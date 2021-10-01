@@ -1,0 +1,35 @@
+slug: crc-nonest-1
+id: 5ojpnovxzdxi
+type: track
+title: OpenShift CodeReady Containers without Nested Virt
+description: This is a PoC for CRC without nested virtualization.
+icon: ""
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+- null
+private: false
+published: true
+show_timer: true
+challenges:
+- slug: crc-nonest-welcome
+  id: oech3eiumpym
+  type: challenge
+  title: Welcome to CodeReady Containers
+  notes:
+  - type: text
+    contents: Trying to boot OpenShift... one moment
+  assignment: Try to login to OpenShift, good luck!
+  tabs:
+  - title: cli
+    type: terminal
+    hostname: crc-nonest-1
+  - title: web ui
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  difficulty: basic
+  timelimit: 3600
+checksum: "13248792668747567990"
