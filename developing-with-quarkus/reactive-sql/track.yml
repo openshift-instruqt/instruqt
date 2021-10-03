@@ -1,0 +1,352 @@
+challenges:
+- assignment: "# Inspect Java runtime\n\nAn appropriate Java runtime has been installed\
+    \ for you. Ensure you can use it by running this command:\n\n> If the command\
+    \ fails, wait a few moments and try again (it is installed in a background process\
+    \ and make take a few moments depending on system load).\n\n```\n$JAVA_HOME/bin/java\
+    \ --version\n```\n\nThe command should report the version in use, for example\
+    \ (the versions and dates may be slightly different than the below example):\n\
+    \n```console\nopenjdk 11.0.10 2021-01-19\nOpenJDK Runtime Environment AdoptOpenJDK\
+    \ (build 11.0.10+9)\nOpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed\
+    \ mode)\n```\n\n## Import the code\n\nLet's refresh the code we'll be using. Run\
+    \ the following command to clone the sample project:\n\n```\ncd /root/projects\
+    \ && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started\n\
+    ```\n\n# The Project\n\nYou start with a basic Maven-based application with the\
+    \ usual `pom.xml` entries for a Quarkus app.\n\nWe've also included a frontend\
+    \ HTML file at `src/main/resources/META-INF/resources/index.html`{{open}} that\
+    \ will show our list of Coffee.\n\n# The Application You Will Build\n\nThe application\
+    \ is a simple CRUD app with a Front end that lists Coffee and gives options to\
+    \ remove and add more Coffee.\n\nWe also use a CoffeeResource that helps us define\
+    \ those methods with JAX-RS.\n\nFurther more we use a PostgreSQL database, where\
+    \ we create the databses, read from and write to it.\n\nLets get started. We have\
+    \ already created a project for you, and lets continue adding functionality to\
+    \ this bare bones project.\n\n> In this guide, we will use the Mutiny API of the\
+    \ Reactive PostgreSQL Client. If you\u2019re not familiar with Mutiny reactive\
+    \ types, read the [Getting Started with Reactive guide](https://quarkus.io/guides/getting-started-reactive#mutiny)\
+    \ if you want to learn more!\n\n\n## Add Extension\n\nLike other exercises, we\u2019\
+    ll need another extension to start using the PosgtreSQL. Lets install it by clicking\
+    \ on the following command:\n\n`cd /root/projects/rhoar-getting-started/quarkus/reactive-sql\
+    \ &&\n  mvn quarkus:add-extension -Dextensions=\"reactive-pg-client\"`{{execute}}\n\
+    \n> The first time you add the extension, new dependencies may be downloaded via\
+    \ maven. This should only happen once, after that things will go even faster.\n\
+    \nThis will add the necessary entries in your `pom.xml`{{open}} to bring in the\
+    \ Reactive PostgreSQL extension. You'll see:\n\n```xml\n<dependency>\n    <groupId>io.quarkus</groupId>\n\
+    \    <artifactId>quarkus-reactive-pg-client</artifactId>\n</dependency>\n```\n\
+    \nThere are a few other extensions we'll use that are already there, including\
+    \ `resteasy-jackson` (for encoding Java objects as JSON objects).\n\nWith the\
+    \ app initialized, lets start coding!\n"
+  difficulty: basic
+  slug: 01-add-extension
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "# Remote Live Coding\n\nWhat if you want to expand the inner loop development\
+    \ cycle to a remote container environment such as Kubernetes or OpenShift? You\
+    \ can configure your application in remote development mode to make changes to\
+    \ your local files immediately visible in your remote container environment. This\
+    \ allows you to develop in the same environment you will actually run your app\
+    \ in, and with access to the same services.\n\nWe'll deploy our application to\
+    \ OpenShift and connect it to your local environment. The end result will be a\
+    \ fully functional app, already running on the target platform (OpenShift).\n\n\
+    ## Login to OpenShift\n\nIn order to login, we will use the **oc** command and\
+    \ then specify the server that we\nwant to authenticate to:\n\n```\noc login -u\
+    \ developer -p developer\n```\n\nThis will automatically log you in as the user\
+    \ `developer` whose password is `developer`.\n\n> If the above `oc login` command\
+    \ doesn't seem to do anything, you may have forgotten to stop the application\
+    \ from the previous\nstep. Click in the first terminal and press CTRL-C to stop\
+    \ the application and try to `oc login` again!\n\n## Access OpenShift Project\n\
+    \nFor this scenario, let's create a project that you will use to house your applications.\
+    \ Click:\n\n```\noc new-project reactive-sql --display-name=\"ReactiveSQL with\
+    \ Quarkus\"\n```\n\n**3. Open the OpenShift Web Console**\n\nOpenShift ships with\
+    \ a web-based console that will allow users to\nperform various tasks via a browser.\
+    \ To get a feel for how the web console\nworks, click this link to open the [Overview\
+    \ in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph)\n\
+    \nThe first screen you will see is the authentication screen. Enter your username\
+    \ and password and\nthen log in:\n\n* Username: `developer`\n* Password: `developer`\n\
+    \n![Web Console Login](/openshift/assets/middleware/quarkus/login.png)\n\nClick\
+    \ **Skip Tour** to skip the new user introduction.\n\nThere's nothing there now\
+    \ (\"No workloads found\"), but that's about to change.\n\n## Deploy Postgres\n\
+    \nOur app will need a Postgres database. Click the next command to quickly deploy\
+    \ a Postgres instance to your new project:\n\n`oc new-app \\\n    -e POSTGRESQL_USER=username\
+    \ \\\n    -e POSTGRESQL_PASSWORD=password \\\n    -e POSTGRESQL_DATABASE=sampledb\
+    \ \\\n    --name=database \\\n    -l app.openshift.io/runtime=postgresql \\\n\
+    \    openshift/postgresql`{{execute}}\n\nYou'll see the Postgres pod spinning\
+    \ up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph).\n\
+    \n![Postgres pod](/openshift/assets/middleware/quarkus/rxpost.png)\n\n## Add Quarkus\
+    \ OpenShift extension\n\nQuarkus offers the ability to automatically generate\
+    \ OpenShift resources based on sane defaults and user supplied configuration.\
+    \ The OpenShift extension is actually a wrapper extension that brings together\
+    \ the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i)\
+    \ extensions with defaults so that it\u2019s easier for the user to get started\
+    \ with Quarkus on OpenShift.\n\nClick the following command to add it to our project:\n\
+    \n```\nmvn quarkus:add-extension -Dextensions=\"openshift\"\n```\n\nYou will see:\n\
+    \n```console\n[SUCCESS] \u2705 Extension io.quarkus:quarkus-openshift has been\
+    \ installed\n```\n\n## Configure Quarkus for remote live coding\n\nClick: `./src/main/resources/application.properties`{{open}}\
+    \ to open this file. This file contains Quarkus configuration.\n\nClick **Copy\
+    \ to Editor** to add the following values to the `application.properties` file:\n\
+    \n<pre class=\"file\" data-filename=\"./src/main/resources/application.properties\"\
+    \ data-target=\"replace\">\n# Remote Live Coding setup\nquarkus.package.type=mutable-jar\n\
+    quarkus.live-reload.password=changeit\n\n# OpenShift Production Configuration\n\
+    quarkus.datasource.db-kind=postgresql\nquarkus.datasource.reactive.url=postgresql://database:5432/sampledb\n\
+    quarkus.datasource.username=username\nquarkus.datasource.password=password\n</pre>\n\
+    \nThe `quarkus.package.type=mutable-jar` instructs Quarkus to package the app\
+    \ as a _mutable_ app. Mutable applications also include the deployment time parts\
+    \ of Quarkus (need for dev mode), so they take up a bit more disk space. If run\
+    \ normally they start just as fast and use the same memory as an immutable application,\
+    \ however they can also be started in dev mode.\n\nWe also configure Quarkus to\
+    \ use the Postgres database, using `database` as the hostname (which is resolved\
+    \ by OpenShift to the running Postgres database host).\n\n> **NOTE:** that you\
+    \ can change the remote live-reload password to whatever you want. It is used\
+    \ to secure communication between the remote side and the local side.\n\n## Deploy\
+    \ application to OpenShift\n\nRun the following command which will build and deploy\
+    \ the Quarkus app in Openshift. There's a number of arguments (which could optionally\
+    \ be put in `application.properties`) that are explained below.\n\n`mvn clean\
+    \ package -DskipTests \\\n-Dquarkus.kubernetes.deploy=true \\\n-Dquarkus.container-image.build=true\
+    \ \\\n-Dquarkus.kubernetes-client.trust-certs=true \\\n-Dquarkus.kubernetes.deployment-target=openshift\
+    \ \\\n-Dquarkus.openshift.route.expose=true \\\n-Dquarkus.openshift.annotations.\\\
+    \"app.openshift.io/connects-to\\\"=database \\\n-Dquarkus.openshift.env.vars.QUARKUS_DATASOURCE_DEVSERVICES=false\
+    \ \\\n-Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`{{execute}}\n\n\
+    The output should end with `BUILD SUCCESS`.\n\nFor more details of the above options:\n\
+    \n* `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift\
+    \ after the container image is built\n* `quarkus.container-image.build=true` -\
+    \ Instructs the extension to build a container image\n* `quarkus.kubernetes-client.trust-certs=true`\
+    \ - We are using self-signed certs in this simple example, so this simply says\
+    \ to the extension to trust them.\n* `quarkus.kubernetes.deployment-target=openshift`\
+    \ - Instructs the extension to generate and create the OpenShift resources (like\
+    \ `DeploymentConfig`s and `Service`s) after building the container\n* `quarkus.openshift.route.expose=true`\
+    \ - Instructs the extension to generate an OpenShift `Route` so we can access\
+    \ it from our browser.\n* `quarkus.kubernetes.annotations.\"app.openshift.io/connects-to\"\
+    =database` - Adds a visual connector to show the DB connection in the web console\
+    \ topology view.\n* `quarkus.openshift.env.vars.QUARKUS_DATASOURCE_DEVSERVICES=false`\
+    \ - Disables Quarkus dev services, as these are not needed on OpenShift\n* `quarkus.openshift.env.vars.quarkus-launch-devmode=true`\
+    \ - Sets an environment variable in the container to tell Quarkus to launch in\
+    \ dev mode (not production mode which is the default when deploying to Kubernetes\
+    \ or OpenShift)\n\nFinally, make sure it's actually done rolling out:\n\n```\n\
+    oc rollout status -w dc/reactive-sql\n```\n\nWait (about 30 seconds) for that\
+    \ command to report `replication controller \"reactive-sql-1\" successfully rolled\
+    \ out` before continuing.\n\n> If the `oc rollout` command appears to not finish,\
+    \ just `CTRL-C` it and run it again.\n\nYou can see it on the [Overview in the\
+    \ OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph):\n\
+    \n![Quarkus pod](/openshift/assets/middleware/quarkus/rx-deploy.png)\n\n\nDo a\
+    \ quick test to ensure the remote app is running by [accessing the sample app](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\
+    \ (which will display the GUI but otherwise be non-functional).\n\n> It may take\
+    \ a few seconds for the app to work and the networking to get glued together,\
+    \ so if it doesn't show up, just reload the browser until it does.\n\nYou should\
+    \ see:\n\n![Web Console Login](/openshift/assets/middleware/quarkus/rx-initial.png)\n\
+    \nIt's working! We'll leave it running and use Quarkus' Remote Live Reload feature\
+    \ to automatically update our app as we make changes.\n\n# Remote Dev Connection\n\
+    \nNow we are ready to run our in dev mode and connect it to the remote application.\
+    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com``\n\
+    ```\n\nYou should see a bunch of log output including:\n\n```console\nINFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient]\
+    \ (Remote dev client thread) Connected to remote server\n```\n\nYour locally running\
+    \ Quarkus app is now connected to the remote side running on OpenShift, and changes\
+    \ you make here will be immediately reflected live in the remote application.\
+    \ Cool!\n\nYou will leave this connection up and running and live code using it\
+    \ in the next step.\n\n> **NOTE**: If you accidently quit (e.g. CTRL-C) the locally\
+    \ running app, no problem. The remote side continues to execute normally, and\
+    \ you can reconnect by re-running the above `quarkus:remote-dev` command!\n\n\
+    # Congratulations!\n\nYou've seen how to setup a remote connection to live code\
+    \ your application as it runs in the target environment (in this case OpenShift)\n\
+    \nIn the next step we'll add more functionality to the app using the Reactive\
+    \ SQL clients for Quarkus.\n\n"
+  difficulty: basic
+  slug: 02-remote-dev
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "In the previous step you created created a PostgreSQL databases for\
+    \ your app, and also added the extensions. In this section we will create our\
+    \ Reactive CoffeeResource and its endpoints.\n\n\n## Add CoffeeResource endpoints\n\
+    \nLet\u2019s modify the application and add relevant methods. The CoffeeResource\
+    \ has alredy been created we will add the functionality to it.\nOpen a new file\
+    \ by clicking: `src/main/java/org/acme/reactive/CoffeeResource.java`{{open}}.\n\
+    \n**1. Add db initialization**\nLets add a few queries to initialize our database.\
+    \ We could have also choosen to omit this step, in that case the database should\
+    \ have had these tables. But since we have a new barebones instance, we can also\
+    \ use this way of initializing.\n\nClick **Copy to Editor** to add the following\
+    \ code to this file:\n\n<pre class=\"file\" data-filename=\"src/main/java/org/acme/reactive/CoffeeResource.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO initdb\">\n        client.query(\"\
+    DROP TABLE IF EXISTS coffee\").execute()\n                .flatMap(r -> client.query(\"\
+    CREATE TABLE coffee (id SERIAL PRIMARY KEY, name TEXT NOT NULL)\").execute())\n\
+    \                .flatMap(r -> client.query(\"INSERT INTO coffee (name) VALUES\
+    \ ('Americano')\").execute())\n                .flatMap(r -> client.query(\"INSERT\
+    \ INTO coffee (name) VALUES ('Latte')\").execute())\n                .flatMap(r\
+    \ -> client.query(\"INSERT INTO coffee (name) VALUES ('Mocha')\").execute()).await()\n\
+    \                .indefinitely();\n</pre>\n\n**2. Add REST methods**\n\nFirst\
+    \ lets add our GET method so we can get the list of all the Coffee, and also if\
+    \ we want to look up with id where we add the `PathParam` to our method and with\
+    \ `@Path` annotation to enable the request to our `getSingle` method.\n\nClick\
+    \ **Copy to Editor** to add the following code to this file:\n<pre class=\"file\"\
+    \ data-filename=\"src/main/java/org/acme/reactive/CoffeeResource.java\" data-target=\"\
+    insert\" data-marker=\"// TODO GET\">\n\n    @GET\n    public Multi&lt;Coffee&gt;\
+    \ get() {\n        return Coffee.findAll(client);\n    }\n\n    @GET\n    @Path(\"\
+    {id}\")\n    public Uni&lt;Response&gt; getSingle(@PathParam(\"id\") Long id)\
+    \ {\n        return Coffee.findById(client, id)\n            .onItem().transform(fruit\
+    \ -> fruit != null ? Response.ok(fruit) : Response.status(Status.NOT_FOUND))\n\
+    \            .onItem().transform(ResponseBuilder::build);\n    }\n\n</pre>\n\n\
+    \n\nNext lets add the POST and PUT request methods.\n\nClick **Copy to Editor**\
+    \ to add the following code to this file:\n<pre class=\"file\" data-filename=\"\
+    src/main/java/org/acme/reactive/CoffeeResource.java\" data-target=\"insert\" data-marker=\"\
+    // TODO POST\">\n\n    @POST\n    public Uni&lt;Response&gt; create(Coffee coffee)\
+    \ {\n        return coffee.save(client)\n                .onItem().transform(id\
+    \ -> URI.create(\"/coffee/\" + id))\n                .onItem().transform(uri ->\
+    \ Response.created(uri).build());\n    }\n\n    @PUT\n    @Path(\"{id}\")\n  \
+    \  public Uni&lt;Response&gt; update(@PathParam(\"id\") Long id, Coffee coffee)\
+    \ {\n        return coffee.update(client)\n            .onItem().transform(updated\
+    \ -> updated ? Status.OK : Status.NOT_FOUND)\n            .onItem().transform(status\
+    \ -> Response.status(status).build());\n    }\n\n</pre>\n\nFinally lets add the\
+    \ DELETE method, so we can also delete Coffee from our quarkus app.\n\nClick **Copy\
+    \ to Editor** to add the following code to this file:\n<pre class=\"file\" data-filename=\"\
+    src/main/java/org/acme/reactive/CoffeeResource.java\" data-target=\"insert\" data-marker=\"\
+    // TODO DELETE\">\n    @DELETE\n    @Path(\"{id}\")\n    public Uni&lt;Response&gt;\
+    \ delete(@PathParam(\"id\") Long id) {\n        return Coffee.delete(client, id)\n\
+    \                .onItem().transform(deleted -> deleted ? Status.NO_CONTENT :\
+    \ Status.NOT_FOUND)\n                .onItem().transform(status -> Response.status(status).build());\n\
+    \    }\n</pre>\n\nLets continue further to add reactive accessor methods for our\
+    \ Coffee resource."
+  difficulty: basic
+  slug: 03-add-resource
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "Lets continue in this section and define are model Class\n\nLet\u2019\
+    s modify the application and add relevant methods. The `Coffee` model class has\
+    \ alredy been created we will add the functionality to it.\nOpen a new file by\
+    \ clicking: `src/main/java/org/acme/reactive/Coffee.java`{{open}}.\n\nWe only\
+    \ have two fields, one for the ID of the Coffe and one for its name.\n<pre>\n\n\
+    \    public Long id;\n\n    public String name;\n\n</pre>\n\nWith this simple\
+    \ model we implement some of the accessor methods. e.g save, from, update etc.\
+    \ All of them use a `PgPool` object, since we are going to use a PostgreSQL database\
+    \ and are using the PostgreSQL reactive driver.\n\nLets add the `findById` method.\n\
+    \n**1. Add FindById method**\nClick **Copy to Editor** to add the following code\
+    \ to this file:\n\n<pre class=\"file\" data-filename=\"src/main/java/org/acme/reactive/Coffee.java\"\
+    \ data-target=\"insert\" data-marker=\" // TODO FindById\">\n\n    public static\
+    \ Uni&lt;Coffee&gt; findById(PgPool client, Long id) {\n        return client.preparedQuery(\"\
+    SELECT id, name FROM coffee WHERE id = $1\").execute(Tuple.of(id))\n         \
+    \       .onItem().transform(RowSet::iterator)\n                .onItem().transform(iterator\
+    \ -> iterator.hasNext() ? from(iterator.next()) : null);\n    }\n\n</pre>\n\n\
+    In the above you can see we use a `PgPool` object and once the query is prepared\
+    \ we then apply successive `onItem` reactive methods to transform the result and\
+    \ finally passing that back as a `Uni<Coffee>`, part of the Mutiny reactive API.\n\
+    \n## Inspect the results\n\nSince we still have our app running and connected\
+    \ remotely using Quarkus' remote development, when you make these changes and\
+    \ reload the endpoint, Quarkus will notice all of these changes and live reload\
+    \ them on the remote side.\n\nCheck that it works as expected by revisiting the\
+    \ page by [clicking here](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n\
+    \nTry to add and remove Coffee elements to the list.\n\n## Congratulations!\n\n\
+    Now you have a running app, with a reactive database extension.\nIn the next step,\
+    \ we'll redeploy it to OpenShift.\n\nNow Cancel the running dev session by clicking\
+    \ the `clear`{{execute T1 interrupt}} before moving ahead."
+  difficulty: basic
+  slug: 04-add-model
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "In the previous step you added a custom bean to the app. Let's now\
+    \ package it up as a production app and deploy it.\n\n### Stop the previous application\n\
+    \nLet's stop the original application so we can package it as an executable JAR.\
+    \ In the terminal, press `CTRL-C` to stop the application.\n\n## Deploy production\
+    \ application to OpenShift\n\nTo deploy the application \"in production\", we\
+    \ can simply re-deploy the application using the OpenShift extension, omitting\
+    \ the `quarkus-launch-devmode` environment variable. Click the following command\
+    \ to do this:\n\n`mvn clean package -DskipTests \\\n-Dquarkus.kubernetes.deploy=true\
+    \ \\\n-Dquarkus.container-image.build=true \\\n-Dquarkus.kubernetes-client.trust-certs=true\
+    \ \\\n-Dquarkus.kubernetes.deployment-target=openshift \\\n-Dquarkus.openshift.route.expose=true\
+    \ \\\n-Dquarkus.openshift.annotations.\\\"app.openshift.io/connects-to\\\"=database`{{execute}}\n\
+    \nFinally, make sure it's actually done rolling out:\n\n```\noc rollout status\
+    \ -w dc/reactive-sql\n```\n\nWait (about 30 seconds) for that command to report\
+    \ `replication controller \"reactive-sql-3\" successfully rolled out` before continuing.\n\
+    \n> If the `oc rollout` command appears to not finish, just `CTRL-C` it and run\
+    \ it again.\n\nThe output should end with `BUILD SUCCESS`.\n\n[Open up the web\
+    \ UI](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\
+    \ You should see the front web page load with the List of Coffees, to which you\
+    \ can add (or delete).\n\n![Reactive SQL app UI](/openshift/assets/middleware/quarkus/reactive-sql-ui.png)\n\
+    \n# Open the solution in an IDE in the Cloud!\nWant to continue exploring this\
+    \ solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
+    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
+    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
+    \ are a new user. This free service expires after 30 days, but you can always\
+    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/reactive-sql/devfile.yaml)\
+    \ to open the solution for this project in the cloud IDE. While loading, if it\
+    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
+    \ code to your own GitHub!\nWant to experiment more with the solution code you\
+    \ just worked with? If so, you can fork the repository containing the solution\
+    \ to your own GitHub repository by clicking on the following command to execute\
+    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
+    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
+    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
+    \ to open a new browser tab to GitHub and paste in the code you were presented\
+    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
+    \ close the browser tab and return to the console and press `Enter` to complete\
+    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
+    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
+    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
+    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
+    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
+    \ repo will be forked in your own GitHub account. On the `solution` branch in\
+    \ the repo, the `reactive-sql` project inside the `quarkus` folder contains the\
+    \ completed solution for this scenario.\n## Congratulations!\n\nYou've packaged\
+    \ up the app as a production app and learned a bit more about the mechanics of\
+    \ packaging. In this tutorial we also used JAX-RS and deployed our application\
+    \ to the Openshift Container platform.\n\nTo read more about Quarkus and Reactive\
+    \ SQL head off to [QuarkusIO](http://www.quarkus.io) for more details.\n"
+  difficulty: basic
+  slug: 05-package-and-run
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: reactive-sql
+tags:
+- openshift
+title: Reactive programming with Quarkus Reactive SQL
+type: truck

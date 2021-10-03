@@ -1,0 +1,309 @@
+challenges:
+- assignment: "Let's begin my creating a new project called `myproject`:\n\n```\n\
+    oc new-project myproject\n```\n\n```\n\nMemcached is an in-memory key-value store\
+    \ for small chunks of arbitrary data (strings, objects) from results of database\
+    \ calls, API calls, or page rendering.\n\n\nLet's now create a new directory for\
+    \ our project:\n\n```\nmkdir -p $HOME/projects/memcached-operator\n```\n\n```\n\
+    <br>\nNavigate to the directory:\n\n```\ncd $HOME/projects/memcached-operator\n\
+    ```\n\n```\n<br>\nCreate a new Helm-based Operator SDK project for the Memcached\
+    \ Operator:\n\n```\noperator-sdk init --plugins helm --domain example.com\n```\n\
+    \n```\n\n<br>\nFor Helm-based projects, `operator-sdk` init also generates the\
+    \ RBAC rules in `config/rbac/role.yaml` based on the resources that would be deployed\
+    \ by the chart\u2019s default manifest. Be sure to double check that the rules\
+    \ generated in `config/rbac/role.yaml` meet the operator\u2019s permission requirements.\n\
+    \nTo learn more about the project directory structure, see the [project layout](https://sdk.operatorframework.io/docs/overview/project-layout)\
+    \ doc.\n\n** Use an existing chart **\n\nInstead of creating your project with\
+    \ a boilerplate Helm chart, you can also use `--helm-chart`, `--helm-chart-repo`,\
+    \ and `--helm-chart-version` to use an existing chart, either from your local\
+    \ filesystem or a remote chart repository.\n\n<br>\nAutomatically fetch the Memcached\
+    \ Helm Chart and generate the CRD/API:\n\n```\noperator-sdk create api --helm-chart\
+    \ memcached --helm-chart-repo=https://charts.helm.sh/stable``\n```\n<br>\n###\
+    \ Project Scaffolding Layout\n\nAfter creating a new operator project the directory\
+    \ has numerous generated folders and files. The following\ntable describes a basic\
+    \ rundown of each generated file/directory.\n\n| File/Folders   | Purpose    \
+    \                       |\n| :---           | :--- |\n| config | Kustomize YAML\
+    \ definitions required to launch our controller on a cluster. It is the target\
+    \ directory to hold our CustomResourceDefinitions, RBAC configuration, and WebhookConfigurations.\n\
+    | Dockerfile | The container build file used to build your Ansible Operator container\
+    \ image. |\n| helm-charts | The location for the specified helm-charts. |\n| Makefile\
+    \ | Make targets for building and deploying your controller. |\n| PROJECT | Kubebuilder\
+    \ metadata for scaffolding new components. |\n| watches.yaml | Contains Group,\
+    \ Version, Kind, and desired chart. |\n"
+  difficulty: basic
+  slug: step1
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Initialize the Project
+  type: challenge
+- assignment: 'The `watches.yaml` file maps a Group, Version, and Kind to a specific
+    Helm Chart. Observe the contents of the `watches.yaml`:
+
+
+    ```
+
+    cat watches.yaml
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step2
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Update the Watches File
+  type: challenge
+- assignment: 'Apply the Memcached Custom Resource Definition to the cluster:
+
+
+    ```
+
+    oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Once the CRD is registered, there are two ways to run the Operator:
+
+
+    * As a Pod inside a Kubernetes cluster
+
+    * As a Go program outside the cluster using Operator-SDK. This is great for local
+    development of your Operator.
+
+
+    For the sake of this tutorial, we will run the Operator as a Go program outside
+    the cluster using Operator-SDK and our `kubeconfig` credentials
+
+
+    Once running, the command will block the current session. You can continue interacting
+    with the OpenShift cluster by opening a new terminal window. You can quit the
+    session by pressing `CTRL + C`.
+
+
+    ```
+
+    WATCH_NAMESPACE=myproject make run
+
+    ```
+
+
+    ```
+
+    '
+  difficulty: basic
+  slug: step3
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Apply the Memcached Custom Resource Definition
+  type: challenge
+- assignment: "Open a new terminal window and navigate to the `memcached-operator`\
+    \ top-level directory:\n\n```\ncd projects/memcached-operator\n```\n\n```\nBefore\
+    \ applying the Memcached Custom Resource, observe the Memcached Helm Chart `values.yaml`:\n\
+    \n[Memcached Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/memcached/values.yaml)\n\
+    \nUpdate the Memcached Custom Resource at `config/samples/charts_v1alpha1_memcached.yaml`\
+    \ with the following values:\n\n* `spec.replicaCount: 3`\n\n<pre class=\"file\"\
+    >\napiVersion: charts.example.com/v1alpha1\nkind: Memcached\nmetadata:\n  name:\
+    \ memcached-sample\nspec:\n  # Default values copied from <project_dir>/helm-charts/memcached/values.yaml\n\
+    \  AntiAffinity: soft\n  affinity: {}\n  extraContainers: \"\"\n  extraVolumes:\
+    \ \"\"\n  image: memcached:1.5.20\n  kind: StatefulSet\n  memcached:\n    extendedOptions:\
+    \ modern\n    extraArgs: []\n    maxItemMemory: 64\n    verbosity: v\n  metrics:\n\
+    \    enabled: false\n    image: quay.io/prometheus/memcached-exporter:v0.6.0\n\
+    \    resources: {}\n    serviceMonitor:\n      enabled: false\n      interval:\
+    \ 15s\n  nodeSelector: {}\n  pdbMinAvailable: 2\n  podAnnotations: {}\n  replicaCount:\
+    \ 3\n  resources:\n    requests:\n      cpu: 50m\n      memory: 64Mi\n  securityContext:\n\
+    \    enabled: false \n    fsGroup: 1001\n    runAsUser: 1001\n  serviceAnnotations:\
+    \ {}\n  tolerations: {}\n  updateStrategy:\n    type: RollingUpdate\n</pre>\n\n\
+    You can easily update this file by running the following command:\n\n```\n\\cp\
+    \ /tmp/charts_v1alpha1_memcached.yaml config/samples/charts_v1alpha1_memcached.yaml\n\
+    ```\n\n```\n<br>\nAfter updating the Memcached Custom Resource with our desired\
+    \ spec, apply it to the cluster. Ensure you are currently scoped to the `myproject`\
+    \ Namespace:\n\n```\noc project myproject\n```\n\n```\n\n```\noc apply -f config/samples/charts_v1alpha1_memcached.yaml\n\
+    ```\n\n```\n<br>\nConfirm that the Custom Resource was created:\n\n```\noc get\
+    \ memcached\n```\n\n```\n<br>\nIt may take some time for the environment to pull\
+    \ down the Memcached container image. Confirm that the Stateful Set was created:\n\
+    \n```\noc get statefulset\n```\n\n```\n<br>\nConfirm that the Stateful Set's pod\
+    \ is currently running:\n\n```\noc get pods\n```\n\n```\n<br>\nConfirm that the\
+    \ Memcached \"internal\" and \"public\" ClusterIP Service were created:\n\n```\n\
+    oc get services\n```\n\n```\n"
+  difficulty: basic
+  slug: step4
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Apply the Memcached Custom Resource
+  type: challenge
+- assignment: 'Let''s now update the Memcached `example` Custom Resource and increase
+    the desired number of replicas to `5`:
+
+
+    ```
+
+    oc patch memcached memcached-sample -p ''{"spec":{"replicaCount": 5}}'' --type=merge
+
+    ```
+
+
+    ```
+
+
+    <br>
+
+    Verify that the Memcached Stateful Set is creating two additional pods:
+
+
+    ```
+
+    oc get pods
+
+    ```
+
+
+    ```
+
+    '
+  difficulty: basic
+  slug: step5
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Update the Memcached Custom Resource
+  type: challenge
+- assignment: 'If any Memcached member fails it gets restarted or recreated automatically
+    by the Kubernetes infrastructure, and will rejoin the cluster automatically when
+    it comes back up. You can test this scenario by killing any of the pods:
+
+
+    ```
+
+    oc delete pods -l app.kubernetes.io/name=memcached
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Watch the pods respawn:
+
+
+    ```
+
+    oc get pods -l app.kubernetes.io/name=memcached
+
+    ```
+
+
+    ```
+
+    '
+  difficulty: basic
+  slug: step6
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Test Memcached Cluster Failover
+  type: challenge
+- assignment: 'Delete the Memcached cluster and all associated resources by deleting
+    the `example` Custom Resource:
+
+
+    ```
+
+    oc delete memcached memcached-sample
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Verify that the Stateful Set, pods, and services are removed:
+
+
+    ```
+
+    oc get statefulset
+
+    oc get pods
+
+    oc get services
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step7
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Clean Up
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: helm-operator-memcached
+tags:
+- openshift
+title: Operator SDK with Helm, Memcached
+type: truck

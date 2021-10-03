@@ -1,0 +1,352 @@
+challenges:
+- assignment: 'The Jupyter on OpenShift project provides Jupyter notebook images which
+    have been purpose built to work best with OpenShift.
+
+
+    Before you can deploy these Jupyter notebook images, you first need to load the
+    images for the Jupyter notebook application into your project in OpenShift. You
+    only need to load this once in a project. You can then use it in creating as many
+    different Jupyter notebook deployments as you need.
+
+
+    In this workshop the step of loading the Jupyter notebook images has already been
+    done for you.
+
+
+    To verify that the images have been loaded run the command:
+
+
+    ```
+
+    oc get imagestreams -o name`
+
+    ```
+
+
+    You should see that the `s2i-minimal-notebook` image stream exists.
+
+
+    You can inspect the image stream by running:
+
+
+    ```
+
+    oc describe imagestream s2i-minimal-notebook`
+
+    ```
+
+
+    You should see that the image stream includes tags for `3.5` and `3.6`. These
+    correspond to versions of the image for Python 3.5 and Python 3.6.
+
+    '
+  difficulty: basic
+  slug: 01-loading-the-notebook-images
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 1 - Loading the Notebook Images
+  type: challenge
+- assignment: 'The minimal Jupyter notebook images that have been loaded can be deployed
+    as is, but to make it easier to secure access, add persistent storage, define
+    resources, as well as use it as a Source-to-Image (S2I) builder to create custom
+    Jupyter notebook images, the Jupyter on OpenShift project also provides a set
+    of OpenShift templates.
+
+
+    As with the Jupyter notebook images, for this workshop these have already been
+    loaded for you.
+
+
+    To verify that the templates have been loaded for you, run:
+
+
+    ```
+
+    oc get templates`
+
+    ```
+
+
+    The purpose of the OpenShift templates which have been loaded are:
+
+
+    * `notebook-deployer` - Template for deploying a Jupyter notebook image.
+
+
+    * `notebook-builder` - Template for building a custom Jupyter notebook image using
+    Source-to-Image (S2I) against a hosted Git repository. Python packages listed
+    in the `requirements.txt` file of the Git repository will be installed and any
+    files, including notebook images, will be copied into the image. The image can
+    then be deployed using the `notebook-deployer` template.
+
+
+    * `notebook-quickstart` - Template for building and deploying a custom Jupyter
+    notebook image. This combines the functionality of the `notebook-builder` and
+    `notebook-deployer` templates.
+
+
+    * `notebook-workspace` - Template for deploying a Jupyter notebook instance which
+    also attaches a persistent volume, and copies any Python packages and notebooks
+    included in the image, into the persistent volume. Any work done on the notebooks,
+    or to install additional Python packages, will survive a restart of the Jupyter
+    notebook environment. A webdav interface is also enabled to allow remote mounting
+    of the persistent volume to a local computer.
+
+
+    In this workshop you will be using the `notebook-deployer` template.
+
+
+    To see details about this template and what parameters can be provided when using
+    the template, run the command:
+
+
+    ```
+
+    oc describe template notebook-deployer`
+
+    ```
+
+
+    Check out the other workshops available here for more information on this and
+    the other templates.
+
+    '
+  difficulty: basic
+  slug: 02-loading-the-notebook-templates
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 2 - Loading the Notebook Templates
+  type: challenge
+- assignment: 'To deploy a Jupyter notebook using the `notebook-deployer` template,
+    you can use the command line or the OpenShift web console. We will use the web
+    console in this example.
+
+
+    Click on the _Console_ tab in the workshop dashboard. You will be presented with
+    the OpenShift login screen.
+
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-web-console-login.png)
+
+
+    For the credentials, enter:
+
+
+    * **Username:** ``developer``
+
+    * **Password:** ``developer``
+
+
+    Once you have logged in, you should be shown the list of projects you have access
+    to. A project called ``myproject`` has already been created for you to use in
+    this workshop.
+
+
+    ![List of Projects](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-list-of-projects.png)
+
+
+    Click on ``myproject`` and you should then be at the _Overview_ page for
+
+    the project. Select the _Developer_ perspective for the project instead of the
+    _Adminstrator_ perspective in the left hand side menu. If necessary click on the
+    hamburger menu icon top left of the web console to expose the left hand side menu.
+
+
+    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-add-to-project.png)
+
+
+    As the project is currently empty, no workloads should be found and you will be
+    presented with various options for how you can deploy an application.
+
+
+    Once you have deployed a workload, you can return to this view to deploy additional
+    applications by selecting the _+Add_ option in the left hand side menu.
+
+    '
+  difficulty: basic
+  slug: 03-accessing-the-web-console
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 3 - Accessing the Web Console
+  type: challenge
+- assignment: 'From the options for deploying applications to your project, select
+    _From Catalog_. This will bring up the _Developer Catalog_.
+
+
+    Ensure that _All Items_ is selected on the left hand side, and in the _Filter
+    by keyword_ text entry field enter ``jupyter``. This will limit the displayed
+    items to just the OpenShift templates you loaded.
+
+
+    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-jupyter-notebook-templates.png)
+
+
+    Click on the tile for _Jupyter Notebook_.
+
+
+    This will bring up the description of the template. Click on _Instantiate Template_,
+    which will bring up a form with the parameters for the template which you can
+    customize.
+
+
+    ![Instatiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-instantiate-template.png)
+
+
+    The purpose of the template parameters are:
+
+
+    * ``APPLICATION_NAME`` - The name of the deployment.
+
+    * ``NOTEBOOK_IMAGE`` - The name of the image stream for the Jupyter notebook image,
+    and the version tag, which you wish to use.
+
+    * ``NOTEBOOK_PASSWORD`` - The password used to protect access to the Jupyter notebook.
+    This cannot be left empty.
+
+    * ``NOTEBOOK_INTERFACE`` - The Jupyter notebook web interface to use. Setting
+    this to ``lab`` will enable the JupyterLab web interface.
+
+    * ``NOTEBOOK_MEMORY`` - The maximum amount of memory the Jupyter noteboook deployment
+    is allowed to use.
+
+
+    In the ``NOTEBOOK_PASSWORD`` field enter a password of ``secret``, and then click
+    on _Create_. The _Template Instance Overview_ view for the deployment will be
+    displayed.
+
+
+    To monitor the deployment, click on the _Topology_ view in the left hand side
+    menu.
+
+
+    ![Topology View](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-topology-view.png)
+
+
+    The ring shown in the visualization of the deployment will change from white,
+    indicating the deployment is pending, to light blue, indicating the application
+    is starting, and finally blue, indicating the application is running.
+
+
+    The icon top right of the ring is a short cut to access the URL for the deployment.
+    Once the ring has turned blue indicating the application is running, click on
+    this icon, which will open a new browser tab or window for the Jupyter notebook.
+
+
+    Because a secure HTTP connection is used, but an environment may in some cases
+    use a self signed SSL certificate, you will need to accept the certificate to
+    proceed.
+
+
+    ![Login Prompt](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-notebook-login-prompt.png)
+
+
+    At the login prompt, enter the password ``secret`` which you entered into the
+    ``NOTEBOOK_PASSWORD`` field. You will then be granted access to the Jupyter notebook
+    file browser.
+
+
+    ![Classic Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-classic-notebook-interface.png)
+
+
+    At this point you can create new notebooks or upload existing notebooks. If you
+    need to install additional Python packages, when using this type of deployment
+    you would need to start a terminal from the Jupyter notebook web interface and
+    install the packages manually.
+
+
+    In this configuration nothing is persistent. If the notebook instance were restarted,
+    you would loose any work. For a persistent workspace, the ``notebook-workspace``
+    template can be used. Details of how to use this template are described in a separate
+    workshop.
+
+    '
+  difficulty: basic
+  slug: 04-deploying-the-jupyter-notebook
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 4 - Deploying the Jupyter Notebook
+  type: challenge
+- assignment: 'When you are done with the Jupyter notebook instance you can delete
+    it from the command line.
+
+
+    To validate that you are deleting the correct resources, first run:
+
+
+    ```
+
+    oc get all --selector app=custom-notebook -o name`
+
+    ```
+
+
+    This uses a label selector to reference only the resources for this deployment.
+
+
+    When happy that you will be deleting the correct resources, run:
+
+
+    ```
+
+    oc delete all --selector app=custom-notebook`
+
+    ```
+
+    '
+  difficulty: basic
+  slug: 05-deleting-the-jupyter-notebook
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 5 - Deleting the Jupyter Notebook
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: jupyter-notebooks
+tags:
+- openshift
+title: Deploying a Jupyter Notebook Image
+type: truck

@@ -1,0 +1,729 @@
+challenges:
+- assignment: 'The Jupyter on OpenShift project provides Jupyter notebook and JupyterHub
+    images which have been purpose built to work best with OpenShift.
+
+
+    Before you can deploy JupyterHub, you first need to load the images for the Jupyter
+    notebook application and JupyterHub into your project in OpenShift. You only need
+    to load this once in a project. You can then use it in creating as many different
+    JupyterHub deployments as you need.
+
+
+    In this workshop the step of loading the Jupyter notebook and JupyterHub images
+    has already been done for you.
+
+
+    To verify that the images have been loaded run the command:
+
+
+    ```
+
+    oc get imagestreams -o name`
+
+    ```
+
+
+
+    You should see that the `s2i-minimal-notebook` and `jupyterhub` image stream exists.
+
+
+    You can inspect the image stream by running:
+
+
+    ```
+
+    oc describe imagestream s2i-minimal-notebook`
+
+    ```
+
+
+    You should see that the image stream includes tags for `3.5` and `3.6`. These
+    correspond to versions of the image for Python 3.5 and Python 3.6.
+
+
+    When deploying JupyterHub, either of these images for the Jupyter notebook can
+    be used, or a custom Jupyter notebook image you built could instead be used.
+
+    '
+  difficulty: intermediate
+  slug: 01-loading-the-required-images
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 1 - Loading the Required Images
+  type: challenge
+- assignment: 'Deploying JupyterHub requires a bit more work to setup than just deploying
+    the JupyterHub image, so templates are available to make this task easier.
+
+
+    As with the Jupyter notebook and JupyterHub images, for this workshop these have
+    already been loaded for you.
+
+
+    To verify that the templates have been loaded for you, run:
+
+
+    ```
+
+    oc get templates`
+
+    ```
+
+
+    The purpose of the OpenShift templates which have been loaded are:
+
+
+    * `jupyterhub-deployer` - Template for deploying a JupyterHub service using an
+    existing Jupyter notebook image.
+
+
+    * `jupyterhub-builder` - Template for building a custom JupyterHub image using
+    Source-to-Image (S2I) against a hosted Git repository. Custom JupyterHub configuration
+    will be combined with the base JupyterHub image.
+
+
+    * `jupyterhub-quickstart` - Template for deploying a JupyterHub service, using
+    a custom Jupyter notebook image built using Source-to-Image (S2I).
+
+
+    * `notebook-builder` - Template for building a custom Jupyter notebook image using
+    Source-to-Image (S2I) against a hosted Git repository.
+
+
+    In this workshop you will be using the `jupyterhub-deployer`, `jupyterhub-builder`
+    and `jupyterhub-quickstart` templates.
+
+
+    To see details about the `jupyterhub-deployer` template and what parameters can
+    be provided when using the template, run the command:
+
+
+    ```
+
+    oc describe template jupyterhub-deployer`
+
+    ```
+
+
+    To see details about the `jupyterhub-builder` template and what parameters can
+    be provided when using the template, run the command:
+
+
+    ```
+
+    oc describe template jupyterhub-builder`
+
+    ```
+
+
+    To see details about the `jupyterhub-quickstart` template and what parameters
+    can be provided when using the template, run the command:
+
+
+    ```
+
+    oc describe template jupyterhub-quickstart`
+
+    ```
+
+
+    Check out the other workshops available here for more information on the other
+    templates.
+
+    '
+  difficulty: intermediate
+  slug: 02-loading-the-required-templates
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 2 - Loading the Required Templates
+  type: challenge
+- assignment: 'You can work with the templates using either the command line or the
+    OpenShift web console. We will use the web console in this example.
+
+
+    Click on the _Console_ tab in the workshop dashboard. You will be presented with
+    the OpenShift login screen.
+
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/03-web-console-login.png)
+
+
+    For the credentials, enter:
+
+
+    * **Username:** ``developer``
+
+    * **Password:** ``developer``
+
+
+    Once you have logged in, you should be shown the list of projects you have access
+    to. A project called ``myproject`` has already been created for you to use in
+    this workshop.
+
+
+    ![List of Projects](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/03-list-of-projects.png)
+
+
+    Click on ``myproject`` and you should then be at the _Overview_ page for
+
+    the project. Select the _Developer_ perspective for the project instead of the
+    _Adminstrator_ perspective in the left hand side menu. If necessary click on the
+    hamburger menu icon top left of the web console to expose the left hand side menu.
+
+
+    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/03-add-to-project.png)
+
+
+    As the project is currently empty, no workloads should be found and you will be
+    presented with various options for how you can deploy an application.
+
+
+    Once you have deployed a workload, you can return to this view to deploy additional
+    applications by selecting the _+Add_ option in the left hand side menu.
+
+    '
+  difficulty: intermediate
+  slug: 03-accessing-the-web-console
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 3 - Accessing the Web Console
+  type: challenge
+- assignment: 'From the options for deploying applications to your project, select
+    _From Catalog_. This will bring up the _Developer Catalog_.
+
+
+    Ensure that _All Items_ is selected on the left hand side, and in the _Filter
+    by keyword_ text entry field enter ``jupyter``. This will limit the displayed
+    items to just the OpenShift templates you loaded.
+
+
+    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/04-jupyterhub-service-templates.png)
+
+
+    Click on the tile for _JupyterHub_.
+
+
+    This will bring up the description of the template. Click on _Instantiate Template_,
+    which will bring up a form with the parameters for the template which you can
+    customize.
+
+
+    ![Instatiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/04-instantiate-template.png)
+
+
+    The purpose of the template parameters are:
+
+
+    * ``APPLICATION_NAME`` - The name of the deployment.
+
+    * ``JUPYTERHUB_IMAGE`` - The name of the image stream for the JupyterHub image,
+    and the version tag, which you wish to use.
+
+    * ``NOTEBOOK_IMAGE`` - The name of the image stream for the Jupyter notebook image,
+    and the version tag, which you wish to use.
+
+    * ``JUPYTERHUB_CONFIG`` - Contents for a custom `jupyterhub_config.py` file to
+    override any JupyterHub defaults.
+
+    * ``JUPYTERHUB_ENVVARS`` - Contents for a shell script to be executed to set any
+    special environment variables to customise the JupyterHub deployment.
+
+    * ``DATABASE_PASSWORD`` - Password for accessing the database used by JupyterHub.
+
+    * ``COOKIE_SECRET`` - Secret used with cookies to encode information about the
+    JupyterHub session.
+
+    * ``JUPYTERHUB_MEMORY`` - The maximum amount of memory the JupyterHub deployment
+    is allowed to use.
+
+    * ``DATABASE_MEMORY`` - The maximum amount of memory the JupyterHub database application
+    is allowed to use.
+
+    * ``NOTEBOOK_MEMORY`` - The maximum amount of memory each Jupyter noteboook deployment
+    is allowed to use.
+
+
+    For this example, you can leave all the fields as there default values. This means
+    we will use an empty Jupyter notebook image. You could instead use the ``notebook-builder``
+    template to first build your own custom Jupyter notebook image and use it instead.
+
+
+    Click on _Create_. The _Template Instance Overview_ view for the deployment will
+    be displayed.
+
+
+    To monitor the deployment, click on the _Topology_ view in the left hand side
+    menu.
+
+
+    ![Topology View](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/04-topology-view.png)
+
+
+    You will see two deployments, one for JupyterHub and one for a PostgreSQL database
+    it uses to store information.
+
+
+    The rings shown in the visualization for the deployments will change from white,
+    indicating a deployment is pending, to light blue, indicating the application
+    is starting, and finally blue, indicating the application is running.
+
+
+    The icon top right of the ring for the JupyterHub deployment is a short cut to
+    access the URL for the deployment. Once the ring has turned blue indicating the
+    application is running, click on this icon, which will open a new browser tab
+    or window.
+
+
+    Because a secure HTTP connection is used, but an environment may in some cases
+    use a self signed SSL certificate, you will need to accept the certificate to
+    proceed.
+
+
+    In this deployment of JupyterHub, user authentication is not required and you
+    will be assigned a temporary identity.
+
+
+    What you will see is a progress screen as a separate Jupyter notebook instance
+    is started up for you. Once the instance has started, you will have access to
+    the Jupyter notebook file browser.
+
+
+    ![Classic Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-workspace-42/04-classic-notebook-interface.png)
+
+
+    At this point you can create new notebooks or upload existing notebooks. If you
+    need to install additional Python packages, when using this type of deployment
+    you would need to start a terminal from the Jupyter notebook web interface and
+    install the packages manually.
+
+
+    In this configuration nothing is persistent. If the notebook instance were restarted,
+    you would loose any work.
+
+
+    Because JupyterHub is used to handle spawning of JupyterHub notebook instances
+    on demand, a separate user visiting the same URL, will be given access to their
+    own notebook session.
+
+    '
+  difficulty: intermediate
+  slug: 04-deploying-jupyterhub-service
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 4 - Deploying JupyterHub Service
+  type: challenge
+- assignment: 'When you are done with the JupyterHub service you can delete it from
+    the command line.
+
+
+    To validate that you are deleting the correct resources, first run:
+
+
+    ```
+
+    oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
+    -o name`
+
+    ```
+
+
+    This uses a label selector to reference only the resources for this deployment.
+
+
+    When happy that you will be deleting the correct resources, run:
+
+
+    ```
+
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+
+    ```
+
+    '
+  difficulty: intermediate
+  slug: 05-deleting-the-jupyterhub-service
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 5 - Deleting the JupyterHub Service
+  type: challenge
+- assignment: 'The default configuration for the JupyterHub service created allows
+    for anonymous access and nothing is persistent.
+
+
+    JupyterHub is however a highly configurable system. The template and JupyterHub
+    image provide a starting point which you can build on, to customize it for your
+    specific requirements. This includes being able to use your own authentication
+    provider to control who can access the service, or add persistence for authenticated
+    user sessions.
+
+
+    Depending on the type of configuration required, and whether additional application
+    services need to be created, there are a number of different methods you can use
+    to customize the deployment.
+
+
+    The first of these is to provide configuration through the template parameters.
+    To do this we will create the deployment from the command line by running:
+
+
+    ```
+
+    oc process jupyterhub-deployer --param JUPYTERHUB_CONFIG="`cat jupyterhub_config.py`"
+    --param JUPYTERHUB_ENVVARS="`cat jupyterhub_config.sh`" | oc apply -f -`
+
+    ```
+
+
+    This will supply configuration which configures the JupyterHub service to use
+    OpenShift as the authentication mechanism to control who can access the service.
+    Only users who have an existing user account in the OpenShift cluster will be
+    able to access the service.
+
+
+    To monitor the deployment run:
+
+
+    ```
+
+    oc rollout status dc/jupyterhub`
+
+    ```
+
+
+    When complete, jump back to the _Topology_ view of the web console and click on
+    the URL short cut for the application to access it. This time when you access
+    the JupyterHub service, you should be prompted to login with your OpenShift cluster
+    credentials first.
+
+
+    For the credentials, enter:
+
+
+    * **Username:** ``developer``
+
+    * **Password:** ``developer``
+
+
+    When you have verified access, delete the JupyterHub service again:
+
+
+    ```
+
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+
+    ```
+
+    '
+  difficulty: intermediate
+  slug: 06-customizing-the-configuration
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 6 - Customizing the Configuration
+  type: challenge
+- assignment: 'If the required configuration is too complex to provide via the template
+    parameters, you need to include additional files, or install extra Python packages
+    to support a particular authentication provider, you can use the JupyterHub image
+    as a Source-to-Image (S2I) builder to create a custom JupyterHub image.
+
+
+    From the web console click on _+Add_ in the left hand side menu and select _From
+    Catalog_. In the _Developer Catalog_, enter ``jupyter`` into the _Filter by keyword_
+    text entry box.
+
+
+    This time select _JupyterHub Builder_ from the catalog entries shown.
+
+
+    This will bring up the description of the template. Click on _Instantiate Template_,
+    which will bring up a form with the parameters for the template which you can
+    customize.
+
+
+    ![Instantiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/07-instantiate-template.png)
+
+
+    The purpose of the template parameters are:
+
+
+    * ``JUPYTERHUB_NAME`` - The name to be given to the custom JupyterHub image.
+
+    * ``BUILDER_IMAGE`` - The name and version of the JupyterHub image to be used
+    as the base for building the custom notebook image.
+
+    * ``GIT_REPOSITORY_URL`` - The URL to a hosted Git repository containing the JupyterHub
+    configuration, and a Python ``requirements.txt`` file listing any Python packages
+    if required.
+
+    * ``GIT_REFERENCE`` - The branch of the Git repository to use.
+
+    * ``CONTEXT_DIR`` - Where files to be used to build the custom JupyterHub image
+    are located in a sub directory of the Git repository, the name of that sub directory.
+
+
+    In the ``GIT_REPOSITORY_URL`` field enter the URL:
+
+
+    ``https://github.com/jupyter-on-openshift/poc-hub-openshift-auth``
+
+
+    In the ``CONTEXT_DIR`` field enter:
+
+
+    ``jupyterhub``
+
+
+    Click on _Create_ to instantiate the template. This will leave you on the _Template
+    Instance Overview_ with details of what was created.
+
+
+    Usually a template is used to create a deployment for an application. In this
+    case it has created a build configuration and triggered a build of a custom JupyterHub
+    image, using the files held in the Git repository you provided to the template.
+
+
+    To monitor the building of the custom JupyterHub image, run:
+
+
+    ```
+
+    oc logs -f bc/custom-jupyterhub`
+
+    ```
+
+
+    The build process will then use the builder image as a base for your custom JupyterHub
+    image, injecting into the image the source code files from the Git repository,
+    and installing any Python packages listed in the Python ``requirements.txt`` file.
+
+
+    One of the items created by the template is an image stream, with it defining
+    the destination for the image which is built.
+
+
+    Once the build has completed, list the image streams in the project by running:
+
+
+    ```
+
+    oc get imagestreams -o name`
+
+    ```
+
+
+    You will see there are now multiple JupyterHub image streams. The original ``jupyterhub``
+    image, and the ``custom-jupyterhub`` image.
+
+
+    Return again to the web console, and click on _+Add_ in the left hand side menu
+    and select _From Catalog_. In the _Developer Catalog_, enter ``jupyter`` into
+    the _Filter by keyword_ text entry box.
+
+
+    Select _JupyterHub_ from the catalog entries shown and then _Instantiate Template_.
+
+
+    In the list of template parameters, change the value of ``JUPYTERHUB_IMAGE`` to
+    ``custom-jupyterhub:latest``. This is the name and version of the custom  JupyterHub
+    image you just created.
+
+
+    Click on _Create_ and return to the _Topology_ view to wait for the deployment
+    to complete. When done, click on the URL short cut icon to open the application.
+    You will once again be asked to login using OpenShift credentials.
+
+
+    When you have verified access, delete the JupyterHub service again:
+
+
+    ```
+
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+
+    ```
+
+
+    For details on how to structure the directory in the Git repository used as input
+    to a custom JupyterHub image build, see the `jupyterhub` directory of:
+
+
+    * https://github.com/jupyter-on-openshift/poc-hub-openshift-auth
+
+
+    As well as serving as input to an S2I build, this Git repository can also be built
+    using a ``Dockerfile`` build, and includes an example of using custom templates
+    to provide alternate options for deployment.
+
+
+    A further example which uses templates to deploy additional services, in this
+    case a KeyCloak service to act as the authentication provider, is:
+
+
+    * https://github.com/jupyter-on-openshift/poc-hub-keycloak-auth
+
+    '
+  difficulty: intermediate
+  slug: 07-source-to-image-builder
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 7 - Source to Image Builder
+  type: challenge
+- assignment: 'In the examples so far in this workshop, an empty Jupyter notebook
+    image was used. It was mentioned that you could use the `notebook-builder` template
+    to build a custom Jupyter notebook image first, and then use that when deploying
+    the JupyterHub service.
+
+
+    An alternative which allows this to be done in one step, is the ``jupyterhub-quickstart``
+    template.
+
+
+    Return again to the web console, and click on _+Add_ in the left hand side menu
+    and select _From Catalog_. In the _Developer Catalog_, enter ``jupyter`` into
+    the _Filter by keyword_ text entry box.
+
+
+    Select _JupyterHub Quickstart_ from the catalog entries shown and then _Instantiate
+    Template_.
+
+
+    ![Instantiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-service-42/08-instantiate-template.png)
+
+
+    This combines aspects of the ``notebook-builder`` and ``jupyterhub-deployer``
+    templates. In this case the template parameters below relate to the building of
+    a custom Jupyter notebook image.
+
+
+    * ``BUILDER_IMAGE`` - The name and version of the Jupyter notebook image to be
+    used as the base for building the custom notebook image.
+
+    * ``GIT_REPOSITORY_URL`` - The URL to a hosted Git repository containing the Jupyter
+    notebook files, and a Python ``requirements.txt`` file listing any Python packages
+    required by the notebook files.
+
+    * ``GIT_REFERENCE`` - The branch of the Git repository to use.
+
+    * ``CONTEXT_DIR`` - Where files to be used to build the custom notebook image
+    are located in a sub directory of the Git repository, the name of that sub directory.
+
+
+    In the list of template parameters, change the value of ``JUPYTERHUB_IMAGE`` to
+    ``custom-jupyterhub:latest``. This is so we use the existing custom JupyterHub
+    image with authentication again.
+
+
+    In the ``GIT_REPOSITORY_URL`` field enter the URL:
+
+
+    ``https://github.com/jupyter-on-openshift/sample-notebooks``
+
+
+    In the ``CONTEXT_DIR`` field enter:
+
+
+    ``matplotlib``
+
+
+    Click on _Create_ to instantiate the template. This will leave you on the _Template
+    Instance Overview_ with details of what was created.
+
+
+    Two things will happen this time. The JupyterHub service will be deployed, and
+    in parallel, the custom Jupyter notebook image will be built. Before we can access
+    the JupyterHub service, we need to wait until the Jupyter notebook image has been
+    built, so monitor it by running:
+
+
+    ```
+
+    oc logs -f bc/jupyterhub-nb`
+
+    ```
+
+
+    When the build has completed, use the URL short cut icon in the _Topology_ view
+    to access the JupyterHub service.
+
+
+    This time after you get past the authentication and the Jupyter notebook file
+    browser web interface is displayed, you will see that a sample notebook file already
+    exists for the session.
+
+    '
+  difficulty: intermediate
+  slug: 08-building-the-notebook-image
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 8 - Building the Notebook Image
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: jupyterhub-service
+tags:
+- openshift
+title: Deploying JupyterHub as a Service
+type: truck

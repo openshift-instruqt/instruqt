@@ -1,0 +1,347 @@
+challenges:
+- assignment: "## Import the code\n\nLet's refresh the code we'll be using. Run the\
+    \ following command to clone the sample project:\n\n```\ncd /root/projects &&\
+    \ rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started\n\
+    ```\n\n# Inspect Java runtime\n\nAn appropriate Java runtime has been installed\
+    \ for you. Ensure you can use it by running this command:\n\n```\n$JAVA_HOME/bin/java\
+    \ --version\n```\n\nThe command should report the version in use, for example\
+    \ (the versions and dates may be slightly different than the below example):\n\
+    \n```console\nopenjdk 11.0.10 2021-01-19\nOpenJDK Runtime Environment AdoptOpenJDK\
+    \ (build 11.0.10+9)\nOpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed\
+    \ mode)\n```\n\nIf the command fails, wait a few moments and try again (it is\
+    \ installed in a background process and make take a few moments depending on system\
+    \ load).\n\n# The Project\n\nYou start with a basic Maven-based application with\
+    \ the usual `pom.xml` entries for a Quarkus app.\n\nWe've also included a frontend\
+    \ HTML file at `src/main/resources/META-INF/resources/index.html`{{open}} that\
+    \ will render our stream.\n\n# The Application You Will Build\n\nThe app consists\
+    \ of 3 components that pass messages via Kafka and an in-memory stream, then uses\
+    \ SSE to push messages to\nthe browser. It looks like:\n\n![kafka](/openshift/assets/middleware/quarkus/kafkaarch.png)\n\
+    \n## Add Extension\n\nLike other exercises, we\u2019ll need another extension\
+    \ to integrate Quarkus with Kafka. Install it by clicking on the following command:\n\
+    \n`cd /root/projects/rhoar-getting-started/quarkus/kafka &&\n  mvn quarkus:add-extension\
+    \ -Dextensions=\"smallrye-reactive-messaging-kafka\"`{{execute}}\n\n> The first\
+    \ time you add the extension, new dependencies may be downloaded via maven. This\
+    \ should only happen once, after that things will go even faster.\n\nThis will\
+    \ add the necessary entries in your `pom.xml`{{open}} to bring in the Kafka extension.\
+    \ You'll see:\n\n```xml\n<dependency>\n    <groupId>io.quarkus</groupId>\n   \
+    \ <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>\n</dependency>\n\
+    ```\n"
+  difficulty: basic
+  slug: 01-add-extension
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "# Create name generator\n\nTo start building the app, create a new\
+    \ Java class by clicking: `src/main/java/org/acme/people/stream/NameGenerator.java`{{open}}.\n\
+    \nNext, click **Copy to Editor** to add the following code to this file:\n\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/java/org/acme/people/stream/NameGenerator.java\"\
+    \ data-target=\"replace\">\npackage org.acme.people.stream;\n\nimport io.smallrye.mutiny.Multi;\n\
+    \nimport javax.enterprise.context.ApplicationScoped;\nimport org.acme.people.utils.CuteNameGenerator;\n\
+    import org.eclipse.microprofile.reactive.messaging.Outgoing;\n\nimport java.time.Duration;\n\
+    \n@ApplicationScoped\npublic class NameGenerator {\n\n    @Outgoing(\"generated-name\"\
+    )\n    public Multi&lt;String&gt; generate() {\n        return Multi.createFrom().ticks().every(Duration.ofSeconds(5))\n\
+    \            .onOverflow().drop()\n            .map(tick -> CuteNameGenerator.generate());\n\
+    \    }\n\n}\n</pre>\n\nThis simple method:\n\n* Instructs Reactive Messaging to\
+    \ dispatch the items from returned stream to `generated-name`\n* Returns a [Mutiny](https://smallrye.io/smallrye-mutiny/)\
+    \ `Multi` stream emitting a random name every 5 seconds\n\nThe method returns\
+    \ a Reactive Stream. The generated items are sent to the stream named `generated-name`.\
+    \ This stream is\nmapped to Kafka using the `application.properties` file that\
+    \ we will soon create.\n"
+  difficulty: basic
+  slug: 02-create-generator
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "# Create name converter\n\nThe name converter reads the names from\
+    \ Kafka, and transforms them, adding a random (English) honorific to the beginning\
+    \ of the name.\n\nCreate a new Java class by clicking: `src/main/java/org/acme/people/stream/NameConverter.java`{{open}}.\n\
+    \nNext, click **Copy to Editor** to add the following code to this file:\n\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/java/org/acme/people/stream/NameConverter.java\"\
+    \ data-target=\"replace\">\npackage org.acme.people.stream;\n\nimport javax.enterprise.context.ApplicationScoped;\n\
+    import org.eclipse.microprofile.reactive.messaging.Incoming;\nimport org.eclipse.microprofile.reactive.messaging.Outgoing;\n\
+    import io.smallrye.reactive.messaging.annotations.Broadcast;\n\n@ApplicationScoped\n\
+    public class NameConverter {\n\n    private static final String[] honorifics =\
+    \ {\"Mr.\", \"Mrs.\", \"Sir\", \"Madam\", \"Lord\", \"Lady\", \"Dr.\", \"Professor\"\
+    , \"Vice-Chancellor\", \"Regent\", \"Provost\", \"Prefect\"};\n\n    @Incoming(\"\
+    names\")               \n    @Outgoing(\"my-data-stream\")      \n    @Broadcast\
+    \                       \n    public String process(String name) {\n        String\
+    \ honorific = honorifics[(int)Math.floor(Math.random() * honorifics.length)];\n\
+    \        return honorific + \" \" + name;\n    }\n}\n</pre>\n\nThis simple method:\n\
+    \n* Consumes the items from the `names` topic using `@Incoming`\n* Adds an _honorific_\
+    \ to the start of each name in the stream\n* Sends the resulting `@Outgoing` stream\
+    \ to all _subscribers_ (`@Broadcast`) of the in-memory `my-data-stream` stream\n\
+    \nThe `process()` method is called for every Kafka record from the `names` topic\
+    \ (configured in the application\nconfiguration which we'll do later). Every result\
+    \ is sent to the my-data-stream in-memory stream.\n"
+  difficulty: basic
+  slug: 03-create-converter
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "# Create HTTP resource\n\nFinally, let\u2019s bind our stream to a\
+    \ JAX-RS resource.\n\nCreate a final Java class by clicking: `src/main/java/org/acme/people/stream/NameResource.java`{{open}}.\n\
+    \nNext, click **Copy to Editor** to add the following code to this file:\n\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/java/org/acme/people/stream/NameResource.java\"\
+    \ data-target=\"replace\">\npackage org.acme.people.stream;\n\nimport org.eclipse.microprofile.reactive.messaging.Channel;\n\
+    \nimport org.reactivestreams.Publisher;\nimport javax.inject.Inject;\nimport javax.ws.rs.GET;\n\
+    import javax.ws.rs.Path;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\
+    \n/**\n * A simple resource retrieving the in-memory \"my-data-stream\" and sending\
+    \ the items as server-sent events.\n */\n@Path(\"/names\")\npublic class NameResource\
+    \ {\n\n    @Inject\n    @Channel(\"my-data-stream\") Publisher&lt;String&gt; names;\n\
+    \n    @GET\n    @Path(\"/stream\")\n    @Produces(MediaType.SERVER_SENT_EVENTS)\n\
+    \    public Publisher&lt;String&gt; stream() {\n        return names;\n    }\n\
+    }\n</pre>\n\nThis method:\n\n  - `@Inject`s the `my-data-stream` stream using\
+    \ the `@Channel` qualifier\n  - Indicates that the content is sent (`@Produces`)\
+    \ using *Server Sent Events*\n  - Returns the stream (Reactive Stream)\n\nThe\
+    \ `process()` method is called for every Kafka record from the `names` topic (configured\
+    \ in the application\nconfiguration which we'll do later). Every result is sent\
+    \ to the my-data-stream in-memory stream.\n\n> In the `src/main/resources/META-INF/resources/index.html`{{open}}\
+    \ page you'll find code\n> which will make a request to this `/names/stream` endpoint\
+    \ using standard JavaScript running in the browser and draw\n> the resulting names\
+    \ using the [D3.js library](https://d3js.org/). The JavaScript that makes this\
+    \ call looks like this\n> (do not copy this into anything\\!):\n>\n> ```javascript\n\
+    > var source = new EventSource(\"/names/stream\");\n>\n> source.onmessage = function\
+    \ (event) {\n>\n>     console.log(\"received new name: \" + event.data);\n>  \
+    \   // process new name in event.data\n>     // ...\n>\n>     // update the display\
+    \ with the new name\n>     update();\n> };\n> ```\n>  This code:\n>\n>   - Uses\
+    \ your browser\u2019s support for the `EventSource` API (part of the W3C SSE standard)\
+    \ to call the endpoint\n>\n>   - Each time a message is received via SSE, *react*\
+    \ to it by running this function\n>\n>   - Refresh the display using the D3.js\
+    \ library\n"
+  difficulty: basic
+  slug: 04-create-resource
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "# Configure the app\n\nWe need to configure our app to define how our\
+    \ app can connect to Kafka. Click: `src/main/resources/application.properties`{{open}}\
+    \ to open this file. This file contains Quarkus configuration and is empty. The\
+    \ names of the properties for the Kafka extension are structured as follows:\n\
+    \n`mp.messaging.[outgoing|incoming].{channel-name}.property=value`\n\n  - The\
+    \ `channel-name` segment must match the value set in the `@Incoming` and `@Outgoing`\
+    \ annotation:\n\n  - `generated-price` \u2192 sink in which we write the prices\n\
+    \n  - `prices` \u2192 source in which we read the prices\n\nClick **Copy to Editor**\
+    \ to add the following values to the `application.properties` file:\n\n<pre class=\"\
+    file\" data-filename=\"./src/main/resources/application.properties\" data-target=\"\
+    replace\">\n# Configure the Kafka sink (we write to it)\nmp.messaging.outgoing.generated-name.bootstrap.servers=names-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092\n\
+    mp.messaging.outgoing.generated-name.connector=smallrye-kafka\nmp.messaging.outgoing.generated-name.topic=names\n\
+    mp.messaging.outgoing.generated-name.value.serializer=org.apache.kafka.common.serialization.StringSerializer\n\
+    \n# Configure the Kafka source (we read from it)\nmp.messaging.incoming.names.bootstrap.servers=names-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092\n\
+    mp.messaging.incoming.names.connector=smallrye-kafka\nmp.messaging.incoming.names.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer\n\
+    </pre>\n\nThe hostnames used above refer to the in-cluster hostnames that resolve\
+    \ to our running Kafka cluster on OpenShift.\n\nMore details about this configuration\
+    \ is available on the [Producer\nconfiguration](https://kafka.apache.org/documentation/#producerconfigs)\
+    \ and [Consumer\nconfiguration](https://kafka.apache.org/documentation/#consumerconfigs)\
+    \ section from the Kafka documentation.\n\n> **Note**\n>\n> What about `my-data-stream`?\
+    \ This is an in-memory stream, not connected to a message broker.\n\n# Compilation\
+    \ Test\n\nTo make sure you've got a compilable app and code is in its proper place,\
+    \ let's test the build. Run this command to compile and package the app:\n\n```\n\
+    mvn clean package\n```\n"
+  difficulty: basic
+  slug: 05-configure-app
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+- assignment: "# Deploying Kafka to OpenShift\n\nTo deploy Kafka to OpenShift, you'll\
+    \ need to login.\n\nYou should already be logged in as an admin user. Click this\
+    \ command to verify:\n\n`oc whoami`{{execute T2}}\n\nIt should respond with `admin`.\n\
+    \n## Access OpenShift Project\n\n[Projects](https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/projects_and_users.html#projects)\n\
+    are a top level concept to help you organize your deployments. An\nOpenShift project\
+    \ allows a community of users (or a user) to organize and manage\ntheir content\
+    \ in isolation from other communities.\n\nFor this scenario, let's create a project\
+    \ that you will use to house Kafka. Click:\n\n`oc new-project kafka --display-name=\"\
+    Apache Kafka\"`{{execute T2}}\n\n## Deploy Kafka Operator\n\nTo deploy Kafka,\
+    \ we'll use the _Strimzi_ Operator. Strimzi is an open source project that provides\
+    \ an easy way to run an Apache Kafka cluster on Kubernetes in various deployment\
+    \ configurations.\n\nFirst, click this command to deploy the Operator to our new\
+    \ `kafka` namespace:\n\n`oc create -f 'https://strimzi.io/install/latest?namespace=kafka'\
+    \ -n kafka`{{execute T2}}\n\nWait for the Operator to be deployed by running this\
+    \ command:\n\n`oc rollout status -w deployment/strimzi-cluster-operator`{{execute\
+    \ T2}}\n\n> If this command seems to be taking a long time, just CTRL-C it and\
+    \ run it again. It make take time to install Kafka depending on system load.\n\
+    \nYou should eventually see:\n\n```console\ndeployment \"strimzi-cluster-operator\"\
+    \ successfully rolled out\n```\n\n## Deploy Kafka Cluster\n\nBefore deploying\
+    \ the Kafka cluster, make sure you are on the project folder _projects/rhoar-getting-started/quarkus/kafka/_\
+    \ by executing this command:\n\n`cd /root/projects/rhoar-getting-started/quarkus/kafka`{{execute\
+    \ T2}}\n\nNext, create a new `Kafka` object within Kubernetes that the operator\
+    \ is waiting for. Click this command to create it:\n\n`oc apply -f src/main/kubernetes/kafka-names-cluster.yaml`{{execute\
+    \ T2}}\n\nThis command creates a simple Kafka object:\n\n```yaml\napiVersion:\
+    \ kafka.strimzi.io/v1beta1\nkind: Kafka\nmetadata:\n  name: names-cluster\nspec:\n\
+    \  kafka:\n    replicas: 3\n    listeners:\n      ...\n    config:\n      ...\n\
+    \    storage:\n      type: ephemeral\n  zookeeper:\n    ...\n```\n\n## Deploy\
+    \ Kafka Topic\n\nWe\u2019ll need to create a _topic_ for our application to stream\
+    \ to and from. To do so, click the following command to create the _topic_ object:\n\
+    \n`oc apply -f src/main/kubernetes/kafka-names-topic.yaml`{{execute T2}}\n\nThis\
+    \ creates our `names` topic that our code and Quarkus configuration references.\n\
+    \n## Confirm deployment\n\nLook at the list of pods being spun up and look for\
+    \ the Kafka pods for our cluster:\n\n`oc get pods|grep names-cluster`{{execute\
+    \ T2}}\n\nYou should see something like:\n\n``` none\nnames-cluster-entity-operator-6cbfffc465-jthb7\
+    \   3/3     Running   0          45s\nnames-cluster-kafka-0                  \
+    \          1/1     Running   0          99s\nnames-cluster-kafka-1           \
+    \                 1/1     Running   0          99s\nnames-cluster-kafka-2    \
+    \                        1/1     Running   0          99s\nnames-cluster-zookeeper-0\
+    \                        1/1     Running   0          2m31s\nnames-cluster-zookeeper-1\
+    \                        1/1     Running   0          2m31s\nnames-cluster-zookeeper-2\
+    \                        1/1     Running   0          2m31s\n```\nIf the pods\
+    \ are still spinning up (not all in the _Running_ state with `1/1` or `3/3` containers\
+    \ running), keep clicking the above command until you see 3 _kafka_ pods, 3 _zookeeper_\
+    \ pods, and the single _entity operator_ pod.\n\nIt will take around 2 minutes\
+    \ to get all the Kafka pods up and running.\n\n"
+  difficulty: basic
+  slug: 06-deploy-kafka
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 6
+  type: challenge
+- assignment: "## Install OpenShift extension\n\nQuarkus offers the ability to automatically\
+    \ generate OpenShift resources based on sane default and user supplied configuration.\
+    \ The OpenShift extension is actually a wrapper extension that brings together\
+    \ the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i)\
+    \ extensions with sensible defaults so that it\u2019s easier for the user to get\
+    \ started with Quarkus on OpenShift.\n\nRun the following command to add it to\
+    \ our project:\n\n`mvn quarkus:add-extension -Dextensions=\"openshift\"`{{execute\
+    \ T2}}\n\nClick **Copy to Editor** to add the following values to the `application.properties`\
+    \ file:\n\n<pre class=\"file\" data-filename=\"./src/main/resources/application.properties\"\
+    \ data-target=\"append\">\n# Configure the OpenShift extension options\nquarkus.kubernetes-client.trust-certs=true\n\
+    quarkus.container-image.build=true\nquarkus.kubernetes.deploy=true\nquarkus.kubernetes.deployment-target=openshift\n\
+    quarkus.openshift.expose=true\nquarkus.openshift.labels.app.openshift.io/runtime=quarkus\n\
+    </pre>\n\nFor more details of the above options:\n\n* `quarkus.kubernetes-client.trust-certs=true`\
+    \ - We are using self-signed certs in this simple example, so this simply says\
+    \ to the extension to trust them.\n* `quarkus.container-image.build=true` - Instructs\
+    \ the extension to build a container image\n* `quarkus.kubernetes.deploy=true`\
+    \ - Instructs the extension to deploy to OpenShift after the container image is\
+    \ built\n* `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension\
+    \ to generate and create the OpenShift resources (like `DeploymentConfig`s and\
+    \ `Service`s) after building the container\n* `quarkus.openshift.expose=true`\
+    \ - Instructs the extension to generate an OpenShift `Route`.\n* `quarkus.openshift.labels.app.openshift.io/runtime=quarkus`\
+    \ - Adds a nice-looking icon to the app when viewing the OpenShift Developer Toplogy\n\
+    \n## Login to OpenShift\n\nWe'll deploy our app as the `developer` user. Run the\
+    \ following command to login with the OpenShift CLI:\n\n`oc login -u developer\
+    \ -p developer`{{execute T2}}\n\nYou should see\n\n```\nLogin successful.\n\n\
+    You don't have any projects. You can try to create a new project, by running\n\
+    \n    oc new-project <projectname>\n```\n\n## Create project\n\nCreate a new project\
+    \ into which we'll deploy the app:\n\n`oc new-project quarkus-kafka --display-name=\"\
+    Quarkus on Kafka\"`{{execute T2}}\n\n## Deploy application to OpenShift\n\nNow\
+    \ let's deploy the application itself. Run the following command which will build\
+    \ and deploy using the OpenShift extension:\n\n`mvn clean package`{{execute T2}}\n\
+    \n> **NOTE**: This command will take a minute or two, as it builds the app, pushes\
+    \ a container image, and finally deploys the container to OpenShift.\n\nThe output\
+    \ should end with `BUILD SUCCESS`.\n\nFinally, make sure it's actually done rolling\
+    \ out:\n\n`oc rollout status -w dc/people`{{execute T2}}\n\nWait for that command\
+    \ to report `replication controller \"people-1\" successfully rolled out` before\
+    \ continuing.\n\nYou can see the app deployed in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus-kafka):\n\
+    \nYou'll need to login with the same credentials as before:\n\n* Username: `developer`\n\
+    * Password: `developer`\n\n![topology](/openshift/assets/middleware/quarkus/peopletopology.png)\n\
+    \nAnd now we can access using `curl` once again to confirm the app is up:\n\n\
+    `curl http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello`{{execute\
+    \ T2}}\n\nSo now our app is deployed to OpenShift. Finally, let's confirm our\
+    \ streaming Kafka app is working.\n\n[Open up the web UI](http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\
+    \ You should see a word cloud being updated every 5 seconds:\n\n> It takes a few\
+    \ seconds to establish the connection to Kafka. If you don\u2019t see new names\
+    \ generated every 5 seconds reload the browser page to re-initialize the SSE stream.\n\
+    \n![kafka](/openshift/assets/middleware/quarkus/wordcloud.png)\n\n# Open the solution\
+    \ in an IDE in the Cloud!\nWant to continue exploring this solution on your own\
+    \ in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
+    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
+    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
+    \ are a new user. This free service expires after 30 days, but you can always\
+    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/kafka/devfile.yaml)\
+    \ to open the solution for this project in the cloud IDE. While loading, if it\
+    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
+    \ code to your own GitHub!\nWant to experiment more with the solution code you\
+    \ just worked with? If so, you can fork the repository containing the solution\
+    \ to your own GitHub repository by clicking on the following command to execute\
+    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
+    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
+    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
+    \ to open a new browser tab to GitHub and paste in the code you were presented\
+    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
+    \ close the browser tab and return to the console and press `Enter` to complete\
+    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
+    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
+    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
+    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
+    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
+    \ repo will be forked in your own GitHub account. On the `solution` branch in\
+    \ the repo, the `kafka` project inside the `quarkus` folder contains the completed\
+    \ solution for this scenario.\n\n## Congratulations!\n\nThis guide has shown how\
+    \ you can interact with Kafka using Quarkus. It utilizes MicroProfile Reactive\
+    \ Messaging to build\ndata streaming applications.\n\nIf you want to go further\
+    \ check the documentation of [SmallRye Reactive\nMessaging](https://smallrye.io/smallrye-reactive-messaging),\
+    \ the implementation used in Quarkus.\n"
+  difficulty: basic
+  slug: 07-deploy-and-test
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 7
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: kafka
+tags:
+- openshift
+title: Reactive Streaming with Quarkus and Kafka
+type: truck

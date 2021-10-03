@@ -1,0 +1,449 @@
+challenges:
+- assignment: "In this step, you will create a straightforward application serving\
+    \ a `hello` endpoint. To demonstrate dependency injection this endpoint uses a\
+    \ `greeting` bean.\n\n![Architecture](/openshift/assets/middleware/quarkus/arch.png)\n\
+    \n# Wait for prerequisite downloads\n\nA suitable Java runtime is being installed\
+    \ and should take less than a minute. Once it's done, continue below!\n\n# Create\
+    \ basic project\n\nThe easiest way to create a new Quarkus project is to click\
+    \ to run the following command:\n\n`mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create\
+    \ \\\n    -DprojectGroupId=org.acme \\\n    -DprojectArtifactId=getting-started\
+    \ \\\n    -DclassName=\"org.acme.quickstart.GreetingResource\" \\\n    -Dpath=\"\
+    /hello\"`{{execute}}\n\nThis will use the Quarkus Maven Plugin and generate a\
+    \ basic Maven project for you in the `getting-started` subdirectory, generating:\n\
+    \n* The Maven structure\n* An `org.acme.quickstart.GreetingResource` resource\
+    \ exposed on `/hello`\n* An associated unit test\n* A landing page that is accessible\
+    \ on `http://localhost:8080` after starting the application\n* Example `Dockerfile`s\
+    \ for a variety of build targets (native, jvm, etc)\n* The application configuration\
+    \ file\n\nOnce generated, look at the `getting-started/pom.xml`{{open}}. You will\
+    \ find the import of the Quarkus BOM, allowing to omit the version on the different\
+    \ Quarkus dependencies. In addition, you can see the `quarkus-maven-plugin` responsible\
+    \ of the packaging of the application and also providing the development mode.\n\
+    \n```xml\n  <dependencyManagement>\n    <dependencies>\n      <dependency>\n \
+    \       <groupId>${quarkus.platform.group-id}</groupId>\n        <artifactId>${quarkus.platform.artifact-id}</artifactId>\n\
+    \        <version>${quarkus.platform.version}</version>\n        <type>pom</type>\n\
+    \        <scope>import</scope>\n      </dependency>\n    </dependencies>\n  </dependencyManagement>\n\
+    ```\n\nIf we focus on the dependencies section, you can see we are using [Quarkus\
+    \ extensions](https://quarkus.io/extensions/) allowing the development and testing\
+    \ of REST applications:\n```xml\n  <dependencies>\n    <dependency>\n      <groupId>io.quarkus</groupId>\n\
+    \      <artifactId>quarkus-arc</artifactId>\n    </dependency>\n    <dependency>\n\
+    \      <groupId>io.quarkus</groupId>\n      <artifactId>quarkus-resteasy</artifactId>\n\
+    \    </dependency>\n    <dependency>\n      <groupId>io.quarkus</groupId>\n  \
+    \    <artifactId>quarkus-junit5</artifactId>\n      <scope>test</scope>\n    </dependency>\n\
+    \    <dependency>\n      <groupId>io.rest-assured</groupId>\n      <artifactId>rest-assured</artifactId>\n\
+    \      <scope>test</scope>\n    </dependency>\n  </dependencies>\n```\n\nDuring\
+    \ the project creation, the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`{{open}}\
+    \ file has been created with the following endpoint:\n\n```java\n@Path(\"/hello\"\
+    )\npublic class GreetingResource {\n\n    @GET\n    @Produces(MediaType.TEXT_PLAIN)\n\
+    \    public String hello() {\n        return \"Hello RESTEasy\";\n    }\n}\n```\n\
+    It\u2019s a very simple REST endpoint, returning \"hello\" to requests on `/hello`.\n\
+    \n> Compared to vanilla JAX-RS, with Quarkus there is no need to create an `Application`\
+    \ class. It\u2019s supported but not required. In addition, only one instance\
+    \ of the resource is created and not one per request. You can configure this using\
+    \ the different `*Scoped` annotations (`ApplicationScoped`, `RequestScoped`, etc).\n\
+    \n# Running the Application\n\nFirst, change to the directory in which the project\
+    \ was created:\n\n```\ncd /root/projects/quarkus/getting-started\n```\n\nNow we\
+    \ are ready to run our application. Click here to run:\n\n```\nmvn quarkus:dev\
+    \ -Dquarkus.http.host=0.0.0.0``\n```\n\nYou should see:\n\n```console\n__  ____\
+    \  __  _____   ___  __ ____  ______\n --/ __ \\/ / / / _ | / _ \\/ //_/ / / /\
+    \ __/\n -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\\ \\\n--\\___\\_\\____/_/ |_/_/|_/_/|_|\\\
+    ____/___/\nINFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT\
+    \ on JVM (powered by Quarkus x.x.x.Final) started in 1.194s. Listening on: http://0.0.0.0:8080\n\
+    INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.\n\
+    INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, resteasy]\n\
+    --\nTests paused, press [r] to resume, [h] for more options>\n```\n\nNote the\
+    \ amazingly fast startup time! Once started, you can request the provided endpoint\
+    \ in the browser [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello).\n\
+    \nYou should see:\n\n```console\nHello RESTEasy\n```\nIt's working!\n\nNow, let's\
+    \ exercise the **live reload** capabilities of Quarkus. Click here to open the\
+    \ endpoint:  `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`{{open}}.\
+    \ Change `return \"Hello RESTEasy\";` to `return \"Hola RESTEasy\";` on line 14\
+    \ in the editor. Don't save. Don't recompile or restart anything. Just try to\
+    \ reload the brower (or [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello)\
+    \ again.)\n\nYou should see the updated `hola` message.\n\nWow, how cool is that?\
+    \ Supersonic Subatomic live reload! Go ahead and change it a few more times and\
+    \ access the endpoint again. And we're just getting started.\n\n> `quarkus:dev`\
+    \ runs Quarkus in development mode. This enables live reload with background compilation,\
+    \ which means that when you modify your Java files your resource files and refresh\
+    \ your browser these changes will automatically take effect.\n> This will also\
+    \ listen for a debugger on port `5005`. If your want to wait for the debugger\
+    \ to attach before running you can pass `-Ddebug` on the command line. If you\
+    \ don\u2019t want the debugger at all you can use `-Ddebug=false`.\n\n# The Dev\
+    \ UI\n\nWhen running in Developer mode, Quarkus apps expose a useful UI for inspecting\
+    \ and making on-the-fly changes to the app (much like live coding mode). It allows\
+    \ you to quickly visualize all the extensions currently loaded, see and edit their\
+    \ configuration values, see their status and go directly to their documentation.\n\
+    \nTo access the Dev UI for your running app, [click this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/q/dev)\
+    \ which should open up the Dev UI in a new browser tab.\n\n![Dev UI](/openshift/assets/middleware/quarkus/dev-ui-overview.png)\n\
+    \nFor example, click on the `Config Editor` link within the `Configuration` tile\
+    \ to see and make updates to configuration. This is super useful for developers\
+    \ to confirm code and configuration changes, or experiment with various settings.\n\
+    \n> **NOTE** The Dev UI is only enabled when in _developer_ mode. It is not deployed\
+    \ when in production mode, as it's designed for developers to use during development.\
+    \ For more detail on what you can do, check out the [Dev UI Guide](https://quarkus.io/guides/dev-ui).\n\
+    \n# Continuous Testing\n\nWhen in developer mode (via `mvn quarkus:dev`), Quarkus\
+    \ can automatically and continuously run your unit tests. You may have noticed\
+    \ in the console `Tests paused, press [r] to resume, [h] for more options>`. This\
+    \ is an indication that you can enter continuous test mode. Type `r` to turn continuous\
+    \ testing mode on in the console.\n\nEarlier, you changed `Hello` to `Hola` which\
+    \ broke the default unit test, and you can now see this in the console:\n\n```\n\
+    Response body doesn't match expectation.\nExpected: is \"Hello RESTEasy\"\n  Actual:\
+    \ Hola RESTEasy\n```\n\nLet's fix the test. Change `Hola RESTEasy` back to `Hello\
+    \ RESTEasy` in the editor. As soon as you fix it, Quarkus automatically re-runs\
+    \ the test and you should now have passing tests:\n\n```\nAll 1 tests are passing\
+    \ (0 skipped), 1 tests were run in 389ms. Tests completed at 12:25:40 due to changes\
+    \ to GreetingResource.class.\n```\n\nQuarkus analyses your unit tests and only\
+    \ re-runs the tests that are affected by code changes. It's one of many developer\
+    \ productivity features of Quarkus, providing immediate feedback to developers\
+    \ as they type. We'll leave the tests running continously just to ensure we don't\
+    \ mess up later.\n\n# Congratulations!\n\nYou've seen how to build a basic app,\
+    \ package it as an executable JAR and start it up very quickly. You also saw how\
+    \ Quarkus can run tests continuously to turbocharge your development tasks and\
+    \ facilitate test-driven development. We'll leave the app running and rely on\
+    \ hot reload for the next steps.\n\nIn the next step we'll inject a custom bean\
+    \ to showcase Quarkus' CDI capabilities.\n"
+  difficulty: basic
+  slug: 01-create-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "In the previous step you created a basic RESTful Java application with\
+    \ Quarkus. In this step we'll add a custom bean that will use the _ArC_ extension\
+    \ which provides a CDI-based dependency injection [solution](https://quarkus.io/guides/cdi-reference.html)\
+    \ tailored for the Quarkus architecture.\n\n## Add Custom Bean\n\nLet\u2019s modify\
+    \ the application and add a companion bean. Open a new file by clicking: `getting-started/src/main/java/org/acme/quickstart/GreetingService.java`{{open}}.\n\
+    \nNext, click **Copy to Editor** to add the following code to this file:\n\n<pre\
+    \ class=\"file\" data-filename=\"./getting-started/src/main/java/org/acme/quickstart/GreetingService.java\"\
+    \ data-target=\"replace\">\npackage org.acme.quickstart;\n\nimport javax.enterprise.context.ApplicationScoped;\n\
+    \n@ApplicationScoped\npublic class GreetingService {\n\n    private String hostname\
+    \ = System.getenv().getOrDefault(\"HOSTNAME\", \"unknown\");\n\n    public String\
+    \ greeting(String name) {\n        return \"hello \" + name + \" from \" + hostname;\n\
+    \    }\n\n}\n</pre>\n\nNext, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`{{open}}\
+    \ class and then click **Copy To Editor** once again to inject the new bean and\
+    \ create a new endpoint using it:\n\n<pre class=\"file\" data-filename=\"./getting-started/src/main/java/org/acme/quickstart/GreetingResource.java\"\
+    \ data-target=\"replace\">\npackage org.acme.quickstart;\n\nimport javax.inject.Inject;\n\
+    import javax.ws.rs.GET;\nimport javax.ws.rs.Path;\nimport javax.ws.rs.PathParam;\n\
+    import javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\n@Path(\"/hello\"\
+    )\npublic class GreetingResource {\n\n    @Inject\n    GreetingService service;\n\
+    \n    @GET\n    @Produces(MediaType.TEXT_PLAIN)\n    @Path(\"/greeting/{name}\"\
+    )\n    public String greeting(@PathParam(\"name\") String name) {\n        return\
+    \ service.greeting(name);\n    }\n\n    @GET\n    @Produces(MediaType.TEXT_PLAIN)\n\
+    \    public String hello() {\n        return \"Hello RESTEasy\";\n    }\n}\n</pre>\n\
+    \n## Inspect the results\n\nSince we still have our app running using `mvn quarkus:dev`,\
+    \ when you make these changes and reload the endpoint, Quarkus will notice all\
+    \ of these changes and live reload them.\n\nCheck that it works as expected by\
+    \ loading the new endpoint by [clicking here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus).\n\
+    \nNote we are exercising our new bean using the `/hello/greeting` endpoint, and\
+    \ you should see\n\n```console\nhello quarkus from 4090f59d1a69\n```\n\n> In this\
+    \ case, `4090f59d1a69` is the hostname of the local host we are running on. It\
+    \ will be different for you!\n\n## Add another test\n\nLet's add another test\
+    \ for Quarkus to run continously for our new endpoint. Open a new file by clicking:\
+    \ `getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java`{{open}}.\n\
+    \nNext, click **Copy to Editor** to add the following code to this file:\n\n<pre\
+    \ class=\"file\" data-filename=\"./getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java\"\
+    \ data-target=\"replace\">\npackage org.acme.quickstart;\n\nimport io.quarkus.test.junit.QuarkusTest;\n\
+    import org.junit.jupiter.api.Test;\n\nimport java.util.UUID;\n\nimport static\
+    \ io.restassured.RestAssured.given;\nimport static org.hamcrest.CoreMatchers.startsWith;\n\
+    \n@QuarkusTest\npublic class GreetingServiceTest {\n\n    @Test\n    public void\
+    \ testGreetingEndpoint() {\n        String uuid = UUID.randomUUID().toString();\n\
+    \        given()\n          .pathParam(\"name\", uuid)\n          .when().get(\"\
+    /hello/greeting/{name}\")\n          .then()\n            .statusCode(200)\n \
+    \           .body(startsWith(\"hello \" + uuid));\n    }\n\n}\n</pre>\n\nThis\
+    \ test generates a random string (a UUID), and uses that to call into our new\
+    \ service, looking for the same random name in the returned value.\n\nYou should\
+    \ now see that both tests pass:\n\n```\nAll 2 tests are passing (0 skipped), 1\
+    \ tests were run in 429ms. Tests completed at 12:35:33 due to changes to GreetingServiceTest.class.\n\
+    ```\nAs you add more tests, Quarkus will simply continuously run them to produce\
+    \ the result in realtime.\n\n## Congratulations!\n\nIt's a familiar CDI-based\
+    \ environment for you Enterprise Java developers out there, with powerful mechanisms\
+    \ to reload your code _as you type_ (or very close to realtime). In the next step,\
+    \ we'll package and run it as a standalone executable JAR, which should also be\
+    \ familiar to microservice developers.\n"
+  difficulty: basic
+  slug: 02-inject-bean
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "In the previous step you added a custom CDI bean to the app. Now it's\
+    \ time to package and run it as a self-contained JAR file.\n\n### Stop the previous\
+    \ application\n\nLet's stop the original application so we can package and re-run\
+    \ it as an executable JAR. In the terminal, press `CTRL-C` to stop the application.\n\
+    \n### Package the app\n\nPackage the application:\n\n```\nmvn package\n```. It\
+    \ produces 2 jar files:\n\n* `target/getting-started-1.0.0-SNAPSHOT.jar` - containing\
+    \ just the classes and resources of the projects, it\u2019s the regular artifact\
+    \ produced by the Maven build\n\n* `target/quarkus-app/quarkus-run.jar` - being\
+    \ an executable jar. Be aware that it\u2019s not an \xFCber-jar as the dependencies\
+    \ are copied into several subdirectories (and would need to be included in any\
+    \ layered container image).\n\nSee the files with this command:\n\n```\nls -l\
+    \ target/*.jar target/quarkus-app/*.jar\n```\n\n> **NOTE**: Quarkus uses the _fast-jar_\
+    \ packaging by default. The fast-jar packaging format is introduced as an alternative\
+    \ to the default jar packaging format. The main goal of this new format is to\
+    \ bring faster startup times.\n\n## Run the executable JAR\n\nYou can run the\
+    \ packaged application by clicking:\n\n```\njava -jar target/quarkus-app/quarkus-run.jar\n\
+    ```\n\nAnd then test it again using the browser to access the `/hello/greeting`\
+    \ endpoint, passing `quarkus` in the URL using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus).\n\
+    \nYou should see:\n\n```console\nhello quarkus from 4090f59d1a69\n```\nNote the\
+    \ same hostname as before, and also note that since we're running it as a fast-jar,\
+    \ Quarkus runs in production mode (and does not enable continuous testing or other\
+    \ developer features).\n\n> The `Class-Path` entry of the `MANIFEST.MF` from the\
+    \ _runner jar_ explicitly lists the jars from the subdirectories under `target/quarkus-app`.\
+    \ So if you want to deploy your application somewhere, you need to copy the _runner\
+    \ jar_ as well as the folder structure under `target/quarkus-app`. If you want\
+    \ to create an Uber-jar with everything included, you can use `mvn package -DuberJar`.\n\
+    \n## Cleanup\n\nGo back to the terminal and stop the app once again by pressing\
+    \ `CTRL-C`.\n\n## Congratulations!\n\nYou've packaged up the app as an executable\
+    \ JAR and learned a bit more about the mechanics of packaging. In the next step,\
+    \ we'll continue our journey and build a _native image_ and then we'll learn about\
+    \ the native executable creation and the packaging in a Linux container.\n\n"
+  difficulty: basic
+  slug: 03-package-and-run
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "Let\u2019s now produce a native executable for our application. It\
+    \ improves the startup time of the application, and produces a minimal disk footprint.\
+    \ The executable would have everything to run the application including the \"\
+    JVM\" (shrunk to be just enough to run the application), and the application.\n\
+    \n![Native process](/openshift/assets/middleware/quarkus/native-image-process.png)\n\
+    \nWe will be using GraalVM, which includes a native compiler for producing native\
+    \ images for a number of languages, including Java. GraalVM is installed in `$GRAALVM_HOME`:\n\
+    \n```\necho $GRAALVM_HOME\n```\n\n## Build native image\n\nWithin the `getting-started/pom.xml`{{open}}\
+    \ is the declaration for the Quarkus Maven plugin which contains a profile named\
+    \ `native`:\n\n```xml\n\n    <profile>\n      <id>native</id>\n      <activation>\n\
+    \        <property>\n          <name>native</name>\n        </property>\n    \
+    \  </activation>\n      <build>\n      ...\n      <properties>\n        <quarkus.package.type>native</quarkus.package.type>\n\
+    \      </properties>\n    </profile>\n\n```\nWe use a profile because, you will\
+    \ see very soon, packaging the native image takes a few seconds. However, this\
+    \ compilation time is only incurred _once_, as opposed to _every_ time the application\
+    \ starts, which is the case with other approaches for building and executing JARs.\n\
+    \nCreate a native executable by clicking: ```\nmvn clean package -Pnative -DskipTests\n\
+    ```\n\n> Since we are on Linux in this environment, and the OS that will eventually\
+    \ run our application is also Linux, we can use our local OS to build the native\
+    \ Quarkus app. If you need to build native Linux binaries when on other OS's like\
+    \ Windows or Mac OS X, you can use `-Dquarkus.native.container-runtime=[podman\
+    \ | docker]`. You'll need either Docker or [Podman](https://podman.io) installed\
+    \ depending on which container runtime you want to use!\n\nThis will take a minute\
+    \ or so to finish. Wait for it!\n\nIn addition to the regular files, the build\
+    \ also produces `target/getting-started-1.0.0-SNAPSHOT-runner`. This is a native\
+    \ Linux binary:\n\n```\nfile target/getting-started-1.0.0-SNAPSHOT-runner\n```\n\
+    \n```console\ntarget/getting-started-1.0.0-SNAPSHOT-runner: ELF 64-bit LSB executable,\
+    \ x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2,\
+    \ for GNU/Linux 3.2.0, BuildID[sha1]=61109b6a2cc71d269c61b3b964c419c22fbb038b,\
+    \ not stripped\n```\n\n## Run native image\n\nSince our environment here is Linux,\
+    \ you can _just run it_:\n\n```\ntarget/getting-started-1.0.0-SNAPSHOT-runner\n\
+    ```\n\nNotice the amazingly fast startup time:\n\n```console\nINFO  [io.quarkus]\
+    \ (main) Quarkus x.xx.x started in 0.011s. Listening on: http://[::]:8080\nINFO\
+    \  [io.quarkus] (main) Installed features: [cdi, resteasy]\n```\nThat's 11 milliseconds!\n\
+    \nAnd extremely low memory usage as reported by the Linux `ps` utility. Click\
+    \ here to run this in your other Terminal tab:\n\n`ps -o pid,rss,command -p $(pgrep\
+    \ -f runner)`{{execute T2}}\n\nYou should see something like:\n\n```console\n\
+    \  PID   RSS COMMAND\n 6082 26744 target/getting-started-1.0.0-SNAPSHOT-runner\n\
+    ```\n\nThis shows that our process is taking around 26 MB of memory ([Resident\
+    \ Set Size](https://en.wikipedia.org/wiki/Resident_set_size), or RSS). Pretty\
+    \ compact!\n\n> Note that the RSS and memory usage of any app, including Quarkus,\
+    \ will vary depending your specific environment, and will rise as the application\
+    \ experiences load.\n\nMake sure the app is still working as expected (we'll use\
+    \ `curl` this time to access it directly):\n\n`curl http://localhost:8080/hello/greeting/quarkus`{{execute\
+    \ T2}}\n\n> This will automatically open and run `curl` in a separate terminal.\
+    \ You can also open additional terminals with the \"+\" button on the tab bar\
+    \ to the right.\n\n```console\ncurl http://localhost:8080/hello/greeting/quarkus\n\
+    hello quarkus from 4090f59d1a69\n```\n\nNice!\n\n## Cleanup\n\nGo to the first\
+    \ Terminal tab and press `CTRL-C` to stop our native app.\n\n## Congratulations!\n\
+    \nYou've now built a Java application as an executable JAR and a Linux native\
+    \ binary. Now let's give our app superpowers by deploying to OpenShift as a Linux\
+    \ container image.\n\n"
+  difficulty: basic
+  slug: 04-build-native
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "Now that we have our app built, let's move it into containers and into\
+    \ the cloud.\n\n## Install OpenShift extension\n\nQuarkus offers the ability to\
+    \ automatically generate OpenShift resources based on sane default and user supplied\
+    \ configuration. The OpenShift extension is actually a wrapper extension that\
+    \ brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes)\
+    \ and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions\
+    \ with defaults so that it\u2019s easier for the user to get started with Quarkus\
+    \ on OpenShift.\n\nRun the following command to add it to our project:\n\n`mvn\
+    \ quarkus:add-extension -Dextensions=\"openshift\"`{{execute T1}}\n\n## Login\
+    \ to OpenShift\n\nWe'll deploy our app as the `developer` user. Run the following\
+    \ command to login with the OpenShift CLI:\n\n`oc login -u developer -p developer`{{execute\
+    \ T1}}\n\nYou should see\n\n```\nLogin successful.\n\nYou don't have any projects.\
+    \ You can try to create a new project, by running\n\n    oc new-project <projectname>\n\
+    ```\n\n## Create project\n\nFor this scenario, let's create a project that you\
+    \ will use to house your applications. Click:\n\n`oc new-project quarkus --display-name=\"\
+    Sample Quarkus App\"`{{execute T1}}\n\n## Deploy application to OpenShift\n\n\
+    Now let's deploy the application itself. Run the following command which will\
+    \ build and deploy a Quarkus native application using the OpenShift extension\
+    \ (this will take a few minutes to complete as it rebuilds the native executable,\
+    \ generates a container image and pushes it into OpenShift):\n\n`mvn clean package\
+    \ -Pnative \\\n-Dquarkus.kubernetes-client.trust-certs=true \\\n-Dquarkus.container-image.build=true\
+    \ \\\n-Dquarkus.kubernetes.deploy=true \\\n-Dquarkus.kubernetes.deployment-target=openshift\
+    \ \\\n-Dquarkus.openshift.expose=true \\\n-Dquarkus.openshift.labels.app.openshift.io/runtime=quarkus`{{execute\
+    \ T1}}`\n\nThe output should end with `BUILD SUCCESS`.\n\nFor more details of\
+    \ the above options:\n\n* `quarkus.kubernetes-client.trust-certs=true` - We are\
+    \ using self-signed certs in this simple example, so this simply says to the extension\
+    \ to trust them.\n* `quarkus.container-image.build=true` - Instructs the extension\
+    \ to build a container image\n* `quarkus.kubernetes.deploy=true` - Instructs the\
+    \ extension to deploy to OpenShift after the container image is built\n* `quarkus.kubernetes.deployment-target=openshift`\
+    \ - Instructs the extension to generate and create the OpenShift resources (like\
+    \ `DeploymentConfig`s and `Service`s) after building the container\n* `quarkus.openshift.expose=true`\
+    \ - Instructs the extension to generate an OpenShift `Route`.\n* `quarkus.openshift.labels.app.openshift.io/runtime=quarkus`\
+    \ - Adds a nice-looking icon to the app when viewing the OpenShift Developer Topology\n\
+    \nFinally, make sure it's actually done rolling out:\n\n`oc rollout status -w\
+    \ dc/getting-started`{{execute T1}}\n\nWait for that command to report following\
+    \ before continuing.\n`replication controller \"getting-started-1\" successfully\
+    \ rolled out`\n\nYou can also see the app deployed in the [OpenShift Developer\
+    \ Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus):\n\
+    \nYou'll need to login with the same credentials as before:\n\n* Username: `developer`\n\
+    * Password: `developer`\n\n![topology](/openshift/assets/middleware/quarkus/greetingtopology.png)\n\
+    \nSo now our app is deployed to OpenShift\n\nAnd now we can access using `curl`\
+    \ once again:\n\n`curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift`{{execute\
+    \ T1}}\n\nYou should see:\n\n```console\nhello quarkus-on-openshift from getting-started-1-9sgsm\n\
+    ```\n\n> Your pod's name will be different from the above.\n\n## Congratulations!\n\
+    \nThis step covered the deployment of a Quarkus application on OpenShift. However,\
+    \ there is much more, and the integration with these environments has been tailored\
+    \ to make Quarkus applications execution very smooth. For instance, the health\
+    \ extension can be used for [health check](https://docs.openshift.com/container-platform/4.6/applications/application-health.html);\
+    \ the configuration support allows mounting the application configuration using\
+    \ [config maps](https://docs.openshift.com/container-platform/4.6/authentication/configmaps.html),\
+    \ the metric extension produces data _scrape-able_ by [Prometheus](https://prometheus.io/)\
+    \ and so on.\n\nBut we'll move to the final chapter around scaling and try a few\
+    \ things.\n\n\n"
+  difficulty: basic
+  slug: 05-deploy-to-openshift
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+- assignment: "Now that we have our app running on OpenShift, let's see what we can\
+    \ do.\n\n## Restrict resources\n\nLet's make _sure_ our Quarkus app doesn't go\
+    \ beyond a reasonable amount of memory for each instance by setting _resource\
+    \ constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is\
+    \ pretty thin, compared to your average Java app!). This will let us scale up\
+    \ quite a bit. Click here to set this limit:\n\n`oc set resources dc/getting-started\
+    \ --limits=memory=50Mi`{{execute T1}}\n\n## Scale the app\n\nWith that set, let's\
+    \ see how fast our app can scale up to 10 instances:\n\n`oc scale --replicas=10\
+    \ dc/getting-started`{{execute T1}}\n\nBack in the  [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus)\
+    \ you'll see the app scaling dynamically up to 10 pods:\n\n![Scaling](/openshift/assets/middleware/quarkus/scaling.png)\n\
+    \nThis should only take a few seconds to complete the scaling. Now that we have\
+    \ 10 pods running, let's hit it with some load:\n\n`for i in {1..50} ; do curl\
+    \ http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift\
+    \ ; sleep .05 ; done`{{execute T1}}\n\nYou can see the 10 instances of our Quarkus\
+    \ app being load-balanced and responding evenly:\n\n```console\nhello quarkus-on-openshift\
+    \ from getting-started-2-tfvn4\nhello quarkus-on-openshift from getting-started-2-8f45l\n\
+    hello quarkus-on-openshift from getting-started-2-xgg97\nhello quarkus-on-openshift\
+    \ from getting-started-2-8xw8b\n...\n```\n\n> For more fun with load balancing\
+    \ and apps, checkout the [Red Hat Developer Istio Tutorial](https://bit.ly/istio-tutorial)\
+    \ and learn how to control this with much greater precision and flexibility!\n\
+    \n10 not enough? Let's try 50:\n\n`oc scale --replicas=50 dc/getting-started`{{execute\
+    \ T1}}\n\nBack in the [Overview in the OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview)\
+    \ you'll see the app scaling dynamically up to 50 pods:\n\n![Scaling to 50](/openshift/assets/middleware/quarkus/50pods.png)\n\
+    \nOnce they are all up and running, try the same load again:\n\n`for i in {1..50}\
+    \ ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift\
+    \ ; sleep .05 ; done`{{execute T1}}\n\nAnd witness all 50 pods responding evenly\
+    \ to requests. Try doing that with your average Java app running in a container!\
+    \ This tutorial uses a single node OpenShift cluster, but in practice you'll have\
+    \ many more nodes, and can scale to hundreds or thousands of replicas if and when\
+    \ load goes way up.\n\n> 50 still not enough? Are you feeling lucky? Try **100**:\
+    \ `oc scale --replicas=100 dc/getting-started`{{execute T1}} and watch the magic\
+    \ on the [OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview).\
+    \ It may take a bit of time for all 100 to spin up given this limited resource\
+    \ environment, but they will eventually!\n\n# Open the solution in an IDE in the\
+    \ Cloud!\nWant to continue exploring this solution on your own in the cloud? You\
+    \ can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
+    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
+    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
+    \ are a new user. This free service expires after 30 days, but you can always\
+    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/getting-started/devfile.yaml)\
+    \ to open the solution for this project in the cloud IDE. While loading, if it\
+    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
+    \ code to your own GitHub!\nWant to experiment more with the solution code you\
+    \ just worked with? If so, you can fork the repository containing the solution\
+    \ to your own GitHub repository by clicking on the following command to execute\
+    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
+    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
+    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
+    \ to open a new browser tab to GitHub and paste in the code you were presented\
+    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
+    \ close the browser tab and return to the console and press `Enter` to complete\
+    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
+    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
+    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
+    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
+    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
+    \ repo will be forked in your own GitHub account. On the `solution` branch in\
+    \ the repo, the `getting-started` project inside the `quarkus` folder contains\
+    \ the completed solution for this scenario.\n\n## Congratulations\n\nIn this scenario\
+    \ you got a glimpse of the power of Quarkus apps, both traditional JVM-based as\
+    \ well as native builds. There is much more to Quarkus than fast startup times\
+    \ and low resource usage, so keep on exploring additional scenarios to learn more,\
+    \ and be sure to visit [quarkus.io](https://quarkus.io) to learn even more about\
+    \ the architecture and capabilities of this exciting new framework for Java developers.\n"
+  difficulty: basic
+  slug: 06-scaling
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 6
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: getting-started
+tags:
+- openshift
+title: Getting Started with Quarkus
+type: truck

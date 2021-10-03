@@ -1,0 +1,258 @@
+challenges:
+- assignment: "In this step, you will create the Kogito application skeleton.\n\n\
+    # The Project\n\nYou start with a basic Maven-based Kogito application which has\
+    \ been generated from the Kogito Maven Archetype.\n\n# The Application You Will\
+    \ Build\n\nThe application is a decision microservice which determines whether\
+    \ a person is an adult.\n\nYou will implement these rules in DRL (Drools Rule\
+    \ Language), using the _rule unit_ API and the _OOPath_ rule syntax.\n\nLet's\
+    \ get started.\n\n# Create a basic project\n\nThe easiest way to create a new\
+    \ Kogito project is to execute the Maven command below by clicking on it:\n\n\
+    `mvn archetype:generate \\\n  -DinteractiveMode=false \\\n  -DarchetypeGroupId=org.kie.kogito\
+    \ \\\n  -DarchetypeArtifactId=kogito-quarkus-archetype \\\n  -DarchetypeVersion=0.9.0\
+    \ \\\n  -DgroupId=org.acme \\\n  -DartifactId=adult-service \\\n  -Dversion=1.0-SNAPSHOT`{{execute}}\n\
+    \nThis will use the Kogito Maven Archetype and generate a basic Maven project\
+    \ for you in the `adult-service` subdirectory.\n\nThe default Kogito application\
+    \ created from the archetype contains a sample process called `test-process.bpmn2`.\
+    \ We will remove this process definition, as it is not required for our application.\n\
+    \n```\nrm -f /root/projects/kogito/adult-service/src/main/resources/test-process.bpmn2\n\
+    ```\n\n# Running the Application\n\nWe will now run the Kogito application in\
+    \ development mode. This allows us to keep the application running while implementing\
+    \ our application logic. Kogito and Quarkus will _hot reload_ the application\
+    \ when it is accessed and changes have been detected.\n\n```\ncd /root/projects/kogito/adult-service\n\
+    ```\n\n```\nmvn clean compile quarkus:dev\n```\n\nWhen the application has started,\
+    \ you can access the [Swagger UI](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui).\n\
+    \nYou should see the following page:\n\n![New Kogito Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-empty-swagger-ui.png)\n\
+    \nIt's working!\n\nYou can now stop the application with `CTRL-C`.\n\n# Congratulations!\n\
+    \nYou've seen how to create the skeleton of basic Kogito app, and start the application\
+    \ in _Quarkus dev-mode_.\n\nIn the next step we'll add the domain model of our\
+    \ application.\n"
+  difficulty: basic
+  slug: 01-create-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "In the previous step you've created a skeleton Kogito application with\
+    \ Quarkus and started the application in _Quarkus dev-mode_. In this step we'll\
+    \ create the domain model of our application.\n\n## Facts.\n\nA (business) rules\
+    \ and/or decision service operates on entities called _facts_. _Facts_ is data\
+    \ over which a rules engine reasons and to which it applies its constraints. In\
+    \ Kogito, facts are implemented as POJOs (Plain Old Java Objects).\n\nOur _adult\
+    \ service_ determines if a _person_ is an adult based on his age.\n\nFrom this\
+    \ description of our application, we can infer the _fact_:\n\n* Person: which\
+    \ has a name, an age, and a boolean that states whether he/she is an adult.\n\n\
+    \n## Person\n\nWe will first implement the `Person` class. To do this, we first\
+    \ need to create a new package in our project:\n\n`mkdir -p /root/projects/kogito/adult-service/src/main/java/org/acme/domain`{{execute\
+    \ T2}}\n\nWe can now open a new `Person.java` file in this package by clicking:\
+    \ `adult-service/src/main/java/org/acme/domain/Person.java`{{open}}\n\nClick on\
+    \ the _Copy to Editor_ link to copy the source code into the new `Person.java`file.\n\
+    \n<pre class=\"file\" data-filename=\"./adult-service/src/main/java/org/acme/domain/Person.java\"\
+    \ data-target=\"replace\">\npackage org.acme.domain;\n\npublic class Person {\n\
+    \n    private String name;\n\n    private int age;\n\n    private boolean adult;\n\
+    \n    public Person() {\n    }\n\n    public String getName() {\n        return\
+    \ name;\n    }\n\n    public void setName(String name) {\n        this.name =\
+    \ name;\n    }\n\n    public int getAge() {\n        return age;\n    }\n\n  \
+    \  public void setAge(int age) {\n        this.age = age;\n    }\n\n    public\
+    \ boolean isAdult() {\n        return adult;\n    }\n\n    public void setAdult(boolean\
+    \ adult) {\n        this.adult = adult;\n    }\n\n}\n</pre>\n\n\n## Congratulations!\n\
+    \nYou've implemented the domain model of your Kogito business rules project. In\
+    \ the next step, we will implement the _RuleUnit_ of our application.\n"
+  difficulty: basic
+  slug: 02-implement-domain-model
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "In the previous step you've implement the domain model of the application.\
+    \ Now it's time to implement the _RuleUnit_.\n\n## Rule Unit\n\n_Rule Units_ are\
+    \ groups of data sources, global variables, and DRL rules that function together\
+    \ for a specific purpose. You can use rule units to partition a rule set into\
+    \ smaller units, bind different data sources to those units, and then execute\
+    \ the individual unit.\n\n## PersonUnit.\n\nWe will first implement the skeleton\
+    \ of our `PersonUnit` class. To do this, we first create a new `PersonUnit.java`\
+    \ file by clicking: `adult-service/src/main/java/org/acme/PersonUnit.java`{{open}}\n\
+    \nClick on the _Copy to Editor_ link to copy the source code into the new `PersonUnit.java`file.\n\
+    \n<pre class=\"file\" data-filename=\"./adult-service/src/main/java/org/acme/PersonUnit.java\"\
+    \ data-target=\"replace\">\npackage org.acme;\n\nimport org.acme.domain.Person;\n\
+    import org.kie.kogito.rules.DataSource;\nimport org.kie.kogito.rules.DataStore;\n\
+    import org.kie.kogito.rules.RuleUnitData;\n\npublic class PersonUnit implements\
+    \ RuleUnitData {\n\n//Add Person DataStore here\n\n//Add adultAge variable here\n\
+    \n    public PersonUnit() {\n\n    }\n\n//Add DataStore Getters and Setters here\n\
+    \n//Add adultAge Getters and Setters here\n\n}\n</pre>\n\nWe now need to create\
+    \ out `DataSource` for our `Person` facts. A `DataSource` provides us with a typed\
+    \ API to add _facts_ to our unit. Kogito provides a number of different `DataSources`\
+    \ types, for example a `DataStore`, which allows users to insert, update and remove\
+    \ facts, and a `DataStream` that only allows to append facts to a stream.\n\n\
+    In this example we will be using the `DataStore` implementation for our `Person`\
+    \ facts. We therefore add a private `DataStore` variable to our rule unit. We\
+    \ use the `DataSource` factory class to create a new `DataStore` instance and\
+    \ assign it to the variable:\n\n<pre class=\"file\" data-filename=\"./adult-service/src/main/java/org/acme/PersonUnit.java\"\
+    \ data-target=\"insert\" data-marker=\"//Add Person DataStore here\">\n  private\
+    \ DataStore&lt;Person&gt; persons = DataSource.createStore();\n</pre>\n\nWe also\
+    \ create the _getters and setters_ for our store:\n\n<pre class=\"file\" data-filename=\"\
+    ./adult-service/src/main/java/org/acme/PersonUnit.java\" data-target=\"insert\"\
+    \ data-marker=\"//Add DataStore Getters and Setters here\">\n  public DataStore&lt;Person&gt;\
+    \ getPersons() {\n      return persons;\n  }\n\n  public void setPersons(DataStore&lt;Person&gt;\
+    \ persons) {\n      this.persons = persons;\n  }\n</pre>\n\nThat's it for now.\
+    \ We will implement some additional functionality to this unit later in this scenario.\n\
+    \n## Congratulations!\n\nIn this step you've implemented your first _Rule Unit_.\
+    \ Well done! In the next step we will implement the rules and queries of our rule\
+    \ unit.\n"
+  difficulty: basic
+  slug: 03-implement-the-ruleunit
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "In the previous step you've implement the rule unit of our application.\
+    \ We can now implement our rules and queries and start our application.\n\n##\
+    \ Rules\n\nThe rules of our rule unit will be implemented in DRL, the Drools Rule\
+    \ Language. DRL is a declarative language in which advanced rules can be defined\
+    \ and implemented, using constructs like rules, functions and queries.\n\n## PersonUnit\
+    \ DRL\n\nWe will first implement the skeleton of our `PersonUnit.drl` file in\
+    \ the `src/main/resources` directory of our project.\n\nFirst we create the proper\
+    \ package in our `src/main/resources` folder: `mkdir -p /root/projects/kogito/adult-service/src/main/resources/org/acme`{{execute\
+    \ T2}}\n\nNext, we create the DRL file by clicking: `adult-service/src/main/resources/org/acme/PersonUnit.drl`{{open}}\n\
+    \nClick on the _Copy to Editor_ link to copy the source code into the new `PersonUnit.drl`file.\n\
+    \n<pre class=\"file\" data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"replace\">\npackage org.acme;\n//Unit definition\n\nimport org.acme.domain.Person;\n\
+    \nrule \"Is Adult\"\nwhen\n//Person OOPath\nthen\n//Set adult\nend\n\n\nquery\
+    \ \"adult\"\n//Adult query\nend\n</pre>\n\nWe first need to define that this `PersonUnit.drl`\
+    \ is connected to our `PersonUnit`. We do this through `unit` definition under\
+    \ the `package` definition at the top of the DRL file:\n\n<pre class=\"file\"\
+    \ data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"insert\" data-marker=\"//Unit definition\">\nunit PersonUnit;\n\
+    </pre>\n\nNext, we implement the constraint, or left-hand-side of our rule. We\
+    \ will do this in the _OOPath_ syntax. _OOPath_ allows us to write constraints\
+    \ in an XPath-like syntax, allowing users to more easily navigate object hierarchies\
+    \ when writing rules. Also, it allows us to easily define constraints using the\
+    \ rule unit `DataSource` paradigm.\n\nThe following constraint matches `Person`\
+    \ facts from the `persons` datastore of our unit, who's age is equal to, or greater\
+    \ than 18:\n\n<pre class=\"file\" data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"insert\" data-marker=\"//Person OOPath\">\n  $p: /persons[age\
+    \ &gt;= 18];\n</pre>\n\nWe can now implement the consequence of our rule, or the\
+    \ right-hand-side (RHS). This the action that will be executed when the rule fires.\
+    \ In our case we want to set the person's `adult` field to true when the rule\
+    \ fires:\n\n<pre class=\"file\" data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"insert\" data-marker=\"//Set adult\">\n  $p.setAdult(true);\n\
+    </pre>\n\n\nThe next thing we need to do for our Kogito application is a query.\
+    \ The query in a unit's DRL, in combination with the rule unit definition, is\
+    \ used by the Kogito code generator to automatically generate the RESTful endpoint\
+    \ for our application.\n\nIn this query, we simply want to return all the facts\
+    \ from our `persons` datastore:\n\n<pre class=\"file\" data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"insert\" data-marker=\"//Adult query\">\n  $p: /persons;\n</pre>\n\
+    \nThis completes the initial implementation of our DRL.\n\n## Running the application\n\
+    \nWith our domain model, rule unit and rules implemented, we can now start our\
+    \ application.\n\n`mvn clean compile quarkus:dev`{{execute T1}}\n\nWe can inspect\
+    \ the generated RESTful endpoint in the Swagger-UI [Swagger UI](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui)\
+    \ of the application.\n\nWe can now send a request to our generated RESTful endpoint\
+    \ using cURL:\n\n`curl -X POST \"http://localhost:8080/adult\" -H \"accept: application/json\"\
+    \ -H \"Content-Type: application/json\" -d \"{\\\"persons\\\":[{\\\"age\\\":18,\\\
+    \"name\\\":\\\"Jason\\\"}]}\"`{{execute T2}}\n\nYou should see the following result,\
+    \ showing that Jason is an adult:\n\n```console\n[{\"name\":\"Jason\",\"age\"\
+    :18,\"adult\":true}]\n```\n\nStop the application in the first terminal using\
+    \ `CTRL-C`.\n\n## Congratulations!\n\nIn this step you've implemented your first\
+    \ Kogito rules and queries. You've seen how Kogito automatically generates the\
+    \ RESTful microservice for you using your business assets, like your rule unit\
+    \ and rules definitions. Finally, we've started our application in Quarkus dev-mode,\
+    \ and fired a request.\n"
+  difficulty: basic
+  slug: 04-ruleunit-rules
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "In the previous step you've implemented the rules of our application.\
+    \ We will now add a new variable to our unit and rules to control the age when\
+    \ someone is considered and adult.\n\n## RuleUnit variables\n\nApart from using\
+    \ `DataSources` in our rule units to insert, update and delete facts, we can also\
+    \ define variables in our unit that can be used in our rules. In this use-case\
+    \ we will add an `adultAge` variable to our unit, which allows us to send the\
+    \ age at which a person is considered an adult in our request, and using that\
+    \ age in our rules.\n\n## PersonUnit DRL\n\nFirst, we add a new `adultAge` variable\
+    \ to our `PersonUnit` class. First we open the file: `adult-service/src/main/java/org/acme/PersonUnit.java`{{open}}\n\
+    \nAnd next, we add the `adultAge` variable:\n\n<pre class=\"file\" data-filename=\"\
+    ./service-task/src/main/java/org/acme/PersonUnit.java\" data-target=\"insert\"\
+    \ data-marker=\"//Add adultAge variable here\">\n  private int adultAge;\n</pre>\n\
+    \nWe also add the _getters and setters_:\n\n<pre class=\"file\" data-filename=\"\
+    ./adult-service/src/main/java/org/acme/PersonUnit.java\" data-target=\"insert\"\
+    \ data-marker=\"//Add adultAge Getters and Setters here\">\n  public int getAdultAge()\
+    \ {\n      return adultAge;\n  }\n\n  public void setAdultAge(int adultAge) {\n\
+    \      this.adultAge = adultAge;\n  }\n</pre>\n\nWith our variable implemented,\
+    \ we can now use this variable in our rules: `adult-service/src/main/resources/org/acme/PersonUnit.drl`{{open}}\n\
+    \n<pre class=\"file\" data-filename=\"./adult-service/src/main/resources/org/acme/PersonUnit.drl\"\
+    \ data-target=\"insert\" data-marker=\"$p: /persons[age >= 18];\">\n  $p: /persons[age\
+    \ &gt;= adultAge];\n</pre>\n\nWe've now added the functionality we want, so we\
+    \ can start our application again:\n\n`mvn clean compile quarkus:dev`{{execute\
+    \ T1}}\n\nWe can now hit the application with a request that contains our new\
+    \ `adultAge` variable:\n\n`curl -X POST \"http://localhost:8080/adult\" -H \"\
+    accept: application/json\" -H \"Content-Type: application/json\" -d \"{\\\"adultAge\\\
+    \": 21, \\\"persons\\\":[{\\\"age\\\":18,\\\"name\\\":\\\"Jason\\\"}]}\"`{{execute\
+    \ T2}}\n\nThis will give you the following result:\n\n```console\n[{\"name\":\"\
+    Jason\",\"age\":18,\"adult\":false}]\n```\n\nNotice that, because we have defined\
+    \ the `adultAge` to be 21, Jason is no longer considered an adult.\n\n## OpenAPI\
+    \ Specification\n\nA Kogito Quarkus application running in Quarkus dev-mode automatically\
+    \ exposes an OpenAPI specification of its RESTful resources through a Swagger-UI.\
+    \ You can open this Swagger [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui).\n\
+    \nOpen the **POST /adult** RESTful endpoint. Note that a fully typed API is generated\
+    \ for you, based on your business assets like your rule units and rules.\n\n![API](/openshift/assets/middleware/middleware-kogito/kogito-adult-post-api.png)\n\
+    \n## Congratulations!\n\nYou have added a variable to your rule unit and used\
+    \ it in your rules. You've also experienced the power of live/hot reload of Kogito,\
+    \ providing extremely fast roundtrip times.\n"
+  difficulty: basic
+  slug: 05-ruleunit-variables
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: rules
+tags:
+- openshift
+title: Kogito and Rules with RuleUnits
+type: truck

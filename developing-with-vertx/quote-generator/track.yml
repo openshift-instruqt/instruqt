@@ -1,0 +1,315 @@
+challenges:
+- assignment: "The sample project shows the components of a basic Vert.x project laid\
+    \ out in different\nsubdirectories according to Maven best practices.\n\n**Examine\
+    \ the Quote Generator project structure.**\n\nSwitch to the `quote-generator`\
+    \ project\n\n```\ncd /root/code/quote-generator\n```\n\nLet\u2019s have a look\
+    \ at the project, as every other project are structured the same way.\n\n```\n\
+    tree\n```\n\n```markdown\n.\n|-- README.md \n|-- pom.xml \n|-- src\n|   |-- kubernetes/config.json\n\
+    |   |-- main\n|   |   |-- fabric8\n|   |   |   `-- deployment.yml \n|   |   |--\
+    \ java\n|   |   |   `-- io/vertx/workshop/quote \n|   |   |               |--\
+    \ GeneratorConfigVerticle.java\n|   |   |               |-- MarketDataVerticle.java\n\
+    |   |   |               `-- RestQuoteAPIVerticle.java\n|   |   `-- solution\n\
+    |   |       `-- io/vertx/workshop/quote \n|   |                   |-- GeneratorConfigVerticle.java\n\
+    |   |                   |-- MarketDataVerticle.java\n|   |                   `--\
+    \ RestQuoteAPIVerticle.java\n|   `-- test\n|       |-- java\n|       |   `-- io/vertx/workshop/quote\
+    \ \n|       |               |-- GeneratorConfigVerticleTest.java\n|       |  \
+    \             `-- MarketDataVerticleTest.java\n|       `-- resources \n`-- target\n\
+    ```\n\n>**NOTE:** To generate a similar project skeleton you can visit the [Vert.x\
+    \ Starter](http://start.vertx.io/) webpage.\n\nLet\u2019s start with the `pom.xml`\
+    \ file. This file specifies the Maven build:\n\n1. Define the dependencies\n2.\
+    \ Compile the java code and process resources (if any)\n3. Build a fat-jar\n\n\
+    A fat-jar (also called uber jar or shaded jar) is a convenient way to package\
+    \ a Vert.x application. It creates an uber-jar containing your application and\
+    \ all its dependencies, including Vert.x. Then, to launch it, you just need to\
+    \ use `java -jar <jar name>` without having to handle the `CLASSPATH`. Vert.x\
+    \ does not dictate a type of packaging. It\u2019s true, fat jars are convenient,\
+    \ but they are not the only way. You can use plain (not fat) jars, OSGi bundles\u2026\
+    \u200B\nThe pom.xml file also contains a set of properties used to configure the\
+    \ application:\n\n* `vertx.verticle` defines the main verticle - the entry point\n\
+    * `vertx.cluster.name` defines the name of the cluster"
+  difficulty: basic
+  slug: 01-examine-the-sample-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "## Verticle\n\nAs you may have noticed, the code is structured in 3\
+    \ `verticles`, but what are these? Verticles is a way to structure Vert.x application\
+    \ code. It\u2019s not mandatory, but it is quite convenient. A verticle is a chunk\
+    \ of code that is deployed on top of a Vert.x instance. A verticle has access\
+    \ to the instance of `vertx` on which it\u2019s deployed, and can deploy other\
+    \ verticles.\n\n**Understanding the Application**\n\nLet's open the `GeneratorConfigVerticle`\
+    \ class by clicking on the link below and look at the `start` method\n\n`quote-generator/src/main/java/io/vertx/workshop/quote/GeneratorConfigVerticle.java`{{open}}\n\
+    \nThis method retrieves the configuration, instantiates the verticles and publishes\
+    \ the services in the service discovery.\n\nFirst, notice the method signature.\
+    \ It receives a Future object indicating that the start is asynchronous. Indeed,\
+    \ all the actions made in this method are asynchronous. So, when the caller thread\
+    \ reaches the end of the method, the actions may have not completed. We use this\
+    \ given Future to indicate when the process has completed (or failed).\n\nThe\
+    \ start method:\n\n1. retrieves the configuration (giving the \"fake\" company\
+    \ settings)\n2. deploys one verticle per defined company\n3. deploys the RestQuoteAPIVerticle\n\
+    4. exposes the market-data message source\n5. notifies the given Future of the\
+    \ successful completion or failure\n\nAs you review the content, you will notice\
+    \ that there are 2 TODO comments. Do not remove them! These comments are used\
+    \ as a marker and without them, you will not be able to finish this scenario.\n\
+    \nTo retrieve the configuration the verticle needs a `ConfigRetriever`. This object\
+    \ allows retrieving configuration chunks from different stores (such as git, files,\
+    \ http, etc.). Here we just load the contents of the ``config.json`` file located\
+    \ in the src/kubernetes directory. The configuration is a JsonObject. Vert.x uses\
+    \ JSON heavily, so you are going to see a lot of JSON in this lab.\n\nOnce we\
+    \ have the retriever, we can retrieve the configuration. This is an asynchronous\
+    \ method (``rxGetConfig``) returning a Single (a stream containing one item).\
+    \ After the configuration is retrieved, we extract the companies array from it\
+    \ and deploy one verticle per defined company. The deployment is also asynchronous\
+    \ and done with ``rxDeployVerticle``. These company verticles simulate the value\
+    \ of the stocks. The quotes are sent on the event bus on the market address.\n\
+    \nAdd the below content to the matching `// TODO: MarketDataVerticle` statement\
+    \ (or use the `Copy to Editor` button):\n      \n<pre class=\"file\" data-filename=\"\
+    src/main/java/io/vertx/workshop/quote/GeneratorConfigVerticle.java\" data-target=\"\
+    insert\" data-marker=\"// TODO: MarketDataVerticle\">\n.flatMapSingle(company\
+    \ -> vertx.rxDeployVerticle(MarketDataVerticle.class.getName(),\n    new DeploymentOptions().setConfig(company)))\n\
+    </pre>\n\nWhen the company verticles are deployed, we deploy another verticle\
+    \ providing an HTTP API to access market data. \n\nAdd the below content to the\
+    \ matching `// TODO: RestQuoteAPIVerticle` statement (or use the `Copy to Editor`\
+    \ button):\n\n<pre class=\"file\" data-filename=\"quote-generator/src/main/java/io/vertx/workshop/quote/GeneratorConfigVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: RestQuoteAPIVerticle\">\n.flatMap(l\
+    \ -> vertx.rxDeployVerticle(RestQuoteAPIVerticle.class.getName()))\n</pre>\n\n\
+    The last part of the method is about the service discovery mentioned in the microservice\
+    \ section. This component generates quotes sent on the event bus. But to let other\
+    \ components discover where the messages are sent (where means on which address),\
+    \ it registers it. ``market-data`` is the name of the service, ``ADDRESS`` (a\
+    \ static final variable defined as market) is the event bus address on which the\
+    \ messages are sent.\n\n```java\n.flatMap(x -> discovery.rxPublish(MessageSource.createRecord(\"\
+    market-data\", ADDRESS)))\n```\n\nFinally, when everything is done, we report\
+    \ the status on the given Future object. The failure management can be made at\
+    \ any stage, but generally, it\u2019s done in the subscribe method:\n        \
+    \                                                                           \n\
+    ```java\nobject.rxAsync(param1, param2)\n // ....\n .subscribe((rec, err) -> {\n\
+    \     if (rec != null) {\n         future.complete();\n     } else {\n       \
+    \  future.fail(err);\n     }\n });\n```\n\nIf you remember the architecture, the\
+    \ quote generator also provides an HTTP endpoint returning the last values of\
+    \ the quotes. Note that this service is not explicitly published in the service\
+    \ discovery. That\u2019s because Kubernetes is taking care of this part. The Vert.x\
+    \ service discovery interacts with Kubernetes services, so all Kubernetes services\
+    \ can be retrieved by Vert.x"
+  difficulty: basic
+  slug: 02-quote-generator-verticle
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "## The quote REST endpoint\n\nOpen the `RestQuoteAPIVerticle`. This\
+    \ verticle exposes a HTTP endpoint to retrieve the current / last values of the\
+    \ maker data (quotes). In the `start` method you need to:\n\n* Receive the event\
+    \ bus market messages to collect the last quotations (in the ``quotes`` map)\n\
+    * Handle HTTP requests to return the list of quotes or a single quote if the ``name``\
+    \ (query) param is set.\n\nIn this example we are using streams (Flowable). Streams\
+    \ are an important part of reactive programming and architecture. \n\nLet\u2019\
+    s do that\u2026\u200B.\n\n**1. Implementing a Handler to receive events**\n\n\
+    The first action is about observing the stream of market messages. This is done\
+    \ using ``vertx.eventBus().<JsonObject>consumer(GeneratorConfigVerticle.ADDRESS).toFlowable()``.\
+    \ We now have the stream of messages, but we need to extract the JSON body and\
+    \ populate the quotes map. Implement the missing logic that extracts the body\
+    \ of the message (with the ``body()`` method), and then put ``name \u2192 quote``\
+    \ in the ``quotes`` map.\n\nOpen the file in the editor: \n\n`quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java`{{open}}\n\
+    \nThen, copy the below content to the matching `// TODO` statements (or use the\
+    \ `Copy to Editor` button):\n\nExtract the body of the message using `.map(msg\
+    \ -> {})`\n\n<pre class=\"file\" data-filename=\"quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: Extract the body of the message\"\
+    >\n.map(Message::body)  \n</pre>\n\nFor each message, populate the `quotes` map\
+    \ with the received quote. Use `.doOnNext(json -> {})` \nQuotes are json objects\
+    \ you can retrieve from the message body. The map is structured as follows: name\
+    \ -> quote\n\n<pre class=\"file\" data-filename=\"quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: For each message, populate the\
+    \ quotes map with the received quote.\">\n.doOnNext(json -> {\n    quotes.put(json.getString(\"\
+    name\"), json); // 2\n})\n</pre>\n\n**2. Implementing a Handler to handle HTTP\
+    \ requests**\n\nNow that you have the `quotes`, let\u2019s use them to handle\
+    \ HTTP requests. The code already creates the HTTP server and provides the stream\
+    \ of HTTP requests. The stream emits an item for every HTTP request received by\
+    \ the server. So, you need to handle the request and write the response.\n\nWrite\
+    \ the content of the request handler to respond to the request:\n\n1. a response\
+    \ with the content-type header set to `application/json` (already done)\n2. retrieve\
+    \ the `name` parameter (it\u2019s the company name)\n3. if the company name is\
+    \ not set, return all the quotes as json.\n\nif the company name is set, return\
+    \ the stored quote or a 404 response if the company is unknown\nCopy the following\
+    \ to the matching `// TODO: Handle the HTTP request` statement\n\n<pre class=\"\
+    file\" data-filename=\"quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: Handle the HTTP request\">\nString\
+    \ company = request.getParam(\"name\");\nif (company == null) {\n    String content\
+    \ = Json.encodePrettily(quotes);\n    response.end(content);\n} else {\n    JsonObject\
+    \ quote = quotes.get(company);\n    if (quote == null) {\n        response.setStatusCode(404).end();\n\
+    \    } else {\n        response.end(quote.encodePrettily());\n    }\n}\n</pre>\n\
+    \n1. Get the response object from the request\n2. Gets the name parameter (query\
+    \ parameter)\n3. Encode the map to JSON\n4. Write the response and flush it using\
+    \ end(\u2026\u200B)\n5. If the given name does not match a company, set the status\
+    \ code to 404\n\nYou may wonder why synchronization is not required. Indeed we\
+    \ write in the map and read from it without any synchronization constructs. Here\
+    \ is one of the main feature of Vert.x: all this code is going to be executed\
+    \ by the same event loop, so it\u2019s always accessed by the same thread, never\
+    \ concurrently.\n\nYou have seen the basics of Vert.x development including Asynchronous\
+    \ API and AsyncResult, implementing Handler and receiving messages from the event\
+    \ bus\n\nIn next step of this scenario we will deploy our application to the OpenShift\
+    \ Container Platform."
+  difficulty: basic
+  slug: 03-create-quote-rest-endpoint
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "## Red Hat OpenShift Container Platform\n\nRed Hat OpenShift Container\
+    \ Platform is the preferred runtime for the Red Hat OpenShift Application Runtimes\
+    \ like Vert.x. OpenShift Container Platform is based on Kubernetes which is probably\
+    \ the most used Orchestration for containers running in production. OpenShift\
+    \ is currently the only container platform based on Kuberenetes that offers multitenancy.\
+    \ This means that developers can have their own personal, isolated projects to\
+    \ test and verify application before committing to a shared code repository.\n\
+    \nOpenShift also ships with a feature rich web console as well as command line\
+    \ tools to provide users with a friendly interface to work with applications deployed\
+    \ to the platform.\n\n**1. Login to OpenShift Container Platform**\n\nDo this\
+    \ in the 1st terminal. To login, we will use the oc command and then specify username\
+    \ and password like this:\n\n`oc login https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com\
+    \ -u developer -p developer --insecure-skip-tls-verify=true`{{execute interrupt}}\n\
+    \nCongratulations, you are now authenticated to the OpenShift server.\n\n**IMPORTANT**:\
+    \ If the above oc login command doesn't seem to do anything, you may have forgotten\
+    \ to stop the application from the previous step. Click on the terminal and press\
+    \ CTRL-C to stop the application and try the above oc login command again!\n\n\
+    **2. Create project**\n\nProjects are a top-level concept to help you organize\
+    \ your deployments. An OpenShift project allows a community of users (or a user)\
+    \ to organize and manage their content in isolation from other communities. Each\
+    \ project has its own resources, policies (who can or cannot perform actions),\
+    \ and constraints (quotas and limits on resources, etc.). Projects act as a wrapper\
+    \ around all the application services and endpoints you (or your teams) are using\
+    \ for your work.\n\nFor this scenario, let's create a project that you will use\
+    \ to house your applications.\n\n```\noc new-project vertx-kubernetes-workshop\n\
+    ```\n\n```\noc policy add-role-to-group edit system:serviceaccounts -n vertx-kubernetes-workshop\n\
+    ```\n\nThe first instruction creates the project. The second instruction grants\
+    \ permissions in order to use all the OpenShift capabilities.\n\n**3. Open the\
+    \ OpenShift Web Console**\n\nOpenShift ships with a web-based console that will\
+    \ allow users to perform various tasks via a browser. To get a feel for how the\
+    \ web console works, click on the \"OpenShift Console\" tab next to the \"Local\
+    \ Web Browser\" tab.\n\n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \nLogin with the following credentials:\n\n* Username: `developer`\n* Password:\
+    \ `developer`\n  \nYou should see the newly created project. Click on it. It\u2019\
+    s empty, so let\u2019s deploy our first application.\n"
+  difficulty: basic
+  slug: 04-create-openshift-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "## Deploy to OpenShift\n\nNow that you've logged into OpenShift, let's\
+    \ deploy our new micro-trader Vert.x microservice:\n\n**1. Create a ConfigMap**\n\
+    \nA config map is a Kubernetes entity storing the configuration of an application.\
+    \ The application configuration is in src/kubernetes/config.json. We are going\
+    \ to create a config map from this file. In a terminal, execute:\n\n```\noc create\
+    \ configmap app-config --from-file=src/kubernetes/config.json\n```\n\nTo check\
+    \ that the config map has been created correctly, execute:\n\n```\noc get configmap\
+    \ -o yaml\n```\n\nIt should display the Kubernetes entity and in the data entry\
+    \ our json content.\n\nNow that the config map is created, let\u2019s read it\
+    \ from our application. There are several ways to consume a config map:\n\n* ENV\
+    \ variables\n* Config mounted as a file\n* Vert.x Config\n\nWe are going to use\
+    \ the second approach and mount the configuration as a file in the application\
+    \ container. Indeed, our application has been configured to read its configuration\
+    \ from a src/kubernetes/config.json file:\n\n```java\nprivate ConfigRetrieverOptions\
+    \ getConfigurationOptions() {\n    JsonObject path = new JsonObject().put(\"path\"\
+    , \"src/kubernetes/config.json\");\n    return new ConfigRetrieverOptions().addStore(new\
+    \ ConfigStoreOptions().setType(\"file\").setConfig(path));\n}\n```\n\nFor that,\
+    \ we have defined additional config in ``quote-generator/src/main/fabric8/deployment.yml``{{open}}\
+    \ that contains the right configuration to:\n1. define a volume with the config\
+    \ map content\n2. mount this volume in the right directory\n\nYou can also see\
+    \ that this file contains the JAVA options we pass to the process.\n\n**2. Start\
+    \ the quote generator**\n\nRed Hat OpenShift Application Runtimes includes a powerful\
+    \ maven plugin that can take an\nexisting Eclipse Vert.x application and generate\
+    \ the necessary Kubernetes configuration.\n\nBuild and deploy the project using\
+    \ the following command, which will use the maven plugin to deploy:\n\n```\nmvn\
+    \ fabric8:deploy\n```\n\nThe build and deploy may take a minute or two. Wait for\
+    \ it to complete. You should see a **BUILD SUCCESS** at the\nend of the build\
+    \ output.\n\nAfter the maven build finishes it will take less than a minute for\
+    \ the application to become available.\nTo verify that everything is started,\
+    \ run the following command and wait for it complete successfully:\n\n```\noc\
+    \ rollout status -w dc/quote-generator\n```\n\n**3. Access the application running\
+    \ on OpenShift**\n\nClick on the\n[route URL](http://quote-generator-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
+    to access the sample UI.\n\n> You can also access the application through the\
+    \ link for the quote-generator route on the OpenShift Web Console Overview page.\n\
+    \nYou should now see an HTML page that looks like this:\n\n```json\n\n{\n  \"\
+    MacroHard\" : {\n    \"volume\" : 100000,\n    \"shares\" : 51351,\n    \"symbol\"\
+    \ : \"MCH\",\n    \"name\" : \"MacroHard\",\n    \"ask\" : 655.0,\n    \"bid\"\
+    \ : 666.0,\n    \"open\" : 600.0\n  },\n  \"Black Coat\" : {\n    \"volume\" :\
+    \ 90000,\n    \"shares\" : 45889,\n    \"symbol\" : \"BCT\",\n    \"name\" : \"\
+    Black Coat\",\n    \"ask\" : 654.0,\n    \"bid\" : 641.0,\n    \"open\" : 300.0\n\
+    \  },\n  \"Divinator\" : {\n    \"volume\" : 500000,\n    \"shares\" : 251415,\n\
+    \    \"symbol\" : \"DVN\",\n    \"name\" : \"Divinator\",\n    \"ask\" : 877.0,\n\
+    \    \"bid\" : 868.0,\n    \"open\" : 800.0\n  }\n}\n```\n\n**4. Build and Deploy\
+    \ the micro-trader-dashboard**\n\n```\ncd /root/code/micro-trader-dashboard\n\
+    ```\n\n```\nmvn fabric8:deploy\n```\n\nIn the OpenShift web console, wait until\
+    \ the pod is ready and click on the associated route. Append \"/admin\" at the\
+    \ end of the URL and you should see the dashboard. If you go into the trader tab,\
+    \ the graph should display the evolution of the market.\n\nAlternatively, you\
+    \ can click on the\n[route URL](http://micro-trader-dashboard-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/admin)\n\
+    to access the sample UI.\n\n**5. You are not a financial expert ?**\nSo maybe\
+    \ you are not used to the financial world and words\u2026\u200B Neither am I,\
+    \ and this is a overly simplified version. Let\u2019s define the important fields:\n\
+    \n* `name` : the company name\n\n* `symbol` : short name\n\n* `shares` : the number\
+    \ of stock that can be bought\n\n* `open` : the stock price when the session opened\n\
+    \n* `ask` : the price of the stock when you buy them (seller price)\n\n* `bid`\
+    \ : the price of the stock when you sell them (buyer price)\n\nYou can check Wikipedia\
+    \ for more details.\n\n## Congratulations!\n\nYou have deployed the quote-generator\
+    \ as a microservice. In the next component, we are going to implement an event\
+    \ bus service (the portfolio microservice). \n"
+  difficulty: basic
+  slug: 05-deploy-to-openshift
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: quote-generator
+tags:
+- openshift
+title: 'MicroTrader App Part 1: Quote Generator'
+type: truck

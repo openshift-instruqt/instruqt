@@ -1,0 +1,214 @@
+challenges:
+- assignment: 'As we saw in the previous scenario, Prometheus metrics are time series
+    data identified by metric name and key/value pairs. With the increased amount
+    of metrics flowing in it is getting harder to see the signals within the noise.
+    The current state of the art is to graph out metrics on dashboards and alert on
+    thresholds. However, we can leverage machine learning algorithms to perform time
+    series forecasting and predict an unusual behavior or pattern in the metrics.
+    The predicted values from the model can be compared with the actual metric values
+    and if they differ from the default threshold values, we can flag it as an anomaly.
+
+
+    ## What is Time Series Forecasting?
+
+    A time series is a sequence of observations taken sequentially in time. Time series
+    adds an explicit order dependence between observations: a time dimension. This
+    additional dimension is both a constraint and a structure that provides a source
+    of additional information.
+
+
+    ![Time Series Forecasting](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-timeseries-forecasting/01-time-series-forecasting.png)
+
+
+    We have different goals depending on whether we are interested in understanding
+    a dataset or making predictions.
+
+    Making predictions about the future is called extrapolation in the classical statistical
+    handling of time series data. More modern fields focus on the topic and refer
+    to it as time series forecasting. Forecasting involves taking models fit on historical
+    data and using them to predict future observations. An important distinction in
+    forecasting is that the future is completely unavailable and must only be estimated
+    from what has already happened. The skill of a time series forecasting model is
+    determined by its performance at predicting the future. This is often at the expense
+    of being able to explain why a specific prediction was made, confidence intervals
+    and even better understanding the underlying causes behind the problem.
+
+
+    ## Components of Time Series
+
+    Some important components of time series are:
+
+    1. **Level** - The baseline value for the series if it were a straight line
+
+    2. **Trend** - The optional and often linear increasing or decreasing behavior
+    of the series over time
+
+    3. **Seasonality** - The optional repeating patterns or cycles of behavior over
+    time
+
+    4. **Noise** - The optional variability in the observations that cannot be explained
+    by the model
+
+
+    ![Components of Time Series](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-timeseries-forecasting/01-components-time-series.png)
+
+
+    All time series have a level, most have noise, and the trend and seasonality are
+    optional. Assumptions can be made about these components both in behavior and
+    in how they are combined, which allows them to be modeled using traditional statistical
+    methods. These components may also be the most effective way to make predictions
+    about future values, but not always
+
+
+    ## Concerns of Forecasting
+
+    When forecasting, it is important to understand your goal and ask lots of questions
+    to help zoom in on the specifics of your predictive modeling problem. For example:
+
+    * *How much data do you have available and are you able to gather it all together?*
+
+    * *What is the time horizon of predictions that is required? Short, medium or
+    long term?*
+
+    * *Can forecasts be updated frequently over time or must they be made once and
+    remain static?*
+
+    * *At what temporal frequency are forecasts required?*
+
+
+    Time series data often requires cleaning, scaling, and even transformation.
+
+
+    For example:
+
+
+    * **Frequency** - Perhaps data is provided at a frequency that is too high to
+    model or is unevenly spaced through time requiring resampling for use in some
+    models
+
+    * **Outliers** - Perhaps there are corrupt or extreme outlier values that need
+    to be identified and handled
+
+    * **Missing** - Perhaps there are gaps or missing data that need to be interpolated
+    or imputed
+
+
+    ## SARIMA model for Time Series Forecasting
+
+    In this notebook, we will explore how to train a SARIMA (Seasonal AutoRegressive
+    Integrated Moving Average) model for predicting anomalies on sample metric data.
+    (S)ARIMA models are among the most widely used approaches for time series forecasting.
+    In an **AutoRegressive** model the forecasts correspond to a linear combination
+    of past values of the variable. In a **Moving Average** model the forecasts correspond
+    to a linear combination of past forecast errors.
+
+
+    Basically, the ARIMA models combine these two approaches. Since they require the
+    time series to be stationary, differencing (Integrating) the time series may be
+    a necessary step, i.e. considering the time series of the differences instead
+    of the original one.
+
+
+    The **SARIMA** model (Seasonal ARIMA) extends the ARIMA by adding a linear combination
+    of seasonal past values and/or forecast errors.
+
+
+    Let us now proceed to the notebook and understand all the necessary steps involved
+    while solving a machine learning problem!
+
+    '
+  difficulty: basic
+  slug: 01-loading-the-notebook-images
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: SARIMA model to forecast timeseries metrics
+  type: challenge
+- assignment: "Please wait for a few minutes while the environment loads. (If you\
+    \ want to look at what's going on under the hood, you can go to Step 3 to access\
+    \ the OpenShift console and come back to this step to login to the Jupyter Notebook\
+    \ environment.)\n\n### Accessing the Jupyter Notebook Environment\n* The jupyter\
+    \ environment with the workshop notebooks is available here: <br>\nhttps://pad-workshop-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/\n\
+    \n* You might see a warning like in the image below, this is because we don't\
+    \ generate valid ssl certificates for all our routes. You can click on `Advanced...`\
+    \ and then click on `Accept the Risk and Continue` to continue to the Jupyter\
+    \ environment.\n\n  ![Cert Warning Page](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-cert-warning-page.png)\n\
+    \n* You will need a password to access the environment. <br>\n  The password is\
+    \ `secret` <br>\n![Jupyter Environment Secret](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-timeseries-forecasting/02-jupyter-secret.png)\n\
+    \n\n* Once you login to the Jupyter environment, you will find the following:\n\
+    \  1. `metrics` folder: This contains sample Prometheus metric data sets which\
+    \ we will use in our notebook for training the time series forecasting (SARIMA)\
+    \ model.\n  2. `(Exercises) Introduction_TimeSeries_Anomaly_Detection.ipynb`:\
+    \ In this notebook you will explore the sample metric data sets and perform time\
+    \ series forecasting for detecting anomalies.\n  3. `(Solutions) Introduction_TimeSeries_Anomaly_Detection.ipynb`:\
+    \ You will find the solutions to the exercises in this notebook. <br><br>\n\n\
+    ![Jupyter Notebook List](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-timeseries-forecasting/02-jupyter-notebook-list.png)\n\
+    \nNow, spend some time going through the notebook(s) and try out the exercises\
+    \ for yourself to understand time series analysis better!\n"
+  difficulty: basic
+  slug: 02-loading-the-notebook-templates
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Using a Jupyter Notebook to play with the SARIMA model
+  type: challenge
+- assignment: "### Accessing the OpenShift Console\n\nYou don't need to access the\
+    \ OpenShift Console for the purposes of this workshop. <br>\nBut if you want to\
+    \ look at what's going on under the hood, you can follow the instructions below:\n\
+    \nTo access the OpenShift console:\n\n* Click on the _Console_ tab in the workshop\
+    \ dashboard. You will be presented with the OpenShift login screen.\n\n  ![Web\
+    \ Console Login](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-login-page.png)\n\
+    \n  For the credentials, enter:\n\n  * **Username:** ``developer``\n  * **Password:**\
+    \ ``developer``\n\nOnce you have logged in, you should be shown the list of projects\
+    \ you have access to. A project called `myproject` is where this workshop is deployed.\n\
+    \nYou should be able to see the deployment in the OpenShift Web Console by switching\
+    \ over to the **Developer** perspective of the OpenShift Web Console. Change from\
+    \ **Administrator** to **Developer** from the drop-down as shown below:\n\n![Web\
+    \ Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)\n\
+    \nMake sure you are on the `myproject` project by selecting it from the projects\
+    \ list or **Project** dropdown menu.\n\nIn this project you should be able to\
+    \ see a Jupyter deployment. Once the pod is ready, you can login to the Jupyter\
+    \ environment.\n\n![Web Console Project](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-timeseries-forecasting/03-openshift-console-page.png)\n\
+    \nGo back to Step 2 if you want to continue playing with the notebooks, else you\
+    \ can proceed to exit this scenario. \n"
+  difficulty: basic
+  slug: 03-accessing-the-web-console
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Accessing the OpenShift console
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: prometheus-timeseries-forecasting
+tags:
+- openshift
+title: Time series forecasting for Prometheus metrics
+type: truck

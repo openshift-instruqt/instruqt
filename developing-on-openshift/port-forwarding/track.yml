@@ -1,0 +1,209 @@
+challenges:
+- assignment: "Before we get started, you need to login and create a project in OpenShift\n\
+    to work in.\n\nTo login to the OpenShift cluster used for this course from the\
+    \ _Terminal_,\nrun:\n\n``oc login -u developer -p developer``{{execute HOST1}}\n\
+    \nThis will log you in using the credentials:\n\n* **Username:** ``developer``\n\
+    * **Password:** ``developer``\n\nYou should see the output:\n\n```\nLogin successful.\n\
+    \nYou don't have any projects. You can try to create a new project, by running\n\
+    \n    oc new-project <projectname>\n```\n\nTo create a new project called ``myproject``\
+    \ run the command:\n\n``oc new-project myproject``{{execute HOST1}}\n\nYou should\
+    \ see output similar to:\n\n```\nNow using project \"myproject\" on server \"\
+    https://openshift:6443\".\n\nYou can add applications to this project with the\
+    \ 'new-app' command. For example, try:\n\n    oc new-app django-psql-example\n\
+    \nto build a new example application in Python. Or use kubectl to deploy a simple\
+    \ Kubernetes application:\n\n    kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node\n\
+    ```\n\nWe are not going to use the web console for this course, but if you want\
+    \ to check anything from the web console, switch to the _Console_ and  use the\
+    \ same credentials to login as you used above to login from the command line.\n"
+  difficulty: basic
+  slug: 01-creating-an-initial-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 1 - Creating an Initial Project
+  type: challenge
+- assignment: 'To create a database which you can then connect to, run the command:
+
+
+    ```
+
+    oc new-app postgresql-ephemeral --name database --param DATABASE_SERVICE_NAME=database
+    --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param
+    POSTGRESQL_PASSWORD=password`
+
+    ```
+
+
+    This will start up an instance of a PostgreSQL database.
+
+
+    Although a database would normally be paired with a persistent volume, we only
+    want to demonstrate how to access the database in this course. The database instance
+    we create here, will therefore only store the database in the filesystem local
+    to the container. This means that if the database were restarted, any changes
+    would be lost. When you deploy a database to be used with your own applications,
+    you would want to look at using persistent volumes.
+
+
+    To monitor progress as the database is deployed and made ready, run the command:
+
+
+    ```
+
+    oc rollout status dc/database`
+
+    ```
+
+
+    This command will exit once the database is ready to be used.
+
+
+    When using a database with your front end web application, you will need to configure
+    the web application to know about the database. We are going to skip that in this
+    course.'
+  difficulty: basic
+  slug: 02-deploying-a-postgresql-database
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 2 - Deploying a PostgreSQL Database
+  type: challenge
+- assignment: "In order to know where the database is running to connect to, run the\
+    \ command:\n\n```\noc get pods --selector name=database`\n```\n\nThis will output\
+    \ the details of the pod which is running the database.\n\n```\nNAME         \
+    \      READY     STATUS    RESTARTS   AGE\ndatabase-1-9xv8n   1/1       Running\
+    \   0          1m\n```\n\nTo make it easier to reference the name of the pod,\
+    \ capture the name of the pod in an environment variable by running:\n\n```\n\
+    POD=`oc get pods --selector name=database -o custom-columns=NAME:.metadata.name\
+    \ --no-headers`; echo $POD`\n```\n\nTo create an interactive shell within the\
+    \ same container running the database, you can use the ``oc rsh`` command, supplying\
+    \ it the name of the pod.\n\n```\noc rsh $POD`\n```\n\nYou could also access an\
+    \ interactive terminal session via a web browser by visiting the pod details from\
+    \ the web console.\n\nYou can see that you are in the container running the database\
+    \ by running:\n\n```\nps x`\n```\n\nThis will display output similar to:\n\n```\n\
+    PID TTY      STAT   TIME COMMAND\n  1 ?        Ss     0:00 postgres\n 60 ?   \
+    \     Ss     0:00 postgres: logger process\n 62 ?        Ss     0:00 postgres:\
+    \ checkpointer process\n 63 ?        Ss     0:00 postgres: writer process\n 64\
+    \ ?        Ss     0:00 postgres: wal writer process\n 65 ?        Ss     0:00\
+    \ postgres: autovacuum launcher process\n 66 ?        Ss     0:00 postgres: stats\
+    \ collector process\n 67 ?        Ss     0:00 postgres: bgworker: logical replication\
+    \ launcher\n193 pts/0    Ss     0:00 /bin/sh\n257 pts/0    R+     0:00 ps x\n\
+    ```\n\nBecause you are in the same container, you could at this point run the\
+    \ database client for the database if provided in the container. For PostgreSQL,\
+    \ you would use the ``psql`` command.\n\n```\npsql sampledb username`\n```\n\n\
+    This will present you with the prompt for running database operations via ``psql``.\n\
+    \n```\npsql (9.5.4)\nType \"help\" for help.\n\nsampledb=>\n```\n\nYou could now\
+    \ dynamically create database tables, add data, or modify existing data.\n\nTo\
+    \ exit ``psql`` enter:\n\n```\n\\q`\n```\n\nTo exit the interactive shell run:\n\
+    \n```\nexit`\n```\n\nAnything you want to do to the database could be be done\
+    \ through any database admin tool included in the container. This will though\
+    \ be limited to console based tools and you would not be able to use a GUI based\
+    \ tool which runs from your local machine as the database is still not exposed\
+    \ outside of the OpenShift cluster at this point.\n\nIf you need to run database\
+    \ script files to perform operations on the database, you would also need to first\
+    \ copy those files into the database container using the ``oc rsync`` command.\n"
+  difficulty: basic
+  slug: 03-starting-an-interactive-shell
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 3 - Starting an Interactive Shell
+  type: challenge
+- assignment: "In order to access the database from a database administration tool\
+    \ running on your own local machine, it will be necessary to expose the database\
+    \ service outside of the OpenShift cluster.\n\nWhen a web application is made\
+    \ visible outside of the OpenShift cluster a _Route_ is created. This enables\
+    \ a user to use a URL to access the web application from a web browser. A route\
+    \ is only usually used for web applications which use the HTTP protocol. A route\
+    \ cannot be used to expose a database as they would typically use their own distinct\
+    \ protocol and routes would not be able to work with the database protocol.\n\n\
+    There are ways of permanently exposing a database service outside of an OpenShift\
+    \ cluster, however the need to do that would be an exception and not the norm.\
+    \ If only wanting to access the database to perform administration on it, you\
+    \ can instead create a temporary connection back to your local machine using port\
+    \ forwarding. The act of setting up port forwarding creates a port on your local\
+    \ machine which you can then use to connect to the database using a database administration\
+    \ tool.\n\nTo setup port forwarding between a local machine and the database running\
+    \ on OpenShift you use the ``oc port-forward`` command. You need to pass the name\
+    \ of the pod and details of the port the database service is using, as well as\
+    \ the local port to use.\n\nThe format for the command is:\n\n```\noc port-forward\
+    \ <pod-name> <local-port>:<remote-port>\n```\n\nTo create a connection to the\
+    \ PostgreSQL database, which uses port 5432, and expose it on the local machine\
+    \ where ``oc`` is being run, as port 15432, use:\n\n```\noc port-forward $POD\
+    \ 15432:5432 &`\n```\n\nPort 15432 is used here for the local machine, rather\
+    \ than using 5432, in case an instance of PostgreSQL was also running on the local\
+    \ machine. If an instance of PostgreSQL was running on the local machine and the\
+    \ same port was used, setting up the connection would fail as the port would already\
+    \ be in use.\n\nIf you do not know what ports may be available, you can instead\
+    \ use the following format for the command:\n\n```\noc port-forward <pod-name>\
+    \ :<remote-port>\n```\n\nIn this form, the local port is left off, resulting in\
+    \ a random available port being used. You would need to look at the output from\
+    \ the command to work out what port number was used for the local port and use\
+    \ that.\n\nWhen the ``oc port-forward`` command is run and the connection setup,\
+    \ it will stay running until the command is interrupted. You would then use a\
+    \ separate terminal window to run the administration tool which could connect\
+    \ via the forwarded connection. In this case, as we only have the one terminal\
+    \ window, we ran the ``oc port-forward`` command as a background job.\n\nYou can\
+    \ see that it is still running using: \n\n```\njobs`\n```\n\nWith the port forwarding\
+    \ in place, you can now run ``psql`` again. This time it is being run from the\
+    \ local machine, and not inside of the container. Because the forwarded connection\
+    \ is using port 15432 on the local machine, you need to explicitly tell it to\
+    \ use that port rather than the default database port.\n\n```\npsql sampledb username\
+    \ --host=127.0.0.1 --port=15432`\n```\n\nThis will again present you with the\
+    \ prompt for running database operations via ``psql``.\n\n```\nHandling connection\
+    \ for 5432\npsql (9.2.18, server 9.5.4)\nWARNING: psql version 9.2, server version\
+    \ 9.5.\n         Some psql features might not work.\nType \"help\" for help.\n\
+    \nsampledb=>\n```\n\nYou could now dynamically create database tables, add data,\
+    \ or modify existing data.\n\nTo exit ``psql`` enter:\n\n```\n\\q`\n```\n\nBecause\
+    \ we ran the ``oc port-forward`` command as a background process, we can kill\
+    \ it when done using:\n\n```\nkill %1`\n```\n\nRunning ``jobs`` again we can see\
+    \ it is terminated.\n\n```\njobs`\n```\n\nIn this exercise we used ``psql``, however\
+    \ you could also use a GUI based database administration tool running on your\
+    \ local machine as well."
+  difficulty: basic
+  slug: 04-creating-a-remote-connection
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 4 - Creating a Remote Connection
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: port-forwarding
+tags:
+- openshift
+title: Connecting to a Database Using Port Forwarding
+type: truck

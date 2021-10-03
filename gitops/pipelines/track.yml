@@ -1,0 +1,416 @@
+challenges:
+- assignment: "OpenShift Pipelines are an OpenShift add-on that can be installed via\
+    \ an operator that is available in the OpenShift OperatorHub.\n\nYou can either\
+    \ install the operator using the OpenShift Pipelines Operator in the web console\
+    \ or by using the CLI tool `oc`. Let's log in to our cluster to make changes and\
+    \ install the operator. You can do so by running:\n\n```\noc login -u admin -p\
+    \ admin\n```\n\nThis will log you in using the credentials:\n\n* **Username:**\
+    \ ``admin``\n* **Password:** ``admin``\n\n## Installing the OpenShift Pipelines\
+    \ Operator in Web Console\n\nYou can install OpenShift Pipelines using the Operator\
+    \ listed in the OpenShift Container Platform OperatorHub. When you install the\
+    \ OpenShift Pipelines Operator, the Custom Resources (CRs) required for the Pipelines\
+    \ configuration are automatically installed along with the Operator.\n\nFirstly,\
+    \ switch to the _Console_ and login to the OpenShift web console using the same\
+    \ credentials you used above.\n\n![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)\n\
+    \nIn the _Administrator_ perspective of the web console, navigate to Operators\
+    \ \u2192 OperatorHub. You can see the list of available operators for OpenShift\
+    \ provided by Red Hat as well as a community of partners and open-source projects.\n\
+    \nUse the _Filter by keyword_ box to search for `OpenShift Pipelines Operator`\
+    \ in the catalog. Click the _OpenShift Pipelines Operator_ tile.\n\n![Web Console\
+    \ Hub](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-hub.png)\n\
+    \nRead the brief description of the Operator on the _OpenShift Pipelines Operator_\
+    \ page. Click _Install_.\n\nSelect _All namespaces on the cluster (default)_ for\
+    \ installation mode & _Automatic_ for the approval strategy. Click Subscribe!\n\
+    \n![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-settings.png)\n\
+    \nBe sure to verify that the OpenShift Pipelines Operator has installed through\
+    \ the Operators \u2192 Installed Operators page.\n\n## Installing the OpenShift\
+    \ Pipelines Operator using the CLI\n\nYou can install OpenShift Pipelines Operator\
+    \ from the OperatorHub using the CLI.\n\nFirst, you'll want to create a Subscription\
+    \ object YAML file to subscribe a namespace to the OpenShift Pipelines Operator,\
+    \ for example, `subscription.yaml` as shown below:\n\n```\napiVersion: operators.coreos.com/v1alpha1\n\
+    kind: Subscription\nmetadata:\n  name: openshift-pipelines-operator\n  namespace:\
+    \ openshift-operators \nspec:\n  channel: stable\n  name: openshift-pipelines-operator-rh\n\
+    \  source: redhat-operators\n  sourceNamespace: openshift-marketplace\n```\n\n\
+    This YAML file defines various components, such as the `channel` specifying the\
+    \ channel name where we want to subscribe, `name` being the name of our Operator,\
+    \ and `source` being the CatalogSource that provides the operator. For your convenience,\
+    \ we've placed this exact file in your `/operator` local folder. \n\nYou can now\
+    \ create the Subscription object similar to any OpenShift object.\n\n```\noc apply\
+    \ -f operator/subscription.yaml\n```\n\n## Verify installation\n\nThe OpenShift\
+    \ Pipelines Operator provides all its resources under a single API group: tekton.dev.\
+    \ This operation can take a few seconds; you can run the following script to monitor\
+    \ the progress of the installation.\n\n```\nuntil oc api-resources --api-group=tekton.dev\
+    \ | grep tekton.dev &> /dev/null\ndo \n echo \"Operator installation in progress...\"\
+    \n sleep 5\ndone\n\necho \"Operator ready\"\n```\n\n```\n\nGreat! The OpenShift\
+    \ Pipelines Operator is now installed. Now, let's start the workshop.\n"
+  difficulty: intermediate
+  slug: 01install-op
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1 - Install the Pipelines Operator
+  type: challenge
+- assignment: 'For this tutorial, you''re going to create a simple application that
+    involves a [frontend](https://github.com/openshift/pipeliness-vote-ui) and [backend](https://github.com/openshift/pipelines-vote-api).
+    This application needs to deploy in a new project (i.e. Kubernetes namespace).
+    You can start by creating the project with:
+
+
+    ```
+
+    oc new-project pipelines-tutorial
+
+    ```
+
+
+    You can also deploy the same applications by applying the artifacts available
+    in k8s directory of the respective repo.
+
+
+    ## Deploying through Web Console
+
+
+    If you deploy the application directly, you should be able to see the deployment
+    in the OpenShift Web Console by switching over to the **Developer** perspective
+    of the OpenShift Web Console. Change from **Administrator** to **Developer** from
+    the drop-down as shown below:
+
+
+    ![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+
+
+    Make sure you are on the `pipelines-tutorial` project by selecting it from the
+    **Project** dropdown menu. Either search for `pipelines-tutorial` in the search
+    bar or scroll down until you find `pipelines-tutorial` and click on the name of
+    your project.
+
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-project.png)
+
+
+    Next, we''ll work on creating a sample `Task` that outputs to the console!
+
+    '
+  difficulty: intermediate
+  slug: 02new-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2 - Create a New Project
+  type: challenge
+- assignment: "A [`Task`](tasks.md) defines a series of `steps` that run in a desired\
+    \ order and complete a set amount of build work. Every `Task` runs as a Pod on\
+    \ your Kubernetes cluster with each `step` as its own container. For example,\
+    \ the following `Task` outputs \"Hello World\":\n\n```\napiVersion: tekton.dev/v1beta1\n\
+    kind: Task\nmetadata:\n  name: hello\nspec:\n  steps:\n    - name: say-hello\n\
+    \      image: registry.access.redhat.com/ubi8/ubi\n      command:\n        - /bin/bash\n\
+    \      args: ['-c', 'echo Hello World']\n```\n\nApply this Task to your cluster\
+    \ just like any other Kubernetes object. Then run it using `tkn`, the CLI tool\
+    \ for Tekton.\n\n```\noc apply -f tasks/hello.yaml\n```\n\n```\ntkn task start\
+    \ --showlog hello\n```\n\nThe output will look similar to the following:\n\n```\n\
+    TaskRun started: hello-run-9cp8x\nWaiting for logs to be available...\n[say-hello]\
+    \ Hello World\n```\n\nIn the next section, you will examine the task definitions\
+    \ that will be needed for our pipeline."
+  difficulty: intermediate
+  slug: 03create-task
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3 - Create Sample Task
+  type: challenge
+- assignment: "Tasks can also take parameters. This way, you can pass various flags\
+    \ to be used in this Task. These `params` can be instrumental in making your Tasks\
+    \ more generic and reusable across Pipelines. For example, a `Task` could apply\
+    \ a custom Kubernetes manifest, like the example below. This will be needed for\
+    \ deploying an image on OpenShift in our next section. In addition, we'll cover\
+    \ the `workspaces` during our `Pipeline` step.\n\n```\napiVersion: tekton.dev/v1beta1\n\
+    kind: Task\nmetadata:\n  name: apply-manifests\nspec:\n  workspaces:\n  - name:\
+    \ source\n  params:\n    - name: manifest_dir\n      description: The directory\
+    \ in source that contains yaml manifests\n      type: string\n      default: \"\
+    k8s\"\n  steps:\n    - name: apply\n      image: quay.io/openshift/origin-cli:latest\n\
+    \      workingDir: /workspace/source\n      command: [\"/bin/bash\", \"-c\"]\n\
+    \      args:\n        - |-\n          echo Applying manifests in $(inputs.params.manifest_dir)\
+    \ directory\n          oc apply -f $(inputs.params.manifest_dir)\n          echo\
+    \ -----------------------------------\n```\n\nCreate the `apply-manifests` task:\n\
+    \n```\noc create -f tasks/apply_manifest_task.yaml\n```\n\nWe'll also create a\
+    \ `update-deployment` task, which can be seen with a `cat` command:\n\n```\noc\
+    \ create -f tasks/update_deployment_task.yaml\n```\n\nFinally, we can create a\
+    \ PersistentVolumeClaim to provide the filesystem for our pipeline execution,\
+    \ explained more in the next step:\n\n```\noc create -f resources/persistent_volume_claim.yaml\n\
+    ```\n\nYou can take a look at the tasks you created using the [Tekton CLI](https://github.com/tektoncd/cli/releases):\n\
+    \n```\ntkn task ls\n```\n\nYou should see similar output to this:\n\n```\nNAME\
+    \                DESCRIPTION   AGE\napply-manifests                   4 seconds\
+    \ ago\nhello                             1 minute ago\nupdate-deployment     \
+    \            3 seconds ago\n```\n\nIn the next section, you will create a pipeline\
+    \ that takes the source code of an application from GitHub and then builds and\
+    \ deploys it on OpenShift."
+  difficulty: intermediate
+  slug: 04task-resource-def
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4 - Task Resource Definitions
+  type: challenge
+- assignment: "A `Pipeline` defines an ordered series of `Tasks` that you want to\
+    \ execute along with the corresponding inputs and outputs for each `Task`. In\
+    \ fact, tasks should do one single thing so you can reuse them across pipelines\
+    \ or even within a single pipeline.\n\nBelow is an example definition of a `Pipeline`,\
+    \ created using the following diagram:\n\n![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/pipeline-diagram.png)\n\
+    \nBelow is a YAML file that represents the above pipeline:\n\n```\napiVersion:\
+    \ tekton.dev/v1beta1\nkind: Pipeline\nmetadata:\n  name: build-and-deploy\nspec:\n\
+    \  workspaces:\n  - name: shared-workspace\n  params:\n  - name: deployment-name\n\
+    \    type: string\n    description: name of the deployment to be patched\n  -\
+    \ name: git-url\n    type: string\n    description: url of the git repo for the\
+    \ code of deployment\n  - name: git-revision\n    type: string\n    description:\
+    \ revision to be used from repo of the code for deployment\n    default: \"master\"\
+    \n  - name: IMAGE\n    type: string\n    description: image to be build from the\
+    \ code\n  tasks:\n  - name: fetch-repository\n    taskRef:\n      name: git-clone\n\
+    \      kind: ClusterTask\n    workspaces:\n    - name: output\n      workspace:\
+    \ shared-workspace\n    params:\n    - name: url\n      value: $(params.git-url)\n\
+    \    - name: subdirectory\n      value: \"\"\n    - name: deleteExisting\n   \
+    \   value: \"true\"\n    - name: revision\n      value: $(params.git-revision)\n\
+    \  - name: build-image\n    taskRef:\n      name: buildah\n      kind: ClusterTask\n\
+    \    params:\n    - name: TLSVERIFY\n      value: \"false\"\n    - name: IMAGE\n\
+    \      value: $(params.IMAGE)\n    workspaces:\n    - name: source\n      workspace:\
+    \ shared-workspace\n    runAfter:\n    - fetch-repository\n  - name: apply-manifests\n\
+    \    taskRef:\n      name: apply-manifests\n    workspaces:\n    - name: source\n\
+    \      workspace: shared-workspace\n    runAfter:\n    - build-image\n  - name:\
+    \ update-deployment\n    taskRef:\n      name: update-deployment\n    workspaces:\n\
+    \    - name: source\n      workspace: shared-workspace\n    params:\n    - name:\
+    \ deployment\n      value: $(params.deployment-name)\n    - name: IMAGE\n    \
+    \  value: $(params.IMAGE)\n    runAfter:\n    - apply-manifests\n```\n\nThis pipeline\
+    \ helps you to build and deploy backend/frontend, by configuring the right resources\
+    \ to the pipeline.\n\nPipeline Steps:\n\n  1. `fetch-repository` clones the source\
+    \ code of the application from a git repository by referring (`git-url` and `git-revision`\
+    \ param)\n  2. `build-image` builds the container image of the application using\
+    \ the `buildah` clustertask\n  that uses [Buildah](https://buildah.io/) to build\
+    \ the image\n  3. The application image is pushed to an image registry by referring\
+    \ (`image` param)\n  4. The new application image is deployed on OpenShift using\
+    \ the `apply-manifests` and `update-deployment` tasks\n\nYou might have noticed\
+    \ that there are no references to the git repository or the image registry it\
+    \ will be pushed to in the pipeline. That's because pipeline in Tekton is designed\
+    \ to be generic and re-usable across environments and stages through the application's\
+    \ lifecycle. Pipelines abstract away the specifics of the git\nsource repository\
+    \ and image to be produced as [`PipelineResources`](https://tekton.dev/docs/pipelines/resources)\
+    \ or `Params`. When triggering a pipeline, you can provide different git repositories\
+    \ and image registries to be used during pipeline execution.\n\nThe execution\
+    \ order of task is determined by dependencies that are defined between the tasks\
+    \ via inputs and outputs as well as explicit orders that are defined via `runAfter`.\n\
+    \n`workspaces` field allows you to specify one or more volumes that each Task\
+    \ in the Pipeline requires during execution. You specify one or more Workspaces\
+    \ in the `workspaces` field.\n\nCreate the pipeline by running the following:\n\
+    \n```\noc create -f pipeline/pipeline.yaml\n```\n\nIn the next section, you will\
+    \ focus on creating a trigger to execute the tasks specified in the pipeline."
+  difficulty: intermediate
+  slug: 05create-pipeline
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5 - Create Pipeline
+  type: challenge
+- assignment: 'Now that the pipeline is created, you can trigger it to execute the
+    tasks specified in the pipeline. This is done by creating a `PipelineRun` via
+    `tkn`.
+
+
+    # Trigger a Pipeline via CLI
+
+
+    Let''s start a pipeline to build and deploy our backend application using `tkn`.
+    By creating a `PipelineRun` with the name of our applied `Pipeline`, we can define
+    various arguments to our command like `params` that will be used in the `Pipeline`.  For
+    example, we can apply a request for storage with a `persistentVolumeClaim`, as
+    well as define a name for our `deployment`, `git-url` repository to be cloned,
+    and `IMAGE` to be created.
+
+
+    We''ll first build and deploy our backend application using the following command,
+    with the params already included for our specific demo:
+
+
+    ```
+
+    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc
+    -p deployment-name=pipelines-vote-api -p git-url=https://github.com/openshift/pipelines-vote-api.git
+    -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-api
+    --showlog
+
+    ```
+
+
+    Similarly, start a pipeline to build and deploy the frontend application:
+
+
+    ```
+
+    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc
+    -p deployment-name=pipelines-vote-ui -p git-url=https://github.com/openshift/pipelines-vote-ui.git
+    -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-ui
+    --showlog
+
+    ```
+
+
+    As soon as you start the `build-and-deploy` pipeline, a `PipelineRun` will be
+    instantiated and pods will be created to execute the tasks that are defined in
+    the pipeline. To display a list of Pipelines, use the following command:
+
+
+    ```
+
+    tkn pipeline ls
+
+    ```
+
+
+    Again, notice the reusability of pipelines, and how one generic `Pipeline` can
+    be triggered with various `params`. We''ve started the `build-and-deploy` pipeline,
+    with relevant pipeline resources to deploy backend/frontend application using
+    a single pipeline. Let''s list our PipelineRuns:
+
+
+    ```
+
+    tkn pipelinerun ls
+
+    ```
+
+
+    After a few minutes, the pipeline should finish successfully!
+
+
+    ```
+
+    tkn pipelinerun ls
+
+    ```
+
+
+    ## Access Pipeline via Web Console
+
+
+    To view the `PipelineRun` visually, visit the Pipelines section of the developer
+    perspective. From here, you can see the details of our `Pipeline`, including the
+    YAML file we''ve applied, the `PipelineRun`, input custom `params`, and more:
+
+
+    ![Web Console Pipelines](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+
+
+    Congrats! Your `Pipeline` has successfully ran, and the final step will provide
+    instructions on how to access the deployed image.
+
+    '
+  difficulty: intermediate
+  slug: 06trigger-pipeline
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 6 - Trigger a Pipeline
+  type: challenge
+- assignment: 'To verify a successful deployment for our application, head back out
+    to the web console by clicking on the Console at the center top of the workshop
+    in your browser.
+
+
+    Click on the Topology tab on the left side of the web console. You should see
+    something similar to what is shown in the screenshot below:
+
+
+    ![Web Console Deployed](https://katacoda.com/openshift/assets/middleware/pipelines/application-deployed.png)
+
+
+    The Topology view of the OpenShift web console helps to show what is deployed
+    out to your OpenShift project visually. As mentioned earlier, the dark blue lining
+    around the _ui_ circle means that a container has started up and running the _api_
+    application. By clicking on the arrow icon as shown below, you can open the URL
+    for _ui_ in a new tab and see the application running.
+
+
+    ![Web Console URL Icon](https://katacoda.com/openshift/assets/middleware/pipelines/url-icon.png)
+
+
+    After clicking on the icon, you should see the application running in a new tab.
+
+
+    ## Accessing application via CLI
+
+
+    In addition, you can get the route of the application by executing the following
+    command to access the application.
+
+
+    ```
+
+    oc get route pipelines-vote-ui --template=''http://{{.spec.host}}''
+
+    ```
+
+
+    Congratulations! You have successfully deployed your first application using OpenShift
+    Pipelines.'
+  difficulty: intermediate
+  slug: 07verify-deployment
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 7 - Verify Deployment
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: pipelines
+tags:
+- openshift
+title: Using OpenShift Pipelines
+type: truck

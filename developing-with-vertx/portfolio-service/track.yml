@@ -1,0 +1,253 @@
+challenges:
+- assignment: "## Async service interface\n\nTo create an async RPC service, or event\
+    \ bus service, or service proxies, you first need a Java interface declaring the\
+    \ async methods. \n\nOpen the ``io.vertx.workshop.portfolio.PortfolioService``\
+    \ class by clicking the link:\n\n``portfolio-service/src/main/java/io/vertx/workshop/portfolio/PortfolioService.java``{{open}}\n\
+    \nThe class is annotated with:\n\n* ``ProxyGen`` - enables the event bus service\
+    \ proxy and server generation\n\n* ``VertxGen`` - enables the creation of the\
+    \ proxy in the different language supported by Vert.x\n\nLet\u2019s have a look\
+    \ at the first method:\n\n```java\nvoid getPortfolio(Handler<AsyncResult<Portfolio>>\
+    \ resultHandler);\n```\n\nThis method lets you retrieve a Portfolio object. This\
+    \ method is asynchronous and so has a Handler parameter receiving an AsyncResult<Portfolio>.\
+    \ The other methods follows the same pattern.\n\n***NOTE***\nYou may have also\
+    \ noticed that the package has a package-info.java file. This file is required\
+    \ to enable the service proxy generation.\n\n"
+  difficulty: basic
+  slug: 01-async-service-interface
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: '## Data objects
+
+
+    The ``Portfolio`` object is a data object. Event bus proxies support a limited
+    set of types, and for non-supported types, it must use data objects (please check
+    the documentation for the whole list of supported types). Data objects are Java
+    classes obeying to a set of constraints:
+
+
+    * It must be annotated with ``DataObject``
+
+
+    * It must have an empty constructor, a copy constructor and a constructor taking
+    a ``JsonObject`` as parameter
+
+
+    * It must have a ``toJson`` method building a ``JsonObject`` representing the
+    current object
+
+
+    * Fields must be property with (getters and setters)
+
+
+    Let''s open the ``io.vertx.workshop.portfolio.Portfolio.java`` class to see what
+    it looks like:
+
+
+    ``portfolio-service/src/main/java/io/vertx/workshop/portfolio/Portfolio.java``{{open}}
+
+
+    As you can see, all the JSON handling is managed by ``converters`` that are automatically
+    generated, so a data object is very close to a simple bean.'
+  difficulty: basic
+  slug: 02-data-objects
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "## Implementing the service\n\nIt\u2019s time to implement our async\
+    \ service interface. We are going to implement three methods in this service:\n\
+    \n* `getPortfolio` to understand how to create AsyncResult objects\n\n* `sendActionOnTheEventBus`\
+    \ to see how to send messages on the event bus\n\n* `evaluate` computing the current\
+    \ value of the portfolio\n\n**1. Creating AsyncResult instances**\n\nAs we have\
+    \ seen above, our async service has a `Handler<AsyncResult<Portfolio>>` parameter.\
+    \ So when we implement this service, we would need to call the `Handler` with\
+    \ an instance of `AsyncResult`. To see how this works, let\u2019s implement the\
+    \ `getPortfolio` method:\n\nIn `io.vertx.workshop.portfolio.impl.PortfolioServiceImpl`,\
+    \ fill the `getPortfolio` method. It should call the `handle` method of the `resultHandler`\
+    \ with a successful async result. This object can be created from the (Vert.x)\
+    \ `Future` method.\n\nOpen the file in the editor: \n\n`portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java`{{open}}\n\
+    \nThen, copy the below content to the matching `// TODO: getPortfolio` statement\
+    \ (or use the `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"\
+    portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: getPortfolio\">\nresultHandler.handle(Future.succeededFuture(portfolio));\n\
+    </pre>\n\nLet\u2019s dissect it:\n\n* resultHandler.handle : this invokes the\
+    \ Handler. Handler<X> has a single method (handle(X)).\n* Future.succeededFuture\
+    \ : this is how we create an instance of AsyncResult denoting a success. The passed\
+    \ value is the result (portfolio)\n\nWhat is the relationship between `AsyncResult`\
+    \ and `Future`? A `Future` represents the result of an action that may, or may\
+    \ not, have occurred yet. The result may be null if the `Future` is used to detect\
+    \ the completion of an operation. The operation behind a `Future` object may succeed\
+    \ or fail. `AsyncResult` is a structure describing the success of the failure\
+    \ of an operation. So, `Future` are `AsyncResult`. In Vert.x `AsyncResult` instances\
+    \ are created from the `Future` class.\n\n`AsyncResult` describes:\n\n* a success\
+    \ as shown before, it encapsulates the result\n* a failure, it encapsulates a\
+    \ `Throwable` instance\n\nSo, how does this work with our async RPC service, let\u2019\
+    s look at this sequence diagram:\n\n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/portfolio-sequence.png)\n\
+    \n**2. Sending an event on the event bus**\nIt\u2019s time to see how to send\
+    \ messages on the event bus. You access the event bus using vertx.eventBus().\
+    \ From this object you can:\n\n* `send` : send a message in point to point mode\n\
+    * `publish` : broadcast a message to all consumers registered on the address\n\
+    * `send` with a `Handler<AsyncResult<Message>>>`: send a message in point to point\
+    \ mode and expect a reply. If you use RX Java, this method is called `rxSend`\
+    \ and returns a `Single<Message>`. If the receiver does not reply to the message,\
+    \ it is considered a failure (timeout)\n\nIn our code, We have provided the `buy`\
+    \ and `sell` methods, that are just doing some checks before buying or selling\
+    \ shares. Once the action is emitted, we send a message on the event bus that\
+    \ will be consumed by the `Audit Service` and the `Dashboard`. So, we are going\
+    \ to use the `publish` method.\n\nWrite the body of the `sendActionOnTheEventBus`\
+    \ method in order to publish a message on the `EVENT_ADDRESS` address containing\
+    \ a `JsonObject` as body. This object must contains the following entries:\n*\
+    \ action \u2192 the action (buy or sell)\n* quote \u2192 the quote as Json\n*\
+    \ date \u2192 a date (long in milliseconds)\n* amount \u2192 the amount\n* owned\
+    \ \u2192 the updated (owned) amount\n\nCopy the following to the matching `//\
+    \ TODO: sendActionOnTheEventBus` statement\n\n<pre class=\"file\" data-filename=\"\
+    portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: sendActionOnTheEventBus\">\nvertx.eventBus().publish(EVENT_ADDRESS,\
+    \ new JsonObject()\n    .put(\"action\", action)\n    .put(\"quote\", quote)\n\
+    \    .put(\"date\", System.currentTimeMillis())\n    .put(\"amount\", amount)\n\
+    \    .put(\"owned\", newAmount));\n</pre>\n\nLet\u2019s have a deeper look:\n\n\
+    * It gets the `EventBus` instance and call `publish` on it. The first parameter\
+    \ is the address on which the message is sent\n* The body is a `JsonObject` containing\
+    \ the different information on the action (buy or sell, the quote (another json\
+    \ object), the date\u2026\u200B\n\n**3. Coordinating async methods and consuming\
+    \ HTTP endpoints - Portfolio value evaluation**\n\nThe last method to implement\
+    \ is the `evaluate` method. This method computes the current value of the portfolio.\
+    \ However, for this it needs to access the \"current\" value of the stock (so\
+    \ the last quote). It is going to consume the HTTP endpoint we have implemented\
+    \ in the quote generator. For this, we are going to:\n\n* Discover the service\n\
+    * Call the service for each company we own some shares\n* When all calls are done,\
+    \ compute the value and send it back to the caller\n\nLet\u2019s do it step by\
+    \ step. First, in the evaluate, we need to retrieve the HTTP endpoint (service)\
+    \ provided by the quote generator. This service is named quotes. We published\
+    \ in in the previous section. So, let\u2019s start to get this service.\n\nFill\
+    \ the evaluate method to retrieve the quotes service. You can retrieve Http services\
+    \ using HttpEndpoint.getClient. The name of the service is quotes. If you can\u2019\
+    t retrieve the service, just passed a failed async result to the handler. Otherwise,\
+    \ call computeEvaluation.\n\nCopy the following to the matching `// TODO: evaluate`\
+    \ statement in the evaluate method\n\n<pre class=\"file\" data-filename=\"portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: evaluate\">\nquotes.subscribe((client,\
+    \ err) -> {\n if (err != null) {\n     resultHandler.handle(Future.failedFuture(err));\n\
+    \ } else {\n     computeEvaluation(client, resultHandler);\n }\n});\n</pre>\n\n\
+    * Get the HTTP Client for the requested service.\n* The client cannot be retrieved\
+    \ (service not found), report the failure\n* We have the client, let\u2019s continue\u2026\
+    \u200B\n\nHere is how the `computeEvaluation` method is implemented:\n\n```java\n\
+    private void computeEvaluation(HttpClient httpClient, Handler<AsyncResult<Double>>\
+    \ resultHandler) {\n    // We need to call the service for each company we own\
+    \ shares\n    List<Future> results = portfolio.getShares().entrySet().stream()\n\
+    \        .map(entry -> getValueForCompany(httpClient, entry.getKey(), entry.getValue()))\
+    \    \n        .collect(Collectors.toList());\n\n\n    // We need to return only\
+    \ when we have all results, for this we create a composite future.\n    // The\
+    \ set handler is called when all the futures has been assigned.\n    CompositeFuture.all(results).setHandler(\
+    \                                            \n      ar -> {\n        double sum\
+    \ = results.stream().mapToDouble(fut -> (double) fut.result()).sum();  \n    \
+    \    resultHandler.handle(Future.succeededFuture(sum));                      \
+    \        \n    });\n}\n```\n\nNow, we just need the `getValueForCompany` method\
+    \ that call the service. Write the content of this method. \n\nThis method returns\
+    \ a Single<Double> emitting the numberOfShares * bid result. Write the content\
+    \ of this method following these steps:\n\n1. use the client.get(\"/?name=\" +\
+    \ encode(company)) to create a HTTP request\n2. we expect a JSON object as response\
+    \ payload, so use .as(BodyCodec.jsonObject())\n3. use the rxSend method to create\
+    \ a Single containing the result\n4. we now need to extract the \"bid\" from the\
+    \ returned JSON. Extract the response body and then extract the \"bid\" entry\
+    \ (json.getDouble(\"bid\")). Both extraction are orchestrated using map.\n5. compute\
+    \ the amount (bid * numberOfShared)\n6. Done!\n\nCopy the following to the matching\
+    \ `// TODO: getValueForCompany` statement in the getValueForCompany method \n\n\
+    <pre class=\"file\" data-filename=\"portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: getValueForCompany\">\n return\
+    \ client.get(\"/?name=\" + encode(company))\n     .as(BodyCodec.jsonObject())\n\
+    \     .rxSend()\n     .map(HttpResponse::body)\n     .map(json -> json.getDouble(\"\
+    bid\"))\n     .map(val -> val * numberOfShares);                             \
+    \ \n</pre>"
+  difficulty: basic
+  slug: 03-implement-service
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "## Deploy to OpenShift\n\nNow that you've logged into OpenShift, let's\
+    \ deploy our new micro-trader Vert.x microservice:\n\n**1. Build and Deploy**\n\
+    \nWe have already deployed our `quote-generator` and `micro-trader-dashboard`\
+    \ microservices on OpenShift. In this step we will deploy our new portfolio microservice.\
+    \ We will continue with the same OpenShift project to house this service and other\
+    \ microservices.\n\n```\noc project vertx-kubernetes-workshop\n```\n\nAs you know,\
+    \ Red Hat OpenShift Application Runtimes include a powerful maven plugin that\
+    \ can take an\nexisting Eclipse Vert.x application and generate the necessary\
+    \ Kubernetes configuration.\n\nBuild and deploy the project using the following\
+    \ command, which will use the maven plugin to deploy:\n\n```\ncd /root/code/portfolio-service\n\
+    ```\n\n```\nmvn fabric8:deploy\n```\n\nThe build and deploy may take a minute\
+    \ or two. Wait for it to complete. You should see a **BUILD SUCCESS** at the\n\
+    end of the build output.\n\nAfter the maven build finishes it will take less than\
+    \ a minute for the application to become available.\nTo verify that everything\
+    \ is started, run the following command and wait for it complete successfully:\n\
+    \n```\noc rollout status -w dc/portfolio-service\n```\n\nThere you go, the portfolio\
+    \ service is started. It discovers the ``quotes`` service and is ready to be used.\n\
+    \n**2. Access the Micro-trader dashboard**\n\nClick on the \"OpenShift Console\"\
+    \ tab next to the \"Local Web Browser\" tab.\n\n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \nLog in using `developer/developer` for username and password. You should see\
+    \ the newly created project called `\u201Cvertx-kubernetes-workshop\"`. Click\
+    \ on it. You should see four pods running, one each for the quote-generator and\
+    \ micro-trader-dashboard microservices that you created in previous scenarios\
+    \ and a new one for portfolio-service that you created just now.\n\nClick on the\
+    \ route for the `micro-trader-dashboard`. Append `\u201C/admin\u201D` at the end\
+    \ of the route and you should see the dashboard. You should see some new services\
+    \ and if you click on the \u201CTrader\u201D tab on the left, cash should have\
+    \ been set in the top left corner.\n\nAlternatively, you can click on the\n[route\
+    \ URL](http://micro-trader-dashboard-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/admin)\n\
+    to access the dashboard.\n\nThe dashboard is consuming the portfolio service using\
+    \ the async RPC mechanism. A client for JavaScript is generated at compile time,\
+    \ and use SockJS to communicate. Behind the hood there is a bridge between the\
+    \ event bus and SockJS.\n\n## Congratulations!\n\nYou have deployed the portfolio\
+    \ microservice running on OpenShift. In the next component, we are going to implement\
+    \ the trader service and use that to buy and sell shares. \n"
+  difficulty: basic
+  slug: 04-deploy-to-openshift
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: portfolio-service
+tags:
+- openshift
+title: 'MicroTrader App Part 2: Portfolio Service'
+type: truck

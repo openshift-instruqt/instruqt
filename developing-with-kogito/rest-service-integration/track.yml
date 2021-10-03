@@ -1,0 +1,462 @@
+challenges:
+- assignment: "In this step, we will create a Kogito application skeleton.\n\n\n#\
+    \ Create a basic project\n\nTo create a new Quarkus project with the Kogito extension,\
+    \ click the following command.\n\n`mvn io.quarkus:quarkus-maven-plugin:1.7.0.Final:create\
+    \ \\\n    -DprojectGroupId=org.acme \\\n    -DprojectArtifactId=coffeeshop \\\n\
+    \    -Dextensions=\"org.kie.kogito:kogito-quarkus,io.quarkus:quarkus-smallrye-openapi\"\
+    `{{execute}}\n\n\nThis uses the Quarkus Maven plugin and generates a basic Maven\
+    \ project for us in the `coffeeshop` subdirectory which contains:\n\n* The project's\
+    \ Maven structure.\n* An OpenAPI Swagger-UI at `http://localhost:8080/swagger-ui`.\n\
+    \nOnce generated, look at the `coffeeshop/pom.xml`{{open}}. We will find the import\
+    \ of the Quarkus BOM which enables us to omit the version of the Kogito and Quarkus\
+    \ dependencies. In addition, we can see the `quarkus-maven-plugin`, which is responsible\
+    \ for packaging of the application and which allows us to start the application\
+    \ in development mode.\n\n# Running the Application\n\nClick the following command\
+    \ to change directory to the `coffeeshop` directory:\n\n```\ncd /root/projects/kogito/coffeeshop\n\
+    ```\n\nClick the following command to start the application in Quarkus development\
+    \ mode:\n\n```\nmvn clean compile quarkus:dev\n```\n\nWe see the following output\
+    \ in the console:\n\n```console\n2020-02-07 09:09:12,440 INFO  [io.quarkus] (main)\
+    \ getting-started 1.0-SNAPSHOT (running on Quarkus 1.4.1.Final) started in 5.850s.\
+    \ Listening on: http://0.0.0.0:8080\n2020-02-07 09:09:12,447 INFO  [io.quarkus]\
+    \ (main) Profile dev activated. Live Coding activated.\n2020-02-07 09:09:12,449\
+    \ INFO  [io.quarkus] (main) Installed features: [cdi, kogito, resteasy, resteasy-jackson,\
+    \ smallrye-openapi, swagger-ui]\n```\n\nBecause this is the first Maven Kogito/Quarkus\
+    \ build in this environment, the system first needs to download a number of dependencies.\
+    \ This can take some time.\n\nAfter the dependencies have downloaded, and the\
+    \ application is compiled, note the amazingly fast startup time! Once started,\
+    \ we can open the application's Swagger UI in the browser [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui).\n\
+    \nWe see the following Swagger-UI page. Because we have not yet implemented our\
+    \ application, there are no operations defined yet in our API:\n\n![New Kogito\
+    \ Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-quarkus-empty-swagger-ui.png)\n\
+    \nIt's working!\n\nWe can now stop the application using `CTRL-C`.\n\n# The CoffeeService\n\
+    \nThe goal of this scenario is for our process to call an external microservice\
+    \ using REST from a BPMN2 Service Task node. So we need to have a RESTful microservice\
+    \ that we can call.\n\nAs part of this scenario we've provided a Quarkus-based\
+    \ microservice that serves as our Coffee Menu Service. The service provides a\
+    \ simple RESTful endpoint that returns a list of coffees on the menu, as well\
+    \ as the details of a single coffee item that can be selected by name.\n\nTo run\
+    \ the service, we first need to compile and package it.\n\nClick the following\
+    \ command to change directory to the correct directory:\n\n`cd /root/projects/kogito/coffeeservice-quarkus`{{execute\
+    \ T2}}\n\nTo package the project, click on the following command:\n\n`mvn clean\
+    \ package`{{execute T2}}\n\nThis creates a new runnable Quarkus JAR file. Click\
+    \ on the following command to run the application:\n\n`java -jar target/coffeeservice-quarkus-1.0-SNAPSHOT-runner.jar`{{execute\
+    \ T2}}\n\nWith the microservice running, we can access its [Swagger-UI here](https://[[CLIENT_SUBDOMAIN]]-8090-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui).\n\
+    \nWe can also retrieve the list of coffees using curl.\n\n`curl -X GET \"http://localhost:8090/coffee\"\
+    \ -H \"accept: application/json\" -d \"{}\"`{{execute T3}}\n\nYou should see the\
+    \ following output:\n\n```console\n[{\"id\":1,\"name\":\"espresso-arabica\",\"\
+    description\":\"arabica beans\",\"price\":2.0},{\"id\":2,\"name\":\"espresso-robusta\"\
+    ,\"description\":\"robusta beans\",\"price\":2.0},{\"id\":3,\"name\":\"latte-arabica\"\
+    ,\"description\":\"arabica beans, full fat bio milk\",\"price\":3.0}]\n```\n\n\
+    # Congratulations!\n\nYou've seen how to create the skeleton of basic Kogito app,\
+    \ package it and start it up very quickly in `quarkus:dev` mode. We'll leave the\
+    \ app running and rely on hot reload for the next steps.\n\nIn the next step we'll\
+    \ create a BPMN2 process definition to demonstrate Kogito's code generation, hot-reload\
+    \ and workflow capabilities.\n"
+  difficulty: basic
+  slug: 01-create-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "In the previous step we've created a skeleton Kogito application with\
+    \ Quarkus. In this step we'll create the initial part of our _coffeeshop_ process.\
+    \ This will be a very simple process that only retrieves the available types of\
+    \ coffees from the _CoffeeMenuService_. This scenario is only intended to demonstrate\
+    \ the capabilities of Kogito. The rest of our _coffeeshop process_ would for example\
+    \ include a _UserTask_ to select the type of coffee, selection of a payment method,\
+    \ integration with an external payment provider, and an event to the barista to\
+    \ make the requested coffee.\n\n## Create a process definition\n\nLet\u2019s modify\
+    \ the application and add our simple _coffeeshop process_.\n\nWe create a simple\
+    \ process that will look like this:\n\n![Process](/openshift/assets/middleware/middleware-kogito/kogito-rest-coffeeshop-process.png)\n\
+    \nClick the following path to open a new _coffeeshop process_ BPMN2 file: `coffeeshop/src/main/resources/coffeeshop-process.bpmn`{{open}}\n\
+    \nBPMN2 allows us to define a graphical representation of a process (or workflow),\
+    \ and as such, we need a BPMN2 editor to implement our process. Kogito provides\
+    \ an online BPMN2 editor that we can use to build our process.\n\nClick on the\
+    \ \"Kogito BPMN Tooling\" tab next to the \"OpenShift Console\" tab to open the\
+    \ Kogito BPMN Tooling, or navigate to: https://bpmn.new\n\nImplement the process\
+    \ as follows (note that we can also bypass this step and simply copy the pre-made\
+    \ BPMN2 file provided below):\n\n* Click the pencil icon on the right-hand-side\
+    \ of the screen to open the property panel. Set the following name, id and package:\n\
+    ** Name: `coffeeshop`\n** ID: `coffeeshop`\n** Package: `org.acme`\n* Expand the\
+    \ _Process Data_ section and add the following _Process Variable_:\n** Name: `coffees`\n\
+    ** Data Type: `java.util.Collection`\n* Add the tag `output` to this variable.\
+    \ This controls, among other things, the generation of our RESTful API. I.e.,\
+    \ a variable tagged with `output` will not be part of the input model, and thus\
+    \ does not need to be passed when starting a process. It is however part of the\
+    \ output model, and hence will be returned to the client as a response of the\
+    \ RESTful call.\n* Create a StartEvent node.\n* Create a Service Task node.\n\
+    * Connect the Service Task node to the StartEvent.\n* Give the Service Task node\
+    \ the name: \"Get Coffee Menu\"\n* With the Service Task selected, open the property\
+    \ panel on the right-hand-side of the screen by clicking the pencil icon.\n* Expand\
+    \ the _Implementation/Execution_ section. Set the following values:\n** Implementation:\
+    \ `Java`\n** Interface: `org.acme.service.CoffeeService`\n** Operation: `getCoffees`\n\
+    ** Assignments: See image below\n\n![GetCoffees Input Output](/openshift/assets/middleware/middleware-kogito/kogito-coffee-process-getcoffee-data-assignment.png)\n\
+    \n* Create an EndEvent node and connect it to the Service Task node.\n\nAfter\
+    \ we've defined our process, click on the **File Actions -> Copy source** button\
+    \ to copy the BPMN2 XML definition to our clipboard.\n\nCopy the content of our\
+    \ clipboard to the `coffeeshop/src/main/resources/coffeeshop-process.bpmn` file\
+    \ we've created and opened earlier using `Ctrl+v ` or `Command-v` (depending on\
+    \ your type of computer).\n\nAlternatively, we copy the following BPMN2 definition\
+    \ to the BPMN file:\n\n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/resources/coffeeshop-process.bpmn\"\
+    \ data-target=\"replace\">\n&lt;bpmn2:definitions xmlns:bpmn2=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;\
+    \ xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot; xmlns:bpsim=&quot;http://www.bpsim.org/schemas/1.0&quot;\
+    \ xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot; xmlns:di=&quot;http://www.omg.org/spec/DD/20100524/DI&quot;\
+    \ xmlns:drools=&quot;http://www.jboss.org/drools&quot; id=&quot;_F5Ou4HNMEDig17XG0NHLjQ&quot;\
+    \ exporter=&quot;jBPM Process Modeler&quot; exporterVersion=&quot;2.0&quot; targetNamespace=&quot;http://www.omg.org/bpmn20&quot;&gt;\n\
+    \  &lt;bpmn2:itemDefinition id=&quot;_coffeesItem&quot; structureRef=&quot;java.util.Collection&quot;/&gt;\n\
+    \  &lt;bpmn2:itemDefinition id=&quot;__3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_coffeesOutputXItem&quot;\
+    \ structureRef=&quot;java.util.Collection&quot;/&gt;\n  &lt;bpmn2:interface id=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_ServiceInterface&quot;\
+    \ name=&quot;org.acme.service.CoffeeService&quot; implementationRef=&quot;org.acme.service.CoffeeService&quot;&gt;\n\
+    \    &lt;bpmn2:operation id=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_ServiceOperation&quot;\
+    \ name=&quot;getCoffees&quot; implementationRef=&quot;getCoffees&quot;/&gt;\n\
+    \  &lt;/bpmn2:interface&gt;\n  &lt;bpmn2:process id=&quot;coffeeshop&quot; drools:packageName=&quot;org.acme&quot;\
+    \ drools:version=&quot;1.0&quot; drools:adHoc=&quot;false&quot; name=&quot;coffeeshop&quot;\
+    \ isExecutable=&quot;true&quot; processType=&quot;Public&quot;&gt;\n    &lt;bpmn2:property\
+    \ id=&quot;coffees&quot; itemSubjectRef=&quot;_coffeesItem&quot; name=&quot;coffees&quot;&gt;\n\
+    \      &lt;bpmn2:extensionElements&gt;\n        &lt;drools:metaData name=&quot;customTags&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[output]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n      &lt;/bpmn2:extensionElements&gt;\n  \
+    \  &lt;/bpmn2:property&gt;\n    &lt;bpmn2:sequenceFlow id=&quot;_323FD4C9-FC3D-404F-9156-E3F83B45A799&quot;\
+    \ sourceRef=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot; targetRef=&quot;_D74E4311-5CAB-4CBE-9B83-C12961961633&quot;&gt;\n\
+    \      &lt;bpmn2:extensionElements&gt;\n        &lt;drools:metaData name=&quot;isAutoConnection.source&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[true]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n        &lt;drools:metaData name=&quot;isAutoConnection.target&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[true]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n      &lt;/bpmn2:extensionElements&gt;\n  \
+    \  &lt;/bpmn2:sequenceFlow&gt;\n    &lt;bpmn2:sequenceFlow id=&quot;_00AB4A77-D70F-4086-8BA6-57DD017A5323&quot;\
+    \ sourceRef=&quot;_75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73&quot; targetRef=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot;&gt;\n\
+    \      &lt;bpmn2:extensionElements&gt;\n        &lt;drools:metaData name=&quot;isAutoConnection.source&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[true]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n        &lt;drools:metaData name=&quot;isAutoConnection.target&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[true]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n      &lt;/bpmn2:extensionElements&gt;\n  \
+    \  &lt;/bpmn2:sequenceFlow&gt;\n    &lt;bpmn2:endEvent id=&quot;_D74E4311-5CAB-4CBE-9B83-C12961961633&quot;&gt;\n\
+    \      &lt;bpmn2:incoming&gt;_323FD4C9-FC3D-404F-9156-E3F83B45A799&lt;/bpmn2:incoming&gt;\n\
+    \    &lt;/bpmn2:endEvent&gt;\n    &lt;bpmn2:serviceTask id=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot;\
+    \ drools:serviceimplementation=&quot;Java&quot; drools:serviceinterface=&quot;org.acme.service.CoffeeService&quot;\
+    \ drools:serviceoperation=&quot;getCoffees&quot; name=&quot;Get Coffee Menu&quot;\
+    \ implementation=&quot;Java&quot; operationRef=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_ServiceOperation&quot;&gt;\n\
+    \      &lt;bpmn2:extensionElements&gt;\n        &lt;drools:metaData name=&quot;elementname&quot;&gt;\n\
+    \          &lt;drools:metaValue&gt;&lt;![CDATA[Get Coffee Menu]]&gt;&lt;/drools:metaValue&gt;\n\
+    \        &lt;/drools:metaData&gt;\n      &lt;/bpmn2:extensionElements&gt;\n  \
+    \    &lt;bpmn2:incoming&gt;_00AB4A77-D70F-4086-8BA6-57DD017A5323&lt;/bpmn2:incoming&gt;\n\
+    \      &lt;bpmn2:outgoing&gt;_323FD4C9-FC3D-404F-9156-E3F83B45A799&lt;/bpmn2:outgoing&gt;\n\
+    \      &lt;bpmn2:ioSpecification&gt;\n        &lt;bpmn2:dataOutput id=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_coffeesOutputX&quot;\
+    \ drools:dtype=&quot;java.util.Collection&quot; itemSubjectRef=&quot;__3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_coffeesOutputXItem&quot;\
+    \ name=&quot;coffees&quot;/&gt;\n        &lt;bpmn2:outputSet&gt;\n          &lt;bpmn2:dataOutputRefs&gt;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_coffeesOutputX&lt;/bpmn2:dataOutputRefs&gt;\n\
+    \        &lt;/bpmn2:outputSet&gt;\n      &lt;/bpmn2:ioSpecification&gt;\n    \
+    \  &lt;bpmn2:dataOutputAssociation&gt;\n        &lt;bpmn2:sourceRef&gt;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_coffeesOutputX&lt;/bpmn2:sourceRef&gt;\n\
+    \        &lt;bpmn2:targetRef&gt;coffees&lt;/bpmn2:targetRef&gt;\n      &lt;/bpmn2:dataOutputAssociation&gt;\n\
+    \    &lt;/bpmn2:serviceTask&gt;\n    &lt;bpmn2:startEvent id=&quot;_75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73&quot;&gt;\n\
+    \      &lt;bpmn2:outgoing&gt;_00AB4A77-D70F-4086-8BA6-57DD017A5323&lt;/bpmn2:outgoing&gt;\n\
+    \    &lt;/bpmn2:startEvent&gt;\n  &lt;/bpmn2:process&gt;\n  &lt;bpmndi:BPMNDiagram&gt;\n\
+    \    &lt;bpmndi:BPMNPlane bpmnElement=&quot;coffeeshop&quot;&gt;\n      &lt;bpmndi:BPMNShape\
+    \ id=&quot;shape__75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73&quot; bpmnElement=&quot;_75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73&quot;&gt;\n\
+    \        &lt;dc:Bounds height=&quot;56&quot; width=&quot;56&quot; x=&quot;176&quot;\
+    \ y=&quot;198&quot;/&gt;\n      &lt;/bpmndi:BPMNShape&gt;\n      &lt;bpmndi:BPMNShape\
+    \ id=&quot;shape__3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot; bpmnElement=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot;&gt;\n\
+    \        &lt;dc:Bounds height=&quot;90&quot; width=&quot;195&quot; x=&quot;326&quot;\
+    \ y=&quot;181&quot;/&gt;\n      &lt;/bpmndi:BPMNShape&gt;\n      &lt;bpmndi:BPMNShape\
+    \ id=&quot;shape__D74E4311-5CAB-4CBE-9B83-C12961961633&quot; bpmnElement=&quot;_D74E4311-5CAB-4CBE-9B83-C12961961633&quot;&gt;\n\
+    \        &lt;dc:Bounds height=&quot;56&quot; width=&quot;56&quot; x=&quot;641&quot;\
+    \ y=&quot;198&quot;/&gt;\n      &lt;/bpmndi:BPMNShape&gt;\n      &lt;bpmndi:BPMNEdge\
+    \ id=&quot;edge_shape__75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73_to_shape__3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot;\
+    \ bpmnElement=&quot;_00AB4A77-D70F-4086-8BA6-57DD017A5323&quot;&gt;\n        &lt;di:waypoint\
+    \ x=&quot;232&quot; y=&quot;226&quot;/&gt;\n        &lt;di:waypoint x=&quot;326&quot;\
+    \ y=&quot;226&quot;/&gt;\n      &lt;/bpmndi:BPMNEdge&gt;\n      &lt;bpmndi:BPMNEdge\
+    \ id=&quot;edge_shape__3CDC6E61-DCC5-4831-8BBB-417CFF517CB0_to_shape__D74E4311-5CAB-4CBE-9B83-C12961961633&quot;\
+    \ bpmnElement=&quot;_323FD4C9-FC3D-404F-9156-E3F83B45A799&quot;&gt;\n        &lt;di:waypoint\
+    \ x=&quot;521&quot; y=&quot;226&quot;/&gt;\n        &lt;di:waypoint x=&quot;732.5&quot;\
+    \ y=&quot;198&quot;/&gt;\n      &lt;/bpmndi:BPMNEdge&gt;\n    &lt;/bpmndi:BPMNPlane&gt;\n\
+    \  &lt;/bpmndi:BPMNDiagram&gt;\n  &lt;bpmn2:relationship type=&quot;BPSimData&quot;&gt;\n\
+    \    &lt;bpmn2:extensionElements&gt;\n      &lt;bpsim:BPSimData&gt;\n        &lt;bpsim:Scenario\
+    \ id=&quot;default&quot; name=&quot;Simulationscenario&quot;&gt;\n          &lt;bpsim:ScenarioParameters/&gt;\n\
+    \          &lt;bpsim:ElementParameters elementRef=&quot;_75AC8C0C-CFBD-4ADF-A3B4-83AB90581A73&quot;&gt;\n\
+    \            &lt;bpsim:TimeParameters&gt;\n              &lt;bpsim:ProcessingTime&gt;\n\
+    \                &lt;bpsim:NormalDistribution mean=&quot;0&quot; standardDeviation=&quot;0&quot;/&gt;\n\
+    \              &lt;/bpsim:ProcessingTime&gt;\n            &lt;/bpsim:TimeParameters&gt;\n\
+    \          &lt;/bpsim:ElementParameters&gt;\n          &lt;bpsim:ElementParameters\
+    \ elementRef=&quot;_3CDC6E61-DCC5-4831-8BBB-417CFF517CB0&quot;&gt;\n         \
+    \   &lt;bpsim:TimeParameters&gt;\n              &lt;bpsim:ProcessingTime&gt;\n\
+    \                &lt;bpsim:NormalDistribution mean=&quot;0&quot; standardDeviation=&quot;0&quot;/&gt;\n\
+    \              &lt;/bpsim:ProcessingTime&gt;\n            &lt;/bpsim:TimeParameters&gt;\n\
+    \            &lt;bpsim:ResourceParameters&gt;\n              &lt;bpsim:Availability&gt;\n\
+    \                &lt;bpsim:FloatingParameter value=&quot;0&quot;/&gt;\n      \
+    \        &lt;/bpsim:Availability&gt;\n              &lt;bpsim:Quantity&gt;\n \
+    \               &lt;bpsim:FloatingParameter value=&quot;0&quot;/&gt;\n       \
+    \       &lt;/bpsim:Quantity&gt;\n            &lt;/bpsim:ResourceParameters&gt;\n\
+    \            &lt;bpsim:CostParameters&gt;\n              &lt;bpsim:UnitCost&gt;\n\
+    \                &lt;bpsim:FloatingParameter value=&quot;0&quot;/&gt;\n      \
+    \        &lt;/bpsim:UnitCost&gt;\n            &lt;/bpsim:CostParameters&gt;\n\
+    \          &lt;/bpsim:ElementParameters&gt;\n        &lt;/bpsim:Scenario&gt;\n\
+    \      &lt;/bpsim:BPSimData&gt;\n    &lt;/bpmn2:extensionElements&gt;\n    &lt;bpmn2:source&gt;_F5Ou4HNMEDig17XG0NHLjQ&lt;/bpmn2:source&gt;\n\
+    \    &lt;bpmn2:target&gt;_F5Ou4HNMEDig17XG0NHLjQ&lt;/bpmn2:target&gt;\n  &lt;/bpmn2:relationship&gt;\n\
+    &lt;/bpmn2:definitions&gt;\n</pre>\n\nNote that we've not yet implemented the\
+    \ required CDI beans, therefore we cannot test our process yet. We will implement\
+    \ this CDI bean in the following step.\n\n## Congratulations!\n\nWe've created\
+    \ the coffeeshop business process in our Kogito application using BPMN2. In the\
+    \ next step, we will implement the CDI bean that our Service Task is referencing.\n"
+  difficulty: basic
+  slug: 02-implement-process
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "In the previous step we added a process definition to our Kogito application\
+    \ that uses a Service Task node to call a CDI bean. In this step we will implement\
+    \ the CDI bean that calls our RESTful service.\n\n# REST Client Dependencies\n\
+    \nWe first add the required dependencies to our pom.xml. Because we will use the\
+    \ `quarkus-rest-client`, we need to add its dependency to our POM.\n\nClick the\
+    \ following command to add the dependencies to our project.\n\n`mvn quarkus:add-extension\
+    \ -Dextensions=io.quarkus:quarkus-rest-client`{{execute T1}}\n\nOpen the `pom.xml`\
+    \ file and observe that the required dependencies have been added: `coffeeshop/pom.xml`{{open}}\n\
+    \n### JAX-RS Client\n\nOur Service Task node in our process will call the method\
+    \ `getCoffees` of a CDI bean called `CoffeeService`. Let's first create the skeleton\
+    \ of that bean.\n\nClick the following command to create the package of the `CoffeeService`\
+    \ bean.\n\n`mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/service`{{execute\
+    \ T3}}\n\nClick the following path to open a new `CoffeeService.java` file: `coffeeshop/src/main/java/org/acme/service/CoffeeService.java`{{open}}\n\
+    \nClick _Copy to Editor_ to copy the source code into the new `CoffeeService.java`file.\n\
+    \n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"replace\">\npackage org.acme.service;\n\nimport java.util.Collection;\n\
+    \nimport javax.enterprise.context.ApplicationScoped;\nimport javax.inject.Inject;\n\
+    \nimport org.acme.coffeeservice.client.CoffeeResource;\nimport org.acme.model.Coffee;\n\
+    \nimport org.eclipse.microprofile.rest.client.inject.RestClient;\n\n@ApplicationScoped\n\
+    public class CoffeeService {\n\n//Add RestClient annotations\n//Add RestClient\
+    \ attribute\n\n    public Collection&lt;Coffee&gt; getCoffees() {\n      return\
+    \ null;\n    }\n\n}\n</pre>\n\nWith the CDI bean skeleton implemented, we can\
+    \ focus on the domain model and the JAX-RS interface from which our rest client\
+    \ is generated.\n\nOur domain model is simply the `Coffee` class that's also used\
+    \ by the CoffeeService we started in the first step. Click the following command\
+    \ to create a new package for our domain class.\n\n`mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/model`{{execute\
+    \ T3}}\n\nClick the following path to create the `Coffee.java` file: `coffeeshop/src/main/java/org/acme/model/Coffee.java`{{open}}\n\
+    \n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/model/Coffee.java\"\
+    \ data-target=\"replace\">\npackage org.acme.model;\n\npublic class Coffee {\n\
+    \n    private long id;\n\n    private String name;\n\n    private String description;\n\
+    \n    private double price;\n\n    public Coffee() {\n    }\n\n    public Coffee(final\
+    \ long id, final String name, final String description, final double price) {\n\
+    \        this.id = id;\n        this.name = name;\n        this.description =\
+    \ description;\n        this.price = price;\n    }\n\n    public long getId()\
+    \ {\n        return id;\n    }\n\n    public String getName() {\n        return\
+    \ name;\n    }\n\n    public String getDescription() {\n        return description;\n\
+    \    }\n\n    public double getPrice() {\n        return price;\n    }\n\n}\n\
+    </pre>\n\nWith our domain model implemented, we can now implement the JAX-RS interface\
+    \ definition. This is actually the same JAX-RS interface definition that is used\
+    \ in the _CoffeeService_. The only difference is that we annotate this interface\
+    \ with the `@RegisterRestClient(configKey = \"coffeeresource\")` annotation to\
+    \ register it as a Rest client.\n\nClick the following command to create the package\
+    \ force our Rest client.\n\n`mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/coffeeservice/client`{{execute\
+    \ T3}}\n\nClick the following path to create the `CoffeeResource.java` interface:\
+    \ `coffeeshop/src/main/java/org/acme/coffeeservice/client/CoffeeResource.java`{{open}}\n\
+    \n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/coffeeservice/client/CoffeeResource.java\"\
+    \ data-target=\"replace\">\npackage org.acme.coffeeservice.client;\n\nimport java.util.Collection;\n\
+    \nimport javax.ws.rs.GET;\nimport javax.ws.rs.Path;\nimport javax.ws.rs.PathParam;\n\
+    import javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\nimport org.acme.model.Coffee;\n\
+    \nimport org.eclipse.microprofile.rest.client.inject.RegisterRestClient;\n\n@RegisterRestClient(configKey\
+    \ = \"coffeeresource\")\n@Path(\"/coffee\")\npublic interface CoffeeResource {\n\
+    \n    @GET\n    @Produces(MediaType.APPLICATION_JSON)\n    public Collection<Coffee>\
+    \ getCoffees();\n\n    @GET\n    @Path(\"/{name}\")\n    @Produces(MediaType.APPLICATION_JSON)\n\
+    \    public Coffee getCoffee(@PathParam(\"name\") String name);\n\n}\n</pre>\n\
+    \nWith our domain model and JAX-RS client interface defined, we can now add the\
+    \ logic to our CDI bean to use the JAX-RS client. Click the following path to\
+    \ re-open the `CoffeeService.java` class: `coffeeshop/src/main/java/org/acme/service/CoffeeService.java`{{open}}\n\
+    \nFirst, we inject the `CoffeeResource` class into the service. Click _Copy to\
+    \ Editor_ to add the `CoffeeResource` attribute to our class (note that this attribute\
+    \ is _package-private_. This is recommended by Quarkus, as this enables Quarkus\
+    \ to do the injection without the need for reflection):\n\n<pre class=\"file\"\
+    \ data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"insert\" data-marker=\"//Add RestClient attribute\">\n    CoffeeResource\
+    \ coffeeResource;\n</pre>\n\nNext, we add the annotations to this attribute to\
+    \ inject the REST client. We need two annotations. First we need the `@Inject`\
+    \ annotation, but because we want to inject the generated REST client project\
+    \ (generated from the JAX-RS interface we created earlier), we also need to add\
+    \ the `@RestClient` annotation. Click `Copy to Editor` to add the annotations.\n\
+    \n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"insert\" data-marker=\"//Add RestClient annotations\">\n    @Inject\n\
+    \    @RestClient\n</pre>\n\nFinally, we call our REST client to retrieve the list\
+    \ of coffees from our service. We add some logging to our application to show\
+    \ that our CDI is actually being called (just for demonstration purposes). Click\
+    \ `Copy to Editor` to add this logic to our service class.\n\n<pre class=\"file\"\
+    \ data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"insert\" data-marker=\"return null;\">\n    System.out.println(\"\
+    Kogito calling our CoffeeService microservice!\");\n    return coffeeResource.getCoffees();\n\
+    </pre>\n\n# Configuring the REST client\nWith our code completed, we now only\
+    \ need to add some configuration options to our `application.properties` file\
+    \ to instruct our REST client which endpoint it needs to call.\n\nClick the following\
+    \ path to open the `application.properties`: `coffeeshop/src/main/resources/application.properties`{{open}}\n\
+    \nClick `Copy to Editor` to add the configuration of the REST client to the `application.properties`\
+    \ file.\n\n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/resources/application.properties\"\
+    \ data-target=\"replace\">\n#\n# Copyright 2020 Red Hat, Inc. and/or its affiliates.\n\
+    #\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you\
+    \ may not use this file except in compliance with the License.\n# You may obtain\
+    \ a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n\
+    #\n# Unless required by applicable law or agreed to in writing, software\n# distributed\
+    \ under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES\
+    \ OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for\
+    \ the specific language governing permissions and\n# limitations under the License.\n\
+    #\n\n#https://quarkus.io/guides/openapi-swaggerui\nquarkus.smallrye-openapi.path=/docs/openapi.json\n\
+    quarkus.swagger-ui.always-include=true\n\nkogito.service.url=http://localhost:8080\n\
+    \n#CoffeeResource\ncoffeeresource/mp-rest/url=http://localhost:8090\ncoffeeresource/mp-rest/scope=javax.inject.Singleton\n\
+    </pre>\n\nNotice that we use the key `coffeeresource` to configure our client,\
+    \ and don't specify its full class name. This is possible because we defined this\
+    \ name as the `configKey` in `@RegisterRestClient` annotation on the JAX-RS interface.\n\
+    \n# Starting the Application\n\nWith our code implemented, click the following\
+    \ command to start the application.\n\n`mvn clean compile quarkus:dev`{{execute\
+    \ T1}}\n\nThis downloads the new dependencies and starts our application in Quarkus\
+    \ development mode.\n\n## Testing the Application\n\nClick the following command\
+    \ to send a request to our application.\n\n`curl -X POST \"http://localhost:8080/coffeeshop\"\
+    \ -H \"accept: application/json\" -H \"Content-Type: application/json\" -d \"\
+    {}\"`{{execute T3}}\n\nWe see the following output in the console:\n\n```console\n\
+    [{\"id\":1,\"name\":\"espresso-arabica\",\"description\":\"arabica beans\",\"\
+    price\":2.0},{\"id\":2,\"name\":\"espresso-robusta\",\"description\":\"robusta\
+    \ beans\",\"price\":2.0},{\"id\":3,\"name\":\"latte-arabica\",\"description\"\
+    :\"arabica beans, full fat bio milk\",\"price\":3.0}]\n```\n\n## Congratulations!\n\
+    \nWe've implemented the MicroProfile JAXRS Rest Client to integrate our Kogito\
+    \ application with another microservice over REST. Well done! In the next step\
+    \ we will change the implementation to use Apache Camel.\n"
+  difficulty: basic
+  slug: 03-implement-jaxrs-client
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "In the previous step we've implemented a RESTful call from a Kogito\
+    \ process to a microservice using the MicroProfile JAX-RS Rest Client. In this\
+    \ step we will replace that implementation with an Apache Camel implementation.\
+    \ The advantage of Camel is that we can:\n\n* Add additional logic to our integration\
+    \ using additional Camel functionality, e.g. marshalling, transformation, routing,\
+    \ error handling, etc.\n* Use the vast array of Camel components to connect to\
+    \ virtually any other external system, e.g. Salesforce, Kafka, Twitter, Filesystems,\
+    \ etc.\n\n# Stop the Application\nBecause we will add a number of Camel dependencies\
+    \ to our application, we must first stop our application.\n\nIn the first terminal,\
+    \ stop the application using `CTRL-C`.\n\n# Camel Dependencies\n\nWe add the required\
+    \ dependencies to our pom.xml. Because we will use the `netty-http` Camel component,\
+    \ we add its dependency to our POM. We will also use `camel-direct` to call the\
+    \ Camel Route from our CDI bean, and `jackson` to support marshalling and unmarshalling\
+    \ in our route.\n\nClick the following command to add the dependencies to our\
+    \ project:\n\n`mvn quarkus:add-extension -Dextensions=org.apache.camel.quarkus:camel-quarkus-netty-http,org.apache.camel.quarkus:camel-quarkus-jackson,org.apache.camel.quarkus:camel-quarkus-direct`{{execute\
+    \ T1}}\n\nClick the following path to open the `pom.xml` file and observe that\
+    \ the required dependencies have been added: `coffeeshop/pom.xml`{{open}}\n\n\
+    ### Camel RouteBuilder\n\nWe will now implement the Camel `RouteBuilder`. In the\
+    \ `RouteBuilder` we implement the Camel route that, in our case, will do a RESTful\
+    \ call to our CoffeeService microservice, and process the response.\n\nClick the\
+    \ following command to create a new package in which we create our RouteBuilder:\n\
+    \n`mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/camel`{{execute\
+    \ T3}}\n\nClick on the following path to create the `CoffeeRouteBuilder.java`\
+    \ file: `coffeeshop/src/main/java/org/acme/camel/CoffeeRouteBuilder.java`{{open}}\n\
+    \nClick _Copy to Editor_ to implement the `CoffeeRouteBuilder`.\n\n<pre class=\"\
+    file\" data-filename=\"./coffeeshop/src/main/java/org/acme/camel/CoffeeRouteBuilder.java\"\
+    \ data-target=\"replace\">\npackage org.acme.camel;\n\nimport javax.enterprise.context.ApplicationScoped;\n\
+    import javax.ws.rs.core.MediaType;\n\nimport org.acme.model.Coffee;\n\nimport\
+    \ org.apache.camel.builder.RouteBuilder;\nimport org.apache.camel.component.jackson.JacksonDataFormat;\n\
+    import org.apache.camel.component.jackson.ListJacksonDataFormat;\n\n@ApplicationScoped\n\
+    public class CoffeeRouteBuilder extends RouteBuilder {\n\n    @Override\n    public\
+    \ void configure() throws Exception {        \n\n        JacksonDataFormat format\
+    \ = new ListJacksonDataFormat(Coffee.class);\n\n        from(\"direct://getCoffees\"\
+    ).log(\"Get Coffee Route Triggered: ${body}\")\n        .setHeader(\"Accept\"\
+    ).constant(MediaType.APPLICATION_JSON)\n        .setHeader(\"CamelHttpMethod\"\
+    ).constant(\"GET\")\n        .to(\"netty-http:http://localhost:8090/coffee\")\n\
+    \        .unmarshal(format);\n\n    }\n\n}\n</pre>\n\nThe route is pretty simple.\
+    \ It accepts an exchange (message) from a \"direct\" endpoint (which allows us\
+    \ to call this endpoint from our CDI bean), it sets the required HTTP headers\
+    \ (`Accept`), it sets the HTTP method that we want to use, and uses the `netty-http`\
+    \ component to do a call to our CoffeeService. Finally, the response is unmarshalled\
+    \ into a `Collection` of `Coffee` instances using the `JacksonDataFormat` instance.\n\
+    \nWith our route implemented, we can change our `CoffeeService` implementation\
+    \ to use our Camel route. To do this, click _Copy to Editor_ to replace our old\
+    \ implementation with a new following skeleton implementation.\n\n<pre class=\"\
+    file\" data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"replace\">\npackage org.acme.service;\n\nimport java.util.Collection;\n\
+    \nimport javax.annotation.PostConstruct;\nimport javax.annotation.PreDestroy;\n\
+    import javax.enterprise.context.ApplicationScoped;\nimport javax.inject.Inject;\n\
+    \nimport org.acme.coffeeservice.client.CoffeeResource;\nimport org.acme.model.Coffee;\n\
+    \nimport org.apache.camel.CamelContext;\nimport org.apache.camel.FluentProducerTemplate;\n\
+    \nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\n\n@ApplicationScoped\n\
+    public class CoffeeService {\n\n    private static final Logger LOGGER = LoggerFactory.getLogger(CoffeeService.class);\n\
+    \n//Add CamelContext\n\n//Add FluentProducerTemplate\n\n//Add PostConstruct\n\n\
+    //Add PreDestroy\n\n    public Collection<Coffee> getCoffees() {\n        LOGGER.debug(\"\
+    Retrieving coffees\");\n//Add Method Implementation\n    }\n\n}\n\n</pre>\n\n\n\
+    Click _Copy to Editor_ to copy the code snippet that injects the `CamelContext`\
+    \ into the service class:\n\n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"insert\" data-marker=\"//Add CamelContext\">\n    @Inject\n  \
+    \  CamelContext camelContext;\n</pre>\n\nClick _Copy to Editor_ to add an attribute\
+    \ to our class to hold the `FluentProducerTemplate`.\n\n<pre class=\"file\" data-filename=\"\
+    ./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\" data-target=\"\
+    insert\" data-marker=\"//Add FluentProducerTemplate\">\n    private FluentProducerTemplate\
+    \ producer;\n</pre>\n\nClick _Copy to Editor_ to add the `@PostConstruct` method,\
+    \ in which the `FluentProducerTemplate` is initialized and its default endpoint\
+    \ is set:\n\n<pre class=\"file\" data-filename=\"./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\"\
+    \ data-target=\"insert\" data-marker=\"//Add PostConstruct\">\n    @PostConstruct\n\
+    \    void init() {\n       producer = camelContext.createFluentProducerTemplate();\n\
+    \       producer.setDefaultEndpointUri(\"direct://getCoffees\");\n    }\n</pre>\n\
+    \nClick _Copy to Editor_ to add the `@PreDestroy` method which cleans-up the `ProducerTemplate`\
+    \ resources when the bean is destroyed:\n\n<pre class=\"file\" data-filename=\"\
+    ./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\" data-target=\"\
+    insert\" data-marker=\"//Add PreDestroy\">\n    @PreDestroy\n    void destroy()\
+    \ {\n      producer.stop();\n    }\n</pre>\n\nWith all the plumbing in place,\
+    \ click _Copy to Editor_ to implement the method which calls the Camel route,\
+    \ which in its turn calls the microservice via REST:\n\n<pre class=\"file\" data-filename=\"\
+    ./coffeeshop/src/main/java/org/acme/service/CoffeeService.java\" data-target=\"\
+    insert\" data-marker=\"//Add Method Implementation\">\n    return producer.request(Collection.class);\n\
+    </pre>\n\n\n# Starting the Application\n\nClick on the following command to start\
+    \ the application again:\n\n`mvn clean compile quarkus:dev`{{execute T1}}\n\n\
+    This downloads the new dependencies and starts our application in Quarkus development\
+    \ mode.\n\n## Testing the Application\n\nClick on the following command to send\
+    \ a request to test our application.\n\n`curl -X POST \"http://localhost:8080/coffeeshop\"\
+    \ -H \"accept: application/json\" -H \"Content-Type: application/json\" -d \"\
+    {}\"`{{execute T3}}\n\nWe should see the following output in the console:\n\n\
+    ```console\n[{\"id\":1,\"name\":\"espresso-arabica\",\"description\":\"arabica\
+    \ beans\",\"price\":2.0},{\"id\":2,\"name\":\"espresso-robusta\",\"description\"\
+    :\"robusta beans\",\"price\":2.0},{\"id\":3,\"name\":\"latte-arabica\",\"description\"\
+    :\"arabica beans, full fat bio milk\",\"price\":3.0}]\n```\n\n## Congratulations!\n\
+    \nWe've implemented the integration with our CoffeeService using Apache Camel's\
+    \ `netty-http` component. Well done!\n"
+  difficulty: basic
+  slug: 04-implement-camel-client
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: rest-service-integration
+tags:
+- openshift
+title: Orchestrating RESTful Services with Kogito
+type: truck

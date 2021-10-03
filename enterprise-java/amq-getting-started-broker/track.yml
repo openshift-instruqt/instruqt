@@ -1,0 +1,274 @@
+challenges:
+- assignment: "To get started, first we need to login to OpenShift.\n\n### Logging\
+    \ in to the Cluster via OpenShift CLI\n\nTo login to the OpenShift cluster use\
+    \ the following commmand in your **_Terminal_**:\n\n```\noc login -u admin -p\
+    \ admin`\n```\n\n> You can click on the above command (and all others in this\
+    \ scenario) to automatically copy it into the terminal and execute it.\n\nThis\
+    \ will log you in using the credentials:\n\n* **Username:** ``admin``\n* **Password:**\
+    \ ``admin``\n\nYou should see the output:\n\n```bash\nLogin successful.\n\nYou\
+    \ don't have any projects. You can try to create a new project, by running\n\n\
+    \    oc new-project <projectname>\n```\n\nFor this scenario lets create a project\
+    \ called ``messaging`` by running the command:\n\n```\noc new-project messaging`\n\
+    ```\n\nYou should see output similar to:\n\n```bash\nNow using project \"messaging\"\
+    \ on server \"https://172.17.0.41:8443\".\n\nYou can add applications to this\
+    \ project with the 'new-app' command. For example, try:\n\n    oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git\n\
+    \nto build a new example application in Ruby. Or use kubectl to deploy a simple\
+    \ Kubernetes application:\n\n    kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node\n\
+    ```\n\n### Install AMQ broker operator\n\nAMQ Broker provides container images\
+    \ and Operators for running ActiveMQ Artemis on OpenShift.\n\nDeploy the Operator\
+    \ Lifecycle Manager Operator Group and Susbcription to easily install the operator\
+    \ in the previously created namespace:\n\n```\noc -n messaging apply -f /opt/operator-install.yaml`\n\
+    ```\n\nYou should see the following result:\n\n```bash\noperatorgroup.operators.coreos.com/broker-operatorgroup\
+    \ created\nsubscription.operators.coreos.com/amq-broker created\n```\n\n> You\
+    \ can also deploy the AMQ broker operator from the OpenShift OperatorHub from\
+    \ within the administration console.\n\n### Check operator deployment\n\nFollow\
+    \ up the operator deployment to validate it is running.\n\nTo watch the pods status\
+    \ run the following command:\n\n```\noc -n messaging get pods -w`\n```\n\nYou\
+    \ will see the status of the operator changing until it gets to `running`. It\
+    \ should look similar to the following:\n\n```bash\nNAME                     \
+    \             READY   STATUS              RESTARTS   AGE\namq-broker-operator-6c76986f9-bsrcv\
+    \   0/1     ContainerCreating   0          1s\namq-broker-operator-6c76986f9-bsrcv\
+    \   0/1     ContainerCreating   0          2s\namq-broker-operator-6c76986f9-bsrcv\
+    \   0/1     ContainerCreating   0          7s\namq-broker-operator-6c76986f9-bsrcv\
+    \   1/1     Running             0          23s\n```\n\nHit <kbd>Ctrl</kbd>+<kbd>C</kbd>\
+    \ to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\nIn the next step, you will\
+    \ deploy a new instance of the AMQ broker.\n"
+  difficulty: basic
+  slug: 01-creating-an-initial-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Creating an Initial Project
+  type: challenge
+- assignment: 'With the project space now available, let''s create the broker instance.
+
+
+    ### Inspect the ActiveMQArtermis custom resource
+
+
+    Click the link below to open the custom resource (CR) definition for the cluster:
+
+
+    * `amq-broker.yaml`{{open}}
+
+
+    As you can see, we are enabling just one single acceptor and configuring it to
+    accept incomming `AMQP` connections in the default `5672` port.
+
+
+    We are also enabling the _console_ and exposing the endpoints for external access
+    too.
+
+
+    ### Creating an AMQ broker
+
+
+    Switch to the application directory in the command line by issuing the following
+    command:
+
+
+    ```cd /root/projects/amq-examples/amq-js-demo```{{execute interrupt}}
+
+
+    Create a new broker using the OpenShift command:
+
+
+    ```
+
+    oc -n messaging apply -f amq-broker.yaml`
+
+    ```
+
+
+    This command will create a broker customer resource, the operator then will take
+    notice of the desired state and will create the required deployment and resources
+    missing to run a new instance.
+
+
+    You should see the output:
+
+
+    ```bash
+
+    activemqartemis.broker.amq.io/broker created
+
+    ```
+
+
+    ### Check broker deployment
+
+
+    Follow up the AMQ broker deployment to validate it is running.
+
+
+    To watch the pods status run the following command:
+
+
+    ```
+
+    oc -n messaging get pods -w`
+
+    ```
+
+
+    You will see the pod for the broker StatefulSet changing the status to `running`.
+    It should look similar to the following:
+
+
+    ```bash
+
+    NAME                                  READY   STATUS              RESTARTS   AGE
+
+    amq-broker-operator-6c76986f9-brl67   1/1     Running             0          15m
+
+    broker-ss-0                           0/1     ContainerCreating   0          5s
+
+    broker-ss-0                           0/1     ContainerCreating   0          6s
+
+    broker-ss-0                           0/1     Running             0          25s
+
+    broker-ss-0                           1/1     Running             0          57s
+
+    ```
+
+
+    Hit <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+
+    `^C`{{execute ctrl-seq}}
+
+
+    When the provisioning of the broker finishes, you will be set to start using the
+    service. In the next step you will deploy a simple messging application.
+
+    '
+  difficulty: basic
+  slug: 02-create-broker-instance
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Deploying a Broker Instance
+  type: challenge
+- assignment: "The sample project in the upper right part side of the screen, shows\
+    \ the components of your sample Node.js project. This project uses [Red Hat Runtimes](https://developers.redhat.com/appruntimes),\
+    \ a set of open source cloud native application runtimes for modern applications.\n\
+    \nThe app implements a simple messaging greeting service that simply sends a Hello\
+    \ World! to a queue and the same application listens in the same queue for greeting\
+    \ messages. We use the Red Hat AMQ JavaScript Client to create a connection to\
+    \ the messaging broker to send and receive messages.\n\n> The AMQ Clients is a\
+    \ suite of AMQP 1.0 messaging APIs that allow you to make any application a messaging\
+    \ application. It includes both industry-standard APIs such as JMS and new event-driven\
+    \ APIs that make it easy to integrate messaging anywhere. The AMQ Javascript Client\
+    \ is based on the [AMQP Rhea Project](https://github.com/amqp/rhea).\n\n### Inspect\
+    \ the application code\n\nClick the links below to open each file and inspect\
+    \ its contents:\n\n* `package.json`{{open}} - Metadata about the project: name,\
+    \ version, dependencies, and other information needed to build and maintain the\
+    \ project.\n* `app.js`{{open}} - Main logic of the sample application.\n\n###\
+    \ Install Dependencies\n\nDependencies are listed in the `package.json` file and\
+    \ declare which external projects this sample app requires.\nTo download and install\
+    \ them, run the following command:\n\n``npm install``{{execute interrupt}}\n\n\
+    It will take a few seconds to download, and you should see a final report such\
+    \ as \n\n```bash\nadded 140 packages in 2.937s\n```\n\n### Deploy\n\nBuild and\
+    \ deploy the project using the following command:\n\n```\nnpm run openshift``\n\
+    ```\n\n> This uses NPM and the [Nodeshift](https://github.com/bucharest-gold/nodeshift)\
+    \ project to build and deploy the sample application to OpenShift using the containerized\
+    \ Node.js runtime.\n\nThe build and deploy may take a minute or two. Wait for\
+    \ it to complete.\n\nYou should see `INFO complete` at the end of the build output,\
+    \ and you should not see any obvious errors or failures.\n\n### Check application\
+    \ deployment\n\nFollow up the application deployment to validate it is running.\n\
+    \nTo watch the pods status run the following command:\n\n```\noc -n messaging\
+    \ get pods -w`\n```\n\nYou will see the pod for the application changing the status\
+    \ to `running`. It should look similar to the following:\n\n```bash\nNAME    \
+    \                              READY   STATUS      RESTARTS   AGE\namq-broker-operator-6c76986f9-6vjhj\
+    \   1/1     Running     0          6m5s\namq-js-demo-1-deploy                \
+    \  0/1     Completed   0          32s\namq-js-demo-1-dftm4                   1/1\
+    \     Running     0          26s\namq-js-demo-s2i-1-build               0/1  \
+    \   Completed   0          90s\nbroker-ss-0                           1/1    \
+    \ Running     0          4m46s\n```\n\nHit <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop\
+    \ the process.\n\n`^C`{{execute ctrl-seq}}\n\nIn the next step you will check\
+    \ your application is running.\n"
+  difficulty: basic
+  slug: 03-simple-client
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Creating a Simple Messaging Application
+  type: challenge
+- assignment: 'After the previous step build finishes, it will take less than a minute
+    for the application to become available.
+
+
+    ### Check the application logs
+
+
+    Now that the application is up and running you can check the logs to check how
+    is everything going on.
+
+
+    Let''s use the OpenShift CLI tool to connect with the deployment and view the
+    pod''s log.
+
+
+    Use the following command to retrieve the logs:
+
+
+    `oc -n messaging logs -f dc/amq-js-demo`{{execute interrupt}}
+
+
+    You will see a message every 10 seconds with the following text:
+
+
+    ``Message received: {"id":1,"text":"Hello World!","timestamp":1605814628546}``
+
+
+    This message is been sent and received to the ``example`` queue by the application
+    you just deployed.
+
+    '
+  difficulty: basic
+  slug: 04-running-application
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Access the application running on OpenShift
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: amq-getting-started-broker
+tags:
+- openshift
+title: Application Messaging with Openshift
+type: truck

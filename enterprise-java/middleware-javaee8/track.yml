@@ -1,0 +1,716 @@
+challenges:
+- assignment: '**Background**
+
+
+    To help illustrate the most common features of Jakarta EE 8, you will build a
+    web application called "Weather App". The application allows users to see weather
+    information in the largest cities per country.
+
+
+    ![The Weather App](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/weather-app.png)
+
+
+    A user can switch country by clicking on one of the flags in the menu.
+
+
+    ![The Weather App](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/flags.png)
+
+
+    To save time there is a skeleton project with a prototype version that returns
+    a hard-coded list of cities. What you will achieve are:
+
+
+    1.  Deploy the prototype to OpenShift
+
+    2. Read the weather information from a database (internal at first)
+
+    3. Allow the user to choose a country
+
+    4. Connect the application to an external database with weather information
+
+
+    ### Review the current state of the prototype app
+
+
+    **Front-end**
+
+    The web application is a single page `./src/main/webapp/index.html`{{open}}.  In
+    short, the front-end uses Bootstrap and jQuery. It uses REST to contact the back-end.
+
+
+    **Domain model**
+
+    Two Java classes represent the domain model for our application, `src/main/java/com/redhat/example/weather/Country.java`{{open}}
+    and `src/main/java/com/redhat/example/weather/City.java`{{open}}.
+
+
+    ![The Weather App](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/domain-model.png)
+
+
+    **REST application using JAX-RS**
+
+    The prototype already implements a simple REST based service to allow the front-end
+    to retrieve a country object with a list of cities to display. To enable JAX-RS
+    it''s required to provide a class that extends the `javax.ws.rs.core.Application`  and
+    configure the base URI (path) that is used to expose services. In the prototype,
+    this is done in the `src/main/java/com/redhat/example/weather/RestApplication.java`{{open}}.
+    In that class, we set the base URI to `/api`, which means that any call to the
+    back-end using that URI is routed to the JAX-RS subsystem.
+
+
+    **Weather REST Service**
+
+    The current weather service `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}
+    already implement a simple REST service using JAX-RS and returns a List with one
+    country that is currently hard-coded. We will change that later in this service.
+
+
+    **User state**
+
+    Finally, for convenience, the prototype also includes `src/main/java/com/redhat/example/weather/SelectedCountry.java`{{open}}
+    . This class is not in use at the moment, but we will make use of it later. The
+    class is annotated with `@SessionScope` which tells the application server that
+    the state of this class should be stored in the session scope. E.g., the state
+    is maintained between different requests from the front-end to the back-end. However,
+    if the user closes the browser or is inactive for too long, the state is removed.
+    Using the session is a convenient way to store temporary state for a user that
+    is ephemeral. For a persistent state, a database is typically used.
+
+
+    **Build configuration**
+
+    The prototype also includes build configuration in the `pom.xml`{{open}}. The
+    build configuration is pretty simple but does include the `wildfly-maven-plugin`.
+    Since we will be deploying to OpenShift, we will not use that plugin, but it''s
+    included here if you would like to use this project as a base for local development.
+
+
+    ### Summary
+
+    If you are new to Jakarta EE development, the prototype might seem to include
+    a lot "magic", but most of the code in here is normal Java and should be familiar
+    if you have developed Java applications before. The reason we are providing this
+    prototype is to be able to focus on Jakarta EE as quickly as possible and not
+    spend time with setup.
+
+
+    The code for the prototype is available [here](https://github.com/openshift-katacoda/rhoar-getting-started/tree/master/javaee/weather-app)
+    and the `solution` branch contains the finished application.
+
+    '
+  difficulty: intermediate
+  slug: 01-review-the-weather-app
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Review the weather application
+  type: challenge
+- assignment: '# Deploy to OpenShift
+
+
+    An appropriate Java runtime has been installed for you for building the app. Ensure
+    you can use it by running this command:
+
+
+    > If the command fails, wait a few moments and try again (it is installed in a
+    background process and make take a few moments depending on system load).
+
+
+    ```
+
+    $JAVA_HOME/bin/java --version
+
+    ```
+
+
+    The command should report the version in use, for example (the versions and dates
+    may be slightly different than the below example):
+
+
+    ```console
+
+    openjdk 11.0.10 2021-01-19
+
+    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+
+    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+
+    ```
+
+
+    **Red Hat OpenShift Container Platform** is the preferred cloud runtime for JBoss
+    EAP
+
+    OpenShift Container Platform is based on **Kubernetes** which is the most used
+    Orchestration for containers running in production. We assume you understand the
+    basics of OpenShift, if not, please complete [Introduction to OpenShift]( https://learn.openshift.com/introduction/)
+    course and come back here.
+
+
+    **1. Login to OpenShift Container Platform**
+
+
+    To authenticate to the OpenShift Container Platform, we will use the **oc** command
+    and then specify the server that we
+
+    want to authenticate to:
+
+
+    ```
+
+    oc login -u developer -p developer``
+
+    ```
+
+
+
+    Congratulations, you are now authenticated to the OpenShift server.
+
+
+
+    **2. Create project**
+
+
+    For this scenario, you will build a REST service that manages products that we
+    deploy on OpenShift.
+
+
+    ```
+
+    oc new-project my-project --display-name="Weather App"
+
+    ```
+
+
+    ```
+
+
+    **3. Open the OpenShift Web Console**
+
+
+    As you probably know, OpenShift ships with a web-based console that will allow
+    users to perform various tasks via a browser. To get a feel for how the web console
+    works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
+
+
+    ![OpenShift Console Tab](/openshift/assets/middleware/middleware-javaee8/openshift-console-tab.png)
+
+
+    The first screen you will see is the authentication screen. Enter your username
+    and password and
+
+    then login:
+
+
+    ![Web Console Login](/openshift/assets/middleware/middleware-javaee8/login.png)
+
+
+    * Username: `developer`
+
+    * Password: `developer`
+
+
+    After you have authenticated to the web console, click **Skip Tour** to bypass
+    the initial new user tour (feel free to visit it later on). After that, you will
+    be on the initial screen listing the projects you''re able to work with, including
+    your newly created _my-project_.
+
+
+    ![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/projects.png)
+
+
+    Click on your new project name to be taken to the project topology page which
+    will initially be empty ("No resources found") but that''s about to change.
+
+
+    Now that you''ve logged into OpenShift, let''s deploy a single JBoss EAP instance.
+    The deployed JBoss EAP instance will in this step not be connected to a database,
+    but we will see an example of that in a later scenario.
+
+
+    **3. Deploy JBoss EAP image**
+
+
+    To deploy our application we first have to create a container. JBoss EAP comes
+    with a S2I image that packages all the binaries that are needed at runtime. S2I
+    stands for Source-To-Image and is a convenient way for developers to provide either
+    an artifact (E.g. WAR, JAR, etc) or the source code directly and OpenShift will
+    then build a container image for you, so there is no need to have a local container
+    build system and as a developer you do not have to care about patching and maintaining
+    the base image.
+
+
+    We will use the following command to create a build configuration in OpenShift:
+
+
+    ```
+
+    oc new-build jboss-eap73-openjdk11-openshift:7.3 --binary=true --name=weather-app
+
+    ```
+
+
+    This command tells openshift to use a base image including JBoss EAP 7.3 with
+    the name `weather-app`  and finally, we tell it to use what is called binary deployment.
+    Binary deployment means that we will build the Java artifacts locally (using maven)
+    and let the S2I process build a container where that artifact is deployed in JBoss
+    EAP.
+
+
+    Now, we need to build the prototype application that we are going to deploy.
+
+
+    First move to the project directory:
+
+
+    ```
+
+    cd ~/projects/rhoar-getting-started/javaee/weather-app
+
+    ```
+
+
+    Now, build the application by executing the following maven command.
+
+
+    ```
+
+    mvn clean package
+
+    ```
+
+
+    We are now ready to upload our artifact (a WAR file) to the build "weather-app"
+    process that we created earlier.
+
+
+    ```
+
+    oc start-build weather-app --from-file=target/ROOT.war --follow
+
+    ```
+
+
+    This command will upload the artifact to the build config that we created before
+    and start building a container. Please note that this might take a while the first
+    time you execute it since openshift will have to download the EAP image. Next
+    time it will go much faster.
+
+
+    When the build is finished, we are ready to create your application.
+
+
+    ```
+
+    oc new-app weather-app -l app.openshift.io/runtime=jboss
+
+    ```
+
+
+    The command new-app will create a running instance based on the container that
+    we built before, and a label `-l` that gives it a nice icon on the topology view.
+
+
+    Go back to the [Topology view](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/my-project/graph)
+    and verify that the application comes up correctly (look for the dark blue circle):
+
+
+    ![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/initial-deploy.png)
+
+
+
+    **4. Expose service route**
+
+
+    Now that our application is runing in a container we also have to expose the application
+    to be accessed outside the internal OpenShift network. For that we need to create
+    a route that will forward traffic ffrom the external OpenShift router to our service.
+
+
+    Let''s do that next.
+
+
+    ```
+
+    oc expose svc weather-app``
+
+    ```
+
+
+    You''ll notice a new route link icon on the topology view. Click it to access
+    the app:
+
+
+    ![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/route-link.png)
+
+
+    You should see the app running:
+
+
+    ![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/initial-app.png)
+
+
+    You won''t yet be able to select different country flags (you''ll get an error
+    popup) - this we will fix in the next step.
+
+    '
+  difficulty: intermediate
+  slug: 02-deploy-to-openshift
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Deploy to OpenShift
+  type: challenge
+- assignment: "**1. What is Java Persistence API?**\n\nThe Java Persistence API (JPA)\
+    \ is a Java application programming interface specification that describes the\
+    \ management of relational data in applications using Java Platform. Java Persistence\
+    \ API removes a lot of boilerplate code and helps bridge the differences between\
+    \ the object modules (used in Object-oriented languages like Java) and the relational\
+    \ model (used in relational databases like PostgreSQL\xAE, MySQL\xAE, Oracle\xAE\
+    \ DB, etc.). JPA is commonly used in both Jakarta EE and other frameworks like\
+    \ Spring Data.\n\nThe JPA implementation in JBoss EAP is called Hibernate, which\
+    \ is a Red Hat-lead open source project. Hibernate is probably the most popular\
+    \ JPA implementation known for its stability and performance.\n\n**2. Enable JPA\
+    \ in JBoss EAP**\nJakarta EE has sometimes received criticism for being too big,\
+    \ making application servers slow and requiring too much resources, but to be\
+    \ fair Jakarta EE is only a specification of different API's and how they should\
+    \ work. How these specifications are implemented are left to the application server,\
+    \ and while there are application servers that are slow and requires a lot of\
+    \ resources, JBoss EAP is a modern application server based on a modular architecture\
+    \ using subsystems to implement Jakarta EE technologies. Many of these modules\
+    \ are only started when an application makes uses of them. So  if you are only\
+    \ using parts of all the features in Jakarta EE, JBoss EAP will not waste resources\
+    \ like memory and CPU with unused subsystems.\n\nThe way you enable JPA in JBoss\
+    \ EAP merely is by putting a `persistence.xml` file on the classpath. The `persistence.xml`\
+    \ file is anyway required by the JPA specification and holds the base configuration,\
+    \ for example, which datasource to use.\n\nOur first step is to create a `persistence.xml`\
+    \ file in `src/main/resources/META-INF`.\n\nClick this link to create and open\
+    \ the file `src/main/resources/META-INF/persistence.xml`{{open}}\n\nNext, Click\
+    \ on **Copy To Editor** below to add the content to the file.\n\n<pre class=\"\
+    file\" data-filename=\"./src/main/resources/META-INF/persistence.xml\" data-target=\"\
+    replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\n&lt;persistence\
+    \ version=\"2.1\"\n             xmlns=\"http://xmlns.jcp.org/xml/ns/persistence\"\
+    \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
+    \n        http://xmlns.jcp.org/xml/ns/persistence\n        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd\"\
+    &gt;\n    &lt;persistence-unit name=\"primary\"&gt;\n        &lt;jta-data-source&gt;java:jboss/datasources/WeatherDS&lt;/jta-data-source&gt;\n\
+    \        &lt;properties&gt;\n            &lt;!-- Properties for Hibernate --&gt;\n\
+    \            &lt;property name=\"hibernate.hbm2ddl.auto\" value=\"create-drop\"\
+    \ /&gt;\n            &lt;property name=\"hibernate.show_sql\" value=\"true\" /&gt;\n\
+    \        &lt;/properties&gt;\n    &lt;/persistence-unit&gt;\n&lt;/persistence&gt;\n\
+    </pre>\n\nNote that we are giving the persistence unit the name `primary` and\
+    \ instructing it to use the JTA datasource called `java:jboss/datasources/WeatherDS`.\
+    \ There are also two hibernate specific properties configured here. The first\
+    \ is `hibernate.hbm2ddl.auto` which is set to `create-drop`. This tells Hibernate\
+    \ to create the necessary database schema when the application is deployed and\
+    \ drop (.e.g. delete) the schema when it's undeployed. This assumes that we are\
+    \ starting from an empty database and will delete the content of the database\
+    \ when undeployed. This is of course not a setting we want to have in production.\
+    \ A common setting is to use `verify`, which will check that the database schema\
+    \ matches the object model and otherwise fail to deploy. However, for the convenience\
+    \ of this scenario, we will leave it at `create-drop` for now. The second property\
+    \ `hibernate.show_sql` and will configure hibernate to log all SQL queries in\
+    \ the JBoss EAP server.log.\n\n**3. Create a datasource**\n\nNext step is to create\
+    \ the datasource. Usually this is done by configuring JBoss EAP using web-console,\
+    \ CLI scripts, or similar. At this stage, we haven't created a database yet, but\
+    \ for test and development purposes we can use an in-memory database like H2.\
+    \ We can define it as follows.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml`{{open}}\
+    \ file and click **Copy To Editor** to insert add the following content to the\
+    \ file:\n\n<pre class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/weather-ds.xml\"\
+    \ data-target=\"replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\
+    &lt;datasources xmlns=\"http://www.jboss.org/ironjacamar/schema\"\n          \
+    \   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
+    http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd\"\
+    &gt;\n    &lt;!-- The datasource is bound into JNDI at this location. We reference\n\
+    \        this in META-INF/persistence.xml --&gt;\n    &lt;datasource jndi-name=\"\
+    java:jboss/datasources/WeatherDS\"\n                pool-name=\"weather\" enabled=\"\
+    true\"\n                use-java-context=\"true\"&gt;\n        &lt;connection-url&gt;jdbc:h2:mem:weather;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1&lt;/connection-url&gt;\n\
+    \        &lt;driver&gt;h2&lt;/driver&gt;\n        &lt;security&gt;\n         \
+    \   &lt;user-name&gt;sa&lt;/user-name&gt;\n            &lt;password&gt;sa&lt;/password&gt;\n\
+    \        &lt;/security&gt;\n    &lt;/datasource&gt;\n&lt;/datasources&gt;\n</pre>\n\
+    \nNow that we have both the JPA persistence configuration and the datasource configuration\
+    \ in place we are ready to extend our model to work with JPA.\n\n**4. Add JPA\
+    \ annotation to the data model**\n\nJPA is a very non-intrusive framework, and\
+    \ all we need to do is to add a couple of annotation to the objects in the domain\
+    \ model.\n\nLet's start with the `City` class. Open `src/main/java/com/redhat/example/weather/City.java`{{open}}\n\
+    \nFirst, we need to tell JPA that this class is an Entity, meaning that it needs\
+    \ to be able to persist to the database. We do this by adding the `@Entity` annotation.\
+    \ Either to that manually at the comment `//TODO: Add Entity annotation` or click\
+    \ the **Copy To Editor**\n\n<pre class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/City.java\"\
+    \ data-target=\"insert\" data-marker=\"//TODO: Add Entity annotation\">\n@Entity</pre>\n\
+    \nThen, we need to indicate which field is to be considered the primary key for\
+    \ the object. We do this by adding annotation `@Id` to the field `private String\
+    \ id`.\n\n<pre class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/City.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: add Id annotation\">\n@Id</pre>\n\
+    \nThat's it! We are now ready to retrieve object of the type City. However, We\
+    \ also have a data model for Country that holds a list of Cities. Let's go ahead\
+    \ and annotate that as well.\n\nOpen `src/main/java/com/redhat/example/weather/Country.java`{{open}}\n\
+    \nAdd `@Entity` annotation to the class definition.\n\n<pre class=\"file\" data-filename=\"\
+    ./src/main/java/com/redhat/example/weather/Country.java\" data-target=\"insert\"\
+    \ data-marker=\"//TODO: Add Entity annotation\">\n@Entity</pre>\n\nThen add `@Id`\
+    \ annotation to  `public String id`;\n\n<pre class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/Country.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: add Id annotation\">\n@Id</pre>\n\
+    \nNow, we also need to tell JPA that the `private List<City> cities;` are related\
+    \ to each other. The relationship is what DB's calls *One-To-Many*, meaning that\
+    \ one single `Country` object has zero, one or more related `City` objects. In\
+    \ JPA we can accomplish this by adding `@OneToMany` annotation to it.\n\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/Country.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO: add one to many annotation\">\n\
+    @OneToMany(fetch = FetchType.EAGER)</pre>\n\nHere we also use an attribute called\
+    \ fetch, and we set it to type `FetchType.EAGER`. The reason for this is that\
+    \ the default fetch type is `FetchType.LAZY`, which means that `City` object related\
+    \ to the Country object isn't retrieved from the database until requests. However,\
+    \ since we are going to return a Country object from a REST service as a JSON\
+    \ string that looks like this:\n\n```json\n{\n  \"cities\": [\n    {\n      \"\
+    id\": \"lon\",\n      \"maxTemp\": 11,\n      \"minTemp\": 7,\n      \"name\"\
+    : \"London\",\n      \"temp\": 9,\n      \"tempFeelsLike\": 9,\n      \"weatherType\"\
+    : \"sunny\",\n      \"wind\": 3\n    },\n    {\n      \"id\": \"man\",\n     \
+    \ \"maxTemp\": 8,\n      \"minTemp\": 5,\n      \"name\": \"Manchester\",\n  \
+    \    \"temp\": 7,\n      \"tempFeelsLike\": 3,\n      \"weatherType\": \"rainy-7\"\
+    ,\n      \"wind\": 10\n    },\n    {\n      \"id\": \"edi\",\n      \"maxTemp\"\
+    : -6,\n      \"minTemp\": -9,\n      \"name\": \"Edinburgh\",\n      \"temp\"\
+    : -7,\n      \"tempFeelsLike\": -13,\n      \"weatherType\": \"snowy-4\",\n  \
+    \    \"wind\": 7\n    }\n  ],\n  \"id\": \"en\",\n  \"name\": \"England\"\n}\n\
+    ```\n\nBecause of the way that Json-b works we need to cities to be retrieved\
+    \ together with the country object, so therefor we set it to `FetchType.EAGER`.\n\
+    \nThat is it. We are ready to start using the JPA model. So the next task is to\
+    \ update the rest service to collect it from the database.\n\n**5. Update the\
+    \ rest service to return content from the database**\n\nTo find or persist the\
+    \ object in the database using JPA provides an API object called `EntityManager`.\
+    \ Getting an EntityManager is fairly simple since all we have to do is to inject\
+    \ it using `@PersistenceContext`.\n\nOpen `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}\n\
+    \nAt the TODO comment inject the entity manager like this:\n\n<pre class=\"file\"\
+    \ data-filename=\"./src/main/java/com/redhat/example/weather/WeatherService.java\"\
+    \ data-target=\"insert\" data-marker=\"//TODO: Inject EntityManager\">\n@PersistenceContext(unitName\
+    \ = \"primary\")\nEntityManager em;</pre>\n\nNote, that we also set the unitName\
+    \ to \"primary\". That is actually not necessary since we only have a single persistence\
+    \ unit, JPA would use that one, but as a best practice it's always good to refer\
+    \ to named persistence units.\n\nNow we can use the `EntityManager` to collect\
+    \ Country object. There are many different API calls we can do including creating\
+    \ our own query, however the fastest and easiest way is to use a methods called\
+    \ `find(Class returnType,Object key)` like this:\n\n<pre class=\"file\" data-filename=\"\
+    ./src/main/java/com/redhat/example/weather/WeatherService.java\" data-target=\"\
+    insert\" data-marker=\"return england; //TODO: Replace with call to database\"\
+    >\nreturn em.find(Country.class,\"en\"/* TODO: Replace with dynamic call to get\
+    \ selected language*/);</pre>\n\nAt the moment the country id is hardcoded as\
+    \ \"en\", but in the next scenario we will learn how to use CDI to let the user\
+    \ select which country they want to display\n\n**6. Deploy the updates**\n\nWe\
+    \ are now ready to test our application in OpenShift.\n\nFirst, build the application\
+    \ and verify that we do not have any compilation issues.\n\n```\nmvn clean package\n\
+    ```\n\nThis will produce a WAR file called ROOT.war under the target directory.\n\
+    \nNext, build a container by starting an OpenShift S2I build and provide the WAR\
+    \ file as input.\n\n```\noc start-build weather-app --from-file=target/ROOT.war\
+    \ --follow\n```\n\nWhen the build has finished, you can test the REST endpoint\
+    \ directly using for example curl.\n\n```\ncurl -s \"Accept:application/json\"\
+    \ http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/weather\
+    \ | jq\n```\n\n> **Note:** that it might take a couple of seconds for the application\
+    \ to start so if the command fails at first, please try again.\n\nYou should see:\n\
+    \n```console\n{\n  \"cities\": [\n    {\n      \"id\": \"lon\",\n      \"maxTemp\"\
+    : 11,\n      \"minTemp\": 7,\n      \"name\": \"London\",\n      \"temp\": 9,\n\
+    \      \"tempFeelsLike\": 9,\n      \"weatherType\": \"sunny\",\n      \"wind\"\
+    : 3\n    },\n    {\n      \"id\": \"man\",\n      \"maxTemp\": 8,\n      \"minTemp\"\
+    : 5,\n      \"name\": \"Manchester\",\n      \"temp\": 7,\n      \"tempFeelsLike\"\
+    : 3,\n      \"weatherType\": \"rainy-7\",\n      \"wind\": 10\n    },\n    {\n\
+    \      \"id\": \"edi\",\n      \"maxTemp\": -6,\n      \"minTemp\": -9,\n    \
+    \  \"name\": \"Edinburgh\",\n      \"temp\": -7,\n      \"tempFeelsLike\": -13,\n\
+    \      \"weatherType\": \"snowy-4\",\n      \"wind\": 7\n    }\n  ],\n  \"id\"\
+    : \"en\",\n  \"name\": \"England\"\n}\n```\n\n\nYou can also test the web application\
+    \ by clicking [here](http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/index.html)\n\
+    \n**Summary**\n\nWe have now connected our application to use an in-memory database\
+    \ to collect the data. If you wonder where the data comes from we are using a\
+    \ Hibernate specific feature where you can load data into the database by adding\
+    \ it to `src/main/resources/import.sql`{{open}}. The database tables that are\
+    \ generated here are `City`,`Country` and `Country_City`. The later one is a mapping\
+    \ table that maps Cities with Countries and could potentially be made more efficient\
+    \ by instead using a Foreign key, but in that case, we would have to extend the\
+    \ domain model objects.\n"
+  difficulty: intermediate
+  slug: 03-jpa
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Basics of Java Persistance
+  type: challenge
+- assignment: "**1. What is CDI**\n\nCDI, aka Context Dependency Injection, is the\
+    \ core dependency injection framework of the Jakarta EE platform. It provides\
+    \ a uniform architecture for dependency injection and the life cycle management\
+    \ of managed beans. CDI is sometimes compared to Spring Dependency Injection,\
+    \ and it has a lot of similar features, but CDI is tightly integrated with Jakarta\
+    \ EE and is used by many other specifications too, for example, enable control\
+    \ over producing EntityManager from JPA and other resources like JMS queues, etc.\n\
+    \n**2. Enable CDI**\nTo activate CDI we need to create a beans archive and include\
+    \ beans.xml file in the META-INF directory of the classpath. Let's add an empty\
+    \ beans.xml file.\n\nOpen `src/main/webapp/WEB-INF/beans.xml`{{open}}\n\nCopy\
+    \ the following content to the file or use the **Copy To Editor** button.\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/beans.xml\" data-target=\"\
+    replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;beans xmlns=\"\
+    http://xmlns.jcp.org/xml/ns/javaee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+    \n       xsi:schemaLocation=\"\n      http://xmlns.jcp.org/xml/ns/javaee\n   \
+    \   http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd\"\n       bean-discovery-mode=\"\
+    all\"&gt;\n&lt;/beans&gt;\n</pre>\n\n**3. Let the user select the country**\n\n\
+    The application already has a session scoped bean `src/main/java/com/redhat/example/weather/SelectedCountry.java`{{open}}\
+    \ that can store the users last selected country. The storage is temporary and\
+    \ will be removed as soon as the user closes the browser or the session times\
+    \ out.\n\nTo change country the user clicks on one of the flags, it will trigger\
+    \ an HTTP PUT call to `/api/country/{code}` where the code is the country code.\
+    \ We, therefore, need to implement a REST service that updates the selected country.\n\
+    \nOpen `src/main/java/com/redhat/example/weather/CountryService.java`{{open}}.\n\
+    \nUsing CDI we can inject a reference to the SelectedCountry. Since the selected\
+    \ country is annotated with @SessionScope we don't have to care about retrieving\
+    \ a HttpSession object or similar. Instead, we can safely assume that an update\
+    \ to the selected country object will be kept in the user's session.\n\n<pre class=\"\
+    file\" data-filename=\"./src/main/java/com/redhat/example/weather/CountryService.java\"\
+    \ data-target=\"insert\" data-marker=\"//TODO: Inject selected country\">\n@Inject\n\
+    SelectedCountry selectedCountry;</pre>\n\nWe can now create a rest service that\
+    \ allows the user to set the country of choice. Our REST service needs to be annotated\
+    \ with @PUT and since the `RestApplication` defines a base path to `/api` and\
+    \ the `CountryService` defines a path of `country` we only need to add a @Path\
+    \ annotation specifying `{code}`. The brackets tell JAX-RS that this is a path\
+    \ parameter and that it will match to any request matching `/api/country/*`. Our\
+    \ rest service should look like this:\n\n<pre class=\"file\" data-filename=\"\
+    ./src/main/java/com/redhat/example/weather/CountryService.java\" data-target=\"\
+    insert\" data-marker=\"//TODO: Expose REST service to set the selected country\"\
+    >\n@PUT\n@Path(\"/{code}\")\npublic void setSelectedCountry(@PathParam(\"code\"\
+    ) String countryCode) {\n    selectedCountry.setCode(countryCode);\n}\n</pre>\n\
+    \nWe are now ready to extend the `WeatherService` class to make use of the user\
+    \ selected country instead of hard-coding the country id.\n\nOpen  `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}\
+    \ and inject the user selected country.\n\n<pre class=\"file\" data-filename=\"\
+    ./src/main/java/com/redhat/example/weather/WeatherService.java\" data-target=\"\
+    insert\" data-marker=\"//TODO: Inject selected country\">\n@Inject\nSelectedCountry\
+    \ selectedCountry;</pre>\n\nThen we can replace the hardcoded value of \"en\"\
+    \ and instead invoke\n\n<pre class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/WeatherService.java\"\
+    \ data-target=\"insert\" data-marker='\"en\"/* TODO: Replace with dynamic call\
+    \ to get selected language*/'>selectedCountry.getCode()</pre>\n\nThat's it. Now,\
+    \ as soon as we have deployed the app, users can dynamically change the country\
+    \ by just clicking one of the flags.\n\n**6. Deploy the application**\n\nWe are\
+    \ now ready to test our application in OpenShift.\n\nFirst, build the application\
+    \ and verify that we do not have any compilation issues.\n\n```\nmvn clean package\n\
+    ```\n\nThis command produces a WAR file called ROOT.war under the target directory.\n\
+    \nNext, build a container by starting an OpenShift S2I build and provide the WAR\
+    \ file as input.\n\n```\noc start-build weather-app --from-file=target/ROOT.war\
+    \ --follow\n```\n\nWhen the build has finished, you can test the REST endpoint\
+    \ directly using for example curl.\n\n```\ncurl -s \"Accept:application/json\"\
+    \ http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/weather\
+    \ | jq\n```\n\n> **Note:** that it might take a couple of seconds for the application\
+    \ to start so if the command fails at first, please try again.\n\nYou should see\
+    \ the same output as before.\n\nYou can also test the web application by clicking\
+    \ [here](http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/index.html)\n\
+    \nVerify that you can change the cities shown by clicking the different flags.\n"
+  difficulty: intermediate
+  slug: 04-cdi
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Basics of CDI
+  type: challenge
+- assignment: "\nSo far we have been using an in-memory database that is part of JBoss\
+    \ EAP. However, JBoss EAP only provides this to make it easy to develop and test\
+    \ application. The in-memory database H2 is not recommended for production use.\n\
+    \nIn this part, you will learn how to setup a simple PostgreSQL database in OpenShift,\
+    \ how to configure a datasource within the JBoss EAP image that connects to the\
+    \ database, and finally how to make use of that database in your application.\n\
+    \n\n**1. Remove the internal in-memory database**\n\nIf you recall in step 03\
+    \ we create a datasource definition as part of the deployment. Let's update it\
+    \ to use PostgresQL.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml`{{open}}\
+    \ file and click **Copy To Editor** to replace its content for PostgresQL:\n\n\
+    <pre class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/weather-ds.xml\"\
+    \ data-target=\"replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\
+    &lt;datasources xmlns=\"http://www.jboss.org/ironjacamar/schema\"\n          \
+    \   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
+    http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd\"\
+    &gt;\n    &lt;!-- The datasource is bound into JNDI at this location. We reference\n\
+    \        this in META-INF/persistence.xml --&gt;\n    &lt;datasource jndi-name=\"\
+    java:jboss/datasources/WeatherDS\"\n                pool-name=\"weather\" enabled=\"\
+    true\"\n                use-java-context=\"true\"&gt;\n        &lt;connection-url&gt;jdbc:postgresql://weather-postgresql:5432/weather-db&lt;/connection-url&gt;\n\
+    \        &lt;driver&gt;postgresql.jar&lt;/driver&gt;\n        &lt;security&gt;\n\
+    \            &lt;user-name&gt;weather-app-user&lt;/user-name&gt;\n           \
+    \ &lt;password&gt;secret&lt;/password&gt;\n        &lt;/security&gt;\n    &lt;/datasource&gt;\n\
+    &lt;/datasources&gt;\n</pre>\n\nThis configures our app to access the database\
+    \ using a hostname of `weather-postgresql` and corresponding ports, usernames,\
+    \ and password. We'll need to deploy Postgres itself to respond to these connection\
+    \ requests.\n\n**2. Start a PostgreSQL database**\n\nTo start a PostgreSQL database\
+    \ in OpenShift we can simply use the image provided as part of the OpenShift distribution.\n\
+    \n```\noc new-app -e POSTGRESQL_USER=weather-app-user -e POSTGRESQL_PASSWORD=secret\
+    \ -e POSTGRESQL_DATABASE=weather-db --name=weather-postgresql -l app.openshift.io/runtime=postgresql\
+    \ postgresql:10\n```\n\nBy using the `-e` flag, we can also pass a set of environment\
+    \ variables that will configure and setup the PostgreSQL database. These environment\
+    \ variables are pretty self explaining. The `-l` flag adds a nice icon to our\
+    \ deployment topology view for the database.\n\nYou can see the new database spinning\
+    \ up on the [Topology view](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/my-project/graph):\n\
+    \n![Postgres topology view](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/postgres-topology.png)\n\
+    \n**3. Deploying the application**\n\nWe are now ready to test our application\
+    \ in OpenShift using an external database.\n\nFirst, build the application and\
+    \ verify that we do not have any compilation issues.\n\n```\nmvn clean package\n\
+    ```\n\nSince EAP does not ship with a Postgres DB driver by default, we'll need\
+    \ to download it and include it with our application. Click the following command\
+    \ to download the driver to the `target/` directory:\n\n```\ncurl -o target/postgresql.jar\
+    \ https://jdbc.postgresql.org/download/postgresql-42.2.20.jar\n```\n\nNext, build\
+    \ a container by starting an OpenShift S2I build and provide the files as input.\n\
+    \n```\noc start-build weather-app --from-dir=target/ --follow\n```\n\nWhen the\
+    \ build has finished, you can test the REST endpoint directly using for example\
+    \ curl:\n\n```\ncurl -s \"Accept:application/json\" http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/weather\
+    \ | jq\n```\n\n> **Note:** that it might take a couple of seconds for the application\
+    \ to start so if the command fails at first, please try again.\n\nYou should see\
+    \ the same output as before.\n\nYou can also test the web application by clicking\
+    \ [here](http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/index.html)\n\
+    \nNote: that it might take a couple of seconds for the application to start so\
+    \ if you see an error page wait 30 secs and then try again.\n\n**4. Verify the\
+    \ database**\n\nOpen [this](http://weather-app-my-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/index.html)\
+    \ link and click on the US flag. Note the weather icon in New York. It should\
+    \ be sunny:\n\n![Sunny](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/sunny.png)\n\
+    \nLet's update the database and set it to rainy instead.\n\n```\noc rsh deployment/weather-postgresql\n\
+    ```\n\n```\npsql -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c \"update city set\
+    \ weathertype='rainy-5' where id='nyc'\";\n```\n\nNow, reload the weather page\
+    \ for US and check the weather icon in New York. It should now be rainy.\n\n![Rainy](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/rainy.png)\n"
+  difficulty: intermediate
+  slug: 05-database
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Externalize the data storage
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: middleware-javaee8
+tags:
+- openshift
+title: Jakarta EE 8 Development
+type: truck

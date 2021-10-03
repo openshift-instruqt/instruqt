@@ -1,0 +1,117 @@
+challenges:
+- assignment: "## The callback-based trader\n\nLet\u2019s start with the callback\
+    \ trader. This trader is developed using the raw Vert.x API and so callbacks.\
+    \ To ease the readability of the code, we are going to use Vert.x `Future`. A\
+    \ `Future` is a structure encapsulating a deferred result (or failure). Unlike\
+    \ regular Java Future, Vert.x `Futures` are non-blocking (no `get` and `join`\
+    \ methods). You needs to listen for the `Future` completion by attaching a `Handler`\
+    \ indicating the result (success or failure). `Futures` provide a nice and simple\
+    \ way to structure your code, but that\u2019s not all. It also provides high-level\
+    \ operators such as `CompositeFuture.all` indicating the completion of a set of\
+    \ Futures.\n\nFuture objects are created using Future.future(). To be notified\
+    \ of the completion, you need to attach a Handler<AsyncResult>> using the Future.setHandler\
+    \ method.\n\nOpen the `io.vertx.workshop.trader.impl.CallbackTraderVerticle` class\
+    \ and fill in the code to complete TODOs 1 and 2.\n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/CallbackTraderVerticle.java`{{open}}\
+    \ \n\nThe trader needs the Portfolio service and the market service (the message\
+    \ source sending the market data). We cannot start the trading logic before having\
+    \ retrieved both of them. Use a CompositeFuture to be notified when both are completed\
+    \ (or one fails). A CompositeFuture is a Future, so attach a Handler to it that\
+    \ call the initialize method.\n\n<pre class=\"file\" data-filename=\"compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/CallbackTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 1\">\nFuture&lt;PortfolioService&gt;\
+    \ retrieveThePortfolioService = getPortfolioService(discovery.result());\nFuture&lt;MessageConsumer&lt;JsonObject&gt;&gt;\
+    \ retrieveTheMarket = getMarketSource(discovery.result());\n</pre>\n\n<pre class=\"\
+    file\" data-filename=\"compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/CallbackTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 2\">\nCompositeFuture.all(retrieveServiceDiscovery,\
+    \ retrieveTheMarket)\n    .setHandler(x ->\n        initialize(done, company,\
+    \ numberOfShares, retrieveThePortfolioService, retrieveTheMarket, x));\n</pre>"
+  difficulty: basic
+  slug: 01-callback-based-trader
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "## The RX Java 2 trader\n\nIn this task, we re-implement the very same\
+    \ logic but using a different programming style. We are going to use Rx Java 2.\
+    \ \n\nOpen the `io.vertx.workshop.trader.impl.RXCompulsiveTraderVerticle` class.\
+    \ \n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java`{{open}}\n\
+    \nComplete the code following the TODO items. Use the zip operator to combine\
+    \ the two Singles. When both are completed, attach the message handler to the\
+    \ MessageConsumer and execute the trading logic on each received event. Don\u2019\
+    t forget the subscription part(s).\n\nCopy the following to `// TODO 1`\n<pre\
+    \ class=\"file\" data-filename=\"compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 1\">\nretrieveThePortfolioService.zipWith(retrieveTheMarket,\
+    \ (ps, consumer) -> {\n</pre>\n\nCopy the following to `// TODO 2`\n<pre class=\"\
+    file\" data-filename=\"compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 2\">\nconsumer.handler(message\
+    \ ->\n</pre>\n\nCopy the following to `// TODO 3`\n<pre class=\"file\" data-filename=\"\
+    compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 3\">\n    TraderUtils.dumbTradingLogic(company,\
+    \ numberOfShares, ps, message.body()).subscribe());\n    return true;\n})\n</pre>\n\
+    \nCopy the following to `// TODO 4`\n<pre class=\"file\" data-filename=\"compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java\"\
+    \ data-target=\"insert\" data-marker=\"// TODO 4\">\n.toCompletable()\n.subscribe(CompletableHelper.toObserver(future));\n\
+    </pre>\n\n"
+  difficulty: basic
+  slug: 02-rx-java2-trader
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "## Deploy to OpenShift\n\n**1. Build and Deploy**\n\nTo test, we can\
+    \ deploy our traders service to OpenShift using\n\n```\ncd /root/code/compulsive-traders\n\
+    ```\n\n```\nmvn fabric8:deploy\n```\n\n**2. Access the Micro-trader dashboard**\n\
+    \nClick on the \"OpenShift Console\" tab next to the \"Local Web Browser\" tab.\n\
+    \n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \nLog in using `developer/developer` for username and password. You should see\
+    \ the newly created project called `\u201Cvertx-kubernetes-workshop\"`. Click\
+    \ on it. You should see four pods running, one each for the quote-generator, portfolio-service\
+    \ and micro-trader-dashboard microservices that you created in previous scenarios\
+    \ and a new one for the compulsive-traders service that you created just now.\n\
+    \nClick on the route for the `micro-trader-dashboard`. Append `\u201C/admin\u201D\
+    ` at the end of the route and you should see the dashboard. You should see some\
+    \ new services and if you click on the \u201CTrader\u201D tab on the left, you\
+    \ may start seeing some moves on your portfolio!\n\nAlternatively, you can click\
+    \ on the\n[route URL](http://micro-trader-dashboard-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/admin)\n\
+    to access the dashboard."
+  difficulty: basic
+  slug: 03-deploy-to-openshift
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: compulsive-traders
+tags:
+- openshift
+title: 'MicroTrader App Part 3: Compulsive Traders'
+type: truck

@@ -1,0 +1,196 @@
+challenges:
+- assignment: "Before you get started we recommend reading the following steps. They\
+    \ explain\na bit about how the playground environment is setup and what access\
+    \ you have.\n\n## Logging in to the Cluster via Dashboard\n\nClick the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)\
+    \ tab to open the dashboard. \n\nYou will then able able to login with admin permissions\
+    \ with:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\n## Logging\
+    \ in to the Cluster via CLI\n\nWhen the OpenShift playground is created you will\
+    \ be logged in initially as\na cluster admin (```\noc whoami\n```) on the command\
+    \ line. This will allow you to perform\noperations which would normally be performed\
+    \ by a cluster admin.\n\nBefore creating any applications, it is recommended you\
+    \ login as a distinct\nuser. This will be required if you want to log in to the\
+    \ web console and\nuse it.\n\nTo login to the OpenShift cluster from the _Terminal_\
+    \ run:\n\n```\noc login -u admin -p admin`\n```\n\nThis will log you in using\
+    \ the credentials:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\n\
+    Use the same credentials to log into the web console.\nFor simplicity we are logging\
+    \ in here as admin.\n\n## Creating your own Project\n\nTo create a new project\
+    \ called ``myproject`` run the command:\n\n```\noc new-project myproject`\n```\n\
+    \nYou could instead create the project from the web console. If you do this,\n\
+    to change to the project from the command line run the command:\n\n```\noc project\
+    \ myproject`\n```\n\nNow that you have created your own project, me move to the\
+    \ next\nstep. "
+  difficulty: intermediate
+  slug: setup
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Getting Started
+  type: challenge
+- assignment: "Before we deploy the app, let's explore the build config and S2I image\
+    \ we will be using. \n\nHere is the example repo we are going to try today - \n\
+    \n[https://github.com/thoth-station/s2i-example-tensorflow](https://github.com/thoth-station/s2i-example-tensorflow)\n\
+    \nLet's check out the `log-thoth-broken` branch.\nThe upstream link to the same\
+    \ is - [https://github.com/thoth-station/s2i-example/tree/log-thoth-broken](https://github.com/thoth-station/s2i-example/tree/log-thoth-broken)\n\
+    \nIf you go to app.py, it's a simple Python app that prints `Hello thoth` every\
+    \ 10 seconds. \nAnd you have a Pipfile that has `daiquiri` as the only package.\
+    \ That is the standard Python project, we are going to experiment with. \n\nNow\
+    \ let's explore the `openshift.yaml`. \nEnd of the yaml, we declare the image\
+    \ to be `s2i-thoth-ubi8-py38`\n```\n  - apiVersion: \"image.openshift.io/v1\"\n\
+    \    kind: ImageStream\n    metadata:\n      labels:\n        app: \"s2i-example-log\"\
+    \n      name: \"s2i-thoth-ubi8-py38\"\n    spec:\n      tags:\n        - name:\
+    \ \"latest\"\n          from:\n            kind: \"DockerImage\"\n           \
+    \ name: \"quay.io/thoth-station/s2i-thoth-ubi8-py38\"\n          referencePolicy:\n\
+    \            type: \"Source\"\n```\nAnd we use this under BuildConfig under line\
+    \ 26, stating our source repo to be - \n```\ngit:\n    uri: \"https://github.com/thoth-station/s2i-example\"\
+    \n    ref: \"log-thoth-broken\"\n```\nNow that we have successfully explored the\
+    \ repo, and are using a Thoth powered s2i image, let's explore some configuration\
+    \ options, that \nThoth image provides out of box. "
+  difficulty: intermediate
+  slug: app
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Getting the sample Python app
+  type: challenge
+- assignment: "Now finally let's explore the options Thoth s2i build image offers\
+    \ - \n\nThoth\u2019s s2i container images can be configured using environment\
+    \ variables supplied to the build config:\n\n`THOTH_PROVENANCE_CHECK` - verify\
+    \ stack provenance - the provenance check is triggered only if the lock file is\
+    \ not comming from Thoth\u2019s recommendation engine (otherwise the stack has\
+    \ already verified provenance)\n\n`THOTH_ADVISE` - always use the recommended\
+    \ stack by Thoth (even if Pipfile.lock is present in the repo)\n\n`THOTH_ASSEMBLE_DEBUG`\
+    \ - run s2i\u2019s assemble script in verbose mode\n\n`THOTH_DRY_RUN` - submit\
+    \ stack to Thoth\u2019s recommendation engine but do not use the recommended Pipfile.lock\
+    \ file, use the Pipfile.lock file present in the repo instead\n\n`THOTH_FROM_MASTER`\
+    \ - Use Thamos from git instead of a PyPI release - handy if the released Thamos\
+    \ has a bug which was fixed in the master branch\n\n`THOTH_HOST` - Thoth\u2019\
+    s host to reach out to for recommendations (defaults to prod deployment at khemenu.thoth-station.ninja)\n\
+    \n`THOTH_ERROR_FALLBACK` - fallback to the Pipfile.lock present in the repository\
+    \ if the submitted Thoth analysis fails\n\nIf you go checkout the `openshift.yaml`\
+    \ in [s2i-example/log-thoth-broken](https://github.com/thoth-station/s2i-example/blob/log-thoth-broken/openshift.yaml)\
+    \ and checkout the env block under BuildConfig (ln 57), you will see some of these\
+    \ being used like `THOTH_PROVENANCE_CHECK`, `THAMOS_ADVISE`, `THOTH_DRY_RUN`,\
+    \ `THOTH_HOST`.\nThamos Host is currently set to `api.moc.thoth-station.ninja`,\
+    \ which is our public facing api. \nAnd `THOTH_PROVENANCE_CHECK` set to 1, that\
+    \ triggers the provenance check. For this tutorial we have turned of `THOTH_ADVISE=0`\
+    \ to focus on provenance checks only.\n\n\nHere are some config option's that\
+    \ you could configure, which \nchanges the behaviour of `Thamos` (the cli tool\
+    \ used to interact with Thoth internally.) \n - https://thoth-station.ninja/docs/developers/thamos/\n\
+    \nThese env variables can be toggles according to your needs in the `openshift.yaml`."
+  difficulty: intermediate
+  slug: parameter
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Thoth s2i parameters
+  type: challenge
+- assignment: "Now that you are familiar with the configurations our s2i image offers,\
+    \ let's try deploying our sample app using Thoth's S2I build process. \n\nAssuming\
+    \ you have followed the steps from before are logged in as an admin into `myproject`\
+    \ in the OpenShift cluster lets deploy - \n\nAs the cluster is ready now, let's\
+    \ try deploying the application using Thoth S2I build process - \n\n```\noc process\
+    \ -f https://raw.githubusercontent.com/thoth-station/s2i-example/log-thoth-broken/openshift.yaml\
+    \ | oc apply -f -`\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
+    \ on the right, you should see this - \n```\nbuildconfig.build.openshift.io/s2i-example-log\
+    \ created\ndeploymentconfig.apps.openshift.io/s2i-example-log created\nimagestream.image.openshift.io/s2i-example-log\
+    \ created\nimagestream.image.openshift.io/s2i-thoth-ubi8-py38 created\n```\n\n\
+    ### Let's go to Openshift UI and checkout our build process - \n\nMake sure you\
+    \ have selected `myproject` on the project selector. \nIf you go to Builds in\
+    \ the OpenShift UI in the other tab, under `Builds`, you would see `s2i-example-log`\
+    \ and under logs you could inspect the build process. \nYou would see `thamos\
+    \ provenance-check` being run your stack. \n\nYou can also check the logs from\
+    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f`\n\
+    ```\n\nYou should keep a eye for these things in the log - \n - Thoth's configuration\
+    \ file after hardware and software discovery (that's the .thoth.yaml being expanded\
+    \ from the template.)\n - Asking Thoth for provenance check... (That is where\
+    \ Thamos interacts with Thoth API)\n\nIf you scroll to the end of it, you should\
+    \ see something similar to this - \n![provenance fail](https://raw.githubusercontent.com/saisankargochhayat/katacoda-scenarios/master/thoth-provenance/assets/provenance_fail.png)\n\
+    \nWe can see `python-json-logger` has an `INVALID-ARTIFACT-HASH`. Let's figure\
+    \ out why this happened - \nIf you take a look at the [Pipfile.lock](https://github.com/thoth-station/s2i-example/blob/log-thoth-broken/Pipfile.lock#L29)\
+    \ \nRight there at line 29, we have the corrupt SHA that was caught during the\
+    \ provenance check and we prevented a potentially unsafe package from being uninstalled.\
+    \ \n\nNow let's pull down the app you deployed and deploy a version that is not\
+    \ broken - \n\n```\noc delete all --selector 'app=s2i-example-log'`\n```"
+  difficulty: intermediate
+  slug: deploy
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Let's Deploy
+  type: challenge
+- assignment: "Now that we know the Thoth's provenance check adeptly caught the error,\
+    \ let's try running it on a fixed version of the repo - [log-thoth-provenance](https://github.com/thoth-station/s2i-example/blob/log-thoth-provenance)\n\
+    If you have a look at the [Pipfile.lock](https://github.com/thoth-station/s2i-example/blob/log-thoth-provenance/Pipfile.lock),\
+    \ we have fixed the corrupt hash here. \nWe have `THOTH_PROVENANCE_CHECK` turned\
+    \ on, let's try deploying this version. \n\nYou can deploy the fixed version using\
+    \ - \n\n```\noc process -f https://raw.githubusercontent.com/thoth-station/s2i-example/log-thoth-provenance/openshift.yaml\
+    \ | oc apply -f -`\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
+    \ on the right, you should see this - \n```\nbuildconfig.build.openshift.io/s2i-example-log\
+    \ created\ndeploymentconfig.apps.openshift.io/s2i-example-log created\nimagestream.image.openshift.io/s2i-example-log\
+    \ created\nimagestream.image.openshift.io/s2i-thoth-ubi8-py38 created\n```\n\n\
+    ### Let's go to Openshift UI and checkout our build process - \n\nMake sure you\
+    \ have selected `myproject` on the project selector. \nIf you go to Builds in\
+    \ the OpenShift UI in the other tab, under `Builds`, you would see `s2i-example-log`\
+    \ and under logs you could inspect the build process. \nYou would see `thamos\
+    \ provenance-check` being run your stack. \n\nYou can also check the logs from\
+    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f`\n\
+    ```\n\nYou should keep a eye for these things in the log - \n - Thoth's configuration\
+    \ file after hardware and software discovery (that's the .thoth.yaml being expanded\
+    \ from the template.)\n - Asking Thoth for provenance check... (That is where\
+    \ Thamos interacts with Thoth API)\n\nIf you scroll to the end of it, you should\
+    \ see something similar to this - \n![provenance pass](https://raw.githubusercontent.com/saisankargochhayat/katacoda-scenarios/master/thoth-provenance/assets/provenance_pass.png)\n\
+    \nProvenance check passed! \\o/\n\nYou can check the logs from the deployed app\
+    \ using - \n\n```\noc logs -f dc/s2i-example-log`\n```"
+  difficulty: intermediate
+  slug: fix
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Fix the error
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: thoth-s2i-provenance
+tags:
+- openshift
+title: Thoth S2I build with Provenance check on OpenShift
+type: truck

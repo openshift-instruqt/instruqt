@@ -1,0 +1,400 @@
+challenges:
+- assignment: 'The easiest way to access and interact with OpenShift is through the
+    web console. The URL for the web console will be dictated by what was specified
+    as the public URL for the OpenShift cluster when it was set up. Once the web console
+    is accessed, how you then login will depend on the configured identity provider.
+
+
+    For this course the public URL for the web console is:
+
+
+    ``https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com``
+
+
+    To view the web console at the same time as these instructions, you can also select
+    the _Console_ tab to the right of the tab for the embedded _Terminal_.
+
+
+    In the case of the OpenShift cluster managing user authentication, the web console
+    login page will prompt you for your _Username_ and _Password_.
+
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-web-console-login.png)
+
+
+    In the case of an external authentication service being used as the identity provider,
+    it will be necessary to login first to the external service. As an example, if
+    you were accessing [OpenShift Online](https://www.openshift.com/get-started/)
+    you would see:
+
+
+    ![External Login](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-external-identity-provider.png)
+
+
+    For the OpenShift cluster used in this course, as the OpenShift cluster is managing
+    user authentication, you will be presented with a login page that prompts you
+    for your user account credentials. You can login using the credentials:
+
+
+    * **Username:** ``developer``
+
+    * **Password:** ``developer``
+
+
+    As this is the first time you have logged in as this user in this OpenShift cluster,
+    you will be presented with a "Welcome to OpenShift" message and the option of
+    creating a new project.
+
+
+    ![Web Console Welcome](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-web-console-welcome.png)
+
+
+    Create a new project by selecting _Create Project_. Call the project ``myproject``.
+
+
+    ![Create New Project](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-create-new-project.png)
+
+
+    Upon creating a project you will be left on the overview page for the new project.
+
+
+    If you want to get to a list of all the projects you have available, you can select
+    "Home->Projects" from the left hand side menu. If you do not see the menu, you
+    can click on the hamburger menu item button in the top level corner of the web
+    console.
+
+
+    ![List of Projects](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-list-of-projects.png)
+
+    '
+  difficulty: basic
+  slug: 01-logging-in-via-the-web-console
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 1 - Logging in Via the Web Console
+  type: challenge
+- assignment: "The OpenShift web console provides a convenient method for quickly\
+    \ interacting with and viewing the state of applications you have deployed using\
+    \ OpenShift. Not everything you may want to do can be done through the web console.\
+    \ You will therefore also need to be familiar with using the OpenShift command\
+    \ line tool ``oc``.\n\nIn this course the embedded _Terminal_ provided to you\
+    \ already has ``oc`` installed so you do not need to download and install the\
+    \ ``oc`` client.\n\nIf you were using a different OpenShift cluster and did not\
+    \ already have the ``oc`` command line tool, you can download it by following\
+    \ the links in the _Command Line Tools_ menu option of the web console.\n\n![Command\
+    \ Line Tools](https://katacoda.com/openshift/assets/introduction/cluster-access-44/02-command-line-tools.png)\n\
+    \nA link to details on where to get the command line tools was also shown on the\
+    \ initial welcome page when you first accessed the cluster when there were no\
+    \ projects.\n\nOnce you get to the list of downloads, you would need to download\
+    \ the archive specific to your platform, extract the ``oc`` binary and install\
+    \ it.\n\nTo login to the OpenShift cluster used for this course run in the terminal:\n\
+    \n```\noc login -u developer -p developer`\n```\n\nYou should see output similar\
+    \ to:\n\n```\nAuthentication required for https://openshift:6443 (openshift)\n\
+    Login successful.\n\nYou don't have any projects. You can try to create a new\
+    \ project, by running\n\n    oc new-project <projectname>\n```\n\nNext, create\
+    \ a new project namespace:\n\n```\noc new-project myproject`\n```\n\nYou can list\
+    \ all the projects you currently have access to by running:\n\n```\noc get projects`\n\
+    ```\n\nOnce logged in, you can verify what user you are logged in by running:\n\
+    \n```\noc whoami`\n```\n\nYou can verify which server you are logged into by running:\n\
+    \n```\noc whoami --show-server`\n```\n\nIn the case of an external authentication\
+    \ service being used as the identity provider, the required steps are a bit different.\n\
+    \nIf you login using ``oc login`` on the command line you will be presented with\
+    \ an error message similar to:\n\n```\nLogin failed (401 Unauthorized)\nYou must\
+    \ obtain an API token by visiting\n  https://api.starter-us-east-1.openshift.com/oauth/token/request\n\
+    ```\n\nYou would visit the link given, logging in first via the separate authentication\
+    \ service if necessary. You will then be redirected to a page which will give\
+    \ details of the login command to use. This will include an access token to authenticate\
+    \ you for the session.\n\nEven in the case where user authentication is managed\
+    \ by the OpenShift cluster and user credentials are accepted, you can opt to instead\
+    \ use an access token. You can retrieve the command to run by manually entering\
+    \ the ``/oauth/token/request`` path against the URL for the cluster access endpoint.\n\
+    \nIf you are already logged into the web console, you can also retrieve the details\
+    \ of the login command and access token by accessing the _Copy Login Command_\
+    \ menu option under your login name.\n\n ![Request Access Token](https://katacoda.com/openshift/assets/introduction/cluster-access-44/02-login-access-token.png)\n\
+    \nWhichever mechanism you use to login from the command line using ``oc login``,\
+    \ the login will periodically expire and you will need to login again. The expiration\
+    \ period is typically 24 hours.\n"
+  difficulty: basic
+  slug: 02-logging-in-via-the-command-line
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 2 - Logging in Via the Command Line
+  type: challenge
+- assignment: 'Working alone can be lots of fun, but as your application grows you
+    may want to get others to help. This is no problem with OpenShift as it is built
+    to be multi tenant. This means it can support many different users, each working
+    on their own applications. To support collaboration on the same project, you can
+    also grant other users access to any of your projects. Access can be granted at
+    varying levels depending on what they need to be able to do in your project.
+
+
+    To test out how users can collaborate, we need another user.
+
+
+    Login from the command line as the user ``user1`` by running:
+
+
+    ```
+
+    oc login --username user1 --password user1`
+
+    ```
+
+
+    This is the first time this user has logged in, so if you run:
+
+
+    ```
+
+    oc get projects`
+
+    ```
+
+
+    you should see that the user has access to no projects.
+
+
+    To grant this user access to your project, go to the list of projects in the web
+    console and select on the drop down menu to the right of the project name and
+    select on _Edit Project_.
+
+
+    ![Edit Project Details](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-edit-project-option.png)
+
+
+    When the project details are displayed, select on the _Role Bindings_ tab.
+
+
+    ![Project Role Bindings](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-project-role-bindings.png)
+
+
+    You will see that only the ``developer`` user is a member of the project at this
+    point, with the user having `admin` access.
+
+
+    Click on _Create Binding_ to grant an additional user access to the project.
+
+
+    ![Create Role Binding](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-create-role-binding.png)
+
+
+    For the name of the role binding use ``user1-edit``.
+
+
+    Ensure that the ``myproject`` namespace is selected, and with the role name as
+    ``edit``.
+
+
+    Finally enter ``user1`` as the subject name.
+
+
+    Click on _Create_.
+
+
+    The user ``user1`` is now a member of the project. Back in the _Terminal_ run
+    again the command:
+
+
+    ```
+
+    oc get projects`
+
+    ```
+
+
+    This should show that ``user1`` now has access to the project created by the ``developer``
+    user.
+
+
+    In this case you gave ``user1`` the role type ``edit`` in the project. This allows
+    the user to perform most tasks within the project, with the exception of tasks
+    related to administration of the project. The user therefore cannot make changes
+    to project membership or delete the project.
+
+
+    Other roles you might instead assign to a collaborator are ``view``, which means
+    they can look at everything in the project, but not change anything, or ``admin``,
+    which gives them equal rights as the owner of the project, including editing project
+    membership or deleting the project.
+
+
+    Making changes to project membership can also be done from the command line using
+    ``oc``.
+
+
+    As ``user1`` has no projects at this point, create one by running:
+
+
+    ```
+
+    oc new-project mysecrets`
+
+    ```
+
+
+    Then add the ability for ``developer`` to also view that project by running:
+
+
+    ```
+
+    oc adm policy add-role-to-user view developer -n mysecrets`
+
+    ```
+
+
+    Return to the main page in the web console where the list of projects is shown
+    for ``developer`` and you should
+
+    see ``mysecrets`` listed.
+
+    '
+  difficulty: basic
+  slug: 03-collaborating-with-other-users
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 3 - Collaborating with Other Users
+  type: challenge
+- assignment: 'When using the ``oc`` command line tool, you can only interact with
+    one OpenShift cluster at a time. It is not possible to open a separate shell on
+    the same computer, as the same local user, and work on a different OpenShift cluster
+    at the same time. This is because state about the current login session is stored
+    in the home directory of the local user running the ``oc`` command.
+
+
+    If you do need to work against multiple OpenShift clusters, or even as different
+    users on the same OpenShift cluster, you will need to remember to switch between
+    them.
+
+
+    In this course you originally logged in from the command line using ``oc login``
+    as the ``developer`` user. You then subsequently logged in as the ``user1`` user.
+
+
+    At this point you are still logged in and have an active session token for both
+    users, but are currently operating as the ``user1`` user.
+
+
+    To switch back to the ``developer`` user run:
+
+
+    ```
+
+    oc login --username developer`
+
+    ```
+
+
+    Because you had already provided a password for the ``developer`` user, you will
+    not be prompted to supply it again. The only time you would be prompted again
+    to provide the password, or supply a new session token, when switching users,
+    is if the active session had expired.
+
+
+    You can validate that you are now the ``developer`` user by running:
+
+
+    ```
+
+    oc whoami`
+
+    ```
+
+
+    If you are working against multiple OpenShift clusters, to switch between them,
+    you again use ``oc login``, but supply just the URL for the OpenShift cluster.
+    For example, if you had an account with the OpenShift Online free starter tier,
+    and had been assigned to the ``us-east-1`` cluster, you could run:
+
+
+    ``oc login https://api.starter-us-east-1.openshift.com``
+
+
+    When switching between OpenShift clusters, if you do not explicitly say which
+    user to use, it will use whatever was the last user you were logged in as with
+    that cluster. You can still provide ``--username`` if required.
+
+
+    Switching, without needing to supply the password or register with a token is
+    possible as details for each are saved away separately in what is called a context.
+    You can see what the current context is by running:
+
+
+    ```
+
+    oc whoami --show-context`
+
+    ```
+
+
+    You can get a list of all OpenShift clusters you have ever logged into by running:
+
+
+    ```
+
+    oc config get-clusters`
+
+    ```
+
+
+    You can get a list of all contexts which have ever been created, indicating what
+    users on those clusters you have logged in as, and which projects you have worked
+    on, by running:
+
+
+    ```
+
+    oc config get-contexts`
+
+    ```
+
+    '
+  difficulty: basic
+  slug: 04-switching-between-accounts
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Topic 4 - Switching Between Accounts
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: cluster-access
+tags:
+- openshift
+title: Logging in to an OpenShift Cluster
+type: truck

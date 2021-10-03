@@ -1,0 +1,3 @@
+[submodule "learn-katacoda"]
+	path = learn-katacoda
+	url = https://github.com/openshift-labs/learn-katacoda.git

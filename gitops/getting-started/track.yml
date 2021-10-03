@@ -1,0 +1,250 @@
+challenges:
+- assignment: "Welcome! In this section we will be exploring the OpenShift GitOps\n\
+    Operator, what it installs, and how all the components fit together.\n\n## Logging\
+    \ in to the Cluster via Dashboard\n\nClick the [OpenShift Web Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)\
+    \ tab to open the OpenShift Web UI. \n\nYou will then be able to login with admin\
+    \ permissions with:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\n\
+    ## Exploring the GitOps Operator Installation\n\nThe OpenShift GitOps Operator\
+    \ was installed via the Operator Hub. You\ncan view this installation via the\
+    \ UI in the Administrator Perspective:\n\n* Click on `Operators` drop down on\
+    \ the leftside navigation.\n* Click on `Installed Operators`\n* In the `Project`\
+    \ dropdown, make sure `openshift-gitops` is selected.\n\nYou should see that the\
+    \ OpenShift GitOps Operator is installed.\n\n![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)\n\
+    \nAnother way to view what was installed is to run the following:\n\n```\noc get\
+    \ operators\n```\n\nThis should have the following output.\n\n```shell\nNAME \
+    \                                                 AGE\nopenshift-gitops-operator.openshift-operators\
+    \         25m\n```\n\nThis Operator is a \"meta\" Operator that installs both\
+    \ Argo CD and the\nTekton Operator. This is why you see both the GitOps Operator\
+    \ and the\nTekton Operator listed.\n\nFinally, you can verify the installation\
+    \ by running ```\noc get pods -n openshift-gitops\n```\n\nYou should something\
+    \ similar to the following output.\n\n```shell\nNAME                         \
+    \                                 READY   STATUS    RESTARTS   AGE\ncluster-b5798d6f9-p9mt5\
+    \                                       1/1     Running   0          12m\nkam-69866d7c48-hr92f\
+    \                                          1/1     Running   0          12m\n\
+    openshift-gitops-application-controller-0                     1/1     Running\
+    \   0          12m\nopenshift-gitops-applicationset-controller-6447b8dfdd-2xqw2\
+    \   1/1     Running   0          12m\nopenshift-gitops-redis-74bd8d7d96-72fmd\
+    \                       1/1     Running   0          12m\nopenshift-gitops-repo-server-c999f75d5-7jfc8\
+    \                  1/1     Running   0          12m\nopenshift-gitops-server-6ff4fbc8f6-fpfdp\
+    \                      1/1     Running   0          7m47s\n```\n\nOnce you see\
+    \ the all the pods running, you can proceed!\n"
+  difficulty: basic
+  slug: 01-exploring-openshift-operator
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Exploring the OpenShift GitOps Operator
+  type: challenge
+- assignment: 'Now that you''ve verified that Argo CD is up and running, let''s explore
+
+    how to access and manage Argo CD.
+
+
+    ## The Argo CD CLI
+
+
+    Part of the setup of this lab connects you to the Argo CD instance via
+
+    CLI. Verify this by running the following:
+
+
+    ```
+
+    argocd cluster list
+
+    ```
+
+
+    You should see output similar to this:
+
+
+    ```shell
+
+    SERVER                          NAME        VERSION  STATUS   MESSAGE
+
+    https://kubernetes.default.svc  in-cluster           Unknown  Cluster has no application
+    and not being monitored.
+
+    ```
+
+
+    This output lists the clusters that Argo CD manages. In this case
+
+    `in-cluster` in the `NAME` field signifies that Argo CD is managing the
+
+    cluster it''s installed on.
+
+
+    > **NOTE** You can connect multiple clusters for Argo CD to manage!
+
+
+    To enable bash completion, run the following command:
+
+
+    ```
+
+    source <(argocd completion bash)
+
+    ```
+
+
+    The Argo CD CLI stores it''s configuration under `~/.argocd/config`
+
+
+    > **NOTE** The `argocd cluster add` command used the `~/.kube/config` file to
+    establish connection to the cluster.
+
+
+    ```
+
+    ls ~/.argocd/config
+
+    ```
+
+
+    The `argocd` CLI tool is useful for debugging and viewing status of your apps
+    deployed.
+
+
+    ## The Argo CD Web Console
+
+
+    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+    tab.
+
+
+    Once you have accepted the self signed certificate, you should be
+
+    presented with the Argo CD login screen.
+
+
+    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+
+
+    You can login with the following
+
+    * **Username:** ``admin``
+
+    * **Password:** ```
+
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+
+    ```
+
+
+    > **NOTE** The Password is stored in a secret on the platform.
+
+
+    Once you''ve logged in, you should see the following page.
+
+
+    ![ArgoCD](https://katacoda.com/openshift/assets/gitops/argocd.png)
+
+
+    This is the Argo CD Web UI. Keep this tab open for the next exercise.
+
+    '
+  difficulty: basic
+  slug: 02-connecting-to-argocd
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Connecting to ArgoCD
+  type: challenge
+- assignment: "In this environment, we have some\nexample manifesets taken from our\
+    \ [sample GitOps repo](https://github.com/redhat-developer-demos/openshift-gitops-examples).\n\
+    We'll be uisng this repo to test. These manifests include:\n\n* A **Namespace**:\
+    \ `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-ns.yaml`{{open}}\n* A **Deployment**:\
+    \ `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-deployment.yaml`{{open}}\n\
+    * A **Service**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-svc.yaml`{{open}}\n\
+    * A **Route**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-route.yaml`{{open}}\n\
+    \nCollectively, this is known as an `Application` within ArgoCD. Therefore,\n\
+    you must define it as such in order to apply these manifest in your\ncluster.\n\
+    \nOpen up the Argo CD `Application` manifest: `openshift-gitops-examples/components/applications/bgd-app.yaml`{{open}}\n\
+    \nLet's break this down a bit.\n\n* ArgoCD's concept of a `Project` is different\
+    \ than OpenShift's. Here you're installing the application in ArgoCD's `default`\
+    \ project (`.spec.project`). **NOT** OpenShift's `default` project.\n* The destination\
+    \ server is the server we installed ArgoCD on (noted as `.spec.destination.server`).\n\
+    * The manifest repo where the YAML resides and the path to look for the YAML is\
+    \ under `.spec.source`.\n* The `.spec.syncPolicy` is set to `false`. Note that\
+    \ you can have Argo CD automatically sync the repo.\n* The last section `.spec.sync`\
+    \ just says what are you comparing the repo to. (Basically \"Compare the running\
+    \ config to the desired config\")\n\nThe `Application` CR (`CustomResource`) can\
+    \ be applied by running the following:\n\n```\noc apply -f ~/resources/openshift-gitops-examples/components/applications/bgd-app.yaml\n\
+    ```\n\nThis should create the `bgd-app` in the ArgoCD UI.\n\n![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgd-app.png)\n\
+    \nClicking on this \"card\" takes you to the overview page. You may see it as\
+    \ still progressing or full synced. \n\n![synced-app](https://katacoda.com/openshift/assets/gitops/synced-app.png)\n\
+    \n> **NOTE**: You may have to click on `show hidden resources` on this page to\
+    \ see it all\n\nAt this point the application should be up and running. You can\
+    \ see\nall the resources created with the ```\noc get pods,svc,route -n bgd\n\
+    ```\ncommand. The output should look like this:\n\n```shell\nNAME            \
+    \           READY   STATUS    RESTARTS   AGE\npod/bgd-788cb756f7-kz448   1/1 \
+    \    Running   0          10m\n\nNAME          TYPE        CLUSTER-IP       EXTERNAL-IP\
+    \   PORT(S)    AGE\nservice/bgd   ClusterIP   172.30.111.118   <none>        8080/TCP\
+    \   10m\n\nNAME                           HOST/PORT                          \
+    \      PATH   SERVICES   PORT   TERMINATION   WILDCARD\nroute.route.openshift.io/bgd\
+    \   bgd-bgd.apps.example.com          bgd        8080                 None\n```\n\
+    \nFirst wait for the rollout to complete ```\noc rollout status deploy/bgd -n\
+    \ bgd\n``` \n\nThen visit your application using the route by clicking [HERE](http://bgd-bgd.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
+    \nYour application should look like this.\n\n![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)\n\
+    \nLet's introduce a change! Patch the live manifest to change the color\nof the\
+    \ box from blue to green:\n\n```\noc -n bgd patch deploy/bgd --type='json' -p='[{\"\
+    op\": \"replace\", \"path\": \"/spec/template/spec/containers/0/env/0/value\"\
+    , \"value\":\"green\"}]'\n```\n\nWait for the rollout to happen:\n\n```\noc rollout\
+    \ status deploy/bgd -n bgd\n```\n\nIf you refresh your tab where your application\
+    \ is running you should see a green square now.\n\n![bgd-green](https://katacoda.com/openshift/assets/gitops/bgd-green.png)\n\
+    \nLooking over at your Argo CD Web UI, you can see that Argo detects your\napplication\
+    \ as \"Out of Sync\".\n\n![outofsync](https://katacoda.com/openshift/assets/gitops/out-of-sync.png)\n\
+    \nYou can sync your app via the Argo CD by:\n\n* First clicking `SYNC`\n* Then\
+    \ clicking `SYNCHRONIZE`\n\nConversely, you can run ```\nargocd app sync bgd-app\n\
+    ```\n\nAfter the sync process is done, the Argo CD UI should mark the application\
+    \ as in sync.\n\n![fullysynced](https://katacoda.com/openshift/assets/gitops/fullysynced.png)\n\
+    \nIf you reload the page on the tab where the application is running. It\nshould\
+    \ have returned to a blue square.\n\n![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)\n\
+    \nYou can setup Argo CD to automatically correct drift by setting the\n`Application`\
+    \ manifest to do so. Here is an example snippet:\n\n```yaml\nspec:\n  syncPolicy:\n\
+    \    automated:\n      prune: true\n      selfHeal: true\n```\n\nOr, as in our\
+    \ case, after the fact by running the following command:\n\n```\noc patch application/bgd-app\
+    \ -n openshift-gitops --type=merge -p='{\"spec\":{\"syncPolicy\":{\"automated\"\
+    :{\"prune\":true,\"selfHeal\":true}}}}'\n```"
+  difficulty: basic
+  slug: 03-deploying-sample-application
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Deploying a Sample Application
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: getting-started
+tags:
+- openshift
+title: Getting Started with ArgoCD and OpenShift GitOps Operator
+type: truck

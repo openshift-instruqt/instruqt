@@ -1,0 +1,346 @@
+challenges:
+- assignment: 'The application you will be deploying is a wild west shooter style
+    game.
+
+
+    Applications are often divided into components based on a logical division of
+    labor. For example, an application might consist of a data-storage, backend component
+    that performs the application''s primary work and stores the results. The backend
+    component is paired with a user interface, frontend component that accesses the
+    backend to retrieve data and displays it to a user.
+
+
+    The application deployed in this tutorial consists of two such components.
+
+
+    ## Backend
+
+
+    The backend is a Java Spring Boot application. It performs queries against the
+    Kubernetes and OpenShift REST APIs to retrieve a list of the resource objects
+    that were created when you deployed the application. Then, it returns details
+    about these resource objects to the frontend.
+
+
+    ## Frontend
+
+
+    The frontend is the user interface for a wild west style game written in Node.js.
+    It displays popup images which you can shoot, corresponding to the resource objects
+    returned by the backend.
+
+    '
+  difficulty: basic
+  slug: 00-application-overview
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Application Overview
+  type: challenge
+- assignment: "## Logging in to OpenShift\n\nBefore we get started, you need to log\
+    \ in to OpenShift. To log in to the OpenShift cluster used for this scenario from\
+    \ the _Terminal_,\nrun:\n\n```\nodo login -u developer -p developer\n```\n\nThis\
+    \ will log you in using the credentials:\n\n* **Username:** ``developer``\n* **Password:**\
+    \ ``developer``\n\nYou should see the output below:\n\n```\nConnecting to the\
+    \ OpenShift cluster\n\nLogin successful.\n\nYou don't have any projects. You can\
+    \ try to create a new project, by running\n    odo project create <project-name>\n\
+    ```\n\nWe will start by creating a new project by running `odo project create`:\n\
+    \n```\nodo project create myproject\n```\n\nYou should see the following output\
+    \ confirming the creation of a new OpenShift project called `myproject` and that\
+    \ `odo` is now using `myproject`:\n\n```\n \u2713  Project 'myproject' is ready\
+    \ for use\n \u2713  New project created and now using project : myproject\n```\n\
+    \n## Creating a Service Account\nThe backend of our application uses the OpenShift\
+    \ REST API. In order for the backend to access the API, we need to grant access\
+    \ to the service account that the backend is using. We will do this in the web\
+    \ console.\n\nClick the **Console** tab next to the **Terminal** tab near the\
+    \ center top of your browser. This opens the OpenShift web console.\n\nYou should\
+    \ see an OpenShift window with **Username** and **Password** fields, which is\
+    \ similar to this one:\n\n![OCP Web Console](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/ocp-login.png)\n\
+    \nFor this scenario, start by entering the following:\n\n**Username:** ``developer``\n\
+    \n**Password:** ``developer``\n\nAfter logging in to the web console, you'll be\
+    \ in the **Administrator** perspective of the web console, which is a view of\
+    \ the console for handling operations and administrative tasks associated with\
+    \ your OpenShift cluster.\n\nTo start, select the project you just created using\
+    \ `odo` (i.e. `myproject`) by clicking on `myproject` on the **Projects** page\
+    \ as shown below:\n\n![Projects](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/myproject.png)\n\
+    \nBy clicking on the project name, you will be taken to the **Project Details**\
+    \ page that shows information about what is happening in your project. By clicking\
+    \ on the project name, you are also now using this project and all actions via\
+    \ the web console will now happen in this project.\n\nOn the left side of the\
+    \ console, click the **Administration** tab and select the **RoleBindings** option\
+    \ as shown below:\n\n![Role Binding](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/role-binding.png)\n\
+    \nOn the **RoleBindings** page, click the **Create Binding** button and fill out\
+    \ the wizard with the information shown below:\n\n![Role Binding Wizard](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/role-binding-wizard.png)\n\
+    \nFeel free to copy the information for the role binding name and service account\
+    \ subject name below:\n\n**Role Binding Name:** ``defaultview``\n\n**Subject Name:**\
+    \ ``default``\n\nAlternatively, this step can be completed via the command line\
+    \ by running `oc adm policy add-role-to-user view --rolebinding-name=defaultview\
+    \ -z default`\n\nThe default service account provided to the backend container\
+    \ will now have **view** access, allowing it can retrieve objects via the API.\
+    \ Note that you could choose to grant access to the **edit** role instead. Providing\
+    \ **edit** access would allow the backend to view, modify, or delete objects.\
+    \ Enabling this level of access allows the backend to destroy non-recoverable\
+    \ resources that are used to host the game (breaking the user-experience for app\
+    \ users) - which is why we are using **view** access for this scenario.\n"
+  difficulty: basic
+  slug: 01-creating-initial-project
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Creating an Initial Project
+  type: challenge
+- assignment: "As mentioned, applications often consist of two or more components\
+    \ that work together to implement the overall application. OpenShift helps organize\
+    \ these modular applications with a concept called, appropriately enough, the\
+    \ application. An OpenShift application represents all of an app's components\
+    \ in a logical management unit. The `odo` tool helps you manage that group of\
+    \ components and link them together as an application.\n\nA selection of runtimes,\
+    \ frameworks, and other components are available on an OpenShift cluster for building\
+    \ your applications. This list is referred to as the **Developer Catalog**.\n\n\
+    List the supported component types in the catalog by running:\n\n```\nodo catalog\
+    \ list components\n```\n\nAdministrators can configure the catalog to determine\
+    \ what components are available in the catalog, so the list will vary on different\
+    \ OpenShift clusters. For this scenario, the cluster's catalog list must include\
+    \ `java` and `nodejs`.\n\nSource code for the backend of our `wildwest` application\
+    \ is available in the command line environment. Change directories into the source\
+    \ directory, `backend`:\n\n```\ncd ~/backend\n```\n\nTake a look at the contents\
+    \ of the `backend` directory. It's a regular Java Spring Boot application using\
+    \ the Maven build system:\n\n```\nls\n```\n\nBuild the `backend` source files\
+    \ with Maven to create a jar file:\n\n```\nmvn package\n```\n\nSince this is the\
+    \ first time running this build, it may take 30-45 seconds to complete. Subsequent\
+    \ builds will run much more quickly.\n\nWith the backend's `.jar` file built,\
+    \ we can use `odo` to deploy and run it atop the Java application server we saw\
+    \ earlier in the catalog. The command below creates a *component* configuration\
+    \ of *component-type* `java` named `backend`:\n\n```\nodo create java:openjdk-11-ubi8\
+    \ backend --s2i --binary target/wildwest-1.0.jar --app=app\n```\n\nAs the component\
+    \ configuration is created, `odo` will print the following:\n\n```\n\u2713  Validating\
+    \ component [6ms]\nPlease use `odo push` command to create the component with\
+    \ source deployed\n```\n\nThe component is not yet deployed on OpenShift. With\
+    \ an `odo create` command, a configuration file called `config.yaml` has been\
+    \ created in the local directory of the `backend` component that contains information\
+    \ about the component for deployment.\n\nTo see the configuration settings of\
+    \ the `backend` component in `config.yaml`, `odo` has a command to display this\
+    \ information:\n\n```\nodo config view\n```\n\nSince `backend` is a binary component,\
+    \ as specified in the `odo create` command above, changes to the component's source\
+    \ code should be followed by pushing the jar file to a running container. After\
+    \ `mvn` compiled a new `wildwest-1.0.jar` file, the program would be deployed\
+    \ to OpenShift with the `odo push` command. We can execute such a push right now:\n\
+    \n```\nodo push\n```\n\nAs the push is progressing, `odo` will print output similar\
+    \ to the following:\n\n```\nValidation\n \u2713  Checking component [13ms]\n\n\
+    Configuration changes\n \u2713  Initializing component\n \u2713  Creating component\
+    \ [107ms]\n\nPushing to component backend of type binary\n \u2713  Checking files\
+    \ for pushing [2ms]\n \u2713  Waiting for component to start [59s]\n \u2713  Syncing\
+    \ files to the component [14s]\n \u2713  Building component [2s]\n```\n\nUsing\
+    \ `odo push`, OpenShift has created a container to host the `backend` component,\
+    \ deployed the container into a pod running on the OpenShift cluster, and started\
+    \ up the `backend` component.\n\nYou can view the `backend` component being started\
+    \ up in the web console by switching over from the **Administrator** perspective\
+    \ to the **Developer** perspective. To do this, select the **Developer** option\
+    \ from the dropdown menu as shown below:\n\n![Developer Perspective](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/developer-perspective.png)\n\
+    \nAfter selecting the **Developer** option, you will be on the **Topology** view\
+    \ that shows what components are deployed in your OpenShift project. The `backend`\
+    \ component is successfully deployed as a container that runs on a pod. When a\
+    \ dark blue circle appears around the backend component as shown below, the pod\
+    \ is ready and the `backend` component container will start running on it.\n\n\
+    ![Backend Pod](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/backend-pod.png)\n\
+    \nIf you want to check on the status of an action in `odo`, you can use the `odo\
+    \ log` command. When `odo push` is finished, run `odo log` to follow the progress\
+    \ of the `backend` component deployment:\n\n```\nodo log -f\n```\n\nYou should\
+    \ see output similar to the following to confirm the `backend` is running on a\
+    \ container in a pod in `myproject`:\n\n```\n2019-05-13 12:32:15.986  INFO 729\
+    \ --- [           main] c.o.wildwest.WildWestApplication         : Started WildWestApplication\
+    \ in 6.337 seconds (JVM running for 7.779)\n```\n\nThe `backend` jar file has\
+    \ now been pushed, and the `backend` component is running.\n\nWhen you've completed\
+    \ your review of the logs, send a break signal `CTRL-C` to return to the command\
+    \ prompt. \n"
+  difficulty: basic
+  slug: 02-creating-new-binary-component
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Creating new binary component
+  type: challenge
+- assignment: "With the `backend` component running and connected to persistent storage,\
+    \ we are ready to bring up the `frontend` component and connect it to the `backend`.\
+    \ Once again, source code for the component is already available in the command\
+    \ line environment.\n\nChange directories to the `frontend` directory:\n\n`cd\
+    \ ~/frontend`{{execute interrupt}}\n\nListing the contents of this directory shows\
+    \ that `frontend` is a Node.js application.\n\n```\nls\n```\n\nSince `frontend`\
+    \ is written in an interpreted language, there is no build step analogous to the\
+    \ Maven build we performed for the `backend` component. We can proceed directly\
+    \ to specifying the `nodejs` environment from the cluster's catalog.\n\nWe give\
+    \ this Node.js component the name `frontend`:\n\n```\nodo create frontend --app=app\n\
+    ```\n\n`odo` will create a `config.yaml` just like with the `backend` component,\
+    \ and you should see the following output:\n\n```\n\u2713  Validating component\
+    \ [6ms]\nPlease use `odo push` command to create the component with source deployed\n\
+    ```\n\nWith the component named and the config file created, we can push the Node.js\
+    \ source code from the current directory:\n\n```\nodo push\n```\n\n`odo push`\
+    \ should produce the following output:\n\n```\nValidation\n \u2713  Checking component\
+    \ [23ms]\n\nConfiguration changes\n \u2713  Initializing component\n \u2713  Creating\
+    \ component [86ms]\n\nPushing to component frontend of type local\n \u2713  Checking\
+    \ files for pushing [710993ns]\n \u2713  Waiting for component to start [52s]\n\
+    \ \u2713  Syncing files to the component [26s]\n \u2713  Building component [8s]\n\
+    \ \u2713  Changes successfully pushed to component\n```\n\nWhen we created the\
+    \ `backend` component, we viewed the logs via the terminal. You can also follow\
+    \ the status of your container creation in the web console. Click the **Console**\
+    \ tab and make sure you're in the project named `myproject`.\n\nDepending on how\
+    \ far along your `odo push` is, you may see the pod for the `frontend` component\
+    \ starting up with a light blue ring as shown below. This light blue ring means\
+    \ the pod is in a pending state and hasn't started yet:\n\n![Frontend Pending](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-pending.png)\n\
+    \nOnce the pod becomes available, you'll see the `frontend` component become available\
+    \ with a dark blue ring around it like the `backend` component has. This is shown\
+    \ below:\n\n![Frontend Running](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-running.png)\n\
+    \nTo see the logs of the `frontend` component, wait for the dark blue ring to\
+    \ appear around the component and then click on the `frontend` component circle.\
+    \ This should bring up the deployment config for `frontend` and present the option\
+    \ to **View Logs** under the **Pods** section. This is shown below:\n\n![Frontend\
+    \ Logs](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-logs.png)\n\
+    \nClick on **View Logs** where you should eventually see the following logs confirming\
+    \ `frontend` is running:\n\n```\nCONFIG ERROR: backend component config not found:\
+    \ COMPONENT_BACKEND_HOST, COMPONENT_BACKEND_PORT\nListening on 0.0.0.0, port 8080\n\
+    Frontend available at URL_PREFIX: /\n{ Error: 'Backend Component Not Configured'\
+    \ }\n```\n\nDon't worry about the error message for now! You'll correct this in\
+    \ the next section.\n\nWhen you are done viewing the logs, click on the **Topology**\
+    \ tab on the left side of the web console to head back to `myproject`.\n"
+  difficulty: basic
+  slug: 03-deploying-component-from-source-code
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Deploying component from source-code
+  type: challenge
+- assignment: "With both components of our application running on the cluster, we\
+    \ need to confifigure the frontend to connect to the backend service. \n\nConfigure\
+    \ the `frontend` component to connect to the `backend` by running:\n\n```\nodo\
+    \ config set --env COMPONENT_BACKEND_PORT=8080,COMPONENT_BACKEND_HOST=backend-app\n\
+    ```\n\nThis will inject configuration information into the `frontend` about the\
+    \ `backend`.  Run `odo push` to distribute the configuration changes and restart\
+    \ the `frontend` component.\n\n```\nodo push\n```\n\nIf you head back quickly\
+    \ enough to the web console by clicking on the **Console** tab, you will see the\
+    \ `frontend` component have its dark blue ring turn light blue again. This means\
+    \ that the pod for `frontend` is being restarted so that it will now run with\
+    \ information about how to connect to the `backend` component. When the frontend\
+    \ component has a dark blue ring around it again, the linking is complete.\n\n\
+    Click on the `frontend` component circle and select **View Logs**. This time,\
+    \ instead of an error message, you will see the following confirming the `frontend`\
+    \ is properly communicating with the `backend` component:\n\n```\nListening on\
+    \ 0.0.0.0, port 8080\nFrontend available at URL_PREFIX: /\nProxying \"/ws/*\"\
+    \ to 'backend-app:8080'\n```\n\nNow that the `frontend` component has successfully\
+    \ connected to the `backend` component, let's add a `Route` to make the `frontend`\
+    \ publicly accessible.\n"
+  difficulty: basic
+  slug: 04-configuring-components
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Configuring components
+  type: challenge
+- assignment: "We have updated `frontend` to connect to our `backend`, allowing our\
+    \ application's components to communicate. Let's now create an external URL for\
+    \ our application so we can see it in action:\n\n```\nodo url create frontend\
+    \ --port 8080\n```\n\nOnce the URL has been created in the `frontend` component's\
+    \ configuration, you will see the following output:\n\n```\n\u2713  URL created\
+    \ for component: frontend\n\nTo create URL on the OpenShift cluster, please run\
+    \ `odo push`\n```\n\nThe change can now be pushed:\n\n```\nodo push\n```\n\n`odo`\
+    \ will print the URL generated for the application. It should be located in the\
+    \ middle of the output from `odo push` similar to the output below:\n\n```\nValidation\n\
+    \ \u2713  Checking component [34ms]\n\nConfiguration changes\n \u2713  Retrieving\
+    \ component data [27ms]\n \u2713  Applying configuration [25ms]\n\nApplying URL\
+    \ changes\n \u2713  URL frontend: http://frontend-app-myproject.2886795278-80-frugo03.environments.katacoda.com\
+    \ created\n\nPushing to component frontend of type local\n \u2713  Checking file\
+    \ changes for pushing [832029ns]\n \u2713  No file changes detected, skipping\
+    \ build. Use the '-f' flag to force the build.\n```\n\nVisit the URL in your browser\
+    \ to view the application once the `odo push` command finishes.\n"
+  difficulty: basic
+  slug: 05-exposing-components-to-public
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Exposing components to public
+  type: challenge
+- assignment: "We've deployed the first version of our application and tested it by\
+    \ visiting it with a browser. Let's look at how OpenShift and `odo` help make\
+    \ it easier to iterate on that app once it's running.\n\nFirst, make sure you\
+    \ are still in the `frontend` directory:\n\n```\ncd ~/frontend\n```\n\nNow, we\
+    \ will tell `odo` to `watch` for changes on the file system in the background.\
+    \ Note that the `&` is included to run `odo watch` in the background for this\
+    \ tutorial, but it is usually just run as `odo watch` and can be terminated using\
+    \ `ctrl+c`.\n\n```\nodo watch &\n```\n\nLet's change the displayed name for our\
+    \ wild west game. Currently, the title is \"Wild West The OpenShift Way!\" We\
+    \ will change this to \"My App The OpenShift Way!\"\n\n![Application Title](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/app-name.png)\n\
+    \nEdit the file `index.html` with a search-and-replace one-liner performed with\
+    \ the Unix stream editor, `sed`:\n\n```\nsed -i \"s/Wild West/My App/\" index.html\n\
+    ```\n\nThere may be a slight delay before `odo` recognizes the change. Once the\
+    \ change is recognized, `odo` will push the changes to the `frontend` component\
+    \ and print its status to the terminal:\n\n```\nFile /root/frontend/index.html\
+    \ changed\nFile  changed\nPushing files...\n\u2713  Waiting for component to start\
+    \ [10ms]\n\u2713  Syncing files to the component [16s]\n\u2713  Building component\
+    \ [6s]\n```\n\nRefresh the application's page in the web browser. You will see\
+    \ the new name in the web interface for the application.\n\n__NOTE__: If you no\
+    \ longer have the application page opened in a browser, you can recall the url\
+    \ by executing:\n\n`odo url list`{{execute interrupt}}\n"
+  difficulty: basic
+  slug: 06-making-changes-to-source-code
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Making changes to source-code
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: developing-with-odo
+tags:
+- openshift
+title: Developing with odo
+type: truck

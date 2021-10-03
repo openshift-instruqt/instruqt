@@ -1,0 +1,538 @@
+challenges:
+- assignment: "# Inspect Java runtime\n\nAn appropriate Java runtime has been installed\
+    \ for you. Ensure you can use it by running this command:\n\n> If the command\
+    \ fails, wait a few moments and try again (it is installed in a background process\
+    \ and make take a few moments depending on system load).\n\n```\n$JAVA_HOME/bin/java\
+    \ --version\n```\n\nThe command should report the version in use, for example\
+    \ (the versions and dates may be slightly different than the below example):\n\
+    \n```console\nopenjdk 11.0.10 2021-01-19\nOpenJDK Runtime Environment AdoptOpenJDK\
+    \ (build 11.0.10+9)\nOpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed\
+    \ mode)\n```\n## Create sample project\n\nLet's create the basic Quarkus _Hello\
+    \ World_ application and include the necessary qute extensions. Click this command\
+    \ to create the project:\n\n`cd /root/projects/quarkus &&\n mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create\
+    \ \\\n    -DprojectGroupId=org.acme \\\n    -DprojectArtifactId=qute \\\n    -Dextensions=\"\
+    quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler\"`{{execute\
+    \ T1}}\n\n> The first time you create an app, new dependencies may be downloaded\
+    \ via maven and take a minute or so. This should only happen once, after that\
+    \ things will go even faster.\n\nThis will use the Quarkus Maven Plugin and generate\
+    \ a sample Qute project for you in the `qute` subdirectory and include the `quarkus-resteasy-qute`\
+    \ extension which includes the templating engine and integration with JAX-RS via\
+    \ RestEasy. We've also included a few other extensions we'll use later on.\n\n\
+    Once generated, look at the `qute/pom.xml`{{open}}. You will find the import of\
+    \ the Quarkus BOM, allowing to omit the version on the different Quarkus dependencies.\n\
+    \n## Start the app\n\nLet's begin Live Coding. Click on the following command\
+    \ to start the example app in _Live Coding_ mode:\n\n`cd /root/projects/quarkus/qute\
+    \ && \\\n  mvn quarkus:dev -Dquarkus.http.host=0.0.0.0`{{execute T1}}\n\nYou should\
+    \ see:\n\n```console\n__  ____  __  _____   ___  __ ____  ______\n --/ __ \\/\
+    \ / / / _ | / _ \\/ //_/ / / / __/\n -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\\ \\\
+    \n--\\___\\_\\____/_/ |_/_/|_/_/|_|\\____/___/\nINFO  [io.quarkus] (Quarkus Main\
+    \ Thread) qute 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.xx.x.Final) started\
+    \ in x.xxxs. Listening on: http://0.0.0.0:8080\nINFO  [io.quarkus] (Quarkus Main\
+    \ Thread) Profile dev activated. Live Coding activated.\nINFO  [io.quarkus] (Quarkus\
+    \ Main Thread) Installed features: [cdi, mutiny, qute, resteasy, resteasy-qute,\
+    \ scheduler, smallrye-context-propagation, vertx, vertx-web]\n```\n\n> The first\
+    \ time you build the app, new dependencies may be downloaded via maven. This should\
+    \ only happen once, after that things will go even faster.\n\nNote the amazingly\
+    \ fast startup time! The app is now running \"locally\" (within the Linux container\
+    \ in which this exercise runs).\n\nTest that the app is running by accessing the\
+    \ sample page [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page).\
+    \ You should see\n\n![Qute sample](/openshift/assets/middleware/quarkus/qute-sample.png)\n\
+    \nThis page is rendered using the `qute/src/main/resources/templates/page.qute.html`{{open}}\
+    \ HTML template. If you look closely you can see a `{name ?: \"Qute\"}` directive\
+    \ that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java`\
+    \ class and passed into the template renderer in the `data()` method, making the\
+    \ `name` variable available to the renderer and returning the rendered HTML to\
+    \ your browser. If you pass a different name, say, `Jerry` using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page?name=Jerry)\
+    \ (which adds `?name=Jerry` to the URL) you'll see the new name rendered via the\
+    \ Qute template:\n\n![Qute sample](/openshift/assets/middleware/quarkus/qute-sample-jerry.png)\n\
+    \nLet's keep the app running and continue using Quarkus' _Live Coding_ feature.\
+    \ Changes you make are immediately available in the running app when developing\
+    \ Quarkus apps.\n\n## Create basic template\n\nWe\u2019ll start by creating a\
+    \ new and very simple text-based template.\n\nClick `qute/src/main/resources/templates/hello.txt`{{open}}\
+    \ to create an empty template file.\n\nFinally, click the **Copy to Editor** to\
+    \ add the template code:\n\n<pre class=\"file\" data-filename=\"./qute/src/main/resources/templates/hello.txt\"\
+    \ data-target=\"replace\">\nHello {name}!\n</pre>\n\n* `{name}` is a _value expression_\
+    \ that is evaluated when the template is rendered.\n\n> By default, all files\
+    \ located in the `src/main/resources/templates` directory and its\n> subdirectories\
+    \ are registered as templates. Templates are validated during startup\n> and watched\
+    \ for changes in the development mode.\n\n## Create REST endpoint to access template\n\
+    \nNow let\u2019s inject the \"compiled\" template in the resource class.\n\nClick\
+    \ here to open `qute/src/main/java/org/acme/HelloResource.java`{{open}}.\n\nClick\
+    \ the **Copy to Editor** to update our `HelloResource` class:\n\n<pre class=\"\
+    file\" data-filename=\"./qute/src/main/java/org/acme/HelloResource.java\" data-target=\"\
+    replace\">\npackage org.acme;\n\nimport javax.inject.Inject;\nimport javax.ws.rs.GET;\n\
+    import javax.ws.rs.Path;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.QueryParam;\n\
+    import javax.ws.rs.core.MediaType;\n\nimport io.quarkus.qute.TemplateInstance;\n\
+    import io.quarkus.qute.Template;\n\n@Path(\"hello\")\npublic class HelloResource\
+    \ {\n\n    @Inject\n    Template hello;\n\n    @GET\n    @Produces(MediaType.TEXT_PLAIN)\n\
+    \    public TemplateInstance get(@QueryParam(\"name\") String name) {\n      \
+    \  return hello.data(\"name\", name);\n    }\n}\n</pre>\n\n* If there is no `@ResourcePath`\
+    \ qualifier provided when `@Inject`ing, the field name is used to locate the template.\
+    \ In this particular case, we\u2019re injecting a template with path `templates/hello.txt`.\n\
+    * `Template.data()` returns a new template instance that can be customized before\
+    \ the actual rendering is triggered. In this case, we put the name value under\
+    \ the key `name`. The data map is accessible during rendering.\n* Note that we\
+    \ don\u2019t trigger the rendering - this is done automatically by a special `ContainerResponseFilter`\
+    \ implementation.\n\n## Test endpoint\n\nWith our application already running\
+    \ in _Live Coding_ mode, we can render the template by calling the endpoint. Click\
+    \ the command below to test it:\n\n`curl http://localhost:8080/hello?name=James`{{execute\
+    \ T2}}\n\nYou should see:\n\n```\nHello James!\n```\nThe template was _rendered_,\
+    \ replacing the `{name}` expression with the value passed in with `hello.data(\"\
+    name\", name);`\n\nThis is the basic syntax and idea, which originated with other\
+    \ popular and well-known technologies:\n\n* The [syntax](https://quarkus.io/guides/qute-reference#syntax-and-building-blocks)\
+    \ is mainly inspired by [Handlebars](https://handlebarsjs.com/) and [Dust.js](https://www.dustjs.com/).\n\
+    * [Template inheritance](https://quarkus.io/guides/qute-reference#include_helper)\
+    \ is inspired by [Facelets](https://en.wikipedia.org/wiki/Facelets) and [Django](https://docs.djangoproject.com/en/3.0/ref/templates/language/).\n\
+    * Qute supports the [elvis operator](https://en.wikipedia.org/wiki/Elvis_operator)\
+    \ you might be familiar with from [Groovy](https://groovy-lang.org/) and [Kotlin](https://kotlinlang.org/).\n\
+    * [Extension methods](https://quarkus.io/guides/qute-reference#template_extension_methods)\
+    \ that can be used to extend the data classes with new functionality are also\
+    \ inspired by modern languages.\n* If you come from the world of JSP/JSF/Facelets\
+    \ you\u2019ll appreciate that `@Named` CDI beans can be referenced directly in\
+    \ any template through the `inject` namespace, e.g. `{inject:foo.price}`. See\
+    \ [Injecting Beans Directly In Templates](https://quarkus.io/guides/qute-reference#injecting-beans-directly-in-templates)\
+    \ for more information.\n\nLet's now explore some new features based on Quarkus\
+    \ principles."
+  difficulty: basic
+  slug: 01-basics
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 1
+  type: challenge
+- assignment: "# Type-safe Templates\n\nThere\u2019s an alternate way to declare your\
+    \ templates in your Java code, which relies on the following convention:\n\n*\
+    \ Organise your template files in the `/src/main/resources/templates` directory,\
+    \ by grouping them into one directory per resource class. So, if your `ItemResource`\
+    \ class references two templates `hello` and `goodbye`, place them at `/src/main/resources/templates/ItemResource/hello.txt`\
+    \ and `/src/main/resources/templates/ItemResource/goodbye.txt`. Grouping templates\
+    \ per resource class makes it easier to navigate to them.\n\n* In each of your\
+    \ resource class, declare a `@CheckedTemplate static class Template {}` class\
+    \ within your resource class.\n\n* Declare one `public static native TemplateInstance\
+    \ method();` per template file for your resource.\n\n* Use those static methods\
+    \ to build your template instances.\n\n## Create simple template\n\nCreate a directory\
+    \ to hold templates for our HelloResource class:\n\n`cd /root/projects/quarkus/qute\
+    \ && mkdir -p src/main/resources/templates/HelloResource`{{execute T2}}\n\nNext,\
+    \ click to open `qute/src/main/resources/templates/HelloResource/hello.txt`{{open}}.\
+    \ Click **Copy to Editor** to add the code:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/resources/templates/HelloResource/hello.txt\" data-target=\"replace\"\
+    >\nHello {name} from HelloResource!\n</pre>\n\nFor Goodbye, click to open `qute/src/main/resources/templates/HelloResource/goodbye.txt`{{open}}.\
+    \ Click **Copy to Editor** to add the code:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/resources/templates/HelloResource/goodbye.txt\" data-target=\"\
+    replace\">\nGoodbye {name} from GoodbyeResource!\n</pre>\n\nNow let\u2019s declare\
+    \ and use those templates in the resource class. Click **Copy to Editor** to update\
+    \ our `HelloResource` class:\n\n<pre class=\"file\" data-filename=\"./qute/src/main/java/org/acme/HelloResource.java\"\
+    \ data-target=\"replace\">\npackage org.acme;\n\nimport javax.ws.rs.GET;\nimport\
+    \ javax.ws.rs.Path;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.QueryParam;\n\
+    import javax.ws.rs.core.MediaType;\n\nimport io.quarkus.qute.TemplateInstance;\n\
+    import io.quarkus.qute.CheckedTemplate;\n\n@Path(\"hello\")\npublic class HelloResource\
+    \ {\n\n    @CheckedTemplate(requireTypeSafeExpressions = false)\n    public static\
+    \ class Templates {\n        public static native TemplateInstance hello();\n\
+    \        public static native TemplateInstance goodbye();\n    }\n\n    @GET\n\
+    \    @Produces(MediaType.TEXT_PLAIN)\n    public TemplateInstance get(@QueryParam(\"\
+    name\") String name) {\n        return Templates.hello().data(\"name\", name);\n\
+    \    }\n}\n</pre>\n\n* This declares a template with path `templates/HelloResource/hello.txt`,\
+    \ since the `@CheckedTemplate` static class is declared inside the `HelloWorld`\
+    \ class. The name of the method `hello` is used to match files in the directory\
+    \ with common extensions like `.txt`, `.html` etc. You can specify an exact name\
+    \ and path using `@Location`.\n* `Templates.hello()` returns a new template instance\
+    \ that can be customized before the actual rendering is triggered. In this case,\
+    \ we put the name value under the key `name`. The data map is accessible during\
+    \ rendering.\n* Note that we don\u2019t trigger the rendering - this is done automatically\
+    \ by a special `ContainerResponseFilter` implementation.\n* Checked templates\
+    \ require type-safe expressions by default, i.e. expressions that can be validated\
+    \ at build time. It's possible to use `@CheckedTemplate(requireTypeSafeExpressions\
+    \ = false)` to relax this requirement.\n\n> Once you have declared a `@CheckedTemplate`\
+    \ class, we will check that all its methods point to existing templates, so if\
+    \ you try to use a template from your Java code and you forgot to add it, we will\
+    \ let you know at build time :)\n\nKeep in mind this style of declaration allows\
+    \ you to reference templates declared in other resources too.\n\n## Create Goodbye\
+    \ Resource\n\nLet's create another resource and reference our `HelloResource.Templates`\
+    \ static class.\n\nClick to open `qute/src/main/java/org/acme/GoodbyeResource.java`{{open}}\
+    \ then click **Copy to Editor** to create a new resource:\n\n<pre class=\"file\"\
+    \ data-filename=\"./qute/src/main/java/org/acme/GoodbyeResource.java\" data-target=\"\
+    replace\">\npackage org.acme;\n\nimport javax.ws.rs.GET;\nimport javax.ws.rs.Path;\n\
+    import javax.ws.rs.Produces;\nimport javax.ws.rs.QueryParam;\nimport javax.ws.rs.core.MediaType;\n\
+    \nimport io.quarkus.qute.TemplateInstance;\n\n@Path(\"goodbye\")\npublic class\
+    \ GoodbyeResource {\n\n    @GET\n    @Produces(MediaType.TEXT_PLAIN)\n    public\
+    \ TemplateInstance get(@QueryParam(\"name\") String name) {\n        return HelloResource.Templates.goodbye().data(\"\
+    name\", name);\n    }\n}\n</pre>\n\n## Hello and Goodbye test\n\nLet's test our\
+    \ new endpoints against the running Quarkus application:\n\n`curl http://localhost:8080/hello?name=James`{{execute\
+    \ T2}}\n\nYou should see:\n\n```\nHello James from HelloResource!\n```\n\nAnd\
+    \ goodbye:\n\n`curl http://localhost:8080/goodbye?name=James`{{execute T2}}\n\n\
+    You should see the same:\n\n```\nGoodbye James from GoodbyeResource!\n```\n\n\
+    As stated earlier, since the `TemplateInstance` is declared as an inner class\
+    \ inside of `HelloResource`, Qute will attempt to locate the template in the `HelloResource/`\
+    \ subdirectory. If instead you want to create a top-level declaration, you can\
+    \ do this inside a separate class (do not copy this code for this exercise):\n\
+    \n```java\n@CheckedTemplate\npublic class Templates {\n    public static native\
+    \ TemplateInstance hello();\n    public static native TemplateInstance goodbye();\n\
+    }\n```\nThis will cause Qute to look for the associated `hello.txt` or `goodbye.txt`\
+    \ in the `src/main/resources/templates` directory, instead of `src/main/resources/templates/HelloResource`.\
+    \ It is up to you how you wish to organize your templates.\n\n"
+  difficulty: basic
+  slug: 02-typesafe
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 2
+  type: challenge
+- assignment: "# Template Parameter Declarations\n\nIf you declare a parameter declaration\
+    \ in a template, Qute will attempt to validate all expressions that reference\
+    \ this parameter. If an incorrect expression is found the build wil fail. This\
+    \ can greatly reduce developer errors up front. Let's exercise this.\n\nCreate\
+    \ a simple class with two fields by clicking `qute/src/main/java/org/acme/Item.java`{{open}}\
+    \ to open the file then click **Copy to Editor**:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/java/org/acme/Item.java\" data-target=\"replace\">\npackage org.acme;\n\
+    \nimport java.math.BigDecimal;\n\npublic class Item {\n    public String name;\n\
+    \    public BigDecimal price;\n\n    public Item(BigDecimal price, String name)\
+    \ {\n        this.price = price;\n        this.name = name;\n    }\n}\n</pre>\n\
+    \nThis is a simple `Item` object with two fields (`name` and `price`).\n\n## Create\
+    \ Template\n\nNow, suppose we want to render a simple HTML page that contains\
+    \ the item name and price. First, create a directory by clicking:\n\n`mkdir -p\
+    \ src/main/resources/templates/ItemResource`{{execute T2}}\n\nCreate a Qute template\
+    \ at by clicking `qute/src/main/resources/templates/ItemResource/item.html`{{open}}\
+    \ then click the **Copy to Editor** button:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/resources/templates/ItemResource/item.html\" data-target=\"replace\"\
+    >\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;&gt;\n\
+    &lt;title&gt;{item.name}&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1&gt;{item.name}&lt;/h1&gt;\n\
+    \    &lt;div&gt;Price: {item.price}&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n\
+    </pre>\n\n## Create Service\n\nAnd create a simple `ItemService` to mock up a\
+    \ database of items. Click `qute/src/main/java/org/acme/ItemService.java`{{open}}\
+    \ to open the file, then click **Copy To Editor**:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/java/org/acme/ItemService.java\" data-target=\"replace\">\npackage\
+    \ org.acme;\n\nimport java.math.BigDecimal;\nimport java.util.HashMap;\nimport\
+    \ java.util.Map;\nimport javax.enterprise.context.ApplicationScoped;\n\n@ApplicationScoped\n\
+    public class ItemService {\n\n    private Map&lt;Integer, Item&gt; items = Map.of(\n\
+    \        1, new Item(new BigDecimal(1.99), &quot;Apple&quot;),\n        2, new\
+    \ Item(new BigDecimal(2.99), &quot;Pear&quot;),\n        3, new Item(new BigDecimal(3.99),\
+    \ &quot;Grape&quot;),\n        4, new Item(new BigDecimal(129.99), &quot;Mango&quot;)\n\
+    \    );\n\n    public Item findItem(int id) {\n        return items.get(id);\n\
+    \    }\n}\n</pre>\n\n## Create REST endpoint\n\nNow create a resource class that\
+    \ uses this type-safe template. Click `qute/src/main/java/org/acme/ItemResource.java`{{open}}\
+    \ to open the file, then click **Copy To Editor**:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/java/org/acme/ItemResource.java\" data-target=\"replace\">\npackage\
+    \ org.acme;\n\nimport javax.inject.Inject;\nimport javax.ws.rs.GET;\nimport javax.ws.rs.Path;\n\
+    import javax.ws.rs.PathParam;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\
+    \nimport io.quarkus.qute.TemplateInstance;\nimport io.quarkus.qute.CheckedTemplate;\n\
+    \n@Path(\"item\")\npublic class ItemResource {\n\n    @Inject\n    ItemService\
+    \ service;\n\n    @CheckedTemplate\n    public static class Templates {\n    \
+    \    public static native TemplateInstance item(Item item);\n    }\n\n    @GET\n\
+    \    @Path(\"{id}\")\n    @Produces(MediaType.TEXT_HTML)\n    public TemplateInstance\
+    \ get(@PathParam(\"id\") Integer id) {\n        return Templates.item(service.findItem(id));\n\
+    \    }\n}\n</pre>\n\nHere we Declare a static `Templates` inner class with a method\
+    \ called `item()` that gives us a `TemplateInstance` for `templates/ItemResource/item.html`\
+    \ and declare its `Item item` parameter so we can validate the template.\n\nWe\
+    \ then pass the value of `id` to be used to render the template when the REST\
+    \ endpoint is called. Let's try it:\n\n`curl http://localhost:8080/item/1`{{execute\
+    \ T2}}\n\nYou should see an HTML result that shows Apple (`id=1`) and its price:\n\
+    \n```html\n<body>\n    <h1>Apple</h1>\n    <div>Price: 1.9899999999999999911182158029987476766109466552734375</div>\n\
+    </body>\n```\n\nYou can also [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1)\
+    \ to see an actual HTML rendering in your browser:\n\n![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)\n\
+    \n## Template parameter declaration inside the template\n\nAlternatively, to declare\
+    \ that a template is expecting an `Item` type, you can declare it in the template\
+    \ file itself to add additional type and parameter checking and simplify the code\
+    \ while still maintaining type checking. Let's update our HTML template a bit.\
+    \ Click **Copy to Editor** to update the template:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/resources/templates/ItemResource/item.html\" data-target=\"replace\"\
+    >\n{@org.acme.Item item}\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n\
+    &lt;meta charset=&quot;UTF-8&quot;&gt;\n&lt;title&gt;{item.name}&lt;/title&gt;\n\
+    &lt;/head&gt;\n&lt;body&gt;\n    &lt;h1&gt;{item.name}&lt;/h1&gt;\n    &lt;div&gt;Price:\
+    \ {item.price}&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n\nNotice the\
+    \ first line - this ia an _optional_ parameter declaration. If declared, Qute\
+    \ attempts to validate all expressions that reference the parameter `item`.\n\n\
+    Now update the resource class to use the simpler way to inject templates:\n\n\
+    <pre class=\"file\" data-filename=\"./qute/src/main/java/org/acme/ItemResource.java\"\
+    \ data-target=\"replace\">\npackage org.acme;\n\nimport javax.inject.Inject;\n\
+    import javax.ws.rs.GET;\nimport javax.ws.rs.Path;\nimport javax.ws.rs.PathParam;\n\
+    import javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\nimport io.quarkus.qute.TemplateInstance;\n\
+    import io.quarkus.qute.Location;\nimport io.quarkus.qute.Template;\n\n@Path(\"\
+    item\")\npublic class ItemResource {\n\n    @Inject\n    ItemService service;\n\
+    \n    @Inject\n    @Location(\"ItemResource/item\")\n    Template item;\n\n  \
+    \  @GET\n    @Path(\"{id}\")\n    @Produces(MediaType.TEXT_HTML)\n    public TemplateInstance\
+    \ get(@PathParam(\"id\") Integer id) {\n        return item.data(\"item\", service.findItem(id));\n\
+    \    }\n}\n</pre>\n\nTest it out again using the same process: [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1)\
+    \ to see an actual HTML rendering in your browser:\n\n![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)\n\
+    \nIt's the same value, but with additional checking in the template itself. If\
+    \ you made any errors, you'll see it immediately in the rendered output (the live\
+    \ coding rebuild will fail).\n\nIf you did not see errors, congratulations! But\
+    \ let's see what happens if we do. Click here: `qute/src/main/resources/templates/ItemResource/item.html`{{open}}\
+    \ to open the template. Change `{item.name}` to `{item.nonSense}`. Now click here\
+    \ to [reload](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1).\
+    \ You should get an error:\n\n![Err](/openshift/assets/middleware/quarkus/qute-err.png)\n\
+    \nQute checks the syntax and will fail the build (and result in a prettified HTML\
+    \ error screen) when syntax errors are detected in the template. This makes it\
+    \ very easy to quickly iterate, update code and template, and see the results.\n\
+    \n# Before moving on\n\nBe sure to change the value back to `{item.name}`!\n\n"
+  difficulty: basic
+  slug: 03-parameters
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 3
+  type: challenge
+- assignment: "# Template Extension Methods\n\n**Template extension methods** are\
+    \ used to extend the set of accessible properties of data objects.\n\nSometimes,\
+    \ you\u2019re not in control of the classes that you want to use in your template,\
+    \ and you cannot add methods to them. Template extension methods allows you to\
+    \ declare new method for those classes that will be available from your templates\
+    \ just as if they belonged to the target class.\n\nLet\u2019s keep extending on\
+    \ our simple HTML page that contains the item name, price and add a discounted\
+    \ price. The discounted price is sometimes called a \"computed property\". We\
+    \ will implement a template extension method to render this property easily. Let\u2019\
+    s update our template. Click **Copy to Editor** to update the template with computed\
+    \ properties:\n\n<pre class=\"file\" data-filename=\"./qute/src/main/resources/templates/ItemResource/item.html\"\
+    \ data-target=\"replace\">\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n\
+    &lt;meta charset=&quot;UTF-8&quot;&gt;\n&lt;title&gt;{item.name}&lt;/title&gt;\n\
+    &lt;/head&gt;\n&lt;body&gt;\n    &lt;h1&gt;{item.name}&lt;/h1&gt;\n    &lt;div&gt;Price:\
+    \ {item.price}&lt;/div&gt;\n    {#if item.price &gt; 100}\n    &lt;div&gt;Discounted\
+    \ Price: {item.discountedPrice}&lt;/div&gt;\n    {/if}\n&lt;/body&gt;\n&lt;/html&gt;\n\
+    </pre>\n\nNotice the use of Handlebar-esque `{#if ...}`. It's part of Qute's basic\
+    \ control flow features.\n\nAlso notice the use of `{item.discountedPrice}`. This\
+    \ field does not exist in our `Item` class (which only has `name` and `price`).\
+    \ We'll add an _extension_ to our java code to make this property be available\
+    \ to the template, and write the code that computes its value in Java.\n\nClick\
+    \ `qute/src/main/java/org/acme/TemplateExtensions.java`{{open}} to open the new\
+    \ file.\n\nClick **Copy to Editor** to create the extensions class where we'll\
+    \ declare our `discountedPrice`:\n\n<pre class=\"file\" data-filename=\"./qute/src/main/java/org/acme/TemplateExtensions.java\"\
+    \ data-target=\"replace\">\npackage org.acme;\n\nimport java.math.BigDecimal;\n\
+    import io.quarkus.qute.TemplateExtension;\n\n@TemplateExtension\npublic class\
+    \ TemplateExtensions {\n\n    public static BigDecimal discountedPrice(Item item)\
+    \ {\n        return item.price.multiply(new BigDecimal(\"0.9\"));\n    }\n}\n\
+    </pre>\n\nHere we declare a static template extension method that can be used\
+    \ to add \"computed properties\" to a data class. The class of the first parameter\
+    \ (in this case `Item`) is used to match the base object and the method name is\
+    \ used to match the property name (in this case `discountedPrice`). When we declare\
+    \ `{item.discountedPrice}`, the contextual value of `item` is passed to this `discountedPrice`\
+    \ method to compute its value (where we use the `item.price.multiply()` method\
+    \ to apply a 10% discount by multiplying by `0.9`).\n\n> You can place template\
+    \ extension methods in every class if you annotate them with `@TemplateExtension`\
+    \ but we advise to keep them either grouped by target type, or in a single `TemplateExtensions`\
+    \ class by convention.\n\n[Click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1)\
+    \ to reload the page and see the result for Apples:\n\n![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)\n\
+    \nSince Apples cost less than $100, no discount for you (you won't see the discounted\
+    \ price)! But [try with Mangos](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/4).\n\
+    \n![Mango](/openshift/assets/middleware/quarkus/qute-mango.png)\n\nWhat a deal!\n\
+    \n"
+  difficulty: basic
+  slug: 04-extensions
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 4
+  type: challenge
+- assignment: "# Rendering Periodic Reports\n\nTemplating engines can be also very\
+    \ useful when rendering periodic reports. We will use the `quarkus-scheduler`\
+    \ extension which you've already added.\n\n## Create Samples\n\nNow let's create\
+    \ a simple `Sample` object that represents a point-in-time of a value (maybe ambient\
+    \ temperature or blood pressure of a patient):\n\nClick `qute/src/main/java/org/acme/Sample.java`{{open}}\
+    \ to open the file. Click **Copy to Editor** to paste in the code:\n\n<pre class=\"\
+    file\" data-filename=\"./qute/src/main/java/org/acme/Sample.java\" data-target=\"\
+    replace\">\npackage org.acme;\n\npublic class Sample {\n    public boolean valid;\n\
+    \    public String name;\n    public String data;\n\n    public Sample(boolean\
+    \ valid, String name, String data) {\n        this.valid = valid;\n        this.name\
+    \ = name;\n        this.data = data;\n    }\n\n}\n</pre>\n\nNow let's ceate a\
+    \ service whose `get()` method returns a random list of samples. Open the file\
+    \ with `qute/src/main/java/org/acme/SampleService.java`{{open}} and click **Copy\
+    \ to Editor** to create the code:\n\n<pre class=\"file\" data-filename=\"./qute/src/main/java/org/acme/SampleService.java\"\
+    \ data-target=\"replace\">\npackage org.acme;\n\nimport java.util.List;\nimport\
+    \ java.util.Random;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\
+    \nimport javax.enterprise.context.ApplicationScoped;\n\n@ApplicationScoped\npublic\
+    \ class SampleService {\n    private static final String[] names = {&quot;James&quot;,\
+    \ &quot;Deepak&quot;, &quot;Daniel&quot;, &quot;Shaaf&quot;, &quot;Jeff&quot;,\
+    \ &quot;Sally&quot;};\n\n    public List&lt;Sample&gt; get() {\n        int count\
+    \ = new Random().nextInt(10);\n        return IntStream.range(0, count)\n    \
+    \        .mapToObj(idx -&gt; Math.random() &gt; 0.5)\n            .map(valid -&gt;\
+    \ new Sample(valid, names[(int)(Math.random() * names.length)], Math.random()\
+    \ + &quot;&quot;))\n            .collect(Collectors.toList());\n    }\n}\n</pre>\n\
+    \n## Create Template\n\nLet's make a directory to house our new template with\
+    \ this command:\n\n`mkdir -p src/main/resources/templates/reports/v1`{{execute\
+    \ T2}}\n\nClick `qute/src/main/resources/templates/reports/v1/report_01.json.template`{{open}}\
+    \ to open the new file.\n\nClick **Copy to Editor** to create the template. We'll\
+    \ place it in the `src/main/resources/templates/reports/v1` path to simulate some\
+    \ sort of organization of different reports:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/resources/templates/reports/v1/report_01.json.template\" data-target=\"\
+    replace\">\n\\{\n    \"time\": \"{now}\",\n    \"samples\": [\n      {#for sample\
+    \ in samples}\n      \\{\"name\": \"{sample.name ?: 'Unknown'}\",\"data\": \"\
+    {#if sample.valid}{sample.data}{#else}--Invalid--{/if}\"}{#if count < samples.size\
+    \ },{/if}\n      {/for}\n    ]\n  }\n</pre>\n\nHere we are looping over the passed-in\
+    \ `samples`. You can iterate over `Iterable`s, `Map`s and `Stream`s. Since we\
+    \ are rendering JSON, we also need to escape the first of any pair of JSON-related\
+    \ `}` or `{` using `\\}` or `\\{`.\n\nAlso note the use of the [elvis operator](https://en.wikipedia.org/wiki/Elvis_operator)\
+    \ `{sample.name ?: 'Unknown'}` - if the name is `null` the default value `Unknown`\
+    \ is used.\n\n## Create periodic reports\n\nCreate the ReportGenerator file by\
+    \ clicking `qute/src/main/java/org/acme/ReportGenerator.java`{{open}}.\n\nAnd\
+    \ finally click **Copy to Editor** to add code that uses all of the above and\
+    \ generates reports periodically to a file in `/tmp`:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/java/org/acme/ReportGenerator.java\" data-target=\"replace\">\n\
+    package org.acme;\n\nimport java.io.FileWriter;\n\nimport javax.enterprise.context.ApplicationScoped;\n\
+    import javax.enterprise.event.Observes;\nimport javax.inject.Inject;\n\nimport\
+    \ io.quarkus.qute.Template;\nimport io.quarkus.qute.Location;\nimport io.quarkus.runtime.ShutdownEvent;\n\
+    import io.quarkus.runtime.StartupEvent;\nimport io.quarkus.scheduler.Scheduled;\n\
+    \n@ApplicationScoped\npublic class ReportGenerator {\n\n    @Inject\n    SampleService\
+    \ service;\n\n    private FileWriter fout = null;\n\n    @Location(\"reports/v1/report_01.json.template\"\
+    )\n    Template report;\n\n    @Scheduled(cron=\"* * * ? * *\")\n    void generate()\
+    \ throws Exception {\n        String result = report\n            .data(\"samples\"\
+    , service.get())\n            .data(\"now\", java.time.LocalDateTime.now())\n\
+    \            .render();\n            System.out.println(\"report: \" + result);\n\
+    \        if (fout != null) {\n            fout.write(result + \"\\n\");\n    \
+    \        fout.flush();\n        }\n\n    }\n\n    void onStart(@Observes StartupEvent\
+    \ ev) throws Exception {\n        fout = new FileWriter(\"/tmp/report.json\",\
+    \ true);\n    }\n    void onShutdown(@Observes ShutdownEvent ev) throws Exception\
+    \ {\n        fout.close();\n        fout = null;\n    }\n}\n</pre>\n\n* In this\
+    \ case, we use the `@ResourcePath` qualifier to specify the template path: `templates/reports/v1/report_01.json`.\n\
+    * Use the `@Scheduled` annotation to instruct Quarkus to execute this method every\
+    \ second. For more information see the [Scheduler](https://quarkus.io/guides/scheduler)\
+    \ guide.\n* The `TemplateInstance.render()` method triggers rendering. Note that\
+    \ this method blocks the current thread.\n* We use Quarkus' `StartupEvent` and\
+    \ `ShutdownEvent` to manage the File I/O on startup and shutdown\n\nTo trigger\
+    \ report to start generating (by triggering Quarkus Live Reload), click to run\
+    \ this command and access the `hello` endpoint:\n\n`curl http://localhost:8080/hello?name=James`{{execute\
+    \ T2}}\n\nAssuming no errors, our reports should generate every second. Let's\
+    \ `tail` the file:\n\n`tail -f /tmp/report.json`{{execute T2}}\n\nYou should see\
+    \ new reports every second. When done, don't forget to type `CTRL-C` to stop the\
+    \ `tail -f`!\n"
+  difficulty: basic
+  slug: 05-periodic
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 5
+  type: challenge
+- assignment: "# Reactive and Asynchronous APIs\n\nQuarkus is _reactive_. If you look\
+    \ under the hood, you will find a reactive engine powering your Quarkus application.\
+    \ This engine is [Eclipse Vert.x](https://vertx.io). Every IO interaction passes\
+    \ through the non-blocking and reactive Vert.x engine. All the HTTP requests your\
+    \ application receives are handled by event loops (IO Thread) and then are routed\
+    \ towards the code that manages the request. Depending on the destination, it\
+    \ can invoke the code managing the request on a worker thread (Servlet, Jax-RS)\
+    \ or use the IO Thread (reactive route). [Mutiny](https://github.com/smallrye/smallrye-mutiny)\
+    \ is a reactive programming library allowing to express and compose asynchronous\
+    \ actions.\n\nQute Templates can be asynchronously rendered as a `CompletionStage<String>`\
+    \ (completed with the rendered output asynchronously) or as `Publisher<String>`\
+    \ containing the rendered chunks.\n\nIf these are returned in an REST endpoint,\
+    \ the endpoint will be processed asynchronously, saving compute resources by not\
+    \ creating many threads to handle requests. Let's compare both types by creating\
+    \ a traditional (blocking) endpoint, and an async endpoint.\n\nQuarkus [Reactive\
+    \ routes](https://quarkus.io/guides/reactive-routes) propose an alternative approach\
+    \ to implement HTTP endpoints where you declare and chain routes. This approach\
+    \ became very popular in the JavaScript world, with frameworks like Express.Js\
+    \ or Hapi. Quarkus also offers the possibility to use reactive routes. You can\
+    \ implement REST API with routes only or combine them with JAX-RS resources and\
+    \ servlets.\n\n## Create reactive Report Generator\n\nYou've already added the\
+    \ `quarkus-vertx-web` extension which gives us the ability to declare Reactive\
+    \ Routes.\n\nClick `qute/src/main/java/org/acme/ReactiveResource.java`{{open}}\
+    \ to open a new file.\n\nClick **Copy to Editor** to create create a reactive\
+    \ route that will process our Qute template:\n\n<pre class=\"file\" data-filename=\"\
+    ./qute/src/main/java/org/acme/ReactiveResource.java\" data-target=\"replace\"\
+    >\npackage org.acme;\n\nimport io.quarkus.qute.Template;\nimport io.quarkus.qute.Location;\n\
+    import io.quarkus.vertx.web.Route;\nimport io.quarkus.vertx.web.RoutingExchange;\n\
+    import javax.enterprise.context.ApplicationScoped;\nimport javax.inject.Inject;\n\
+    import javax.ws.rs.core.MediaType;\n\n@ApplicationScoped\npublic class ReactiveResource\
+    \ {\n\n    @Inject\n    SampleService service;\n\n    @Location(&quot;reports/v1/report_01.json.template&quot;)\n\
+    \    Template report;\n\n    @Route(path = &quot;/reactive&quot;, methods = Route.HttpMethod.GET,\
+    \ produces = MediaType.APPLICATION_JSON)\n    void reactive(RoutingExchange ex)\
+    \ throws Exception {\n        report\n          .data(&quot;samples&quot;,service.get())\n\
+    \          .data(&quot;now&quot;, java.time.LocalDateTime.now())\n          .renderAsync()\n\
+    \          .thenAccept((val) -&gt; ex.ok(val));\n    }\n}\n</pre>\n\n* The `@Route`\
+    \ annotation indicates that the method is a reactive route. Again, by default,\
+    \ the code contained in the method must not block.\n* Note the use of the Qute\
+    \ `.renderAsync()` method - this method will be completed with the rendered template\
+    \ asynchronously.\n* The method gets a `RoutingExchange` as a parameter. `RoutingExchange`\
+    \ is a convenient wrapper of `RoutingContext` which provides some useful methods.\
+    \ With `RoutingContext` you can retrieve the HTTP request (using `request()`)\
+    \ and write the response using `response().end(\u2026\u200B)`.\n\nMore details\
+    \ about using the RoutingContext is available in the [Vert.x Web documentation](https://vertx.io/docs/vertx-web/java/).\n\
+    \n## Test endpoint\n\nMake sure the endpoint generates a report. Click the following\
+    \ command to try it:\n\n`curl http://localhost:8080/reactive`{{execute T2}}\n\n\
+    You should see a random report of the samples from earlier, but done so with a\
+    \ _Reactive Route_.\n\nTo learn more about Quarkus and reactive programming, check\
+    \ out the [Reactive Programming with Quarkus Reactive SQL exercise](https://learn.openshift.com/middleware/courses/middleware-quarkus/reactive-sql).\n\
+    \n# Open the solution in an IDE in the Cloud!\nWant to continue exploring this\
+    \ solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
+    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
+    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
+    \ are a new user. This free service expires after 30 days, but you can always\
+    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/qute/devfile.yaml)\
+    \ to open the solution for this project in the cloud IDE. While loading, if it\
+    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
+    \ code to your own GitHub!\nWant to experiment more with the solution code you\
+    \ just worked with? If so, you can fork the repository containing the solution\
+    \ to your own GitHub repository by clicking on the following command to execute\
+    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
+    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
+    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
+    \ to open a new browser tab to GitHub and paste in the code you were presented\
+    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
+    \ close the browser tab and return to the console and press `Enter` to complete\
+    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
+    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
+    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
+    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
+    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
+    \ repo will be forked in your own GitHub account. On the `solution` branch in\
+    \ the repo, the `qute` project inside the `quarkus` folder contains the completed\
+    \ solution for this scenario.\n\n# Wrap-up\n\nCongratulations! Qute provides a\
+    \ powerful, flexible, type-safe and reactive way to render templates using ideas\
+    \ and mechanisms familiar to Java developers. To learn more about Qute, please\
+    \ refer to the [Qute reference guide](https://quarkus.io/guides/qute-reference).\n\
+    \n\n"
+  difficulty: basic
+  slug: 06-reactive
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Step 6
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: qute
+tags:
+- openshift
+title: Templating with Qute Templating Engine
+type: truck

@@ -1,0 +1,565 @@
+challenges:
+- assignment: 'Let''s begin my creating a new project called `myproject`:
+
+
+    ```
+
+    oc new-project myproject
+
+    ```
+
+
+    ```
+
+
+    CockroachDB is a database so let''s ensure we have accessible persistent storage
+    by adding some current `PersistentVolumes` to a `StorageClass` called `local-storage`:
+
+
+    ```
+
+    for num in {02..06}; do oc patch pv pv00$num --type=''json'' -p ''[{"op": "replace",
+    "path": "/spec/storageClassName", "value":local-storage}]''; done;
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Let''s now create a new directory for our project:
+
+
+    ```
+
+    mkdir -p $HOME/projects/cockroachdb-operator
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Navigate to the directory:
+
+
+    ```
+
+    cd $HOME/projects/cockroachdb-operator
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Create a new Helm-based Operator SDK project for the CockroachDB Operator:
+
+
+    ```
+
+    operator-sdk init --plugins=helm --domain example.com
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Automatically fetch the Cockroachdb Helm Chart and generate the CRD/API:
+
+
+    ```
+
+    operator-sdk create api --helm-chart=cockroachdb --helm-chart-repo=https://charts.helm.sh/stable
+    --helm-chart-version=3.0.7``
+
+    ```
+
+    <br>
+
+    ### Project Scaffolding Layout
+
+
+    After creating a new operator project the directory has numerous generated folders
+    and files. The following
+
+    table describes a basic rundown of each generated file/directory.
+
+
+    | File/Folders   | Purpose                           |
+
+    | :---           | :--- |
+
+    | config | Kustomize YAML definitions required to launch our controller on a cluster.
+    It is the target directory to hold our CustomResourceDefinitions, RBAC configuration,
+    and WebhookConfigurations.
+
+    | Dockerfile | The container build file used to build your Ansible Operator container
+    image. |
+
+    | helm-charts | The location for the specified helm-charts. |
+
+    | Makefile | Make targets for building and deploying your controller. |
+
+    | PROJECT | Kubebuilder metadata for scaffolding new components. |
+
+    | watches.yaml | Contains Group, Version, Kind, and desired chart. |
+
+    '
+  difficulty: basic
+  slug: step1
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Initialize the Project
+  type: challenge
+- assignment: 'The `watches.yaml` file maps a Group, Version, and Kind to a specific
+    Helm Chart. Observe the contents of the `watches.yaml`:
+
+
+    ```
+
+    cat watches.yaml
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step2
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Update the Watches File
+  type: challenge
+- assignment: 'Apply the CockroachDB Custom Resource Definition to the cluster:
+
+
+    ```
+
+    oc apply -f config/crd/bases/charts.example.com_cockroachdbs.yaml
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Once the CRD is registered, there are two ways to run the Operator:
+
+
+    * As a Pod inside a Kubernetes cluster
+
+    * As a Go program outside the cluster using Operator-SDK. This is great for local
+    development of your Operator.
+
+
+    For the sake of this tutorial, we will run the Operator as a Go program outside
+    the cluster using Operator-SDK and our `kubeconfig` credentials
+
+
+    Once running, the command will block the current session. You can continue interacting
+    with the OpenShift cluster by opening a new terminal window. You can quit the
+    session by pressing `CTRL + C`.
+
+
+    ```
+
+    WATCH_NAMESPACE=myproject make run
+
+    ```
+
+
+    ```
+
+    '
+  difficulty: basic
+  slug: step3
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Apply the CockroachDB Custom Resource Definition
+  type: challenge
+- assignment: "Open a new terminal window and navigate to the `cockroachdb-operator`\
+    \ top-level directory:\n\n```\ncd projects/cockroachdb-operator\n```\n\n```\n\
+    Before applying the CockroachDB Custom Resource, observe the CockroachDB Helm\
+    \ Chart `values.yaml`:\n\n[CockroachDB Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/cockroachdb/values.yaml)\n\
+    \nUpdate the CockroachDB Custom Resource at `config/samples/charts_v1alpha1_cockroachdb.yaml`\
+    \ with the following values:\n\n* `spec.statefulset.replicas: 1`\n* `spec.storage.persistentVolume.size:\
+    \ 1Gi`\n* `spec.storage.persistentVolume.storageClass: local-storage`\n\n<pre\
+    \ class=\"file\">\napiVersion: charts.example.com/v1alpha1\nkind: Cockroachdb\n\
+    metadata: \n  name: cockroachdb-sample\nspec: \n  statefulset: \n    replicas:\
+    \ 1\n  storage: \n    persistentVolume: \n      size: 1Gi\n      storageClass:\
+    \ local-storage\n</pre>\n\nYou can easily update this file by running the following\
+    \ command:\n\n```\n\\cp /tmp/charts_v1alpha1_cockroachdb.yaml config/samples/charts_v1alpha1_cockroachdb.yaml\n\
+    ```\n\n```\n<br>\nAfter updating the CockroachDB Custom Resource with our desired\
+    \ spec, apply it to the cluster. Ensure you are currently scoped to the `myproject`\
+    \ Namespace:\n\n```\noc project myproject\n```\n\n```\n\n```\noc apply -f config/samples/charts_v1alpha1_cockroachdb.yaml\n\
+    ```\n\n```\n<br>\nConfirm that the Custom Resource was created:\n\n```\noc get\
+    \ cockroachdb\n```\n\n```\n<br>\nIt may take some time for the environment to\
+    \ pull down the CockroachDB container image. Confirm that the Stateful Set was\
+    \ created:\n\n```\noc get statefulset\n```\n\n```\n<br>\nConfirm that the Stateful\
+    \ Set's pod is currently running:\n\n```\noc get pods -l app.kubernetes.io/component=cockroachdb\n\
+    ```\n\n```\n<br>\nConfirm that the CockroachDB \"internal\" and \"public\" ClusterIP\
+    \ Service were created:\n\n```\noc get services\n```\n\n```\n"
+  difficulty: basic
+  slug: step4
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Apply the CockroachDB Custom Resource
+  type: challenge
+- assignment: 'Verify that you can access the CockroachDB Web UI by first exposing
+    the CockroachDB Service as a publicly accessible OpenShift Route:
+
+
+    ```
+
+    COCKROACHDB_PUBLIC_SERVICE=`oc get svc -o jsonpath={$.items[1].metadata.name}`
+
+    oc expose --port=http svc $COCKROACHDB_PUBLIC_SERVICE
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Fetch the OpenShift Route URL and copy/paste it into your browser:
+
+
+    ```
+
+    COCKROACHDB_UI_URL=`oc get route -o jsonpath={$.items[0].spec.host}`
+
+    echo $COCKROACHDB_UI_URL
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step5
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Access the CockroachDB Web UI
+  type: challenge
+- assignment: 'Let''s talk to the CockroachDB cluster by connecting to the service
+    from within the cluster. CockroachDB is PostgreSQL wire protocol compatible so
+    there''s a wide variety of supported clients. For the sake of example, we''ll
+    open up a SQL shell using CockroachDB''s built-in shell and play around with it
+    a bit.
+
+
+    ```
+
+    oc run -it --rm cockroach-client --image=cockroachdb/cockroach --restart=Never
+    --command -- ./cockroach sql --insecure --host $COCKROACHDB_PUBLIC_SERVICE
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Once you see the SQL prompt, run the following to show the default databases:
+
+
+    ```
+
+    SHOW DATABASES;
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Create a new database called `bank` and populate a table with arbitrary values:
+
+
+    ```
+
+    CREATE DATABASE bank;
+
+    CREATE TABLE bank.accounts (id INT PRIMARY KEY, balance DECIMAL);
+
+    INSERT INTO bank.accounts VALUES (1234, 10000.50);
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Verify the table and values were successfully created:
+
+
+    ```
+
+    SELECT * FROM bank.accounts;
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Exit the SQL prompt:
+
+    ```
+
+    \q
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step6
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Connect to the CockroachDB Cluster
+  type: challenge
+- assignment: 'Let''s now update the CockroachDB `example` Custom Resource and increase
+    the desired number of replicas to `3`:
+
+
+    ```
+
+    oc patch cockroachdb cockroachdb-sample --type=''json'' -p ''[{"op": "replace",
+    "path": "/spec/statefulset/replicas", "value":3}]''
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Verify that the CockroachDB Stateful Set is creating two additional pods:
+
+
+    ```
+
+    oc get pods -l app.kubernetes.io/component=cockroachdb
+
+    ```
+
+
+    ```
+
+    <br>
+
+    The CockroachDB UI should now reflect these additional nodes as well.
+
+    '
+  difficulty: basic
+  slug: step7
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Update the CockroachDB Custom Resource
+  type: challenge
+- assignment: 'If any CockroachDB member fails it gets restarted or recreated automatically
+    by the Kubernetes infrastructure, and will rejoin the cluster automatically when
+    it comes back up. You can test this scenario by killing any of the pods:
+
+
+    ```
+
+    oc delete pods -l app.kubernetes.io/component=cockroachdb
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Watch the pods respawn:
+
+
+    ```
+
+    oc get pods -l app.kubernetes.io/component=cockroachdb
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Confirm that the contents of the database still persist by connecting to the database
+    cluster:
+
+
+    ```
+
+    COCKROACHDB_PUBLIC_SERVICE=`oc get svc -o jsonpath={$.items[1].metadata.name}`
+
+    oc run -it --rm cockroach-client --image=cockroachdb/cockroach --restart=Never
+    --command -- ./cockroach sql --insecure --host $COCKROACHDB_PUBLIC_SERVICE
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Once you see the SQL prompt, run the following to confirm the database contents
+    are still present:
+
+
+    ```
+
+    SELECT * FROM bank.accounts;
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Exit the SQL prompt:
+
+    ```
+
+    \q
+
+    ```
+
+
+    ```
+
+    '
+  difficulty: basic
+  slug: step8
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Test CockroachDB Cluster Failover
+  type: challenge
+- assignment: 'Delete the CockroachDB cluster and all associated resources by deleting
+    the `example` Custom Resource:
+
+
+    ```
+
+    oc delete cockroachdb cockroachdb-sample
+
+    ```
+
+
+    ```
+
+    <br>
+
+    Verify that the Stateful Set, pods, and services are removed:
+
+
+    ```
+
+    oc get statefulset
+
+    oc get pods
+
+    oc get services
+
+    ```
+
+
+    ```'
+  difficulty: basic
+  slug: step9
+  tabs:
+  - hostname: crc-nonest-1
+    title: cli
+    type: terminal
+  - hostname: crc-nonest-1
+    port: '30443'
+    title: web-ui
+    type: service
+  timelimit: '300'
+  title: Clean Up
+  type: challenge
+developers:
+- btannous@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner:
+- openshift
+private: 'false'
+published: 'true'
+skipping_enabled: 'true'
+slug: helm-operator
+tags:
+- openshift
+title: Operator SDK with Helm
+type: truck
