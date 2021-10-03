@@ -5,3 +5,12 @@
 * Third level: [Steps](https://github.com/openshift-labs/learn-katacoda/tree/master/introduction/cluster-access)->[Challenges/Assignments](https://play.instruqt.com/openshift/tracks/logging-in-to-an-openshift-cluster/challenges/logging-in-via-the-web-console/assignment)
 
 
+## Run the script
+
+
+```bash
+submodule update --init
+python kataklisma.py
+```
+
+
