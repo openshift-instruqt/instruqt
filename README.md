@@ -9,7 +9,7 @@
 
 
 ```bash
-submodule update --init
+git submodule update --init
 python kataklisma.py
 ```
 
