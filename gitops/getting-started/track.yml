@@ -232,40 +232,37 @@ challenges:
   timelimit: 300
   title: Deploying a Sample Application
   type: challenge
+description: "## Goal\n\nThis guide helps you get started with ArgoCD and GitOps with\
+  \ OpenShift.\n\n\n## Concepts\n\n[GitOps](https://www.openshift.com/learn/topics/gitops/)\
+  \ is a set of practices that leverages Git workflows to manage infrastructure and\
+  \ application configurations.\nBy using Git repositories as the source of truth,\
+  \ it allows the DevOps team to store the entire state of the cluster configuration\
+  \ in Git so that the trail of changes are visible and auditable. \n\n**GitOps**\
+  \ simplifies the propagation of infrastructure and application \nconfiguration changes\
+  \ across multiple clusters by defining your infrastructure and applications definitions\
+  \ as \u201Ccode\u201D.\n\n* Ensure that the clusters have similar states for configuration,\
+  \ monitoring, or storage.\n* Recover or recreate clusters from a known state.\n\
+  * Create clusters with a known state.\n* Apply or revert configuration changes to\
+  \ multiple clusters.\n* Associate templated configuration with different environments.\n\
+  \n\n![ArgoCD Logo](../../assets/gitops/argocd-logo.png)\n\n[Argo CD](https://argoproj.github.io/argo-cd/)\
+  \ is a declarative, GitOps continuous delivery tool for Kubernetes.\n\nIt follows\
+  \ the GitOps pattern of using Git repositories as the source of truth for defining\
+  \ the desired application state.\n\nIt automates the deployment of the desired application\
+  \ states in the specified target environments. Application deployments can track\
+  \ updates to branches, tags, or pinned to a specific version of manifests at a Git\
+  \ commit.\n\n\n## Use case\n\nThis is a simple guide that takes you through the\
+  \ following steps:\n\n* Exploring the OpenShift GitOps Operator\n* Accessing Argo\
+  \ CD via CLI and Web UI\n* Deploying A Sample Application\n\nThis OpenShift cluster\
+  \ will self-destruct in one hour.\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## Goal\n\nThis guide helps you get started with ArgoCD and GitOps with\
-    \ OpenShift.\n\n\n## Concepts\n\n[GitOps](https://www.openshift.com/learn/topics/gitops/)\
-    \ is a set of practices that leverages Git workflows to manage infrastructure\
-    \ and application configurations.\nBy using Git repositories as the source of\
-    \ truth, it allows the DevOps team to store the entire state of the cluster configuration\
-    \ in Git so that the trail of changes are visible and auditable. \n\n**GitOps**\
-    \ simplifies the propagation of infrastructure and application \nconfiguration\
-    \ changes across multiple clusters by defining your infrastructure and applications\
-    \ definitions as \u201Ccode\u201D.\n\n* Ensure that the clusters have similar\
-    \ states for configuration, monitoring, or storage.\n* Recover or recreate clusters\
-    \ from a known state.\n* Create clusters with a known state.\n* Apply or revert\
-    \ configuration changes to multiple clusters.\n* Associate templated configuration\
-    \ with different environments.\n\n\n![ArgoCD Logo](../../assets/gitops/argocd-logo.png)\n\
-    \n[Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous\
-    \ delivery tool for Kubernetes.\n\nIt follows the GitOps pattern of using Git\
-    \ repositories as the source of truth for defining the desired application state.\n\
-    \nIt automates the deployment of the desired application states in the specified\
-    \ target environments. Application deployments can track updates to branches,\
-    \ tags, or pinned to a specific version of manifests at a Git commit.\n\n\n##\
-    \ Use case\n\nThis is a simple guide that takes you through the following steps:\n\
-    \n* Exploring the OpenShift GitOps Operator\n* Accessing Argo CD via CLI and Web\
-    \ UI\n* Deploying A Sample Application\n\nThis OpenShift cluster will self-destruct\
-    \ in one hour.\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: getting-started
 tags:

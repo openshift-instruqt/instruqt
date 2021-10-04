@@ -236,35 +236,33 @@ challenges:
   timelimit: 300
   title: Using RWX storage
   type: challenge
+description: 'Make your first steps with the three persistent storage options in Openshift.
+
+
+  ## Content
+
+
+  In this scenario, we will discover three different persistent storage options:
+
+
+  * RWO storage - suited for low-latency, high-performance applications like databases
+
+  * RWX storage - suited for distributed applications that need a common place to
+  store data
+
+  <!-- * OBC storage - used to get application specific access credentials for object
+  storage buckets -->
+
+  '
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: 'Make your first steps with the three persistent storage options in Openshift.
-
-
-    ## Content
-
-
-    In this scenario, we will discover three different persistent storage options:
-
-
-    * RWO storage - suited for low-latency, high-performance applications like databases
-
-    * RWX storage - suited for distributed applications that need a common place to
-    store data
-
-    <!-- * OBC storage - used to get application specific access credentials for object
-    storage buckets -->
-
-    '
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: persistent-intro
 tags:

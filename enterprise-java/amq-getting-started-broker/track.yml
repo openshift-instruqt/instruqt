@@ -256,31 +256,29 @@ challenges:
   timelimit: 300
   title: Access the application running on OpenShift
   type: challenge
+description: "##\_Overview\n\nAMQ provides fast, lightweight, and secure messaging\
+  \ for Internet-scale applications. AMQ components use industry-standard message\
+  \ protocols and support a wide range of programming languages and operating environments.\
+  \ AMQ gives you the strong foundation you need to build modern distributed applications.\n\
+  \n## What is AMQ Broker?\n\nAMQ Broker is a pure-Java multiprotocol message broker.\
+  \ It\u2019s built on an efficient, asynchronous core, with a fast native journal\
+  \ for message persistence and the option of shared-nothing state replication for\
+  \ high availability.\n\n* **Persistence** - A fast, native-IO journal or a JDBC-based\
+  \ store\n* **High availability** - Shared store or shared-nothing state replication\n\
+  * **Advanced queueing** - Last value queues, message groups, topic hierarchies,\
+  \ and large message support\n* **Multiprotocol** - AMQP 1.0, MQTT, STOMP, OpenWire,\
+  \ and HornetQ Core\n\nAMQ Broker is based on the [Apache ActiveMQ Artemis](https://activemq.apache.org/artemis/)\
+  \ project.\n\n## What will you learn\n\nIn this tutorial you will learn how to setup\
+  \ a Red Hat AMQ message broker instance running on OpenShift.\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "##\_Overview\n\nAMQ provides fast, lightweight, and secure messaging\
-    \ for Internet-scale applications. AMQ components use industry-standard message\
-    \ protocols and support a wide range of programming languages and operating environments.\
-    \ AMQ gives you the strong foundation you need to build modern distributed applications.\n\
-    \n## What is AMQ Broker?\n\nAMQ Broker is a pure-Java multiprotocol message broker.\
-    \ It\u2019s built on an efficient, asynchronous core, with a fast native journal\
-    \ for message persistence and the option of shared-nothing state replication for\
-    \ high availability.\n\n* **Persistence** - A fast, native-IO journal or a JDBC-based\
-    \ store\n* **High availability** - Shared store or shared-nothing state replication\n\
-    * **Advanced queueing** - Last value queues, message groups, topic hierarchies,\
-    \ and large message support\n* **Multiprotocol** - AMQP 1.0, MQTT, STOMP, OpenWire,\
-    \ and HornetQ Core\n\nAMQ Broker is based on the [Apache ActiveMQ Artemis](https://activemq.apache.org/artemis/)\
-    \ project.\n\n## What will you learn\n\nIn this tutorial you will learn how to\
-    \ setup a Red Hat AMQ message broker instance running on OpenShift.\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: amq-getting-started-broker
 tags:

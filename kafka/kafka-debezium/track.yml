@@ -358,44 +358,42 @@ challenges:
   timelimit: 300
   title: Streaming data from a database
   type: challenge
+description: "Change data capture, or CDC, is a well-established software design pattern\
+  \ for capturing changes to tables in a database.\nCDC captures row-level changes\
+  \ that occur in database tables and emits event records for those changes to a Kafka\
+  \ data streaming bus.\nYou can configure applications that rely on the data in particular\
+  \ tables to consume the change event streams for those tables.\nConsuming applications\
+  \ read the streams of event records in the order in which the events occurred.\n\
+  \n### What you will learn\n\nIn this scenario you will learn about [Debezium](https://debezium.io/),\
+  \ a component of [Red Hat Integration](https://www.redhat.com/en/products/integration)\
+  \ that provides change data capture for the following supported databases:\n\n*\
+  \ Db2\n* Microsoft SQL Server\n* MongoDB\n* MySQL\n* PostgreSQL\n\nYou will deploy\
+  \ a complete end-to-end solution that captures events from database transaction\
+  \ logs and makes those events available for processing by downstream consumers through\
+  \ an [Apache Kafka](https://kafka.apache.org/) broker.\n\n### What is Debezium?\n\
+  \n![Logo](../../../assets/middleware/debezium-getting-started/debezium-logo.png)\n\
+  \n[Debezium](https://debezium.io/) is a set of distributed services that capture\
+  \ row-level changes in a database.\nDebezium records the change events for each\
+  \ table in a database to a dedicated Kafka topic.\nYou can configure applications\
+  \ to read from the topics that contain change event records for data in specific\
+  \ tables.\nThe consuming applications can then respond to the change events with\
+  \ minimal latency.\nApplications read event records from a topic in the same order\
+  \ in which the events occurred.\n\n A Debezium source connector captures change\
+  \ events from a database and uses the [Apache Kafka](https://kafka.apache.org/)\
+  \ streaming platform to distribute and publish the captured event records to a [Kafka\
+  \ broker](https://kafka.apache.org/documentation/#uses_messaging).\nEach Debezium\
+  \ source connector is built as a plugin for [Kafka Connect](https://kafka.apache.org/documentation/#connect).\n\
+  \nIn this scenario we will deploy a Debezium MySQL connector and use it to set up\
+  \ a data flow between a MySQL database and a Kafka broker.\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "Change data capture, or CDC, is a well-established software design pattern\
-    \ for capturing changes to tables in a database.\nCDC captures row-level changes\
-    \ that occur in database tables and emits event records for those changes to a\
-    \ Kafka data streaming bus.\nYou can configure applications that rely on the data\
-    \ in particular tables to consume the change event streams for those tables.\n\
-    Consuming applications read the streams of event records in the order in which\
-    \ the events occurred.\n\n### What you will learn\n\nIn this scenario you will\
-    \ learn about [Debezium](https://debezium.io/), a component of [Red Hat Integration](https://www.redhat.com/en/products/integration)\
-    \ that provides change data capture for the following supported databases:\n\n\
-    * Db2\n* Microsoft SQL Server\n* MongoDB\n* MySQL\n* PostgreSQL\n\nYou will deploy\
-    \ a complete end-to-end solution that captures events from database transaction\
-    \ logs and makes those events available for processing by downstream consumers\
-    \ through an [Apache Kafka](https://kafka.apache.org/) broker.\n\n### What is\
-    \ Debezium?\n\n![Logo](../../../assets/middleware/debezium-getting-started/debezium-logo.png)\n\
-    \n[Debezium](https://debezium.io/) is a set of distributed services that capture\
-    \ row-level changes in a database.\nDebezium records the change events for each\
-    \ table in a database to a dedicated Kafka topic.\nYou can configure applications\
-    \ to read from the topics that contain change event records for data in specific\
-    \ tables.\nThe consuming applications can then respond to the change events with\
-    \ minimal latency.\nApplications read event records from a topic in the same order\
-    \ in which the events occurred.\n\n A Debezium source connector captures change\
-    \ events from a database and uses the [Apache Kafka](https://kafka.apache.org/)\
-    \ streaming platform to distribute and publish the captured event records to a\
-    \ [Kafka broker](https://kafka.apache.org/documentation/#uses_messaging).\nEach\
-    \ Debezium source connector is built as a plugin for [Kafka Connect](https://kafka.apache.org/documentation/#connect).\n\
-    \nIn this scenario we will deploy a Debezium MySQL connector and use it to set\
-    \ up a data flow between a MySQL database and a Kafka broker.\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: kafka-debezium
 tags:

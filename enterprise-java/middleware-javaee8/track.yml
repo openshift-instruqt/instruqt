@@ -699,30 +699,28 @@ challenges:
   timelimit: 300
   title: Externalize the data storage
   type: challenge
+description: "## What you will learn ##\n\nIn this scenario, you will learn how to\
+  \ get started with developing Jakarta EE 8 application using JBoss Enterprise Application\
+  \ Platform on OpenShift. This scenario is targeted for developers that haven't used\
+  \ Jakarta EE before and covers the most common parts of Jakarta EE 8.\n\n\n## What\
+  \ is Red Hat JBoss EAP?\n\nJBoss Enterprise Application Platform is a leading Jakarta\
+  \ EE platform that includes full Jakarta EE 8 support.\n\nWhat differs JBoss Enterprise\
+  \ Application Platform compared to for example Oracle\xAE WebLogic Application Server\
+  \ and IBM\xAE WebSphere Application Server ND are that JBoss EAP since version 6\
+  \ and later has been architectured to be used both in cloud environments as well\
+  \ as more traditional environments like Virtual or Bare metal.\n\nThis scenario\
+  \ exclusively uses JBoss EAP on OpenShift, which is the leading container platform\
+  \ for Kubernetes and containers, but as a developer, you can also apply what you\
+  \ learn here on other environments.\n\n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## What you will learn ##\n\nIn this scenario, you will learn how to\
-    \ get started with developing Jakarta EE 8 application using JBoss Enterprise\
-    \ Application Platform on OpenShift. This scenario is targeted for developers\
-    \ that haven't used Jakarta EE before and covers the most common parts of Jakarta\
-    \ EE 8.\n\n\n## What is Red Hat JBoss EAP?\n\nJBoss Enterprise Application Platform\
-    \ is a leading Jakarta EE platform that includes full Jakarta EE 8 support.\n\n\
-    What differs JBoss Enterprise Application Platform compared to for example Oracle\xAE\
-    \ WebLogic Application Server and IBM\xAE WebSphere Application Server ND are\
-    \ that JBoss EAP since version 6 and later has been architectured to be used both\
-    \ in cloud environments as well as more traditional environments like Virtual\
-    \ or Bare metal.\n\nThis scenario exclusively uses JBoss EAP on OpenShift, which\
-    \ is the leading container platform for Kubernetes and containers, but as a developer,\
-    \ you can also apply what you learn here on other environments.\n\n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: middleware-javaee8
 tags:

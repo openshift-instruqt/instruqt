@@ -186,28 +186,26 @@ challenges:
   timelimit: 300
   title: Ingest dataset to Elasticsearch
   type: challenge
+description: "# What is OpenShift Container Storage (ODF)\n\nRed Hat\xAE OpenShift\xAE\
+  \ Container Storage is software-defined storage for containers. Engineered as the\
+  \ data and storage services platform for Red Hat OpenShift, Red Hat OpenShift Container\
+  \ Storage helps teams develop and deploy applications quickly and efficiently across\
+  \ clouds.\n\n# What will you learn\n\nIn this tutorial you will learn how to create\
+  \ Persistent Volumes and use that for deploying Elasticsearch. You will then deploy\
+  \ a demo app which is a e-library search engin for 100 classic novels. Once the\
+  \ app is successfully deployed, you could search any word from 100 classic novels,\
+  \ the search is powered by Elasticsearch which is using persistent storage from\
+  \ ODF. The logical architecture of the app that you will deploy looks like this\n\
+  \n![alt text](https://github.com/mulbc/learn-katacoda/raw/master/persistence/persistent-elasticsearch/architecture.png)\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "# What is OpenShift Container Storage (ODF)\n\nRed Hat\xAE OpenShift\xAE\
-    \ Container Storage is software-defined storage for containers. Engineered as\
-    \ the data and storage services platform for Red Hat OpenShift, Red Hat OpenShift\
-    \ Container Storage helps teams develop and deploy applications quickly and efficiently\
-    \ across clouds.\n\n# What will you learn\n\nIn this tutorial you will learn how\
-    \ to create Persistent Volumes and use that for deploying Elasticsearch. You will\
-    \ then deploy a demo app which is a e-library search engin for 100 classic novels.\
-    \ Once the app is successfully deployed, you could search any word from 100 classic\
-    \ novels, the search is powered by Elasticsearch which is using persistent storage\
-    \ from ODF. The logical architecture of the app that you will deploy looks like\
-    \ this\n\n![alt text](https://github.com/mulbc/learn-katacoda/raw/master/persistence/persistent-elasticsearch/architecture.png)\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: persistent-elasticsearch
 tags:

@@ -329,29 +329,27 @@ challenges:
   timelimit: 300
   title: Step 7
   type: challenge
+description: "In this exercise, you will use the Quarkus Kafka extension to build\
+  \ a streaming application using MicroProfile Reative\nStreams Messaging and [Apache\
+  \ Kafka](https://kafka.apache.org), a distributed streaming platform. \n\n## What\
+  \ is Apache Kafka?\n\nApache Kafka is a distributed streaming platform. A streaming\
+  \ platform has three key capabilities:\n\n  - Publish and subscribe to streams of\
+  \ records, similar to a message queue or enterprise messaging system.\n  - Store\
+  \ streams of records in a fault-tolerant durable way.\n  - Process streams of records\
+  \ as they occur.\n\nKafka is generally used for two broad classes of applications:\n\
+  \n  - Building real-time streaming data pipelines that reliably get data between\
+  \ systems or applications\n  - Building real-time streaming applications that transform\
+  \ or react to the streams of data\n\n\n### Other possibilities\n\nLearn more at\
+  \ [quarkus.io](https://quarkus.io), or just drive on and get hands-on!"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "In this exercise, you will use the Quarkus Kafka extension to build a\
-    \ streaming application using MicroProfile Reative\nStreams Messaging and [Apache\
-    \ Kafka](https://kafka.apache.org), a distributed streaming platform. \n\n## What\
-    \ is Apache Kafka?\n\nApache Kafka is a distributed streaming platform. A streaming\
-    \ platform has three key capabilities:\n\n  - Publish and subscribe to streams\
-    \ of records, similar to a message queue or enterprise messaging system.\n  -\
-    \ Store streams of records in a fault-tolerant durable way.\n  - Process streams\
-    \ of records as they occur.\n\nKafka is generally used for two broad classes of\
-    \ applications:\n\n  - Building real-time streaming data pipelines that reliably\
-    \ get data between systems or applications\n  - Building real-time streaming applications\
-    \ that transform or react to the streams of data\n\n\n### Other possibilities\n\
-    \nLearn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: kafka
 tags:

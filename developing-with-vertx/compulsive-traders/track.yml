@@ -99,40 +99,38 @@ challenges:
   timelimit: 300
   title: Step 3
   type: challenge
+description: "## The compulsive traders\n\nLet\u2019s review the previous scenarios\
+  \ to have a better view of the current status. In the quote-generator we have build\
+  \ a verticle sending market data to the event bus. In the portfolio service, we\
+  \ expose an event bus service to manage our portfolio. Traders are the missing link\
+  \ between both. It implement the logic deciding when to buy and sell stocks. Traders\
+  \ have only one goal: getting rich (or not\u2026\u200B)!\n\nIn this section, we\
+  \ are going to develop 3 traders (following a stupid logic you can definitely improve):\n\
+  \n* The first trader is developed with the raw Vert.x API (callbacks)\n\n* The second\
+  \ trader is developer with RX Java 2 (reactive programming)\n\n* The third trader\
+  \ is developed with Kotlin using co-routine\n\nIt gives you an overview of the different\
+  \ programming style proposed by Vert.x, and let you decide which one you prefer.\
+  \ Also notice that Vert.x supports JavaScript, Groovy, Ruby, Scala and Ceylon.\n\
+  \n**1. Initialize katacoda environment**\n\nYou may have noticed a script running\
+  \ in the terminal. This is getting the lab ready up to this scenario i.e. it is\
+  \ \n1. Cloning the source code\n2. Initialize the OpenShift environment\n3. Build\
+  \ and deploy the quote-generator scenario\n4. Build and deploy the portfolio-service\
+  \ sceanrio\n5. Build and deploy the micro-trader-dashboard\n\n\n**2. Compulsive\
+  \ and dumb traders**\n\nBefore seeing how these are implemented, let\u2019s explain\
+  \ the absolutely illogic algorithm used by these traders:\n\nA compulsive trader\
+  \ is choosing one company name and a number of shares (x)\n\nRandomly, it tries\
+  \ to buy or sell x shares of the company\n\nIt does not check whether or not it\
+  \ has enough shares or money, it just tries\u2026\u200B This logic is implemented\
+  \ in ``io.vertx.workshop.trader.impl.TraderUtils``."
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## The compulsive traders\n\nLet\u2019s review the previous scenarios\
-    \ to have a better view of the current status. In the quote-generator we have\
-    \ build a verticle sending market data to the event bus. In the portfolio service,\
-    \ we expose an event bus service to manage our portfolio. Traders are the missing\
-    \ link between both. It implement the logic deciding when to buy and sell stocks.\
-    \ Traders have only one goal: getting rich (or not\u2026\u200B)!\n\nIn this section,\
-    \ we are going to develop 3 traders (following a stupid logic you can definitely\
-    \ improve):\n\n* The first trader is developed with the raw Vert.x API (callbacks)\n\
-    \n* The second trader is developer with RX Java 2 (reactive programming)\n\n*\
-    \ The third trader is developed with Kotlin using co-routine\n\nIt gives you an\
-    \ overview of the different programming style proposed by Vert.x, and let you\
-    \ decide which one you prefer. Also notice that Vert.x supports JavaScript, Groovy,\
-    \ Ruby, Scala and Ceylon.\n\n**1. Initialize katacoda environment**\n\nYou may\
-    \ have noticed a script running in the terminal. This is getting the lab ready\
-    \ up to this scenario i.e. it is \n1. Cloning the source code\n2. Initialize the\
-    \ OpenShift environment\n3. Build and deploy the quote-generator scenario\n4.\
-    \ Build and deploy the portfolio-service sceanrio\n5. Build and deploy the micro-trader-dashboard\n\
-    \n\n**2. Compulsive and dumb traders**\n\nBefore seeing how these are implemented,\
-    \ let\u2019s explain the absolutely illogic algorithm used by these traders:\n\
-    \nA compulsive trader is choosing one company name and a number of shares (x)\n\
-    \nRandomly, it tries to buy or sell x shares of the company\n\nIt does not check\
-    \ whether or not it has enough shares or money, it just tries\u2026\u200B This\
-    \ logic is implemented in ``io.vertx.workshop.trader.impl.TraderUtils``."
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: compulsive-traders
 tags:

@@ -328,28 +328,26 @@ challenges:
   timelimit: 300
   title: Making changes to source-code
   type: challenge
+description: "## Goal\n\nLearn how to use the *OpenShift Do* (`odo`) command line\
+  \ tool to build and deploy applications on OpenShift.\n\n## Concepts\n\n* `odo`\
+  \ developer tool abstracts deployment tasks\n* OpenShift Projects and Applications\n\
+  * OpenShift Web Console\u2019s Developer Perspective\n* Multi-tiered applications\
+  \ with a web frontend\n* Automatic OpenShift Builds for iterative development\n\n\
+  ## Use case\n\nOdo is a developer-centric tool for building and running software\
+  \ on OpenShift. Odo streamlines common build and deployment tasks to let you focus\
+  \ on your application\u2019s source code. You can use odo to reduce the cognitive\
+  \ load and rote steps that are typically involved when working on complex applications\
+  \ built using a mixed stack of component solutions.\n\nThis OpenShift cluster will\
+  \ self-destruct in one hour.\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## Goal\n\nLearn how to use the *OpenShift Do* (`odo`) command line tool\
-    \ to build and deploy applications on OpenShift.\n\n## Concepts\n\n* `odo` developer\
-    \ tool abstracts deployment tasks\n* OpenShift Projects and Applications\n* OpenShift\
-    \ Web Console\u2019s Developer Perspective\n* Multi-tiered applications with a\
-    \ web frontend\n* Automatic OpenShift Builds for iterative development\n\n## Use\
-    \ case\n\nOdo is a developer-centric tool for building and running software on\
-    \ OpenShift. Odo streamlines common build and deployment tasks to let you focus\
-    \ on your application\u2019s source code. You can use odo to reduce the cognitive\
-    \ load and rote steps that are typically involved when working on complex applications\
-    \ built using a mixed stack of component solutions.\n\nThis OpenShift cluster\
-    \ will self-destruct in one hour.\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: developing-with-odo
 tags:

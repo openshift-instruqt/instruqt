@@ -268,44 +268,42 @@ challenges:
   timelimit: 300
   title: Step 6
   type: challenge
+description: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley\
+  \ Act requires you to keep a track of every transaction you do on a financial market.\
+  \ The audit service records the shares you buy and sell in a database. It\u2019\
+  s going to be a PostGreSQL database, but is would be similar with another database,\
+  \ even no-sql database. The database is going to be deployed in OpenShift.\n \n\
+  In this chapter we are going to cover: \n\n* advanced asynchronous orchestration\
+  \ \n* asynchronous JDBC \n* Vert.x Web to build REST API \n* Managing secrets with\
+  \ OpenShift\n\n**1. Initialize katacoda environment**\n\nYou may have noticed a\
+  \ script running in the terminal. This is getting the lab ready up to this scenario\
+  \ i.e. it is \n1. Cloning the source code\n2. Initialize the OpenShift environment\n\
+  3. Build and deploy the quote-generator scenario\n4. Build and deploy the portfolio-service\
+  \ sceanrio\n5. Build and deploy the compulsive-traders sceanrio\n6. Build and deploy\
+  \ the micro-trader-dashboard\n\n\n**2. Accessing data asynchronously**\n\nAs said\
+  \ previously, Vert.x is asynchronous and you must never block the event loop. And\
+  \ you know what\u2019s definitely blocking? Database accesses and more particularly\
+  \ JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.\n\nThe\
+  \ principle is simple (and is applied to all clients accessing blocking systems):\n\
+  \n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
+  \nHowever, interactions with databases are rarely a single operation, but a composition\
+  \ of operations. For example:\n\n1. Get a connection\n2. Drop some tables\n3. Create\
+  \ some tables\n4. Close the connection\n\n**3. The Audit service**\n\nThe Audit\
+  \ service:\n\n1. Listens for the financial operations on the event bus\n2. Stores\
+  \ the received operations in a database\n3. Exposes a REST API to get the last 10\
+  \ operations\n\nInteractions with the database use the `vertx-jdbc-client`, an async\
+  \ version of JDBC. So expect to see some SQL code (I know you love it). But, to\
+  \ orchestrate all these asynchronous calls, we need the right weapons. We are going\
+  \ to use RX Java 2 for this."
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley Act\
-    \ requires you to keep a track of every transaction you do on a financial market.\
-    \ The audit service records the shares you buy and sell in a database. It\u2019\
-    s going to be a PostGreSQL database, but is would be similar with another database,\
-    \ even no-sql database. The database is going to be deployed in OpenShift.\n \n\
-    In this chapter we are going to cover: \n\n* advanced asynchronous orchestration\
-    \ \n* asynchronous JDBC \n* Vert.x Web to build REST API \n* Managing secrets\
-    \ with OpenShift\n\n**1. Initialize katacoda environment**\n\nYou may have noticed\
-    \ a script running in the terminal. This is getting the lab ready up to this scenario\
-    \ i.e. it is \n1. Cloning the source code\n2. Initialize the OpenShift environment\n\
-    3. Build and deploy the quote-generator scenario\n4. Build and deploy the portfolio-service\
-    \ sceanrio\n5. Build and deploy the compulsive-traders sceanrio\n6. Build and\
-    \ deploy the micro-trader-dashboard\n\n\n**2. Accessing data asynchronously**\n\
-    \nAs said previously, Vert.x is asynchronous and you must never block the event\
-    \ loop. And you know what\u2019s definitely blocking? Database accesses and more\
-    \ particularly JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.\n\
-    \nThe principle is simple (and is applied to all clients accessing blocking systems):\n\
-    \n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
-    \nHowever, interactions with databases are rarely a single operation, but a composition\
-    \ of operations. For example:\n\n1. Get a connection\n2. Drop some tables\n3.\
-    \ Create some tables\n4. Close the connection\n\n**3. The Audit service**\n\n\
-    The Audit service:\n\n1. Listens for the financial operations on the event bus\n\
-    2. Stores the received operations in a database\n3. Exposes a REST API to get\
-    \ the last 10 operations\n\nInteractions with the database use the `vertx-jdbc-client`,\
-    \ an async version of JDBC. So expect to see some SQL code (I know you love it).\
-    \ But, to orchestrate all these asynchronous calls, we need the right weapons.\
-    \ We are going to use RX Java 2 for this."
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: audit-service
 tags:

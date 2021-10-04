@@ -113,9 +113,8 @@ for course in hcourses['courses']:
         with open('learn-katacoda/' + pathway_id + '/' + course_id + '/' + introText, 'r') as myintro:
           intro_data=myintro.read()
         
-        notes=[{ "type" : "text", "contents" : intro_data }]
         
-        track_d["notes"] = notes
+        track_d["description"] = intro_data
         
         
         for step in course_json["details"]["steps"]:
@@ -128,10 +127,6 @@ for course in hcourses['courses']:
               print("Directory " , pathway + '/' + trackDir + '/' + slug ,  " Created ")
             else:    
               print("Directory " , pathway + '/' + trackDir + '/' + slug ,  " already exists")
-            
-
-
-
             
             
             d_challenges["slug"] = slug

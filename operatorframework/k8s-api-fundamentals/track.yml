@@ -422,22 +422,20 @@ challenges:
   timelimit: 300
   title: Custom Resource Definitions
   type: challenge
+description: Before diving into the [Operator Framework](https://github.com/operator-framework),
+  this section will give an overview of Kubernetes API fundamentals.  Although the
+  [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating
+  an Operator fun and easy, understanding the structure and features of the Kubernetes
+  API is required.
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: Before diving into the [Operator Framework](https://github.com/operator-framework),
-    this section will give an overview of Kubernetes API fundamentals.  Although the
-    [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating
-    an Operator fun and easy, understanding the structure and features of the Kubernetes
-    API is required.
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: k8s-api-fundamentals
 tags:

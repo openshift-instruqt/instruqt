@@ -245,31 +245,28 @@ challenges:
   timelimit: 300
   title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
   type: challenge
+description: "## Background\nThis lab is focused on understanding how container images\
+  \ are built, tagged, organized and leveraged to deliver software in a range of use\
+  \ cases.\n\nBy the end of this lab you should be able to:\n- Understand the uses\
+  \ of multi-container applications\n- Internalize the difference between orchestration\
+  \ and application definition\n- Command basic container scaling principles\n- Use\
+  \ tools to troubleshoot containers in a clustered environment\n\n## Outline\n- Multi-Container\
+  \ Applications: The classic two-tiered, wordpress application\n- Cluster Performance:\
+  \ Scaling applications horizontally with containers\n- Cluster Debugging: Troubleshooting\
+  \ in a distributed systems environment\n\n## Other Material\nThis presentation will\
+  \ give you a background to all of the concepts in this lab\n- [Google Presentation](https://docs.google.com/presentation/d/1S-JqLQ4jatHwEBRUQRiA5WOuCwpTUnxl2d1qRUoTz5g/edit#slide=id.g20639ff941_0_42)\
+  \ \n- [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)\n\
+  \n## Start Scenario\nOnce you have watched the background video or went throught\
+  \ the presentation, continue to the exercises\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## Background\nThis lab is focused on understanding how container images\
-    \ are built, tagged, organized and leveraged to deliver software in a range of\
-    \ use cases.\n\nBy the end of this lab you should be able to:\n- Understand the\
-    \ uses of multi-container applications\n- Internalize the difference between orchestration\
-    \ and application definition\n- Command basic container scaling principles\n-\
-    \ Use tools to troubleshoot containers in a clustered environment\n\n## Outline\n\
-    - Multi-Container Applications: The classic two-tiered, wordpress application\n\
-    - Cluster Performance: Scaling applications horizontally with containers\n- Cluster\
-    \ Debugging: Troubleshooting in a distributed systems environment\n\n## Other\
-    \ Material\nThis presentation will give you a background to all of the concepts\
-    \ in this lab\n- [Google Presentation](https://docs.google.com/presentation/d/1S-JqLQ4jatHwEBRUQRiA5WOuCwpTUnxl2d1qRUoTz5g/edit#slide=id.g20639ff941_0_42)\
-    \ \n- [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)\n\
-    \n## Start Scenario\nOnce you have watched the background video or went throught\
-    \ the presentation, continue to the exercises\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: container-internals-lab-2-0-part-5
 tags:

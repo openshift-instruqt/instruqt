@@ -332,58 +332,56 @@ challenges:
   timelimit: 300
   title: The OCI Runtime Reference Implementation
   type: challenge
+description: '## Background
+
+  This lab is focused on understanding some of the container standards that govern
+  this space. This will help you better architect your own environments, feeling more
+  confident about where to invest.
+
+
+  By the end of this lab you should be able to:
+
+  - Explain the Image, Runtime, and Distribution specifications
+
+  - Have a basic understanding of the major metadata files
+
+  - Be able to start a container from scratch
+
+
+  ## Outline
+
+  - An overview of the three OCI specifications
+
+  - The OCI image specification
+
+  - The OCI runtime specification
+
+  - The OCI reference implementation of the runtime specification (runc) and how to
+  start a container
+
+
+  ## Other Material
+
+  - [Presentation](https://docs.google.com/presentation/d/1fC9cKR2-kFW5l-VEk0Z5_1vriYpROXOXM_5rhyVnBi4/edit#slide=id.g20639ff941_0_42)
+
+  - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+
+  ## Start Scenario
+
+  Once you have watched the background video or went throught the presentation, continue
+  to the exercises
+
+  '
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: '## Background
-
-    This lab is focused on understanding some of the container standards that govern
-    this space. This will help you better architect your own environments, feeling
-    more confident about where to invest.
-
-
-    By the end of this lab you should be able to:
-
-    - Explain the Image, Runtime, and Distribution specifications
-
-    - Have a basic understanding of the major metadata files
-
-    - Be able to start a container from scratch
-
-
-    ## Outline
-
-    - An overview of the three OCI specifications
-
-    - The OCI image specification
-
-    - The OCI runtime specification
-
-    - The OCI reference implementation of the runtime specification (runc) and how
-    to start a container
-
-
-    ## Other Material
-
-    - [Presentation](https://docs.google.com/presentation/d/1fC9cKR2-kFW5l-VEk0Z5_1vriYpROXOXM_5rhyVnBi4/edit#slide=id.g20639ff941_0_42)
-
-    - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
-
-
-    ## Start Scenario
-
-    Once you have watched the background video or went throught the presentation,
-    continue to the exercises
-
-    '
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: container-internals-lab-2-0-part-6
 tags:

@@ -250,22 +250,20 @@ challenges:
   timelimit: 300
   title: Step 3
   type: challenge
+description: In this scenario you will learn more about developing Spring Boot applications
+  using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform.
+  You will learn about how OpenShift uses monitoring tools to keep your application
+  running / notify you when something unrecoverable happens through the use of *probes*
+  .
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: In this scenario you will learn more about developing Spring Boot applications
-    using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform.
-    You will learn about how OpenShift uses monitoring tools to keep your application
-    running / notify you when something unrecoverable happens through the use of *probes*
-    .
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: monitoring
 tags:

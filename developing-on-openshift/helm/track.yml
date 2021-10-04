@@ -189,36 +189,34 @@ challenges:
   timelimit: 300
   title: Manage Revisions
   type: challenge
+description: "## Goal\n\nLearn how to use the [Helm](https://helm.sh/), a package\
+  \ manager that helps you managing and deploying applications on OpenShift.\n\n![Logo](../../assets/developing-on-openshift/helm/logo.png)\n\
+  \n[Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes\
+  \ which helps users create templated packages called Helm Charts to include all\
+  \ Kubernetes resources that are required to deploy a particular application.  Helm\
+  \ then assists with installing the Helm Chart on Kubernetes, and afterwards it can\
+  \ upgrade or rollback the installed package when new versions are available. \n\n\
+  ## Concepts\n\n* Helm core concepts\n* Exploring `helm` command line tool\n* Deploying\
+  \ and managing `Helm Charts`\n* Creating your own `Chart`\n* Managing applications\
+  \ lifecycle with Helm `Upgrade` and `Rollback` of releases.\n* Helm integrations\
+  \ with OpenShift UI\n\n## Use case\n\nBe able to provide a great experience for\
+  \ both Developers and System Administrators to manage and deploy applications using\
+  \ Helm Charts on top of OpenShift. \n\nHelm Charts are particularly useful for installation\
+  \ and upgrade of stateless applications given that the Kubernetes resources and\
+  \ the application image can simply be updated to newer versions. The follow-up for\
+  \ this Day 1 experience, is to convert Helm Charts into an Operator, using [Operator\
+  \ Framework](https://github.com/operator-framework) for a complete Day 2 experience\
+  \ for your apps.\n\nThis OpenShift cluster will self-destruct in one hour.\n\nLet's\
+  \ get started!\n\n\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## Goal\n\nLearn how to use the [Helm](https://helm.sh/), a package manager\
-    \ that helps you managing and deploying applications on OpenShift.\n\n![Logo](../../assets/developing-on-openshift/helm/logo.png)\n\
-    \n[Helm](https://www.openshift.com/learn/topics/helm) is a package manager for\
-    \ Kubernetes which helps users create templated packages called Helm Charts to\
-    \ include all Kubernetes resources that are required to deploy a particular application.\
-    \  Helm then assists with installing the Helm Chart on Kubernetes, and afterwards\
-    \ it can upgrade or rollback the installed package when new versions are available.\
-    \ \n\n## Concepts\n\n* Helm core concepts\n* Exploring `helm` command line tool\n\
-    * Deploying and managing `Helm Charts`\n* Creating your own `Chart`\n* Managing\
-    \ applications lifecycle with Helm `Upgrade` and `Rollback` of releases.\n* Helm\
-    \ integrations with OpenShift UI\n\n## Use case\n\nBe able to provide a great\
-    \ experience for both Developers and System Administrators to manage and deploy\
-    \ applications using Helm Charts on top of OpenShift. \n\nHelm Charts are particularly\
-    \ useful for installation and upgrade of stateless applications given that the\
-    \ Kubernetes resources and the application image can simply be updated to newer\
-    \ versions. The follow-up for this Day 1 experience, is to convert Helm Charts\
-    \ into an Operator, using [Operator Framework](https://github.com/operator-framework)\
-    \ for a complete Day 2 experience for your apps.\n\nThis OpenShift cluster will\
-    \ self-destruct in one hour.\n\nLet's get started!\n\n\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: helm
 tags:

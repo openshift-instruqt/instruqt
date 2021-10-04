@@ -423,30 +423,28 @@ challenges:
   timelimit: 300
   title: Deploying Kustomized Applicaton
   type: challenge
+description: "## Goal\n\nThis guide helps you get familiar with how to use Kustomize\
+  \ on Argo CD on OpenShift.\n\n\n## Concepts\n\n[Kustomize](https://kustomize.io/)\
+  \ traverses a Kubernetes manifest to add, remove or update configuration options\
+  \ without forking. It is available both as a standalone binary and as a native feature\
+  \ of `kubectl` (and by extension `oc`). \n\nThe principals of `kustomize` are:\n\
+  \n* Purely declarative approach to configuration customization \n* Manage an arbitrary\
+  \ number of distinctly customized Kubernetes configurations \n* Every artifact that\
+  \ kustomize uses is plain YAML and can be validated and processed as such \n* As\
+  \ a \"templateless\" templating system; it encourages using YAML without forking\
+  \ the repo it.\n\n![Kustomize Logo](../../assets/gitops/kustomize_logo.png)\n\n\
+  ## Use case\n\nThis is a simple guide that takes you through the following steps:\n\
+  \n* Exploring the Kustomize syntax\n* Deploying a Kustomized application\n\nThis\
+  \ OpenShift cluster will self-destruct in one hour.\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: "## Goal\n\nThis guide helps you get familiar with how to use Kustomize\
-    \ on Argo CD on OpenShift.\n\n\n## Concepts\n\n[Kustomize](https://kustomize.io/)\
-    \ traverses a Kubernetes manifest to add, remove or update configuration options\
-    \ without forking. It is available both as a standalone binary and as a native\
-    \ feature of `kubectl` (and by extension `oc`). \n\nThe principals of `kustomize`\
-    \ are:\n\n* Purely declarative approach to configuration customization \n* Manage\
-    \ an arbitrary number of distinctly customized Kubernetes configurations \n* Every\
-    \ artifact that kustomize uses is plain YAML and can be validated and processed\
-    \ as such \n* As a \"templateless\" templating system; it encourages using YAML\
-    \ without forking the repo it.\n\n![Kustomize Logo](../../assets/gitops/kustomize_logo.png)\n\
-    \n## Use case\n\nThis is a simple guide that takes you through the following steps:\n\
-    \n* Exploring the Kustomize syntax\n* Deploying a Kustomized application\n\nThis\
-    \ OpenShift cluster will self-destruct in one hour.\n"
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: kustomize
 tags:

@@ -219,56 +219,54 @@ challenges:
   timelimit: 300
   title: Analyzing Storage and Graph Drivers
   type: challenge
+description: '## Background
+
+  This lab is focused on understanding what container registries are for and how they
+  work.
+
+
+  By the end of this lab you should be able to:
+
+  - Evaluate the quality of a container registry
+
+  - Evaluate the quality of a container repository
+
+  - Share your images using public and private registries
+
+
+  ## Outline
+
+  - Understanding the basics of trust - quality & provenance
+
+  - Evaluating four different public registries
+
+  - Evaluating container repositories - trusted base images
+
+  - Sharing your container images
+
+
+  ## Other Material
+
+  - [Presentation](//goo.gl/pckoxn)
+
+  - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+
+  ## Start Scenario
+
+  Once you have watched the background video or went throught the presentation, continue
+  to the exercises
+
+  '
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-notes:
-- contents: '## Background
-
-    This lab is focused on understanding what container registries are for and how
-    they work.
-
-
-    By the end of this lab you should be able to:
-
-    - Evaluate the quality of a container registry
-
-    - Evaluate the quality of a container repository
-
-    - Share your images using public and private registries
-
-
-    ## Outline
-
-    - Understanding the basics of trust - quality & provenance
-
-    - Evaluating four different public registries
-
-    - Evaluating container repositories - trusted base images
-
-    - Sharing your container images
-
-
-    ## Other Material
-
-    - [Presentation](//goo.gl/pckoxn)
-
-    - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
-
-
-    ## Start Scenario
-
-    Once you have watched the background video or went throught the presentation,
-    continue to the exercises
-
-    '
-  type: text
 owner: openshift
-private: false
-published: true
+private: true
+published: false
 skipping_enabled: false
 slug: container-internals-lab-2-0-part-3
 tags:
