@@ -116,6 +116,17 @@ for course in hcourses['courses']:
         
         track_d["description"] = intro_data
         
+        #for asset in course_json["assets"]["clients"]:
+        #    script=asset["file"]
+        
+        try:
+          assets = course_json["details"]["assets"]["client"]
+          #shutil.copyfile('learn-katacoda/' + pathway_id + '/' + course_id + '/assets/*' , pathway + '/' + trackDir + '/track_scripts/')
+          os.system('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/track_scripts/.scripts/' )
+          print('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/track_scripts/.scripts/')
+        except KeyError:
+          pass
+        
         
         for step in course_json["details"]["steps"]:
             slug = step["text"]
