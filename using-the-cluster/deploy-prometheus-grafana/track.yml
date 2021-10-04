@@ -22,10 +22,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1 - Example of Prometheus metrics being exposed by an application
   type: challenge
 - assignment: "\n### Namespace for monitoring\n\nWe have created a [namespace](https://docs.openshift.com/container-platform/4.2/applications/projects/working-with-projects.html)\
@@ -95,10 +95,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2 - Deploying Prometheus to collect exposed metrics
   type: challenge
 - assignment: "\n\n## Setting up Grafana to visualize metrics\n\nNow, we will deploy\
@@ -141,10 +141,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3 - Deploying Grafana to visualize Prometheus metrics
   type: challenge
 - assignment: "\n\n## Visualizing Metrics using Grafana\n\nNow, we will create a dashboard\
@@ -187,10 +187,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4 - Visualize metrics in Grafana
   type: challenge
 developers:
@@ -199,13 +199,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: deploy-prometheus-grafana
 tags:
 - openshift
 title: How to set up Prometheus and Grafana on OpenShift
-type: truck
+type: track

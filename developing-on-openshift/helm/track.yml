@@ -72,10 +72,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Explore Helm CLI
   type: challenge
 - assignment: "At the end of this chapter you will be able to:\n- Create your own\
@@ -132,10 +132,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Create your first Helm Chart
   type: challenge
 - assignment: "At the end of this chapter you will be able to:\n- Manage multiple\
@@ -183,10 +183,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Manage Revisions
   type: challenge
 developers:
@@ -195,13 +195,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: helm
 tags:
 - openshift
 title: Getting Started with Helm 3 on OpenShift
-type: truck
+type: track

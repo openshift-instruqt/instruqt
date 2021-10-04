@@ -26,10 +26,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Kubernetes Manifests
   type: challenge
 - assignment: 'Verify the currently available Kubernetes API versions:
@@ -289,10 +289,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Basic Operations with the Kubernetes API
   type: challenge
 - assignment: "Get a list of all pods in the `myproject` Namespace:\n\n```\noc get\
@@ -328,10 +328,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Replica Sets
   type: challenge
 - assignment: "Create a manifest for a Deployment with a Finalizer:\n\n```\ncat >\
@@ -375,10 +375,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deployments/Finalizers
   type: challenge
 - assignment: "Begin by running a proxy to the Kubernetes API server:\n\n```\noc proxy\
@@ -416,10 +416,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Custom Resource Definitions
   type: challenge
 developers:
@@ -428,13 +428,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: k8s-api-fundamentals
 tags:
 - openshift
 title: Kubernetes API Fundamentals
-type: truck
+type: track

@@ -60,10 +60,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Deploying an Application
   type: challenge
 - assignment: 'Now that you have created an application to work with, the list of
@@ -238,10 +238,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Resource Object Types
   type: challenge
 - assignment: "To get a more detailed description of a specific resource object, you\
@@ -278,10 +278,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Querying Resource Objects
   type: challenge
 - assignment: 'To make changes to an existing resource object you can use the ``oc
@@ -339,10 +339,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Editing Resource Objects
   type: challenge
 - assignment: "The ``oc edit`` command would be used to change an existing resource\
@@ -382,10 +382,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Creating Resource Objects
   type: challenge
 - assignment: "The ``oc create`` command allows you to create a new resource object\
@@ -425,10 +425,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Replacing Resource Objects
   type: challenge
 - assignment: 'When you deploy an application using ``oc new-app`` a label is automatically
@@ -523,10 +523,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 7 - Labelling Resource Objects
   type: challenge
 - assignment: 'If you need to delete an entire application, or just a single resource,
@@ -603,10 +603,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 8 - Deleting Resource Objects
   type: challenge
 developers:
@@ -615,13 +615,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: resource-objects
 tags:
 - openshift
 title: Using the CLI to Manage Resource Objects
-type: truck
+type: track

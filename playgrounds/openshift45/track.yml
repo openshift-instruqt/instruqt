@@ -50,10 +50,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: OpenShift Playground
   type: challenge
 developers:
@@ -62,13 +62,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: openshift45
 tags:
 - openshift
 title: OpenShift 4.5 Playground
-type: truck
+type: track

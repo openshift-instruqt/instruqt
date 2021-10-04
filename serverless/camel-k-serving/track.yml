@@ -31,10 +31,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1
   type: challenge
 - assignment: "## Running the API integration\n\nYou have access to an OpenAPI standard\
@@ -134,10 +134,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2
   type: challenge
 - assignment: "## Setup Serverless\n\nThe API integration can also run as Knative\
@@ -168,10 +168,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3
   type: challenge
 - assignment: '## Making Camel K Serverless
@@ -295,10 +295,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4
   type: challenge
 developers:
@@ -307,13 +307,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: camel-k-serving
 tags:
 - openshift
 title: Serverless Camel K
-type: truck
+type: track

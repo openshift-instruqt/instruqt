@@ -36,10 +36,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Initialize the Project
   type: challenge
 - assignment: 'The `watches.yaml` file maps a Group, Version, and Kind to a specific
@@ -62,10 +62,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Update the Watches File
   type: challenge
 - assignment: 'Apply the Memcached Custom Resource Definition to the cluster:
@@ -119,10 +119,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Apply the Memcached Custom Resource Definition
   type: challenge
 - assignment: "Open a new terminal window and navigate to the `memcached-operator`\
@@ -161,10 +161,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Apply the Memcached Custom Resource
   type: challenge
 - assignment: 'Let''s now update the Memcached `example` Custom Resource and increase
@@ -205,10 +205,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Update the Memcached Custom Resource
   type: challenge
 - assignment: 'If any Memcached member fails it gets restarted or recreated automatically
@@ -249,10 +249,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Test Memcached Cluster Failover
   type: challenge
 - assignment: 'Delete the Memcached cluster and all associated resources by deleting
@@ -294,10 +294,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Clean Up
   type: challenge
 developers:
@@ -306,13 +306,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: helm-operator-memcached
 tags:
 - openshift
 title: Operator SDK with Helm, Memcached
-type: truck
+type: track

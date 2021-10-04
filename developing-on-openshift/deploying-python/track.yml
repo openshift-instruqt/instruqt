@@ -30,10 +30,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Creating an Initial Project
   type: challenge
 - assignment: 'From the options presented for deploying an application, select _From
@@ -130,10 +130,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Deploying Using the Web Console
   type: challenge
 - assignment: 'Once the build has started, click on the _View Logs_ link shown on
@@ -156,10 +156,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Viewing the Builder Logs
   type: challenge
 - assignment: 'Once the build of the application image has completed, it will be deployed.
@@ -196,10 +196,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Accessing the Application
   type: challenge
 - assignment: "Instead of deploying the application from the web console, you can\
@@ -262,10 +262,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Deleting the Application
   type: challenge
 - assignment: "You now have a clean project again, so lets deploy the same web application,\
@@ -324,10 +324,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Deploying Using the Command Line
   type: challenge
 - assignment: "The source code for an application isn't going to be static, so a way\
@@ -435,10 +435,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 7 - Triggering a New Build
   type: challenge
 developers:
@@ -447,13 +447,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: deploying-python
 tags:
 - openshift
 title: Deploying Applications From Source
-type: truck
+type: track

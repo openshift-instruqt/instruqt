@@ -39,10 +39,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1
   type: challenge
 - assignment: "##  Implementing a method returning a Single & Vert.x Web\n\nTake a\
@@ -95,10 +95,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2
   type: challenge
 - assignment: "## Using Async JDBC\n\nIn the `start` method, we are calling `initializeDatabase`.\
@@ -144,10 +144,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3
   type: challenge
 - assignment: "## Async JDBC with a callback-based composition\n\nYou may ask why\
@@ -184,10 +184,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4
   type: challenge
 - assignment: "## Deploy to OpenShift\n\nFirst, we need a database.\n\n**1. Deploy\
@@ -218,10 +218,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 5
   type: challenge
 - assignment: "## Managing Secrets\n\nBut wait\u2026\u200B we have hardcoded the database\
@@ -262,10 +262,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 6
   type: challenge
 developers:
@@ -274,13 +274,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: audit-service
 tags:
 - openshift
 title: 'MicroTrader App Part 4: Audit Service'
-type: truck
+type: track

@@ -75,10 +75,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers
     and history'
   type: challenge
@@ -194,10 +194,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace,
     Repository and Tag'
   type: challenge
@@ -338,10 +338,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating
     system components in a container image'
   type: challenge
@@ -351,13 +351,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-2
 tags:
 - openshift
 title: Container Images
-type: truck
+type: track

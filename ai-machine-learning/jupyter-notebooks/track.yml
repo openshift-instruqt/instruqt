@@ -47,10 +47,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Loading the Notebook Images
   type: challenge
 - assignment: 'The minimal Jupyter notebook images that have been loaded can be deployed
@@ -125,10 +125,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Loading the Notebook Templates
   type: challenge
 - assignment: 'To deploy a Jupyter notebook using the `notebook-deployer` template,
@@ -184,10 +184,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
 - assignment: 'From the options for deploying applications to your project, select
@@ -288,10 +288,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Deploying the Jupyter Notebook
   type: challenge
 - assignment: 'When you are done with the Jupyter notebook instance you can delete
@@ -328,10 +328,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Deleting the Jupyter Notebook
   type: challenge
 developers:
@@ -340,13 +340,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: jupyter-notebooks
 tags:
 - openshift
 title: Deploying a Jupyter Notebook Image
-type: truck
+type: track

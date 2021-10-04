@@ -46,10 +46,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: What is Service Mesh and why we need it?
   type: challenge
 - assignment: "A *service mesh* is the network of microservices that make up applications\
@@ -124,10 +124,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Service Mesh Details
   type: challenge
 - assignment: "As you might have noticed in the terminal, Red Hat OpenShift Service\
@@ -157,10 +157,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Service Mesh Playground
   type: challenge
 developers:
@@ -169,13 +169,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: 1-introduction
 tags:
 - openshift
 title: Red Hat OpenShift Service Mesh and Istio Playground
-type: truck
+type: track

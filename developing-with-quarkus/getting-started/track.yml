@@ -108,10 +108,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1
   type: challenge
 - assignment: "In the previous step you created a basic RESTful Java application with\
@@ -173,10 +173,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2
   type: challenge
 - assignment: "In the previous step you added a custom CDI bean to the app. Now it's\
@@ -217,10 +217,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3
   type: challenge
 - assignment: "Let\u2019s now produce a native executable for our application. It\
@@ -282,10 +282,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4
   type: challenge
 - assignment: "Now that we have our app built, let's move it into containers and into\
@@ -348,10 +348,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 5
   type: challenge
 - assignment: "Now that we have our app running on OpenShift, let's see what we can\
@@ -425,10 +425,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 6
   type: challenge
 developers:
@@ -437,13 +437,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: getting-started
 tags:
 - openshift
 title: Getting Started with Quarkus
-type: truck
+type: track

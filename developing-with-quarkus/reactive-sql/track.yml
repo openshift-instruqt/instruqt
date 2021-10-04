@@ -41,10 +41,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1
   type: challenge
 - assignment: "# Remote Live Coding\n\nWhat if you want to expand the inner loop development\
@@ -163,10 +163,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2
   type: challenge
 - assignment: "In the previous step you created created a PostgreSQL databases for\
@@ -226,10 +226,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3
   type: challenge
 - assignment: "Lets continue in this section and define are model Class\n\nLet\u2019\
@@ -267,10 +267,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4
   type: challenge
 - assignment: "In the previous step you added a custom bean to the app. Let's now\
@@ -328,10 +328,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 5
   type: challenge
 developers:
@@ -340,13 +340,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: reactive-sql
 tags:
 - openshift
 title: Reactive programming with Quarkus Reactive SQL
-type: truck
+type: track

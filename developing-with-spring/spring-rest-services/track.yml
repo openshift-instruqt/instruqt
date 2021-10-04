@@ -28,10 +28,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1
   type: challenge
 - assignment: "# Create REST services for the fruit web application\n\nRESTful web\
@@ -167,10 +167,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2
   type: challenge
 - assignment: "# Login and Deploy to OpenShift Container Platform\n\n**Red Hat OpenShift\
@@ -243,10 +243,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3
   type: challenge
 developers:
@@ -255,13 +255,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: spring-rest-services
 tags:
 - openshift
 title: Spring REST
-type: truck
+type: track

@@ -22,10 +22,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Creating an Initial Project
   type: challenge
 - assignment: "To demonstrate transferring files to and from a running container we\
@@ -119,10 +119,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Downloading Files from a Container
   type: challenge
 - assignment: 'To copy files from the local machine to the container, the ``oc rsync``
@@ -249,10 +249,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Uploading Files to a Container
   type: challenge
 - assignment: 'In addition to being able to manually upload or download files when
@@ -549,10 +549,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Synchronizing Files with a Container
   type: challenge
 - assignment: 'If you are mounting a persistent volume into the container for your
@@ -795,10 +795,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Copying Files to a Persistent Volume
   type: challenge
 developers:
@@ -807,13 +807,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: transferring-files
 tags:
 - openshift
 title: Transferring Files in and out of Containers
-type: truck
+type: track

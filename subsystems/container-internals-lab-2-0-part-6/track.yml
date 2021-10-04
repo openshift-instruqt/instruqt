@@ -29,10 +29,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Overview of The OCI Specifications
   type: challenge
 - assignment: '## The Image Specification
@@ -121,10 +121,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: The OCI Image Specification
   type: challenge
 - assignment: "# The Runtime Specification\n\nThis specification governs the format\
@@ -175,10 +175,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: The OCI Runtime Specification
   type: challenge
 - assignment: 'The goal of this lab is to learn how to use the container runtime to
@@ -326,10 +326,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: The OCI Runtime Reference Implementation
   type: challenge
 developers:
@@ -338,13 +338,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-6
 tags:
 - openshift
 title: Container Standards
-type: truck
+type: track

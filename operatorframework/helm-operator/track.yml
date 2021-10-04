@@ -123,10 +123,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Initialize the Project
   type: challenge
 - assignment: 'The `watches.yaml` file maps a Group, Version, and Kind to a specific
@@ -149,10 +149,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Update the Watches File
   type: challenge
 - assignment: 'Apply the CockroachDB Custom Resource Definition to the cluster:
@@ -206,10 +206,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Apply the CockroachDB Custom Resource Definition
   type: challenge
 - assignment: "Open a new terminal window and navigate to the `cockroachdb-operator`\
@@ -241,10 +241,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Apply the CockroachDB Custom Resource
   type: challenge
 - assignment: 'Verify that you can access the CockroachDB Web UI by first exposing
@@ -286,10 +286,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Access the CockroachDB Web UI
   type: challenge
 - assignment: 'Let''s talk to the CockroachDB cluster by connecting to the service
@@ -379,10 +379,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Connect to the CockroachDB Cluster
   type: challenge
 - assignment: 'Let''s now update the CockroachDB `example` Custom Resource and increase
@@ -427,10 +427,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Update the CockroachDB Custom Resource
   type: challenge
 - assignment: 'If any CockroachDB member fails it gets restarted or recreated automatically
@@ -520,10 +520,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Test CockroachDB Cluster Failover
   type: challenge
 - assignment: 'Delete the CockroachDB cluster and all associated resources by deleting
@@ -565,10 +565,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Clean Up
   type: challenge
 developers:
@@ -577,13 +577,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: helm-operator
 tags:
 - openshift
 title: Operator SDK with Helm
-type: truck
+type: track

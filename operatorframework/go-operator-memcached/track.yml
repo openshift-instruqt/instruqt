@@ -65,10 +65,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating a New Project
   type: challenge
 - assignment: 'Add a new Custom Resource Definition (CRD) API called Memcached with
@@ -106,10 +106,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Create a new API and Controller
   type: challenge
 - assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/memcached_types.go`\
@@ -168,10 +168,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Defining the Spec and Status
   type: challenge
 - assignment: "\n**Note:** The next two subsections explain how the controller watches\
@@ -278,10 +278,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Customizing the Operator Logic
   type: challenge
 - assignment: "**Note:** The next two subsections explain how the controller watches\
@@ -310,10 +310,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Resources watched by the Controller
   type: challenge
 - assignment: "There are a number of other useful configurations that can be made\
@@ -339,10 +339,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Controller Configurations
   type: challenge
 - assignment: "The reconcile function is responsible for enforcing the desired CR\
@@ -368,10 +368,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Reconcile loop
   type: challenge
 - assignment: "The following are a few possible return options for a Reconciler:\n\
@@ -389,10 +389,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Return options for a Reconciler:'
   type: challenge
 - assignment: "The controller needs certain [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)\
@@ -414,10 +414,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Specify permissions and generate RBAC manifests
   type: challenge
 - assignment: 'Once the CRD is registered, there are two ways to run the Operator:
@@ -454,10 +454,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Running the Operator Locally (Outside the Cluster)
   type: challenge
 - assignment: "In a new terminal, inspect the Custom Resource manifest:\n\n```\ncd\
@@ -485,10 +485,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the Memcached Custom Resource
   type: challenge
 - assignment: 'Our Memcached controller creates pods containing OwnerReferences in
@@ -544,10 +544,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deleting the Memcached Custom Resource
   type: challenge
 developers:
@@ -556,13 +556,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: go-operator-memcached
 tags:
 - openshift
 title: Operator SDK with Go, Memcached
-type: truck
+type: track

@@ -62,10 +62,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Create Project and PVC
   type: challenge
 - assignment: "- Apply the YAML file to deploy Elasticsearch\n\n```\noc create -f\
@@ -88,10 +88,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploy Elasticsearch on ODF
   type: challenge
 - assignment: "- Apply the YAML file to deploy application's backend API\n\n```\n\
@@ -113,10 +113,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploy app backend & frontend
   type: challenge
 - assignment: '- Let''s load the text formatted dataset of 100 classic novels from
@@ -180,10 +180,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Ingest dataset to Elasticsearch
   type: challenge
 developers:
@@ -192,13 +192,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: persistent-elasticsearch
 tags:
 - openshift
 title: Persistent Storage for Elasticsearch Powered by OpenShift Container Storage
-type: truck
+type: track

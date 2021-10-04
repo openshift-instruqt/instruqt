@@ -137,10 +137,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using RWO storage
   type: challenge
 - assignment: "RWX storage is a special kind of storage that can be mounted on several\
@@ -230,10 +230,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using RWX storage
   type: challenge
 developers:
@@ -242,13 +242,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: persistent-intro
 tags:
 - openshift
 title: Making Persistent Storage Calls in Your Application
-type: truck
+type: track

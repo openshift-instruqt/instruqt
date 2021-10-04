@@ -20,10 +20,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: More about Prometheus
   type: challenge
 - assignment: "\n### Waiting for the test data to be generated\nWe need to generate\
@@ -62,10 +62,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing the workshop environment
   type: challenge
 - assignment: "\n\n### Accessing the OpenShift Console\n\nYou don't need to access\
@@ -97,10 +97,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing the workshop environment (Backend)
   type: challenge
 developers:
@@ -109,13 +109,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: prometheus-api-client
 tags:
 - openshift
 title: Prometheus metrics for Data Science on OpenShift
-type: truck
+type: track

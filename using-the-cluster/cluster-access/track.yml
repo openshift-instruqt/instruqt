@@ -74,10 +74,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Logging in Via the Web Console
   type: challenge
 - assignment: "The OpenShift web console provides a convenient method for quickly\
@@ -128,10 +128,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Logging in Via the Command Line
   type: challenge
 - assignment: 'Working alone can be lots of fun, but as your application grows you
@@ -269,10 +269,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Collaborating with Other Users
   type: challenge
 - assignment: 'When using the ``oc`` command line tool, you can only interact with
@@ -376,10 +376,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Switching Between Accounts
   type: challenge
 developers:
@@ -388,13 +388,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: cluster-access
 tags:
 - openshift
 title: Logging in to an OpenShift Cluster
-type: truck
+type: track

@@ -16,8 +16,12 @@ import yaml
 import re
 import shutil
 
+#from collections import OrderedDict
+
+
 
 track_d={}
+#track_d=OrderedDict()
 
 with open('learn-katacoda//homepage-pathway.json', 'r') as hfile:
     hdata=hfile.read()
@@ -56,7 +60,7 @@ for course in hcourses['courses']:
         
         track_d["title"] = title
         track_d["slug"] = course_id
-        track_d["type"] = "truck"
+        track_d["type"] = "track"
         
         if not os.path.exists(pathway + '/' + trackDir):
           os.mkdir(pathway + '/' + trackDir)
@@ -77,16 +81,16 @@ for course in hcourses['courses']:
         track_d["icon"] = "https://logodix.com/logo/1910931.png"
         
         track_d["tags"] = ["openshift"]
-        track_d["owner"] = ["openshift"]
+        track_d["owner"] = "openshift"
         track_d["developers"] = [ "btannous@redhat.com", "nvinto@redhat.com","rjarvine@redhat.com"]
-        track_d["private"] =  "false"
-        track_d["published"] = "true"
-        track_d["skipping_enabled"] = "true"
+        track_d["private"] =  False
+        track_d["published"] = True
+        track_d["skipping_enabled"] = False
         
         difficulty="intermediate"
         level="beginner"
         # course_json["time"]
-        time="300"
+        time=300
         
         if course_json["difficulty"] == "beginner":
           difficulty="basic"
@@ -135,7 +139,7 @@ for course in hcourses['courses']:
             d_challenges["assignment"] =  md
             
             d_challenges["tabs"] = [{"title": "cli", "type": "terminal","hostname":"crc-nonest-1"},
-                                    {"title": "web-ui", "type" : "service", "hostname" : "crc-nonest-1", "port" : "30443"}]
+                                    {"title": "web-ui", "type" : "service", "hostname" : "crc-nonest-1", "port" : 30443}]
             
             d_challenges["difficulty"]= difficulty
             d_challenges["timelimit"]= time

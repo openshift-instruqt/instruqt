@@ -42,10 +42,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Install Operator
   type: challenge
 - assignment: "## Create Data Grid Cluster\n\nWith the Data Grid Operator installed,\
@@ -114,10 +114,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Create Cluster
   type: challenge
 - assignment: "# Types of Data Grid services\n\nData Grid has two types of services:\n\
@@ -181,10 +181,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Test Access
   type: challenge
 developers:
@@ -193,13 +193,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: rhoar-getting-started-rhdg
 tags:
 - openshift
 title: Red Hat Data Grid development
-type: truck
+type: track

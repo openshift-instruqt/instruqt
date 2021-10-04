@@ -52,10 +52,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Loading the Required Images
   type: challenge
 - assignment: 'Deploying JupyterHub requires a bit more work to setup than just deploying
@@ -144,10 +144,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Loading the Required Templates
   type: challenge
 - assignment: 'You can work with the templates using either the command line or the
@@ -202,10 +202,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
 - assignment: 'From the options for deploying applications to your project, select
@@ -333,10 +333,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Deploying JupyterHub Service
   type: challenge
 - assignment: 'When you are done with the JupyterHub service you can delete it from
@@ -374,10 +374,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Deleting the JupyterHub Service
   type: challenge
 - assignment: 'The default configuration for the JupyterHub service created allows
@@ -455,10 +455,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Customizing the Configuration
   type: challenge
 - assignment: 'If the required configuration is too complex to provide via the template
@@ -609,10 +609,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 7 - Source to Image Builder
   type: challenge
 - assignment: 'In the examples so far in this workshop, an empty Jupyter notebook
@@ -705,10 +705,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 8 - Building the Notebook Image
   type: challenge
 developers:
@@ -717,13 +717,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: jupyterhub-service
 tags:
 - openshift
 title: Deploying JupyterHub as a Service
-type: truck
+type: track

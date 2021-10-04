@@ -64,10 +64,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Prepare for Exercises
   type: challenge
 - assignment: "[ocp-serving-components]: https://docs.openshift.com/container-platform/4.7/serverless/architecture/serverless-serving-architecture.html\n\
@@ -208,10 +208,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying your service
   type: challenge
 - assignment: "At the end of this step you will be able to:\n- Provide a custom `name`\
@@ -289,10 +289,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Traffic Distribution
   type: challenge
 - assignment: "At the end of this step you will be able to:\n- Configure a service\
@@ -345,10 +345,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Canary Releases
   type: challenge
 - assignment: "[apachebench]: https://httpd.apache.org/docs/2.4/programs/ab.html \n\
@@ -478,10 +478,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Scaling
   type: challenge
 developers:
@@ -490,13 +490,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: serverless
 tags:
 - openshift
 title: Getting Started with OpenShift Serverless
-type: truck
+type: track

@@ -155,10 +155,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying the HTTP Bridge
   type: challenge
 - assignment: "To verify that the Ingress is working properly, try to access the ``/healthy`\
@@ -201,10 +201,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Producing messages
   type: challenge
 - assignment: "Before you can perform any consumer operations in the Kafka cluster,\
@@ -244,10 +244,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Subscribing to the topic
   type: challenge
 - assignment: "Finally, retrieve the latest messages from the Kafka Bridge consumer\
@@ -292,10 +292,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Consuming messages
   type: challenge
 developers:
@@ -304,13 +304,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: kafka-http-bridge
 tags:
 - openshift
 title: Exposing Apache Kafka through the HTTP Bridge
-type: truck
+type: track

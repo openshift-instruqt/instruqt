@@ -96,10 +96,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
   type: challenge
 - assignment: "In the last step, you created a multi-tier web application. Now, log\
@@ -133,10 +133,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
   type: challenge
 - assignment: "In this exercise, you will scale and load test a distributed application\
@@ -181,10 +181,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Cluster Performance: Scaling applications horizontally with containers'
   type: challenge
 - assignment: "The goal of this exercise is to understand the nature of a distributed\
@@ -239,10 +239,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
   type: challenge
 developers:
@@ -251,13 +251,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-5
 tags:
 - openshift
 title: Container Orchestration
-type: truck
+type: track

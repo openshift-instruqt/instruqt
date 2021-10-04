@@ -97,10 +97,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Define Entity
   type: challenge
 - assignment: "# Remote Live Coding\n\nWhat if you want to expand the inner loop development\
@@ -227,10 +227,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Setup Remove Development
   type: challenge
 - assignment: "In the previous step you created a basic RESTful Java application with\
@@ -292,10 +292,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Add Queries
   type: challenge
 - assignment: "In the previous step you added a few more custom queries to your entity\
@@ -383,10 +383,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Add Paging/Filtering
   type: challenge
 - assignment: "In the previous step you built a slightly more complex query including\
@@ -443,10 +443,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Add Startup Task
   type: challenge
 - assignment: "Now that we have our app running on OpenShift, let's see what we can\
@@ -509,10 +509,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Exercise Table
   type: challenge
 developers:
@@ -521,13 +521,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: panache-reactive
 tags:
 - openshift
 title: Reactive Data access with Quarkus Hibernate Reactive with Panache
-type: truck
+type: track

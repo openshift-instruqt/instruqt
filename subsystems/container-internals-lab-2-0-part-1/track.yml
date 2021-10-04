@@ -31,10 +31,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Introduction to Containers
   type: challenge
 - assignment: 'Container images are really just tar files. Seriously, they are tar
@@ -159,10 +159,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Container Images
   type: challenge
 - assignment: "Registries are really just fancy file servers that help users share\
@@ -210,10 +210,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Container Registries
   type: challenge
 - assignment: "To understand the Container Host, we must analyze the layers that work\
@@ -256,10 +256,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Container Hosts
   type: challenge
 - assignment: 'Container Orchestration is the next logical progression after you become
@@ -397,10 +397,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Container Orchestration
   type: challenge
 - assignment: 'In this lab, we have covered container images, registries, hosts, and
@@ -441,10 +441,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Closing
   type: challenge
 developers:
@@ -453,13 +453,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-1
 tags:
 - openshift
 title: Introduction to Containers
-type: truck
+type: track

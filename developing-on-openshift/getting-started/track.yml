@@ -26,10 +26,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1 - Exploring The Command Line
   type: challenge
 - assignment: "This section focuses on using the web console.\n\n## Exercise: Logging\
@@ -71,10 +71,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2 - Exploring The Web Console
   type: challenge
 - assignment: "In this section, you are going to deploy the front end component of\
@@ -123,10 +123,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3 - Deploying a Docker Image
   type: challenge
 - assignment: 'Let''s scale our application up to 2 instances of the pods. You can
@@ -217,10 +217,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4 - Scaling Your Application
   type: challenge
 - assignment: '_Services_ provide internal abstraction and load balancing within an
@@ -304,10 +304,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 5 - Routing HTTP Requests
   type: challenge
 - assignment: 'In this section, you are going to deploy a backend service for the
@@ -463,10 +463,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 6 - Building From Source Code
   type: challenge
 developers:
@@ -475,13 +475,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: getting-started
 tags:
 - openshift
 title: Getting Started with OpenShift for Developers
-type: truck
+type: track

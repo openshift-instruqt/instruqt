@@ -47,10 +47,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Loading the Notebook Images
   type: challenge
 - assignment: 'The minimal Jupyter notebook images that have been loaded can be deployed
@@ -148,10 +148,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Loading the Notebook Templates
   type: challenge
 - assignment: 'You can work with the templates using either the command line or the
@@ -206,10 +206,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
 - assignment: 'In the separate workshop _Deploying a Jupyter Notebook Image_ we already
@@ -334,10 +334,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Building the Notebook Image
   type: challenge
 - assignment: 'Return to the web console, and click on the _+Add_ option in the left
@@ -448,10 +448,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Deploying the Notebook Image
   type: challenge
 - assignment: 'When you are done with the Jupyter notebook instance you can delete
@@ -515,10 +515,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Deleting the Jupyter Notebook
   type: challenge
 - assignment: 'Having built a custom Jupyter notebook image as a separate step, you
@@ -631,10 +631,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 7 - Build and Deploy the Notebooks
   type: challenge
 developers:
@@ -643,13 +643,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: custom-notebooks
 tags:
 - openshift
 title: Building Custom Notebook Images
-type: truck
+type: track

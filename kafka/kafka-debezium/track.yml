@@ -69,10 +69,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying a Kafka broker
   type: challenge
 - assignment: "After you set up a Kafka cluster, deploy Kafka Connect in a custom\
@@ -124,10 +124,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying Kafka Connect with Debezium
   type: challenge
 - assignment: "Our final step is to create a link between Debezium and a MySQL database\
@@ -352,10 +352,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Streaming data from a database
   type: challenge
 developers:
@@ -364,13 +364,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: kafka-debezium
 tags:
 - openshift
 title: Debezium for change data capture
-type: truck
+type: track

@@ -52,10 +52,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Loading the Required Images
   type: challenge
 - assignment: 'Deploying JupyterHub requires a bit more work to setup than just deploying
@@ -108,10 +108,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Loading the Required Templates
   type: challenge
 - assignment: 'You can work with the templates using either the command line or the
@@ -145,10 +145,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
 - assignment: 'To see details about the `jupyterhub-workspace` template we will use
@@ -310,10 +310,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Deploying JupyterHub Service
   type: challenge
 - assignment: 'For each user session, a separate pod is created in the same project
@@ -447,10 +447,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - User Workspace and Project
   type: challenge
 - assignment: 'When you are done with the JupyterHub service you can delete it from
@@ -521,10 +521,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Deleting the JupyterHub Service
   type: challenge
 developers:
@@ -533,13 +533,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: jupyterhub-workspace
 tags:
 - openshift
 title: Multi-user Workspace Using JupyterHub
-type: truck
+type: track

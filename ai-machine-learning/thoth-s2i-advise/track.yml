@@ -26,10 +26,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Getting Started
   type: challenge
 - assignment: "Before we explore more about the build process, let's check the sample\
@@ -59,10 +59,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Getting the sample Python app
   type: challenge
 - assignment: "Now finally let's explore the options Thoth s2i build image offers\
@@ -98,10 +98,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Thoth s2i parameters
   type: challenge
 - assignment: "Now that you are familiar with the configurations our s2i image offers,\
@@ -137,10 +137,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Let's Deploy
   type: challenge
 developers:
@@ -149,13 +149,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: thoth-s2i-advise
 tags:
 - openshift
 title: Thoth S2I build with Advise on OpenShift
-type: truck
+type: track

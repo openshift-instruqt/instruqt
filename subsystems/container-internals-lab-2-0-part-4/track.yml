@@ -70,10 +70,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Container Engines & The Linux Kernel
   type: challenge
 - assignment: 'In this step, we are going to investigate the basic construction of
@@ -320,10 +320,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step by step creation of a container
   type: challenge
 - assignment: 'The goal of this exercise is to gain a basic understanding of SELinux/sVirt.
@@ -422,10 +422,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'SELinux & sVirt: Dynamically generated contexts to protect your containers'
   type: challenge
 - assignment: "The goal of this exercise is to gain a basic understanding of how containers\
@@ -448,10 +448,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Cgroups: Dynamically created with container instantiation'
   type: challenge
 - assignment: "The goal of this exercise is to gain a basic understanding of SECCOMP.\
@@ -469,10 +469,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'SECCOMP: Limiting how a containerized process can interact with the kernel'
   type: challenge
 developers:
@@ -481,13 +481,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-4
 tags:
 - openshift
 title: Container Hosts
-type: truck
+type: track

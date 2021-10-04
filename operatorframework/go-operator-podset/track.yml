@@ -63,10 +63,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating a New Project
   type: challenge
 - assignment: 'Add a new Custom Resource Definition (CRD) API called PodSet with APIVersion
@@ -96,10 +96,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the API and Controller
   type: challenge
 - assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go`\
@@ -155,10 +155,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Defining the Spec and Status
   type: challenge
 - assignment: "Let's now observe the default `controllers/podset_controller.go` file:\n\
@@ -256,10 +256,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Customizing the Operator Logic
   type: challenge
 - assignment: 'Once the CRD is registered, there are two ways to run the Operator:
@@ -296,10 +296,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Running the Operator Locally (Outside the Cluster)
   type: challenge
 - assignment: "In a new terminal, inspect the Custom Resource manifest:\n\n```\ncd\
@@ -327,10 +327,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the PodSet Custom Resource
   type: challenge
 - assignment: 'Our PodSet controller creates pods containing OwnerReferences in their
@@ -386,10 +386,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deleting the PodSet Custom Resource
   type: challenge
 developers:
@@ -398,13 +398,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: go-operator-podset
 tags:
 - openshift
 title: Operator SDK with Go
-type: truck
+type: track

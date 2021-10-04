@@ -43,10 +43,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using Syncwaves
   type: challenge
 - assignment: "Now that you're familiar with syncwaves, we can begin exploring applying\n\
@@ -106,10 +106,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Exploring Resource Hooks
   type: challenge
 - assignment: 'Now that you got your hands on syncwaves and resource hooks, you will
@@ -255,10 +255,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using Syncwaves and Hooks Together
   type: challenge
 developers:
@@ -267,13 +267,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: syncwaves-hooks
 tags:
 - openshift
 title: Syncwaves and Hooks
-type: truck
+type: track

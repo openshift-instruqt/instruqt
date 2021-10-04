@@ -50,10 +50,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: An Overview of Container Tools
   type: challenge
 - assignment: "As mentioned in the previous step, there are two main types of streams.\
@@ -104,10 +104,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using the Fast and Stable Streams
   type: challenge
 - assignment: "The goal of this lab is to introduce you to Podman and some of the\
@@ -202,10 +202,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Podman: Familiar Territory'
   type: challenge
 - assignment: 'The goal of this lab is to introduce you to Buildah and the flexibility
@@ -599,10 +599,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Buildah: Granularity & Control'
   type: challenge
 - assignment: 'In this step, we are going to do a couple of simple exercises with
@@ -778,10 +778,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Skopeo: Moving & Sharing'
   type: challenge
 - assignment: "With some help from a program called CRIU, Podman can checkpoint and\
@@ -844,10 +844,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'CRIU: Checkpointing and Restoring'
   type: challenge
 - assignment: "The default Containers SELinux policy does a really good job Podman\
@@ -888,10 +888,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'Udica: Custom SELinux Policies'
   type: challenge
 - assignment: "In this lab we're going to demonstrate using the [oscap-podman](https://github.com/OpenSCAP/openscap/blob/master/utils/oscap-podman)\
@@ -953,10 +953,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: 'OSCAP Podman: Trust but Verify'
   type: challenge
 developers:
@@ -965,13 +965,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: container-internals-lab-2-0-part-7
 tags:
 - openshift
 title: Container Tools Ecosystem
-type: truck
+type: track

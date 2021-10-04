@@ -127,10 +127,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Installing Red Hat AMQ Streams Operators
   type: challenge
 - assignment: 'With AMQ Streams installed, create a Kafka cluster, then a topic within
@@ -282,10 +282,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying a Kafka cluster
   type: challenge
 - assignment: "Time to check that the deployment is working, and the Topic Operator\
@@ -317,10 +317,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing the Kafka cluster from a console
   type: challenge
 - assignment: 'Kafka clients connect through the network to the Kafka brokers where
@@ -406,10 +406,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Producing and consuming records
   type: challenge
 developers:
@@ -418,13 +418,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: kafka-basic
 tags:
 - openshift
 title: Apache Kafka basics
-type: truck
+type: track

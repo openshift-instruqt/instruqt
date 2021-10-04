@@ -19,10 +19,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the Custom Resource Definition (CRD)
   type: challenge
 - assignment: "Create a dedicated Service Account responsible for running the Etcd\
@@ -55,10 +55,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the Service Account, Role, and RoleBinding
   type: challenge
 - assignment: "Create the Deployment containing the Etcd Operator container image:\n\
@@ -89,10 +89,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the Etcd Operator Deployment
   type: challenge
 - assignment: "Ensure you are currently scoped to the `myproject` Namespace:\n\n```\n\
@@ -113,10 +113,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the EtcdCluster Custom Resource (CR)
   type: challenge
 - assignment: "Let's now create another pod and attempt to connect to the etcd cluster\
@@ -137,10 +137,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Interacting with a Live Etcd Cluster
   type: challenge
 - assignment: 'Let''s change the size of the Etcd `example-etcd-cluster` CR. The Etcd
@@ -188,10 +188,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Scaling and Modifying the Etcd Version
   type: challenge
 - assignment: 'In another session delete a pod from the cluster and watch recovery
@@ -220,10 +220,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Disaster Recovery in Action
   type: challenge
 - assignment: 'Delete your Etcd cluster:
@@ -279,10 +279,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Clean Up
   type: challenge
 developers:
@@ -291,13 +291,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: etcd-operator
 tags:
 - openshift
 title: Etcd Operator
-type: truck
+type: track

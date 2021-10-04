@@ -241,10 +241,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Exploring Kustomize
   type: challenge
 - assignment: 'In previous scenarios, you learned that in a GitOps workflow; the
@@ -417,10 +417,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying Kustomized Applicaton
   type: challenge
 developers:
@@ -429,13 +429,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: kustomize
 tags:
 - openshift
 title: Working with Kustomize
-type: truck
+type: track

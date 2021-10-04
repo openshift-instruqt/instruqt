@@ -50,10 +50,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 1 - Install the Pipelines Operator
   type: challenge
 - assignment: 'For this tutorial, you''re going to create a simple application that
@@ -104,10 +104,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 2 - Create a New Project
   type: challenge
 - assignment: "A [`Task`](tasks.md) defines a series of `steps` that run in a desired\
@@ -130,10 +130,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 3 - Create Sample Task
   type: challenge
 - assignment: "Tasks can also take parameters. This way, you can pass various flags\
@@ -169,10 +169,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 4 - Task Resource Definitions
   type: challenge
 - assignment: "A `Pipeline` defines an ordered series of `Tasks` that you want to\
@@ -232,10 +232,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 5 - Create Pipeline
   type: challenge
 - assignment: 'Now that the pipeline is created, you can trigger it to execute the
@@ -338,10 +338,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 6 - Trigger a Pipeline
   type: challenge
 - assignment: 'To verify a successful deployment for our application, head back out
@@ -392,10 +392,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Step 7 - Verify Deployment
   type: challenge
 developers:
@@ -404,13 +404,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: pipelines
 tags:
 - openshift
 title: Using OpenShift Pipelines
-type: truck
+type: track

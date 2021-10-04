@@ -124,10 +124,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: SARIMA model to forecast timeseries metrics
   type: challenge
 - assignment: "Please wait for a few minutes while the environment loads. (If you\
@@ -158,10 +158,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Using a Jupyter Notebook to play with the SARIMA model
   type: challenge
 - assignment: "### Accessing the OpenShift Console\n\nYou don't need to access the\
@@ -190,10 +190,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing the OpenShift console
   type: challenge
 developers:
@@ -202,13 +202,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: prometheus-timeseries-forecasting
 tags:
 - openshift
 title: Time series forecasting for Prometheus metrics
-type: truck
+type: track

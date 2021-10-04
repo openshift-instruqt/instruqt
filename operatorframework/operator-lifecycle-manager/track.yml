@@ -45,10 +45,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Exploring OLM
   type: challenge
 - assignment: "Observe the CatalogSources that ship with OLM and OpenShift 4:\n\n\
@@ -87,10 +87,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: CatalogSources
   type: challenge
 - assignment: 'You can access OLM via the OpenShift console by clicking the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)
@@ -118,10 +118,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing OLM on the OpenShift Console
   type: challenge
 - assignment: "Let's begin my creating a new project called `myproject`.\n\n```\n\
@@ -151,10 +151,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the OperatorGroup and Subscription
   type: challenge
 - assignment: 'Fetch the InstallPlan and observe the Kubernetes objects that will
@@ -300,10 +300,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Reviewing the InstallPlan and Installing the Operator
   type: challenge
 - assignment: "Let's deploy our ArgoCD Server \"operand\" by creating the ArgoCD manifest\
@@ -323,10 +323,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating the Custom Resource
   type: challenge
 - assignment: 'Let''s access the ArgoCD Dashboard via an OpenShift Route:
@@ -357,10 +357,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Accessing the ArgoCD Dashboard
   type: challenge
 - assignment: 'You can easily uninstall your operator by first removing the ArgoCD
@@ -433,10 +433,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Uninstalling the Operator
   type: challenge
 developers:
@@ -445,13 +445,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: operator-lifecycle-manager
 tags:
 - openshift
 title: Operator Lifecycle Manager
-type: truck
+type: track

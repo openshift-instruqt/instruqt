@@ -37,10 +37,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Adding a Quarkus Reactive Messaging Extension
   type: challenge
 - assignment: "This project has already a `VehicleGenerator` class that will be used\
@@ -67,10 +67,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating an event generator
   type: challenge
 - assignment: "With Quarkus, you can automatically generate OpenShift resources from\
@@ -127,10 +127,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying the application to OpenShift
   type: challenge
 - assignment: "The application will now generate a new event with vehicle information\
@@ -185,10 +185,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Checking Kafka records
   type: challenge
 developers:
@@ -197,13 +197,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: kafka-quarkus
 tags:
 - openshift
 title: Apache Kafka with Reactive Messaging
-type: truck
+type: track

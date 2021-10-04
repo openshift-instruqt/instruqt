@@ -105,10 +105,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Review the weather application
   type: challenge
 - assignment: '# Deploy to OpenShift
@@ -368,10 +368,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploy to OpenShift
   type: challenge
 - assignment: "**1. What is Java Persistence API?**\n\nThe Java Persistence API (JPA)\
@@ -543,10 +543,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Basics of Java Persistance
   type: challenge
 - assignment: "**1. What is CDI**\n\nCDI, aka Context Dependency Injection, is the\
@@ -621,10 +621,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Basics of CDI
   type: challenge
 - assignment: "\nSo far we have been using an in-memory database that is part of JBoss\
@@ -693,10 +693,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Externalize the data storage
   type: challenge
 developers:
@@ -705,13 +705,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: middleware-javaee8
 tags:
 - openshift
 title: Jakarta EE 8 Development
-type: truck
+type: track

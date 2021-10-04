@@ -47,10 +47,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 1 - Loading the Notebook Images
   type: challenge
 - assignment: 'The minimal Jupyter notebook images that have been loaded can be deployed
@@ -125,10 +125,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 2 - Loading the Notebook Templates
   type: challenge
 - assignment: 'You can work with the templates using either the command line or the
@@ -183,10 +183,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
 - assignment: 'From the options for deploying applications to your project, select
@@ -289,10 +289,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 4 - Deploying the Jupyter Workspace
   type: challenge
 - assignment: 'To test that the persistent storage is working as advertised, create
@@ -404,10 +404,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 5 - Testing the Persistent Storage
   type: challenge
 - assignment: 'When you are done with the Jupyter notebook instance you can delete
@@ -444,10 +444,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Topic 6 - Deleting the Jupyter Notebook
   type: challenge
 developers:
@@ -456,13 +456,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: jupyter-workspace
 tags:
 - openshift
 title: Persistent Workspace for Notebooks
-type: truck
+type: track

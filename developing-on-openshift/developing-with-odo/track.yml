@@ -37,10 +37,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Application Overview
   type: challenge
 - assignment: "## Logging in to OpenShift\n\nBefore we get started, you need to log\
@@ -95,10 +95,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating an Initial Project
   type: challenge
 - assignment: "As mentioned, applications often consist of two or more components\
@@ -172,10 +172,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Creating new binary component
   type: challenge
 - assignment: "With the `backend` component running and connected to persistent storage,\
@@ -227,10 +227,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Deploying component from source-code
   type: challenge
 - assignment: "With both components of our application running on the cluster, we\
@@ -259,10 +259,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Configuring components
   type: challenge
 - assignment: "We have updated `frontend` to connect to our `backend`, allowing our\
@@ -288,10 +288,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Exposing components to public
   type: challenge
 - assignment: "We've deployed the first version of our application and tested it by\
@@ -322,10 +322,10 @@ challenges:
     title: cli
     type: terminal
   - hostname: crc-nonest-1
-    port: '30443'
+    port: 30443
     title: web-ui
     type: service
-  timelimit: '300'
+  timelimit: 300
   title: Making changes to source-code
   type: challenge
 developers:
@@ -334,13 +334,12 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-owner:
-- openshift
-private: 'false'
-published: 'true'
-skipping_enabled: 'true'
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
 slug: developing-with-odo
 tags:
 - openshift
 title: Developing with odo
-type: truck
+type: track
