@@ -13,4 +13,9 @@ git submodule update --init
 python kataklisma.py
 ```
 
+For each generated directory representing the pathway->topic, inside subfolders with tracks:
+
+```
+instruqt track validate && instruqt track push
+```
 
