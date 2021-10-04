@@ -807,6 +807,18 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
+notes:
+- contents: "## Goal\n\nLearn how to copy files to and from a running container without\
+    \ rebuilding the container image. Augment this with a watch function that automatically\
+    \ applies local changes to a running container so you can immediately see the\
+    \ effects in your application.\n\n## Concepts\n\n* Rapid inner-loop development\
+    \ by modifying a running container\n* OpenShift Projects and Applications\n* OpenShift\
+    \ `oc` tool\u2019s `new-app` subcommand\n\n## Use case\n\nYou can modify an application\
+    \ in a container to develop and test before building a new version of the container's\
+    \ immutable image. Automatatically synchronizing the container with local changes\
+    \ speeds the \"inner loop\" of develop and test cycles, especially with interpreted\
+    \ programming languages.\n\nThis OpenShift cluster will self-destruct in one hour.\n"
+  type: text
 owner: openshift
 private: false
 published: true

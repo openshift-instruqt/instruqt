@@ -149,6 +149,24 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
+notes:
+- contents: "In this tutorial, we are going to build a simple Python app, using Thoth\
+    \ s2i.\nThus getting intelligent recommendation on the software stack during the\
+    \ build process.\n\n## Why to use Thoth s2i build process?\n\nFor those who are\
+    \ new to this [Source-to-Image(s2i)](https://docs.openshift.com/container-platform/latest/openshift_images/using_images/using-s21-images.html)\
+    \ refers to the Source to image process which\nbundles your source code to a image\
+    \ that can be run on OpenShift. \n\nSo when you use, Thoth s2i build process instead\
+    \ of the normal s2i build process, \nThoth produces recommendations targeting\
+    \ your specific hardware configuration you \nuse to run your application inside\
+    \ the cluster (e.g. specific GPU available in \nthe cluster).\n\nYou can find\
+    \ a list of base images which you can use with Thoth in [s2i-thoth repository](https://github.com/thoth-station/s2i-thoth)\
+    \ \nwith detailed instructions on how to use Thoth in the OpenShift\u2019s s2i\
+    \ process. \nThe container images are hosted at - \n[quay.io](quay.io/organization/thoth-station)\
+    \ with the \nprefix s2i.\n\nWe are going to discover more about it in the next\
+    \ step how you can customize the process.\n\nIn this demo, we are going to use\
+    \ an Openshift 4.7 playground.<br>\nWe are operating our services on the MassOpen.cloud\
+    \ [#operatefirst](https://massopen.cloud/connected-initiatives/operate-first)"
+  type: text
 owner: openshift
 private: false
 published: true

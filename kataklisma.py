@@ -16,14 +16,13 @@ import yaml
 import re
 import shutil
 
-#from collections import OrderedDict
 
-
+# Instruqt will order the YAML and sanitize the YAML content (e.g. assignments)
+# so there's no need to order te dict nor optimize the escaped block for non-YAML
 
 track_d={}
-#track_d=OrderedDict()
 
-with open('learn-katacoda//homepage-pathway.json', 'r') as hfile:
+with open('learn-katacoda/homepage-pathway.json', 'r') as hfile:
     hdata=hfile.read()
 
 hcourses = json.loads(hdata)
@@ -83,8 +82,8 @@ for course in hcourses['courses']:
         track_d["tags"] = ["openshift"]
         track_d["owner"] = "openshift"
         track_d["developers"] = [ "btannous@redhat.com", "nvinto@redhat.com","rjarvine@redhat.com"]
-        track_d["private"] =  False
-        track_d["published"] = True
+        track_d["private"] =  True
+        track_d["published"] = False
         track_d["skipping_enabled"] = False
         
         difficulty="intermediate"
@@ -106,7 +105,17 @@ for course in hcourses['courses']:
         dst= pathway + '/' + trackDir + '/' + 'config.yml'
         shutil.copyfile(src, dst)
         
+        if os.path.exists(pathway + '/' + trackDir + '/track_scripts'):
+          shutil.rmtree(pathway + '/' + trackDir + '/track_scripts')
         shutil.copytree('track_scripts', pathway + '/' + trackDir + '/track_scripts')
+        
+        introText=course_json["details"]["intro"]["text"]
+        with open('learn-katacoda/' + pathway_id + '/' + course_id + '/' + introText, 'r') as myintro:
+          intro_data=myintro.read()
+        
+        notes=[{ "type" : "text", "contents" : intro_data }]
+        
+        track_d["notes"] = notes
         
         
         for step in course_json["details"]["steps"]:

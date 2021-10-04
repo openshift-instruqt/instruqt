@@ -256,6 +256,13 @@ developers:
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
 level: beginner
+notes:
+- contents: In this scenario you will learn more about developing Spring Boot applications
+    using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform.
+    You will learn about how OpenShift uses monitoring tools to keep your application
+    running / notify you when something unrecoverable happens through the use of *probes*
+    .
+  type: text
 owner: openshift
 private: false
 published: true
