@@ -1,685 +1,587 @@
-challenges:
-- assignment: 'Before you can start this course you need to deploy a sample application
-    to work with.
-
-
-    The first step is to ensure you are logged in as the ``developer`` user.
-
-
-    ```
-
-    oc login --username developer --password developer
-
-    ```
-
-
-    Next create a new project to add the application to, by running:
-
-
-    ```
-
-    oc new-project myproject
-
-    ```
-
-
-    This should automatically switch you to the new project, so you are ready to deploy
-    the application.
-
-
-    The application you are going to deploy is the ParksMap web application used in
-    the _Getting Started with OpenShift for Developers_ Katacoda course.
-
-
-    ```
-
-    oc new-app openshiftroadshow/parksmap-katacoda:1.2.0 --name parksmap
-
-    ```
-
-
-    By default when using ``oc new-app`` from the command line to deploy an application,
-    the application will not be exposed to the public. As our final step you therefore
-    need to expose the service so that people can access it.
-
-
-    ```
-
-    oc expose svc/parksmap
-
-    ```
-
-
-    You are now ready to start investigating the resource objects which were created.
-
-    '
-  difficulty: basic
-  slug: 01-deploying-an-application
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 1 - Deploying an Application
-  type: challenge
-- assignment: 'Now that you have created an application to work with, the list of
-    key resource objects which have been created within the project can be listed
-    using the:
-
-
-    ```
-
-    oc get all
-
-    ```
-
-
-    command. The output you will see from running this command will be similar to
-    the following:
-
-
-    ```
-
-    NAME                    READY   STATUS              RESTARTS   AGE
-
-    pod/parksmap-1-deploy   1/1     Running             0          22s
-
-    pod/parksmap-1-dvsqf    0/1     ContainerCreating   0          9s
-
-
-    NAME                               DESIRED   CURRENT   READY   AGE
-
-    replicationcontroller/parksmap-1   1         1         0       22s
-
-
-    NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-
-    service/parksmap   ClusterIP   172.30.222.21   <none>        8080/TCP   23s
-
-
-    NAME                                          REVISION   DESIRED   CURRENT   TRIGGERED
-    BY
-
-    deploymentconfig.apps.openshift.io/parksmap   1          1         1         config,image(parksmap:1.0.0)
-
-
-    NAME                                      IMAGE REPOSITORY TAGS    UPDATED
-
-    imagestream.image.openshift.io/parksmap   default-route-openshift-image-registry.apps-crc.testing/myproject/parksmap
-    1.0.0   23 seconds ago
-
-
-    NAME                                HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-
-    route.route.openshift.io/parksmap   parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com          parksmap   8080-tcp                 None
-
-    ```
-
-
-    You can restrict the output to just the names of the resources by running:
-
-
-    ```
-
-    oc get all -o name
-
-    ```
-
-
-    In other words, supply the ``-o name`` option to change the output format.
-
-
-    ```
-
-    pod/parksmap-1-deploy
-
-    pod/parksmap-1-dvsqf
-
-    replicationcontroller/parksmap-1
-
-    service/parksmap
-
-    deploymentconfig.apps.openshift.io/parksmap
-
-    imagestream.image.openshift.io/parksmap
-
-    route.route.openshift.io/parksmap
-
-    ```
-
-
-    The ``oc get`` command is the most basic command that exists in OpenShift for
-    querying resource objects. You will use it a lot, so you should become familiar
-    with it, as well as how to update resource objects.
-
-
-    In addition to being able to use the special name ``all`` to query information
-    about the key resource object types, you can also list specific object types by
-    name. You can for example get a list of the routes created when applications have
-    been exposed by running:
-
-
-    ```
-
-    oc get routes
-
-    ```
-
-
-    For the application you have deployed, you should see something like:
-
-
-    ```
-
-    NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-
-    parksmap   parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com          parksmap   8080-tcp     None
-
-    ```
-
-
-    You can get a list of all the different resource object types you can query by
-    running:
-
-
-    ```
-
-    oc api-resources
-
-    ```
-
-
-    This will output a long list starting out as:
-
-
-    ```
-
-    NAME                                  SHORTNAMES       APIGROUP                              NAMESPACED   KIND
-
-    bindings                                                                                     true         Binding
-
-    componentstatuses                     cs                                                     false        ComponentStatus
-
-    configmaps                            cm                                                     true         ConfigMap
-
-    endpoints                             ep                                                     true         Endpoints
-
-    events                                ev                                                     true         Event
-
-    limitranges                           limits                                                 true         LimitRange
-
-    namespaces                            ns                                                     false        Namespace
-
-    nodes                                 no                                                     false        Node
-
-    ...
-
-    ```
-
-
-    In addition to being able to be queried using their full name, many resource object
-    types can be queried using a shorter alias. You can therefore use ``cm`` instead
-    of ``configmaps``.
-
-
-    In all cases where the ``type`` of a resource object is listed as a plural, you
-    can also use the ``type`` in its singular form. You can therefore use ``route``
-    instead of ``routes``.
-
-    '
-  difficulty: basic
-  slug: 02-resource-object-types
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 2 - Resource Object Types
-  type: challenge
-- assignment: "To get a more detailed description of a specific resource object, you\
-    \ can use the ``oc describe`` command.\n\nRun:\n\n```\noc describe route/parksmap\n\
-    ```\n\nand it should yield something similar to:\n\n```\nName:               \
-    \    parksmap\nNamespace:              myproject\nCreated:                5 minutes\
-    \ ago\nLabels:                 app=parksmap\nAnnotations:            openshift.io/host.generated=true\n\
-    Requested Host:         parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com\n\
-    \                          exposed on router default (host apps-crc.testing) 5\
-    \ minutes ago\nPath:                   <none>\nTLS Termination:        <none>\n\
-    Insecure Policy:        <none>\nEndpoint Port:          8080-tcp\n\nService: \
-    \       parksmap\nWeight:         100 (100%)\nEndpoints:      10.128.0.220:8080\n\
-    ```\n\nWhenever passing a specific resource object as argument to an ``oc`` command,\
-    \ there are two conventions which can be used. The first is to use a single string\
-    \ of the form ``type/name``. The second is to pass the ``type`` and ``name`` as\
-    \ separate consecutive arguments. The command:\n\n```\noc describe route parksmap\n\
-    ```\n\nis therefore equivalent.\n\nThe output produced by ``oc describe`` is intended\
-    \ to be a human readable format. To get the raw object details as JSON or YAML,\
-    \ you can use the ``oc get`` command, listing the name of the resource and the\
-    \ output format.\n\nFor JSON output, you can use:\n\n```\noc get route/parksmap\
-    \ -o json\n```.\n\nFor YAML output, you can use:\n\n```\noc get route/parksmap\
-    \ -o yaml\n```.\n\nTo see a description of the purpose of specific fields in the\
-    \ raw object, you can use the ``oc explain`` command, providing it with a path\
-    \ selector for the field.\n\nTo see the description of the ``host`` field of the\
-    \ ``spec`` object, you can run:\n\n```\noc explain route.spec.host\n```\n\nThis\
-    \ will output:\n\n```\nKIND:     Route\nVERSION:  route.openshift.io/v1\n\nFIELD:\
-    \    host <string>\n\nDESCRIPTION:\n     host is an alias/DNS that points to the\
-    \ service. Optional. If not specified\n     a route name will typically be automatically\
-    \ chosen. Must follow DNS952\n     subdomain conventions.\n```\n"
-  difficulty: basic
-  slug: 03-querying-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 3 - Querying Resource Objects
-  type: challenge
-- assignment: 'To make changes to an existing resource object you can use the ``oc
-    edit`` command.
-
-
-    To edit the details of the ``route`` object for the sample application you can
-    run:
-
-
-    ```
-
-    oc edit route/parksmap
-
-    ```
-
-
-    This will start up an editor from which you can edit the definition of the resource
-    object.
-
-
-    The ``vi`` editor will be used with this environment. If you are not familiar
-    with ``vi``, you can enter ``:q`` to exit provided no changes have been made.
-
-
-    By default, when editing a definition, it will be provided as YAML. To edit the
-    definition as JSON add the ``-o json`` option.
-
-
-    ```
-
-    oc edit route/parksmap -o json
-
-    ```
-
-
-    Once you are done with any edits, save the changes and quit the editor. The changes
-    will be automatically uploaded and used to replace the original definition.
-
-
-    As OpenShift works on a declarative configuration model, the platform will then
-    run any steps needed to bring the state of the cluster into agreement with the
-    required state as defined by the resource object.
-
-
-    Do be aware that not all fields of a resource object are able to be changed. Some
-    fields may be immutable. Others may represent the current state of the corresponding
-    resource and any change will be overridden again with the current state.
-
-    '
-  difficulty: basic
-  slug: 04-editing-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 4 - Editing Resource Objects
-  type: challenge
-- assignment: "The ``oc edit`` command would be used to change an existing resource\
-    \ object, it cannot be used to create a new object. To create a new object you\
-    \ need to use the ``oc create`` command.\n\nThe ``oc create`` command provides\
-    \ a generic way of creating any resource object from a JSON or YAML definition,\
-    \ as well as a simpler option driven method for a subset of resource object types.\n\
-    \nIf for example you wanted to create a secure route for the application with\
-    \ your own host name, you would create a ``parksmap-fqdn.json`` file containing\
-    \ the definition of the route:\n\n``cat > parksmap-fqdn.json << !\n{\n    \"kind\"\
-    : \"Route\",\n    \"apiVersion\": \"v1\",\n    \"metadata\": {\n        \"name\"\
-    : \"parksmap-fqdn\",\n        \"labels\": {\n            \"app\": \"parksmap\"\
-    \n        }\n    },\n    \"spec\": {\n        \"host\": \"www.example.com\",\n\
-    \        \"to\": {\n            \"kind\": \"Service\",\n            \"name\":\
-    \ \"parksmap\",\n            \"weight\": 100\n        },\n        \"port\": {\n\
-    \            \"targetPort\": \"8080-tcp\"\n        },\n        \"tls\": {\n  \
-    \          \"termination\": \"edge\",\n            \"insecureEdgeTerminationPolicy\"\
-    : \"Allow\"\n        }\n    }\n}\n!``{{execute}}\n\nTo create the route from the\
-    \ ``parksmap-fqdn.json`` file you would run the command:\n\n```\noc create -f\
-    \ parksmap-fqdn.json\n```.\n\nThe definition for this route had a unique value\
-    \ for ``route.metadata.name``, which wasn't previously in use. If you now run:\n\
-    \n```\noc get routes\n```\n\nyou should see two routes listed.\n\n```\nNAME  \
-    \          HOST/PORT                                                         \
-    \   PATH   SERVICES   PORT       TERMINATION   WILDCARD\nparksmap        parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com\
-    \          parksmap   8080-tcp          None\nparksmap-fqdn   www.example.com\
-    \                                                             parksmap   8080-tcp\
-    \   edge/Allow    None\n```\n\nIn the case of a route, ``oc create`` provides\
-    \ a sub command specifically for creating a route. You could therefore also have\
-    \ run ``oc create route`` using the command:\n\n``oc create route edge parksmap-fqdn\
-    \ --service parksmap --insecure-policy Allow --hostname www.example.com``\n\n\
-    To see the list of resource object types that ``oc create`` has more specific\
-    \ support for, run:\n\n```\noc create --help\n```\n"
-  difficulty: basic
-  slug: 05-creating-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 5 - Creating Resource Objects
-  type: challenge
-- assignment: "The ``oc create`` command allows you to create a new resource object\
-    \ from a JSON or YAML definition contained in a file. To change an existing resource\
-    \ object using ``oc edit`` was an interactive process. To be able to change an\
-    \ existing resource from a JSON or YAML definition contained in a file, you can\
-    \ use the ``oc replace`` command.\n\nTo disallow an insecure route you create\
-    \ a modified definition of the route object:\n\n``cat > parksmap-fqdn.json <<\
-    \ !\n{\n    \"kind\": \"Route\",\n    \"apiVersion\": \"v1\",\n    \"metadata\"\
-    : {\n        \"name\": \"parksmap-fqdn\",\n        \"labels\": {\n           \
-    \ \"app\": \"parksmap\"\n        }\n    },\n    \"spec\": {\n        \"host\"\
-    : \"www.example.com\",\n        \"to\": {\n            \"kind\": \"Service\",\n\
-    \            \"name\": \"parksmap\",\n            \"weight\": 100\n        },\n\
-    \        \"port\": {\n            \"targetPort\": \"8080-tcp\"\n        },\n \
-    \       \"tls\": {\n            \"termination\": \"edge\",\n            \"insecureEdgeTerminationPolicy\"\
-    : \"Redirect\"\n        }\n    }\n}\n!``{{execute}}\n\nand then run:\n\n```\n\
-    oc replace -f parksmap-fqdn.json\n```\n\nIn order for ``oc replace`` to target\
-    \ the correct resource object, the ``metadata.name`` value of the JSON or YAML\
-    \ definition must be the same as that to be changed.\n\nTo script the updating\
-    \ of a value in an existing resource object using ``oc replace``, it is necessary\
-    \ to fetch the definition of the existing resource object using ``oc get``. The\
-    \ definition can then be edited and ``oc replace`` used to update the existing\
-    \ resource object.\n\nTo edit the definition will require a way of editing the\
-    \ JSON or YAML definition on the fly. The alternative to this process is to use\
-    \ the ``oc patch`` command, which will edit a value in place for you based on\
-    \ a supplied specification.\n\nThe ``route.spec.tls.insecureEdgeTerminationPolicy``\
-    \ value could for example be switched back to allowing an insecure route by running:\n\
-    \n```\noc patch route/parksmap-fqdn --patch '{\"spec\":{\"tls\": {\"insecureEdgeTerminationPolicy\"\
-    : \"Allow\"}}}'\n```\n\nFor both cases, the resource object to be updated must\
-    \ already exist or the command will fail. If you do not know whether the resource\
-    \ object will already exist, and want it updated if it does, but created if it\
-    \ does not, instead of using ``oc replace``, you can use ``oc apply``.\n"
-  difficulty: basic
-  slug: 06-replacing-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 6 - Replacing Resource Objects
-  type: challenge
-- assignment: 'When you deploy an application using ``oc new-app`` a label is automatically
-    applied to the resource objects created. The name of the label is ``app`` and
-    it will be set to the name of the application. This label can be used to select
-    a subset of resource objects when running queries.
-
-
-    When you have multiple applications deployed, you can list all resource objects
-    related to a specific application using the command ``oc get all``, passing the
-    command a selector which describes the label to match.
-
-
-    To query the resources just for the application you deployed run:
-
-
-    ```
-
-    oc get all -o name --selector app=parksmap
-
-    ```
-
-
-    This should yield:
-
-
-    ```
-
-    pod/parksmap-1-dvsqf
-
-    replicationcontroller/parksmap-1
-
-    service/parksmap
-
-    deploymentconfig.apps.openshift.io/parksmap
-
-    imagestream.image.openshift.io/parksmap
-
-    route.route.openshift.io/parksmap
-
-    route.route.openshift.io/parksmap-fqdn
-
-    ```
-
-
-    If you need to apply additional labels to a resource object you can use the ``oc
-    label`` command.
-
-
-    To add the label ``web`` to the service object for your application, and give
-    it the value ``true``, run:
-
-
-    ```
-
-    oc label service/parksmap web=true
-
-    ```
-
-
-    Then query all resource objects with just that label.
-
-
-    ```
-
-    oc get all -o name --selector web=true
-
-    ```
-
-
-    Only the service object should be returned in the output.
-
-
-    To remove a label from a resource object you can use:
-
-
-    ```
-
-    oc label service/parksmap web-
-
-    ```
-
-
-    The label declaration in this command is of the form ``name-``. The trailing ``-``,
-    rather than ``=value`` indicates the label should be removed.
-
-    '
-  difficulty: basic
-  slug: 07-labelling-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 7 - Labelling Resource Objects
-  type: challenge
-- assignment: 'If you need to delete an entire application, or just a single resource,
-    you can use the ``oc delete`` command. Specific resource objects can be deleted
-    by their names, or by matching on a subset of resource objects using labels.
-
-
-    To delete a single resource object by name supply the name:
-
-
-    ```
-
-    oc delete route/parksmap-fqdn
-
-    ```
-
-
-    To delete all resources objects of a specific type using labels, supply the resource
-    object type name and the selector.
-
-
-    ```
-
-    oc delete route --selector app=parksmap
-
-    ```
-
-
-    When using a label selector, you can list more than one resource object type name
-    by separating them with a comma.
-
-
-    ```
-
-    oc delete svc,route --selector app=parksmap
-
-    ```
-
-
-    The short cut of ``all`` can also be used to match all key resource objects types
-    that are directly associated with the build and deployment of an application.
-
-
-    ```
-
-    oc delete all --selector app=parksmap
-
-    ```
-
-
-    It is recommended that before deleting any resource objects, you use ``oc get``
-    with the same parameters to confirm what would be deleted. This is especially
-    important with a final variant of the ``oc delete all`` command. That is, where
-    no selector is provided.
-
-
-    In this case, all matched resource objects in the project would be deleted. Because
-    the danger is there of accidentally deleting all your work, it is necessary to
-    also supply the ``--all`` option to confirm that you do really wish to delete
-    all resources objects from the project.
-
-
-    ```
-
-    oc delete all --all
-
-    ```
-
-    '
-  difficulty: basic
-  slug: 08-deleting-resource-objects
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 8 - Deleting Resource Objects
-  type: challenge
-description: '## Goal
-
+slug: using-the-cluster-resource-objects
+id: uysmncjvfgvk
+type: track
+title: Using the CLI to Manage Resource Objects
+description: |
+  ## Goal
 
   Learn how to enumerate, describe, and update application resource objects on OpenShift.
 
-
   ## Concepts
 
-
   * OpenShift Projects and Applications
-
   * Applications on OpenShift as Builds and Deployments
-
   * Application resources like Services, Persistent Volumes, and configuration
-
   * OpenShift `oc` command line tool
-
 
   ## Use case
 
-
   You can find, query, and change the OpenShift resources that make up an application.
 
-
   This OpenShift cluster will self-destruct in one hour.
-
-  '
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: using-the-cluster-resource-objects
-tags:
-- openshift
-title: Using the CLI to Manage Resource Objects
-type: track
+challenges:
+- slug: 01-deploying-an-application
+  id: ys2hejknxwks
+  type: challenge
+  title: Topic 1 - Deploying an Application
+  assignment: |
+    Before you can start this course you need to deploy a sample application to work with.
+
+    The first step is to ensure you are logged in as the ``developer`` user.
+
+    ```
+    oc login --username developer --password developer
+    ```
+
+    Next create a new project to add the application to, by running:
+
+    ```
+    oc new-project myproject
+    ```
+
+    This should automatically switch you to the new project, so you are ready to deploy the application.
+
+    The application you are going to deploy is the ParksMap web application used in the _Getting Started with OpenShift for Developers_ Katacoda course.
+
+    ```
+    oc new-app openshiftroadshow/parksmap-katacoda:1.2.0 --name parksmap
+    ```
+
+    By default when using ``oc new-app`` from the command line to deploy an application, the application will not be exposed to the public. As our final step you therefore need to expose the service so that people can access it.
+
+    ```
+    oc expose svc/parksmap
+    ```
+
+    You are now ready to start investigating the resource objects which were created.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-resource-object-types
+  id: encyw43dspg4
+  type: challenge
+  title: Topic 2 - Resource Object Types
+  assignment: |
+    Now that you have created an application to work with, the list of key resource objects which have been created within the project can be listed using the:
+
+    ```
+    oc get all
+    ```
+
+    command. The output you will see from running this command will be similar to the following:
+
+    ```
+    NAME                    READY   STATUS              RESTARTS   AGE
+    pod/parksmap-1-deploy   1/1     Running             0          22s
+    pod/parksmap-1-dvsqf    0/1     ContainerCreating   0          9s
+
+    NAME                               DESIRED   CURRENT   READY   AGE
+    replicationcontroller/parksmap-1   1         1         0       22s
+
+    NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+    service/parksmap   ClusterIP   172.30.222.21   <none>        8080/TCP   23s
+
+    NAME                                          REVISION   DESIRED   CURRENT   TRIGGERED BY
+    deploymentconfig.apps.openshift.io/parksmap   1          1         1         config,image(parksmap:1.0.0)
+
+    NAME                                      IMAGE REPOSITORY TAGS    UPDATED
+    imagestream.image.openshift.io/parksmap   default-route-openshift-image-registry.apps-crc.testing/myproject/parksmap 1.0.0   23 seconds ago
+
+    NAME                                HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
+    route.route.openshift.io/parksmap   parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com          parksmap   8080-tcp                 None
+    ```
+
+    You can restrict the output to just the names of the resources by running:
+
+    ```
+    oc get all -o name
+    ```
+
+    In other words, supply the ``-o name`` option to change the output format.
+
+    ```
+    pod/parksmap-1-deploy
+    pod/parksmap-1-dvsqf
+    replicationcontroller/parksmap-1
+    service/parksmap
+    deploymentconfig.apps.openshift.io/parksmap
+    imagestream.image.openshift.io/parksmap
+    route.route.openshift.io/parksmap
+    ```
+
+    The ``oc get`` command is the most basic command that exists in OpenShift for querying resource objects. You will use it a lot, so you should become familiar with it, as well as how to update resource objects.
+
+    In addition to being able to use the special name ``all`` to query information about the key resource object types, you can also list specific object types by name. You can for example get a list of the routes created when applications have been exposed by running:
+
+    ```
+    oc get routes
+    ```
+
+    For the application you have deployed, you should see something like:
+
+    ```
+    NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
+    parksmap   parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com          parksmap   8080-tcp     None
+    ```
+
+    You can get a list of all the different resource object types you can query by running:
+
+    ```
+    oc api-resources
+    ```
+
+    This will output a long list starting out as:
+
+    ```
+    NAME                                  SHORTNAMES       APIGROUP                              NAMESPACED   KIND
+    bindings                                                                                     true         Binding
+    componentstatuses                     cs                                                     false        ComponentStatus
+    configmaps                            cm                                                     true         ConfigMap
+    endpoints                             ep                                                     true         Endpoints
+    events                                ev                                                     true         Event
+    limitranges                           limits                                                 true         LimitRange
+    namespaces                            ns                                                     false        Namespace
+    nodes                                 no                                                     false        Node
+    ...
+    ```
+
+    In addition to being able to be queried using their full name, many resource object types can be queried using a shorter alias. You can therefore use ``cm`` instead of ``configmaps``.
+
+    In all cases where the ``type`` of a resource object is listed as a plural, you can also use the ``type`` in its singular form. You can therefore use ``route`` instead of ``routes``.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 03-querying-resource-objects
+  id: jnkkunlqepf6
+  type: challenge
+  title: Topic 3 - Querying Resource Objects
+  assignment: |
+    To get a more detailed description of a specific resource object, you can use the ``oc describe`` command.
+
+    Run:
+
+    ```
+    oc describe route/parksmap
+    ```
+
+    and it should yield something similar to:
+
+    ```
+    Name:                   parksmap
+    Namespace:              myproject
+    Created:                5 minutes ago
+    Labels:                 app=parksmap
+    Annotations:            openshift.io/host.generated=true
+    Requested Host:         parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com
+                              exposed on router default (host apps-crc.testing) 5 minutes ago
+    Path:                   <none>
+    TLS Termination:        <none>
+    Insecure Policy:        <none>
+    Endpoint Port:          8080-tcp
+
+    Service:        parksmap
+    Weight:         100 (100%)
+    Endpoints:      10.128.0.220:8080
+    ```
+
+    Whenever passing a specific resource object as argument to an ``oc`` command, there are two conventions which can be used. The first is to use a single string of the form ``type/name``. The second is to pass the ``type`` and ``name`` as separate consecutive arguments. The command:
+
+    ```
+    oc describe route parksmap
+    ```
+
+    is therefore equivalent.
+
+    The output produced by ``oc describe`` is intended to be a human readable format. To get the raw object details as JSON or YAML, you can use the ``oc get`` command, listing the name of the resource and the output format.
+
+    For JSON output, you can use:
+
+    ```
+    oc get route/parksmap -o json
+    ```.
+
+    For YAML output, you can use:
+
+    ```
+    oc get route/parksmap -o yaml
+    ```.
+
+    To see a description of the purpose of specific fields in the raw object, you can use the ``oc explain`` command, providing it with a path selector for the field.
+
+    To see the description of the ``host`` field of the ``spec`` object, you can run:
+
+    ```
+    oc explain route.spec.host
+    ```
+
+    This will output:
+
+    ```
+    KIND:     Route
+    VERSION:  route.openshift.io/v1
+
+    FIELD:    host <string>
+
+    DESCRIPTION:
+         host is an alias/DNS that points to the service. Optional. If not specified
+         a route name will typically be automatically chosen. Must follow DNS952
+         subdomain conventions.
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 04-editing-resource-objects
+  id: qebn5w4y6e3y
+  type: challenge
+  title: Topic 4 - Editing Resource Objects
+  assignment: |
+    To make changes to an existing resource object you can use the ``oc edit`` command.
+
+    To edit the details of the ``route`` object for the sample application you can run:
+
+    ```
+    oc edit route/parksmap
+    ```
+
+    This will start up an editor from which you can edit the definition of the resource object.
+
+    The ``vi`` editor will be used with this environment. If you are not familiar with ``vi``, you can enter ``:q`` to exit provided no changes have been made.
+
+    By default, when editing a definition, it will be provided as YAML. To edit the definition as JSON add the ``-o json`` option.
+
+    ```
+    oc edit route/parksmap -o json
+    ```
+
+    Once you are done with any edits, save the changes and quit the editor. The changes will be automatically uploaded and used to replace the original definition.
+
+    As OpenShift works on a declarative configuration model, the platform will then run any steps needed to bring the state of the cluster into agreement with the required state as defined by the resource object.
+
+    Do be aware that not all fields of a resource object are able to be changed. Some fields may be immutable. Others may represent the current state of the corresponding resource and any change will be overridden again with the current state.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 05-creating-resource-objects
+  id: wpzl29pywzfm
+  type: challenge
+  title: Topic 5 - Creating Resource Objects
+  assignment: |
+    The ``oc edit`` command would be used to change an existing resource object, it cannot be used to create a new object. To create a new object you need to use the ``oc create`` command.
+
+    The ``oc create`` command provides a generic way of creating any resource object from a JSON or YAML definition, as well as a simpler option driven method for a subset of resource object types.
+
+    If for example you wanted to create a secure route for the application with your own host name, you would create a ``parksmap-fqdn.json`` file containing the definition of the route:
+
+    ``cat > parksmap-fqdn.json << !
+    {
+        "kind": "Route",
+        "apiVersion": "v1",
+        "metadata": {
+            "name": "parksmap-fqdn",
+            "labels": {
+                "app": "parksmap"
+            }
+        },
+        "spec": {
+            "host": "www.example.com",
+            "to": {
+                "kind": "Service",
+                "name": "parksmap",
+                "weight": 100
+            },
+            "port": {
+                "targetPort": "8080-tcp"
+            },
+            "tls": {
+                "termination": "edge",
+                "insecureEdgeTerminationPolicy": "Allow"
+            }
+        }
+    }
+    !``{{execute}}
+
+    To create the route from the ``parksmap-fqdn.json`` file you would run the command:
+
+    ```
+    oc create -f parksmap-fqdn.json
+    ```.
+
+    The definition for this route had a unique value for ``route.metadata.name``, which wasn't previously in use. If you now run:
+
+    ```
+    oc get routes
+    ```
+
+    you should see two routes listed.
+
+    ```
+    NAME            HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
+    parksmap        parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com          parksmap   8080-tcp          None
+    parksmap-fqdn   www.example.com                                                             parksmap   8080-tcp   edge/Allow    None
+    ```
+
+    In the case of a route, ``oc create`` provides a sub command specifically for creating a route. You could therefore also have run ``oc create route`` using the command:
+
+    ``oc create route edge parksmap-fqdn --service parksmap --insecure-policy Allow --hostname www.example.com``
+
+    To see the list of resource object types that ``oc create`` has more specific support for, run:
+
+    ```
+    oc create --help
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 06-replacing-resource-objects
+  id: aqor4zltvjun
+  type: challenge
+  title: Topic 6 - Replacing Resource Objects
+  assignment: |
+    The ``oc create`` command allows you to create a new resource object from a JSON or YAML definition contained in a file. To change an existing resource object using ``oc edit`` was an interactive process. To be able to change an existing resource from a JSON or YAML definition contained in a file, you can use the ``oc replace`` command.
+
+    To disallow an insecure route you create a modified definition of the route object:
+
+    ``cat > parksmap-fqdn.json << !
+    {
+        "kind": "Route",
+        "apiVersion": "v1",
+        "metadata": {
+            "name": "parksmap-fqdn",
+            "labels": {
+                "app": "parksmap"
+            }
+        },
+        "spec": {
+            "host": "www.example.com",
+            "to": {
+                "kind": "Service",
+                "name": "parksmap",
+                "weight": 100
+            },
+            "port": {
+                "targetPort": "8080-tcp"
+            },
+            "tls": {
+                "termination": "edge",
+                "insecureEdgeTerminationPolicy": "Redirect"
+            }
+        }
+    }
+    !``{{execute}}
+
+    and then run:
+
+    ```
+    oc replace -f parksmap-fqdn.json
+    ```
+
+    In order for ``oc replace`` to target the correct resource object, the ``metadata.name`` value of the JSON or YAML definition must be the same as that to be changed.
+
+    To script the updating of a value in an existing resource object using ``oc replace``, it is necessary to fetch the definition of the existing resource object using ``oc get``. The definition can then be edited and ``oc replace`` used to update the existing resource object.
+
+    To edit the definition will require a way of editing the JSON or YAML definition on the fly. The alternative to this process is to use the ``oc patch`` command, which will edit a value in place for you based on a supplied specification.
+
+    The ``route.spec.tls.insecureEdgeTerminationPolicy`` value could for example be switched back to allowing an insecure route by running:
+
+    ```
+    oc patch route/parksmap-fqdn --patch '{"spec":{"tls": {"insecureEdgeTerminationPolicy": "Allow"}}}'
+    ```
+
+    For both cases, the resource object to be updated must already exist or the command will fail. If you do not know whether the resource object will already exist, and want it updated if it does, but created if it does not, instead of using ``oc replace``, you can use ``oc apply``.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 07-labelling-resource-objects
+  id: 5ukngju0fisc
+  type: challenge
+  title: Topic 7 - Labelling Resource Objects
+  assignment: |
+    When you deploy an application using ``oc new-app`` a label is automatically applied to the resource objects created. The name of the label is ``app`` and it will be set to the name of the application. This label can be used to select a subset of resource objects when running queries.
+
+    When you have multiple applications deployed, you can list all resource objects related to a specific application using the command ``oc get all``, passing the command a selector which describes the label to match.
+
+    To query the resources just for the application you deployed run:
+
+    ```
+    oc get all -o name --selector app=parksmap
+    ```
+
+    This should yield:
+
+    ```
+    pod/parksmap-1-dvsqf
+    replicationcontroller/parksmap-1
+    service/parksmap
+    deploymentconfig.apps.openshift.io/parksmap
+    imagestream.image.openshift.io/parksmap
+    route.route.openshift.io/parksmap
+    route.route.openshift.io/parksmap-fqdn
+    ```
+
+    If you need to apply additional labels to a resource object you can use the ``oc label`` command.
+
+    To add the label ``web`` to the service object for your application, and give it the value ``true``, run:
+
+    ```
+    oc label service/parksmap web=true
+    ```
+
+    Then query all resource objects with just that label.
+
+    ```
+    oc get all -o name --selector web=true
+    ```
+
+    Only the service object should be returned in the output.
+
+    To remove a label from a resource object you can use:
+
+    ```
+    oc label service/parksmap web-
+    ```
+
+    The label declaration in this command is of the form ``name-``. The trailing ``-``, rather than ``=value`` indicates the label should be removed.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 08-deleting-resource-objects
+  id: dtbn2mxqw5dj
+  type: challenge
+  title: Topic 8 - Deleting Resource Objects
+  assignment: |
+    If you need to delete an entire application, or just a single resource, you can use the ``oc delete`` command. Specific resource objects can be deleted by their names, or by matching on a subset of resource objects using labels.
+
+    To delete a single resource object by name supply the name:
+
+    ```
+    oc delete route/parksmap-fqdn
+    ```
+
+    To delete all resources objects of a specific type using labels, supply the resource object type name and the selector.
+
+    ```
+    oc delete route --selector app=parksmap
+    ```
+
+    When using a label selector, you can list more than one resource object type name by separating them with a comma.
+
+    ```
+    oc delete svc,route --selector app=parksmap
+    ```
+
+    The short cut of ``all`` can also be used to match all key resource objects types that are directly associated with the build and deployment of an application.
+
+    ```
+    oc delete all --selector app=parksmap
+    ```
+
+    It is recommended that before deleting any resource objects, you use ``oc get`` with the same parameters to confirm what would be deleted. This is especially important with a final variant of the ``oc delete all`` command. That is, where no selector is provided.
+
+    In this case, all matched resource objects in the project would be deleted. Because the danger is there of accidentally deleting all your work, it is necessary to also supply the ``--all`` option to confirm that you do really wish to delete all resources objects from the project.
+
+    ```
+    oc delete all --all
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "17119674816365064445"
