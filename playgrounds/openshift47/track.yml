@@ -25,14 +25,14 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- btannous@redhat.com
 private: true
 published: false
 challenges:
 - slug: tips
-  id: rovbyiaq9mkf
+  id: bhgfsi5sh0vr
   type: challenge
   title: OpenShift Playground
   assignment: |+
@@ -161,5 +161,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "8172934182891954906"
+  timelimit: 3600
+checksum: "14148003597457910260"
+_: ""

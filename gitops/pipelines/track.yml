@@ -59,7 +59,7 @@ private: true
 published: false
 challenges:
 - slug: 01install-op
-  id: gkqrck2oyhz5
+  id: wglijc5mefda
   type: challenge
   title: Step 1 - Install the Pipelines Operator
   assignment: |
@@ -154,10 +154,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 02new-project
-  id: qgwk1r6cytkt
+  id: u0wjoqsldsfm
   type: challenge
   title: Step 2 - Create a New Project
   assignment: |
@@ -192,10 +192,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 03create-task
-  id: aevudzascfzm
+  id: s6yzrjk5kmho
   type: challenge
   title: Step 3 - Create Sample Task
   assignment: |-
@@ -246,10 +246,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 04task-resource-def
-  id: xvnqrb4rzzzp
+  id: qzgzarq9buh4
   type: challenge
   title: Step 4 - Task Resource Definitions
   assignment: |-
@@ -326,10 +326,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 05create-pipeline
-  id: xdx4xgtwg2pk
+  id: kmkfd749hytj
   type: challenge
   title: Step 5 - Create Pipeline
   assignment: |-
@@ -453,10 +453,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 06trigger-pipeline
-  id: ny3ci7u6xtya
+  id: lardy15kymlp
   type: challenge
   title: Step 6 - Trigger a Pipeline
   assignment: |
@@ -515,10 +515,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 257
 - slug: 07verify-deployment
-  id: qleyfyuywf5f
+  id: 8ual7buvmkjs
   type: challenge
   title: Step 7 - Verify Deployment
   assignment: |-
@@ -555,6 +555,7 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
-checksum: "11360965769649833144"
+  difficulty: basic
+  timelimit: 257
+checksum: "10550816387242689590"
+_: ""

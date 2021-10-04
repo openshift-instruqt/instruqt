@@ -54,7 +54,7 @@ private: true
 published: false
 challenges:
 - slug: 01-exploring-openshift-operator
-  id: gydto0xa2ng1
+  id: 2kqytmhzrbtj
   type: challenge
   title: Exploring the OpenShift GitOps Operator
   assignment: |
@@ -131,9 +131,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 02-connecting-to-argocd
-  id: zjjxjkyzqpht
+  id: xifhmvgynucl
   type: challenge
   title: Connecting to ArgoCD
   assignment: |
@@ -213,9 +213,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 03-deploying-sample-application
-  id: 9sw7uqelvqxy
+  id: vfvw8jpxdj9x
   type: challenge
   title: Deploying a Sample Application
   assignment: |-
@@ -223,16 +223,16 @@ challenges:
     example manifesets taken from our [sample GitOps repo](https://github.com/redhat-developer-demos/openshift-gitops-examples).
     We'll be uisng this repo to test. These manifests include:
 
-    * A **Namespace**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-ns.yaml`{{open}}
-    * A **Deployment**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-deployment.yaml`{{open}}
-    * A **Service**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-svc.yaml`{{open}}
-    * A **Route**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-route.yaml`{{open}}
+    * A **Namespace**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-ns.yaml`
+    * A **Deployment**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-deployment.yaml`
+    * A **Service**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-svc.yaml`
+    * A **Route**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-route.yaml`
 
     Collectively, this is known as an `Application` within ArgoCD. Therefore,
     you must define it as such in order to apply these manifest in your
     cluster.
 
-    Open up the Argo CD `Application` manifest: `openshift-gitops-examples/components/applications/bgd-app.yaml`{{open}}
+    Open up the Argo CD `Application` manifest: `openshift-gitops-examples/components/applications/bgd-app.yaml`
 
     Let's break this down a bit.
 
@@ -354,5 +354,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "3343090918082787900"
+  timelimit: 600
+checksum: "15158444902626755236"
+_: ""

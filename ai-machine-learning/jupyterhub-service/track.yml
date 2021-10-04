@@ -13,7 +13,7 @@ description: |
 
   The examples shown will make use of sample Jupyter notebook images, JupyterHub images, and templates, from the [Jupyter on OpenShift](https://github.com/jupyter-on-openshift) project, a community project for demonstrating how Jupyter notebooks and JupyterHub can be deployed to OpenShift.
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 tags:
 - openshift
 owner: openshift
@@ -25,7 +25,7 @@ private: true
 published: false
 challenges:
 - slug: 01-loading-the-required-images
-  id: cqylaxjrb3ly
+  id: hxp0txua6ccy
   type: challenge
   title: Topic 1 - Loading the Required Images
   assignment: |
@@ -66,9 +66,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 02-loading-the-required-templates
-  id: yhuyemxmwxr8
+  id: tlcxhz6jv39p
   type: challenge
   title: Topic 2 - Loading the Required Templates
   assignment: |
@@ -126,9 +126,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 03-accessing-the-web-console
-  id: uw5zm6k20evj
+  id: av6v8ywffezj
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -168,9 +168,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 04-deploying-jupyterhub-service
-  id: nsmmqbap1jzs
+  id: aqruz6e4o46u
   type: challenge
   title: Topic 4 - Deploying JupyterHub Service
   assignment: |
@@ -239,9 +239,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 05-deleting-the-jupyterhub-service
-  id: 5a5hcqpcylx1
+  id: 4q8vffeed6jh
   type: challenge
   title: Topic 5 - Deleting the JupyterHub Service
   assignment: |
@@ -273,9 +273,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 06-customizing-the-configuration
-  id: gojzx6iznffj
+  id: 2uby2py2k18t
   type: challenge
   title: Topic 6 - Customizing the Configuration
   assignment: |
@@ -324,9 +324,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 07-source-to-image-builder
-  id: lxt2pxbttnv3
+  id: 9fgafxrxkxbb
   type: challenge
   title: Topic 7 - Source to Image Builder
   assignment: |
@@ -414,9 +414,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 150
 - slug: 08-building-the-notebook-image
-  id: axewdgndr8sj
+  id: vknr49adhyh4
   type: challenge
   title: Topic 8 - Building the Notebook Image
   assignment: |
@@ -471,5 +471,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
-checksum: "7921654372686904025"
+  timelimit: 150
+checksum: "13822081452090055906"
+_: ""

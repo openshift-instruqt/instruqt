@@ -35,7 +35,7 @@ description: |
 
   In this scenario we will deploy a Debezium MySQL connector and use it to set up a data flow between a MySQL database and a Kafka broker.
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 tags:
 - openshift
 owner: openshift
@@ -47,7 +47,7 @@ private: true
 published: false
 challenges:
 - slug: 01-deploying-a-broker
-  id: nuacijqbugf2
+  id: r3wilcyqvqjo
   type: challenge
   title: Deploying a Kafka broker
   assignment: |
@@ -169,9 +169,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 400
 - slug: 02-deploying-a-kafka-connect
-  id: i39snxwibara
+  id: gvf4dhjnliip
   type: challenge
   title: Deploying Kafka Connect with Debezium
   assignment: |
@@ -274,9 +274,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 400
 - slug: 03-streaming-data-from-database
-  id: ujoddseec79h
+  id: u3hxfrcb9han
   type: challenge
   title: Streaming data from a database
   assignment: |
@@ -288,7 +288,7 @@ challenges:
 
     ### Create a KafkaConnector resource
 
-    We'll use the following registration resource, which is included in the scenario environment: `kafka-connector.yaml`{{open}}.
+    We'll use the following registration resource, which is included in the scenario environment: `kafka-connector.yaml`.
 
     Register the database source:
 
@@ -848,5 +848,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
-checksum: "4110511532584509663"
+  timelimit: 400
+checksum: "7806841365664535753"
+_: ""

@@ -25,7 +25,7 @@ private: true
 published: false
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: g38a3a3bflax
+  id: mnghr3hf3dlu
   type: challenge
   title: Topic 1 - Loading the Notebook Images
   assignment: |
@@ -63,9 +63,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 02-loading-the-notebook-templates
-  id: ueylricsiyby
+  id: 1sbrslovrexj
   type: challenge
   title: Topic 2 - Loading the Notebook Templates
   assignment: |
@@ -111,9 +111,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 03-accessing-the-web-console
-  id: jxbljhfzpwbo
+  id: fgt1pl2bxy0f
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -153,9 +153,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 04-deploying-the-jupyter-notebook
-  id: nd4owot0l3ba
+  id: xtrxtiqhy6di
   type: challenge
   title: Topic 4 - Deploying the Jupyter Notebook
   assignment: |
@@ -213,9 +213,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 05-deleting-the-jupyter-notebook
-  id: s92ttdtijnwi
+  id: g7yzhxjhdvfc
   type: challenge
   title: Topic 5 - Deleting the Jupyter Notebook
   assignment: |
@@ -247,5 +247,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "8137997038897338119"
+  timelimit: 180
+checksum: "7148321476705985535"
+_: ""

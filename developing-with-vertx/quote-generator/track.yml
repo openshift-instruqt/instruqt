@@ -41,7 +41,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 1
   type: challenge
 - assignment: "## Verticle\n\nAs you may have noticed, the code is structured in 3\
@@ -50,7 +50,7 @@ challenges:
     \ of code that is deployed on top of a Vert.x instance. A verticle has access\
     \ to the instance of `vertx` on which it\u2019s deployed, and can deploy other\
     \ verticles.\n\n**Understanding the Application**\n\nLet's open the `GeneratorConfigVerticle`\
-    \ class by clicking on the link below and look at the `start` method\n\n`quote-generator/src/main/java/io/vertx/workshop/quote/GeneratorConfigVerticle.java`{{open}}\n\
+    \ class by clicking on the link below and look at the `start` method\n\n`quote-generator/src/main/java/io/vertx/workshop/quote/GeneratorConfigVerticle.java`\n\
     \nThis method retrieves the configuration, instantiates the verticles and publishes\
     \ the services in the service discovery.\n\nFirst, notice the method signature.\
     \ It receives a Future object indicating that the start is asynchronous. Indeed,\
@@ -117,7 +117,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 2
   type: challenge
 - assignment: "## The quote REST endpoint\n\nOpen the `RestQuoteAPIVerticle`. This\
@@ -133,7 +133,7 @@ challenges:
     \ We now have the stream of messages, but we need to extract the JSON body and\
     \ populate the quotes map. Implement the missing logic that extracts the body\
     \ of the message (with the ``body()`` method), and then put ``name \u2192 quote``\
-    \ in the ``quotes`` map.\n\nOpen the file in the editor: \n\n`quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java`{{open}}\n\
+    \ in the ``quotes`` map.\n\nOpen the file in the editor: \n\n`quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java`\n\
     \nThen, copy the below content to the matching `// TODO` statements (or use the\
     \ `Copy to Editor` button):\n\nExtract the body of the message using `.map(msg\
     \ -> {})`\n\n<pre class=\"file\" data-filename=\"quote-generator/src/main/java/io/vertx/workshop/quote/RestQuoteAPIVerticle.java\"\
@@ -186,7 +186,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 3
   type: challenge
 - assignment: "## Red Hat OpenShift Container Platform\n\nRed Hat OpenShift Container\
@@ -238,7 +238,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 4
   type: challenge
 - assignment: "## Deploy to OpenShift\n\nNow that you've logged into OpenShift, let's\
@@ -258,7 +258,7 @@ challenges:
     \ getConfigurationOptions() {\n    JsonObject path = new JsonObject().put(\"path\"\
     , \"src/kubernetes/config.json\");\n    return new ConfigRetrieverOptions().addStore(new\
     \ ConfigStoreOptions().setType(\"file\").setConfig(path));\n}\n```\n\nFor that,\
-    \ we have defined additional config in ``quote-generator/src/main/fabric8/deployment.yml``{{open}}\
+    \ we have defined additional config in ``quote-generator/src/main/fabric8/deployment.yml``\
     \ that contains the right configuration to:\n1. define a volume with the config\
     \ map content\n2. mount this volume in the right directory\n\nYou can also see\
     \ that this file contains the JAVA options we pass to the process.\n\n**2. Start\
@@ -314,7 +314,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 5
   type: challenge
 description: "In this scenario, you will learn more about Reactive Microservices using\

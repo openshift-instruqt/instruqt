@@ -38,14 +38,14 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- btannous@redhat.com
 private: true
 published: false
 challenges:
 - slug: step1
-  id: kaet0pxxe9ua
+  id: txayvdtlhmyb
   type: challenge
   title: Step 1
   assignment: |
@@ -138,9 +138,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 450
 - slug: step2
-  id: ixy4k2cbxaiy
+  id: 44z4yrcleubt
   type: challenge
   title: Step 2
   assignment: |
@@ -402,9 +402,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 450
 - slug: step3
-  id: vy77cgjpdncx
+  id: lfia6kngqwvh
   type: challenge
   title: Step 3
   assignment: |
@@ -465,9 +465,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 450
 - slug: step4
-  id: twqw1tlkv1ue
+  id: nqsolohsjhxh
   type: challenge
   title: Step 4
   assignment: |
@@ -546,5 +546,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "8321647092688772124"
+  timelimit: 450
+checksum: "3933469558049817333"
+_: ""

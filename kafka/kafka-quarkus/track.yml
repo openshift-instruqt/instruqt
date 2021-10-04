@@ -47,7 +47,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: mx6hzsczxlmv
+  id: sh82xijndwib
   type: challenge
   title: Adding a Quarkus Reactive Messaging Extension
   assignment: |
@@ -71,7 +71,7 @@ challenges:
 
     >The first time you add the extension will take longer, as Maven downloads new dependencies.
 
-    This will add the necessary entries in your `pom.xml`{{open}} to bring in the Kafka extension. You should see a fragment similar to this around line 50:
+    This will add the necessary entries in your `pom.xml` to bring in the Kafka extension. You should see a fragment similar to this around line 50:
 
     ```xml
     ...
@@ -98,7 +98,7 @@ challenges:
     mp.messaging.[outgoing|incoming].{channel-name}.connector=smallrye-kafka
     ```
 
-    Open the `src/main/resources/application.properties`{{open}} file to add the following configuration:
+    Open the `src/main/resources/application.properties` file to add the following configuration:
 
     <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
     # Configuration file
@@ -126,10 +126,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 75
 - slug: step2
-  id: zj4imyzldti5
+  id: lemwx3hnjuqy
   type: challenge
   title: Creating an event generator
   assignment: |
@@ -139,7 +139,7 @@ challenges:
 
     The Kafka connector can write Reactive Messaging messages as Kafka records.
 
-    Open the `src/main/java/com/redhat/katacoda/kafka/VehicleGenerator.java`{{open}} file to check the code.
+    Open the `src/main/java/com/redhat/katacoda/kafka/VehicleGenerator.java` file to check the code.
 
     We will be sending the events to the `uber` channel by adding the following method:
 
@@ -174,10 +174,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 75
 - slug: step3
-  id: wcaakzpslt0b
+  id: 30cruu57wjlt
   type: challenge
   title: Deploying the application to OpenShift
   assignment: |
@@ -189,7 +189,7 @@ challenges:
     mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
-    Reopen the `src/main/resources/application.properties`{{open}} file and click **Copy to Editor** to add the following values:
+    Reopen the `src/main/resources/application.properties` file and click **Copy to Editor** to add the following values:
 
     <pre class="file" data-filename="./src/main/resources/application.properties" data-target="append">
     # Configures the OpenShift extension options
@@ -270,10 +270,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 75
 - slug: step4
-  id: 6kygcyopyeob
+  id: bbzenxwjjccy
   type: challenge
   title: Checking Kafka records
   assignment: |
@@ -374,6 +374,7 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
-checksum: "252939636282693177"
+  difficulty: basic
+  timelimit: 75
+checksum: "11962047499969958372"
+_: ""

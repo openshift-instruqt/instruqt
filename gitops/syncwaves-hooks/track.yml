@@ -43,7 +43,7 @@ private: true
 published: false
 challenges:
 - slug: 01-using-syncwaves
-  id: erwqr61ylaag
+  id: nzlrorerrgtr
   type: challenge
   title: Using Syncwaves
   assignment: |
@@ -83,10 +83,10 @@ challenges:
 
     The manifests that will be deployed have been annotated with the following values:
 
-    * The Namspace with `0` `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves/welcome-php-ns.yaml`{{open}}
-    * The Deployment with `1` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-deployment.yaml`{{open}}
-    * The Service with `2` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-svc.yaml`{{open}}
-    * Finally the Route with `3` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-route.yaml`{{open}}
+    * The Namspace with `0` `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves/welcome-php-ns.yaml`
+    * The Deployment with `1` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-deployment.yaml`
+    * The Service with `2` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-svc.yaml`
+    * Finally the Route with `3` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-route.yaml`
 
     Argo CD will apply the Namespace first (since it's the lowest value),
     and make sure it returns a "healthy" status before moving on.
@@ -147,9 +147,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 02-exploring-resource-hooks
-  id: gxvpuay9bvcc
+  id: s0fetuwqjun1
   type: challenge
   title: Exploring Resource Hooks
   assignment: |-
@@ -203,7 +203,7 @@ challenges:
 
     I will be adding the following manifest to the first
     application deployed. Take a look at the manfiest
-    `openshift-gitops-examples/apps/welcome-php/overlays/hooks/welcome-php-presync-job.yaml`{{open}}
+    `openshift-gitops-examples/apps/welcome-php/overlays/hooks/welcome-php-presync-job.yaml`
 
     You'll see that I have the annotation `argocd.argoproj.io/hook: PreSync`
     set. This means that this Job will run in the `PreSync` phase, before
@@ -217,7 +217,7 @@ challenges:
     on the one we previously deployed; while adding the `Job`
     with the resource hook. You can see this by [visiting the repo](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/welcome-php/overlays/hooks)
 
-    Taking a look at the manifest file `openshift-gitops-examples/components/applications/welcome-hooks.yaml`{{open}}
+    Taking a look at the manifest file `openshift-gitops-examples/components/applications/welcome-hooks.yaml`
     will show that this will deploy the application in the `welcome-hooks`
     namespace.
 
@@ -268,9 +268,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 03-using-syncwaves-and-hooks
-  id: uldwq3wz2djn
+  id: wyxhxnhiulzh
   type: challenge
   title: Using Syncwaves and Hooks Together
   assignment: |
@@ -302,9 +302,9 @@ challenges:
 
     Using Kustomize, we will be adding 3 addition manifests.
 
-    * A `PreSync` Job with a syncwave of 0 `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-job.yaml`{{open}}
-    * A `PreSync` Pod with a syncwave of 1 and a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-pod.yaml`{{open}}
-    * A `PostSync` Pod with a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-postsync-pod.yaml`{{open}}
+    * A `PreSync` Job with a syncwave of 0 `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-job.yaml`
+    * A `PreSync` Pod with a syncwave of 1 and a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-pod.yaml`
+    * A `PostSync` Pod with a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-postsync-pod.yaml`
 
     The manifest will apply in the following order.
 
@@ -315,7 +315,7 @@ challenges:
 
     ## Deploying the Application
 
-    Take a look at the manifest file `openshift-gitops-examples/components/applications/welcome-syncwaves-and-hooks.yaml`{{open}}
+    Take a look at the manifest file `openshift-gitops-examples/components/applications/welcome-syncwaves-and-hooks.yaml`
 
     As before, we are using Kustomize to deploy the same application,
     but in a different namespace and we are loading in the 3 additional
@@ -365,5 +365,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "11334735295016347802"
+  timelimit: 600
+checksum: "17864307423818915063"
+_: ""

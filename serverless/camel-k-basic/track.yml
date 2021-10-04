@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: kujvx5efvpxu
+  id: af9prv9osc2y
   type: challenge
   title: Step 1
   assignment: |
@@ -93,9 +93,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step2
-  id: apqnnir231nl
+  id: gfzkuhxhd4y0
   type: challenge
   title: Step 2
   assignment: |
@@ -189,9 +189,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step3
-  id: o5g0grh1o2mt
+  id: uvp9kxyb8grn
   type: challenge
   title: Step 3
   assignment: |
@@ -305,9 +305,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step4
-  id: nmirzxfunfur
+  id: fzeidykti0df
   type: challenge
   title: Step 4
   assignment: |
@@ -389,5 +389,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "5955677208237276123"
+  timelimit: 225
+checksum: "370514815419971396"
+_: ""

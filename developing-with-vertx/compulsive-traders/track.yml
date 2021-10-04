@@ -11,7 +11,7 @@ challenges:
     \ Futures.\n\nFuture objects are created using Future.future(). To be notified\
     \ of the completion, you need to attach a Handler<AsyncResult>> using the Future.setHandler\
     \ method.\n\nOpen the `io.vertx.workshop.trader.impl.CallbackTraderVerticle` class\
-    \ and fill in the code to complete TODOs 1 and 2.\n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/CallbackTraderVerticle.java`{{open}}\
+    \ and fill in the code to complete TODOs 1 and 2.\n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/CallbackTraderVerticle.java`\
     \ \n\nThe trader needs the Portfolio service and the market service (the message\
     \ source sending the market data). We cannot start the trading logic before having\
     \ retrieved both of them. Use a CompositeFuture to be notified when both are completed\
@@ -44,7 +44,7 @@ challenges:
 - assignment: "## The RX Java 2 trader\n\nIn this task, we re-implement the very same\
     \ logic but using a different programming style. We are going to use Rx Java 2.\
     \ \n\nOpen the `io.vertx.workshop.trader.impl.RXCompulsiveTraderVerticle` class.\
-    \ \n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java`{{open}}\n\
+    \ \n\n`compulsive-traders/src/main/java/io/vertx/workshop/trader/impl/RXCompulsiveTraderVerticle.java`\n\
     \nComplete the code following the TODO items. Use the zip operator to combine\
     \ the two Singles. When both are completed, attach the message handler to the\
     \ MessageConsumer and execute the trading logic on each received event. Don\u2019\

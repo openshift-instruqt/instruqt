@@ -50,7 +50,7 @@ description: |
 
   Now, let's get started!
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 tags:
 - openshift
 owner: openshift
@@ -62,7 +62,7 @@ private: true
 published: false
 challenges:
 - slug: 01-prepare
-  id: mtuxuxgytliz
+  id: ynwnpxa6dy2b
   type: challenge
   title: Prepare for Exercises
   assignment: |
@@ -151,9 +151,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 360
 - slug: 02-serving
-  id: enavz0sdxqky
+  id: ktayosqw5may
   type: challenge
   title: Deploying your service
   assignment: |
@@ -394,9 +394,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 360
 - slug: 03-traffic-distribution
-  id: 6wy6pagfm44y
+  id: xbdkmqqwsyqx
   type: challenge
   title: Traffic Distribution
   assignment: |
@@ -533,9 +533,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 360
 - slug: 04-canary-releases
-  id: fl1zeqlsrrvr
+  id: mdskulum3xn5
   type: challenge
   title: Canary Releases
   assignment: |
@@ -635,9 +635,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 360
 - slug: 05-scaling
-  id: ygxrxnuhx4kz
+  id: n3pdmjpfiqiy
   type: challenge
   title: Scaling
   assignment: |
@@ -848,5 +848,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
-checksum: "6800132867076540446"
+  timelimit: 360
+checksum: "15693990765124626480"
+_: ""

@@ -29,7 +29,7 @@ private: true
 published: false
 challenges:
 - slug: 01-basics
-  id: brwdaixnnizg
+  id: gqymgsvs51mx
   type: challenge
   title: Step 1
   assignment: |-
@@ -64,7 +64,7 @@ challenges:
 
     This will use the Quarkus Maven Plugin and generate a sample Qute project for you in the `qute` subdirectory and include the `quarkus-resteasy-qute` extension which includes the templating engine and integration with JAX-RS via RestEasy. We've also included a few other extensions we'll use later on.
 
-    Once generated, look at the `qute/pom.xml`{{open}}. You will find the import of the Quarkus BOM, allowing to omit the version on the different Quarkus dependencies.
+    Once generated, look at the `qute/pom.xml`. You will find the import of the Quarkus BOM, allowing to omit the version on the different Quarkus dependencies.
 
     ## Start the app
 
@@ -93,7 +93,7 @@ challenges:
 
     ![Qute sample](/openshift/assets/middleware/quarkus/qute-sample.png)
 
-    This page is rendered using the `qute/src/main/resources/templates/page.qute.html`{{open}} HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page?name=Jerry) (which adds `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template:
+    This page is rendered using the `qute/src/main/resources/templates/page.qute.html` HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page?name=Jerry) (which adds `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template:
 
     ![Qute sample](/openshift/assets/middleware/quarkus/qute-sample-jerry.png)
 
@@ -103,7 +103,7 @@ challenges:
 
     We’ll start by creating a new and very simple text-based template.
 
-    Click `qute/src/main/resources/templates/hello.txt`{{open}} to create an empty template file.
+    Click `qute/src/main/resources/templates/hello.txt` to create an empty template file.
 
     Finally, click the **Copy to Editor** to add the template code:
 
@@ -121,7 +121,7 @@ challenges:
 
     Now let’s inject the "compiled" template in the resource class.
 
-    Click here to open `qute/src/main/java/org/acme/HelloResource.java`{{open}}.
+    Click here to open `qute/src/main/java/org/acme/HelloResource.java`.
 
     Click the **Copy to Editor** to update our `HelloResource` class:
 
@@ -191,9 +191,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 02-typesafe
-  id: pac21vizjih1
+  id: mnsf7qclgu7p
   type: challenge
   title: Step 2
   assignment: |+
@@ -215,13 +215,13 @@ challenges:
 
     `cd /root/projects/quarkus/qute && mkdir -p src/main/resources/templates/HelloResource`{{execute T2}}
 
-    Next, click to open `qute/src/main/resources/templates/HelloResource/hello.txt`{{open}}. Click **Copy to Editor** to add the code:
+    Next, click to open `qute/src/main/resources/templates/HelloResource/hello.txt`. Click **Copy to Editor** to add the code:
 
     <pre class="file" data-filename="./qute/src/main/resources/templates/HelloResource/hello.txt" data-target="replace">
     Hello {name} from HelloResource!
     </pre>
 
-    For Goodbye, click to open `qute/src/main/resources/templates/HelloResource/goodbye.txt`{{open}}. Click **Copy to Editor** to add the code:
+    For Goodbye, click to open `qute/src/main/resources/templates/HelloResource/goodbye.txt`. Click **Copy to Editor** to add the code:
 
     <pre class="file" data-filename="./qute/src/main/resources/templates/HelloResource/goodbye.txt" data-target="replace">
     Goodbye {name} from GoodbyeResource!
@@ -271,7 +271,7 @@ challenges:
 
     Let's create another resource and reference our `HelloResource.Templates` static class.
 
-    Click to open `qute/src/main/java/org/acme/GoodbyeResource.java`{{open}} then click **Copy to Editor** to create a new resource:
+    Click to open `qute/src/main/java/org/acme/GoodbyeResource.java` then click **Copy to Editor** to create a new resource:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/GoodbyeResource.java" data-target="replace">
     package org.acme;
@@ -341,9 +341,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 03-parameters
-  id: du9ihxlnrycd
+  id: v5iblebhvy5d
   type: challenge
   title: Step 3
   assignment: |+
@@ -351,7 +351,7 @@ challenges:
 
     If you declare a parameter declaration in a template, Qute will attempt to validate all expressions that reference this parameter. If an incorrect expression is found the build wil fail. This can greatly reduce developer errors up front. Let's exercise this.
 
-    Create a simple class with two fields by clicking `qute/src/main/java/org/acme/Item.java`{{open}} to open the file then click **Copy to Editor**:
+    Create a simple class with two fields by clicking `qute/src/main/java/org/acme/Item.java` to open the file then click **Copy to Editor**:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/Item.java" data-target="replace">
     package org.acme;
@@ -377,7 +377,7 @@ challenges:
 
     `mkdir -p src/main/resources/templates/ItemResource`{{execute T2}}
 
-    Create a Qute template at by clicking `qute/src/main/resources/templates/ItemResource/item.html`{{open}} then click the **Copy to Editor** button:
+    Create a Qute template at by clicking `qute/src/main/resources/templates/ItemResource/item.html` then click the **Copy to Editor** button:
 
     <pre class="file" data-filename="./qute/src/main/resources/templates/ItemResource/item.html" data-target="replace">
     &lt;!DOCTYPE html&gt;
@@ -395,7 +395,7 @@ challenges:
 
     ## Create Service
 
-    And create a simple `ItemService` to mock up a database of items. Click `qute/src/main/java/org/acme/ItemService.java`{{open}} to open the file, then click **Copy To Editor**:
+    And create a simple `ItemService` to mock up a database of items. Click `qute/src/main/java/org/acme/ItemService.java` to open the file, then click **Copy To Editor**:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/ItemService.java" data-target="replace">
     package org.acme;
@@ -423,7 +423,7 @@ challenges:
 
     ## Create REST endpoint
 
-    Now create a resource class that uses this type-safe template. Click `qute/src/main/java/org/acme/ItemResource.java`{{open}} to open the file, then click **Copy To Editor**:
+    Now create a resource class that uses this type-safe template. Click `qute/src/main/java/org/acme/ItemResource.java` to open the file, then click **Copy To Editor**:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/ItemResource.java" data-target="replace">
     package org.acme;
@@ -539,7 +539,7 @@ challenges:
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
-    If you did not see errors, congratulations! But let's see what happens if we do. Click here: `qute/src/main/resources/templates/ItemResource/item.html`{{open}} to open the template. Change `{item.name}` to `{item.nonSense}`. Now click here to [reload](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1). You should get an error:
+    If you did not see errors, congratulations! But let's see what happens if we do. Click here: `qute/src/main/resources/templates/ItemResource/item.html` to open the template. Change `{item.name}` to `{item.nonSense}`. Now click here to [reload](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1). You should get an error:
 
     ![Err](/openshift/assets/middleware/quarkus/qute-err.png)
 
@@ -562,9 +562,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 04-extensions
-  id: rwuxlz2yngid
+  id: u00wfxonfoxb
   type: challenge
   title: Step 4
   assignment: |+
@@ -597,7 +597,7 @@ challenges:
 
     Also notice the use of `{item.discountedPrice}`. This field does not exist in our `Item` class (which only has `name` and `price`). We'll add an _extension_ to our java code to make this property be available to the template, and write the code that computes its value in Java.
 
-    Click `qute/src/main/java/org/acme/TemplateExtensions.java`{{open}} to open the new file.
+    Click `qute/src/main/java/org/acme/TemplateExtensions.java` to open the new file.
 
     Click **Copy to Editor** to create the extensions class where we'll declare our `discountedPrice`:
 
@@ -643,9 +643,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 05-periodic
-  id: 4dedfrfkr9n1
+  id: j5bxxlx0al8q
   type: challenge
   title: Step 5
   assignment: |
@@ -657,7 +657,7 @@ challenges:
 
     Now let's create a simple `Sample` object that represents a point-in-time of a value (maybe ambient temperature or blood pressure of a patient):
 
-    Click `qute/src/main/java/org/acme/Sample.java`{{open}} to open the file. Click **Copy to Editor** to paste in the code:
+    Click `qute/src/main/java/org/acme/Sample.java` to open the file. Click **Copy to Editor** to paste in the code:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/Sample.java" data-target="replace">
     package org.acme;
@@ -676,7 +676,7 @@ challenges:
     }
     </pre>
 
-    Now let's ceate a service whose `get()` method returns a random list of samples. Open the file with `qute/src/main/java/org/acme/SampleService.java`{{open}} and click **Copy to Editor** to create the code:
+    Now let's ceate a service whose `get()` method returns a random list of samples. Open the file with `qute/src/main/java/org/acme/SampleService.java` and click **Copy to Editor** to create the code:
 
     <pre class="file" data-filename="./qute/src/main/java/org/acme/SampleService.java" data-target="replace">
     package org.acme;
@@ -708,7 +708,7 @@ challenges:
 
     `mkdir -p src/main/resources/templates/reports/v1`{{execute T2}}
 
-    Click `qute/src/main/resources/templates/reports/v1/report_01.json.template`{{open}} to open the new file.
+    Click `qute/src/main/resources/templates/reports/v1/report_01.json.template` to open the new file.
 
     Click **Copy to Editor** to create the template. We'll place it in the `src/main/resources/templates/reports/v1` path to simulate some sort of organization of different reports:
 
@@ -729,7 +729,7 @@ challenges:
 
     ## Create periodic reports
 
-    Create the ReportGenerator file by clicking `qute/src/main/java/org/acme/ReportGenerator.java`{{open}}.
+    Create the ReportGenerator file by clicking `qute/src/main/java/org/acme/ReportGenerator.java`.
 
     And finally click **Copy to Editor** to add code that uses all of the above and generates reports periodically to a file in `/tmp`:
 
@@ -810,9 +810,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 06-reactive
-  id: sv0dpqovotun
+  id: akviev4fnpok
   type: challenge
   title: Step 6
   assignment: |+
@@ -830,7 +830,7 @@ challenges:
 
     You've already added the `quarkus-vertx-web` extension which gives us the ability to declare Reactive Routes.
 
-    Click `qute/src/main/java/org/acme/ReactiveResource.java`{{open}} to open a new file.
+    Click `qute/src/main/java/org/acme/ReactiveResource.java` to open a new file.
 
     Click **Copy to Editor** to create create a reactive route that will process our Qute template:
 
@@ -918,5 +918,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "14782702030055897842"
+  timelimit: 150
+checksum: "8964048366090671171"
+_: ""

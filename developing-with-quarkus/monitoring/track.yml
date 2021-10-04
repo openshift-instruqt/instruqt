@@ -25,7 +25,7 @@ private: true
 published: false
 challenges:
 - slug: 01-install-prometheus
-  id: f8ds8xlazt4l
+  id: nn1wmjfmzpwt
   type: challenge
   title: Step 1
   assignment: |
@@ -138,9 +138,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 02-create-and-instrument-app
-  id: te4b3qdkusgl
+  id: 1kcyj7oveaus
   type: challenge
   title: Step 2
   assignment: |-
@@ -251,9 +251,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 03-add-additional-metrics
-  id: k2rf4echdl66
+  id: 0sv2lyxfdjyd
   type: challenge
   title: Step 3
   assignment: |+
@@ -262,7 +262,7 @@ challenges:
     Out of the box, you get a lot of basic JVM metrics which are useful, but what if you wanted to provide metrics for your
     app? Let’s add a few using the Quarkus metrics APIs.
 
-    Click here to open a new file `./primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`{{open}}.
+    Click here to open a new file `./primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`.
 
     This new class will implement an algorithm for checking whether a number is a prime number. This algorithm is exposed over a REST interface. With the Micrometer extension enabled, metrics for all http server requests are also collected automatically.
 
@@ -397,7 +397,7 @@ challenges:
 
     To create MeterFilters, you can simply declare them using annotations in your code. Quarkus will identify and inject them into `MeterRegistry`s as they are created, based on criteria specified in the annotations.
 
-    Click here to open a new file `primes/src/main/java/org/acme/quickstart/CustomConfiguration.java`{{open}}.
+    Click here to open a new file `primes/src/main/java/org/acme/quickstart/CustomConfiguration.java`.
 
     Click **Copy To Editor** to create the code for our new class:
 
@@ -475,7 +475,7 @@ challenges:
 
     Finally, you need to add the configuration value referenced in the `configureAllRegistries` filter to your `application.properties`.
 
-    Click here to open the file (it will be empty): `primes/src/main/resources/application.properties`{{open}}.
+    Click here to open the file (it will be empty): `primes/src/main/resources/application.properties`.
 
     Then click **Copy to Editor** to add the following values to the `application.properties` file:
 
@@ -530,9 +530,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 04-deploy-to-openshift
-  id: fyaddkrvucwn
+  id: 4k0clwjkvbjl
   type: challenge
   title: Step 4
   assignment: |-
@@ -546,7 +546,7 @@ challenges:
 
     `mvn quarkus:add-extension -Dextensions="openshift"`{{execute T1}}
 
-    Open here to add OpenShift properties: `primes/src/main/resources/application.properties`{{open}}.
+    Open here to add OpenShift properties: `primes/src/main/resources/application.properties`.
 
     Then click **Copy to Editor** to add the following values to the `application.properties` file:
 
@@ -621,9 +621,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 05-query-with-prometheus
-  id: kk3pjo1yl6lg
+  id: w4qfjyzefslg
   type: challenge
   title: Step 4
   assignment: |-
@@ -686,9 +686,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 06-install-grafana
-  id: gkflqtqfywrk
+  id: 3ldwefrgibr7
   type: challenge
   title: Step 5
   assignment: |+
@@ -751,9 +751,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 07-create-dashboard
-  id: 70jjq8fhqo0t
+  id: zfhsrcyyykvp
   type: challenge
   title: Step 6
   assignment: |
@@ -872,5 +872,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "4407861697479887903"
+  timelimit: 128
+checksum: "6002368377117858831"
+_: ""

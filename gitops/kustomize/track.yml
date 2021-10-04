@@ -42,7 +42,7 @@ private: true
 published: false
 challenges:
 - slug: 01-exploring-kustomize
-  id: ny98eul3axsh
+  id: 18sofrgknkzm
   type: challenge
   title: Exploring Kustomize
   assignment: |
@@ -85,10 +85,10 @@ challenges:
     ls -l
     ```
 
-    Taking a look at the `openshift-gitops-examples/components/kustomize-build/welcome.yaml`{{open}}
+    Taking a look at the `openshift-gitops-examples/components/kustomize-build/welcome.yaml`
     file shows nothing special. Just a standard Kubernetes manifest.
 
-    What if, for example, we wanted to add a `label` to this manifest without editing it? This is where the `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}} file comes in.
+    What if, for example, we wanted to add a `label` to this manifest without editing it? This is where the `openshift-gitops-examples/components/kustomize-build/kustomization.yaml` file comes in.
 
     As you can see in the output there isn't much. The two sections for this
     example are the `resources` and the `patchesJson6902` sections.
@@ -111,7 +111,7 @@ challenges:
     ```
 
     This will update the
-    `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}} file with a
+    `openshift-gitops-examples/components/kustomize-build/kustomization.yaml` file with a
     ```
     images` section. Now when you run `kustomize build .
     ``` -
@@ -187,9 +187,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 900
 - slug: 02-deploying-kustomized-application
-  id: ymcnj2jfasb3
+  id: ko3pt0bv7dwy
   type: challenge
   title: Deploying Kustomized Applicaton
   assignment: |
@@ -254,13 +254,13 @@ challenges:
     use if you have different environements or clusters you're deploying
     to.
 
-    Take a look at the `Application` definition:  `openshift-gitops-examples/components/applications/bgdk-app.yaml`{{open}}
+    Take a look at the `Application` definition:  `openshift-gitops-examples/components/applications/bgdk-app.yaml`
 
     This application is pointed to the [same repo](https://github.com/redhat-developer-demos/openshift-gitops-examples) but [different directory](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgdk).
 
     This is using a concept of an "overlay", where you have a "base"
     set of manifests and you overlay your customizations. Take a look
-    at the `openshift-gitops-examples/apps/bgd/overlays/bgdk/kustomization.yaml`{{open}} example
+    at the `openshift-gitops-examples/apps/bgd/overlays/bgdk/kustomization.yaml` example
     file.
 
     This `kustomization.yaml` takes the base application and patches the
@@ -299,5 +299,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "12772963493670603474"
+  timelimit: 900
+checksum: "8901408527511938855"
+_: ""

@@ -34,14 +34,14 @@ challenges:
 
     **Front-end**
 
-    The web application is a single page `./src/main/webapp/index.html`{{open}}.  In
-    short, the front-end uses Bootstrap and jQuery. It uses REST to contact the back-end.
+    The web application is a single page `./src/main/webapp/index.html`.  In short,
+    the front-end uses Bootstrap and jQuery. It uses REST to contact the back-end.
 
 
     **Domain model**
 
-    Two Java classes represent the domain model for our application, `src/main/java/com/redhat/example/weather/Country.java`{{open}}
-    and `src/main/java/com/redhat/example/weather/City.java`{{open}}.
+    Two Java classes represent the domain model for our application, `src/main/java/com/redhat/example/weather/Country.java`
+    and `src/main/java/com/redhat/example/weather/City.java`.
 
 
     ![The Weather App](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/domain-model.png)
@@ -53,21 +53,21 @@ challenges:
     to retrieve a country object with a list of cities to display. To enable JAX-RS
     it''s required to provide a class that extends the `javax.ws.rs.core.Application`  and
     configure the base URI (path) that is used to expose services. In the prototype,
-    this is done in the `src/main/java/com/redhat/example/weather/RestApplication.java`{{open}}.
+    this is done in the `src/main/java/com/redhat/example/weather/RestApplication.java`.
     In that class, we set the base URI to `/api`, which means that any call to the
     back-end using that URI is routed to the JAX-RS subsystem.
 
 
     **Weather REST Service**
 
-    The current weather service `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}
+    The current weather service `src/main/java/com/redhat/example/weather/WeatherService.java`
     already implement a simple REST service using JAX-RS and returns a List with one
     country that is currently hard-coded. We will change that later in this service.
 
 
     **User state**
 
-    Finally, for convenience, the prototype also includes `src/main/java/com/redhat/example/weather/SelectedCountry.java`{{open}}
+    Finally, for convenience, the prototype also includes `src/main/java/com/redhat/example/weather/SelectedCountry.java`
     . This class is not in use at the moment, but we will make use of it later. The
     class is annotated with `@SessionScope` which tells the application server that
     the state of this class should be stored in the session scope. E.g., the state
@@ -79,10 +79,10 @@ challenges:
 
     **Build configuration**
 
-    The prototype also includes build configuration in the `pom.xml`{{open}}. The
-    build configuration is pretty simple but does include the `wildfly-maven-plugin`.
-    Since we will be deploying to OpenShift, we will not use that plugin, but it''s
-    included here if you would like to use this project as a base for local development.
+    The prototype also includes build configuration in the `pom.xml`. The build configuration
+    is pretty simple but does include the `wildfly-maven-plugin`. Since we will be
+    deploying to OpenShift, we will not use that plugin, but it''s included here if
+    you would like to use this project as a base for local development.
 
 
     ### Summary
@@ -112,7 +112,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 120
   title: Review the weather application
   type: challenge
 - assignment: '# Deploy to OpenShift
@@ -379,7 +379,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 120
   title: Deploy to OpenShift
   type: challenge
 - assignment: "**1. What is Java Persistence API?**\n\nThe Java Persistence API (JPA)\
@@ -406,14 +406,14 @@ challenges:
     \ file is anyway required by the JPA specification and holds the base configuration,\
     \ for example, which datasource to use.\n\nOur first step is to create a `persistence.xml`\
     \ file in `src/main/resources/META-INF`.\n\nClick this link to create and open\
-    \ the file `src/main/resources/META-INF/persistence.xml`{{open}}\n\nNext, Click\
-    \ on **Copy To Editor** below to add the content to the file.\n\n<pre class=\"\
-    file\" data-filename=\"./src/main/resources/META-INF/persistence.xml\" data-target=\"\
-    replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\n&lt;persistence\
-    \ version=\"2.1\"\n             xmlns=\"http://xmlns.jcp.org/xml/ns/persistence\"\
-    \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
-    \n        http://xmlns.jcp.org/xml/ns/persistence\n        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd\"\
-    &gt;\n    &lt;persistence-unit name=\"primary\"&gt;\n        &lt;jta-data-source&gt;java:jboss/datasources/WeatherDS&lt;/jta-data-source&gt;\n\
+    \ the file `src/main/resources/META-INF/persistence.xml`\n\nNext, Click on **Copy\
+    \ To Editor** below to add the content to the file.\n\n<pre class=\"file\" data-filename=\"\
+    ./src/main/resources/META-INF/persistence.xml\" data-target=\"replace\">\n&lt;?xml\
+    \ version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\n&lt;persistence version=\"2.1\"\n\
+    \             xmlns=\"http://xmlns.jcp.org/xml/ns/persistence\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+    \n             xsi:schemaLocation=\"\n        http://xmlns.jcp.org/xml/ns/persistence\n\
+    \        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd\"&gt;\n \
+    \   &lt;persistence-unit name=\"primary\"&gt;\n        &lt;jta-data-source&gt;java:jboss/datasources/WeatherDS&lt;/jta-data-source&gt;\n\
     \        &lt;properties&gt;\n            &lt;!-- Properties for Hibernate --&gt;\n\
     \            &lt;property name=\"hibernate.hbm2ddl.auto\" value=\"create-drop\"\
     \ /&gt;\n            &lt;property name=\"hibernate.show_sql\" value=\"true\" /&gt;\n\
@@ -434,7 +434,7 @@ challenges:
     \ the datasource. Usually this is done by configuring JBoss EAP using web-console,\
     \ CLI scripts, or similar. At this stage, we haven't created a database yet, but\
     \ for test and development purposes we can use an in-memory database like H2.\
-    \ We can define it as follows.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml`{{open}}\
+    \ We can define it as follows.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml`\
     \ file and click **Copy To Editor** to insert add the following content to the\
     \ file:\n\n<pre class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/weather-ds.xml\"\
     \ data-target=\"replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\
@@ -452,7 +452,7 @@ challenges:
     \ in place we are ready to extend our model to work with JPA.\n\n**4. Add JPA\
     \ annotation to the data model**\n\nJPA is a very non-intrusive framework, and\
     \ all we need to do is to add a couple of annotation to the objects in the domain\
-    \ model.\n\nLet's start with the `City` class. Open `src/main/java/com/redhat/example/weather/City.java`{{open}}\n\
+    \ model.\n\nLet's start with the `City` class. Open `src/main/java/com/redhat/example/weather/City.java`\n\
     \nFirst, we need to tell JPA that this class is an Entity, meaning that it needs\
     \ to be able to persist to the database. We do this by adding the `@Entity` annotation.\
     \ Either to that manually at the comment `//TODO: Add Entity annotation` or click\
@@ -464,7 +464,7 @@ challenges:
     \ data-target=\"insert\" data-marker=\"// TODO: add Id annotation\">\n@Id</pre>\n\
     \nThat's it! We are now ready to retrieve object of the type City. However, We\
     \ also have a data model for Country that holds a list of Cities. Let's go ahead\
-    \ and annotate that as well.\n\nOpen `src/main/java/com/redhat/example/weather/Country.java`{{open}}\n\
+    \ and annotate that as well.\n\nOpen `src/main/java/com/redhat/example/weather/Country.java`\n\
     \nAdd `@Entity` annotation to the class definition.\n\n<pre class=\"file\" data-filename=\"\
     ./src/main/java/com/redhat/example/weather/Country.java\" data-target=\"insert\"\
     \ data-marker=\"//TODO: Add Entity annotation\">\n@Entity</pre>\n\nThen add `@Id`\
@@ -498,7 +498,7 @@ challenges:
     \ rest service to return content from the database**\n\nTo find or persist the\
     \ object in the database using JPA provides an API object called `EntityManager`.\
     \ Getting an EntityManager is fairly simple since all we have to do is to inject\
-    \ it using `@PersistenceContext`.\n\nOpen `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}\n\
+    \ it using `@PersistenceContext`.\n\nOpen `src/main/java/com/redhat/example/weather/WeatherService.java`\n\
     \nAt the TODO comment inject the entity manager like this:\n\n<pre class=\"file\"\
     \ data-filename=\"./src/main/java/com/redhat/example/weather/WeatherService.java\"\
     \ data-target=\"insert\" data-marker=\"//TODO: Inject EntityManager\">\n@PersistenceContext(unitName\
@@ -539,9 +539,9 @@ challenges:
     \n**Summary**\n\nWe have now connected our application to use an in-memory database\
     \ to collect the data. If you wonder where the data comes from we are using a\
     \ Hibernate specific feature where you can load data into the database by adding\
-    \ it to `src/main/resources/import.sql`{{open}}. The database tables that are\
-    \ generated here are `City`,`Country` and `Country_City`. The later one is a mapping\
-    \ table that maps Cities with Countries and could potentially be made more efficient\
+    \ it to `src/main/resources/import.sql`. The database tables that are generated\
+    \ here are `City`,`Country` and `Country_City`. The later one is a mapping table\
+    \ that maps Cities with Countries and could potentially be made more efficient\
     \ by instead using a Foreign key, but in that case, we would have to extend the\
     \ domain model objects.\n"
   difficulty: intermediate
@@ -558,7 +558,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 120
   title: Basics of Java Persistance
   type: challenge
 - assignment: "**1. What is CDI**\n\nCDI, aka Context Dependency Injection, is the\
@@ -570,40 +570,39 @@ challenges:
     \ over producing EntityManager from JPA and other resources like JMS queues, etc.\n\
     \n**2. Enable CDI**\nTo activate CDI we need to create a beans archive and include\
     \ beans.xml file in the META-INF directory of the classpath. Let's add an empty\
-    \ beans.xml file.\n\nOpen `src/main/webapp/WEB-INF/beans.xml`{{open}}\n\nCopy\
-    \ the following content to the file or use the **Copy To Editor** button.\n<pre\
-    \ class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/beans.xml\" data-target=\"\
-    replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;beans xmlns=\"\
-    http://xmlns.jcp.org/xml/ns/javaee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
-    \n       xsi:schemaLocation=\"\n      http://xmlns.jcp.org/xml/ns/javaee\n   \
-    \   http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd\"\n       bean-discovery-mode=\"\
-    all\"&gt;\n&lt;/beans&gt;\n</pre>\n\n**3. Let the user select the country**\n\n\
-    The application already has a session scoped bean `src/main/java/com/redhat/example/weather/SelectedCountry.java`{{open}}\
-    \ that can store the users last selected country. The storage is temporary and\
-    \ will be removed as soon as the user closes the browser or the session times\
-    \ out.\n\nTo change country the user clicks on one of the flags, it will trigger\
-    \ an HTTP PUT call to `/api/country/{code}` where the code is the country code.\
-    \ We, therefore, need to implement a REST service that updates the selected country.\n\
-    \nOpen `src/main/java/com/redhat/example/weather/CountryService.java`{{open}}.\n\
-    \nUsing CDI we can inject a reference to the SelectedCountry. Since the selected\
-    \ country is annotated with @SessionScope we don't have to care about retrieving\
-    \ a HttpSession object or similar. Instead, we can safely assume that an update\
-    \ to the selected country object will be kept in the user's session.\n\n<pre class=\"\
-    file\" data-filename=\"./src/main/java/com/redhat/example/weather/CountryService.java\"\
-    \ data-target=\"insert\" data-marker=\"//TODO: Inject selected country\">\n@Inject\n\
-    SelectedCountry selectedCountry;</pre>\n\nWe can now create a rest service that\
-    \ allows the user to set the country of choice. Our REST service needs to be annotated\
-    \ with @PUT and since the `RestApplication` defines a base path to `/api` and\
-    \ the `CountryService` defines a path of `country` we only need to add a @Path\
-    \ annotation specifying `{code}`. The brackets tell JAX-RS that this is a path\
-    \ parameter and that it will match to any request matching `/api/country/*`. Our\
-    \ rest service should look like this:\n\n<pre class=\"file\" data-filename=\"\
+    \ beans.xml file.\n\nOpen `src/main/webapp/WEB-INF/beans.xml`\n\nCopy the following\
+    \ content to the file or use the **Copy To Editor** button.\n<pre class=\"file\"\
+    \ data-filename=\"./src/main/webapp/WEB-INF/beans.xml\" data-target=\"replace\"\
+    >\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;beans xmlns=\"http://xmlns.jcp.org/xml/ns/javaee\"\
+    \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xsi:schemaLocation=\"\
+    \n      http://xmlns.jcp.org/xml/ns/javaee\n      http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd\"\
+    \n       bean-discovery-mode=\"all\"&gt;\n&lt;/beans&gt;\n</pre>\n\n**3. Let the\
+    \ user select the country**\n\nThe application already has a session scoped bean\
+    \ `src/main/java/com/redhat/example/weather/SelectedCountry.java` that can store\
+    \ the users last selected country. The storage is temporary and will be removed\
+    \ as soon as the user closes the browser or the session times out.\n\nTo change\
+    \ country the user clicks on one of the flags, it will trigger an HTTP PUT call\
+    \ to `/api/country/{code}` where the code is the country code. We, therefore,\
+    \ need to implement a REST service that updates the selected country.\n\nOpen\
+    \ `src/main/java/com/redhat/example/weather/CountryService.java`.\n\nUsing CDI\
+    \ we can inject a reference to the SelectedCountry. Since the selected country\
+    \ is annotated with @SessionScope we don't have to care about retrieving a HttpSession\
+    \ object or similar. Instead, we can safely assume that an update to the selected\
+    \ country object will be kept in the user's session.\n\n<pre class=\"file\" data-filename=\"\
     ./src/main/java/com/redhat/example/weather/CountryService.java\" data-target=\"\
-    insert\" data-marker=\"//TODO: Expose REST service to set the selected country\"\
-    >\n@PUT\n@Path(\"/{code}\")\npublic void setSelectedCountry(@PathParam(\"code\"\
-    ) String countryCode) {\n    selectedCountry.setCode(countryCode);\n}\n</pre>\n\
-    \nWe are now ready to extend the `WeatherService` class to make use of the user\
-    \ selected country instead of hard-coding the country id.\n\nOpen  `src/main/java/com/redhat/example/weather/WeatherService.java`{{open}}\
+    insert\" data-marker=\"//TODO: Inject selected country\">\n@Inject\nSelectedCountry\
+    \ selectedCountry;</pre>\n\nWe can now create a rest service that allows the user\
+    \ to set the country of choice. Our REST service needs to be annotated with @PUT\
+    \ and since the `RestApplication` defines a base path to `/api` and the `CountryService`\
+    \ defines a path of `country` we only need to add a @Path annotation specifying\
+    \ `{code}`. The brackets tell JAX-RS that this is a path parameter and that it\
+    \ will match to any request matching `/api/country/*`. Our rest service should\
+    \ look like this:\n\n<pre class=\"file\" data-filename=\"./src/main/java/com/redhat/example/weather/CountryService.java\"\
+    \ data-target=\"insert\" data-marker=\"//TODO: Expose REST service to set the\
+    \ selected country\">\n@PUT\n@Path(\"/{code}\")\npublic void setSelectedCountry(@PathParam(\"\
+    code\") String countryCode) {\n    selectedCountry.setCode(countryCode);\n}\n\
+    </pre>\n\nWe are now ready to extend the `WeatherService` class to make use of\
+    \ the user selected country instead of hard-coding the country id.\n\nOpen  `src/main/java/com/redhat/example/weather/WeatherService.java`\
     \ and inject the user selected country.\n\n<pre class=\"file\" data-filename=\"\
     ./src/main/java/com/redhat/example/weather/WeatherService.java\" data-target=\"\
     insert\" data-marker=\"//TODO: Inject selected country\">\n@Inject\nSelectedCountry\
@@ -640,7 +639,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 120
   title: Basics of CDI
   type: challenge
 - assignment: "\nSo far we have been using an in-memory database that is part of JBoss\
@@ -651,12 +650,12 @@ challenges:
     \ database, and finally how to make use of that database in your application.\n\
     \n\n**1. Remove the internal in-memory database**\n\nIf you recall in step 03\
     \ we create a datasource definition as part of the deployment. Let's update it\
-    \ to use PostgresQL.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml`{{open}}\
-    \ file and click **Copy To Editor** to replace its content for PostgresQL:\n\n\
-    <pre class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/weather-ds.xml\"\
-    \ data-target=\"replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\
-    &lt;datasources xmlns=\"http://www.jboss.org/ironjacamar/schema\"\n          \
-    \   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
+    \ to use PostgresQL.\n\nOpen the `src/main/webapp/WEB-INF/weather-ds.xml` file\
+    \ and click **Copy To Editor** to replace its content for PostgresQL:\n\n<pre\
+    \ class=\"file\" data-filename=\"./src/main/webapp/WEB-INF/weather-ds.xml\" data-target=\"\
+    replace\">\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;datasources\
+    \ xmlns=\"http://www.jboss.org/ironjacamar/schema\"\n             xmlns:xsi=\"\
+    http://www.w3.org/2001/XMLSchema-instance\"\n             xsi:schemaLocation=\"\
     http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd\"\
     &gt;\n    &lt;!-- The datasource is bound into JNDI at this location. We reference\n\
     \        this in META-INF/persistence.xml --&gt;\n    &lt;datasource jndi-name=\"\
@@ -716,7 +715,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 120
   title: Externalize the data storage
   type: challenge
 description: "## What you will learn ##\n\nIn this scenario, you will learn how to\
@@ -737,7 +736,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 owner: openshift
 private: true
 published: false

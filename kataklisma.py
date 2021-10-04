@@ -18,7 +18,7 @@ import shutil
 
 
 # Instruqt will order the YAML and sanitize the YAML content (e.g. assignments)
-# so there's no need to order te dict nor optimize the escaped block for non-YAML
+# so there's no need to order the dict nor optimize the escaped block for non-YAML
 
 track_d={}
 
@@ -90,12 +90,26 @@ for course in hcourses['courses']:
         
         difficulty="intermediate"
         level="beginner"
-        # course_json["time"]
-        time=300
         
-        if course_json["difficulty"] == "beginner":
-          difficulty="basic"
-          level="beginner"
+        
+        duration=re.match('(.*?)(-(.*?))? minutes', course_json["time"] )
+        if duration is not None:
+          time=duration.group(1)
+          if duration.group(3) is not None:
+              time=duration.group(3)
+          time = int(time) * 60
+        else:
+          print("Time not found " + course_json["time"])
+          time=300  
+        
+        level = course_json["difficulty"].lower()
+        difficulty = course_json["difficulty"].lower()
+        
+        if level == "advanced":
+          difficulty = "expert"
+        elif level == "easy" or level == "beginner" or level == "basic":
+          level = "beginner"
+          difficulty = "basic"
         
         track_d["level"] = level
       
@@ -132,7 +146,11 @@ for course in hcourses['courses']:
         if course_json["environment"]["uilayout"] == "editor-terminal":
           visualEditor=True
         
-        for step in course_json["details"]["steps"]:
+        l_steps = course_json["details"]["steps"]
+        l_size = len(l_steps)
+        time = int(int(time) / l_size)
+        
+        for step in l_steps:
             slug = step["text"]
             
             slug = re.sub(r'\.md$', '', slug )
@@ -153,6 +171,7 @@ for course in hcourses['courses']:
             
             md=re.sub(r'`{1,3}(.+?)`{1,3}\{\{execute\}\}', r'```\n\1\n```', assign_data )
             md=re.sub(r'\{\{copy\}\}',r'', md)
+            md=re.sub(r'\{\{open\}\}',r'', md)
             md=re.sub(r'\(\.\.\/\.\.\/assets',r'(https://katacoda.com/openshift/assets',md)
             
             d_challenges["assignment"] =  md

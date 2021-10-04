@@ -16,7 +16,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: 8bsfphxw6775
+  id: lhv1mwbnlyrb
   type: challenge
   title: Step 1
   assignment: |
@@ -32,7 +32,7 @@ challenges:
 
     For your convenience, this scenario has been created with a base project using the Java programming language and the Apache Maven build tool.
 
-    As you review the content, you will notice that there are a couple **TODO** comments. **Do not remove them!** These comments are used as markers for later exercises in this scenario. Open ``src/main/java/com/example/service/FruitController.java``{{open}}. This is our rest controller. We will be adding our logging commands here later in this module.
+    As you review the content, you will notice that there are a couple **TODO** comments. **Do not remove them!** These comments are used as markers for later exercises in this scenario. Open ``src/main/java/com/example/service/FruitController.java``. This is our rest controller. We will be adding our logging commands here later in this module.
 
     **1. Test the application locally**
 
@@ -74,7 +74,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
-  id: 9hpyctlgaadd
+  id: jtkunlwqpq1t
   type: challenge
   title: Step 2
   assignment: |-
@@ -134,7 +134,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-add-health-checks
-  id: et1schgjxe8t
+  id: bntprm07yau8
   type: challenge
   title: Step 3
   assignment: |
@@ -161,7 +161,7 @@ challenges:
 
     **2. Add Health Checks with Actuator**
 
-    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml``{{open}} at the **TODO** comment..
+    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment..
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add Actuator dependency here -->">
         &lt;dependency&gt;
@@ -192,7 +192,7 @@ challenges:
 
     The `/actuator/health` endpoint isn't the only endpoint that Spring Actuator provides out of the box. We're going to take a closer look at a few of the different endpoints so we can see how they help us with monitoring our newly deployed application, specifically the `/metrics` and `/beans` endpoints. A list of all other Spring Actuator endpoints can be found [here](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html).
 
-    Unlike the `/actuator/health` endpoint some of these endpoints can return sensitive information and require authentication. For simplicity purposes we will be removing this security requirement in order to hit the endpoints, but this is not recommended for a production environment with sensitive data. Pull up the application.properties file ``src/main/resources/application.properties``{{open}} and add this code to disable endpoint security.
+    Unlike the `/actuator/health` endpoint some of these endpoints can return sensitive information and require authentication. For simplicity purposes we will be removing this security requirement in order to hit the endpoints, but this is not recommended for a production environment with sensitive data. Pull up the application.properties file ``src/main/resources/application.properties`` and add this code to disable endpoint security.
 
     <pre class="file" data-filename="src/main/resources/application.properties" data-target="insert" data-marker="# TODO: Add Security preference here">
     management.endpoints.web.exposure.include=*
@@ -255,4 +255,5 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "18434713938988868474"
+checksum: "18015319831098869484"
+_: ""

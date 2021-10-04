@@ -34,7 +34,7 @@ private: true
 published: false
 challenges:
 - slug: 01-creating-an-initial-project
-  id: u6vrlslprxg7
+  id: 0iuirkyydpw4
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -113,9 +113,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 02-deploying-using-the-web-console
-  id: vamskotsnors
+  id: c4vizqy8r0by
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -173,9 +173,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 03-viewing-the-builder-logs
-  id: yebfxuydbrue
+  id: wf12ytazbqx6
   type: challenge
   title: Topic 3 - Viewing the Builder Logs
   assignment: |
@@ -197,9 +197,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 04-accessing-the-application
-  id: to7xwol77qlz
+  id: m0ykvrd1gdhc
   type: challenge
   title: Topic 4 - Accessing the Application
   assignment: |
@@ -229,9 +229,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 05-deleting-the-application
-  id: 3gmqs2ku7puy
+  id: qmyhtivbedj3
   type: challenge
   title: Topic 5 - Deleting the Application
   assignment: |
@@ -336,9 +336,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 06-deploying-using-the-command-line
-  id: 7h8acrt3fnbr
+  id: 9oourr3abhia
   type: challenge
   title: Topic 6 - Deploying Using the Command Line
   assignment: |
@@ -442,9 +442,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 07-triggering-a-new-build
-  id: 4cqo5dpdlb1u
+  id: si9row1ptlju
   type: challenge
   title: Topic 7 - Triggering a New Build
   assignment: |
@@ -642,5 +642,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "16859053873131984729"
+  timelimit: 171
+checksum: "13543600746929665830"
+_: ""

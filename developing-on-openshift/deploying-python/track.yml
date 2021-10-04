@@ -34,7 +34,7 @@ private: true
 published: false
 challenges:
 - slug: 01-creating-an-initial-project
-  id: c8urruy56gz1
+  id: vzskxblx9zgz
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -109,9 +109,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 02-deploying-using-the-web-console
-  id: axqhrnqdbplw
+  id: df5ziimmibt4
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -165,9 +165,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 03-viewing-the-builder-logs
-  id: dq1rfyqyctvi
+  id: u2wtzzs9tiyy
   type: challenge
   title: Topic 3 - Viewing the Builder Logs
   assignment: |
@@ -185,9 +185,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 04-accessing-the-application
-  id: vwghekaejk4p
+  id: 2eyvjak3yvzp
   type: challenge
   title: Topic 4 - Accessing the Application
   assignment: |
@@ -213,9 +213,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 05-deleting-the-application
-  id: 8xyx4mnsclxe
+  id: gxclvwgbyhcm
   type: challenge
   title: Topic 5 - Deleting the Application
   assignment: |
@@ -316,9 +316,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 06-deploying-using-the-command-line
-  id: ujhkwabqhiit
+  id: ychqdm0bp7qs
   type: challenge
   title: Topic 6 - Deploying Using the Command Line
   assignment: |
@@ -418,9 +418,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 171
 - slug: 07-triggering-a-new-build
-  id: 4s5aucgtw380
+  id: 5y48xmpvdoh1
   type: challenge
   title: Topic 7 - Triggering a New Build
   assignment: |
@@ -614,5 +614,6 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
-checksum: "410090208144354598"
+  timelimit: 171
+checksum: "2769862023061668609"
+_: ""

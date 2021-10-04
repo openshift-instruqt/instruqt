@@ -18,7 +18,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: ricm7cauwogk
+  id: v4n5diifthj2
   type: challenge
   title: Step 1
   assignment: |-
@@ -70,7 +70,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-read-content-from-a-database
-  id: xw1zld4am1ny
+  id: bvq8bha6xsvk
   type: challenge
   title: Step 2
   assignment: |
@@ -82,7 +82,7 @@ challenges:
 
     Since our application will need to access a database to retrieve and store fruit entries we need to add a Database Connection library. One such implementation in Spring is the Spring Data JPA project, which contains the Java Persistence APIs (JPA) and a JPA implementation - Hibernate. Hibernate has been tested and verified as part of the Red Hat Runtimes, so we are going to use it here. Spring Boot has full knowledge of these libraries as well so we get to take advantage of Spring Boot's auto-configuration with these libraries as well!
 
-    To add Spring Data + JPA and Hibernate to our project all we have to do is to add the following line in ``pom.xml``{{open}}
+    To add Spring Data + JPA and Hibernate to our project all we have to do is to add the following line in ``pom.xml``
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add JPA dependency here -->">
         &lt;dependency&gt;
@@ -101,13 +101,13 @@ challenges:
         &lt;/dependency&gt;
     </pre>
 
-    If Spring Boot sees a database like H2 on the classpath it will automatically configure an in-memory one for us as well as all the connection Beans necessary to connect to it. We've chosen to override these settings in the ``src/main/resources/application-local.properties``{{open}} file to demonstrate that you can interact with Spring Boot's auto-configuration quite easily.
+    If Spring Boot sees a database like H2 on the classpath it will automatically configure an in-memory one for us as well as all the connection Beans necessary to connect to it. We've chosen to override these settings in the ``src/main/resources/application-local.properties`` file to demonstrate that you can interact with Spring Boot's auto-configuration quite easily.
 
     **2. Create an Entity class**
 
     We are going to implement an Entity class that represents a Fruit. This class is used to map our object to a database schema.
 
-    First, we need to create the java class file. For that, you need to click on the following link which opens the skeletal class file in the editor: ``src/main/java/com/example/service/Fruit.java``{{open}}
+    First, we need to create the java class file. For that, you need to click on the following link which opens the skeletal class file in the editor: ``src/main/java/com/example/service/Fruit.java``
 
     Then, copy the below content into the file (or use the `Copy to Editor` button):
 
@@ -159,7 +159,7 @@ challenges:
 
     The repository should provide methods for inserting, updating, reading, and deleting Fruits from the database. We are going to use Spring Data for this which already provides us with a lot of the boilerplate code, so all we have to do is to add an interface that extends the `CrudRepository<T, I>` interface provided by Spring Data.
 
-    First, we need to fill out the skeltal java class file. For that, you need to click on the following link which opens the file in the editor: ``src/main/java/com/example/service/FruitRepository.java``{{open}}
+    First, we need to fill out the skeltal java class file. For that, you need to click on the following link which opens the file in the editor: ``src/main/java/com/example/service/FruitRepository.java``
 
     Then, copy the below content into the file (or use the `Copy to Editor` button):
 
@@ -182,7 +182,7 @@ challenges:
 
     To pre-populate the database with content, Hibernate offers a nifty feature where we can provide an SQL file that populates the content.
 
-    First, we need to create the SQL file. For that, you need to click on the following link which opens the empty file in the editor: ``src/main/resources/import.sql``{{open}}
+    First, we need to create the SQL file. For that, you need to click on the following link which opens the empty file in the editor: ``src/main/resources/import.sql``
 
     Then, copy the below content into the file (or use the `Copy to Editor` button):
 
@@ -193,7 +193,7 @@ challenges:
     </pre>
 
     **5. Test and Verify**
-    To verify that we can use the `FruitRepository` for retrieving and storing Fruit objects we have created a JUnit Test Class at ``src/test/java/com/example/service/DatabaseTest.java``{{open}}
+    To verify that we can use the `FruitRepository` for retrieving and storing Fruit objects we have created a JUnit Test Class at ``src/test/java/com/example/service/DatabaseTest.java``
 
     Take a bit of time and review the tests. The `testGetAll` test will return all fruits in the repository, which should be three because of the content in `import.sql`. The `getOne` test will retrieve the fruit with ID 1 (e.g., the Cherry) and then check that it's not null. The `getWrongId` checks that if we try to retrieve a fruit id that doesn't exist and check that fruitRepository returns null.
 
@@ -214,7 +214,7 @@ challenges:
 
     **6. Review The Controller**
 
-    To see how this repository could be used in a web application we're going to quickly review the FruitController file. Open ``src/main/java/com/example/service/FruitController.java``{{open}} in your editor.
+    To see how this repository could be used in a web application we're going to quickly review the FruitController file. Open ``src/main/java/com/example/service/FruitController.java`` in your editor.
 
     In order to use our FruitRepository we must first autowire one in our constructor:
 
@@ -236,7 +236,7 @@ challenges:
 
     Fortunately there exists within the JPA specification a section on `Query Methods`. Query methods are methods on Repositories that follow a specific naming pattern. These methods can then be turned into implementation code by JPA providers for running actual queries.
 
-    Let's re-open the FruitRepository class file in the editor: ``src/main/java/com/example/service/FruitRepository.java``{{open}} and add the following code at the TODO line (or use the `Copy to Editor` button):
+    Let's re-open the FruitRepository class file in the editor: ``src/main/java/com/example/service/FruitRepository.java`` and add the following code at the TODO line (or use the `Copy to Editor` button):
 
     <pre class="file" data-filename="src/test/java/com/example/service/FruitRepository.java" data-target="insert" data-marker="// TODO query methods">
         List&lt;Fruit&gt; findByName(String name);
@@ -289,7 +289,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-deploy-to-openshift
-  id: 76zxlylcmh7y
+  id: cll3xbwnajn5
   type: challenge
   title: Step 3
   assignment: |
@@ -325,17 +325,17 @@ challenges:
 
     **3. Review Database configuration**
 
-    Take some time and review the ``src/main/jkube/deployment.yml``{{open}}.
+    Take some time and review the ``src/main/jkube/deployment.yml``.
 
-    As you can see that file specifies a couple of elements that are needed for our deployment. It also uses the username and password from a Kubernetes Secret. For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``{{open}}, however in a production environment this would likely be provided to you by the Ops team.
+    As you can see that file specifies a couple of elements that are needed for our deployment. It also uses the username and password from a Kubernetes Secret. For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``, however in a production environment this would likely be provided to you by the Ops team.
 
-    Now, review the ``src/main/resources/application-openshift.properties``{{open}}
+    Now, review the ``src/main/resources/application-openshift.properties``
 
     In this file we are using the configuration from the `deployment.yml` to read the username, password, and other connection details.
 
     **4. Add the PostgreSQL database driver**
 
-    So far our application has only used the H2 embedded Database. We now need to add a dependency for the PostgreSQL driver. We do that by adding a runtime dependency under the `openshift` profile in the ``pom.xml``{{open}} file.
+    So far our application has only used the H2 embedded Database. We now need to add a dependency for the PostgreSQL driver. We do that by adding a runtime dependency under the `openshift` profile in the ``pom.xml`` file.
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add PostgreSQL database dependency here -->">
             &lt;dependency&gt;
@@ -348,7 +348,7 @@ challenges:
 
     **5. Add a health check**
 
-    We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to ``pom.xml``{{open}} at the **TODO** comment..
+    We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to ``pom.xml`` at the **TODO** comment..
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add Actuator dependency here -->">
         &lt;dependency&gt;
@@ -411,4 +411,5 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "10781092323774100150"
+checksum: "4711411395424901949"
+_: ""

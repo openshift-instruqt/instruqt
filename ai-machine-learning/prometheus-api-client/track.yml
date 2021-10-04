@@ -31,7 +31,7 @@ private: true
 published: false
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: r8vf7bnhbff9
+  id: ro2exq8dytxo
   type: challenge
   title: More about Prometheus
   assignment: |
@@ -53,9 +53,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: yvuuxe48pnxd
+  id: gzukevifbsar
   type: challenge
   title: Accessing the workshop environment
   assignment: |2
@@ -112,9 +112,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: 80eizyvtgp7u
+  id: hrslpgudjsb2
   type: challenge
   title: Accessing the workshop environment (Backend)
   assignment: |2
@@ -166,5 +166,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "6657252348682566947"
+  timelimit: 400
+checksum: "16017134592663286904"
+_: ""

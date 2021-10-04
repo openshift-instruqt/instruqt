@@ -59,7 +59,7 @@ challenges:
     Click the link below to open the custom resource (CR) definition for the cluster:
 
 
-    * `amq-broker.yaml`{{open}}
+    * `amq-broker.yaml`
 
 
     As you can see, we are enabling just one single acceptor and configuring it to
@@ -181,25 +181,25 @@ challenges:
     \ APIs that make it easy to integrate messaging anywhere. The AMQ Javascript Client\
     \ is based on the [AMQP Rhea Project](https://github.com/amqp/rhea).\n\n### Inspect\
     \ the application code\n\nClick the links below to open each file and inspect\
-    \ its contents:\n\n* `package.json`{{open}} - Metadata about the project: name,\
-    \ version, dependencies, and other information needed to build and maintain the\
-    \ project.\n* `app.js`{{open}} - Main logic of the sample application.\n\n###\
-    \ Install Dependencies\n\nDependencies are listed in the `package.json` file and\
-    \ declare which external projects this sample app requires.\nTo download and install\
-    \ them, run the following command:\n\n``npm install``{{execute interrupt}}\n\n\
-    It will take a few seconds to download, and you should see a final report such\
-    \ as \n\n```bash\nadded 140 packages in 2.937s\n```\n\n### Deploy\n\nBuild and\
-    \ deploy the project using the following command:\n\n```\nnpm run openshift\n\
-    ```\n\n> This uses NPM and the [Nodeshift](https://github.com/bucharest-gold/nodeshift)\
-    \ project to build and deploy the sample application to OpenShift using the containerized\
-    \ Node.js runtime.\n\nThe build and deploy may take a minute or two. Wait for\
-    \ it to complete.\n\nYou should see `INFO complete` at the end of the build output,\
-    \ and you should not see any obvious errors or failures.\n\n### Check application\
-    \ deployment\n\nFollow up the application deployment to validate it is running.\n\
-    \nTo watch the pods status run the following command:\n\n```\noc -n messaging\
-    \ get pods -w\n```\n\nYou will see the pod for the application changing the status\
-    \ to `running`. It should look similar to the following:\n\n```bash\nNAME    \
-    \                              READY   STATUS      RESTARTS   AGE\namq-broker-operator-6c76986f9-6vjhj\
+    \ its contents:\n\n* `package.json` - Metadata about the project: name, version,\
+    \ dependencies, and other information needed to build and maintain the project.\n\
+    * `app.js` - Main logic of the sample application.\n\n### Install Dependencies\n\
+    \nDependencies are listed in the `package.json` file and declare which external\
+    \ projects this sample app requires.\nTo download and install them, run the following\
+    \ command:\n\n``npm install``{{execute interrupt}}\n\nIt will take a few seconds\
+    \ to download, and you should see a final report such as \n\n```bash\nadded 140\
+    \ packages in 2.937s\n```\n\n### Deploy\n\nBuild and deploy the project using\
+    \ the following command:\n\n```\nnpm run openshift\n```\n\n> This uses NPM and\
+    \ the [Nodeshift](https://github.com/bucharest-gold/nodeshift) project to build\
+    \ and deploy the sample application to OpenShift using the containerized Node.js\
+    \ runtime.\n\nThe build and deploy may take a minute or two. Wait for it to complete.\n\
+    \nYou should see `INFO complete` at the end of the build output, and you should\
+    \ not see any obvious errors or failures.\n\n### Check application deployment\n\
+    \nFollow up the application deployment to validate it is running.\n\nTo watch\
+    \ the pods status run the following command:\n\n```\noc -n messaging get pods\
+    \ -w\n```\n\nYou will see the pod for the application changing the status to `running`.\
+    \ It should look similar to the following:\n\n```bash\nNAME                  \
+    \                READY   STATUS      RESTARTS   AGE\namq-broker-operator-6c76986f9-6vjhj\
     \   1/1     Running     0          6m5s\namq-js-demo-1-deploy                \
     \  0/1     Completed   0          32s\namq-js-demo-1-dftm4                   1/1\
     \     Running     0          26s\namq-js-demo-s2i-1-build               0/1  \

@@ -23,7 +23,7 @@ private: true
 published: false
 challenges:
 - slug: 01-create-project
-  id: x1pj9v6sk3g5
+  id: pojxuuwabzaq
   type: challenge
   title: Step 1
   assignment: |-
@@ -120,9 +120,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 02-create-data
-  id: kr5i9n5pmiex
+  id: tzg8xujzdbis
   type: challenge
   title: Step 2
   assignment: |-
@@ -134,7 +134,7 @@ challenges:
 
     ## Create Model
 
-    Click here to create and open a new file for our Remodelpository: `fruit-taster/src/main/java/org/acme/Fruit.java`{{open}}.
+    Click here to create and open a new file for our Remodelpository: `fruit-taster/src/main/java/org/acme/Fruit.java`.
 
     Click **Copy to Editor** to add the code:
 
@@ -195,7 +195,7 @@ challenges:
 
     ## Create Spring Data Repository
 
-    Next, click here to create and open a new file for our Repository: `fruit-taster/src/main/java/org/acme/FruitRepository.java`{{open}}.
+    Next, click here to create and open a new file for our Repository: `fruit-taster/src/main/java/org/acme/FruitRepository.java`.
 
     Click **Copy to Editor** to create the code for the repository:
 
@@ -217,7 +217,7 @@ challenges:
 
     ## Create sample data
 
-    Finally, we need some sample data to work with. Click here to create and open a new file to hold our sample data: `fruit-taster/src/main/resources/import.sql`{{open}}.
+    Finally, we need some sample data to work with. Click here to create and open a new file to hold our sample data: `fruit-taster/src/main/resources/import.sql`.
 
     Click **Copy to Editor** to create add the sample data which will be used to populate our database when the app runs:
 
@@ -231,7 +231,7 @@ challenges:
 
     ## Configure Quarkus
 
-    We need to configure our app to define database connection settings. Click: `fruit-taster/src/main/resources/application.properties`{{open}} to open this file. This file contains Quarkus configuration.
+    We need to configure our app to define database connection settings. Click: `fruit-taster/src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
 
     Click **Copy to Editor** to add the following values to the `application.properties` file:
 
@@ -262,9 +262,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 03-create-beans
-  id: 7tjlpkkqgxiq
+  id: 5jqfkoukuyzg
   type: challenge
   title: Step 3
   assignment: |
@@ -282,7 +282,7 @@ challenges:
 
     > Functional Interfaces are part of the base Java platform, and are not Spring-specific.
 
-    Click here to create and open a new file for our interface: `fruit-taster/src/main/java/org/acme/StringFunction.java`{{open}}.
+    Click here to create and open a new file for our interface: `fruit-taster/src/main/java/org/acme/StringFunction.java`.
 
     Click **Copy to Editor** to create the code for the interface:
 
@@ -298,7 +298,7 @@ challenges:
 
     With the interface in place, we will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean. It will be used to create a `StringFunction` bean that will capitalize the text passed as parameter.
 
-    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`{{open}}.
+    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
 
     Click **Copy to Editor** to create the code for the interface:
 
@@ -322,7 +322,7 @@ challenges:
 
     Now we define another bean that will implement `StringFunction` using Spring’s _stereotype annotation_ style. This bean will effectively be a no-op bean that simply returns the input as is.
 
-    Click here to create and open a new file for our bean: `fruit-taster/src/main/java/org/acme/NoOpSingleStringFunction.java`{{open}}.
+    Click here to create and open a new file for our bean: `fruit-taster/src/main/java/org/acme/NoOpSingleStringFunction.java`.
 
     Click **Copy to Editor** to create the code for the interface:
 
@@ -349,7 +349,7 @@ challenges:
     taste.message = tastes great
     </pre>
 
-    We'll also need a new Spring Bean to use this configuration! Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/MessageProducer.java`{{open}}.
+    We'll also need a new Spring Bean to use this configuration! Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/MessageProducer.java`.
 
     Click **Copy to Editor** to create the code for the interface:
 
@@ -375,7 +375,7 @@ challenges:
 
     The final bean we will create ties together all the previous beans.
 
-    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/TasterBean.java`{{open}}.
+    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/TasterBean.java`.
 
     Click **Copy to Editor** to create the code for the bean:
 
@@ -432,9 +432,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 04-create-web
-  id: qpi5kksfb3nb
+  id: hleopjxalygt
   type: challenge
   title: Step 4
   assignment: |+
@@ -446,7 +446,7 @@ challenges:
 
     ## Create Controllers
 
-    Click here to create and open a new file for our basic controller for accessing Fruits: `fruit-taster/src/main/java/org/acme/FruitController.java`{{open}}.
+    Click here to create and open a new file for our basic controller for accessing Fruits: `fruit-taster/src/main/java/org/acme/FruitController.java`.
 
     Click **Copy to Editor** to create the code for the controller:
 
@@ -604,7 +604,7 @@ challenges:
 
     As a final test let's create another bean to use our injected beans and configuration using Spring DI annotations.
 
-    Click here to create and open a new file for our taster controller for tasting Fruits: `fruit-taster/src/main/java/org/acme/TasterController.java`{{open}}.
+    Click here to create and open a new file for our taster controller for tasting Fruits: `fruit-taster/src/main/java/org/acme/TasterController.java`.
 
     Click **Copy to Editor** to create the code for the controller:
 
@@ -785,9 +785,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 05-build-app
-  id: czbzfyly4z4i
+  id: 8dlaxyfexvgw
   type: challenge
   title: Step 5
   assignment: |
@@ -843,9 +843,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 06-deploy-and-test
-  id: uncdehrftkbj
+  id: tmcj09bfwvwc
   type: challenge
   title: Step 6
   assignment: |-
@@ -899,7 +899,7 @@ challenges:
 
     Since we are now deploying this to Openshift our database will no longer be on localhost. And our production is running Postgres. How do we handle these multiple configurations? Quarkus has a neat feature where we can create different profiles. So we will use the %dev profile for our local environment.
 
-    Click: `fruit-taster/src/main/resources/application.properties`{{open}} to open this file. This file contains Quarkus configuration.
+    Click: `fruit-taster/src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
 
     Click **Copy to Editor** to add the following values to the `application.properties` file:
 
@@ -1042,5 +1042,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "9809509234440177829"
+  timelimit: 150
+checksum: "15743192154725482484"
+_: ""

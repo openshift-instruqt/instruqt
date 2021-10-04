@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: 01-logging-in-via-the-web-console
-  id: a23amax6yvbz
+  id: q8hlygbymw5o
   type: challenge
   title: Topic 1 - Logging in Via the Web Console
   assignment: |
@@ -83,9 +83,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 02-logging-in-via-the-command-line
-  id: 4dwhw5tc6wvw
+  id: gzlxerbly8ei
   type: challenge
   title: Topic 2 - Logging in Via the Command Line
   assignment: |
@@ -174,9 +174,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 03-collaborating-with-other-users
-  id: yfdkc7722fgp
+  id: zcbrefygs4di
   type: challenge
   title: Topic 3 - Collaborating with Other Users
   assignment: |
@@ -261,9 +261,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 04-switching-between-accounts
-  id: emthrfqtyscc
+  id: 3sheshtm1k2m
   type: challenge
   title: Topic 4 - Switching Between Accounts
   assignment: |
@@ -325,5 +325,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "16532612427869684136"
+  timelimit: 150
+checksum: "5858777391166663590"
+_: ""

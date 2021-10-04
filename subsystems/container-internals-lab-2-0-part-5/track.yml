@@ -1,291 +1,416 @@
-challenges:
-- assignment: "The goal of this exercise is to build a containerized two tier application\
-    \ in an OpenShift cluster. This application will help you learn about clustered\
-    \ containers and distributed systems. It will teach you about Kubernetes and how\
-    \ it operates with the principles of \"defined state\" and \"actual state\" -\
-    \ it constantly monitors the environment and attempts to make the actual state\
-    \ match the defined state.\n\nIn Kubernetes/OpenShift, applications are defined\
-    \ with either JSON or YAML files - either file format can be imported or exported,\
-    \ even converting between the two. In this lab, we will use YAML files.\n\nEssentially,\
-    \ the application definition files are a collection of software defined objects\
-    \ in Kubernetes. The objects in the file are imported and become defined state\
-    \ for the application. Important objects include:\n\n- Pods: Collections of one\
-    \ or more containers\n- ReplicationControllers: Ensure that the correct number\
-    \ of pods are running.\n- Services: Internal object which represents the port/daemon/program\
-    \ running.\n- Routes: Expose services to the external world.\n- PeristentVolumeClaims:\
-    \ Represents the request for storage and how much. Typically defined in the application\
-    \ by the developer or architect.\n- PersistentVolume: Represents the actual storage.\
-    \ Typically defined by sysadmins or automation.\n\nDevelopers and architects can\
-    \ group these objects/resources in a single file to make sharing and deployment\
-    \ of the entire application easier. These definitions can be stored in version\
-    \ control systems just like code. Let's inspect some of the Kubernetes resource\
-    \ definitions we will use for this lab.\n\nFirst, look at the objects/resources\
-    \ that define the application:\n\n```\ncat ~/labs/wordpress-demo/wordpress-objects.yaml\n\
-    ```\n\nNotice there are two Services defined - one for MySQL and one for Wordpress.\
-    \ This allows these two Services to scale independently. The front end can scale\
-    \ with web traffic demand. The MySQL service could also be made to scale with\
-    \ a technology like Galera, but would require special care. You may also notice\
-    \ that even though there are two Services, there is only a single Route in this\
-    \ definition. That's because Services are internal to the Kubernetes cluster,\
-    \ while Routes expose the service externally. We only want to expose our Web Server\
-    \ externally, not our database.\n\nContainers are ephemeral which means their\
-    \ storage is deleted and recreated every time they restart. MySQL tables and the\
-    \ Apacheweb root need storage because we don't want our website data deleted every\
-    \ time a container restarts. To do this, we will define Persistent Volumes in\
-    \ Kubernetes. We will create four persistent volumes - two that have 1GB of storage\
-    \ and two that will have 2GB of storage. In this lab environment, these persistent\
-    \ volumes will reside on the local all-in-one installation, but in a production\
-    \ environment they could reside on shared storage and be accessed from any node\
-    \ in the Kubernetes/OpenShift cluster. In a production environment, they could\
-    \ also be dynamically provisioned with the appropriate resiliency (Gluster, Ceph,\
-    \ AWS EBS Volumes, NFS, iSCSI, others):\n\n```\ncat ~/labs/wordpress-demo/persistent-volumes.yaml\n\
-    ```\n\nNow, let's instantiate some Persistent Volumes:\n\n```\noc create -f ~/labs/wordpress-demo/persistent-volumes.yaml\n\
-    ```\n\nNotice that the persistent volumes are unbound. They are available and\
-    \ waiting, but will not be utilized until you define an application which consumes\
-    \ storage. This is inline with the way Kubernetes constantly tries to drive the\
-    \ actual state toward the defined state. Currently, there is no definition to\
-    \ consume this storage: \n\n```\noc get pv\n```\n\nNow, let's instantiate our\
-    \ two tier web application with a single command. This single command can be thought\
-    \ of as an API call which tells Kubernetes the desired state or defined state\
-    \ which it will use as a guide:\n\n```\noc create -f ~/labs/wordpress-demo/wordpress-objects.yaml\n\
-    ```\n\nLook at the status of the application. The two pods that make up this application\
-    \ will remain in a \"pending\" state - why? Kubernetes will connect the Persistent\
-    \ Volume Claims with the available Persistent Volumes, pull images, and schedule\
-    \ the pods to a node. Keep running these commands until the pods start:\n\n```\n\
-    oc describe pod wordpress-\n```\n\n```\noc describe pod mysql-\n```\n\nNow, the\
-    \ persistent volume claims for the application will become Bound and satisfy the\
-    \ storage requirements. Kubernetes/OpenShift will now start to converge the defined\
-    \ state and the actual state:\n\n```\noc get pvc\n```\n\nAlso, take a look at\
-    \ the Persistent Volumes again:\n\n```\noc get pv\n```\n\nYou may notice the wordpress\
-    \ pod enter a state called CrashLoopBackOff. This is a natural state in Kubernetes/OpenShift\
-    \ which helps satisfy dependencies. The wordpress pod will not start until the\
-    \ mysql pod is up and running. This makes sense, because wordpress can't run until\
-    \ it has a database and a connection to it. Similar to email retries, Kubernetes\
-    \ will back off and attempt to restart the pod again after a short time. Kubernetes\
-    \ will try several times, extending the time between tries until eventually the\
-    \ dependency is satisfied, or it enters an Error state. Luckily, once the mysql\
-    \ pod comes up, wordpress will come up successfully. Here are some useful commands\
-    \ to watch the state:\n\nShow all pods. You may run this command several times\
-    \ waiting for the actual state to converge with the defined state:\n\n```\noc\
-    \ get pods\n```\n\nView the events for a pod. You may run these commands several\
-    \ times waiting for the actual state to converge with the defined state:\n\n```\n\
-    oc describe pod mysql-\n```\n\n```\noc describe pod wordpress-\n```\n\nOnce the\
-    \ pods are scheduled and running, view the terminal output for each pod:\n\n```\n\
-    oc logs $(oc get pods | grep mysql- | awk '{print $1}')\n```\n\n```\noc logs $(oc\
-    \ get pods | grep wordpress- | awk '{print $1}')\n```\n\nFinally, ensure that\
-    \ the web interface is up and running. The following curl/grep/awk command will\
-    \ show us the HTML returned form the webserver, letting us know that wordpress\
-    \ is up and running.\n\n```\ncurl http://$(oc get svc | grep wpfrontend | awk\
-    \ '{print $3}')/wp-admin/install.php\n```\n\nThink about it, we just instantiated\
-    \ a fairly complex, multi-service application with a single command and pre-defined\
-    \ state in the YAML files. This is extremely powerful and can be used to construct\
-    \ complex applications with 10, 20, 30 or 100 services.\n\nIn this exercise you\
-    \ learned how to deploy a fully functional two tier application with a single\
-    \ command (oc create). As long as the cluster has persistent volumes available\
-    \ to satisify the application, an end user can do this on their laptop, in a development\
-    \ environment or in production data centers all over the world. All of the dependent\
-    \ code is packaged up and delivered in the container images - all of the data\
-    \ and configuration comes from the environment. Production instances will access\
-    \ production persistent volumes, development environments can be seeded with copies\
-    \ of production data, etc. It's easy to see why container orchestration is so\
-    \ powerful. \n"
-  difficulty: intermediate
-  slug: 01-multi-container-applications
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
-  type: challenge
-- assignment: "In the last step, you created a multi-tier web application. Now, log\
-    \ into the OpenShift web interface which is a convenient place to monitor the\
-    \ state, and troubleshoot things when they go wrong. You can even get a debug\
-    \ terminal into a Pod to troubleshoot if it crashes. This can help you figure\
-    \ out why it crashed. This shouldn't happen in this lab, but as you build applications\
-    \ it surely will. Also, feel free to delete a pod and see what happens. Kubernetes\
-    \ will see that the defined state and actual state no longer match and will recreate\
-    \ it. This is useful when things are taking too long :-)\n\n* Username: `admin`\n\
-    * Password: `admin`\n* Console: [here](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/default/overview)\n\
-    \nHere are some useful locations to investigate what is happening. The \"Events\"\
-    \ section is useful early in the Pod creation process, when its being scheduled\
-    \ in the cluster and then when the container image is being pulled. Later in the\
-    \ process when a Pod is crashing because of something in the container image itself,\
-    \ its useful to watch the terminal output in the \"Logs\" section. It can also\
-    \ be useful to run commands live in a Terminal. Sometimes a Pod won't start, so\
-    \ it's useful poke around with using the \"Debug in Terminal\" section. Get a\
-    \ feel in the following areas of the interface.\n\nFirst check out the MySQL Pod:\n\
-    \n- Applications -> Pods -> mysql-<id> -> Details\n- Applications -> Pods -> mysql-<id>\
-    \ -> Events \n- Applications -> Pods -> mysql-<id> -> Logs\n- Applications ->\
-    \ Pods -> mysql-<id> -> Terminal\n\nDo the same for Wordpress:\n\n- Applicaitons\
-    \ -> Pods -> wordpress-<id> -> Details\n- Applicaitons -> Pods -> wordpress-<id>\
-    \ -> Events\n- Applicaitons -> Pods -> wordpress-<id> -> Logs\n- Applicaitons\
-    \ -> Pods -> wordpress-<id> -> Terminal\n\nOnce you've spent some time in the\
-    \ web interface, move on to the next lab.\n"
-  difficulty: intermediate
-  slug: 02-openshift-web-interface
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
-  type: challenge
-- assignment: "In this exercise, you will scale and load test a distributed application\
-    \ using a tool called Apache Bench. Apache Bench (ab command) is a tool for benchmarking\
-    \ HTTP servers. It is designed to give you an impression of how your current Apache\
-    \ installation perform. In particular ab shows you how many requests per second\
-    \ your Apache installation is capable of serving. The ab tool is especially useful\
-    \ with a Kubernetes cluster, where you can scale up web servers with a single\
-    \ command and provide more capacity to handle more requests per second.\n\nBefore\
-    \ we test, lets set up an environment variable so that we have the ip address\
-    \ to connect to for several tests:\n\n```\nexport SITE=\"http://$(oc get svc |\
-    \ grep wpfrontend | awk '{print $3}')/wp-admin/install.php\"\n```\n\nTest with\
-    \ ab before we scale the application to get a base line. Take note of the \"Time\
-    \ taken for tests\" section:\n\n```\nab -n10 -c 3 -k -H \"Accept-Encoding: gzip,\
-    \ deflate\" $SITE\n```\n\n\nTake note of the following sections in the output:\n\
-    \n- Time taken for tests\n- Requests per second\n- Percentage of the requests\
-    \ served within a certain time (ms)\n\n\nGo to the web interface. Scale the Wordpress\
-    \ Deployment up to three containers. Click the up arrow:\n\n- Applications ->\
-    \ Deployments -> wordpress -> Up Arrow\n\n\nTest with ab again. How did this affect\
-    \ our benchmarking and why?\n\n```\nab -n10 -c 3 -k -H \"Accept-Encoding: gzip,\
-    \ deflate\" $SITE\n```\n\n\nNow lets scale up more with command line instead of\
-    \ the web interface:\n\n```\noc scale --replicas=5 rc/wordpress\n```\n\n\nTest\
-    \ with ab. How did this affect our benchmarking and why?\n\n```\nab -n10 -c 3\
-    \ -k -H \"Accept-Encoding: gzip, deflate\" $SITE\n```\n\n\nScale the application\
-    \ back down to one pod:\n\n```\noc scale --replicas=1 rc/wordpress\n```\n\nTest\
-    \ with ab. How did this affect our benchmarking and why?\n\n```\nab -n10 -c 3\
-    \ -k -H \"Accept-Encoding: gzip, deflate\" $SITE\n```\n\nCounter intuitively,\
-    \ you may have seen slower response times when you scaled the pods up. This is\
-    \ probably because we are running Kubernetes on a single node. The requests are\
-    \ bing sent through a reverse proxy and distributed to multiple pods all running\
-    \ on the same server for this lab. If this were a real OpenShift cluster with\
-    \ 100s or 1000s of nodes, you may have seen scale out performance where response\
-    \ times went down. \n\nSometimes horizontal scaling can have counter intuitive\
-    \ effects. Sometimes great care must be taken with applications to get the performance\
-    \ characteristics that we need. The world of container orchestration opens up\
-    \ an entirely new kind of performance tuning and you will need new skills to tackle\
-    \ this challenge.\n"
-  difficulty: intermediate
-  slug: 03-load-testing
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Cluster Performance: Scaling applications horizontally with containers'
-  type: challenge
-- assignment: "The goal of this exercise is to understand the nature of a distributed\
-    \ systems environment with containers. Quickly and easily troubleshooting problems\
-    \ in containers requires distributed systems thinking. You have to think of things\
-    \ programatically. You can't just ssh into a server and understand the problem.\
-    \ You can execute commands in a single pod, but even that might prevent you from\
-    \ troubleshooting things like network, or database connection errors which are\
-    \ specific to only certain nodes. This can happen because of persnickety differences\
-    \ in locations of your compute nodes in a cloud environment or code that only\
-    \ fails in unforeseen ways at scale or under load. \n\nWe are going to simulate\
-    \ one of these problems by using a specially designed test application. In this\
-    \ exercise we will learn how to figure things out quickly and easily.\n\nInspect\
-    \ each of the files and try to understand them a bit:\n\n```\ncat ~/labs/goodbad/Build.yaml\n\
-    ```\n\n```\ncat ~/labs/goodbad/Run.yaml\n```\n\n\nBuild the test application.\
-    \ **Wait** for the build to successfully complete. You can watch the log output\
-    \ in the OpenShift web interface.\n\n```\noc create -f ~/labs/goodbad/Build.yaml\n\
-    ```\n\n\n```\noc get builds\n```\n\n```\noc get pods\n```\n\nYou can watch the\
-    \ logs like this. Keep running the following command until you see \"Push successful\"\
-    \ in the logs:\n\n```\noc logs goodbad-1-build\n```\n\nWhen the above build completes,\
-    \ run the test application:\n\n```\noc create -f ~/labs/goodbad/Run.yaml\n```\n\
-    \n\nGet the IP address for the goodbad service\n\n```\noc get svc\n```\n\n\nNow\
-    \ test the cluster IP with curl. Use the cluster IP address so that the traffic\
-    \ is balanced among the active pods. You will notice some errors in your responses.\
-    \ You may also test with a browser. Some of the pods are different - how could\
-    \ this be? They should be identical because they were built from code right?\n\
-    \n``SVC_IP=$(oc get svc | grep goodbad | awk '{print $3}')\nfor i in {1..20};\
-    \ do curl $SVC_IP; done``{{execute}}\n\n\nExample output:\n\n``ERROR\nERROR\n\
-    Hello World\nERROR``\n\n\nTake a look at the code. A random number is generated\
-    \ in the entry point and written to a file in /var/www/html/goodbad.txt:\n\n```\n\
-    cat ~/labs/goodbad/index.php\n```\n\n```\ncat ~/labs/goodbad/Dockerfile\n```\n\
-    \n\nTroubleshoot the problem in a programmatic way. Notice some pods have files\
-    \ which contain numbers that are lower than 7, this means the pod will return\
-    \ a bad response:\n\n```\nfor i in $(oc get pods | grep goodbad | grep -v build\
-    \ | awk '{print $1}'); do oc exec -t $i -- cat /var/www/html/goodbad.txt; done\n\
-    ```\n\n\nContinue to troubleshoot the problem by temporarily fixing the file\n\
-    \n```\nfor i in $(oc get pods | grep goodbad | grep -v build | awk '{print $1}');\
-    \ do oc exec -t $i -- sed -i -e s/[0-9]*/7/ /var/www/html/goodbad.txt; done\n\
-    ```\n\n\nWrite a quick test that verifies the logic of your fix\n\n```\nfor i\
-    \ in {1..2000}; do curl $SVC_IP 2>&1; done | grep \"Hello World\" | wc -l\n```\n\
-    \n\nScale up the nodes, and test again. Notice it's broken again because new pods\
-    \ have been added with the broken file\n\n```\noc scale rc goodbad --replicas=10\n\
-    ```\n\n```\nfor i in {1..2000}; do curl $SVC_IP 2>&1; done | grep \"Hello World\"\
-    \ | wc -l\n```\n\n\nOptional: As a final challenge, fix the problem permanently\
-    \ by fixing the logic so that the number is always above 7 and never causes the\
-    \ application to break. Rebuild, and redeploy the application. Hint: you have\
-    \ to get the images to redeploy with the newer versions (delete the rc) :-)\n"
-  difficulty: intermediate
-  slug: 04-troubleshooting-distributed-applications
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
-  type: challenge
-description: "## Background\nThis lab is focused on understanding how container images\
-  \ are built, tagged, organized and leveraged to deliver software in a range of use\
-  \ cases.\n\nBy the end of this lab you should be able to:\n- Understand the uses\
-  \ of multi-container applications\n- Internalize the difference between orchestration\
-  \ and application definition\n- Command basic container scaling principles\n- Use\
-  \ tools to troubleshoot containers in a clustered environment\n\n## Outline\n- Multi-Container\
-  \ Applications: The classic two-tiered, wordpress application\n- Cluster Performance:\
-  \ Scaling applications horizontally with containers\n- Cluster Debugging: Troubleshooting\
-  \ in a distributed systems environment\n\n## Other Material\nThis presentation will\
-  \ give you a background to all of the concepts in this lab\n- [Google Presentation](https://docs.google.com/presentation/d/1S-JqLQ4jatHwEBRUQRiA5WOuCwpTUnxl2d1qRUoTz5g/edit#slide=id.g20639ff941_0_42)\
-  \ \n- [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)\n\
-  \n## Start Scenario\nOnce you have watched the background video or went throught\
-  \ the presentation, continue to the exercises\n"
+slug: subsystems-container-internals-lab-2-0-part-5
+id: a6atvfn5b7th
+type: track
+title: Container Orchestration
+description: |
+  ## Background
+  This lab is focused on understanding how container images are built, tagged, organized and leveraged to deliver software in a range of use cases.
+
+  By the end of this lab you should be able to:
+  - Understand the uses of multi-container applications
+  - Internalize the difference between orchestration and application definition
+  - Command basic container scaling principles
+  - Use tools to troubleshoot containers in a clustered environment
+
+  ## Outline
+  - Multi-Container Applications: The classic two-tiered, wordpress application
+  - Cluster Performance: Scaling applications horizontally with containers
+  - Cluster Debugging: Troubleshooting in a distributed systems environment
+
+  ## Other Material
+  This presentation will give you a background to all of the concepts in this lab
+  - [Google Presentation](https://docs.google.com/presentation/d/1S-JqLQ4jatHwEBRUQRiA5WOuCwpTUnxl2d1qRUoTz5g/edit#slide=id.g20639ff941_0_42)
+  - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+  ## Start Scenario
+  Once you have watched the background video or went throught the presentation, continue to the exercises
+icon: https://logodix.com/logo/1910931.png
+level: intermediate
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: subsystems-container-internals-lab-2-0-part-5
-tags:
-- openshift
-title: Container Orchestration
-type: track
+challenges:
+- slug: 01-multi-container-applications
+  id: dyxyw7jtiy6w
+  type: challenge
+  title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
+  assignment: |
+    The goal of this exercise is to build a containerized two tier application in an OpenShift cluster. This application will help you learn about clustered containers and distributed systems. It will teach you about Kubernetes and how it operates with the principles of "defined state" and "actual state" - it constantly monitors the environment and attempts to make the actual state match the defined state.
+
+    In Kubernetes/OpenShift, applications are defined with either JSON or YAML files - either file format can be imported or exported, even converting between the two. In this lab, we will use YAML files.
+
+    Essentially, the application definition files are a collection of software defined objects in Kubernetes. The objects in the file are imported and become defined state for the application. Important objects include:
+
+    - Pods: Collections of one or more containers
+    - ReplicationControllers: Ensure that the correct number of pods are running.
+    - Services: Internal object which represents the port/daemon/program running.
+    - Routes: Expose services to the external world.
+    - PeristentVolumeClaims: Represents the request for storage and how much. Typically defined in the application by the developer or architect.
+    - PersistentVolume: Represents the actual storage. Typically defined by sysadmins or automation.
+
+    Developers and architects can group these objects/resources in a single file to make sharing and deployment of the entire application easier. These definitions can be stored in version control systems just like code. Let's inspect some of the Kubernetes resource definitions we will use for this lab.
+
+    First, look at the objects/resources that define the application:
+
+    ```
+    cat ~/labs/wordpress-demo/wordpress-objects.yaml
+    ```
+
+    Notice there are two Services defined - one for MySQL and one for Wordpress. This allows these two Services to scale independently. The front end can scale with web traffic demand. The MySQL service could also be made to scale with a technology like Galera, but would require special care. You may also notice that even though there are two Services, there is only a single Route in this definition. That's because Services are internal to the Kubernetes cluster, while Routes expose the service externally. We only want to expose our Web Server externally, not our database.
+
+    Containers are ephemeral which means their storage is deleted and recreated every time they restart. MySQL tables and the Apacheweb root need storage because we don't want our website data deleted every time a container restarts. To do this, we will define Persistent Volumes in Kubernetes. We will create four persistent volumes - two that have 1GB of storage and two that will have 2GB of storage. In this lab environment, these persistent volumes will reside on the local all-in-one installation, but in a production environment they could reside on shared storage and be accessed from any node in the Kubernetes/OpenShift cluster. In a production environment, they could also be dynamically provisioned with the appropriate resiliency (Gluster, Ceph, AWS EBS Volumes, NFS, iSCSI, others):
+
+    ```
+    cat ~/labs/wordpress-demo/persistent-volumes.yaml
+    ```
+
+    Now, let's instantiate some Persistent Volumes:
+
+    ```
+    oc create -f ~/labs/wordpress-demo/persistent-volumes.yaml
+    ```
+
+    Notice that the persistent volumes are unbound. They are available and waiting, but will not be utilized until you define an application which consumes storage. This is inline with the way Kubernetes constantly tries to drive the actual state toward the defined state. Currently, there is no definition to consume this storage:
+
+    ```
+    oc get pv
+    ```
+
+    Now, let's instantiate our two tier web application with a single command. This single command can be thought of as an API call which tells Kubernetes the desired state or defined state which it will use as a guide:
+
+    ```
+    oc create -f ~/labs/wordpress-demo/wordpress-objects.yaml
+    ```
+
+    Look at the status of the application. The two pods that make up this application will remain in a "pending" state - why? Kubernetes will connect the Persistent Volume Claims with the available Persistent Volumes, pull images, and schedule the pods to a node. Keep running these commands until the pods start:
+
+    ```
+    oc describe pod wordpress-
+    ```
+
+    ```
+    oc describe pod mysql-
+    ```
+
+    Now, the persistent volume claims for the application will become Bound and satisfy the storage requirements. Kubernetes/OpenShift will now start to converge the defined state and the actual state:
+
+    ```
+    oc get pvc
+    ```
+
+    Also, take a look at the Persistent Volumes again:
+
+    ```
+    oc get pv
+    ```
+
+    You may notice the wordpress pod enter a state called CrashLoopBackOff. This is a natural state in Kubernetes/OpenShift which helps satisfy dependencies. The wordpress pod will not start until the mysql pod is up and running. This makes sense, because wordpress can't run until it has a database and a connection to it. Similar to email retries, Kubernetes will back off and attempt to restart the pod again after a short time. Kubernetes will try several times, extending the time between tries until eventually the dependency is satisfied, or it enters an Error state. Luckily, once the mysql pod comes up, wordpress will come up successfully. Here are some useful commands to watch the state:
+
+    Show all pods. You may run this command several times waiting for the actual state to converge with the defined state:
+
+    ```
+    oc get pods
+    ```
+
+    View the events for a pod. You may run these commands several times waiting for the actual state to converge with the defined state:
+
+    ```
+    oc describe pod mysql-
+    ```
+
+    ```
+    oc describe pod wordpress-
+    ```
+
+    Once the pods are scheduled and running, view the terminal output for each pod:
+
+    ```
+    oc logs $(oc get pods | grep mysql- | awk '{print $1}')
+    ```
+
+    ```
+    oc logs $(oc get pods | grep wordpress- | awk '{print $1}')
+    ```
+
+    Finally, ensure that the web interface is up and running. The following curl/grep/awk command will show us the HTML returned form the webserver, letting us know that wordpress is up and running.
+
+    ```
+    curl http://$(oc get svc | grep wpfrontend | awk '{print $3}')/wp-admin/install.php
+    ```
+
+    Think about it, we just instantiated a fairly complex, multi-service application with a single command and pre-defined state in the YAML files. This is extremely powerful and can be used to construct complex applications with 10, 20, 30 or 100 services.
+
+    In this exercise you learned how to deploy a fully functional two tier application with a single command (oc create). As long as the cluster has persistent volumes available to satisify the application, an end user can do this on their laptop, in a development environment or in production data centers all over the world. All of the dependent code is packaged up and delivered in the container images - all of the data and configuration comes from the environment. Production instances will access production persistent volumes, development environments can be seeded with copies of production data, etc. It's easy to see why container orchestration is so powerful.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 675
+- slug: 02-openshift-web-interface
+  id: nnjowpzyqw2b
+  type: challenge
+  title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
+  assignment: |
+    In the last step, you created a multi-tier web application. Now, log into the OpenShift web interface which is a convenient place to monitor the state, and troubleshoot things when they go wrong. You can even get a debug terminal into a Pod to troubleshoot if it crashes. This can help you figure out why it crashed. This shouldn't happen in this lab, but as you build applications it surely will. Also, feel free to delete a pod and see what happens. Kubernetes will see that the defined state and actual state no longer match and will recreate it. This is useful when things are taking too long :-)
+
+    * Username: `admin`
+    * Password: `admin`
+    * Console: [here](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/default/overview)
+
+    Here are some useful locations to investigate what is happening. The "Events" section is useful early in the Pod creation process, when its being scheduled in the cluster and then when the container image is being pulled. Later in the process when a Pod is crashing because of something in the container image itself, its useful to watch the terminal output in the "Logs" section. It can also be useful to run commands live in a Terminal. Sometimes a Pod won't start, so it's useful poke around with using the "Debug in Terminal" section. Get a feel in the following areas of the interface.
+
+    First check out the MySQL Pod:
+
+    - Applications -> Pods -> mysql-<id> -> Details
+    - Applications -> Pods -> mysql-<id> -> Events
+    - Applications -> Pods -> mysql-<id> -> Logs
+    - Applications -> Pods -> mysql-<id> -> Terminal
+
+    Do the same for Wordpress:
+
+    - Applicaitons -> Pods -> wordpress-<id> -> Details
+    - Applicaitons -> Pods -> wordpress-<id> -> Events
+    - Applicaitons -> Pods -> wordpress-<id> -> Logs
+    - Applicaitons -> Pods -> wordpress-<id> -> Terminal
+
+    Once you've spent some time in the web interface, move on to the next lab.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 675
+- slug: 03-load-testing
+  id: eejplbme33xc
+  type: challenge
+  title: 'Cluster Performance: Scaling applications horizontally with containers'
+  assignment: |
+    In this exercise, you will scale and load test a distributed application using a tool called Apache Bench. Apache Bench (ab command) is a tool for benchmarking HTTP servers. It is designed to give you an impression of how your current Apache installation perform. In particular ab shows you how many requests per second your Apache installation is capable of serving. The ab tool is especially useful with a Kubernetes cluster, where you can scale up web servers with a single command and provide more capacity to handle more requests per second.
+
+    Before we test, lets set up an environment variable so that we have the ip address to connect to for several tests:
+
+    ```
+    export SITE="http://$(oc get svc | grep wpfrontend | awk '{print $3}')/wp-admin/install.php"
+    ```
+
+    Test with ab before we scale the application to get a base line. Take note of the "Time taken for tests" section:
+
+    ```
+    ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
+    ```
+
+
+    Take note of the following sections in the output:
+
+    - Time taken for tests
+    - Requests per second
+    - Percentage of the requests served within a certain time (ms)
+
+
+    Go to the web interface. Scale the Wordpress Deployment up to three containers. Click the up arrow:
+
+    - Applications -> Deployments -> wordpress -> Up Arrow
+
+
+    Test with ab again. How did this affect our benchmarking and why?
+
+    ```
+    ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
+    ```
+
+
+    Now lets scale up more with command line instead of the web interface:
+
+    ```
+    oc scale --replicas=5 rc/wordpress
+    ```
+
+
+    Test with ab. How did this affect our benchmarking and why?
+
+    ```
+    ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
+    ```
+
+
+    Scale the application back down to one pod:
+
+    ```
+    oc scale --replicas=1 rc/wordpress
+    ```
+
+    Test with ab. How did this affect our benchmarking and why?
+
+    ```
+    ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
+    ```
+
+    Counter intuitively, you may have seen slower response times when you scaled the pods up. This is probably because we are running Kubernetes on a single node. The requests are bing sent through a reverse proxy and distributed to multiple pods all running on the same server for this lab. If this were a real OpenShift cluster with 100s or 1000s of nodes, you may have seen scale out performance where response times went down.
+
+    Sometimes horizontal scaling can have counter intuitive effects. Sometimes great care must be taken with applications to get the performance characteristics that we need. The world of container orchestration opens up an entirely new kind of performance tuning and you will need new skills to tackle this challenge.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 675
+- slug: 04-troubleshooting-distributed-applications
+  id: snmrvcx4jbgw
+  type: challenge
+  title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
+  assignment: |
+    The goal of this exercise is to understand the nature of a distributed systems environment with containers. Quickly and easily troubleshooting problems in containers requires distributed systems thinking. You have to think of things programatically. You can't just ssh into a server and understand the problem. You can execute commands in a single pod, but even that might prevent you from troubleshooting things like network, or database connection errors which are specific to only certain nodes. This can happen because of persnickety differences in locations of your compute nodes in a cloud environment or code that only fails in unforeseen ways at scale or under load.
+
+    We are going to simulate one of these problems by using a specially designed test application. In this exercise we will learn how to figure things out quickly and easily.
+
+    Inspect each of the files and try to understand them a bit:
+
+    ```
+    cat ~/labs/goodbad/Build.yaml
+    ```
+
+    ```
+    cat ~/labs/goodbad/Run.yaml
+    ```
+
+
+    Build the test application. **Wait** for the build to successfully complete. You can watch the log output in the OpenShift web interface.
+
+    ```
+    oc create -f ~/labs/goodbad/Build.yaml
+    ```
+
+
+    ```
+    oc get builds
+    ```
+
+    ```
+    oc get pods
+    ```
+
+    You can watch the logs like this. Keep running the following command until you see "Push successful" in the logs:
+
+    ```
+    oc logs goodbad-1-build
+    ```
+
+    When the above build completes, run the test application:
+
+    ```
+    oc create -f ~/labs/goodbad/Run.yaml
+    ```
+
+
+    Get the IP address for the goodbad service
+
+    ```
+    oc get svc
+    ```
+
+
+    Now test the cluster IP with curl. Use the cluster IP address so that the traffic is balanced among the active pods. You will notice some errors in your responses. You may also test with a browser. Some of the pods are different - how could this be? They should be identical because they were built from code right?
+
+    ``SVC_IP=$(oc get svc | grep goodbad | awk '{print $3}')
+    for i in {1..20}; do curl $SVC_IP; done``{{execute}}
+
+
+    Example output:
+
+    ``ERROR
+    ERROR
+    Hello World
+    ERROR``
+
+
+    Take a look at the code. A random number is generated in the entry point and written to a file in /var/www/html/goodbad.txt:
+
+    ```
+    cat ~/labs/goodbad/index.php
+    ```
+
+    ```
+    cat ~/labs/goodbad/Dockerfile
+    ```
+
+
+    Troubleshoot the problem in a programmatic way. Notice some pods have files which contain numbers that are lower than 7, this means the pod will return a bad response:
+
+    ```
+    for i in $(oc get pods | grep goodbad | grep -v build | awk '{print $1}'); do oc exec -t $i -- cat /var/www/html/goodbad.txt; done
+    ```
+
+
+    Continue to troubleshoot the problem by temporarily fixing the file
+
+    ```
+    for i in $(oc get pods | grep goodbad | grep -v build | awk '{print $1}'); do oc exec -t $i -- sed -i -e s/[0-9]*/7/ /var/www/html/goodbad.txt; done
+    ```
+
+
+    Write a quick test that verifies the logic of your fix
+
+    ```
+    for i in {1..2000}; do curl $SVC_IP 2>&1; done | grep "Hello World" | wc -l
+    ```
+
+
+    Scale up the nodes, and test again. Notice it's broken again because new pods have been added with the broken file
+
+    ```
+    oc scale rc goodbad --replicas=10
+    ```
+
+    ```
+    for i in {1..2000}; do curl $SVC_IP 2>&1; done | grep "Hello World" | wc -l
+    ```
+
+
+    Optional: As a final challenge, fix the problem permanently by fixing the logic so that the number is always above 7 and never causes the application to break. Rebuild, and redeploy the application. Hint: you have to get the images to redeploy with the newer versions (delete the rc) :-)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 675
+checksum: "10483393307621717364"
+_: ""

@@ -25,14 +25,14 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- btannous@redhat.com
 private: true
 published: false
 challenges:
 - slug: 01-deploying-an-application
-  id: ys2hejknxwks
+  id: fagvt4xlczr8
   type: challenge
   title: Topic 1 - Deploying an Application
   assignment: |
@@ -78,9 +78,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 02-resource-object-types
-  id: encyw43dspg4
+  id: d0s8uokj1amj
   type: challenge
   title: Topic 2 - Resource Object Types
   assignment: |
@@ -183,9 +183,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 03-querying-resource-objects
-  id: jnkkunlqepf6
+  id: 7z8srodnfd4h
   type: challenge
   title: Topic 3 - Querying Resource Objects
   assignment: |
@@ -273,9 +273,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 04-editing-resource-objects
-  id: qebn5w4y6e3y
+  id: kfgc8ceoaflb
   type: challenge
   title: Topic 4 - Editing Resource Objects
   assignment: |
@@ -315,9 +315,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 05-creating-resource-objects
-  id: wpzl29pywzfm
+  id: za9decokckrs
   type: challenge
   title: Topic 5 - Creating Resource Objects
   assignment: |
@@ -397,9 +397,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 06-replacing-resource-objects
-  id: aqor4zltvjun
+  id: pp5xdoflxsla
   type: challenge
   title: Topic 6 - Replacing Resource Objects
   assignment: |
@@ -467,9 +467,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 07-labelling-resource-objects
-  id: 5ukngju0fisc
+  id: w8sghnim60nq
   type: challenge
   title: Topic 7 - Labelling Resource Objects
   assignment: |
@@ -531,9 +531,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 112
 - slug: 08-deleting-resource-objects
-  id: dtbn2mxqw5dj
+  id: ncbvwsaoprnd
   type: challenge
   title: Topic 8 - Deleting Resource Objects
   assignment: |
@@ -583,5 +583,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "17119674816365064445"
+  timelimit: 112
+checksum: "4853810085779153203"
+_: ""

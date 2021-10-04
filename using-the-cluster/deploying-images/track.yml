@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: 01-creating-an-initial-project
-  id: 4v6vfczchg0o
+  id: wxof3pm8fgfi
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -110,9 +110,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 02-deploying-using-the-web-console
-  id: ucjulacwvy1j
+  id: hep1rwqzcmm7
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -156,9 +156,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 03-exploring-the-topology-view
-  id: mbrnjzszfeut
+  id: bdyfjzkixpqk
   type: challenge
   title: Topic 3 - Exploring the Topology View
   assignment: |
@@ -190,9 +190,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 04-deleting-the-application
-  id: djo093s992n1
+  id: mr5jtrj8dxtd
   type: challenge
   title: Topic 4 - Deleting the Application
   assignment: |
@@ -292,9 +292,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 05-deploying-using-the-command-line
-  id: y5wg0qokkdgp
+  id: 96tat0xuyhdb
   type: challenge
   title: Topic 5 - Deploying Using the Command Line
   assignment: |
@@ -384,5 +384,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "10223449981654815959"
+  timelimit: 180
+checksum: "5836300861180102649"
+_: ""

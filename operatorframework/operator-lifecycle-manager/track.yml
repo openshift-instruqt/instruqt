@@ -43,7 +43,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: bkfs9drsncef
+  id: flolqpqzpw5l
   type: challenge
   title: Exploring OLM
   assignment: |-
@@ -95,9 +95,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step2
-  id: 7i1y8pvqyo3l
+  id: pkdbfwmaljtl
   type: challenge
   title: CatalogSources
   assignment: |-
@@ -168,9 +168,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step3
-  id: o41ycuapowkt
+  id: b8hbdj26jped
   type: challenge
   title: Accessing OLM on the OpenShift Console
   assignment: |
@@ -197,9 +197,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step4
-  id: wptdqwlrvwya
+  id: r8qvhlyjexgh
   type: challenge
   title: Creating the OperatorGroup and Subscription
   assignment: |-
@@ -305,9 +305,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step5
-  id: ydz5ytb6gdsz
+  id: 0kvpqbsqrzbp
   type: challenge
   title: Reviewing the InstallPlan and Installing the Operator
   assignment: |-
@@ -397,9 +397,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step6
-  id: xjqoi42yuzti
+  id: svddexorkurh
   type: challenge
   title: Creating the Custom Resource
   assignment: |-
@@ -461,9 +461,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step7
-  id: zkcuhcnvjxyn
+  id: tj0rtalbxoi0
   type: challenge
   title: Accessing the ArgoCD Dashboard
   assignment: |-
@@ -492,9 +492,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step8
-  id: l7phfcxwqgh8
+  id: 9d00wfe9rsjs
   type: challenge
   title: Uninstalling the Operator
   assignment: |-
@@ -546,5 +546,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "3239865713117282539"
+  timelimit: 225
+checksum: "15308922412689981244"
+_: ""

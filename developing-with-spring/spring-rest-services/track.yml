@@ -19,7 +19,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: llzx1lulmzra
+  id: bfl69cwpnfp9
   type: challenge
   title: Step 1
   assignment: |
@@ -37,7 +37,7 @@ challenges:
 
     Since our application will be a web application, we need to use a servlet container like Apache Tomcat or Undertow to handle incoming connections from clients. Since Red Hat offers support for Apache Tomcat (e.g., security patches, bug fixes, etc.), we will use it here.
 
-    In addition we are going to utilize the Spring MVC project which contains many of the abstractions we will use to build our APIs. Observe the following code block in the ``pom.xml``{{open}}
+    In addition we are going to utilize the Spring MVC project which contains many of the abstractions we will use to build our APIs. Observe the following code block in the ``pom.xml``
 
     `    <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -75,7 +75,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-create-rest-services
-  id: 3nxhlpnca5wy
+  id: hxkiaz5x5tvh
   type: challenge
   title: Step 2
   assignment: |-
@@ -85,11 +85,11 @@ challenges:
 
     **1. Review the Model**
 
-    We have already created the model for our Fruit objects due to it being necessary for the Repository. Click on the following link which will open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``{{open}}. As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific annotations. Don't worry about the annotations. They are not important for this module.
+    We have already created the model for our Fruit objects due to it being necessary for the Repository. Click on the following link which will open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``. As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific annotations. Don't worry about the annotations. They are not important for this module.
 
     **2. Add a Controller**
 
-    Next we need to create a Spring Controller to handle HTTP requests to our application. The `@RestController` annotation on a Java class marks the class as a Controller (intended to be of the REST variety) which Spring will register automatically for you on application start. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitController.java``{{open}}
+    Next we need to create a Spring Controller to handle HTTP requests to our application. The `@RestController` annotation on a Java class marks the class as a Controller (intended to be of the REST variety) which Spring will register automatically for you on application start. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitController.java``
 
     Then, copy the below content into the file (or use the `Copy to Editor` button):
 
@@ -243,7 +243,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-login-to-openshift
-  id: 4oyzr2xrtxfr
+  id: xvtik0wou2yq
   type: challenge
   title: Step 3
   assignment: |-
@@ -275,7 +275,7 @@ challenges:
                  openshift/postgresql:12-el8 \
                  --name=my-database``{{execute}}
 
-    Our application knows how to interact with the database because you defined the properties in the ``src/main/resources/application-openshift.properties``{{open}} file. You can see below that the URL, username, password, and driver for the database have been supplied.
+    Our application knows how to interact with the database because you defined the properties in the ``src/main/resources/application-openshift.properties`` file. You can see below that the URL, username, password, and driver for the database have been supplied.
     ```
     spring.datasource.url=jdbc:postgresql://${MY_DATABASE_SERVICE_HOST}:${MY_DATABASE_SERVICE_PORT}/my_data
     spring.datasource.username=${DB_USERNAME}
@@ -347,4 +347,5 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "12894529665180547941"
+checksum: "425630700294992571"
+_: ""

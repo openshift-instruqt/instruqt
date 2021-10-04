@@ -33,7 +33,7 @@ private: true
 published: false
 challenges:
 - slug: 1explore-cli
-  id: jy5mxcuyzfn2
+  id: vrbnwr9rd163
   type: challenge
   title: Step 1 - Exploring The Command Line
   assignment: |
@@ -86,9 +86,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 2explore-console
-  id: ffzmhdp1irwx
+  id: 9njw2xk4cyuk
   type: challenge
   title: Step 2 - Exploring The Web Console
   assignment: |+
@@ -150,9 +150,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 3deploy-docker
-  id: paoqjdlgh84f
+  id: kveynhiegrvm
   type: challenge
   title: Step 3 - Deploying a Docker Image
   assignment: |
@@ -200,9 +200,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 4scaling
-  id: osm3ivxewxsf
+  id: shdcycjipsio
   type: challenge
   title: Step 4 - Scaling Your Application
   assignment: |
@@ -257,9 +257,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 5routes
-  id: dbu9cqgajp11
+  id: 4fhixztjaqip
   type: challenge
   title: Step 5 - Routing HTTP Requests
   assignment: |
@@ -309,9 +309,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 6s2i
-  id: ab47viubhslp
+  id: yskr3ncdwoy8
   type: challenge
   title: Step 6 - Building From Source Code
   assignment: |
@@ -390,5 +390,6 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
-checksum: "18385387953682959085"
+  timelimit: 150
+checksum: "13277756299076397611"
+_: ""

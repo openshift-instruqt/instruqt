@@ -16,7 +16,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: eg3r8bdfkegr
+  id: cnspqqyv4fzc
   type: challenge
   title: Kubernetes Manifests
   assignment: |-
@@ -124,9 +124,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 360
 - slug: step2
-  id: w7jheqszmw74
+  id: ufbpg2sr3tvi
   type: challenge
   title: Basic Operations with the Kubernetes API
   assignment: |
@@ -273,9 +273,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 360
 - slug: step3
-  id: 4nx33bjydye7
+  id: ali2jwmc2ndy
   type: challenge
   title: Replica Sets
   assignment: |
@@ -392,9 +392,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 360
 - slug: step4
-  id: rlvbcr9ec7kt
+  id: tey8pyxyxrgf
   type: challenge
   title: Deployments/Finalizers
   assignment: |
@@ -571,9 +571,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 360
 - slug: step5
-  id: jmoksmwgrzv4
+  id: 5tzmjrul4xbk
   type: challenge
   title: Custom Resource Definitions
   assignment: |-
@@ -714,5 +714,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "3826076875713671563"
+  timelimit: 360
+checksum: "6278760580897945593"
+_: ""

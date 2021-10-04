@@ -1,537 +1,370 @@
-challenges:
-- assignment: "If you understand Linux, you probably already have 85% of the knowledge\
-    \ you need to understand containers. If you understand how processes, mounts,\
-    \ networks , shells and daemons work - commands like ps, mount, ip addr, bash,\
-    \ httpd and mysqld - then you just need to understand a few extra primitives to\
-    \ become an expert with containers. Remember that all of the things that you already\
-    \ know today still apply: from security and performance to storage and networking,\
-    \ containers are just a different way of packaging and delivering Linux applications.\
-    \ There are four basic primitives to learn to get you from Linux administrator\
-    \ to feeling comfortable with containers:\n\n* [Container Images](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.dqlu6589ootw)\n\
-    * [Container Registries](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.4cxnedx7tmvq)\n\
-    * [Container Hosts](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.8tyd9p17othl)\n\
-    * [Container Orchestration](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo66)\n\
-    \nOnce, you understand the basic four primitives, there are some advanced concepts\
-    \ that will be covered in future labs including:\n\n* Container Standards: Understanding\
-    \ OCI, CRI, CNI, and more\n* Container Tools Ecosystem - Podman, Buildah, Skopeo,\
-    \ cloud registries, etc\n* Production Image Builds: Sharing and collaborating\
-    \ between technical specialists (performance, network, security, databases, etc)\n\
-    * Intermediate Architecture: Production environments\n* Advanced Architecture:\
-    \ Building in resilience\n* Container History: Context for where we are at today\
-    \ \n\nCovering all of this material is beyond the scope of any live training,\
-    \ but we will cover the basics, and students can move on to other labs not covered\
-    \ in the classroom. These labs are available online at http://learn.openshift.com/subsystems.\
-    \ \n\nNow, let's start with the introductory lab, which covers these four basic\
-    \ primitives:\n\n![New Primitives](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/01-new-primitives.png)\
-    \ \n"
-  difficulty: intermediate
-  slug: 01-introduction
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Introduction to Containers
-  type: challenge
-- assignment: 'Container images are really just tar files. Seriously, they are tar
-    files, with an associated JSON file. Together we call these an Image Bundle. The
-    on-disk format of this bundle is defined by the [OCI Image Specification](https://github.com/opencontainers/image-spec).
-    All major container engines including Podman, Docker, RKT, CRI-O and containerd
-    build and consume these bundles.
-
-
-    ![Container Images](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-basic-container-image.png)
-
-
-    But let''s dig into three concepts a little deeper:
-
-
-    1. Portability: Since the OCI standard governs the images specification, a container
-    image can be created with Podman, pushed to almost any container registry, shared
-    with the world, and consumed by almost any container engine including Docker,
-    RKT, CRI-O, containerd and, of course, other Podman instances. Standardizing on
-    this image format lets us build infrastructure like registry servers which can
-    be used to store any container image, be it RHEL 6, RHEL 7, RHEL8, Fedora, or
-    even Windows container images. The image format is the same no matter which operating
-    system or binaries are in the container image. Notice that Podman can download
-    a Fedora image, uncompress it, and store it in the local /var/lib/containers image
-    storage even though this isn''t a Fedora container host:
-
-
-    ```
-
-    podman pull quay.io/fedora/fedora:34-x86_64
-
-    ```
-
-
-    2. Compatibility: This addresses the content inside the container image. No matter
-    how hard you try, ARM binaries in a container image will not run on POWER container
-    hosts. Containers do not offer compatibility guarantees; only virtualization can
-    do that. This compatibility problem extends to processor architecture, and also
-    versions of the operating system. Try running a RHEL 8 container image on a RHEL
-    4 container host -- that isn''t going to work. However, as long as the operating
-    systems are reasonably similar, the binaries in the container image will usually
-    run. Note that executing basic commands with a Fedora image work even though this
-    isn''t a Fedora container host:
-
-
-    ```
-
-    podman run -t quay.io/fedora/fedora:34-x86_64 cat /etc/redhat-release
-
-    ```
-
-
-    3. Supportability: This is what vendors can support. This is about investing in
-    testing, security, performance, and architecture as well as ensuring that images
-    and binaries are built in a way that they run correctly on a given set of container
-    hosts. For example, Red Hat supports RHEL 6, UBI 7, and UBI 8 container images
-    on both RHEL 7 and RHEL 8 container hosts (CoreOS is built from RHEL bits). Red
-    Hat cannot guarantee that every permutation of container image and host combination
-    on the planet will work. It would expand the testing and analysis matrix resources
-    at a non-linear growth rate. To demonstrate, run a Red Hat Universal Base Image
-    (UBI) container on this container host. If this was a RHEL container host, this
-    would be completely supported (sorry, only CentOS hosts available for this lab
-    environment :-) so not supported, but you get the point):
-
-
-    ```
-
-    podman run -t registry.access.redhat.com/ubi7/ubi cat /etc/redhat-release
-
-    ```
-
-
-    Analyzing portability, compatibility, and supportability, we can deduce that a
-    RHEL 7 image will work on RHEL 7 host perfectly. The code in both were designed,
-    compiled, and tested together. The Product Security Team at Red Hat is analyzing
-    CVEs for this combination, performance teams are testing RHEL 7 web servers, with
-    a RHEL 7 kernel, etc, etc. The entire machine of software creation and testing
-    does its work in this configuration with programs and kernels compiled, built
-    and tested together. Matching versions of container images and hosts inherit all
-    of this work:
-
-
-    ![Matching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-rhel7-image-rhel7-host.png)
-
-
-    However, there are limits. Red Hat can''t guarantee that RHEL 5, Fedora, and Alpine
-    images will work like they were intended to on a RHEL 7 host. The container image
-    standards guarantee that the container engine will be able to ingest the images,
-    pulling them down and caching them locally. But, nobody can guarantee that the
-    binaries in the container images will work correctly. Nobody can guarantee that
-    there won''t be strange CVEs that show up because of the version combinations
-    (yeah, that''s "a thing"), and of course, nobody can guarantee the performance
-    of the binaries running on a kernel for which it wasn''t compiled. That said,
-    many times, these binaries will appear to just work.
-
-
-    ![Mismatching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-mismatch.png)
-
-
-    This leads us to supportability as a concept seperate from portability and compatibility.
-    This is the ability to guarantee to some level that certain images will work on
-    certain hosts. Red Hat can do this between selected major versions of RHEL for
-    the same reason that we can do it with the [RHEL Application Compatibility Guide](https://access.redhat.com/articles/rhel-abi-compatibility).
-    We take special precautions to compile our programs in a way that doesn''t break
-    compatibility, we analyze CVEs, and we test performance. A bare minimum of testing,
-    security, and performance can go a long way in ensuring supportability between
-    versions of Linux, but there are limits. One should not expect that container
-    images from RHEL 9, 10, or 11 will run on RHEL 8 hosts.
-
-
-    ![Container Image & Host Supportability](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-supportability.png)
-
-
-    Alright, now that we have sorted out the basics of container images, let''s move
-    on to registries...
-
-    '
-  difficulty: intermediate
-  slug: 02-images
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Container Images
-  type: challenge
-- assignment: "Registries are really just fancy file servers that help users share\
-    \ container images with each other. The magic of containers is really the ability\
-    \ to find, run, build, share and collaborate with a new packaging format that\
-    \ groups applications and all of their dependencies together.\n\n![Container Registry](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/03-basic-container-registry.png)\n\
-    \nContainer images make it easy for software builders to package software, as\
-    \ well as provide information about how to run it. Using metadata, software builders\
-    \ can communicate how users *can* and *should* run their software, while providing\
-    \ the flexibility to also build new things based on existing software.\n\nRegistry\
-    \ servers just make it easy to share this work with other users. Builders can\
-    \ push an image to a registry, allowing users and even automation like CI/CD systems\
-    \ to pull it down and use it thousands or millions of times. Some registries like\
-    \ the [Red Hat Container Catalog](https://access.redhat.com/containers/) offer\
-    \ images which are highly curated, well tested, and enterprise grade. Others,\
-    \ like [Quay.io](http://quay.io), are cloud-based registries that give individual\
-    \ users public and private spaces to push their own images and share them with\
-    \ others. Curated registries are good for partners who want to deliver solutions\
-    \ together (eg. Red Hat and CrunchyDB), while cloud-based registries are good\
-    \ for end users collaborating on work.\n\nAs an example which demonstrates the\
-    \ power of sharing with quay.io, let's pull a container image that was designed\
-    \ and built for this lab:\n\n```\npodman pull quay.io/fatherlinux/linux-container-internals-2-0-introduction\n\
-    ```\n\nNow, run this simulated database:\n\n```\npodman run -d -p 3306:3306 quay.io/fatherlinux/linux-container-internals-2-0-introduction\n\
-    ```\n\nNow, poll the simulated database with our very simple client, curl:\n\n\
-    ```\ncurl localhost:3306\n```\n\n\nNotice how easy these commands were. We didn't\
-    \ have to know very much about how to run it. All of the complex logic for how\
-    \ to run it was embedded in the image. Here's the build file, so that you can\
-    \ inspect the start logic (ENTRYPOINT). You might not fully understand the bash\
-    \ code there, but that's OK, that's part of why containers are useful:\n\n~~~~\n\
-    #\n# Version 1\n\n# Pull from Red Hat Universal Base Image\nFROM registry.access.redhat.com/ubi7/ubi-minimal\n\
-    \nMAINTAINER Scott McCarty smccarty@redhat.com\n\n# Update the image\nRUN microdnf\
-    \ -y install nmap-ncat && \\\n    echo \"Hi! I'm a database. Get in ma bellie!!!\"\
-    \ > /srv/hello.txt\n\n# Output\nENTRYPOINT bash -c 'while true; do /usr/bin/nc\
-    \ -l -p 3306 < /srv/hello.txt; done'\n~~~~\n\nRealizing how easy it is to build\
-    \ and share using registry servers is the goal of this lab. You can embed the\
-    \ runtime logic into the container image using a build file, thereby communicating\
-    \ not just *what* to run, but also *how*. You can share the container image making\
-    \ it easier for others to use. You can also share the build file using something\
-    \ like GitHub to make it easy for others to build off of your work (open source\
-    \ for the win).\n\nNow, let's move on to container hosts...\n"
-  difficulty: intermediate
-  slug: 03-registries
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Container Registries
-  type: challenge
-- assignment: "To understand the Container Host, we must analyze the layers that work\
-    \ together to create a container. They include:\n\n* [Container Engine](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo3l)\n\
-    * [Container Runtime](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo55)\n\
-    * [Linux Kernel](https://lwn.net/Articles/780364/)\n\n## Container Engine\nA container\
-    \ engine can loosely be described as any tool which provides an API or CLI for\
-    \ building or running containers. This started with Docker, but also includes\
-    \ Podman, Buildah, rkt, and CRI-O. A container engine accepts user inputs, pulls\
-    \ container images, creates some metadata describing how to run the container,\
-    \ then passes this information to a container Runtime.\n\n## Container Runtime\n\
-    A container runtime is a small tool that expects to be handed two things - a directory\
-    \ often called a root filesystem (or rootfs), and some metadata called config.json\
-    \ (or spec file). The most common runtime [runc](https://github.com/opencontainers/runc)\
-    \ is the default for every container engine mentioned above. However, there are\
-    \ many innovative runtimes including katacontainers, gvisor, crun, and railcar.\n\
-    \n## Linux Kernel\nThe kernel is responsible for the last mile of container creation,\
-    \ as well as resource management during its running lifecycle. The container runtime\
-    \ talks to the kernel to create the new container with a special kernel function\
-    \ called clone(). The runtime also handles talking to the kernel to configure\
-    \ things like cgroups, SELinux, and SECCOMP (more on these later). The combination\
-    \ of kernel technologies invoked are defined by the container runtime, but there\
-    \ are very recent [efforts to standardize this in the kernel](https://lwn.net/Articles/780364/).\n\
-    \n\n![Container Engine](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/04-simple-container-engine.png)\n\
-    \n \nContainers are just regular Linux processes that were started as child processes\
-    \ of a container runtime instead of by a user running commands in a shell. All\
-    \ Linux processes live side by side, whether they are daemons, batch jobs or user\
-    \ commands - the container engine, container runtime, and containers (child processes\
-    \ of the container runtime) are no different. All of these processes make requests\
-    \ to the Linux kernel for protected resources like memory, RAM, TCP sockets, etc.\
-    \ \n\nExecute a few commands with podman and notice the process IDs, and namespace\
-    \ IDs. Containers are just regular processes:\n\n```\npodman ps -ls\n```\n\n```\n\
-    podman top -l huser user hpid pid %C etime tty time args\n```\n\n```\nps -ef |\
-    \ grep 3306\n```\n\nWe will explore this deeper in later labs but, for now, commit\
-    \ this to memory, containers are simply Linux ...\n\n"
-  difficulty: intermediate
-  slug: 04-hosts
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Container Hosts
-  type: challenge
-- assignment: 'Container Orchestration is the next logical progression after you become
-    comfortable working with containers on a single host. With a single container
-    host, containerized applications can be managed quite similarly to traditional
-    applications, while gaining incremental efficiencies. With orchestration, there
-    is a significant paradigm shift - developers and administrators alike need to
-    think differently, making all changes to applications through an API.  Some people
-    question the "complexity" of orchestration, but the benefits far outweigh the
-    work of learning it. Today, Kubernetes is the clear winner when it comes to container
-    orchestration, and with it, you gain:
-
-
-    * Application Definitions - YAML and JSON files can be passed between developers
-    or from developers to operators to run fully-functioning, multi-container applications
-
-    * Easy Application Instances - Run many versions of the same application in different
-    namespaces
-
-    * Multi-Node Scheduling - controllers built into Kubernetes manage 10 or 10,000
-    container hosts with no extra complexity
-
-    * Powerful API - Developers, Cluster Admins, and Automation alike can define application
-    state, tenancy, and with OpenShift 4, even cluster node states
-
-    * Operational Automation - The [Kubernetes Operator Framework](https://coreos.com/operators/)
-    can be thought of as a robot systems administrator deployed side by side with
-    applications managing mundane and complex tasks for the application (backups,
-    restores, etc)
-
-    * Higher Level Frameworks - Once you adopt Kubernetes orchestration, you gain
-    access to an innovative ecosystem of tools like Istio, Knative, and the previously
-    mentioned Operator Framework
-
-
-    ![Orchestration Node](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/05-simple-orchestration-node.png)
-
-
-
-    To demonstrate, all we need is bash, curl, and netcat which lets us pipe text
-    across a TCP port. If you are familiar with basic bash scripting, this tiny lab
-    teases apart the value of the orchestration, versus the application itself. This
-    application doesn''t do much, but it does demonstrate the power of a two-tier
-    application running in containers with both a database and a web front end. In
-    this lab, we use the same container image from before, but this time we embed
-    the *how* to run logic in the Kubernetes YAML. Here''s a simple representation
-    of what our application does:
-
-
-    ~~~~
-
-    User -> Web App (port 80) -> Database (port 3306)
-
-    ~~~~
-
-
-
-    Take a quick look at this YAML file but don''t don''t get too worried if you don''t
-    fully understand the YAML. There are plenty of great tutorials on Kubernetes,
-    and most people learn it over iterations, and building new applications:
-
-
-    ```
-
-    curl https://raw.githubusercontent.com/fatherlinux/two-pizza-team/master/two-pizza-team-ubi.yaml
-
-    ```
-
-
-
-    In the "database," we are opening a file and using netcat to ship it over port
-    3306. In the "web app", we are pulling in the data from port 3306, and shipping
-    it back out over port 80 like a normal application would. The idea is to show
-    a simple example of how powerful this is without having to learn other technology.
-    We are able to fire this application up in an instant with a single *oc* command:
-
-
-    ```
-
-    oc create -f https://raw.githubusercontent.com/fatherlinux/two-pizza-team/master/two-pizza-team-ubi.yaml
-
-    ```
-
-
-    Wait for the cheese-pizza and pepperoni pizza pods to start:
-
-
-    ```
-
-    for i in {1..5}; do oc get pods;sleep 3; done
-
-    ```
-
-
-    Wait until all pods are are in status "RUNNING".
-
-
-    When the pods are done being created, pull some data from our newly created "web
-    app".  Notice that we get back the contents of a file which resides on the the
-    database server, not the web server:
-
-
-    ```
-
-    curl $(oc get svc pepperoni-pizza -o yaml | grep ip | awk ''{print $3}'')
-
-    ```
-
-
-    Note: The command in brackets above is simply getting the IP address of the web
-    server.
-
-
-    Now, let''s pull data directly from the "database."  It''s the same file as we
-    would expect, but this time coming back over port 3306:
-
-
-    ```
-
-    curl $(oc get svc cheese-pizza -o yaml | grep clusterIP | awk ''{print $2}''):3306
-
-    ```
-
-
-    Take a moment to note that we could fire up 50 copies of this same application
-    in Kubernetes with 49 more commands (in different projects). It''s that easy.
-
-
-
-    '
-  difficulty: intermediate
-  slug: 05-orchestration
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Container Orchestration
-  type: challenge
-- assignment: 'In this lab, we have covered container images, registries, hosts, and
-    orchestration as four new primitives you need to learn on your container journey.
-    If you are struggling to understand why you need containers, or why need to move
-    to orchestration - or maybe you are struggling to explain it to your management
-    or others in your team - maybe thinking about it in this context will help:
-
-
-    ![Container Journey](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/06-journey.png)
-
-
-    It is a journey, and we are always happy to help. If you want help along the way,
-    here are some people to follow on Twitter:
-
-
-    * Scott McCarty (Product Manager): [@fatherlinux](https://twitter.com/fatherlinux)
-
-    * Dan Walsh (Containers Team Lead): [@rhatdan](https://twitter.com/rhatdan)
-
-    * Mrunal Patel (Lead for CRI-O): [@mrunalp](https://twitter.com/mrunalp)
-
-    * Nalin Dahyabhai (Lead for Buildah): [@atnalind](https://twitter.com/atnalind)
-
-    * Tom Sweeney (Core Engineer): [@TSweeneyRedHat](https://twitter.com/TSweeneyRedHat)
-
-    * Valentin Rothberg (Core Engineer): [@vlntnrthbrg](https://twitter.com/vlntnrthbrg)
-
-    * William Henry (Core Engineer): [@ipbabble](https://twitter.com/ipbabble)
-
-    * Vincent Batts: (OCI Contributor): [@vbatts](https://twitter.com/vbatts)
-
-    '
-  difficulty: intermediate
-  slug: 06-closing
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Closing
-  type: challenge
-description: '## Background
-
-  In this self-paced tutorial, you will gain a basic understanding of the moving parts
-  that make up the typical container architecture.  This will cover container images,
-  registries, hosts, and orchestration.
-
+slug: subsystems-container-internals-lab-2-0-part-1
+id: ngpjngaqj7nl
+type: track
+title: Introduction to Containers
+description: |
+  ## Background
+  In this self-paced tutorial, you will gain a basic understanding of the moving parts that make up the typical container architecture.  This will cover container images, registries, hosts, and orchestration.
 
   By the end of this lab you should be able to:
-
-  - Draw a diagram showing how the Linux kernel, services and daemons work together
-  to create and deploy containers
-
-  - Internalize how the architecture of the kernel and supporting services affect
-  security and performance
-
-  - Explain the API interactions of daemons and the host kernel to create isolated
-  processes
-
+  - Draw a diagram showing how the Linux kernel, services and daemons work together to create and deploy containers
+  - Internalize how the architecture of the kernel and supporting services affect security and performance
+  - Explain the API interactions of daemons and the host kernel to create isolated processes
   - Understand the basics of why people move on to container orchestration
-
-  - Command the nomenclature necessary to technically discuss the basics of the single
-  and multi-host toolchain
-
+  - Command the nomenclature necessary to technically discuss the basics of the single and multi-host toolchain
 
   ## Outline
-
-  - Container Images: made up of underlying operating system components like libraries
-  and programming languages
-
+  - Container Images: made up of underlying operating system components like libraries and programming languages
   - Container Registries: Fancy file servers that help users share container images
-
   - Container Hosts: Includes Podman (or Docker) runtime, Systemd, runc, and Libcontainer
-
   - Container Orchestration: Includes Kubernetes/OpenShift
 
-
   ## Other Material
-
   - [Presentation](http://bit.ly/2V18QCg)
-
   - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
 
-
   ## Start Scenario
-
-  Once you have watched the background video or went throught the presentation, continue
-  to the exercises
-
-  '
+  Once you have watched the background video or went throught the presentation, continue to the exercises
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: subsystems-container-internals-lab-2-0-part-1
-tags:
-- openshift
-title: Introduction to Containers
-type: track
+challenges:
+- slug: 01-introduction
+  id: yoxnnc1v4hwl
+  type: challenge
+  title: Introduction to Containers
+  assignment: |
+    If you understand Linux, you probably already have 85% of the knowledge you need to understand containers. If you understand how processes, mounts, networks , shells and daemons work - commands like ps, mount, ip addr, bash, httpd and mysqld - then you just need to understand a few extra primitives to become an expert with containers. Remember that all of the things that you already know today still apply: from security and performance to storage and networking, containers are just a different way of packaging and delivering Linux applications. There are four basic primitives to learn to get you from Linux administrator to feeling comfortable with containers:
+
+    * [Container Images](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.dqlu6589ootw)
+    * [Container Registries](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.4cxnedx7tmvq)
+    * [Container Hosts](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.8tyd9p17othl)
+    * [Container Orchestration](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo66)
+
+    Once, you understand the basic four primitives, there are some advanced concepts that will be covered in future labs including:
+
+    * Container Standards: Understanding OCI, CRI, CNI, and more
+    * Container Tools Ecosystem - Podman, Buildah, Skopeo, cloud registries, etc
+    * Production Image Builds: Sharing and collaborating between technical specialists (performance, network, security, databases, etc)
+    * Intermediate Architecture: Production environments
+    * Advanced Architecture: Building in resilience
+    * Container History: Context for where we are at today
+
+    Covering all of this material is beyond the scope of any live training, but we will cover the basics, and students can move on to other labs not covered in the classroom. These labs are available online at http://learn.openshift.com/subsystems.
+
+    Now, let's start with the introductory lab, which covers these four basic primitives:
+
+    ![New Primitives](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/01-new-primitives.png)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+- slug: 02-images
+  id: nk9ymhgeuvm3
+  type: challenge
+  title: Container Images
+  assignment: |
+    Container images are really just tar files. Seriously, they are tar files, with an associated JSON file. Together we call these an Image Bundle. The on-disk format of this bundle is defined by the [OCI Image Specification](https://github.com/opencontainers/image-spec). All major container engines including Podman, Docker, RKT, CRI-O and containerd build and consume these bundles.
+
+    ![Container Images](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-basic-container-image.png)
+
+    But let's dig into three concepts a little deeper:
+
+    1. Portability: Since the OCI standard governs the images specification, a container image can be created with Podman, pushed to almost any container registry, shared with the world, and consumed by almost any container engine including Docker, RKT, CRI-O, containerd and, of course, other Podman instances. Standardizing on this image format lets us build infrastructure like registry servers which can be used to store any container image, be it RHEL 6, RHEL 7, RHEL8, Fedora, or even Windows container images. The image format is the same no matter which operating system or binaries are in the container image. Notice that Podman can download a Fedora image, uncompress it, and store it in the local /var/lib/containers image storage even though this isn't a Fedora container host:
+
+    ```
+    podman pull quay.io/fedora/fedora:34-x86_64
+    ```
+
+    2. Compatibility: This addresses the content inside the container image. No matter how hard you try, ARM binaries in a container image will not run on POWER container hosts. Containers do not offer compatibility guarantees; only virtualization can do that. This compatibility problem extends to processor architecture, and also versions of the operating system. Try running a RHEL 8 container image on a RHEL 4 container host -- that isn't going to work. However, as long as the operating systems are reasonably similar, the binaries in the container image will usually run. Note that executing basic commands with a Fedora image work even though this isn't a Fedora container host:
+
+    ```
+    podman run -t quay.io/fedora/fedora:34-x86_64 cat /etc/redhat-release
+    ```
+
+    3. Supportability: This is what vendors can support. This is about investing in testing, security, performance, and architecture as well as ensuring that images and binaries are built in a way that they run correctly on a given set of container hosts. For example, Red Hat supports RHEL 6, UBI 7, and UBI 8 container images on both RHEL 7 and RHEL 8 container hosts (CoreOS is built from RHEL bits). Red Hat cannot guarantee that every permutation of container image and host combination on the planet will work. It would expand the testing and analysis matrix resources at a non-linear growth rate. To demonstrate, run a Red Hat Universal Base Image (UBI) container on this container host. If this was a RHEL container host, this would be completely supported (sorry, only CentOS hosts available for this lab environment :-) so not supported, but you get the point):
+
+    ```
+    podman run -t registry.access.redhat.com/ubi7/ubi cat /etc/redhat-release
+    ```
+
+    Analyzing portability, compatibility, and supportability, we can deduce that a RHEL 7 image will work on RHEL 7 host perfectly. The code in both were designed, compiled, and tested together. The Product Security Team at Red Hat is analyzing CVEs for this combination, performance teams are testing RHEL 7 web servers, with a RHEL 7 kernel, etc, etc. The entire machine of software creation and testing does its work in this configuration with programs and kernels compiled, built and tested together. Matching versions of container images and hosts inherit all of this work:
+
+    ![Matching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-rhel7-image-rhel7-host.png)
+
+    However, there are limits. Red Hat can't guarantee that RHEL 5, Fedora, and Alpine images will work like they were intended to on a RHEL 7 host. The container image standards guarantee that the container engine will be able to ingest the images, pulling them down and caching them locally. But, nobody can guarantee that the binaries in the container images will work correctly. Nobody can guarantee that there won't be strange CVEs that show up because of the version combinations (yeah, that's "a thing"), and of course, nobody can guarantee the performance of the binaries running on a kernel for which it wasn't compiled. That said, many times, these binaries will appear to just work.
+
+    ![Mismatching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-mismatch.png)
+
+    This leads us to supportability as a concept seperate from portability and compatibility. This is the ability to guarantee to some level that certain images will work on certain hosts. Red Hat can do this between selected major versions of RHEL for the same reason that we can do it with the [RHEL Application Compatibility Guide](https://access.redhat.com/articles/rhel-abi-compatibility). We take special precautions to compile our programs in a way that doesn't break compatibility, we analyze CVEs, and we test performance. A bare minimum of testing, security, and performance can go a long way in ensuring supportability between versions of Linux, but there are limits. One should not expect that container images from RHEL 9, 10, or 11 will run on RHEL 8 hosts.
+
+    ![Container Image & Host Supportability](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-supportability.png)
+
+    Alright, now that we have sorted out the basics of container images, let's move on to registries...
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+- slug: 03-registries
+  id: mksgqnfj7rdf
+  type: challenge
+  title: Container Registries
+  assignment: |
+    Registries are really just fancy file servers that help users share container images with each other. The magic of containers is really the ability to find, run, build, share and collaborate with a new packaging format that groups applications and all of their dependencies together.
+
+    ![Container Registry](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/03-basic-container-registry.png)
+
+    Container images make it easy for software builders to package software, as well as provide information about how to run it. Using metadata, software builders can communicate how users *can* and *should* run their software, while providing the flexibility to also build new things based on existing software.
+
+    Registry servers just make it easy to share this work with other users. Builders can push an image to a registry, allowing users and even automation like CI/CD systems to pull it down and use it thousands or millions of times. Some registries like the [Red Hat Container Catalog](https://access.redhat.com/containers/) offer images which are highly curated, well tested, and enterprise grade. Others, like [Quay.io](http://quay.io), are cloud-based registries that give individual users public and private spaces to push their own images and share them with others. Curated registries are good for partners who want to deliver solutions together (eg. Red Hat and CrunchyDB), while cloud-based registries are good for end users collaborating on work.
+
+    As an example which demonstrates the power of sharing with quay.io, let's pull a container image that was designed and built for this lab:
+
+    ```
+    podman pull quay.io/fatherlinux/linux-container-internals-2-0-introduction
+    ```
+
+    Now, run this simulated database:
+
+    ```
+    podman run -d -p 3306:3306 quay.io/fatherlinux/linux-container-internals-2-0-introduction
+    ```
+
+    Now, poll the simulated database with our very simple client, curl:
+
+    ```
+    curl localhost:3306
+    ```
+
+
+    Notice how easy these commands were. We didn't have to know very much about how to run it. All of the complex logic for how to run it was embedded in the image. Here's the build file, so that you can inspect the start logic (ENTRYPOINT). You might not fully understand the bash code there, but that's OK, that's part of why containers are useful:
+
+    ~~~~
+    #
+    # Version 1
+
+    # Pull from Red Hat Universal Base Image
+    FROM registry.access.redhat.com/ubi7/ubi-minimal
+
+    MAINTAINER Scott McCarty smccarty@redhat.com
+
+    # Update the image
+    RUN microdnf -y install nmap-ncat && \
+        echo "Hi! I'm a database. Get in ma bellie!!!" > /srv/hello.txt
+
+    # Output
+    ENTRYPOINT bash -c 'while true; do /usr/bin/nc -l -p 3306 < /srv/hello.txt; done'
+    ~~~~
+
+    Realizing how easy it is to build and share using registry servers is the goal of this lab. You can embed the runtime logic into the container image using a build file, thereby communicating not just *what* to run, but also *how*. You can share the container image making it easier for others to use. You can also share the build file using something like GitHub to make it easy for others to build off of your work (open source for the win).
+
+    Now, let's move on to container hosts...
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+- slug: 04-hosts
+  id: tyh8z60jdu49
+  type: challenge
+  title: Container Hosts
+  assignment: |+
+    To understand the Container Host, we must analyze the layers that work together to create a container. They include:
+
+    * [Container Engine](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo3l)
+    * [Container Runtime](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo55)
+    * [Linux Kernel](https://lwn.net/Articles/780364/)
+
+    ## Container Engine
+    A container engine can loosely be described as any tool which provides an API or CLI for building or running containers. This started with Docker, but also includes Podman, Buildah, rkt, and CRI-O. A container engine accepts user inputs, pulls container images, creates some metadata describing how to run the container, then passes this information to a container Runtime.
+
+    ## Container Runtime
+    A container runtime is a small tool that expects to be handed two things - a directory often called a root filesystem (or rootfs), and some metadata called config.json (or spec file). The most common runtime [runc](https://github.com/opencontainers/runc) is the default for every container engine mentioned above. However, there are many innovative runtimes including katacontainers, gvisor, crun, and railcar.
+
+    ## Linux Kernel
+    The kernel is responsible for the last mile of container creation, as well as resource management during its running lifecycle. The container runtime talks to the kernel to create the new container with a special kernel function called clone(). The runtime also handles talking to the kernel to configure things like cgroups, SELinux, and SECCOMP (more on these later). The combination of kernel technologies invoked are defined by the container runtime, but there are very recent [efforts to standardize this in the kernel](https://lwn.net/Articles/780364/).
+
+
+    ![Container Engine](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/04-simple-container-engine.png)
+
+
+    Containers are just regular Linux processes that were started as child processes of a container runtime instead of by a user running commands in a shell. All Linux processes live side by side, whether they are daemons, batch jobs or user commands - the container engine, container runtime, and containers (child processes of the container runtime) are no different. All of these processes make requests to the Linux kernel for protected resources like memory, RAM, TCP sockets, etc.
+
+    Execute a few commands with podman and notice the process IDs, and namespace IDs. Containers are just regular processes:
+
+    ```
+    podman ps -ls
+    ```
+
+    ```
+    podman top -l huser user hpid pid %C etime tty time args
+    ```
+
+    ```
+    ps -ef | grep 3306
+    ```
+
+    We will explore this deeper in later labs but, for now, commit this to memory, containers are simply Linux ...
+
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+- slug: 05-orchestration
+  id: icahnrizl2zj
+  type: challenge
+  title: Container Orchestration
+  assignment: |+
+    Container Orchestration is the next logical progression after you become comfortable working with containers on a single host. With a single container host, containerized applications can be managed quite similarly to traditional applications, while gaining incremental efficiencies. With orchestration, there is a significant paradigm shift - developers and administrators alike need to think differently, making all changes to applications through an API.  Some people question the "complexity" of orchestration, but the benefits far outweigh the work of learning it. Today, Kubernetes is the clear winner when it comes to container orchestration, and with it, you gain:
+
+    * Application Definitions - YAML and JSON files can be passed between developers or from developers to operators to run fully-functioning, multi-container applications
+    * Easy Application Instances - Run many versions of the same application in different namespaces
+    * Multi-Node Scheduling - controllers built into Kubernetes manage 10 or 10,000 container hosts with no extra complexity
+    * Powerful API - Developers, Cluster Admins, and Automation alike can define application state, tenancy, and with OpenShift 4, even cluster node states
+    * Operational Automation - The [Kubernetes Operator Framework](https://coreos.com/operators/) can be thought of as a robot systems administrator deployed side by side with applications managing mundane and complex tasks for the application (backups, restores, etc)
+    * Higher Level Frameworks - Once you adopt Kubernetes orchestration, you gain access to an innovative ecosystem of tools like Istio, Knative, and the previously mentioned Operator Framework
+
+    ![Orchestration Node](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/05-simple-orchestration-node.png)
+
+
+    To demonstrate, all we need is bash, curl, and netcat which lets us pipe text across a TCP port. If you are familiar with basic bash scripting, this tiny lab teases apart the value of the orchestration, versus the application itself. This application doesn't do much, but it does demonstrate the power of a two-tier application running in containers with both a database and a web front end. In this lab, we use the same container image from before, but this time we embed the *how* to run logic in the Kubernetes YAML. Here's a simple representation of what our application does:
+
+    ~~~~
+    User -> Web App (port 80) -> Database (port 3306)
+    ~~~~
+
+
+    Take a quick look at this YAML file but don't don't get too worried if you don't fully understand the YAML. There are plenty of great tutorials on Kubernetes, and most people learn it over iterations, and building new applications:
+
+    ```
+    curl https://raw.githubusercontent.com/fatherlinux/two-pizza-team/master/two-pizza-team-ubi.yaml
+    ```
+
+
+    In the "database," we are opening a file and using netcat to ship it over port 3306. In the "web app", we are pulling in the data from port 3306, and shipping it back out over port 80 like a normal application would. The idea is to show a simple example of how powerful this is without having to learn other technology. We are able to fire this application up in an instant with a single *oc* command:
+
+    ```
+    oc create -f https://raw.githubusercontent.com/fatherlinux/two-pizza-team/master/two-pizza-team-ubi.yaml
+    ```
+
+    Wait for the cheese-pizza and pepperoni pizza pods to start:
+
+    ```
+    for i in {1..5}; do oc get pods;sleep 3; done
+    ```
+
+    Wait until all pods are are in status "RUNNING".
+
+    When the pods are done being created, pull some data from our newly created "web app".  Notice that we get back the contents of a file which resides on the the database server, not the web server:
+
+    ```
+    curl $(oc get svc pepperoni-pizza -o yaml | grep ip | awk '{print $3}')
+    ```
+
+    Note: The command in brackets above is simply getting the IP address of the web server.
+
+    Now, let's pull data directly from the "database."  It's the same file as we would expect, but this time coming back over port 3306:
+
+    ```
+    curl $(oc get svc cheese-pizza -o yaml | grep clusterIP | awk '{print $2}'):3306
+    ```
+
+    Take a moment to note that we could fire up 50 copies of this same application in Kubernetes with 49 more commands (in different projects). It's that easy.
+
+
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+- slug: 06-closing
+  id: tzxzfpuertka
+  type: challenge
+  title: Closing
+  assignment: |
+    In this lab, we have covered container images, registries, hosts, and orchestration as four new primitives you need to learn on your container journey. If you are struggling to understand why you need containers, or why need to move to orchestration - or maybe you are struggling to explain it to your management or others in your team - maybe thinking about it in this context will help:
+
+    ![Container Journey](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/06-journey.png)
+
+    It is a journey, and we are always happy to help. If you want help along the way, here are some people to follow on Twitter:
+
+    * Scott McCarty (Product Manager): [@fatherlinux](https://twitter.com/fatherlinux)
+    * Dan Walsh (Containers Team Lead): [@rhatdan](https://twitter.com/rhatdan)
+    * Mrunal Patel (Lead for CRI-O): [@mrunalp](https://twitter.com/mrunalp)
+    * Nalin Dahyabhai (Lead for Buildah): [@atnalind](https://twitter.com/atnalind)
+    * Tom Sweeney (Core Engineer): [@TSweeneyRedHat](https://twitter.com/TSweeneyRedHat)
+    * Valentin Rothberg (Core Engineer): [@vlntnrthbrg](https://twitter.com/vlntnrthbrg)
+    * William Henry (Core Engineer): [@ipbabble](https://twitter.com/ipbabble)
+    * Vincent Batts: (OCI Contributor): [@vbatts](https://twitter.com/vbatts)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 200
+checksum: "4881482960497678652"
+_: ""

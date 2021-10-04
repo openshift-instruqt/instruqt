@@ -33,7 +33,7 @@ private: true
 published: false
 challenges:
 - slug: 00-application-overview
-  id: hyerrzlpyj0s
+  id: vypoetsnmfaa
   type: challenge
   title: Application Overview
   assignment: |
@@ -59,9 +59,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 01-creating-initial-project
-  id: ap2xjdcxg2g7
+  id: qlz2y8uoxfqn
   type: challenge
   title: Creating an Initial Project
   assignment: |
@@ -152,9 +152,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 02-creating-new-binary-component
-  id: 5y75xbhoford
+  id: 1weuw1u3memq
   type: challenge
   title: Creating new binary component
   assignment: |
@@ -268,9 +268,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 03-deploying-component-from-source-code
-  id: pozagq6da2j5
+  id: oewaw2k8yma1
   type: challenge
   title: Deploying component from source-code
   assignment: |
@@ -360,9 +360,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 04-configuring-components
-  id: tn1nwhusqxl2
+  id: etcf4yykt4t2
   type: challenge
   title: Configuring components
   assignment: |
@@ -400,9 +400,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 05-exposing-components-to-public
-  id: mf0ogylh18ie
+  id: f52rv2188hlh
   type: challenge
   title: Exposing components to public
   assignment: |
@@ -454,9 +454,9 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
+  timelimit: 128
 - slug: 06-making-changes-to-source-code
-  id: gbyfqaytxzyk
+  id: dlrwgmhgfd0i
   type: challenge
   title: Making changes to source-code
   assignment: |
@@ -509,5 +509,6 @@ challenges:
     hostname: crc-nonest-1
     port: 30443
   difficulty: basic
-  timelimit: 300
-checksum: "14788363870430455866"
+  timelimit: 128
+checksum: "17063413539169458776"
+_: ""

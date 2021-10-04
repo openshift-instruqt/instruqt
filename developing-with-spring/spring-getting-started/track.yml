@@ -27,7 +27,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: dcsy7veghxht
+  id: vgae5cp0q0ea
   type: challenge
   title: Step 1
   assignment: |
@@ -75,7 +75,7 @@ challenges:
 
     One that differs slightly is the `pom.xml`. Please open the and examine it a bit closer (but do not change anything at this time)
 
-    ``pom.xml``{{open}}
+    ``pom.xml``
 
     As you review the content, you will notice that there are a lot of **TODO** comments. **Do not remove them!** These comments are used as a marker and without them, you will not be able to finish this scenario.
 
@@ -104,7 +104,7 @@ challenges:
     >**NOTE:** Undertow is another an open source project that is maintained by Red Hat and therefore Red Hat plans to add support for Undertow shortly.
 
 
-    To add Apache Tomcat to our project all we have to do is to add the following lines in ``pom.xml``{{open}}
+    To add Apache Tomcat to our project all we have to do is to add the following lines in ``pom.xml``
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add web (tomcat) dependency here -->">
         &lt;dependency&gt;
@@ -166,9 +166,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 02-read-content-from-a-database
-  id: dyzayey51qsb
+  id: avtpiiz22lus
   type: challenge
   title: Step 2
   assignment: |
@@ -184,7 +184,7 @@ challenges:
 
     >**NOTE:** Hibernate is another Open Source project that is maintained by Red Hat and it will soon be productized (as in fully supported) in Red Hat Runtimes.
 
-    To add Hibernate to our project all we have to do is to add the following line in ``pom.xml``{{open}}
+    To add Hibernate to our project all we have to do is to add the following line in ``pom.xml``
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add JPA dependency here -->">
         &lt;dependency&gt;
@@ -207,7 +207,7 @@ challenges:
 
     We are going to implement an Entity class that represents a fruit. This class is used to map our object to a database schema.
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``{{open}}
+    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``
 
     Then, copy the below content into the file (or use the `Copy to editor` button):
 
@@ -258,7 +258,7 @@ challenges:
 
     The repository should provide methods for insert, update, select and delete operations on Fruits from the database. We use Spring Data which provides us with lots of boilerplate code. All we have to do is to add an interface that extends the `CrudRepository<Fruit, Integer>` interface provided by Spring Data.
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitRepository.java``{{open}}
+    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitRepository.java``
 
     Then, copy the below content into the file (or use the `Copy to editor` button):
 
@@ -275,7 +275,7 @@ challenges:
 
     To pre-populate the database with content, Hibernate offers a nifty feature where we can provide a SQL file that populates the content.
 
-    First, we need to create the SQL  file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/resources/import.sql``{{open}}
+    First, we need to create the SQL  file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/resources/import.sql``
 
     Then, copy the below content into the file (or use the `Copy to editor` button):
 
@@ -288,7 +288,7 @@ challenges:
     **5. Add a test class**
     Verify that we can use the `FruitRepository` for retrieving and storing Fruit objects by creating a test class.
 
-    First, we need to create the java class file. Click on the following link to open an empty file in the editor: ``src/test/java/com/example/ApplicationTest.java``{{open}}
+    First, we need to create the java class file. Click on the following link to open an empty file in the editor: ``src/test/java/com/example/ApplicationTest.java``
 
     Then, copy the below content into the file (or use the `Copy to editor` button):
 
@@ -411,9 +411,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 03-create-rest-services
-  id: xynxuvuds2b7
+  id: zdtcybbszf09
   type: challenge
   title: Step 3
   assignment: |
@@ -422,7 +422,7 @@ challenges:
 
     **1. Add a service**
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitController.java``{{open}}
+    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitController.java``
 
     Then, copy the below content into the file (or use the `Copy to editor` button):
 
@@ -575,9 +575,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 04-login-to-openshift
-  id: xwqsv1o4gy4b
+  id: 13nhecl4yo8w
   type: challenge
   title: Step 4
   assignment: |
@@ -646,9 +646,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 180
 - slug: 05-deploy-to-openshift
-  id: xtzt1a4k6x5g
+  id: 9edtnniirbie
   type: challenge
   title: Step 5
   assignment: |
@@ -671,17 +671,17 @@ challenges:
 
     **2. Review Database configuration**
 
-    Take some time and review the ``src/main/jkube/deployment.yml``{{open}}.
+    Take some time and review the ``src/main/jkube/deployment.yml``.
 
-    As you can see that file specifies a couple of elements that are needed for our deployment. It also uses the username and password from a Kubernetes Secret. For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``{{open}}, however in a production environment this would likely be provided to you by the Ops team.
+    As you can see that file specifies a couple of elements that are needed for our deployment. It also uses the username and password from a Kubernetes Secret. For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``, however in a production environment this would likely be provided to you by the Ops team.
 
-    Now, review the ``src/main/resources/application-openshift.properties``{{open}}
+    Now, review the ``src/main/resources/application-openshift.properties``
 
     In this file, we are using the configuration from the `deployment.yml` to read username, password, and other connection details.
 
     **3. Add the PostgreSQL database driver**
 
-    So far our application has only used the H2 Database, we now need to add a dependency for PostgreSQL driver. We do that by adding a runtime dependency under the `openshift` profile in ``pom.xml``{{open}}.
+    So far our application has only used the H2 Database, we now need to add a dependency for PostgreSQL driver. We do that by adding a runtime dependency under the `openshift` profile in ``pom.xml``.
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: ADD PostgreSQL database dependency here -->">
             &lt;dependency&gt;
@@ -694,7 +694,7 @@ challenges:
 
     **4. Add a health check**
 
-    We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to ``pom.xml``{{open}} at the **TODO** comment..
+    We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to ``pom.xml`` at the **TODO** comment..
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: ADD Actuator dependency here -->">
         &lt;dependency&gt;
@@ -758,5 +758,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "11840753409703345841"
+  timelimit: 180
+checksum: "2661738245038217206"
+_: ""

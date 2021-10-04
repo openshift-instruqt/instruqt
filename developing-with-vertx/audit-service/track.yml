@@ -1,6 +1,6 @@
 challenges:
 - assignment: "## Composing methods returning Single\n\nOpen the `io.vertx.workshop.audit.impl.AuditVerticle`\
-    \ class:\n\n`audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java`{{open}}\
+    \ class:\n\n`audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java`\
     \ \n\nThe first important detail of this verticle is its `start` method. As the\
     \ `start` method from the traders, the method is asynchronous, and report its\
     \ completion in the given `Future` object.\n\nVert.x would consider the verticle\
@@ -46,7 +46,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 1
   type: challenge
 - assignment: "##  Implementing a method returning a Single & Vert.x Web\n\nTake a\
@@ -106,7 +106,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 2
   type: challenge
 - assignment: "## Using Async JDBC\n\nIn the `start` method, we are calling `initializeDatabase`.\
@@ -159,7 +159,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 3
   type: challenge
 - assignment: "## Async JDBC with a callback-based composition\n\nYou may ask why\
@@ -203,7 +203,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 4
   type: challenge
 - assignment: "## Deploy to OpenShift\n\nFirst, we need a database.\n\n**1. Deploy\
@@ -241,7 +241,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 5
   type: challenge
 - assignment: "## Managing Secrets\n\nBut wait\u2026\u200B we have hardcoded the database\
@@ -252,7 +252,7 @@ challenges:
     \ pairs.\n\nThere are several ways to access secrets from your application:\n\n\
     1, ENV variables\n2. Mounted as a file\n3. Using the Vert.x config\n\nFor sake\
     \ of simplicity we are going to use the first approach.\n\nSo, we first need to\
-    \ bind the secret with our deployment. \n\nOpen `audit-service/src/main/fabric8/deployment.yml`{{open}}\
+    \ bind the secret with our deployment. \n\nOpen `audit-service/src/main/fabric8/deployment.yml`\
     \ and copy the following content (or uncomment the commented part):\n\n```yaml\n\
     spec:\n  template:\n    spec:\n      containers:\n        - name: vertx\n    \
     \      env:\n            - name: KUBERNETES_NAMESPACE\n              valueFrom:\n\
@@ -289,7 +289,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Step 6
   type: challenge
 description: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley\

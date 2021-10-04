@@ -37,7 +37,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: nvh3t2nimrfo
+  id: qazmygthlry9
   type: challenge
   title: Step 1
   assignment: |
@@ -122,7 +122,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: step2
-  id: lcufec5ybxd4
+  id: rotcg2leeugs
   type: challenge
   title: Step 2
   assignment: |
@@ -255,7 +255,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: step3
-  id: sac0cxwh4dng
+  id: qtola9smnjxu
   type: challenge
   title: Step 3
   assignment: |2
@@ -401,7 +401,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: step4
-  id: pljbvumhpuiv
+  id: vsoesvnyygnz
   type: challenge
   title: Step 4
   assignment: |
@@ -491,4 +491,5 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "16016927680769033206"
+checksum: "4918477026936523773"
+_: ""

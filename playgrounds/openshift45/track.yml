@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: tips
-  id: ss2pcbzbtlas
+  id: 5xyen9yrym0q
   type: challenge
   title: OpenShift Playground
   assignment: |+
@@ -161,5 +161,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "1054452787766589830"
+  timelimit: 3600
+checksum: "8828154294547925428"
+_: ""

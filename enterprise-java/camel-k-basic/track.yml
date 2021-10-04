@@ -87,7 +87,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 1
   type: challenge
 - assignment: "## Writing the first Camel K application\nWe are going to start fresh\
@@ -175,7 +175,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 2
   type: challenge
 - assignment: "## Applying configuration and routing\n\nThis step shows how to configure\
@@ -243,7 +243,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 3
   type: challenge
 - assignment: '## Running integrations as Kubernetes CronJobs
@@ -381,7 +381,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 4
   type: challenge
 description: '

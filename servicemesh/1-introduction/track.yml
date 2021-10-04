@@ -35,7 +35,7 @@ private: true
 published: false
 challenges:
 - slug: 01-what-is-service-mesh
-  id: m8z7k0s6wwfv
+  id: d8eaxamxkg9b
   type: challenge
   title: What is Service Mesh and why we need it?
   assignment: |
@@ -75,10 +75,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 600
 - slug: 02-details
-  id: 3twxh5g95g3s
+  id: 1uvxolhzxpa8
   type: challenge
   title: Service Mesh Details
   assignment: |-
@@ -155,10 +155,10 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
+  difficulty: basic
+  timelimit: 600
 - slug: 03-playground
-  id: 8x94gx6xtwkx
+  id: ib9bjqcis026
   type: challenge
   title: Service Mesh Playground
   assignment: |+
@@ -222,6 +222,7 @@ challenges:
     type: code
     hostname: crc-nonest-1
     path: /root
-  difficulty: intermediate
-  timelimit: 300
-checksum: "12154344048699997555"
+  difficulty: basic
+  timelimit: 600
+checksum: "7958845925091971737"
+_: ""

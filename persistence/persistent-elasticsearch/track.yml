@@ -69,7 +69,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Create Project and PVC
   type: challenge
 - assignment: "- Apply the YAML file to deploy Elasticsearch\n\n```\noc create -f\
@@ -99,7 +99,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Deploy Elasticsearch on ODF
   type: challenge
 - assignment: "- Apply the YAML file to deploy application's backend API\n\n```\n\
@@ -128,7 +128,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Deploy app backend & frontend
   type: challenge
 - assignment: '- Let''s load the text formatted dataset of 100 classic novels from
@@ -199,7 +199,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Ingest dataset to Elasticsearch
   type: challenge
 description: "# What is OpenShift Container Storage (ODF)\n\nRed Hat\xAE OpenShift\xAE\

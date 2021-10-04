@@ -40,7 +40,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: cypee3efjblq
+  id: 2cr93oswbakl
   type: challenge
   title: Initialize the Project
   assignment: |
@@ -116,9 +116,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step2
-  id: jlwyzhat3wsw
+  id: sip5nmxqtrap
   type: challenge
   title: Update the Watches File
   assignment: |-
@@ -142,9 +142,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step3
-  id: biwonegnzaad
+  id: yg6ssxiiwpgs
   type: challenge
   title: Apply the CockroachDB Custom Resource Definition
   assignment: |
@@ -183,9 +183,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step4
-  id: trvlugyyfulq
+  id: axy69m2nzwyq
   type: challenge
   title: Apply the CockroachDB Custom Resource
   assignment: |
@@ -286,9 +286,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step5
-  id: ie31wjnaa2zj
+  id: nb5sjyswkymn
   type: challenge
   title: Access the CockroachDB Web UI
   assignment: |-
@@ -322,9 +322,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step6
-  id: 7cxdha9xjuym
+  id: qf3dgkkxa2kj
   type: challenge
   title: Connect to the CockroachDB Cluster
   assignment: |-
@@ -381,9 +381,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step7
-  id: 8vm6dcwyetax
+  id: 8m1phccosdgv
   type: challenge
   title: Update the CockroachDB Custom Resource
   assignment: |
@@ -417,9 +417,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step8
-  id: wyo6ocn4dlhd
+  id: qvn0uvbp3yvt
   type: challenge
   title: Test CockroachDB Cluster Failover
   assignment: |
@@ -475,9 +475,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: step9
-  id: sryxliequ41s
+  id: gnch27kpbbme
   type: challenge
   title: Clean Up
   assignment: |-
@@ -511,5 +511,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "7520839767890589670"
+  timelimit: 200
+checksum: "478162101958009916"
+_: ""

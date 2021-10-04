@@ -19,7 +19,7 @@ description: |
 
   In the following tutorial, you will deploy the Kafka Bridge and use it to connect to your Apache Kafka cluster using HTTP.
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 tags:
 - openshift
 owner: openshift
@@ -31,7 +31,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: ijqw4b3asnwf
+  id: vynctj3xrqln
   type: challenge
   title: Deploying the HTTP Bridge
   assignment: |2
@@ -69,7 +69,7 @@ challenges:
 
     Click the link below to open the custom resource (CR) definition for the bridge:
 
-    * `kafka-bridge.yaml`{{open}}
+    * `kafka-bridge.yaml`
 
     The bridge has to connect to the Apache Kafka cluster. This is specified in the `bootstrapServers` property. The bridge then uses a native Apache Kafka consumer and producer for interacting with the cluster.
 
@@ -129,9 +129,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 225
 - slug: step2
-  id: zkhy7x7slnbt
+  id: 6zmz8hpahukw
   type: challenge
   title: Producing messages
   assignment: |
@@ -208,9 +208,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 225
 - slug: step3
-  id: bev7yf4c4xsc
+  id: 9sa8vzbproqi
   type: challenge
   title: Subscribing to the topic
   assignment: |
@@ -269,9 +269,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 225
 - slug: step4
-  id: 8235vtxrsidg
+  id: cw3xx2bxplxw
   type: challenge
   title: Consuming messages
   assignment: |
@@ -343,5 +343,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
-checksum: "16437422237691067587"
+  timelimit: 225
+checksum: "795506367884409026"
+_: ""

@@ -144,7 +144,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Using RWO storage
   type: challenge
 - assignment: "RWX storage is a special kind of storage that can be mounted on several\
@@ -241,7 +241,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 150
   title: Using RWX storage
   type: challenge
 description: 'Make your first steps with the three persistent storage options in Openshift.

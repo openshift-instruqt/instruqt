@@ -46,7 +46,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: yynok7yvyjmz
+  id: w0xnilexbzdn
   type: challenge
   title: Installing Red Hat AMQ Streams Operators
   assignment: |
@@ -131,9 +131,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step2
-  id: bkdlablmqenx
+  id: eoyvnhx87m0q
   type: challenge
   title: Deploying a Kafka cluster
   assignment: |
@@ -228,9 +228,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step3
-  id: nk8dgvyxy3w6
+  id: mq0avjbpakqz
   type: challenge
   title: Accessing the Kafka cluster from a console
   assignment: |
@@ -284,9 +284,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step4
-  id: ykn1xqzoupbd
+  id: nmi0i4nutxbu
   type: challenge
   title: Producing and consuming records
   assignment: |
@@ -347,5 +347,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "16425364808088625280"
+  timelimit: 225
+checksum: "14995459864527200800"
+_: ""

@@ -50,7 +50,7 @@ private: true
 published: false
 challenges:
 - slug: 01-add-extension
-  id: kwmrpwyitq1r
+  id: sqmjwnvmxadk
   type: challenge
   title: Step 1
   assignment: |
@@ -84,7 +84,7 @@ challenges:
 
     You start with a basic Maven-based application with the usual `pom.xml` entries for a Quarkus app.
 
-    We've also included a frontend HTML file at `src/main/resources/META-INF/resources/index.html`{{open}} that will show our list of Coffee.
+    We've also included a frontend HTML file at `src/main/resources/META-INF/resources/index.html` that will show our list of Coffee.
 
     # The Application You Will Build
 
@@ -108,7 +108,7 @@ challenges:
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    This will add the necessary entries in your `pom.xml`{{open}} to bring in the Reactive PostgreSQL extension. You'll see:
+    This will add the necessary entries in your `pom.xml` to bring in the Reactive PostgreSQL extension. You'll see:
 
     ```xml
     <dependency>
@@ -133,9 +133,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 120
 - slug: 02-remote-dev
-  id: ixhqhd0bjlad
+  id: 9751ifet7w3n
   type: challenge
   title: Step 2
   assignment: |+
@@ -219,7 +219,7 @@ challenges:
 
     ## Configure Quarkus for remote live coding
 
-    Click: `./src/main/resources/application.properties`{{open}} to open this file. This file contains Quarkus configuration.
+    Click: `./src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
 
     Click **Copy to Editor** to add the following values to the `application.properties` file:
 
@@ -332,9 +332,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 120
 - slug: 03-add-resource
-  id: sdu8mflevdnx
+  id: 6axkuzvmqrlx
   type: challenge
   title: Step 3
   assignment: |-
@@ -344,7 +344,7 @@ challenges:
     ## Add CoffeeResource endpoints
 
     Let’s modify the application and add relevant methods. The CoffeeResource has alredy been created we will add the functionality to it.
-    Open a new file by clicking: `src/main/java/org/acme/reactive/CoffeeResource.java`{{open}}.
+    Open a new file by clicking: `src/main/java/org/acme/reactive/CoffeeResource.java`.
 
     **1. Add db initialization**
     Lets add a few queries to initialize our database. We could have also choosen to omit this step, in that case the database should have had these tables. But since we have a new barebones instance, we can also use this way of initializing.
@@ -433,16 +433,16 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 120
 - slug: 04-add-model
-  id: d4fd3jevgq3j
+  id: c3achjbjsudc
   type: challenge
   title: Step 4
   assignment: |-
     Lets continue in this section and define are model Class
 
     Let’s modify the application and add relevant methods. The `Coffee` model class has alredy been created we will add the functionality to it.
-    Open a new file by clicking: `src/main/java/org/acme/reactive/Coffee.java`{{open}}.
+    Open a new file by clicking: `src/main/java/org/acme/reactive/Coffee.java`.
 
     We only have two fields, one for the ID of the Coffe and one for its name.
     <pre>
@@ -499,9 +499,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 120
 - slug: 05-package-and-run
-  id: 2hkqksntirb5
+  id: tzevegbqkd5l
   type: challenge
   title: Step 5
   assignment: |
@@ -575,5 +575,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "7735449076825931465"
+  timelimit: 120
+checksum: "7079273085265592686"
+_: ""

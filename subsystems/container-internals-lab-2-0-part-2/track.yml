@@ -1,415 +1,250 @@
-challenges:
-- assignment: 'The goal of this exercise is to understand the difference between base
-    images and multi-layered images (repositories). Also, we''ll try to understand
-    the difference between an image layer and a repository.
-
-
-    Let''s take a look at some base images. We will use the podman history command
-    to inspect all of the layers in these repositories. Notice that these container
-    images have no parent layers. These are base images, and they are designed to
-    be built upon. First, let''s look at the full ubi7 base image:
-
-
-    ```
-
-    podman history registry.access.redhat.com/ubi7/ubi:latest
-
-    ```
-
-
-    Now, let''s take a look at the minimal base image, which is part of the Red Hat
-    Universal Base Image (UBI) collection. Notice that it''s quite a bit smaller:
-
-
-    ```
-
-    podman history registry.access.redhat.com/ubi7/ubi-minimal:latest
-
-    ```
-
-
-    Now, using a simple Dockerfile we created for you, build a multi-layered image:
-
-
-    ```
-
-    podman build -t ubi7-change -f ~/labs/lab2-step1/Dockerfile
-
-    ```
-
-
-    Do you see the newly created ubi7-change tag?
-
-
-    ```
-
-    podman images
-
-    ```
-
-
-    Can you see all of the layers that make up the new image/repository/tag? This
-    command even shows a short summary of the commands run in each layer. This is
-    very convenient for exploring how an image was made.
-
-
-    ```
-
-    podman history ubi7-change
-
-    ```
-
-
-    Notice that the first image ID (bottom) listed in the output matches the registry.access.redhat.com/ubi7/ubi
-    image. Remember, it is important to build on a trusted base image from a trusted
-    source (aka have provenance or maintain chain of custody). Container repositories
-    are made up of layers, but we often refer to them simply as "container images"
-    or containers. When architecting systems, we must be precise with our language,
-    or we will cause confusion to our end users.
-
-    '
-  difficulty: intermediate
-  slug: 01-base-multi-layer-images
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers
-    and history'
-  type: challenge
-- assignment: 'Now we are going to inspect the different parts of the URL that you
-    pull. The most common command is something like this, where only the repository
-    name is specified:
-
-
-    ```
-
-    podman inspect ubi7/ubi
-
-    ```
-
-
-    But, what''s really going on? Well, similar to DNS, the podman command line is
-    resolving the full URL and TAG of the repository on the registry server. The following
-    command will give you the exact same results:
-
-
-    ```
-
-    podman inspect registry.access.redhat.com/ubi7/ubi:latest
-
-    ```
-
-
-    You can run any of the following commands, and you will get the exact same results
-    as well:
-
-
-    ```
-
-    podman inspect registry.access.redhat.com/ubi7/ubi:latest
-
-    ```
-
-
-    ```
-
-    podman inspect registry.access.redhat.com/ubi7/ubi
-
-    ```
-
-
-    ```
-
-    podman inspect ubi7/ubi:latest
-
-    ```
-
-
-    ```
-
-    podman inspect ubi7/ubi
-
-    ```
-
-
-    Now, let''s build another image, but give it a tag other than "latest":
-
-
-    ```
-
-    podman build -t ubi7:test -f ~/labs/lab2-step1/Dockerfile
-
-    ```
-
-
-    Now, notice there is another tag.
-
-
-    ```
-
-    podman images
-
-    ```
-
-
-    Now try the resolution trick again. What happened?
-
-
-    ```
-
-    podman inspect ubi7
-
-    ```
-
-
-    It failed, but why? Try again with a complete URL:
-
-
-    ```
-
-    podman inspect ubi7:test
-
-    ```
-
-
-    Notice that podman resolves container images similar to DNS resolution. Each container
-    engine is different, and Docker will actually resolve some things podman doesn''t
-    because there is no standard on how image URIs are resolved. If you test long
-    enough, you will find many other caveats to namespace, repository, and tag resolution.
-    Generally, it''s best to always use the full URI, specifying the server, namespace,
-    repository, and tag. Remember this when building scripts. Containers seem deceptively
-    easy, but you need to pay attention to details.
-
-    '
-  difficulty: intermediate
-  slug: 02-image-urls
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace,
-    Repository and Tag'
-  type: challenge
-- assignment: 'In this exercise, we will take a look at what''s inside the container
-    image. Java is particularly interesting because it uses glibc, even though most
-    people don''t realize it. We will use the ldd command to prove it, which shows
-    you all of the libraries that a binary is linked against. When a binary is dynamically
-    linked (libraries loaded when the binary starts), these libraries must be installed
-    on the system, or the binary will not run. In this example, in particular, you
-    can see that getting a JVM to run with the exact same behavior requires compiling
-    and linking in the same way. Stated another way, all Java images are not created
-    equal:
-
-
-    ```
-
-    podman run -it registry.access.redhat.com/jboss-eap-7/eap70-openshift ldd -v -r
-    /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java
-
-    ```
-
-
-    Notice that dynamic scripting languages are also compiled and linked against system
-    libraries:
-
-
-    ```
-
-    podman run -it registry.access.redhat.com/ubi7/ubi ldd /usr/bin/python
-
-    ```
-
-
-    Inspecting a common tool like "curl" demonstrates how many libraries are used
-    from the operating system. First, start the RHEL Tools container. This is a special
-    image that Red Hat releases with all of the tools necessary for troubleshooting
-    in a containerized environment. It''s rather large, but quite convenient:
-
-
-    ```
-
-    podman run -it registry.access.redhat.com/rhel7/rhel-tools bash
-
-    ```
-
-
-    Take a look at all of the libraries curl is linked against:
-
-
-    ```
-
-    ldd /usr/bin/curl
-
-    ```
-
-
-    Let''s see what packages deliver those libraries. It seems as if it''s both OpenSSL
-    and the Network Security Services libraries. When there is a new CVE discovered
-    in either OpenSSL or NSS, a new container image will need to be built to patch
-    it:
-
-
-    ```
-
-    rpm -qf /lib64/libssl.so.10
-
-    ```
-
-
-    ```
-
-    rpm -qf /lib64/libssl3.so
-
-    ```
-
-
-    Exit the rhel-tools container:
-
-
-    ```
-
-    exit
-
-    ```
-
-
-
-    It''s a similar story with Apache and most other daemons and utilities that rely
-    on libraries for security or deep hardware integration:
-
-
-    ```
-
-    podman run -it registry.access.redhat.com/rhscl/httpd-24-rhel7 bash
-
-    ```
-
-
-    Inspect mod_ssl Apache module:
-
-
-    ```
-
-    ldd /opt/rh/httpd24/root/usr/lib64/httpd/modules/mod_ssl.so
-
-    ```
-
-
-    Once again, we find a library provided by OpenSSL:
-
-
-    ```
-
-    rpm -qf /lib64/libcrypto.so.10
-
-    ```
-
-
-    Exit the httpd24 container:
-
-
-    ```
-
-    exit
-
-    ```
-
-
-    What does this all mean? Well, it means you need to be ready to rebuild all of
-    your container images any time there is a security vulnerability in one of the
-    libraries inside it.
-
-    '
-  difficulty: intermediate
-  slug: 03-image-internals
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating
-    system components in a container image'
-  type: challenge
-description: '## Background
-
-  This lab is focused on understanding how container images are built, tagged, organized
-  and leveraged to deliver software in a range of use cases.
-
+slug: subsystems-container-internals-lab-2-0-part-2
+id: kkfr9xvziaxx
+type: track
+title: Container Images
+description: |
+  ## Background
+  This lab is focused on understanding how container images are built, tagged, organized and leveraged to deliver software in a range of use cases.
 
   By the end of this lab you should be able to:
-
   - Internalize the difference between base images and multi-layered images
-
   - Understand the full URL of an image/repository
-
-  - Command a complete understanding of what''s inside of a container image
-
+  - Command a complete understanding of what's inside of a container image
 
   ## Outline
-
   - Image Layers and Repositories: inspecting base images, layers and history
-
-  - Image URLs: Mapping business requirements to the URL, Namespace, Repository and
-  Tag
-
-  - Image Internals: Inspecting the libraries, interpreters, and operating system
-  components in a container image
-
+  - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag
+  - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image
 
   ## Other Material
-
   This presentation will give you a background to all of the concepts in this lab.
-
   - [Presentation](https://goo.gl/wnB7JK)
-
   - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
 
-
   ## Start Scenario
-
-  Once you have watched the background video or went throught the presentation, continue
-  to the exercises
-
-  '
+  Once you have watched the background video or went throught the presentation, continue to the exercises
+icon: https://logodix.com/logo/1910931.png
+level: intermediate
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: subsystems-container-internals-lab-2-0-part-2
-tags:
-- openshift
-title: Container Images
-type: track
+challenges:
+- slug: 01-base-multi-layer-images
+  id: t1myugtexgb2
+  type: challenge
+  title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers and history'
+  assignment: |
+    The goal of this exercise is to understand the difference between base images and multi-layered images (repositories). Also, we'll try to understand the difference between an image layer and a repository.
+
+    Let's take a look at some base images. We will use the podman history command to inspect all of the layers in these repositories. Notice that these container images have no parent layers. These are base images, and they are designed to be built upon. First, let's look at the full ubi7 base image:
+
+    ```
+    podman history registry.access.redhat.com/ubi7/ubi:latest
+    ```
+
+    Now, let's take a look at the minimal base image, which is part of the Red Hat Universal Base Image (UBI) collection. Notice that it's quite a bit smaller:
+
+    ```
+    podman history registry.access.redhat.com/ubi7/ubi-minimal:latest
+    ```
+
+    Now, using a simple Dockerfile we created for you, build a multi-layered image:
+
+    ```
+    podman build -t ubi7-change -f ~/labs/lab2-step1/Dockerfile
+    ```
+
+    Do you see the newly created ubi7-change tag?
+
+    ```
+    podman images
+    ```
+
+    Can you see all of the layers that make up the new image/repository/tag? This command even shows a short summary of the commands run in each layer. This is very convenient for exploring how an image was made.
+
+    ```
+    podman history ubi7-change
+    ```
+
+    Notice that the first image ID (bottom) listed in the output matches the registry.access.redhat.com/ubi7/ubi image. Remember, it is important to build on a trusted base image from a trusted source (aka have provenance or maintain chain of custody). Container repositories are made up of layers, but we often refer to them simply as "container images" or containers. When architecting systems, we must be precise with our language, or we will cause confusion to our end users.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 900
+- slug: 02-image-urls
+  id: 6d56ovybryvn
+  type: challenge
+  title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag'
+  assignment: |
+    Now we are going to inspect the different parts of the URL that you pull. The most common command is something like this, where only the repository name is specified:
+
+    ```
+    podman inspect ubi7/ubi
+    ```
+
+    But, what's really going on? Well, similar to DNS, the podman command line is resolving the full URL and TAG of the repository on the registry server. The following command will give you the exact same results:
+
+    ```
+    podman inspect registry.access.redhat.com/ubi7/ubi:latest
+    ```
+
+    You can run any of the following commands, and you will get the exact same results as well:
+
+    ```
+    podman inspect registry.access.redhat.com/ubi7/ubi:latest
+    ```
+
+    ```
+    podman inspect registry.access.redhat.com/ubi7/ubi
+    ```
+
+    ```
+    podman inspect ubi7/ubi:latest
+    ```
+
+    ```
+    podman inspect ubi7/ubi
+    ```
+
+    Now, let's build another image, but give it a tag other than "latest":
+
+    ```
+    podman build -t ubi7:test -f ~/labs/lab2-step1/Dockerfile
+    ```
+
+    Now, notice there is another tag.
+
+    ```
+    podman images
+    ```
+
+    Now try the resolution trick again. What happened?
+
+    ```
+    podman inspect ubi7
+    ```
+
+    It failed, but why? Try again with a complete URL:
+
+    ```
+    podman inspect ubi7:test
+    ```
+
+    Notice that podman resolves container images similar to DNS resolution. Each container engine is different, and Docker will actually resolve some things podman doesn't because there is no standard on how image URIs are resolved. If you test long enough, you will find many other caveats to namespace, repository, and tag resolution. Generally, it's best to always use the full URI, specifying the server, namespace, repository, and tag. Remember this when building scripts. Containers seem deceptively easy, but you need to pay attention to details.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 900
+- slug: 03-image-internals
+  id: k2y1js8sg1fw
+  type: challenge
+  title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image'
+  assignment: |
+    In this exercise, we will take a look at what's inside the container image. Java is particularly interesting because it uses glibc, even though most people don't realize it. We will use the ldd command to prove it, which shows you all of the libraries that a binary is linked against. When a binary is dynamically linked (libraries loaded when the binary starts), these libraries must be installed on the system, or the binary will not run. In this example, in particular, you can see that getting a JVM to run with the exact same behavior requires compiling and linking in the same way. Stated another way, all Java images are not created equal:
+
+    ```
+    podman run -it registry.access.redhat.com/jboss-eap-7/eap70-openshift ldd -v -r /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java
+    ```
+
+    Notice that dynamic scripting languages are also compiled and linked against system libraries:
+
+    ```
+    podman run -it registry.access.redhat.com/ubi7/ubi ldd /usr/bin/python
+    ```
+
+    Inspecting a common tool like "curl" demonstrates how many libraries are used from the operating system. First, start the RHEL Tools container. This is a special image that Red Hat releases with all of the tools necessary for troubleshooting in a containerized environment. It's rather large, but quite convenient:
+
+    ```
+    podman run -it registry.access.redhat.com/rhel7/rhel-tools bash
+    ```
+
+    Take a look at all of the libraries curl is linked against:
+
+    ```
+    ldd /usr/bin/curl
+    ```
+
+    Let's see what packages deliver those libraries. It seems as if it's both OpenSSL and the Network Security Services libraries. When there is a new CVE discovered in either OpenSSL or NSS, a new container image will need to be built to patch it:
+
+    ```
+    rpm -qf /lib64/libssl.so.10
+    ```
+
+    ```
+    rpm -qf /lib64/libssl3.so
+    ```
+
+    Exit the rhel-tools container:
+
+    ```
+    exit
+    ```
+
+
+    It's a similar story with Apache and most other daemons and utilities that rely on libraries for security or deep hardware integration:
+
+    ```
+    podman run -it registry.access.redhat.com/rhscl/httpd-24-rhel7 bash
+    ```
+
+    Inspect mod_ssl Apache module:
+
+    ```
+    ldd /opt/rh/httpd24/root/usr/lib64/httpd/modules/mod_ssl.so
+    ```
+
+    Once again, we find a library provided by OpenSSL:
+
+    ```
+    rpm -qf /lib64/libcrypto.so.10
+    ```
+
+    Exit the httpd24 container:
+
+    ```
+    exit
+    ```
+
+    What does this all mean? Well, it means you need to be ready to rebuild all of your container images any time there is a security vulnerability in one of the libraries inside it.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 900
+checksum: "3731953612352659768"
+_: ""

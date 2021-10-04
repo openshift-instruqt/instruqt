@@ -2,7 +2,7 @@ challenges:
 - assignment: "## Async service interface\n\nTo create an async RPC service, or event\
     \ bus service, or service proxies, you first need a Java interface declaring the\
     \ async methods. \n\nOpen the ``io.vertx.workshop.portfolio.PortfolioService``\
-    \ class by clicking the link:\n\n``portfolio-service/src/main/java/io/vertx/workshop/portfolio/PortfolioService.java``{{open}}\n\
+    \ class by clicking the link:\n\n``portfolio-service/src/main/java/io/vertx/workshop/portfolio/PortfolioService.java``\n\
     \nThe class is annotated with:\n\n* ``ProxyGen`` - enables the event bus service\
     \ proxy and server generation\n\n* ``VertxGen`` - enables the creation of the\
     \ proxy in the different language supported by Vert.x\n\nLet\u2019s have a look\
@@ -26,7 +26,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 1
   type: challenge
 - assignment: '## Data objects
@@ -56,7 +56,7 @@ challenges:
     it looks like:
 
 
-    ``portfolio-service/src/main/java/io/vertx/workshop/portfolio/Portfolio.java``{{open}}
+    ``portfolio-service/src/main/java/io/vertx/workshop/portfolio/Portfolio.java``
 
 
     As you can see, all the JSON handling is managed by ``converters`` that are automatically
@@ -75,7 +75,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 2
   type: challenge
 - assignment: "## Implementing the service\n\nIt\u2019s time to implement our async\
@@ -89,7 +89,7 @@ challenges:
     \ `getPortfolio` method:\n\nIn `io.vertx.workshop.portfolio.impl.PortfolioServiceImpl`,\
     \ fill the `getPortfolio` method. It should call the `handle` method of the `resultHandler`\
     \ with a successful async result. This object can be created from the (Vert.x)\
-    \ `Future` method.\n\nOpen the file in the editor: \n\n`portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java`{{open}}\n\
+    \ `Future` method.\n\nOpen the file in the editor: \n\n`portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java`\n\
     \nThen, copy the below content to the matching `// TODO: getPortfolio` statement\
     \ (or use the `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"\
     portfolio-service/src/main/java/io/vertx/workshop/portfolio/impl/PortfolioServiceImpl.java\"\
@@ -196,7 +196,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 3
   type: challenge
 - assignment: "## Deploy to OpenShift\n\nNow that you've logged into OpenShift, let's\
@@ -248,7 +248,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 225
   title: Step 4
   type: challenge
 description: "## Event bus services - Porfolio service\n\nIn this scenario, we are\

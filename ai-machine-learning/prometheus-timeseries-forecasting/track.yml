@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: fabqtbchhudm
+  id: es4njwatmco0
   type: challenge
   title: SARIMA model to forecast timeseries metrics
   assignment: |
@@ -93,9 +93,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: jsobpzses5hy
+  id: swsajj6ehkdx
   type: challenge
   title: Using a Jupyter Notebook to play with the SARIMA model
   assignment: |
@@ -135,9 +135,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: y6qzezrferic
+  id: jzanlwd9pvqk
   type: challenge
   title: Accessing the OpenShift console
   assignment: |
@@ -183,5 +183,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "2100569806700540444"
+  timelimit: 400
+checksum: "11061572028252058178"
+_: ""

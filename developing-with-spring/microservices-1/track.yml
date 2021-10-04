@@ -17,7 +17,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: ncgjinibgoaf
+  id: yare1jryol3h
   type: challenge
   title: Step 1
   assignment: |-
@@ -31,13 +31,13 @@ challenges:
     # Review the base structure of the application
     **1. Understanding the Application**
 
-    The project is a simple Greeting application, where a user inputs a fruit name and is greeted by our service. Opening up our ``src/main/java/com/example/service/FruitController.java``{{open}} file we can see the logic used to respond to our user. The interesting part of this logic is right here, where we retrieve the message:
+    The project is a simple Greeting application, where a user inputs a fruit name and is greeted by our service. Opening up our ``src/main/java/com/example/service/FruitController.java`` file we can see the logic used to respond to our user. The interesting part of this logic is right here, where we retrieve the message:
 
     ```java
     String message = String.format(properties.getMessage(), name);
     ```
 
-    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java``{{open}} we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our ``src/main/resources/application-local.properties``{{open}} file.
+    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java`` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our ``src/main/resources/application-local.properties`` file.
 
     Our `application-local.properties` file contains only one property, `greeting.message`. This is the message that we return and display to the user. In order to get an understanding of the flow, let's run the application locally. On the terminal build the project:
 
@@ -67,7 +67,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
-  id: kwx7d74xf62q
+  id: fp5k7wt4pliz
   type: challenge
   title: Step 2
   assignment: |-
@@ -113,7 +113,7 @@ challenges:
 
     There's a lot that happens here so lets break it down:
 
-    For the deployment to OpenShift we are using the [JKube](https://www.eclipse.org/jkube/) tool through the [`openshift-maven-plugin`](https://www.eclipse.org/jkube/docs/openshift-maven-plugin), which is configured in our ``pom.xml``{{open}} (found in the `<profiles/>` section). The deployment may take a few minutes to complete.
+    For the deployment to OpenShift we are using the [JKube](https://www.eclipse.org/jkube/) tool through the [`openshift-maven-plugin`](https://www.eclipse.org/jkube/docs/openshift-maven-plugin), which is configured in our ``pom.xml`` (found in the `<profiles/>` section). The deployment may take a few minutes to complete.
 
     You can run the command ```
     oc rollout status -w dc/spring-boot-configmap-greeting
@@ -145,7 +145,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-modify-the-configmap
-  id: 9mjq4gelfad2
+  id: nogotcrt6rbw
   type: challenge
   title: Step 3
   assignment: |-
@@ -155,7 +155,7 @@ challenges:
 
     `ConfigMap`s are a useful tool for decoupling configuration settings from the code. `ConfigMap`s can be used to inject configuration data into a container in much the same way that secrets do, though `ConfigMap`s should not store confidential information. `ConfigMap` objects hold key-pair values representing all of your configuration data.
 
-    Notice the following dependency that was added to our `pom.xml`{{open}}. This allows us to integrate with OpenShift's ConfigMaps.
+    Notice the following dependency that was added to our `pom.xml`. This allows us to integrate with OpenShift's ConfigMaps.
 
     ```
          <dependency>
@@ -221,4 +221,5 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "4501652212251102519"
+checksum: "5788800395148300580"
+_: ""

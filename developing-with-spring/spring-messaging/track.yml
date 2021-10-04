@@ -18,7 +18,7 @@ private: true
 published: false
 challenges:
 - slug: 01-review-the-initial-project
-  id: 0exflyumiwca
+  id: gws2nokvqvuc
   type: challenge
   title: Step 1
   assignment: |
@@ -38,7 +38,7 @@ challenges:
 
     **1. Add JMS Dependencies**
 
-    To add Spring JMS to our project all we have to do is to add the following line in ``pom.xml``{{open}}
+    To add Spring JMS to our project all we have to do is to add the following line in ``pom.xml``
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add JMS dependency here -->">
         &lt;dependency&gt;
@@ -71,9 +71,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 02-create-message-listeners
-  id: 12xozimhpfrc
+  id: j8ej5jwjmqp1
   type: challenge
   title: Step 2
   assignment: |
@@ -88,7 +88,7 @@ challenges:
 
     First we need a message object. Spring Boot allows us to code in the context of our own Java models when dealing with messages. For this purpose we will create a simple `Fruit` object which contains a String `body`.
 
-    Start with clicking on the following link which will open an empty file in the editor: ``src/main/java/com/example/domain/Fruit.java``{{open}}
+    Start with clicking on the following link which will open an empty file in the editor: ``src/main/java/com/example/domain/Fruit.java``
 
     Then, copy part of the below content into the files (or use the `Copy to Editor` button):
 
@@ -132,7 +132,7 @@ challenges:
 
     </pre>
 
-    Do the same for ``src/main/java/com/example/domain/MemCache.java``{{open}} which adds/retrives messages to/from the cache.
+    Do the same for ``src/main/java/com/example/domain/MemCache.java`` which adds/retrives messages to/from the cache.
 
     <pre class="file" data-filename="src/main/java/com/example/domain/MemCache.java" data-target="replace">
     package com.example.domain;
@@ -169,7 +169,7 @@ challenges:
 
     Just a Plain Old Java Object (POJO)!
 
-    To receive our Ping messages from a JMS Queue we'll need a class that listens for Queue messages. These components (typically called `Receivers`) in Spring Boot are `@Component`-annotated classes with a method annotated with `@JmsListener`. For this you need to click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitReceiver.java``{{open}}
+    To receive our Ping messages from a JMS Queue we'll need a class that listens for Queue messages. These components (typically called `Receivers`) in Spring Boot are `@Component`-annotated classes with a method annotated with `@JmsListener`. For this you need to click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitReceiver.java``
 
     Then, copy part of the below content into the file (or use the `Copy to Editor` button):
 
@@ -206,7 +206,7 @@ challenges:
 
     The `@JmsListener` annotation is what sets this class up for JMS Message handling. We're essentially creating a binding: whenever a message of type `Fruit` is sent to the target Queue (called a `destination` here) this method will be called by Spring for processing. Spring will attempt to deserialize the message to an object and then pass that object to our method here.
 
-    The `"${queue.name}"` String in the destination utilizes the Spring Expression Language to allow parameterization of Queue names. This allows us to place the name of the Queue in our `.properties` files which can change between environments without the need for a code change. You can see the properties for openshift running by opening the ``src/main/resources/application-openshift.properties``{{open}} file.
+    The `"${queue.name}"` String in the destination utilizes the Spring Expression Language to allow parameterization of Queue names. This allows us to place the name of the Queue in our `.properties` files which can change between environments without the need for a code change. You can see the properties for openshift running by opening the ``src/main/resources/application-openshift.properties`` file.
 
     There also exists a second annotation parameter, `connectionFactory`, that we can use if we have a custom `ConnectionFactory` Bean but we don't use that here because we are defaulting to use the `ConnectionFactory` Spring Boot automatically creates.
 
@@ -216,7 +216,7 @@ challenges:
 
     Notice that the argument to our `receiveMessage()` method is our domain class: a `Fruit`. We're not accepting any custom types or wrapper objects (although Spring does support arguments of their `Message<T>` type). This is because Spring magic, under the hood, can convert the raw messages coming into the Queue into our custom objects if we meet a few criteria. For our purposes we are going to send and receive these messages as JSON strings because Spring Boot makes JSON support a breeze.
 
-    In the first step of this scenario we included the `jackson-databind` dependency in the `pom.xml`. Jackson is a library that has tight integration with Spring Boot which enables marshalling and unmarshalling JSON to and from our objects respectively. For our JMS messages this means Spring Boot will automatically marshall our objects to JSON when we send them and unmarshal JSON to our objects when we receive them. We need to create a Configuration class to utilize this functionality. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/config/MessageConfig.java``{{open}}
+    In the first step of this scenario we included the `jackson-databind` dependency in the `pom.xml`. Jackson is a library that has tight integration with Spring Boot which enables marshalling and unmarshalling JSON to and from our objects respectively. For our JMS messages this means Spring Boot will automatically marshall our objects to JSON when we send them and unmarshal JSON to our objects when we receive them. We need to create a Configuration class to utilize this functionality. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/config/MessageConfig.java``
 
     Then, copy part of the below content into the file (or use the `Copy to Editor` button):
 
@@ -245,7 +245,7 @@ challenges:
 
     **3. Sending JMS Messages**
 
-    Now that we have a listener and a Message model we now need a Message Producer. Normally these would be coming from external systems but for our purposes we are going to send messages to ourselves. To do that we need a Producer class. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitPublisher.java``{{open}}
+    Now that we have a listener and a Message model we now need a Message Producer. Normally these would be coming from external systems but for our purposes we are going to send messages to ourselves. To do that we need a Producer class. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitPublisher.java``
 
     Then, copy part of the below content into the file (or use the `Copy to Editor` button):
 
@@ -310,9 +310,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 03-login-to-openshift
-  id: sybpambpiyk7
+  id: yoogp1rwm1pt
   type: challenge
   title: Step 3
   assignment: |-
@@ -394,9 +394,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 04-deploy-to-openshift
-  id: firao0qbdy4c
+  id: viejypahoxt3
   type: challenge
   title: Step 4
   assignment: |-
@@ -406,7 +406,7 @@ challenges:
 
     **1. Add a health check**
 
-    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml``{{open}} at the **TODO** comment..
+    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment..
 
     <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add Actuator dependency here -->">
         &lt;dependency&gt;
@@ -441,7 +441,7 @@ challenges:
 
     The `mvn package` piece of the above command instructs Maven to run the package lifecycle. This builds a Spring Boot JAR file which is a Fat Jar containing all dependencies necessary to run our application.
 
-    For the deployment to OpenShift we are using the [jkube](https://www.eclipse.org/jkube) tool through the `org.eclipse.jkube:openshift-maven-plugin` which is configured in our ``pom.xml``{{open}} (found in the `<profiles/>` section). Configuration files for jkube are contained in the ``src/main/jkube``{{open}} folder mentioned earlier.
+    For the deployment to OpenShift we are using the [jkube](https://www.eclipse.org/jkube) tool through the `org.eclipse.jkube:openshift-maven-plugin` which is configured in our ``pom.xml`` (found in the `<profiles/>` section). Configuration files for jkube are contained in the ``src/main/jkube`` folder mentioned earlier.
 
     After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can either go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below) or click [here](http://spring-messaging-training-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
 
@@ -484,5 +484,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "13738377460076891010"
+  timelimit: 225
+checksum: "17497649004089995584"
+_: ""

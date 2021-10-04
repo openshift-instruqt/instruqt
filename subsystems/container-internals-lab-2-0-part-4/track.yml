@@ -63,7 +63,7 @@ challenges:
     \ All of these processes make requests to the Linux kernel for protected resources\
     \ like memory, RAM, TCP sockets, etc. We will explore this deeper in later labs,\
     \ but for now, commit this to memory...\n"
-  difficulty: intermediate
+  difficulty: expert
   slug: 01-engines-kernel
   tabs:
   - hostname: crc-nonest-1
@@ -77,7 +77,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 360
   title: Container Engines & The Linux Kernel
   type: challenge
 - assignment: 'In this step, we are going to investigate the basic construction of
@@ -317,7 +317,7 @@ challenges:
     podman rm -a`{{execute}}
 
     '
-  difficulty: intermediate
+  difficulty: expert
   slug: 02-create-container
   tabs:
   - hostname: crc-nonest-1
@@ -331,7 +331,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 360
   title: Step by step creation of a container
   type: challenge
 - assignment: 'The goal of this exercise is to gain a basic understanding of SELinux/sVirt.
@@ -423,7 +423,7 @@ challenges:
     ```
 
     '
-  difficulty: intermediate
+  difficulty: expert
   slug: 03-selinux-svirt
   tabs:
   - hostname: crc-nonest-1
@@ -437,7 +437,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 360
   title: 'SELinux & sVirt: Dynamically generated contexts to protect your containers'
   type: challenge
 - assignment: "The goal of this exercise is to gain a basic understanding of how containers\
@@ -453,7 +453,7 @@ challenges:
     \ /sys/fs/cgroup/ | grep $i; done`{{execute}}\n\nNotice how each containerized\
     \ process is put into its own cgroup by the container engine. This is quite convenient,\
     \ similar to sVirt.\n\n"
-  difficulty: intermediate
+  difficulty: expert
   slug: 04-cgroups
   tabs:
   - hostname: crc-nonest-1
@@ -467,7 +467,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 360
   title: 'Cgroups: Dynamically created with container instantiation'
   type: challenge
 - assignment: "The goal of this exercise is to gain a basic understanding of SECCOMP.\
@@ -478,7 +478,7 @@ challenges:
     \ and test if it works. \n\n```\npodman run -it --security-opt seccomp=./labs/lab3-step5/chmod.json\
     \ registry.access.redhat.com/ubi7/ubi chmod 777 /etc/hosts\n```\n\nNotice how\
     \ the chmod system call is blocked.\n"
-  difficulty: intermediate
+  difficulty: expert
   slug: 05-seccomp
   tabs:
   - hostname: crc-nonest-1
@@ -492,7 +492,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 360
   title: 'SECCOMP: Limiting how a containerized process can interact with the kernel'
   type: challenge
 description: '## Background
@@ -565,7 +565,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: advanced
 owner: openshift
 private: true
 published: false

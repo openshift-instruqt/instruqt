@@ -32,7 +32,7 @@ private: true
 published: false
 challenges:
 - slug: 1deploy-demo-app
-  id: wlxpj2tzvtf2
+  id: lllfbozpgwbj
   type: challenge
   title: Step 1 - Example of Prometheus metrics being exposed by an application
   assignment: |
@@ -72,9 +72,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 2deploy-prometheus
-  id: mhz78ifv23bx
+  id: bc29argnx2zx
   type: challenge
   title: Step 2 - Deploying Prometheus to collect exposed metrics
   assignment: |2
@@ -145,7 +145,7 @@ challenges:
     So all the metrics from our demo application can be
     queried with a singe PromQL query, i.e. `{group="pad"}`
 
-    The ConfigMap file should be stored in a file named `prometheus-configmap.yaml`{{open}}, <br>
+    The ConfigMap file should be stored in a file named `prometheus-configmap.yaml`, <br>
     we will use it to update our Prometheus instance in the next step.
 
     ### Deploy Prometheus with new configuration
@@ -179,7 +179,7 @@ challenges:
     ![Prometheus Targets Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/02-prometheus-targets-page.png)
 
     * If you cannot find the demo application, in the targets list, <br>
-    Try to fix your Prometheus configuration in the ConfigMap file `prometheus-configmap.yaml`{{open}} and repeat the previous step.
+    Try to fix your Prometheus configuration in the ConfigMap file `prometheus-configmap.yaml` and repeat the previous step.
 
     ### Check application metrics
     * Once Prometheus is deployed, you can click [here](http://prometheus-demo-route-pad-monitoring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/graph?g0.range_input=1h&g0.expr={group%3D"pad"}) to see all the metrics for the demo application.
@@ -199,9 +199,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 3deploy-grafana
-  id: qtahv3jo3ga2
+  id: n28939d2pyc9
   type: challenge
   title: Step 3 - Deploying Grafana to visualize Prometheus metrics
   assignment: |2
@@ -285,9 +285,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: 4create-dashboard
-  id: aeffwgxsvhwp
+  id: 5ohhjbjl4rxf
   type: challenge
   title: Step 4 - Visualize metrics in Grafana
   assignment: |2
@@ -356,5 +356,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "874716350909065048"
+  timelimit: 225
+checksum: "14754801374372878435"
+_: ""

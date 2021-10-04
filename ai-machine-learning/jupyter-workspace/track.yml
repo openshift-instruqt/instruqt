@@ -25,7 +25,7 @@ private: true
 published: false
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: fxuc6xtjgmra
+  id: wbhhkalsuuy0
   type: challenge
   title: Topic 1 - Loading the Notebook Images
   assignment: |
@@ -63,9 +63,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 02-loading-the-notebook-templates
-  id: rmdzr8v36agt
+  id: kzyois9lbidh
   type: challenge
   title: Topic 2 - Loading the Notebook Templates
   assignment: |
@@ -111,9 +111,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 03-accessing-the-web-console
-  id: np99trmjzui8
+  id: 6dfonkc7986e
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -153,9 +153,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 04-deploying-the-jupyter-workspace
-  id: lyrij1v0w0my
+  id: a9ngk5htxtn0
   type: challenge
   title: Topic 4 - Deploying the Jupyter Workspace
   assignment: |
@@ -214,9 +214,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 05-testing-the-persistent-storage
-  id: 8ei65dztqh4f
+  id: hbgxftcmulle
   type: challenge
   title: Topic 5 - Testing the Persistent Storage
   assignment: |
@@ -288,9 +288,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 150
 - slug: 06-deleting-the-jupyter-notebook
-  id: rfmjl0lwq1lm
+  id: igjmjecu08dj
   type: challenge
   title: Topic 6 - Deleting the Jupyter Notebook
   assignment: |
@@ -322,5 +322,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "11265296413394539570"
+  timelimit: 150
+checksum: "17675128037724040089"
+_: ""

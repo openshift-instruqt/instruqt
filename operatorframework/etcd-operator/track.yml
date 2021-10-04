@@ -33,7 +33,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: x4b6fbdxfsry
+  id: yahy58ywyxvw
   type: challenge
   title: Creating the Custom Resource Definition (CRD)
   assignment: |
@@ -104,9 +104,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step2
-  id: cctic2jq37ol
+  id: asgsx8rvxixn
   type: challenge
   title: Creating the Service Account, Role, and RoleBinding
   assignment: |-
@@ -242,9 +242,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step3
-  id: 2ouepxtqpl5y
+  id: mhmz0dvhypck
   type: challenge
   title: Creating the Etcd Operator Deployment
   assignment: |
@@ -344,9 +344,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step4
-  id: t6eo6yolqn6n
+  id: ribdxbe7ctya
   type: challenge
   title: Creating the EtcdCluster Custom Resource (CR)
   assignment: |
@@ -417,9 +417,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step5
-  id: 0wzxh38lrypa
+  id: smswglctok8h
   type: challenge
   title: Interacting with a Live Etcd Cluster
   assignment: |
@@ -489,9 +489,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step6
-  id: kzfxywdtiwyq
+  id: qxaf2yexhjyk
   type: challenge
   title: Scaling and Modifying the Etcd Version
   assignment: |
@@ -525,9 +525,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step7
-  id: jsy7meylt6vz
+  id: fjc4bczipba0
   type: challenge
   title: Disaster Recovery in Action
   assignment: |
@@ -553,9 +553,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 225
 - slug: step8
-  id: rcrospznqmgy
+  id: s4yzrxmovo1m
   type: challenge
   title: Clean Up
   assignment: |
@@ -596,5 +596,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "5543397443305086265"
+  timelimit: 225
+checksum: "2797073560705037940"
+_: ""

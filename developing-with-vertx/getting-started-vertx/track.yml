@@ -3,10 +3,10 @@ challenges:
     \ has been created with a base project using the Java programming language and\
     \ the Apache Maven build tool.\n\nFor educational purposes, this scenario uses\
     \ one single Java class named `HttpApplication.java`. Now open that file, by clicking\
-    \ on the link below:\n\n``src/main/java/com/example/HttpApplication.java``{{open}}\n\
-    \nAs you review the content, you will notice that there are a lot of **TODO**\
-    \ comments. **Do not remove them!** These comments are used as a marker and without\
-    \ them, you will not be able to finish this scenario.\n\nNotice that `HttpApplication`\
+    \ on the link below:\n\n``src/main/java/com/example/HttpApplication.java``\n\n\
+    As you review the content, you will notice that there are a lot of **TODO** comments.\
+    \ **Do not remove them!** These comments are used as a marker and without them,\
+    \ you will not be able to finish this scenario.\n\nNotice that `HttpApplication`\
     \ class extends another class called `AbstractVerticle`. Before we start implementing\
     \ our logic, let's discuss a bit what a Verticle is.\n\n# What is a verticle?\n\
     Verticles \u2014 the Building Blocks of Eclipse Vert.x\n\nVert.x gives you a lot\
@@ -84,21 +84,21 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 1
   type: challenge
 - assignment: "# Expand your application with server side logic\n\nIn Step 1 you learned\
     \ how to start an HTTP Server and use a static handler to server static files\
     \ like HTML, CSS, etc. In this step, we will create a new handler that uses server-side\
-    \ code.\n\nLooking closer at ``src/main/resources/webroot/index.html``{{open}}\
-    \ we can see that there is a JavaScript function at the end that should react\
-    \ if someone clicks the `Invoke` button. From this line `$.getJSON(\"/api/greeting?name=\"\
+    \ code.\n\nLooking closer at ``src/main/resources/webroot/index.html`` we can\
+    \ see that there is a JavaScript function at the end that should react if someone\
+    \ clicks the `Invoke` button. From this line `$.getJSON(\"/api/greeting?name=\"\
     ` we can see that the webpage expects an API call that will act as a greetings\
     \ function. The idea is that the API function should take the value of the input\
     \ field and turn it into a greeting string. \n\n**1. Add a method for handle greetings\
     \ call**\n\nFirst, we are going to implement a route handler called greeting.\
     \ You will implement it as a private method in the `HttpApplication` class that\
-    \ takes a `RoutingContext` as a parameter. \n\nFirst open ``src/main/java/com/example/HttpApplication.java``{{open}}\
+    \ takes a `RoutingContext` as a parameter. \n\nFirst open ``src/main/java/com/example/HttpApplication.java``\
     \ again.\n\nFirst copy and paste the code below on the line stating `// TODO:\
     \ Add method for greeting here`.\n\n<pre class=\"file\" data-filename=\"src/main/java/com/example/HttpApplication.java\"\
     \ data-target=\"insert\" data-marker=\"// TODO: Add method for greeting here\"\
@@ -142,7 +142,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 2
   type: challenge
 - assignment: '
@@ -262,7 +262,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 3
   type: challenge
 - assignment: "# Deploy to OpenShift\n\nRunning the application on your local computer\
@@ -297,7 +297,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 4
   type: challenge
 - assignment: "# Add health check\nOne limitation of our current application is that\
@@ -311,7 +311,7 @@ challenges:
     \nThis is just a warning, and your container might be working 100% correctly,\
     \ but without a proper health-check configured there is no way for OpenShift to\
     \ tell if the application is responding correctly or not.  \n\n# Monitor if applications\
-    \ are responding correctly\n\n**1. Add a health check**\n\nOpen the `pom.xml`{{open}}\
+    \ are responding correctly\n\n**1. Add a health check**\n\nOpen the `pom.xml`\
     \ file and add the following lines at the `<!-- ADD HEALTH CHECK HERE -->` comment.\n\
     \n<pre class=\"file\" data-filename=\"pom.xml\" data-target=\"insert\" data-marker=\"\
     <!-- ADD HEALTH CHECK HERE -->\">\n  &lt;config&gt;\n    &lt;vertx-health-check&gt;\n\
@@ -348,7 +348,7 @@ challenges:
     path: /root
     title: Visual Editor
     type: code
-  timelimit: 300
+  timelimit: 180
   title: Step 5
   type: challenge
 description: 'In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io),

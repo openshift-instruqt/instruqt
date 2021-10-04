@@ -44,7 +44,7 @@ private: true
 published: false
 challenges:
 - slug: 01-helm-integration
-  id: djbugycvvede
+  id: w87hmalpnocf
   type: challenge
   title: Helm Integration
   assignment: |-
@@ -81,7 +81,7 @@ challenges:
 
     You can specify your Helm repo, chart, and values directly in the
     `Application` manfiest for Argo CD. Let's take a look at the example
-    we're going to deploy. `openshift-gitops-examples/components/applications/quarkus-app.yaml`{{open}}
+    we're going to deploy. `openshift-gitops-examples/components/applications/quarkus-app.yaml`
 
     This `Application` deploys a sample Quarkus application. If you take
     a look at the file, you can see the specific configuration under
@@ -214,9 +214,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 900
 - slug: 02-helm-gitops
-  id: dtg1xrveplqd
+  id: gzbgjbyiggo5
   type: challenge
   title: Helm GitOps Deployment
   assignment: |
@@ -257,7 +257,7 @@ challenges:
 
     As you can see, this is made up of only two YAML files. The `Chart.yaml` file and the `values.yaml` file. Take a look at the chart file:
 
-    `openshift-gitops-examples/apps/quarkus-subchart/Chart.yaml`{{open}}
+    `openshift-gitops-examples/apps/quarkus-subchart/Chart.yaml`
 
     This `Chart.yaml` file, is creating an "empty" Helm chart and adding the Helm chart you want to deploy as a dependency in the `dependecies` secion.
 
@@ -265,7 +265,7 @@ challenges:
 
     The next file is the `values.yaml` file. Take a look at that file.
 
-    `openshift-gitops-examples/apps/quarkus-subchart/values.yaml`{{open}}
+    `openshift-gitops-examples/apps/quarkus-subchart/values.yaml`
 
     Here you're specifying the values you want to pass to the Helm chart.
 
@@ -276,7 +276,7 @@ challenges:
 
     The Argo CD `Application` should look like a "normal" `git` application.
 
-    `openshift-gitops-examples/components/applications/quarkus-subchart.yaml`{{open}}
+    `openshift-gitops-examples/components/applications/quarkus-subchart.yaml`
 
     In this snippet, you can see that now we're targeting the git repo instead of the Helm repo.
 
@@ -375,5 +375,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "10730756902451093506"
+  timelimit: 900
+checksum: "1466675669529580549"
+_: ""

@@ -27,7 +27,7 @@ description: |-
   In this demo, we are going to use an Openshift 4.7 playground.<br>
   We are operating our services on the MassOpen.cloud [#operatefirst](https://massopen.cloud/connected-initiatives/operate-first)
 icon: https://logodix.com/logo/1910931.png
-level: beginner
+level: intermediate
 tags:
 - openshift
 owner: openshift
@@ -39,7 +39,7 @@ private: true
 published: false
 challenges:
 - slug: setup
-  id: cw760zuf7wga
+  id: wzbvyxv7kwoy
   type: challenge
   title: Getting Started
   assignment: |-
@@ -111,9 +111,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 600
 - slug: app
-  id: 9gtr2tjwogcc
+  id: x3irgfquavg8
   type: challenge
   title: Getting the sample Python app
   assignment: |-
@@ -170,9 +170,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 600
 - slug: parameter
-  id: kullwbmj4dvy
+  id: kulaenrblbi1
   type: challenge
   title: Thoth s2i parameters
   assignment: |-
@@ -219,9 +219,9 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 600
 - slug: deploy
-  id: fjo1milpxwk0
+  id: vzapy0qr9m6q
   type: challenge
   title: Let's Deploy
   assignment: |-
@@ -292,5 +292,6 @@ challenges:
     hostname: crc-nonest-1
     path: /root
   difficulty: intermediate
-  timelimit: 300
-checksum: "9850387016229891726"
+  timelimit: 600
+checksum: "4241742961253060320"
+_: ""
