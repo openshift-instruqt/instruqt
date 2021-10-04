@@ -196,8 +196,8 @@ challenges:
     \ well as command line tools to provide users with a friendly interface to work\
     \ with applications deployed to the platform. \n\n**1. Login to OpenShift Container\
     \ Platform**\n\nThis sandbox has already authenticated you to OpenShift. To validate,\
-    \ we will use the `oc whoami` command:\n\n```\noc whoami`\n```\n\n**2. Create\
-    \ project**\n\n[Projects](https://docs.openshift.com/container-platform/4.7/rest_api/project_apis/project-project-openshift-io-v1.html)\
+    \ we will use the `oc whoami` command:\n\n```\noc whoami\n```\n\n**2. Create project**\n\
+    \n[Projects](https://docs.openshift.com/container-platform/4.7/rest_api/project_apis/project-project-openshift-io-v1.html)\
     \ are a top-level concept to help you organize your deployments. An OpenShift\
     \ project allows a community of users (or a user) to organize and manage their\
     \ content in isolation from other communities. Each project has its own resources,\
@@ -205,7 +205,7 @@ challenges:
     \ on resources, etc.). Projects act as a wrapper around all the application services\
     \ and endpoints you (or your teams) are using for your work.\n\nFor this scenario,\
     \ let's create a project that you will use to house your applications.\n\n```\n\
-    oc new-project dev`\n```\n\n**3. Open the OpenShift Web Console**\n\nOpenShift\
+    oc new-project dev\n```\n\n**3. Open the OpenShift Web Console**\n\nOpenShift\
     \ ships with a web-based console that will allow users to\nperform various tasks\
     \ via a browser. To get a feel for how the web console\nworks, click on the \"\
     OpenShift Console\" tab. The login credentials are: admin/admin.\n\n![OpenShift\
@@ -258,12 +258,12 @@ challenges:
     \ the operator installation is successful, you will create two instances - an\
     \ `ActiveMQArtemis` instance and an `ActiveMQArtemisAddress` instance. For your\
     \ reference, the YAML file containing the instance details has been created for\
-    \ you and you can view the file as follows:\n\n```\ncat amq.yml`\n```\n\nYou can\
+    \ you and you can view the file as follows:\n\n```\ncat amq.yml\n```\n\nYou can\
     \ also observe a **Route** to the AMQ console is defined here, should you choose\
     \ to play around. Now, execute the following command to create those two instances\
-    \ and the route:\n\n```\noc create -f amq.yml`\n```\n\n**4. Deploy the application\
+    \ and the route:\n\n```\noc create -f amq.yml\n```\n\n**4. Deploy the application\
     \ to OpenShift**\n\nRun the following command to deploy the application to OpenShift\n\
-    \n```\nmvn package oc:deploy -Popenshift -DskipTests`\n```\n\nThere's a lot that\
+    \n```\nmvn package oc:deploy -Popenshift -DskipTests\n```\n\nThere's a lot that\
     \ happens here so lets break it down:\n\nThe `mvn package` piece of the above\
     \ command instructs Maven to run the package lifecycle. This builds a Spring Boot\
     \ JAR file which is a Fat Jar containing all dependencies necessary to run our\

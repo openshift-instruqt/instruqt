@@ -95,15 +95,15 @@ challenges:
     \ projects.\n\nOnce you get to the list of downloads, you would need to download\
     \ the archive specific to your platform, extract the ``oc`` binary and install\
     \ it.\n\nTo login to the OpenShift cluster used for this course run in the terminal:\n\
-    \n```\noc login -u developer -p developer`\n```\n\nYou should see output similar\
+    \n```\noc login -u developer -p developer\n```\n\nYou should see output similar\
     \ to:\n\n```\nAuthentication required for https://openshift:6443 (openshift)\n\
     Login successful.\n\nYou don't have any projects. You can try to create a new\
     \ project, by running\n\n    oc new-project <projectname>\n```\n\nNext, create\
-    \ a new project namespace:\n\n```\noc new-project myproject`\n```\n\nYou can list\
-    \ all the projects you currently have access to by running:\n\n```\noc get projects`\n\
+    \ a new project namespace:\n\n```\noc new-project myproject\n```\n\nYou can list\
+    \ all the projects you currently have access to by running:\n\n```\noc get projects\n\
     ```\n\nOnce logged in, you can verify what user you are logged in by running:\n\
-    \n```\noc whoami`\n```\n\nYou can verify which server you are logged into by running:\n\
-    \n```\noc whoami --show-server`\n```\n\nIn the case of an external authentication\
+    \n```\noc whoami\n```\n\nYou can verify which server you are logged into by running:\n\
+    \n```\noc whoami --show-server\n```\n\nIn the case of an external authentication\
     \ service being used as the identity provider, the required steps are a bit different.\n\
     \nIf you login using ``oc login`` on the command line you will be presented with\
     \ an error message similar to:\n\n```\nLogin failed (401 Unauthorized)\nYou must\
@@ -150,7 +150,7 @@ challenges:
 
     ```
 
-    oc login --username user1 --password user1`
+    oc login --username user1 --password user1
 
     ```
 
@@ -160,7 +160,7 @@ challenges:
 
     ```
 
-    oc get projects`
+    oc get projects
 
     ```
 
@@ -211,7 +211,7 @@ challenges:
 
     ```
 
-    oc get projects`
+    oc get projects
 
     ```
 
@@ -241,7 +241,7 @@ challenges:
 
     ```
 
-    oc new-project mysecrets`
+    oc new-project mysecrets
 
     ```
 
@@ -251,7 +251,7 @@ challenges:
 
     ```
 
-    oc adm policy add-role-to-user view developer -n mysecrets`
+    oc adm policy add-role-to-user view developer -n mysecrets
 
     ```
 
@@ -300,7 +300,7 @@ challenges:
 
     ```
 
-    oc login --username developer`
+    oc login --username developer
 
     ```
 
@@ -316,7 +316,7 @@ challenges:
 
     ```
 
-    oc whoami`
+    oc whoami
 
     ```
 
@@ -342,7 +342,7 @@ challenges:
 
     ```
 
-    oc whoami --show-context`
+    oc whoami --show-context
 
     ```
 
@@ -352,7 +352,7 @@ challenges:
 
     ```
 
-    oc config get-clusters`
+    oc config get-clusters
 
     ```
 
@@ -364,7 +364,7 @@ challenges:
 
     ```
 
-    oc config get-contexts`
+    oc config get-contexts
 
     ```
 

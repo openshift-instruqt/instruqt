@@ -8,6 +8,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -22,6 +23,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -36,6 +38,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -50,6 +53,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -80,6 +84,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -109,7 +114,7 @@ challenges:
   type: challenge
 - assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/memcached_types.go`\
     \ file for our Memcached API:\n\n```\ncat api/v1alpha1/memcached_types.go\n```\n\
-    \n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap)\
+    `\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap)\
     \ includes `spec` and `status`. Kubernetes functions by reconciling desired state\
     \ (Spec) with the actual cluster state. We then record what is observed (Status).\
     \ \n\nAlso observe the `+kubebuilder` comment markers found throughout the file.\
@@ -140,22 +145,22 @@ challenges:
     \ `json:\"status,omitempty\"`\n}\n\nfunc init() {\n\tSchemeBuilder.Register(&Memcached{},\
     \ &MemcachedList{})\n}\n\n</pre>\n\nYou can easily update this file by running\
     \ the following command:\n\n```\n\\cp /tmp/memcached_types.go api/v1alpha1/memcached_types.go\n\
-    ```\n\n```\n<br>\nAfter modifying the `*_types.go` file, always run the following\
+    ```\n`\n```\n<br>\nAfter modifying the `*_types.go` file, always run the following\
     \ command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n\
-    ```\n\n```\n<br>\n\nThe above makefile target will invoke the controller-gen utility\
-    \ to update the api/v1alpha1/zz_generated.deepcopy.go file to ensure our API\u2019\
-    s Go type definitons implement the runtime.Object interface that all Kind types\
-    \ must implement.\n\n\nNow we can run the `make manifests` command to generate\
-    \ our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n\
-    \n```\n<br>\n\nThis makefile target will invoke controller-gen to generate the\
-    \ CRD manifests at config/crd/bases/cache.example.com_memcacheds.yaml.\n\n\n\n\
-    Thanks to our comment markers, observe that we now have a newly generated CRD\
-    \ yaml that reflects the `spec.size` and `status.nodes` OpenAPI v3 schema validation\
-    \ and customized print columns.\n\n```\ncat config/crd/bases/cache.example.com_memcacheds.yaml\n\
-    ```\n\n```\n<br>\nDeploy your Memcached Custom Resource Definition to the live\
+    ```\n`\n```\n<br>\n\nThe above makefile target will invoke the controller-gen\
+    \ utility to update the api/v1alpha1/zz_generated.deepcopy.go file to ensure our\
+    \ API\u2019s Go type definitons implement the runtime.Object interface that all\
+    \ Kind types must implement.\n\n\nNow we can run the `make manifests` command\
+    \ to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n\
+    ```\n`\n```\n<br>\n\nThis makefile target will invoke controller-gen to generate\
+    \ the CRD manifests at config/crd/bases/cache.example.com_memcacheds.yaml.\n\n\
+    \n\nThanks to our comment markers, observe that we now have a newly generated\
+    \ CRD yaml that reflects the `spec.size` and `status.nodes` OpenAPI v3 schema\
+    \ validation and customized print columns.\n\n```\ncat config/crd/bases/cache.example.com_memcacheds.yaml\n\
+    ```\n`\n```\n<br>\nDeploy your Memcached Custom Resource Definition to the live\
     \ OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/cache.example.com_memcacheds.yaml\n\
-    ```\n\n```\n<br>\nConfirm the CRD was successfully created:\n\n```\noc get crd\
-    \ memcacheds.cache.example.com -o yaml\n```\n\n```\n"
+    ```\n`\n```\n<br>\nConfirm the CRD was successfully created:\n\n```\noc get crd\
+    \ memcacheds.cache.example.com -o yaml\n```\n`\n```\n"
   difficulty: basic
   slug: step3
   tabs:
@@ -172,7 +177,7 @@ challenges:
 - assignment: "\n**Note:** The next two subsections explain how the controller watches\
     \ resources and how the reconcile loop is triggered.\n\nLet's now observe the\
     \ default `controllers/memcached_controller.go` file:\n\n```\ncat controllers/memcached_controller.go\n\
-    ```\n\n```\n\nThis default controller requires additional logic so we can trigger\
+    ```\n`\n```\n\nThis default controller requires additional logic so we can trigger\
     \ our reconciler whenever `kind: Memcached` objects are added, updated, or deleted.\
     \ We also want to trigger the reconciler whenever Deployment owned by a given\
     \ Memcached are added, updated, and deleted as well. To accomplish this. we modify\
@@ -260,12 +265,12 @@ challenges:
     \ ctrl.Manager) error {\n\treturn ctrl.NewControllerManagedBy(mgr).\n\t\tFor(&cachev1alpha1.Memcached{}).\n\
     \t\tOwns(&appsv1.Deployment{}).\n\t\tComplete(r)\n}\n</pre>\n\nYou can easily\
     \ update this file by running the following command:\n\n```\n\\cp /tmp/memcached_controller.go\
-    \ controllers/memcached_controller.go\n```\n\n```\n\n`go mod tidy`  ensures that\
+    \ controllers/memcached_controller.go\n```\n`\n```\n\n`go mod tidy`  ensures that\
     \ the go.mod file matches the source code in the module. It adds any missing module\
     \ requirements necessary to build the current module's packages and dependencies,\
     \ and it removes requirements on modules that don't provide any relevant packages.\
     \ It also adds any missing entries to go.sum and removes unnecessary entries.\n\
-    \n```\ngo mod tidy\n```\n\n```\n\n\n"
+    \n```\ngo mod tidy\n```\n`\n```\n\n\n"
   difficulty: basic
   slug: step4
   tabs:
@@ -282,7 +287,7 @@ challenges:
 - assignment: "**Note:** The next two subsections explain how the controller watches\
     \ resources and how the reconcile loop is triggered. If you\u2019d like to skip\
     \ this section, head to the deploy section to see how to run the operator.\n\n\
-    ```\ncat controllers/memcached_controller.go\n```\n\n```\n\nThe `SetupWithManager()`\
+    ```\ncat controllers/memcached_controller.go\n```\n`\n```\n\nThe `SetupWithManager()`\
     \ function in `controllers/memcached_controller.go` specifies how the controller\
     \ is built to watch a CR and other resources that are owned and managed by that\
     \ controller.\n\n<pre class=\"file\">\nimport (\n\t...\n\tappsv1 \"k8s.io/api/apps/v1\"\
@@ -401,7 +406,7 @@ challenges:
     \ Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {\n  ...\n\
     }\n</pre>\n\nThe `ClusterRole` manifest at `config/rbac/role.yaml` is generated\
     \ from the above markers via controller-gen with the following command:\n\n```\n\
-    make manifests\n```\n\n```\n"
+    make manifests\n```\n`\n```\n"
   difficulty: basic
   slug: step9
   tabs:
@@ -439,6 +444,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic
@@ -456,22 +462,22 @@ challenges:
   type: challenge
 - assignment: "In a new terminal, inspect the Custom Resource manifest:\n\n```\ncd\
     \ $HOME/projects/memcached-operator\ncat config/samples/cache_v1alpha1_memcached.yaml\n\
-    ```\n\n```\n<br>\nEnsure your `kind: Memcached` Custom Resource (CR) is updated\
+    ```\n`\n```\n<br>\nEnsure your `kind: Memcached` Custom Resource (CR) is updated\
     \ with `spec.size`\n\n<pre class=\"file\">\napiVersion: cache.example.com/v1alpha1\n\
     kind: Memcached\nmetadata:\n  name: memcached-sample\nspec:\n  size: 3\n</pre>\n\
     \nYou can easily update this file by running the following command:\n\n```\n\\\
     cp /tmp/cache_v1alpha1_memcached.yaml config/samples/cache_v1alpha1_memcached.yaml\n\
-    ```\n\n```\n<br>\nEnsure you are currently scoped to the `myproject` Namespace:\n\
-    \n```\noc project myproject\n```\n\n```\n<br>\nDeploy your PodSet Custom Resource\
+    ```\n`\n```\n<br>\nEnsure you are currently scoped to the `myproject` Namespace:\n\
+    \n```\noc project myproject\n```\n`\n```\n<br>\nDeploy your PodSet Custom Resource\
     \ to the live OpenShift Cluster:\n\n```\noc create -f config/samples/cache_v1alpha1_memcached.yaml\n\
-    ```\n\n```\n<br>\nVerify the memcached exists:\n\n```\noc get memcached\n```\n\
-    \n```\n<br>\nVerify the Memcached operator has created 3 pods:\n\n```\noc get\
-    \ pods\n```\n\n```\n<br>\nVerify that status shows the name of the pods currently\
+    ```\n`\n```\n<br>\nVerify the memcached exists:\n\n```\noc get memcached\n```\n\
+    `\n```\n<br>\nVerify the Memcached operator has created 3 pods:\n\n```\noc get\
+    \ pods\n```\n`\n```\n<br>\nVerify that status shows the name of the pods currently\
     \ owned by the Memcached:\n\n```\noc get memcached memcached-sample -o yaml\n\
-    ```\n\n```\n<br>\nIncrease the number of replicas owned by the Memcached:\n\n\
+    ```\n`\n```\n<br>\nIncrease the number of replicas owned by the Memcached:\n\n\
     ```\noc patch memcached memcached-sample --type='json' -p '[{\"op\": \"replace\"\
-    , \"path\": \"/spec/size\", \"value\":5}]'\n```\n\n```\n<br>\n\nVerify that we\
-    \ now have 5 running pods\n```\noc get pods\n```\n\n```\n"
+    , \"path\": \"/spec/size\", \"value\":5}]'\n```\n`\n```\n<br>\n\nVerify that we\
+    \ now have 5 running pods\n```\noc get pods\n```\n`\n```\n"
   difficulty: basic
   slug: step11
   tabs:
@@ -499,6 +505,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -513,6 +520,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -526,6 +534,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic

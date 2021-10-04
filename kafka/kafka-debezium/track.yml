@@ -7,12 +7,12 @@ challenges:
     \nIn AMQ Streams, you use Kafka Connect custom Kubernetes resources to deploy\
     \ and manage the Debezium connectors.\n\n### Logging in to the cluster from the\
     \ OpenShift CLI\n\nLog in to the OpenShift cluster from a _terminal_ with the\
-    \ following command:\n\n```\noc login -u developer -p developer`\n```\n\nThe command\
+    \ following command:\n\n```\noc login -u developer -p developer\n```\n\nThe command\
     \ logs you in with the following credentials:\n\n* **Username:** ``developer``\n\
     * **Password:** ``developer``\n\nYou can use the same credentials to log into\
     \ the web console.\n\n### Creating a namespace\n\nCreate a namespace (project)\
     \ with the name ``debezium`` for the AMQ Streams Kafka Cluster Operator:\n\n```\n\
-    oc new-project debezium`\n```\n\n### Creating a Kafka cluster\n\nNow we'll create\
+    oc new-project debezium\n```\n\n### Creating a Kafka cluster\n\nNow we'll create\
     \ a Kafka cluster named `my-cluster` that has one ZooKeeper node and one Kafka\
     \ broker node.\nTo simplify the deployment, the YAML file that we'll use to create\
     \ the cluster specifies the use of `ephemeral` storage.\n\n> **Note:**\n    Red\
@@ -24,7 +24,7 @@ challenges:
     \ the following command:\n\n```\noc -n debezium apply -f /root/projects/debezium/kafka-cluster.yaml\n\
     ```\n\n### Checking the status of the Kafka cluster\n\nVerify that the ZooKeeper\
     \ and Kafka pods are deployed and running in the cluster.\n\nEnter the following\
-    \ command to check the status of the pods:\n\n```\noc -n debezium get pods -w`\n\
+    \ command to check the status of the pods:\n\n```\noc -n debezium get pods -w\n\
     ```\n\nAfter a few minutes, the status of the pods for ZooKeeper, Kafka, and the\
     \ AMQ Streams Entity Operator change to `running`.\nThe output of the `get pods`\
     \ command should look similar to the following example:\n\n```bash\nNAME     \
@@ -57,7 +57,7 @@ challenges:
     \ that the broker is available, enter the following command to retrieve a message\
     \ from the broker:\n\n```\noc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh\
     \ --bootstrap-server localhost:9092 --topic test --from-beginning --max-messages\
-    \ 1`\n```\n\nThe broker processes the message that you sent in the previous command,\
+    \ 1\n```\n\nThe broker processes the message that you sent in the previous command,\
     \ and it returns the ``Hello world`` string.\n\nYou have successfully deployed\
     \ the Kafka broker service and made it available to clients to produce and consume\
     \ messages.\n\nIn the next step of this scenario, we will deploy a single instance\
@@ -88,7 +88,7 @@ challenges:
     \ Kafka Connect cluster with the custom image, enter the following command:\n\n\
     ``oc -n debezium apply -f /root/projects/debezium/kafka-connect.yaml``{{execute\
     \ interrupt}}\n\nThe Kafka Connect node is deployed.\n\nCheck the pod status:\n\
-    \n```\noc get pods -w -l app.kubernetes.io/name=kafka-connect`\n```\n\nThe command\
+    \n```\noc get pods -w -l app.kubernetes.io/name=kafka-connect\n```\n\nThe command\
     \ returns status in the following format:\n\n```bash\nNAME                   \
     \            READY  STATUS             \ndebezium-connect-6fc5b7f97d-g4h2l  0/1\
     \    ContainerCreating   \ndebezium-connect-6fc5b7f97d-g4h2l  1/1    Running \
@@ -138,7 +138,7 @@ challenges:
     \ registration resource, which is included in the scenario environment: `kafka-connector.yaml`{{open}}.\n\
     \nRegister the database source:\n\n``oc -n debezium apply -f /root/projects/debezium/kafka-connector.yaml``{{execute\
     \ interrupt}}\n\nCheck the Kafka Connect log file to verify that the registration\
-    \ succeeded and Debezium started:\n\n```\noc logs -f deploy/debezium-connect`\n\
+    \ succeeded and Debezium started:\n\n```\noc logs -f deploy/debezium-connect\n\
     ```\n\nConnection to the database is confirmed in the output as `Connected to\
     \ mysql.default.svc:3306`:\n\n```bash\n...\n2020-11-19 22:44:19,632 INFO Transitioning\
     \ from the snapshot reader to the binlog reader (io.debezium.connector.mysql.ChainedReader)\
@@ -182,7 +182,7 @@ challenges:
     \n### Verify that data is emitted from MySQL to Kafka\n\nNow let's check the contents\
     \ of the `customers` table in MySQL.\n\nDisplay the source table:\n\n```\noc -n\
     \ default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD\
-    \ -e \"SELECT * from customers\" inventory'`\n```\n\nThe command returns the contents\
+    \ -e \"SELECT * from customers\" inventory'\n```\n\nThe command returns the contents\
     \ of the `customers` table:\n\n```bash\nmysql: [Warning] Using a password on the\
     \ command line interface can be insecure.\n+------+------------+-----------+-----------------------+\n\
     | id   | first_name | last_name | email                 |\n+------+------------+-----------+-----------------------+\n\
@@ -195,7 +195,7 @@ challenges:
     \nLet's look at the messages in the topic:\n\n```\noc exec -c kafka my-cluster-kafka-0\
     \ -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092\
     \ --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 4\
-    \ | jq`\n```\n\nFrom the output, you can see the change events for the table:\n\
+    \ | jq\n```\n\nFrom the output, you can see the change events for the table:\n\
     \n```json\n...\n{\n  \"schema\": {\n    \"type\": \"struct\",\n    \"fields\"\
     : [\n      {\n        \"type\": \"struct\",\n        \"fields\": [\n         \
     \ {\n            \"type\": \"int32\",\n            \"optional\": false,\n    \
@@ -267,12 +267,12 @@ challenges:
     \ to improve readability.\n\nNow, let's add a new customer record to the table:\n\
     \n```\noc -n default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER\
     \ -p$MYSQL_PASSWORD -e \"INSERT INTO customers VALUES(default,\\\"John\\\",\\\"\
-    Doe\\\",\\\"john.doe@example.org\\\")\" inventory'`\n```\n\nAfter we add the record\
+    Doe\\\",\\\"john.doe@example.org\\\")\" inventory'\n```\n\nAfter we add the record\
     \ to the database, Debezium emits a new message to the associated topic.\n\nView\
     \ the messages in the topic again:\n\n```\noc exec -c kafka my-cluster-kafka-0\
     \ -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092\
     \ --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 5\
-    \ | jq`\n```\n\nThe command returns output that includes the newly added record\
+    \ | jq\n```\n\nThe command returns output that includes the newly added record\
     \ for the user _John Doe_:\n\n```json\n...\n{\n  \"schema\": {\n    \"type\":\
     \ \"struct\",\n    \"fields\": [\n      {\n        \"type\": \"struct\",\n   \
     \     \"fields\": [\n          {\n            \"type\": \"int32\",\n         \

@@ -17,7 +17,7 @@ challenges:
 
     ```
 
-    oc login -u developer -p developer`
+    oc login -u developer -p developer
 
     ```
 
@@ -42,7 +42,7 @@ challenges:
 
     ```
 
-    oc project kafka`
+    oc project kafka
 
     ```
 
@@ -82,7 +82,7 @@ challenges:
 
     ```
 
-    oc get pods -w -l app.kubernetes.io/name=kafka-bridge`
+    oc get pods -w -l app.kubernetes.io/name=kafka-bridge
 
     ```
 
@@ -185,7 +185,7 @@ challenges:
     \ of messages to the `my-topic` topic:\n\n```\ncurl -s -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/topics/my-topic\
     \ -H 'content-type: application/vnd.kafka.json.v2+json' -d '{ \"records\": [ {\"\
     key\": \"key-1\",\"value\": \"sales-lead-0001\"}, {\"key\": \"key-2\",\"value\"\
-    : \"sales-lead-0002\"} ] }' | jq`\n```\n\nIf the request is successful, the Kafka\
+    : \"sales-lead-0002\"} ] }' | jq\n```\n\nIf the request is successful, the Kafka\
     \ Bridge returns a `200 OK` HTTP code, with a JSON payload describing the `offsets`\
     \ array, and the partition and offsets in which the messages are written.\n\n\
     In this case, the auto-created topic has just one partition, so the response will\
@@ -217,7 +217,7 @@ challenges:
     \n```\ncurl -s -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group\
     \ -H 'content-type: application/vnd.kafka.v2+json' -d '{\"name\": \"my-consumer\"\
     ,\"format\": \"json\",\"auto.offset.reset\": \"earliest\",\"fetch.min.bytes\"\
-    : 512,\"enable.auto.commit\": false}' | jq`\n```\n\nThis will create a Kafka consumer\
+    : 512,\"enable.auto.commit\": false}' | jq\n```\n\nThis will create a Kafka consumer\
     \ connected to the Kafka cluster. If the request is successful, the bridge will\
     \ reply back with a `200 OK` HTTP code, and a JSON payload with the consumer ID\
     \ (`instance_id`) and base URL (`base_uri`).\n\nIt should look similar to the\
@@ -231,7 +231,7 @@ challenges:
     \ JSON formatted payload.\n\nSubscribe your `my-consumer` consumer to the `my-topic`\
     \ topic with the following command:\n\n```\ncurl -i -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/subscription\
     \ -H 'content-type: application/vnd.kafka.v2+json' -d '{\"topics\": [\"my-topic\"\
-    ]}'`\n```\n\n>This will return a `204 OK` HTTP code with an empty body.\n\nThe\
+    ]}'\n```\n\n>This will return a `204 OK` HTTP code with an empty body.\n\nThe\
     \ `topics` array can contain a single topic (as shown here) or multiple topics.\
     \ If you want to subscribe the consumer to multiple topics that match a regular\
     \ expression, you can use the `topic_pattern` string instead of the `topics` array.\n\
@@ -260,10 +260,10 @@ challenges:
     \ to get partitions assigned. Doing the next poll returns the messages if there\
     \ are any in the topic.\n\nSubmit a `GET` request to the `records` endpoint:\n\
     \n```\ncurl -s -k -X GET https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/records\
-    \ -H 'accept: application/vnd.kafka.json.v2+json' | jq`\n```\n\nRepeat step a\
-    \ couple more times until you retrieve all messages from the Kafka Bridge consumer.\n\
+    \ -H 'accept: application/vnd.kafka.json.v2+json' | jq\n```\n\nRepeat step a couple\
+    \ more times until you retrieve all messages from the Kafka Bridge consumer.\n\
     \n```\ncurl -s -k -X GET https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/records\
-    \ -H 'accept: application/vnd.kafka.json.v2+json' | jq`\n```\n\nThe Kafka Bridge\
+    \ -H 'accept: application/vnd.kafka.json.v2+json' | jq\n```\n\nThe Kafka Bridge\
     \ returns an array of messages\u2009\u2014\u2009describing the topic name, key,\
     \ value, partition, and offset\u2009\u2014\u2009in the response body, along with\
     \ a `200` code. Messages are retrieved from the latest offset by default.\n\n\
@@ -276,7 +276,7 @@ challenges:
     \ commit offsets to the log for all messages received by the Kafka Bridge consumer.\
     \ This is required because the Kafka Bridge consumer that you created earlier\
     \ was configured with the `enable.auto.commit` setting as false.\n\nCommit offsets\
-    \ to the log for `my-consumer`:\n\n```\ncurl -i -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/offsets`\n\
+    \ to the log for `my-consumer`:\n\n```\ncurl -i -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/offsets\n\
     ```\n\n>Because no request body is submitted, offsets are committed for all the\
     \ records that have been received by the consumer. Alternatively, the request\
     \ body can contain an array (OffsetCommitSeekList) that specifies the topics and\

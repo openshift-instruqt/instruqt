@@ -16,7 +16,7 @@ challenges:
 
     ```
 
-    oc login -u admin -p admin`
+    oc login -u admin -p admin
 
     ```
 
@@ -41,7 +41,7 @@ challenges:
 
     ```
 
-    oc new-project kafka`
+    oc new-project kafka
 
     ```
 
@@ -61,7 +61,7 @@ challenges:
 
     ```
 
-    oc -n kafka apply -f /opt/operator-install.yaml`
+    oc -n kafka apply -f /opt/operator-install.yaml
 
     ```
 
@@ -93,7 +93,7 @@ challenges:
 
     ```
 
-    oc -n kafka get pods -w`
+    oc -n kafka get pods -w
 
     ```
 
@@ -176,7 +176,7 @@ challenges:
 
     ```
 
-    oc -n kafka get pods -w`
+    oc -n kafka get pods -w
 
     ```
 

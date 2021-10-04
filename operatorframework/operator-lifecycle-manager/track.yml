@@ -35,9 +35,9 @@ challenges:
     \ watch for their Custom Resource (CR) in a list of namespaces or cluster-wide.\n\
     \nObserve these CRDs by running the following command:\n\n```\noc get crd | grep\
     \ -E 'catalogsource|subscription|clusterserviceversion|packagemanifest|installplan|operatorgroup'\n\
-    ```\n\n```\n\n\nOLM is powered by controllers that reside within the `openshift-operator-lifecycle-manager`\
+    ```\n`\n```\n\n\nOLM is powered by controllers that reside within the `openshift-operator-lifecycle-manager`\
     \ namespace as three Deployments (catalog-operator, olm-operator, and packageserver):\n\
-    \n```\noc -n openshift-operator-lifecycle-manager get deploy\n```\n\n```"
+    \n```\noc -n openshift-operator-lifecycle-manager get deploy\n```\n`\n```"
   difficulty: basic
   slug: step1
   tabs:
@@ -52,18 +52,18 @@ challenges:
   title: Exploring OLM
   type: challenge
 - assignment: "Observe the CatalogSources that ship with OLM and OpenShift 4:\n\n\
-    ```\noc get catalogsources -n openshift-marketplace\n```\n\n```\n\n\nHere is a\
-    \ brief summary of each CatalogSource:\n\n* **Certified Operators**:\n    * All\
-    \ Certified Operators have passed [Red Hat OpenShift Operator Certification](http://connect.redhat.com/explore/red-hat-openshift-operator-certification),\
+    ```\noc get catalogsources -n openshift-marketplace\n```\n`\n```\n\n\nHere is\
+    \ a brief summary of each CatalogSource:\n\n* **Certified Operators**:\n    *\
+    \ All Certified Operators have passed [Red Hat OpenShift Operator Certification](http://connect.redhat.com/explore/red-hat-openshift-operator-certification),\
     \ an offering under Red Hat Partner Connect, our technology partner program. In\
     \ this program, Red Hat partners can certify their Operators for use on Red Hat\
     \ OpenShift. With OpenShift Certified Operators, customers can benefit from validated,\
     \ well-integrated, mature and supported Operators from Red Hat or partner ISVs\
     \ in their hybrid cloud environments.\n\nTo view the Operators included in the\
     \ **Certified Operators** CatalogSource, run the following:\n\n```\noc get packagemanifests\
-    \ -l catalog=certified-operators\n```\n\n```\n\n* **Community Operators**:\n \
-    \   * With access to community Operators, customers can try out Operators at a\
-    \ variety of maturity levels. Delivering the OperatorHub community, Operators\
+    \ -l catalog=certified-operators\n```\n`\n```\n\n* **Community Operators**:\n\
+    \    * With access to community Operators, customers can try out Operators at\
+    \ a variety of maturity levels. Delivering the OperatorHub community, Operators\
     \ on OpenShift fosters iterative software development and deployment as Developers\
     \ get self-service access to popular components like databases, message queues\
     \ or tracing in a managed-service fashion on the platform. These Operators are\
@@ -71,15 +71,15 @@ challenges:
     \ GitHub repository](https://github.com/operator-framework/community-operators).\n\
     \nTo view the Operators included in the **Community Operators** CatalogSource,\
     \ run the following:\n\n```\noc get packagemanifests -l catalog=community-operators\n\
-    ```\n\n```\n\n* **Red Hat Operators**:\n    * These Operators are packaged, shipped,\
+    ```\n`\n```\n\n* **Red Hat Operators**:\n    * These Operators are packaged, shipped,\
     \ and supported by Red Hat.\n\nTo view the Operators included with the **RedHat\
     \ Operators** CatalogSource, run the following:\n\n```\noc get packagemanifests\
-    \ -l catalog=redhat-operators\n```\n\n```\n\n* **Red Hat Marketplace**:\n    *\
-    \ Built in partnership by Red Hat and IBM, the Red Hat Marketplace helps organizations\
+    \ -l catalog=redhat-operators\n```\n`\n```\n\n* **Red Hat Marketplace**:\n   \
+    \ * Built in partnership by Red Hat and IBM, the Red Hat Marketplace helps organizations\
     \ deliver enterprise software and improve workload portability. Learn more at\
     \ [marketplace.redhat.com](https://marketplace.redhat.com).\n\nTo view the Operators\
     \ included in the **Red Hat Marketplace** CatalogSource, run the following:\n\n\
-    ```\noc get packagemanifests -l catalog=redhat-marketplace\n```\n\n```"
+    ```\noc get packagemanifests -l catalog=redhat-marketplace\n```\n`\n```"
   difficulty: basic
   slug: step2
   tabs:
@@ -125,25 +125,25 @@ challenges:
   title: Accessing OLM on the OpenShift Console
   type: challenge
 - assignment: "Let's begin my creating a new project called `myproject`.\n\n```\n\
-    oc new-project myproject\n```\n\n```\n\n\nWe should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html)\
+    oc new-project myproject\n```\n`\n```\n\n\nWe should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html)\
     \ to ensure Operators installed to this namespace will be capable of watching\
     \ for Custom Resources within the `myproject` namespace:\n\n```\ncat > argocd-operatorgroup.yaml\
     \ <<EOF\napiVersion: operators.coreos.com/v1\nkind: OperatorGroup\nmetadata:\n\
     \  name: argocd-operatorgroup\n  namespace: myproject\nspec:\n  targetNamespaces:\n\
-    \    - myproject\nEOF\n```\n\n```\n\n\nCreate the OperatorGroup:\n\n```\noc create\
-    \ -f argocd-operatorgroup.yaml\n```\n\n```\n\n\nVerify the OperatorGroup has been\
-    \ successfully created:\n\n```\noc get operatorgroup argocd-operatorgroup \n```\n\
-    \n```\nCreate a Subscription manifest for the [ArgoCD Operator](https://github.com/argoproj-labs/argocd-operator).\
+    \    - myproject\nEOF\n```\n`\n```\n\n\nCreate the OperatorGroup:\n\n```\noc create\
+    \ -f argocd-operatorgroup.yaml\n```\n`\n```\n\n\nVerify the OperatorGroup has\
+    \ been successfully created:\n\n```\noc get operatorgroup argocd-operatorgroup\
+    \ \n```\n`\n```\nCreate a Subscription manifest for the [ArgoCD Operator](https://github.com/argoproj-labs/argocd-operator).\
     \ Ensure the `installPlanApproval` is set to `Manual`. This will allow us to review\
     \ the InstallPlan before choosing to install the Operator:\n\n```\ncat > argocd-subscription.yaml\
     \ <<EOF\napiVersion: operators.coreos.com/v1alpha1\nkind: Subscription\nmetadata:\n\
     \  name: argocd-operator\n  namespace: myproject \nspec:\n  channel: alpha\n \
     \ installPlanApproval: Manual\n  name: argocd-operator\n  source: community-operators\n\
-    \  sourceNamespace: openshift-marketplace\nEOF\n```\n\n```\n\n\nCreate the Subscription:\n\
-    \n```\noc create -f argocd-subscription.yaml\n```\n\n```\n\n\nVerify the Subscription\
-    \ was created:\n\n```\noc get subscription\n```\n\n```\n\n\nThe creation of the\
+    \  sourceNamespace: openshift-marketplace\nEOF\n```\n`\n```\n\n\nCreate the Subscription:\n\
+    \n```\noc create -f argocd-subscription.yaml\n```\n`\n```\n\n\nVerify the Subscription\
+    \ was created:\n\n```\noc get subscription\n```\n`\n```\n\n\nThe creation of the\
     \ subscription will also trigger OLM to automatically generate an InstallPlan:\n\
-    \n```\noc get installplan\n```\n\n```"
+    \n```\noc get installplan\n```\n`\n```"
   difficulty: basic
   slug: step4
   tabs:
@@ -169,6 +169,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -196,6 +197,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -212,6 +214,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -222,6 +225,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -232,6 +236,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -242,6 +247,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -252,6 +258,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -262,6 +269,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -278,6 +286,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -302,11 +311,11 @@ challenges:
     \ <<EOF\napiVersion: argoproj.io/v1alpha1\nkind: ArgoCD\nmetadata:\n  name: example-argocd\n\
     \  namespace: myproject\nspec:\n  dex:\n    image: quay.io/ablock/dex\n    openShiftOAuth:\
     \ true\n    version: openshift-connector\n  rbac:\n    policy: |\n      g, system:cluster-admins,\
-    \ role:admin\n  server:\n    route:\n      enabled: true\nEOF\n```\n\n```\n\n\n\
-    Create the ArgoCD Custom Resource:\n\n```\noc create -f argocd-cr.yaml\n```\n\n\
-    ```\n\n\nThe ArgoCD Operator should now begin to generate the ArgoCD Operand artifacts.\
-    \ This can take up to one minute:\n\n```\noc get deployments\noc get secrets\n\
-    oc get services\noc get routes\n```\n\n```"
+    \ role:admin\n  server:\n    route:\n      enabled: true\nEOF\n```\n`\n```\n\n\
+    \nCreate the ArgoCD Custom Resource:\n\n```\noc create -f argocd-cr.yaml\n```\n\
+    `\n```\n\n\nThe ArgoCD Operator should now begin to generate the ArgoCD Operand\
+    \ artifacts. This can take up to one minute:\n\n```\noc get deployments\noc get\
+    \ secrets\noc get services\noc get routes\n```\n`\n```"
   difficulty: basic
   slug: step6
   tabs:
@@ -331,6 +340,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -363,6 +373,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -376,6 +387,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -393,6 +405,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -410,6 +423,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic

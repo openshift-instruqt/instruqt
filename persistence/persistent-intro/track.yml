@@ -28,6 +28,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -204,7 +205,7 @@ challenges:
     \ volume` command. Execute the following\n\n````\noc set volume deploy/file-uploader\
     \ --add --name=my-shared-storage \\\n-t pvc --claim-mode=ReadWriteMany --claim-size=1Gi\
     \ \\\n--claim-name=my-shared-storage --claim-class=ocs-storagecluster-cephfs \\\
-    \n--mount-path=/opt/app-root/src/uploaded \\\n-n my-shared-storage\n```\n\n```\n\
+    \n--mount-path=/opt/app-root/src/uploaded \\\n-n my-shared-storage\n```\n`\n```\n\
     \nThis command will:\n\n* create a *PersistentVolumeClaim*\n* update the *DeploymentConfig*\
     \ to include a `volume` definition\n* update the *DeploymentConfig* to attach\
     \ a `volumemount` into the specified `mount-path`\n* cause a new deployment of\

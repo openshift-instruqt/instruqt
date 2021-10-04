@@ -10,14 +10,14 @@ challenges:
     \ be performed by a cluster admin.\n\nBefore creating any applications, it is\
     \ recommended you login as a distinct\nuser. This will be required if you want\
     \ to log in to the web console and\nuse it.\n\nTo login to the OpenShift cluster\
-    \ from the _Terminal_ run:\n\n```\noc login -u developer -p developer`\n```\n\n\
+    \ from the _Terminal_ run:\n\n```\noc login -u developer -p developer\n```\n\n\
     This will log you in using the credentials:\n\n* **Username:** ``developer``\n\
     * **Password:** ``developer``\n\nUse the same credentials to log into the web\
     \ console.\nFor simplicity we are logging in here as admin.\n\n## Creating your\
     \ own Project\n\nTo create a new project called ``myproject`` run the command:\n\
-    \n```\noc new-project myproject`\n```\n\nYou could instead create the project\
-    \ from the web console. If you do this,\nto change to the project from the command\
-    \ line run the command:\n\n```\noc project myproject`\n```\n\nNow that you have\
+    \n```\noc new-project myproject\n```\n\nYou could instead create the project from\
+    \ the web console. If you do this,\nto change to the project from the command\
+    \ line run the command:\n\n```\noc project myproject\n```\n\nNow that you have\
     \ created your own project, me move to the next\nstep. "
   difficulty: intermediate
   slug: setup
@@ -109,7 +109,7 @@ challenges:
     \ you have followed the steps from before and are logged in as an admin into `myproject`\
     \ in the openshift cluster lets deploy - \n\nYou can try deploying our version\
     \ using - \n\n```\noc process -f https://raw.githubusercontent.com/thoth-station/s2i-example/log-thoth/openshift.yaml\
-    \ | oc apply -f -`\n```\n\n\n\n\nNow that you have scheduled it in the katacoda\
+    \ | oc apply -f -\n```\n\n\n\n\nNow that you have scheduled it in the katacoda\
     \ terminal on the right, you should see this - \n```\nbuildconfig.build.openshift.io/s2i-example-log\
     \ created\ndeploymentconfig.apps.openshift.io/s2i-example-log created\nimagestream.image.openshift.io/s2i-example-log\
     \ created\nimagestream.image.openshift.io/s2i-thoth-ubi8-py38 created\n```\n\n\
@@ -119,17 +119,17 @@ challenges:
     \ and under logs you could inspect the build process. \nYou would see `thamos\
     \ advise` being run on your stack and if there is a suggestion. \nIncase the analysis\
     \ fails, we resort to the existing Pipfile.lock to prevent the build from failing.\
-    \ \n\nNow lets check the logs - \n\n```\noc logs bc/s2i-example-log -f`\n```\n\
-    \nYou should keep a eye for these things in the log - \n - Thoth's configuration\
+    \ \n\nNow lets check the logs - \n\n```\noc logs bc/s2i-example-log -f\n```\n\n\
+    You should keep a eye for these things in the log - \n - Thoth's configuration\
     \ file after hardware and software discovery (that's the .thoth.yaml being expanded\
     \ from the template.)\n - Asking Thoth for advise... (That is where thamos interacts\
     \ with Thoth API)\n\nNow if you check the UI, your app should be running under\
     \ `Workloads -> Pods`.\n\nOnce the application is deployed, you can check the\
-    \ logs from the deployed app using - \n\n```\noc logs -f bc/s2i-example-log`\n\
+    \ logs from the deployed app using - \n\n```\noc logs -f bc/s2i-example-log\n\
     ```\n\nAfter Thoth finishes processing your stack you should see something similar\
     \ to this in your report - \n![thoth advise pass](https://raw.githubusercontent.com/saisankargochhayat/katacoda-scenarios/master/hello-world/assets/thamos_advise_pass.png)\n\
     \nIf you want to remove the app from the cluster - \n\n```\noc delete all --selector\
-    \ 'app=s2i-example-log'`\n```"
+    \ 'app=s2i-example-log'\n```"
   difficulty: intermediate
   slug: deploy
   tabs:

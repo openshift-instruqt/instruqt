@@ -20,7 +20,7 @@ challenges:
     \ of the entire application easier. These definitions can be stored in version\
     \ control systems just like code. Let's inspect some of the Kubernetes resource\
     \ definitions we will use for this lab.\n\nFirst, look at the objects/resources\
-    \ that define the application:\n\n```\ncat ~/labs/wordpress-demo/wordpress-objects.yaml`\n\
+    \ that define the application:\n\n```\ncat ~/labs/wordpress-demo/wordpress-objects.yaml\n\
     ```\n\nNotice there are two Services defined - one for MySQL and one for Wordpress.\
     \ This allows these two Services to scale independently. The front end can scale\
     \ with web traffic demand. The MySQL service could also be made to scale with\
@@ -38,45 +38,45 @@ challenges:
     \ environment they could reside on shared storage and be accessed from any node\
     \ in the Kubernetes/OpenShift cluster. In a production environment, they could\
     \ also be dynamically provisioned with the appropriate resiliency (Gluster, Ceph,\
-    \ AWS EBS Volumes, NFS, iSCSI, others):\n\n```\ncat ~/labs/wordpress-demo/persistent-volumes.yaml`\n\
-    ```\n\nNow, let's instantiate some Persistent Volumes:\n\n```\noc create -f ~/labs/wordpress-demo/persistent-volumes.yaml`\n\
+    \ AWS EBS Volumes, NFS, iSCSI, others):\n\n```\ncat ~/labs/wordpress-demo/persistent-volumes.yaml\n\
+    ```\n\nNow, let's instantiate some Persistent Volumes:\n\n```\noc create -f ~/labs/wordpress-demo/persistent-volumes.yaml\n\
     ```\n\nNotice that the persistent volumes are unbound. They are available and\
     \ waiting, but will not be utilized until you define an application which consumes\
     \ storage. This is inline with the way Kubernetes constantly tries to drive the\
     \ actual state toward the defined state. Currently, there is no definition to\
-    \ consume this storage: \n\n```\noc get pv`\n```\n\nNow, let's instantiate our\
+    \ consume this storage: \n\n```\noc get pv\n```\n\nNow, let's instantiate our\
     \ two tier web application with a single command. This single command can be thought\
     \ of as an API call which tells Kubernetes the desired state or defined state\
-    \ which it will use as a guide:\n\n```\noc create -f ~/labs/wordpress-demo/wordpress-objects.yaml`\n\
+    \ which it will use as a guide:\n\n```\noc create -f ~/labs/wordpress-demo/wordpress-objects.yaml\n\
     ```\n\nLook at the status of the application. The two pods that make up this application\
     \ will remain in a \"pending\" state - why? Kubernetes will connect the Persistent\
     \ Volume Claims with the available Persistent Volumes, pull images, and schedule\
     \ the pods to a node. Keep running these commands until the pods start:\n\n```\n\
-    oc describe pod wordpress-`\n```\n\n```\noc describe pod mysql-`\n```\n\nNow,\
-    \ the persistent volume claims for the application will become Bound and satisfy\
-    \ the storage requirements. Kubernetes/OpenShift will now start to converge the\
-    \ defined state and the actual state:\n\n```\noc get pvc`\n```\n\nAlso, take a\
-    \ look at the Persistent Volumes again:\n\n```\noc get pv`\n```\n\nYou may notice\
-    \ the wordpress pod enter a state called CrashLoopBackOff. This is a natural state\
-    \ in Kubernetes/OpenShift which helps satisfy dependencies. The wordpress pod\
-    \ will not start until the mysql pod is up and running. This makes sense, because\
-    \ wordpress can't run until it has a database and a connection to it. Similar\
-    \ to email retries, Kubernetes will back off and attempt to restart the pod again\
-    \ after a short time. Kubernetes will try several times, extending the time between\
-    \ tries until eventually the dependency is satisfied, or it enters an Error state.\
-    \ Luckily, once the mysql pod comes up, wordpress will come up successfully. Here\
-    \ are some useful commands to watch the state:\n\nShow all pods. You may run this\
-    \ command several times waiting for the actual state to converge with the defined\
-    \ state:\n\n```\noc get pods`\n```\n\nView the events for a pod. You may run these\
-    \ commands several times waiting for the actual state to converge with the defined\
-    \ state:\n\n```\noc describe pod mysql-`\n```\n\n```\noc describe pod wordpress-`\n\
-    ```\n\nOnce the pods are scheduled and running, view the terminal output for each\
-    \ pod:\n\n```\noc logs $(oc get pods | grep mysql- | awk '{print $1}')`\n```\n\
-    \n```\noc logs $(oc get pods | grep wordpress- | awk '{print $1}')`\n```\n\nFinally,\
-    \ ensure that the web interface is up and running. The following curl/grep/awk\
-    \ command will show us the HTML returned form the webserver, letting us know that\
-    \ wordpress is up and running.\n\n```\ncurl http://$(oc get svc | grep wpfrontend\
-    \ | awk '{print $3}')/wp-admin/install.php`\n```\n\nThink about it, we just instantiated\
+    oc describe pod wordpress-\n```\n\n```\noc describe pod mysql-\n```\n\nNow, the\
+    \ persistent volume claims for the application will become Bound and satisfy the\
+    \ storage requirements. Kubernetes/OpenShift will now start to converge the defined\
+    \ state and the actual state:\n\n```\noc get pvc\n```\n\nAlso, take a look at\
+    \ the Persistent Volumes again:\n\n```\noc get pv\n```\n\nYou may notice the wordpress\
+    \ pod enter a state called CrashLoopBackOff. This is a natural state in Kubernetes/OpenShift\
+    \ which helps satisfy dependencies. The wordpress pod will not start until the\
+    \ mysql pod is up and running. This makes sense, because wordpress can't run until\
+    \ it has a database and a connection to it. Similar to email retries, Kubernetes\
+    \ will back off and attempt to restart the pod again after a short time. Kubernetes\
+    \ will try several times, extending the time between tries until eventually the\
+    \ dependency is satisfied, or it enters an Error state. Luckily, once the mysql\
+    \ pod comes up, wordpress will come up successfully. Here are some useful commands\
+    \ to watch the state:\n\nShow all pods. You may run this command several times\
+    \ waiting for the actual state to converge with the defined state:\n\n```\noc\
+    \ get pods\n```\n\nView the events for a pod. You may run these commands several\
+    \ times waiting for the actual state to converge with the defined state:\n\n```\n\
+    oc describe pod mysql-\n```\n\n```\noc describe pod wordpress-\n```\n\nOnce the\
+    \ pods are scheduled and running, view the terminal output for each pod:\n\n```\n\
+    oc logs $(oc get pods | grep mysql- | awk '{print $1}')\n```\n\n```\noc logs $(oc\
+    \ get pods | grep wordpress- | awk '{print $1}')\n```\n\nFinally, ensure that\
+    \ the web interface is up and running. The following curl/grep/awk command will\
+    \ show us the HTML returned form the webserver, letting us know that wordpress\
+    \ is up and running.\n\n```\ncurl http://$(oc get svc | grep wpfrontend | awk\
+    \ '{print $3}')/wp-admin/install.php\n```\n\nThink about it, we just instantiated\
     \ a fairly complex, multi-service application with a single command and pre-defined\
     \ state in the YAML files. This is extremely powerful and can be used to construct\
     \ complex applications with 10, 20, 30 or 100 services.\n\nIn this exercise you\
@@ -148,22 +148,22 @@ challenges:
     \ command and provide more capacity to handle more requests per second.\n\nBefore\
     \ we test, lets set up an environment variable so that we have the ip address\
     \ to connect to for several tests:\n\n```\nexport SITE=\"http://$(oc get svc |\
-    \ grep wpfrontend | awk '{print $3}')/wp-admin/install.php\"`\n```\n\nTest with\
+    \ grep wpfrontend | awk '{print $3}')/wp-admin/install.php\"\n```\n\nTest with\
     \ ab before we scale the application to get a base line. Take note of the \"Time\
     \ taken for tests\" section:\n\n```\nab -n10 -c 3 -k -H \"Accept-Encoding: gzip,\
-    \ deflate\" $SITE`\n```\n\n\nTake note of the following sections in the output:\n\
+    \ deflate\" $SITE\n```\n\n\nTake note of the following sections in the output:\n\
     \n- Time taken for tests\n- Requests per second\n- Percentage of the requests\
     \ served within a certain time (ms)\n\n\nGo to the web interface. Scale the Wordpress\
     \ Deployment up to three containers. Click the up arrow:\n\n- Applications ->\
     \ Deployments -> wordpress -> Up Arrow\n\n\nTest with ab again. How did this affect\
     \ our benchmarking and why?\n\n```\nab -n10 -c 3 -k -H \"Accept-Encoding: gzip,\
-    \ deflate\" $SITE`\n```\n\n\nNow lets scale up more with command line instead\
-    \ of the web interface:\n\n```\noc scale --replicas=5 rc/wordpress`\n```\n\n\n\
-    Test with ab. How did this affect our benchmarking and why?\n\n```\nab -n10 -c\
-    \ 3 -k -H \"Accept-Encoding: gzip, deflate\" $SITE`\n```\n\n\nScale the application\
-    \ back down to one pod:\n\n```\noc scale --replicas=1 rc/wordpress`\n```\n\nTest\
+    \ deflate\" $SITE\n```\n\n\nNow lets scale up more with command line instead of\
+    \ the web interface:\n\n```\noc scale --replicas=5 rc/wordpress\n```\n\n\nTest\
     \ with ab. How did this affect our benchmarking and why?\n\n```\nab -n10 -c 3\
-    \ -k -H \"Accept-Encoding: gzip, deflate\" $SITE`\n```\n\nCounter intuitively,\
+    \ -k -H \"Accept-Encoding: gzip, deflate\" $SITE\n```\n\n\nScale the application\
+    \ back down to one pod:\n\n```\noc scale --replicas=1 rc/wordpress\n```\n\nTest\
+    \ with ab. How did this affect our benchmarking and why?\n\n```\nab -n10 -c 3\
+    \ -k -H \"Accept-Encoding: gzip, deflate\" $SITE\n```\n\nCounter intuitively,\
     \ you may have seen slower response times when you scaled the pods up. This is\
     \ probably because we are running Kubernetes on a single node. The requests are\
     \ bing sent through a reverse proxy and distributed to multiple pods all running\
@@ -198,37 +198,37 @@ challenges:
     \ fails in unforeseen ways at scale or under load. \n\nWe are going to simulate\
     \ one of these problems by using a specially designed test application. In this\
     \ exercise we will learn how to figure things out quickly and easily.\n\nInspect\
-    \ each of the files and try to understand them a bit:\n\n```\ncat ~/labs/goodbad/Build.yaml`\n\
-    ```\n\n```\ncat ~/labs/goodbad/Run.yaml`\n```\n\n\nBuild the test application.\
+    \ each of the files and try to understand them a bit:\n\n```\ncat ~/labs/goodbad/Build.yaml\n\
+    ```\n\n```\ncat ~/labs/goodbad/Run.yaml\n```\n\n\nBuild the test application.\
     \ **Wait** for the build to successfully complete. You can watch the log output\
-    \ in the OpenShift web interface.\n\n```\noc create -f ~/labs/goodbad/Build.yaml`\n\
-    ```\n\n\n```\noc get builds`\n```\n\n```\noc get pods`\n```\n\nYou can watch the\
+    \ in the OpenShift web interface.\n\n```\noc create -f ~/labs/goodbad/Build.yaml\n\
+    ```\n\n\n```\noc get builds\n```\n\n```\noc get pods\n```\n\nYou can watch the\
     \ logs like this. Keep running the following command until you see \"Push successful\"\
-    \ in the logs:\n\n```\noc logs goodbad-1-build`\n```\n\nWhen the above build completes,\
-    \ run the test application:\n\n```\noc create -f ~/labs/goodbad/Run.yaml`\n```\n\
-    \n\nGet the IP address for the goodbad service\n\n```\noc get svc`\n```\n\n\n\
-    Now test the cluster IP with curl. Use the cluster IP address so that the traffic\
+    \ in the logs:\n\n```\noc logs goodbad-1-build\n```\n\nWhen the above build completes,\
+    \ run the test application:\n\n```\noc create -f ~/labs/goodbad/Run.yaml\n```\n\
+    \n\nGet the IP address for the goodbad service\n\n```\noc get svc\n```\n\n\nNow\
+    \ test the cluster IP with curl. Use the cluster IP address so that the traffic\
     \ is balanced among the active pods. You will notice some errors in your responses.\
     \ You may also test with a browser. Some of the pods are different - how could\
     \ this be? They should be identical because they were built from code right?\n\
     \n``SVC_IP=$(oc get svc | grep goodbad | awk '{print $3}')\nfor i in {1..20};\
-    \ do curl $SVC_IP; done```\n\n```\n\n\nExample output:\n\n``ERROR\nERROR\nHello\
-    \ World\nERROR``\n\n\nTake a look at the code. A random number is generated in\
-    \ the entry point and written to a file in /var/www/html/goodbad.txt:\n\n```\n\
-    cat ~/labs/goodbad/index.php`\n```\n\n```\ncat ~/labs/goodbad/Dockerfile`\n```\n\
+    \ do curl $SVC_IP; done``{{execute}}\n\n\nExample output:\n\n``ERROR\nERROR\n\
+    Hello World\nERROR``\n\n\nTake a look at the code. A random number is generated\
+    \ in the entry point and written to a file in /var/www/html/goodbad.txt:\n\n```\n\
+    cat ~/labs/goodbad/index.php\n```\n\n```\ncat ~/labs/goodbad/Dockerfile\n```\n\
     \n\nTroubleshoot the problem in a programmatic way. Notice some pods have files\
     \ which contain numbers that are lower than 7, this means the pod will return\
     \ a bad response:\n\n```\nfor i in $(oc get pods | grep goodbad | grep -v build\
-    \ | awk '{print $1}'); do oc exec -t $i -- cat /var/www/html/goodbad.txt; done`\n\
+    \ | awk '{print $1}'); do oc exec -t $i -- cat /var/www/html/goodbad.txt; done\n\
     ```\n\n\nContinue to troubleshoot the problem by temporarily fixing the file\n\
     \n```\nfor i in $(oc get pods | grep goodbad | grep -v build | awk '{print $1}');\
-    \ do oc exec -t $i -- sed -i -e s/[0-9]*/7/ /var/www/html/goodbad.txt; done`\n\
+    \ do oc exec -t $i -- sed -i -e s/[0-9]*/7/ /var/www/html/goodbad.txt; done\n\
     ```\n\n\nWrite a quick test that verifies the logic of your fix\n\n```\nfor i\
-    \ in {1..2000}; do curl $SVC_IP 2>&1; done | grep \"Hello World\" | wc -l`\n```\n\
+    \ in {1..2000}; do curl $SVC_IP 2>&1; done | grep \"Hello World\" | wc -l\n```\n\
     \n\nScale up the nodes, and test again. Notice it's broken again because new pods\
-    \ have been added with the broken file\n\n```\noc scale rc goodbad --replicas=10`\n\
+    \ have been added with the broken file\n\n```\noc scale rc goodbad --replicas=10\n\
     ```\n\n```\nfor i in {1..2000}; do curl $SVC_IP 2>&1; done | grep \"Hello World\"\
-    \ | wc -l`\n```\n\n\nOptional: As a final challenge, fix the problem permanently\
+    \ | wc -l\n```\n\n\nOptional: As a final challenge, fix the problem permanently\
     \ by fixing the logic so that the number is always above 7 and never causes the\
     \ application to break. Rebuild, and redeploy the application. Hint: you have\
     \ to get the images to redeploy with the newer versions (delete the rc) :-)\n"

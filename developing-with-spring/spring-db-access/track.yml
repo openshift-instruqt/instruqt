@@ -174,7 +174,7 @@ challenges:
     \ runtime. This is, however, particularly useful for complex queries that are\
     \ better suited for plain native SQL.\n\n**8. Verify the application**\n\nTo verify\
     \ that the application actually works now we need to actually run the application.\
-    \ Run the application by executing the following command ```\nmvn spring-boot:run`\n\
+    \ Run the application by executing the following command ```\nmvn spring-boot:run\n\
     ```\n\nNext, click on the **Local Web Browser** tab in the console frame of this\
     \ browser window which will open another tab or window of your browser pointing\
     \ to port 8080 on your client. Or use [this](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)\
@@ -211,18 +211,18 @@ challenges:
     \ database that we are going to use, and we also need to add health checks so\
     \ that OpenShift correctly can detect if our application is working. \n\n**1.\
     \ Create a project**\n\nLet's first create a new project\n\n```\noc new-project\
-    \ dev --display-name=\"Dev - Spring Boot App\"`\n```\n\n**2. Create the database**\n\
+    \ dev --display-name=\"Dev - Spring Boot App\"\n```\n\n**2. Create the database**\n\
     \nSince this is your own personal project you need to create a database instance\
     \ that your application can connect to. In a shared environment this would typically\
     \ be provided for you, that's why we are not deploying this as part of your application.\
     \ It's however very simple to do that in OpenShift. All you need to do is to execute\
     \ the below command in the console.\n\n``oc new-app -e POSTGRESQL_USER=dev \\\n\
     \             -e POSTGRESQL_PASSWORD=secret \\\n             -e POSTGRESQL_DATABASE=my_data\
-    \ \\\n             openshift/postgresql:12-el8 \\\n             --name=my-database```\n\
-    \n```\n\nThis command creates a new deployable Postgres instance using the OpenShift\
+    \ \\\n             openshift/postgresql:12-el8 \\\n             --name=my-database``{{execute}}\n\
+    \nThis command creates a new deployable Postgres instance using the OpenShift\
     \ Postgresql image named `my-database`. This step may take a minute or two. We\
     \ can wait for it to complete by running the following command:\n\n```\noc rollout\
-    \ status -w deployment/my-database`\n```\n\n**3. Review Database configuration**\n\
+    \ status -w deployment/my-database\n```\n\n**3. Review Database configuration**\n\
     \nTake some time and review the ``src/main/jkube/deployment.yml``{{open}}.\n\n\
     As you can see that file specifies a couple of elements that are needed for our\
     \ deployment. It also uses the username and password from a Kubernetes Secret.\
@@ -248,11 +248,11 @@ challenges:
     \ &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;\n      &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;\n\
     \    &lt;/dependency&gt;\n</pre>\n\n**6. Deploy the application to OpenShift**\n\
     \nRun the following command to deploy the application to OpenShift\n\n```\nmvn\
-    \ oc:deploy -Popenshift -DskipTests`\n```\n\nThis step may take some time to do\
+    \ oc:deploy -Popenshift -DskipTests\n```\n\nThis step may take some time to do\
     \ the Maven build and the OpenShift deployment. After the build completes you\
     \ can verify that everything is started by running the following command:\n\n\
-    ```\noc rollout status dc/spring-data-jpa-training`\n```\n\nThen either go to\
-    \ the OpenShift web console and click on the route or click [here](http://spring-data-jpa-training-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/).\n\
+    ```\noc rollout status dc/spring-data-jpa-training\n```\n\nThen either go to the\
+    \ OpenShift web console and click on the route or click [here](http://spring-data-jpa-training-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/).\n\
     \nMake sure that you can add and remove fruits using the web application.\n\n\
     # Open the solution in an IDE in the Cloud!\nWant to continue exploring this solution\
     \ on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\

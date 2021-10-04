@@ -84,26 +84,26 @@ challenges:
     \ a container images based on a Linux distro. To demonstrate, let's examine images\
     \ from four different Linux distros - CentOS, Fedora, Ubuntu, and Red Hat Enterprise\
     \ Linux. Each will provide differing levels of information:\n\n### CentOS\n\n\
-    ```\npodman run -it docker.io/centos:7.0.1406 yum updateinfo`\n```\n\nCentOS does\
+    ```\npodman run -it docker.io/centos:7.0.1406 yum updateinfo\n```\n\nCentOS does\
     \ not provide Errata for package updates, so this command will not show any information.\
     \ This makes it difficult to map CVEs to RPM packages. This, in turn, makes it\
     \ difficult to update the packages which are affected by a CVE. Finally, this\
     \ lack of information makes it difficult to score a container image for quality.\
     \ A basic workaround is to just update everything, but even then, you are not\
     \ 100% sure which CVEs you patched.\n\n### Fedora\n\n```\npodman run -it registry.fedoraproject.org/fedora\
-    \ dnf updateinfo`\n```\n\nFedora provides decent meta data about package updates,\
+    \ dnf updateinfo\n```\n\nFedora provides decent meta data about package updates,\
     \ but does not map them to CVEs either. Results will vary on any given day, but\
     \ the output will often look something like this:\n\n```\nLast metadata expiration\
     \ check: 0:00:07 ago on Mon Oct  8 16:22:46 2018.\nUpdates Information Summary:\
     \ available\n    5 Security notice(s)\n        1 Moderate Security notice(s)\n\
     \        2 Low Security notice(s)\n    5 Bugfix notice(s)\n    2 Enhancement notice(s)\n\
     ```\n\n### Ubuntu\n\n```\npodman run -it docker.io/ubuntu:trusty-20170330 /bin/bash\
-    \ -c \"apt-get update && apt list --upgradable\"`\n```\n\nUbuntu provides information\
+    \ -c \"apt-get update && apt list --upgradable\"\n```\n\nUbuntu provides information\
     \ at a similar quality to Fedora, but again does not map updates to CVEs easily.\
     \ The results for this specific image should always be the same because we are\
     \ purposefully pulling an old tag for demonstration purposes.\n\n### Red Hat Enterprise\
     \ Linux\n```\npodman run -it registry.access.redhat.com/ubi7/ubi:7.6-73 yum updateinfo\
-    \ security`\n```\n\nRegretfully, we do not have the active Red Hat subscriptions\
+    \ security\n```\n\nRegretfully, we do not have the active Red Hat subscriptions\
     \ necessary to analyze the Red Hat Universal Base Image (UBI) on the command line,\
     \ but the output should look like the following if ran on RHEL or in OpenShift:\n\
     \n```\nRHSA-2019:0679 Important/Sec. libssh2-1.4.3-12.el7_6.2.x86_64\nRHSA-2019:0710\
@@ -184,22 +184,22 @@ challenges:
     \ password in it, anybody on the system can see it, even if you never push it\
     \ to a registry server.\n\nLet's start with a quick look at Docker and Podman,\
     \ to show the difference in storage: \n\n```\ndocker info 2>&1 | grep -E 'Storage\
-    \ | Root'`\n```\n\nNotice what driver it's using and that it's storing container\
-    \ images in /var/lib/docker:\n\n```\ntree /var/lib/docker/`\n```\n\nNow, let's\
+    \ | Root'\n```\n\nNotice what driver it's using and that it's storing container\
+    \ images in /var/lib/docker:\n\n```\ntree /var/lib/docker/\n```\n\nNow, let's\
     \ take a look at a different container engine called podman. It pulls the same\
     \ OCI compliant, docker compatible images, but uses a different drivers and storage\
-    \ on the system:\n\n```\npodman info | grep -A3 Graph`\n```\n\nFirst, you might\
+    \ on the system:\n\n```\npodman info | grep -A3 Graph\n```\n\nFirst, you might\
     \ be asking yourself, [what the heck is d_type?](https://linuxer.pro/2017/03/what-is-d_type-and-why-docker-overlayfs-need-it/).\
     \ Long story short, it's filesystem option that must be supported for overlay2\
     \ to work properly as a backing store for container images and running containers.\
-    \ Now, take a look at the actuall storage being used by Podman:\n\n```\ntree /var/lib/containers/storage`\n\
+    \ Now, take a look at the actuall storage being used by Podman:\n\n```\ntree /var/lib/containers/storage\n\
     ```\n\nNow, pull an image and verify that the files are just mapped right into\
     \ the filesystem:\n\n``podman pull registry.access.redhat.com/ubi7/ubi\ncat $(find\
-    \ /var/lib/containers/storage | grep redhat-release | tail -n 1)```\n\n```\n\n\
-    With both Docker and Podman, as well as most other container engines on the planet,\
-    \ image layers are mapped one for one to some kind of storage, be it thinp snapshots\
-    \ with devicemapper, or directories with overlay2. \n\nThis has implications on\
-    \ how you move container images from one registry to another. First, you have\
+    \ /var/lib/containers/storage | grep redhat-release | tail -n 1)``{{execute}}\n\
+    \nWith both Docker and Podman, as well as most other container engines on the\
+    \ planet, image layers are mapped one for one to some kind of storage, be it thinp\
+    \ snapshots with devicemapper, or directories with overlay2. \n\nThis has implications\
+    \ on how you move container images from one registry to another. First, you have\
     \ to pull it and cache it locally. Then you have to tag it with the URL, Namespace,\
     \ Repository and Tag that you want in the new regsitry. Finally, you have to push\
     \ it. This is a convoluted mess, and in a later lab, we will investigate a tool\

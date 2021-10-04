@@ -27,7 +27,7 @@ challenges:
     \ application starts as it should.\n\nFirst, switch to the project directory:\n\
     \n```\ncd /root/projects/rhoar-getting-started/vertx/vertx-intro\n```\n\nSince\
     \ this is already a working application, you can run it without any code changes\
-    \ locally directly using `maven` with goal `vertx:run`\n\n```\nmvn compile vertx:run`\n\
+    \ locally directly using `maven` with goal `vertx:run`\n\n```\nmvn compile vertx:run\n\
     ```\n\n>**NOTE:** The vert.x maven plugin replays the phases executed before it\
     \ starts the application and it's therefor good practice to also specify the goals.\
     \  \n\nAt this stage, the application doesn't do anything, but after a while,\
@@ -195,7 +195,7 @@ challenges:
 
     ```
 
-    oc new-project dev --display-name="Dev - Eclipse Vert.x Http App"`
+    oc new-project dev --display-name="Dev - Eclipse Vert.x Http App"
 
     ```
 
@@ -261,11 +261,11 @@ challenges:
     \nRed Hat OpenShift Application Runtimes includes a powerful maven plugin that\
     \ can take an existing Vert.x application and generate necessary Kubernetes configuration.\
     \ \n\nTo deploy our application (and route) just execute the following\n\n```\n\
-    mvn fabric8:deploy -Popenshift`\n```\n\n**2. Verify**\n\nAfter the maven build\
+    mvn fabric8:deploy -Popenshift\n```\n\n**2. Verify**\n\nAfter the maven build\
     \ as finished, it will typically take less than 20 sec for the application to\
     \ be available. To verify that everything is started run the following command\
     \ and wait for it to report `replication controller \"http-vertx-1\" successfully\
-    \ rolled out`:\n\n```\noc rollout status dc/http-vertx`\n```\n\nThen either go\
+    \ rolled out`:\n\n```\noc rollout status dc/http-vertx\n```\n\nThen either go\
     \ to the openshift web console and click on the route or click [here](http://http-vertx-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
     \nTest and verify that the Invoke button works.\n\n## Congratulations\n\nYou have\
     \ now successfully deploy your application to the OpenShift Container Platform.\
@@ -304,13 +304,13 @@ challenges:
     \ the health-checks for us, and we can now redeploy our application with health\
     \ checks active\n\n**2. Re-deploy the application**\n\nRedeploy the application\
     \ by running the fabric8:deploy goal again.\n\n```\nmvn fabric8:undeploy fabric8:deploy\
-    \ -Popenshift`\n```\n\nWait for the rollout to finish.\n\n```\noc rollout status\
-    \ dc/http-vertx`\n```\n\nCheck that the warning is now gone from the [OpenShift\
+    \ -Popenshift\n```\n\nWait for the rollout to finish.\n\n```\noc rollout status\
+    \ dc/http-vertx\n```\n\nCheck that the warning is now gone from the [OpenShift\
     \ webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)\n\
     \n**3. Test**\n\nBelow is a rather complex command that does several steps in\
     \ one. After the command, the different steps are explained in more detail.\n\n\
     ```\noc --server https://$(hostname):8443 --insecure-skip-tls-verify=true rsh\
-    \ $(oc get pods -l app=http-vertx -o name) pkill java && oc get pods -w`\n```\n\
+    \ $(oc get pods -l app=http-vertx -o name) pkill java && oc get pods -w\n```\n\
     \n`oc get pods -l app=http-vertx -o name` will return the name of the running\
     \ pod, which is different each time.\n\n`oc rsh <pod> pkill java` stops the application.\n\
     \n`oc get pods -w` will watch the pods over time and report any status changes\

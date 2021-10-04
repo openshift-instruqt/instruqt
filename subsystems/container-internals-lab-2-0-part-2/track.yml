@@ -215,7 +215,7 @@ challenges:
     ```
 
     podman run -it registry.access.redhat.com/jboss-eap-7/eap70-openshift ldd -v -r
-    /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java`
+    /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java
 
     ```
 
@@ -226,7 +226,7 @@ challenges:
 
     ```
 
-    podman run -it registry.access.redhat.com/ubi7/ubi ldd /usr/bin/python`
+    podman run -it registry.access.redhat.com/ubi7/ubi ldd /usr/bin/python
 
     ```
 
@@ -239,7 +239,7 @@ challenges:
 
     ```
 
-    podman run -it registry.access.redhat.com/rhel7/rhel-tools bash`
+    podman run -it registry.access.redhat.com/rhel7/rhel-tools bash
 
     ```
 
@@ -249,7 +249,7 @@ challenges:
 
     ```
 
-    ldd /usr/bin/curl`
+    ldd /usr/bin/curl
 
     ```
 
@@ -262,14 +262,14 @@ challenges:
 
     ```
 
-    rpm -qf /lib64/libssl.so.10`
+    rpm -qf /lib64/libssl.so.10
 
     ```
 
 
     ```
 
-    rpm -qf /lib64/libssl3.so`
+    rpm -qf /lib64/libssl3.so
 
     ```
 
@@ -279,7 +279,7 @@ challenges:
 
     ```
 
-    exit`
+    exit
 
     ```
 
@@ -291,7 +291,7 @@ challenges:
 
     ```
 
-    podman run -it registry.access.redhat.com/rhscl/httpd-24-rhel7 bash`
+    podman run -it registry.access.redhat.com/rhscl/httpd-24-rhel7 bash
 
     ```
 
@@ -301,7 +301,7 @@ challenges:
 
     ```
 
-    ldd /opt/rh/httpd24/root/usr/lib64/httpd/modules/mod_ssl.so`
+    ldd /opt/rh/httpd24/root/usr/lib64/httpd/modules/mod_ssl.so
 
     ```
 
@@ -311,7 +311,7 @@ challenges:
 
     ```
 
-    rpm -qf /lib64/libcrypto.so.10`
+    rpm -qf /lib64/libcrypto.so.10
 
     ```
 
@@ -321,7 +321,7 @@ challenges:
 
     ```
 
-    exit`
+    exit
 
     ```
 

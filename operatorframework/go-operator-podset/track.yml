@@ -8,6 +8,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -22,6 +23,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -36,6 +38,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -50,6 +53,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic
@@ -78,6 +82,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -98,8 +103,8 @@ challenges:
   title: Creating the API and Controller
   type: challenge
 - assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go`\
-    \ file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n\n```\n\
-    \nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap)\
+    \ file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n`\n\
+    ```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap)\
     \ includes `spec` and `status`. Kubernetes functions by reconciling desired state\
     \ (Spec) with the actual cluster state. We then record what is observed (Status).\
     \ \n\nAlso observe the `+kubebuilder` comment markers found throughout the file.\
@@ -131,18 +136,18 @@ challenges:
     \        Items           []PodSet `json:\"items\"`\n}\n\nfunc init() {\n     \
     \   SchemeBuilder.Register(&PodSet{}, &PodSetList{})\n}\n</pre>\n\nYou can easily\
     \ update this file by running the following command:\n\n```\n\\cp /tmp/podset_types.go\
-    \ api/v1alpha1/podset_types.go\n```\n\n```\n<br>\nAfter modifying the `*_types.go`\
+    \ api/v1alpha1/podset_types.go\n```\n`\n```\n<br>\nAfter modifying the `*_types.go`\
     \ file, always run the following command to update the `zz_generated.deepcopy.go`\
-    \ file:\n\n```\nmake generate\n```\n\n```\n<br>\nNow we can run the `make manifests`\
+    \ file:\n\n```\nmake generate\n```\n`\n```\n<br>\nNow we can run the `make manifests`\
     \ command to generate our customized CRD and additional object YAMLs.\n\n```\n\
-    make manifests\n```\n\n```\n<br>\nThanks to our comment markers, observe that\
+    make manifests\n```\n`\n```\n<br>\nThanks to our comment markers, observe that\
     \ we now have a newly generated CRD yaml that reflects the `spec.replicas` and\
     \ `status.podNames` OpenAPI v3 schema validation and customized print columns.\n\
-    \n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n\n```\n<br>\nDeploy\
-    \ your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\n```\n\
-    oc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\n```\n<br>\n\
-    Confirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com\
-    \ -o yaml\n```\n\n```\n"
+    \n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n`\n```\n<br>\n\
+    Deploy your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\
+    \n```\noc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n`\n```\n\
+    <br>\nConfirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com\
+    \ -o yaml\n```\n`\n```\n"
   difficulty: basic
   slug: step3
   tabs:
@@ -157,7 +162,7 @@ challenges:
   title: Defining the Spec and Status
   type: challenge
 - assignment: "Let's now observe the default `controllers/podset_controller.go` file:\n\
-    \n```\ncat controllers/podset_controller.go\n```\n\n```\n\nThis default controller\
+    \n```\ncat controllers/podset_controller.go\n```\n`\n```\n\nThis default controller\
     \ requires additional logic so we can trigger our reconciler whenever `kind: PodSet`\
     \ objects are added, updated, or deleted. We also want to trigger the reconciler\
     \ whenever Pods owned by a given PodSet are added, updated, and deleted as well.\
@@ -238,12 +243,12 @@ challenges:
     \ error {\n\treturn ctrl.NewControllerManagedBy(mgr).\n\t\tFor(&appv1alpha1.PodSet{}).\n\
     \t\tOwns(&corev1.Pod{}).\n\t\tComplete(r)\n}\n</pre>\n\nYou can easily update\
     \ this file by running the following command:\n\n```\n\\cp /tmp/podset_controller.go\
-    \ controllers/podset_controller.go\n```\n\n```\n\n`go mod tidy`  ensures that\
+    \ controllers/podset_controller.go\n```\n`\n```\n\n`go mod tidy`  ensures that\
     \ the go.mod file matches the source code in the module. It adds any missing module\
     \ requirements necessary to build the current module's packages and dependencies,\
     \ and it removes requirements on modules that don't provide any relevant packages.\
     \ It also adds any missing entries to go.sum and removes unnecessary entries.\n\
-    \n```\ngo mod tidy\n```\n\n```\n\n"
+    \n```\ngo mod tidy\n```\n`\n```\n\n"
   difficulty: basic
   slug: step4
   tabs:
@@ -281,6 +286,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic
@@ -298,22 +304,22 @@ challenges:
   type: challenge
 - assignment: "In a new terminal, inspect the Custom Resource manifest:\n\n```\ncd\
     \ $HOME/projects/podset-operator\ncat config/samples/app_v1alpha1_podset.yaml\n\
-    ```\n\n```\n<br>\nEnsure your `kind: PodSet` Custom Resource (CR) is updated with\
-    \ `spec.replicas`\n\n<pre class=\"file\">\napiVersion: app.example.com/v1alpha1\n\
+    ```\n`\n```\n<br>\nEnsure your `kind: PodSet` Custom Resource (CR) is updated\
+    \ with `spec.replicas`\n\n<pre class=\"file\">\napiVersion: app.example.com/v1alpha1\n\
     kind: PodSet\nmetadata:\n  name: podset-sample\nspec:\n  replicas: 3\n</pre>\n\
     \nYou can easily update this file by running the following command:\n\n```\n\\\
     cp /tmp/app_v1alpha1_podset.yaml config/samples/app_v1alpha1_podset.yaml\n```\n\
-    \n```\n<br>\nEnsure you are currently scoped to the `myproject` Namespace:\n\n\
-    ```\noc project myproject\n```\n\n```\n<br>\nDeploy your PodSet Custom Resource\
+    `\n```\n<br>\nEnsure you are currently scoped to the `myproject` Namespace:\n\n\
+    ```\noc project myproject\n```\n`\n```\n<br>\nDeploy your PodSet Custom Resource\
     \ to the live OpenShift Cluster:\n\n```\noc create -f config/samples/app_v1alpha1_podset.yaml\n\
-    ```\n\n```\n<br>\nVerify the Podset exists:\n\n```\noc get podset\n```\n\n```\n\
+    ```\n`\n```\n<br>\nVerify the Podset exists:\n\n```\noc get podset\n```\n`\n```\n\
     <br>\nVerify the PodSet operator has created 3 pods:\n\n```\noc get pods\n```\n\
-    \n```\n<br>\nVerify that status shows the name of the pods currently owned by\
-    \ the PodSet:\n\n```\noc get podset podset-sample -o yaml\n```\n\n```\n<br>\n\
+    `\n```\n<br>\nVerify that status shows the name of the pods currently owned by\
+    \ the PodSet:\n\n```\noc get podset podset-sample -o yaml\n```\n`\n```\n<br>\n\
     Increase the number of replicas owned by the PodSet:\n\n```\noc patch podset podset-sample\
     \ --type='json' -p '[{\"op\": \"replace\", \"path\": \"/spec/replicas\", \"value\"\
-    :5}]'\n```\n\n```\n<br>\n\nVerify that we now have 5 running pods\n```\noc get\
-    \ pods\n```\n\n```\n"
+    :5}]'\n```\n`\n```\n<br>\n\nVerify that we now have 5 running pods\n```\noc get\
+    \ pods\n```\n`\n```\n"
   difficulty: basic
   slug: step6
   tabs:
@@ -341,6 +347,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -355,6 +362,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -368,6 +376,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic

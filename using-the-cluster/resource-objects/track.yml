@@ -8,7 +8,7 @@ challenges:
 
     ```
 
-    oc login --username developer --password developer`
+    oc login --username developer --password developer
 
     ```
 
@@ -18,7 +18,7 @@ challenges:
 
     ```
 
-    oc new-project myproject`
+    oc new-project myproject
 
     ```
 
@@ -33,7 +33,7 @@ challenges:
 
     ```
 
-    oc new-app openshiftroadshow/parksmap-katacoda:1.2.0 --name parksmap`
+    oc new-app openshiftroadshow/parksmap-katacoda:1.2.0 --name parksmap
 
     ```
 
@@ -45,7 +45,7 @@ challenges:
 
     ```
 
-    oc expose svc/parksmap`
+    oc expose svc/parksmap
 
     ```
 
@@ -73,7 +73,7 @@ challenges:
 
     ```
 
-    oc get all`
+    oc get all
 
     ```
 
@@ -125,7 +125,7 @@ challenges:
 
     ```
 
-    oc get all -o name`
+    oc get all -o name
 
     ```
 
@@ -165,7 +165,7 @@ challenges:
 
     ```
 
-    oc get routes`
+    oc get routes
 
     ```
 
@@ -188,7 +188,7 @@ challenges:
 
     ```
 
-    oc api-resources`
+    oc api-resources
 
     ```
 
@@ -245,7 +245,7 @@ challenges:
   title: Topic 2 - Resource Object Types
   type: challenge
 - assignment: "To get a more detailed description of a specific resource object, you\
-    \ can use the ``oc describe`` command.\n\nRun:\n\n```\noc describe route/parksmap`\n\
+    \ can use the ``oc describe`` command.\n\nRun:\n\n```\noc describe route/parksmap\n\
     ```\n\nand it should yield something similar to:\n\n```\nName:               \
     \    parksmap\nNamespace:              myproject\nCreated:                5 minutes\
     \ ago\nLabels:                 app=parksmap\nAnnotations:            openshift.io/host.generated=true\n\
@@ -257,20 +257,20 @@ challenges:
     ```\n\nWhenever passing a specific resource object as argument to an ``oc`` command,\
     \ there are two conventions which can be used. The first is to use a single string\
     \ of the form ``type/name``. The second is to pass the ``type`` and ``name`` as\
-    \ separate consecutive arguments. The command:\n\n```\noc describe route parksmap`\n\
+    \ separate consecutive arguments. The command:\n\n```\noc describe route parksmap\n\
     ```\n\nis therefore equivalent.\n\nThe output produced by ``oc describe`` is intended\
     \ to be a human readable format. To get the raw object details as JSON or YAML,\
     \ you can use the ``oc get`` command, listing the name of the resource and the\
     \ output format.\n\nFor JSON output, you can use:\n\n```\noc get route/parksmap\
-    \ -o json`\n```.\n\nFor YAML output, you can use:\n\n```\noc get route/parksmap\
-    \ -o yaml`\n```.\n\nTo see a description of the purpose of specific fields in\
-    \ the raw object, you can use the ``oc explain`` command, providing it with a\
-    \ path selector for the field.\n\nTo see the description of the ``host`` field\
-    \ of the ``spec`` object, you can run:\n\n```\noc explain route.spec.host`\n```\n\
-    \nThis will output:\n\n```\nKIND:     Route\nVERSION:  route.openshift.io/v1\n\
-    \nFIELD:    host <string>\n\nDESCRIPTION:\n     host is an alias/DNS that points\
-    \ to the service. Optional. If not specified\n     a route name will typically\
-    \ be automatically chosen. Must follow DNS952\n     subdomain conventions.\n```\n"
+    \ -o json\n```.\n\nFor YAML output, you can use:\n\n```\noc get route/parksmap\
+    \ -o yaml\n```.\n\nTo see a description of the purpose of specific fields in the\
+    \ raw object, you can use the ``oc explain`` command, providing it with a path\
+    \ selector for the field.\n\nTo see the description of the ``host`` field of the\
+    \ ``spec`` object, you can run:\n\n```\noc explain route.spec.host\n```\n\nThis\
+    \ will output:\n\n```\nKIND:     Route\nVERSION:  route.openshift.io/v1\n\nFIELD:\
+    \    host <string>\n\nDESCRIPTION:\n     host is an alias/DNS that points to the\
+    \ service. Optional. If not specified\n     a route name will typically be automatically\
+    \ chosen. Must follow DNS952\n     subdomain conventions.\n```\n"
   difficulty: basic
   slug: 03-querying-resource-objects
   tabs:
@@ -294,7 +294,7 @@ challenges:
 
     ```
 
-    oc edit route/parksmap`
+    oc edit route/parksmap
 
     ```
 
@@ -313,7 +313,7 @@ challenges:
 
     ```
 
-    oc edit route/parksmap -o json`
+    oc edit route/parksmap -o json
 
     ```
 
@@ -360,13 +360,13 @@ challenges:
     \ \"parksmap\",\n            \"weight\": 100\n        },\n        \"port\": {\n\
     \            \"targetPort\": \"8080-tcp\"\n        },\n        \"tls\": {\n  \
     \          \"termination\": \"edge\",\n            \"insecureEdgeTerminationPolicy\"\
-    : \"Allow\"\n        }\n    }\n}\n!```\n\n```\n\nTo create the route from the\
+    : \"Allow\"\n        }\n    }\n}\n!``{{execute}}\n\nTo create the route from the\
     \ ``parksmap-fqdn.json`` file you would run the command:\n\n```\noc create -f\
-    \ parksmap-fqdn.json`\n```.\n\nThe definition for this route had a unique value\
+    \ parksmap-fqdn.json\n```.\n\nThe definition for this route had a unique value\
     \ for ``route.metadata.name``, which wasn't previously in use. If you now run:\n\
-    \n```\noc get routes`\n```\n\nyou should see two routes listed.\n\n```\nNAME \
-    \           HOST/PORT                                                        \
-    \    PATH   SERVICES   PORT       TERMINATION   WILDCARD\nparksmap        parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com\
+    \n```\noc get routes\n```\n\nyou should see two routes listed.\n\n```\nNAME  \
+    \          HOST/PORT                                                         \
+    \   PATH   SERVICES   PORT       TERMINATION   WILDCARD\nparksmap        parksmap-myproject.2886795273-80-frugo03.environments.katacoda.com\
     \          parksmap   8080-tcp          None\nparksmap-fqdn   www.example.com\
     \                                                             parksmap   8080-tcp\
     \   edge/Allow    None\n```\n\nIn the case of a route, ``oc create`` provides\
@@ -374,7 +374,7 @@ challenges:
     \ run ``oc create route`` using the command:\n\n``oc create route edge parksmap-fqdn\
     \ --service parksmap --insecure-policy Allow --hostname www.example.com``\n\n\
     To see the list of resource object types that ``oc create`` has more specific\
-    \ support for, run:\n\n```\noc create --help`\n```\n"
+    \ support for, run:\n\n```\noc create --help\n```\n"
   difficulty: basic
   slug: 05-creating-resource-objects
   tabs:
@@ -401,20 +401,20 @@ challenges:
     \            \"name\": \"parksmap\",\n            \"weight\": 100\n        },\n\
     \        \"port\": {\n            \"targetPort\": \"8080-tcp\"\n        },\n \
     \       \"tls\": {\n            \"termination\": \"edge\",\n            \"insecureEdgeTerminationPolicy\"\
-    : \"Redirect\"\n        }\n    }\n}\n!```\n\n```\n\nand then run:\n\n```\noc replace\
-    \ -f parksmap-fqdn.json`\n```\n\nIn order for ``oc replace`` to target the correct\
-    \ resource object, the ``metadata.name`` value of the JSON or YAML definition\
-    \ must be the same as that to be changed.\n\nTo script the updating of a value\
-    \ in an existing resource object using ``oc replace``, it is necessary to fetch\
-    \ the definition of the existing resource object using ``oc get``. The definition\
-    \ can then be edited and ``oc replace`` used to update the existing resource object.\n\
-    \nTo edit the definition will require a way of editing the JSON or YAML definition\
-    \ on the fly. The alternative to this process is to use the ``oc patch`` command,\
-    \ which will edit a value in place for you based on a supplied specification.\n\
-    \nThe ``route.spec.tls.insecureEdgeTerminationPolicy`` value could for example\
-    \ be switched back to allowing an insecure route by running:\n\n```\noc patch\
-    \ route/parksmap-fqdn --patch '{\"spec\":{\"tls\": {\"insecureEdgeTerminationPolicy\"\
-    : \"Allow\"}}}'`\n```\n\nFor both cases, the resource object to be updated must\
+    : \"Redirect\"\n        }\n    }\n}\n!``{{execute}}\n\nand then run:\n\n```\n\
+    oc replace -f parksmap-fqdn.json\n```\n\nIn order for ``oc replace`` to target\
+    \ the correct resource object, the ``metadata.name`` value of the JSON or YAML\
+    \ definition must be the same as that to be changed.\n\nTo script the updating\
+    \ of a value in an existing resource object using ``oc replace``, it is necessary\
+    \ to fetch the definition of the existing resource object using ``oc get``. The\
+    \ definition can then be edited and ``oc replace`` used to update the existing\
+    \ resource object.\n\nTo edit the definition will require a way of editing the\
+    \ JSON or YAML definition on the fly. The alternative to this process is to use\
+    \ the ``oc patch`` command, which will edit a value in place for you based on\
+    \ a supplied specification.\n\nThe ``route.spec.tls.insecureEdgeTerminationPolicy``\
+    \ value could for example be switched back to allowing an insecure route by running:\n\
+    \n```\noc patch route/parksmap-fqdn --patch '{\"spec\":{\"tls\": {\"insecureEdgeTerminationPolicy\"\
+    : \"Allow\"}}}'\n```\n\nFor both cases, the resource object to be updated must\
     \ already exist or the command will fail. If you do not know whether the resource\
     \ object will already exist, and want it updated if it does, but created if it\
     \ does not, instead of using ``oc replace``, you can use ``oc apply``.\n"
@@ -447,7 +447,7 @@ challenges:
 
     ```
 
-    oc get all -o name --selector app=parksmap`
+    oc get all -o name --selector app=parksmap
 
     ```
 
@@ -484,7 +484,7 @@ challenges:
 
     ```
 
-    oc label service/parksmap web=true`
+    oc label service/parksmap web=true
 
     ```
 
@@ -494,7 +494,7 @@ challenges:
 
     ```
 
-    oc get all -o name --selector web=true`
+    oc get all -o name --selector web=true
 
     ```
 
@@ -507,7 +507,7 @@ challenges:
 
     ```
 
-    oc label service/parksmap web-`
+    oc label service/parksmap web-
 
     ```
 
@@ -539,7 +539,7 @@ challenges:
 
     ```
 
-    oc delete route/parksmap-fqdn`
+    oc delete route/parksmap-fqdn
 
     ```
 
@@ -550,7 +550,7 @@ challenges:
 
     ```
 
-    oc delete route --selector app=parksmap`
+    oc delete route --selector app=parksmap
 
     ```
 
@@ -561,7 +561,7 @@ challenges:
 
     ```
 
-    oc delete svc,route --selector app=parksmap`
+    oc delete svc,route --selector app=parksmap
 
     ```
 
@@ -572,7 +572,7 @@ challenges:
 
     ```
 
-    oc delete all --selector app=parksmap`
+    oc delete all --selector app=parksmap
 
     ```
 
@@ -591,7 +591,7 @@ challenges:
 
     ```
 
-    oc delete all --all`
+    oc delete all --all
 
     ```
 

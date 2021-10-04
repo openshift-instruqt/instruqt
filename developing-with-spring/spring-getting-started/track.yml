@@ -6,7 +6,7 @@ challenges:
     \ structure of the application\n\nFor your convenience, this scenario has been\
     \ created with a base project using the Java programming language and the Apache\
     \ Maven build tool.\n\nInitially, the project is almost empty and doesn't do anything.\
-    \ Start by reviewing the content by executing a ```\ntree`\n``` in your terminal.\n\
+    \ Start by reviewing the content by executing a ```\ntree\n``` in your terminal.\n\
     \nThe output should look something like this\n\n```sh\n.\n|-- pom.xml\n`-- src\n\
     \    `-- main\n        |-- jkube\n        |   |-- credentials-secret.yml\n   \
     \     |   |-- deployment.yml\n        |   |-- route.yml\n        |`-- java\n \
@@ -45,7 +45,7 @@ challenges:
     </pre>\n\n**2. Test the application locally**\n\nAs we develop the application,\
     \ we might want to test and verify our change at different stages. We can do that\
     \ locally, by using the `spring-boot` maven plugin.\n\nRun the application by\
-    \ executing the below command:\n\n```\nmvn spring-boot:run`\n```\n\n>**NOTE:**\
+    \ executing the below command:\n\n```\nmvn spring-boot:run\n```\n\n>**NOTE:**\
     \ The Katacoda terminal window is like your local terminal. Everything that you\
     \ run here you should be able to execute on your local computer as long as you\
     \ have a `Java JDK 11` and `Maven`. In later steps, we will also use the `oc`\
@@ -218,8 +218,8 @@ challenges:
     \ `@RequestMapping(value = \"/api/fruits\")`. We should now be able to see a list\
     \ of fruits on the web page.\n\n**2. Test the service from a web browser locally**\n\
     \nRun the application by executing the below command:\n\n```\nmvn spring-boot:run\
-    \ -DskipTests`\n```\n\n>**NOTE:** We skip the tests to speed up the start and\
-    \ since we do not have any tests for the REST service. Please note that the `spring-boot-crud-booster`\
+    \ -DskipTests\n```\n\n>**NOTE:** We skip the tests to speed up the start and since\
+    \ we do not have any tests for the REST service. Please note that the `spring-boot-crud-booster`\
     \ [here](https://github.com/snowdrop/spring-boot-crud-booster) has test cases\
     \ for REST, please review them if interested.\n\nIn the interest of time, we will\
     \ skip creating test cases for the service and instead test it directly in our\
@@ -253,7 +253,7 @@ challenges:
     Fruit cannot be null\");\n        }\n\n        if (!Objects.isNull(fruit.getId()))\
     \ {\n            throw new RuntimeException(\"Id field must be generated\");\n\
     \        }\n    }\n</pre>\n\n\n**5. Run and verify**\n\nBuild and start the application\
-    \ again\n\n```\nmvn spring-boot:run -DskipTests`\n```\n\nNow that we have implemented\
+    \ again\n\n```\nmvn spring-boot:run -DskipTests\n```\n\nNow that we have implemented\
     \ all the services we are now able to see fruits on the page, and also update,\
     \ create and delete them.\n\nWhen the console reports that Spring is up and running\
     \ access the web page by either click the Web Browser Tab or use [this](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)\
@@ -301,7 +301,7 @@ challenges:
 
     ```
 
-    oc whoami`
+    oc whoami
 
     ```
 
@@ -323,7 +323,7 @@ challenges:
 
     ```
 
-    oc new-project dev --display-name="Dev - Spring Boot App"`
+    oc new-project dev --display-name="Dev - Spring Boot App"
 
     ```
 
@@ -405,14 +405,13 @@ challenges:
     \ simple to do that in openshift. All you need to do is to execute the below command\
     \ in the console.\n\n``oc new-app -e POSTGRESQL_USER=luke \\\n             -e\
     \ POSTGRESQL_PASSWORD=secret \\\n             -e POSTGRESQL_DATABASE=my_data \\\
-    \n             openshift/postgresql:12-el8 \\\n             --name=my-database```\n\
-    \n```\n\n**2. Review Database configuration**\n\nTake some time and review the\
-    \ ``src/main/jkube/deployment.yml``{{open}}.\n\nAs you can see that file specifies\
-    \ a couple of elements that are needed for our deployment. It also uses the username\
-    \ and password from a Kubernetes Secret. For this environment we are providing\
-    \ the secret in this file ``src/main/jkube/credentials-secret.yml``{{open}}, however\
-    \ in a production environment this would likely be provided to you by the Ops\
-    \ team.\n\nNow, review the ``src/main/resources/application-openshift.properties``{{open}}\n\
+    \n             openshift/postgresql:12-el8 \\\n             --name=my-database``{{execute}}\n\
+    \n**2. Review Database configuration**\n\nTake some time and review the ``src/main/jkube/deployment.yml``{{open}}.\n\
+    \nAs you can see that file specifies a couple of elements that are needed for\
+    \ our deployment. It also uses the username and password from a Kubernetes Secret.\
+    \ For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``{{open}},\
+    \ however in a production environment this would likely be provided to you by\
+    \ the Ops team.\n\nNow, review the ``src/main/resources/application-openshift.properties``{{open}}\n\
     \nIn this file, we are using the configuration from the `deployment.yml` to read\
     \ username, password, and other connection details. \n\n**3. Add the PostgreSQL\
     \ database driver**\n\nSo far our application has only used the H2 Database, we\
@@ -431,11 +430,11 @@ challenges:
     \      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;\n      &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;\n\
     \    &lt;/dependency&gt;\n</pre>\n\n**5. Deploy the application to OpenShift**\n\
     \nRun the following command to deploy the application to OpenShift:\n\n```\nmvn\
-    \ package oc:deploy -Popenshift -DskipTests`\n```\n\nThis step may take some time\
+    \ package oc:deploy -Popenshift -DskipTests\n```\n\nThis step may take some time\
     \ to do the Maven build and the OpenShift deployment. After the build completes\
     \ you can verify that everything is started by running the following command:\n\
-    \n```\noc rollout status dc/spring-getting-started`\n```\n\nThen either go to\
-    \ the OpenShift web console and click on the route or click [here](http://spring-getting-started-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n\
+    \n```\noc rollout status dc/spring-getting-started\n```\n\nThen either go to the\
+    \ OpenShift web console and click on the route or click [here](http://spring-getting-started-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n\
     \nMake sure that you can add, edit, and remove fruits, using the web application.\n\
     \n# Open the solution in an IDE in the Cloud!\nWant to continue exploring this\
     \ solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\

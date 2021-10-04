@@ -2,13 +2,13 @@ challenges:
 - assignment: "To get started, first we need to login to OpenShift.\n\n### Logging\
     \ in to the Cluster via OpenShift CLI\n\nTo login to the OpenShift cluster use\
     \ the following commmand in your **_Terminal_**:\n\n```\noc login -u admin -p\
-    \ admin`\n```\n\n> You can click on the above command (and all others in this\
-    \ scenario) to automatically copy it into the terminal and execute it.\n\nThis\
-    \ will log you in using the credentials:\n\n* **Username:** ``admin``\n* **Password:**\
+    \ admin\n```\n\n> You can click on the above command (and all others in this scenario)\
+    \ to automatically copy it into the terminal and execute it.\n\nThis will log\
+    \ you in using the credentials:\n\n* **Username:** ``admin``\n* **Password:**\
     \ ``admin``\n\nYou should see the output:\n\n```bash\nLogin successful.\n\nYou\
     \ don't have any projects. You can try to create a new project, by running\n\n\
     \    oc new-project <projectname>\n```\n\nFor this scenario lets create a project\
-    \ called ``messaging`` by running the command:\n\n```\noc new-project messaging`\n\
+    \ called ``messaging`` by running the command:\n\n```\noc new-project messaging\n\
     ```\n\nYou should see output similar to:\n\n```bash\nNow using project \"messaging\"\
     \ on server \"https://172.17.0.41:8443\".\n\nYou can add applications to this\
     \ project with the 'new-app' command. For example, try:\n\n    oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git\n\
@@ -17,16 +17,16 @@ challenges:
     ```\n\n### Install AMQ broker operator\n\nAMQ Broker provides container images\
     \ and Operators for running ActiveMQ Artemis on OpenShift.\n\nDeploy the Operator\
     \ Lifecycle Manager Operator Group and Susbcription to easily install the operator\
-    \ in the previously created namespace:\n\n```\noc -n messaging apply -f /opt/operator-install.yaml`\n\
+    \ in the previously created namespace:\n\n```\noc -n messaging apply -f /opt/operator-install.yaml\n\
     ```\n\nYou should see the following result:\n\n```bash\noperatorgroup.operators.coreos.com/broker-operatorgroup\
     \ created\nsubscription.operators.coreos.com/amq-broker created\n```\n\n> You\
     \ can also deploy the AMQ broker operator from the OpenShift OperatorHub from\
     \ within the administration console.\n\n### Check operator deployment\n\nFollow\
     \ up the operator deployment to validate it is running.\n\nTo watch the pods status\
-    \ run the following command:\n\n```\noc -n messaging get pods -w`\n```\n\nYou\
-    \ will see the status of the operator changing until it gets to `running`. It\
-    \ should look similar to the following:\n\n```bash\nNAME                     \
-    \             READY   STATUS              RESTARTS   AGE\namq-broker-operator-6c76986f9-bsrcv\
+    \ run the following command:\n\n```\noc -n messaging get pods -w\n```\n\nYou will\
+    \ see the status of the operator changing until it gets to `running`. It should\
+    \ look similar to the following:\n\n```bash\nNAME                            \
+    \      READY   STATUS              RESTARTS   AGE\namq-broker-operator-6c76986f9-bsrcv\
     \   0/1     ContainerCreating   0          1s\namq-broker-operator-6c76986f9-bsrcv\
     \   0/1     ContainerCreating   0          2s\namq-broker-operator-6c76986f9-bsrcv\
     \   0/1     ContainerCreating   0          7s\namq-broker-operator-6c76986f9-bsrcv\
@@ -81,7 +81,7 @@ challenges:
 
     ```
 
-    oc -n messaging apply -f amq-broker.yaml`
+    oc -n messaging apply -f amq-broker.yaml
 
     ```
 
@@ -112,7 +112,7 @@ challenges:
 
     ```
 
-    oc -n messaging get pods -w`
+    oc -n messaging get pods -w
 
     ```
 
@@ -181,7 +181,7 @@ challenges:
     \ them, run the following command:\n\n``npm install``{{execute interrupt}}\n\n\
     It will take a few seconds to download, and you should see a final report such\
     \ as \n\n```bash\nadded 140 packages in 2.937s\n```\n\n### Deploy\n\nBuild and\
-    \ deploy the project using the following command:\n\n```\nnpm run openshift``\n\
+    \ deploy the project using the following command:\n\n```\nnpm run openshift\n\
     ```\n\n> This uses NPM and the [Nodeshift](https://github.com/bucharest-gold/nodeshift)\
     \ project to build and deploy the sample application to OpenShift using the containerized\
     \ Node.js runtime.\n\nThe build and deploy may take a minute or two. Wait for\
@@ -189,7 +189,7 @@ challenges:
     \ and you should not see any obvious errors or failures.\n\n### Check application\
     \ deployment\n\nFollow up the application deployment to validate it is running.\n\
     \nTo watch the pods status run the following command:\n\n```\noc -n messaging\
-    \ get pods -w`\n```\n\nYou will see the pod for the application changing the status\
+    \ get pods -w\n```\n\nYou will see the pod for the application changing the status\
     \ to `running`. It should look similar to the following:\n\n```bash\nNAME    \
     \                              READY   STATUS      RESTARTS   AGE\namq-broker-operator-6c76986f9-6vjhj\
     \   1/1     Running     0          6m5s\namq-js-demo-1-deploy                \

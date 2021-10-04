@@ -139,9 +139,9 @@ challenges:
     \ mesh\nA quick and easy way to add a new project to the service mesh can be found\
     \ below.  Be sure to set the NEWPROJECT environment variable to your project's\
     \ name using:\n\n```\nCONTROL_PLANE_NS=istio-system\nNEW_PROJECT=UPDATE-ME\n```\n\
-    \n```\n\nNow you can add your project to the mesh:\n\n``` \noc patch -n ${CONTROL_PLANE_NS}\
+    `\n```\n\nNow you can add your project to the mesh:\n\n``` \noc patch -n ${CONTROL_PLANE_NS}\
     \ --type='json' smmr default -p '[{\"op\": \"add\", \"path\": \"/spec/members\"\
-    , \"value\":[\"'\"${NEW_PROJECT}\"'\"]}]'\n```\n\n```\n\n## Kiali and Jaeger\n\
+    , \"value\":[\"'\"${NEW_PROJECT}\"'\"]}]'\n```\n`\n```\n\n## Kiali and Jaeger\n\
     Be sure to also check out the Kiali and Jaeger consoles using the links above\
     \ your terminal window or below.  Login using the OpenShift credentials above.\n\
     * [Kiali](https://kiali-istio-system.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
@@ -149,7 +149,7 @@ challenges:
     \n## Bookinfo\nThe installation script deployed the Istio Bookinfo application\
     \ in the `bookinfo` project.\n\nPlay around using the examples that can be found\
     \ here: https://istio.io/latest/docs/examples/bookinfo/\n\nFor example:\n```\n\
-    oc get virtualservices -n bookinfo\n```\n\n```\n\n"
+    oc get virtualservices -n bookinfo\n```\n`\n```\n\n"
   difficulty: intermediate
   slug: 03-playground
   tabs:

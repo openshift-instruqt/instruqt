@@ -35,7 +35,7 @@ challenges:
 
     oc new-app postgresql-ephemeral --name database --param DATABASE_SERVICE_NAME=database
     --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param
-    POSTGRESQL_PASSWORD=password`
+    POSTGRESQL_PASSWORD=password
 
     ```
 
@@ -56,7 +56,7 @@ challenges:
 
     ```
 
-    oc rollout status dc/database`
+    oc rollout status dc/database
 
     ```
 
@@ -81,18 +81,18 @@ challenges:
   title: Topic 2 - Deploying a PostgreSQL Database
   type: challenge
 - assignment: "In order to know where the database is running to connect to, run the\
-    \ command:\n\n```\noc get pods --selector name=database`\n```\n\nThis will output\
+    \ command:\n\n```\noc get pods --selector name=database\n```\n\nThis will output\
     \ the details of the pod which is running the database.\n\n```\nNAME         \
     \      READY     STATUS    RESTARTS   AGE\ndatabase-1-9xv8n   1/1       Running\
     \   0          1m\n```\n\nTo make it easier to reference the name of the pod,\
     \ capture the name of the pod in an environment variable by running:\n\n```\n\
     POD=`oc get pods --selector name=database -o custom-columns=NAME:.metadata.name\
-    \ --no-headers`; echo $POD`\n```\n\nTo create an interactive shell within the\
-    \ same container running the database, you can use the ``oc rsh`` command, supplying\
-    \ it the name of the pod.\n\n```\noc rsh $POD`\n```\n\nYou could also access an\
+    \ --no-headers`; echo $POD\n```\n\nTo create an interactive shell within the same\
+    \ container running the database, you can use the ``oc rsh`` command, supplying\
+    \ it the name of the pod.\n\n```\noc rsh $POD\n```\n\nYou could also access an\
     \ interactive terminal session via a web browser by visiting the pod details from\
     \ the web console.\n\nYou can see that you are in the container running the database\
-    \ by running:\n\n```\nps x`\n```\n\nThis will display output similar to:\n\n```\n\
+    \ by running:\n\n```\nps x\n```\n\nThis will display output similar to:\n\n```\n\
     PID TTY      STAT   TIME COMMAND\n  1 ?        Ss     0:00 postgres\n 60 ?   \
     \     Ss     0:00 postgres: logger process\n 62 ?        Ss     0:00 postgres:\
     \ checkpointer process\n 63 ?        Ss     0:00 postgres: writer process\n 64\
@@ -102,18 +102,18 @@ challenges:
     \ launcher\n193 pts/0    Ss     0:00 /bin/sh\n257 pts/0    R+     0:00 ps x\n\
     ```\n\nBecause you are in the same container, you could at this point run the\
     \ database client for the database if provided in the container. For PostgreSQL,\
-    \ you would use the ``psql`` command.\n\n```\npsql sampledb username`\n```\n\n\
+    \ you would use the ``psql`` command.\n\n```\npsql sampledb username\n```\n\n\
     This will present you with the prompt for running database operations via ``psql``.\n\
     \n```\npsql (9.5.4)\nType \"help\" for help.\n\nsampledb=>\n```\n\nYou could now\
     \ dynamically create database tables, add data, or modify existing data.\n\nTo\
-    \ exit ``psql`` enter:\n\n```\n\\q`\n```\n\nTo exit the interactive shell run:\n\
-    \n```\nexit`\n```\n\nAnything you want to do to the database could be be done\
-    \ through any database admin tool included in the container. This will though\
-    \ be limited to console based tools and you would not be able to use a GUI based\
-    \ tool which runs from your local machine as the database is still not exposed\
-    \ outside of the OpenShift cluster at this point.\n\nIf you need to run database\
-    \ script files to perform operations on the database, you would also need to first\
-    \ copy those files into the database container using the ``oc rsync`` command.\n"
+    \ exit ``psql`` enter:\n\n```\n\\q\n```\n\nTo exit the interactive shell run:\n\
+    \n```\nexit\n```\n\nAnything you want to do to the database could be be done through\
+    \ any database admin tool included in the container. This will though be limited\
+    \ to console based tools and you would not be able to use a GUI based tool which\
+    \ runs from your local machine as the database is still not exposed outside of\
+    \ the OpenShift cluster at this point.\n\nIf you need to run database script files\
+    \ to perform operations on the database, you would also need to first copy those\
+    \ files into the database container using the ``oc rsync`` command.\n"
   difficulty: basic
   slug: 03-starting-an-interactive-shell
   tabs:
@@ -148,8 +148,8 @@ challenges:
     \ <pod-name> <local-port>:<remote-port>\n```\n\nTo create a connection to the\
     \ PostgreSQL database, which uses port 5432, and expose it on the local machine\
     \ where ``oc`` is being run, as port 15432, use:\n\n```\noc port-forward $POD\
-    \ 15432:5432 &`\n```\n\nPort 15432 is used here for the local machine, rather\
-    \ than using 5432, in case an instance of PostgreSQL was also running on the local\
+    \ 15432:5432 &\n```\n\nPort 15432 is used here for the local machine, rather than\
+    \ using 5432, in case an instance of PostgreSQL was also running on the local\
     \ machine. If an instance of PostgreSQL was running on the local machine and the\
     \ same port was used, setting up the connection would fail as the port would already\
     \ be in use.\n\nIf you do not know what ports may be available, you can instead\
@@ -162,20 +162,20 @@ challenges:
     \ separate terminal window to run the administration tool which could connect\
     \ via the forwarded connection. In this case, as we only have the one terminal\
     \ window, we ran the ``oc port-forward`` command as a background job.\n\nYou can\
-    \ see that it is still running using: \n\n```\njobs`\n```\n\nWith the port forwarding\
+    \ see that it is still running using: \n\n```\njobs\n```\n\nWith the port forwarding\
     \ in place, you can now run ``psql`` again. This time it is being run from the\
     \ local machine, and not inside of the container. Because the forwarded connection\
     \ is using port 15432 on the local machine, you need to explicitly tell it to\
     \ use that port rather than the default database port.\n\n```\npsql sampledb username\
-    \ --host=127.0.0.1 --port=15432`\n```\n\nThis will again present you with the\
-    \ prompt for running database operations via ``psql``.\n\n```\nHandling connection\
-    \ for 5432\npsql (9.2.18, server 9.5.4)\nWARNING: psql version 9.2, server version\
+    \ --host=127.0.0.1 --port=15432\n```\n\nThis will again present you with the prompt\
+    \ for running database operations via ``psql``.\n\n```\nHandling connection for\
+    \ 5432\npsql (9.2.18, server 9.5.4)\nWARNING: psql version 9.2, server version\
     \ 9.5.\n         Some psql features might not work.\nType \"help\" for help.\n\
     \nsampledb=>\n```\n\nYou could now dynamically create database tables, add data,\
-    \ or modify existing data.\n\nTo exit ``psql`` enter:\n\n```\n\\q`\n```\n\nBecause\
+    \ or modify existing data.\n\nTo exit ``psql`` enter:\n\n```\n\\q\n```\n\nBecause\
     \ we ran the ``oc port-forward`` command as a background process, we can kill\
-    \ it when done using:\n\n```\nkill %1`\n```\n\nRunning ``jobs`` again we can see\
-    \ it is terminated.\n\n```\njobs`\n```\n\nIn this exercise we used ``psql``, however\
+    \ it when done using:\n\n```\nkill %1\n```\n\nRunning ``jobs`` again we can see\
+    \ it is terminated.\n\n```\njobs\n```\n\nIn this exercise we used ``psql``, however\
     \ you could also use a GUI based database administration tool running on your\
     \ local machine as well."
   difficulty: basic

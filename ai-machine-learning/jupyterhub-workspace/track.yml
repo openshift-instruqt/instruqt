@@ -18,7 +18,7 @@ challenges:
 
     ```
 
-    oc get imagestreams -o name`
+    oc get imagestreams -o name
 
     ```
 
@@ -32,7 +32,7 @@ challenges:
 
     ```
 
-    oc describe imagestream s2i-minimal-notebook`
+    oc describe imagestream s2i-minimal-notebook
 
     ```
 
@@ -71,7 +71,7 @@ challenges:
 
     ```
 
-    oc get templates`
+    oc get templates
 
     ```
 
@@ -158,7 +158,7 @@ challenges:
 
     ```
 
-    oc describe template jupyterhub-workspace`
+    oc describe template jupyterhub-workspace
 
     ```
 
@@ -239,7 +239,7 @@ challenges:
     oc process jupyterhub-workspace --param SPAWNER_NAMESPACE=`oc project --short`
     --param CLUSTER_SUBDOMAIN="[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"
     --param NOTEBOOK_INTERFACE=lab --param OPENSHIFT_PROJECT=''{username}-workspace''
-    --param VOLUME_SIZE=1Gi --param IDLE_TIMEOUT=3600 | oc apply -f -`
+    --param VOLUME_SIZE=1Gi --param IDLE_TIMEOUT=3600 | oc apply -f -
 
     ```
 
@@ -258,7 +258,7 @@ challenges:
 
     ```
 
-    oc rollout status dc/jupyterhub`
+    oc rollout status dc/jupyterhub
 
     ```
 
@@ -323,7 +323,7 @@ challenges:
 
     ```
 
-    oc get pod -l component=singleuser-server`
+    oc get pod -l component=singleuser-server
 
     ```
 
@@ -346,7 +346,7 @@ challenges:
 
     ```
 
-    oc get pvc -l component=singleuser-storage`
+    oc get pvc -l component=singleuser-storage
 
     ```
 
@@ -390,7 +390,7 @@ challenges:
 
     ```
 
-    oc get project/user1-workspace`
+    oc get project/user1-workspace
 
     ```
 
@@ -463,7 +463,7 @@ challenges:
     ```
 
     oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
-    -o name`
+    -o name
 
     ```
 
@@ -476,7 +476,7 @@ challenges:
 
     ```
 
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
 
     ```
 
@@ -493,7 +493,7 @@ challenges:
 
     ```
 
-    oc get oauthclient --selector app=jupyterhub`
+    oc get oauthclient --selector app=jupyterhub
 
     ```
 
@@ -504,7 +504,7 @@ challenges:
 
     ```
 
-    oc delete oauthclient/jupyterhub-myproject-users`
+    oc delete oauthclient/jupyterhub-myproject-users
 
     ```
 

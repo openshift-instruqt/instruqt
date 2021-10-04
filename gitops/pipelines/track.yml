@@ -41,7 +41,7 @@ challenges:
     \ This operation can take a few seconds; you can run the following script to monitor\
     \ the progress of the installation.\n\n```\nuntil oc api-resources --api-group=tekton.dev\
     \ | grep tekton.dev &> /dev/null\ndo \n echo \"Operator installation in progress...\"\
-    \n sleep 5\ndone\n\necho \"Operator ready\"\n```\n\n```\n\nGreat! The OpenShift\
+    \n sleep 5\ndone\n\necho \"Operator ready\"\n```\n`\n```\n\nGreat! The OpenShift\
     \ Pipelines Operator is now installed. Now, let's start the workshop.\n"
   difficulty: intermediate
   slug: 01install-op

@@ -43,7 +43,7 @@ challenges:
     \n# Running the Application\n\nFirst, change to the directory in which the project\
     \ was created:\n\n```\ncd /root/projects/quarkus/getting-started\n```\n\nNow we\
     \ are ready to run our application. Click here to run:\n\n```\nmvn quarkus:dev\
-    \ -Dquarkus.http.host=0.0.0.0``\n```\n\nYou should see:\n\n```console\n__  ____\
+    \ -Dquarkus.http.host=0.0.0.0\n```\n\nYou should see:\n\n```console\n__  ____\
     \  __  _____   ___  __ ____  ______\n --/ __ \\/ / / / _ | / _ \\/ //_/ / / /\
     \ __/\n -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\\ \\\n--\\___\\_\\____/_/ |_/_/|_/_/|_|\\\
     ____/___/\nINFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT\

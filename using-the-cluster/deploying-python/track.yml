@@ -1,12 +1,12 @@
 challenges:
 - assignment: "Before we get started, you need to login and create a project in OpenShift\n\
     to work in.\n\nTo login to the OpenShift cluster used for this course from the\
-    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer`\n```\n\nThis will\
+    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer\n```\n\nThis will\
     \ log you in using the credentials:\n\n* **Username:** ``developer``\n* **Password:**\
     \ ``developer``\n\nYou should see the output:\n\n```\nLogin successful.\n\nYou\
     \ don't have any projects. You can try to create a new project, by running\n\n\
     \    oc new-project <projectname>\n```\n\nTo create a new project called ``myproject``\
-    \ run the command:\n\n```\noc new-project myproject`\n```\n\nYou should see output\
+    \ run the command:\n\n```\noc new-project myproject\n```\n\nYou should see output\
     \ similar to:\n\n```\nNow using project \"myproject\" on server \"https://openshift:6443\"\
     .\n\nYou can add applications to this project with the 'new-app' command. For\
     \ example, try:\n\n    oc new-app django-psql-example\n\nto build a new example\
@@ -208,7 +208,7 @@ challenges:
     \ type created and delete them one at a time. The simpler way to delete an application\
     \ is from the command line using the ``oc`` command line tool.\n\nTo see a list\
     \ of all the resources that have been created in the project so far, you can run\
-    \ the command:\n\n```\noc get all -o name`\n```\n\nThis will display output similar\
+    \ the command:\n\n```\noc get all -o name\n```\n\nThis will display output similar\
     \ to:\n\n```\npod/blog-django-py-1-build\npod/blog-django-py-64fb76b5c9-6hzhn\n\
     service/blog-django-py\ndeployment.apps/blog-django-py\nreplicaset.apps/blog-django-py-64fb76b5c9\n\
     replicaset.apps/blog-django-py-6c7f488b57\nbuildconfig.build.openshift.io/blog-django-py\n\
@@ -220,7 +220,7 @@ challenges:
     \ to a subset of resources using a label selector.\n\nTo determine what labels\
     \ may have been added to the resources, select one and display the details on\
     \ it. To look at the _Route_ which was created, you can run the command:\n\n```\n\
-    oc describe route/blog-django-py`\n```\n\nThis should display output similar to:\n\
+    oc describe route/blog-django-py\n```\n\nThis should display output similar to:\n\
     \n```\nName:                   blog-django-py\nNamespace:              myproject\n\
     Created:                19 minutes ago\nLabels:                 app=blog-django-py\n\
     \                        app.kubernetes.io/component=blog-django-py\n        \
@@ -236,14 +236,14 @@ challenges:
     ```\n\nIn this case when deploying the application via the OpenShift web console,\
     \ OpenShift has applied automatically to all resources the label ``app=blog-django-py``.\
     \ You can confirm this by running the command:\n\n```\noc get all --selector app=blog-django-py\
-    \ -o name`\n```\n\nThis should display the same list of resources as when ``oc\
+    \ -o name\n```\n\nThis should display the same list of resources as when ``oc\
     \ get all -o name`` was run. To double check that this is doing what is being\
-    \ described, run instead:\n\n```\noc get all --selector app=blog -o name`\n```\n\
+    \ described, run instead:\n\n```\noc get all --selector app=blog -o name\n```\n\
     \nIn this case, because there are no resources with the label ``app=blog``, the\
     \ result will be empty.\n\nHaving a way of selecting just the resources for the\
     \ one application, you can now schedule them for deletion by running the command:\n\
-    \n```\noc delete all --selector app=blog-django-py`\n```\n\nTo confirm that the\
-    \ resources have been deleted, run again the command:\n\n```\noc get all -o name`\n\
+    \n```\noc delete all --selector app=blog-django-py\n```\n\nTo confirm that the\
+    \ resources have been deleted, run again the command:\n\n```\noc get all -o name\n\
     ```\n\nIf you do still see any resources listed, keep running this command until\
     \ it shows they have all been deleted. You can find that resources may not be\
     \ deleted immediately as you only scheduled them for deletion and how quickly\
@@ -272,7 +272,7 @@ challenges:
     \ but this time using the ``oc`` command line tool.\n\nThe URL of the Git repository\
     \ containing the web application is:\n\n`https://github.com/openshift-katacoda/blog-django-py`\n\
     \nWe want to deploy it using the S2I builder for the latest version of Python\
-    \ provided by the platform. To do this run the command:\n\n```\noc new-app python:latest~https://github.com/openshift-katacoda/blog-django-py`\n\
+    \ provided by the platform. To do this run the command:\n\n```\noc new-app python:latest~https://github.com/openshift-katacoda/blog-django-py\n\
     ```\n\nThis should display output similar to:\n\n```\n--> Found image 2437334\
     \ (6 weeks old) in image stream \"openshift/python\" under tag \"latest\" for\
     \ \"python:latest\"\n\n    Python 3.6\n    ----------\n    ...\n\n    Tags: builder,\
@@ -294,10 +294,10 @@ challenges:
     \ is ``blog-django-py``. If you wanted to change the name, you could have supplied\
     \ the ``--name`` option along with the name you wish to use as an argument.\n\n\
     To monitor the log output from the build as it is running, run the command:\n\n\
-    ```\noc logs bc/blog-django-py --follow`\n```\n\nThis command will exit once the\
+    ```\noc logs bc/blog-django-py --follow\n```\n\nThis command will exit once the\
     \ build has completed. You can also interrupt the command by typing _CTRL-C_ in\
     \ the terminal window.\n\nTo view the status of any applications deployed to the\
-    \ project you can run the command:\n\n```\noc status`\n```\n\nOnce the build and\
+    \ project you can run the command:\n\n```\noc status\n```\n\nOnce the build and\
     \ deployment of the application has completed you should see output similar to:\n\
     \n```\nIn project myproject on server https://openshift:6443\n\nsvc/blog-django-py\
     \ - 172.30.54.158:8080\n  dc/blog-django-py deploys istag/blog-django-py:latest\
@@ -307,7 +307,7 @@ challenges:
     \ the case of deploying the application from the web console, the application\
     \ is not exposed outside of the OpenShift cluster by default. To expose the application\
     \ so it is available outside of the OpenShift cluster, you can run the command:\n\
-    \n```\noc expose service/blog-django-py`\n```\n\nSwitch to the OpenShift web console\
+    \n```\noc expose service/blog-django-py\n```\n\nSwitch to the OpenShift web console\
     \ by selecting on _Console_ to verify that the application has been deployed.\n\
     \nYou will note though that the visualisation on the topology view lacks icons\
     \ for the build and source code repository. This is because they rely on special\
@@ -316,7 +316,7 @@ challenges:
     \ the application from the command line. You can add the annotations later if\
     \ you wanted.\n\nThe icon for accessing the URL is still present on the visualisation.\
     \ Alternatively, to view the hostname assigned to the route created from the command\
-    \ line, you can run the command:\n\n```\noc get route/blog-django-py`\n```\n"
+    \ line, you can run the command:\n\n```\noc get route/blog-django-py\n```\n"
   difficulty: basic
   slug: 06-deploying-using-the-command-line
   tabs:
@@ -332,21 +332,21 @@ challenges:
   type: challenge
 - assignment: "The source code for an application isn't going to be static, so a way\
     \ to trigger a new build after making any changes is required.\n\nTo do this from\
-    \ the command line using ``oc``, run the command:\n\n```\noc start-build blog-django-py`\n\
+    \ the command line using ``oc``, run the command:\n\n```\noc start-build blog-django-py\n\
     ```\n\nThis should display:\n\n```\nbuild.build.openshift.io/blog-django-py-2\
     \ started\n```\n\nA new build could also have been triggered from the web console\
     \ by finding the build configuration for the application under the _Builds_ menu,\
     \ selecting the kebab menu on the right side of the entry, and clicking on _Start\
     \ Build_.\n\nAs before you can use ``oc logs`` to monitor the log output as the\
     \ build runs. You can also monitor the progress of any builds in a project by\
-    \ running the command:\n\n```\noc get builds --watch`\n```\n\nAs the build progresses,\
+    \ running the command:\n\n```\noc get builds --watch\n```\n\nAs the build progresses,\
     \ this should display output similar to:\n\n```\nNAME                TYPE    \
     \  FROM          STATUS     STARTED         DURATION\nblog-django-py-1    Source\
     \    Git@fcdc38c   Complete   2 minutes ago   1m2s\nblog-django-py-2    Source\
     \    Git@fcdc38c   Running    3 seconds ago   3s\nblog-django-py-2    Source \
     \   Git@fcdc38c   Complete   About a minute ago   1m9s\n```\n\nTo exit the command\
     \ type _CTRL-C_ in the terminal window.\n\nTo display information about the build\
-    \ configuration for the application you can run:\n\n```\noc describe bc/blog-django-py`\n\
+    \ configuration for the application you can run:\n\n```\noc describe bc/blog-django-py\n\
     ```\n\nThis will display output similar to:\n\n```\nName:           blog-django-py\n\
     Namespace:      myproject\nCreated:        8 minutes ago\nLabels:         app=blog-django-py\n\
     Annotations:    openshift.io/generated-by=OpenShiftNewApp\nLatest Version: 2\n\
@@ -376,20 +376,20 @@ challenges:
     \ don't want to have to commit every change and push it back up to the hosted\
     \ Git repository, you can use what is called a binary input build.\n\nTo demonstrate\
     \ this, clone the Git repository for the application by running:\n\n```\ngit clone\
-    \ https://github.com/openshift-katacoda/blog-django-py`\n```\n\nThis will create\
+    \ https://github.com/openshift-katacoda/blog-django-py\n```\n\nThis will create\
     \ a sub directory ``blog-django-py`` containing the source code for the application:\n\
     \n```\nCloning into 'blog-django-py'...\nremote: Enumerating objects: 3, done.\n\
     remote: Counting objects: 100% (3/3), done.\nremote: Compressing objects: 100%\
     \ (3/3), done.\nremote: Total 412 (delta 0), reused 0 (delta 0), pack-reused 409\n\
     Receiving objects: 100% (412/412), 68.49 KiB | 556.00 KiB/s, done.\nResolving\
     \ deltas: 100% (200/200), done.\n```\n\nChange into the sub directory.\n\n```\n\
-    cd blog-django-py`\n```\n\nTo show how a build can be triggered from the local\
+    cd blog-django-py\n```\n\nTo show how a build can be triggered from the local\
     \ copy of the application source code, without needing to commit changes back\
     \ to the Git repository, first run the command:\n\n```\necho 'BLOG_BANNER_COLOR=blue'\
-    \ >> .s2i/environment`\n```\n\nThis command will update an environment variable\
+    \ >> .s2i/environment\n```\n\nThis command will update an environment variable\
     \ setting file used by S2I to determine what environment variables are baked into\
     \ the application image created.\n\nStart a new build by running the command:\n\
-    \n```\noc start-build blog-django-py --from-dir=. --wait`\n```\n\nThis is similar\
+    \n```\noc start-build blog-django-py --from-dir=. --wait\n```\n\nThis is similar\
     \ to what you ran before, with the exception that the option ``--from-dir=.``\
     \ is also passed to the command, indicating that source code should be uploaded\
     \ from the directory on the host where you are running the command, rather than\
@@ -411,16 +411,16 @@ challenges:
     \ you wanted to run further builds with source code from your local directory,\
     \ you would need to supply ``--from-dir=.`` each time.\n\nTo return back to using\
     \ the source code from the hosted Git repository, run:\n\n\n```\noc start-build\
-    \ blog-django-py`\n```\n\nThis should output:\n\n```\nbuild.build.openshift.io/blog-django-py-4\
+    \ blog-django-py\n```\n\nThis should output:\n\n```\nbuild.build.openshift.io/blog-django-py-4\
     \ started\n```\n\nIf for some reason a build was wrongly started, or you realised\
     \ it would fail anyway, you can cancel the build by running ``oc cancel-build``\
-    \ and supplying the name of the build.\n\n```\noc cancel-build blog-django-py-4`\n\
+    \ and supplying the name of the build.\n\n```\noc cancel-build blog-django-py-4\n\
     ```\n\nThis should show the build has been cancelled.\n\n```\nbuild.build.openshift.io/blog-django-py-4\
     \ marked for cancellation, waiting to be cancelled\nbuild.build.openshift.io/blog-django-py-4\
     \ cancelled\n```\n\nYou can confirm this by also looking at the list of all builds\
-    \ run.\n\n```\noc get builds`\n```\n\nThis should display output similar to:\n\
-    \n```\nNAME               TYPE     FROM             STATUS                   \
-    \    STARTED          DURATION\nblog-django-py-1   Source   Git@35b89e2      Complete\
+    \ run.\n\n```\noc get builds\n```\n\nThis should display output similar to:\n\n\
+    ```\nNAME               TYPE     FROM             STATUS                     \
+    \  STARTED          DURATION\nblog-django-py-1   Source   Git@35b89e2      Complete\
     \                     15 minutes ago   1m31s\nblog-django-py-2   Source   Git@35b89e2\
     \      Complete                     8 minutes ago    1m28s\nblog-django-py-3 \
     \  Source   Binary@35b89e2   Complete                     3 minutes ago    1m28s\n\

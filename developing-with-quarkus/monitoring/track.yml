@@ -23,7 +23,7 @@ challenges:
     \ alertmanagers:\n  - static_configs:\n    - targets:\nscrape_configs:\n  - job_name:\
     \ 'prometheus'\n    static_configs:\n    - targets: ['localhost:9090']\n  - job_name:\
     \ 'hello-app'\n    metrics_path: '/q/metrics'\n    static_configs:\n    - targets:\
-    \ ['primes']\nEOF\n```\n\n```\n\nThis file contains basic Prometheus configuration,\
+    \ ['primes']\nEOF\n```\n`\n```\n\nThis file contains basic Prometheus configuration,\
     \ plus a specific `scrape_config` which instructs Prometheus to\nlook for application\
     \ metrics from both Prometheus itself, and a Quarkus app called `primes` (which\
     \ we'll create later) at the `/q/metrics` endpoint.\n\nNext, click this command\

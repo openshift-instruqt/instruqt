@@ -164,7 +164,7 @@ challenges:
 
     ```
 
-    oc login -u developer -p developer``
+    oc login -u developer -p developer
 
     ```
 
@@ -187,6 +187,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -338,7 +339,7 @@ challenges:
 
     ```
 
-    oc expose svc weather-app``
+    oc expose svc weather-app
 
     ```
 

@@ -41,7 +41,7 @@ challenges:
 
     ```
 
-    mvn spring-boot:run`
+    mvn spring-boot:run
 
     ```
 
@@ -92,13 +92,13 @@ challenges:
   type: challenge
 - assignment: "# Deploy to OpenShift Application Platform\n**1. Deploying the application\
     \ to OpenShift**\n\nThis sandbox has already authenticated you to OpenShift. To\
-    \ validate, we will use the `oc whoami` command:\n\n```\noc whoami`\n```\n\nLet's\
+    \ validate, we will use the `oc whoami` command:\n\n```\noc whoami\n```\n\nLet's\
     \ create a project that you will use to house your applications.\n\n```\noc new-project\
-    \ dev --display-name=\"Dev - Spring Boot App\"`\n```\n\nRun the following command\
+    \ dev --display-name=\"Dev - Spring Boot App\"\n```\n\nRun the following command\
     \ to deploy the application to OpenShift:\n\n```\nmvn package oc:deploy -Popenshift\
-    \ -DskipTests`\n```\n\nThis step may take some time to do the Maven build and\
-    \ the OpenShift deployment. After the build completes you can verify that everything\
-    \ is started by running the following command:\n\n```\noc rollout status dc/spring-monitoring`\n\
+    \ -DskipTests\n```\n\nThis step may take some time to do the Maven build and the\
+    \ OpenShift deployment. After the build completes you can verify that everything\
+    \ is started by running the following command:\n\n```\noc rollout status dc/spring-monitoring\n\
     ```\n \n**2. Using a Route to reach the application from the internet** \n\nNow\
     \ that our application is deployed to OpenShift, how do external users access\
     \ it? The answer is with a **Route**. By using a route, we are able to expose\
@@ -160,7 +160,7 @@ challenges:
     \ triggers jkube to create Readiness/Liveness probes for OpenShift. These probes\
     \ will periodically query the new health endpoints to make sure the app is still\
     \ up.\n\nRun the following command again to re-deploy the application to OpenShift:\n\
-    \n```\nmvn package oc:deploy -Popenshift -DskipTests`\n```\n\nNow that we've added\
+    \n```\nmvn package oc:deploy -Popenshift -DskipTests\n```\n\nNow that we've added\
     \ Spring Actuator, we're able to hit their provided `/actuator/health` endpoint.\
     \ We can navigate to it by either adding `/actuator/health` to our landing page,\
     \ or by clicking [here](http://spring-monitoring-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/actuator/health)\
@@ -181,7 +181,7 @@ challenges:
     \ to disable endpoint security.\n\n<pre class=\"file\" data-filename=\"src/main/resources/application.properties\"\
     \ data-target=\"insert\" data-marker=\"# TODO: Add Security preference here\"\
     >\nmanagement.endpoints.web.exposure.include=*  \n</pre>\n\nIf we redeploy the\
-    \ application again with: \n\n```\nmvn package oc:deploy -Popenshift -DskipTests`\n\
+    \ application again with: \n\n```\nmvn package oc:deploy -Popenshift -DskipTests\n\
     ```\n\nNow we can hit the `/actuator/metrics` endpoint [here](http://spring-monitoring-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/actuator/metrics)\
     \ and get a list of metrics types accessible to us:\n\n```json\n{\"names\":[\"\
     jvm.memory.max\",\"jvm.threads.states\",\"process.files.max\",\"jvm.gc.memory.promoted\"\

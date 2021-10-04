@@ -18,7 +18,7 @@ challenges:
 
     ```
 
-    oc get imagestreams -o name`
+    oc get imagestreams -o name
 
     ```
 
@@ -32,7 +32,7 @@ challenges:
 
     ```
 
-    oc describe imagestream s2i-minimal-notebook`
+    oc describe imagestream s2i-minimal-notebook
 
     ```
 
@@ -71,7 +71,7 @@ challenges:
 
     ```
 
-    oc get templates`
+    oc get templates
 
     ```
 
@@ -106,7 +106,7 @@ challenges:
 
     ```
 
-    oc describe template jupyterhub-deployer`
+    oc describe template jupyterhub-deployer
 
     ```
 
@@ -117,7 +117,7 @@ challenges:
 
     ```
 
-    oc describe template jupyterhub-builder`
+    oc describe template jupyterhub-builder
 
     ```
 
@@ -128,7 +128,7 @@ challenges:
 
     ```
 
-    oc describe template jupyterhub-quickstart`
+    oc describe template jupyterhub-quickstart
 
     ```
 
@@ -349,7 +349,7 @@ challenges:
     ```
 
     oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
-    -o name`
+    -o name
 
     ```
 
@@ -362,7 +362,7 @@ challenges:
 
     ```
 
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
 
     ```
 
@@ -403,7 +403,7 @@ challenges:
     ```
 
     oc process jupyterhub-deployer --param JUPYTERHUB_CONFIG="`cat jupyterhub_config.py`"
-    --param JUPYTERHUB_ENVVARS="`cat jupyterhub_config.sh`" | oc apply -f -`
+    --param JUPYTERHUB_ENVVARS="`cat jupyterhub_config.sh`" | oc apply -f -
 
     ```
 
@@ -419,7 +419,7 @@ challenges:
 
     ```
 
-    oc rollout status dc/jupyterhub`
+    oc rollout status dc/jupyterhub
 
     ```
 
@@ -443,7 +443,7 @@ challenges:
 
     ```
 
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
 
     ```
 
@@ -527,7 +527,7 @@ challenges:
 
     ```
 
-    oc logs -f bc/custom-jupyterhub`
+    oc logs -f bc/custom-jupyterhub
 
     ```
 
@@ -546,7 +546,7 @@ challenges:
 
     ```
 
-    oc get imagestreams -o name`
+    oc get imagestreams -o name
 
     ```
 
@@ -578,7 +578,7 @@ challenges:
 
     ```
 
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub`
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
 
     ```
 
@@ -684,7 +684,7 @@ challenges:
 
     ```
 
-    oc logs -f bc/jupyterhub-nb`
+    oc logs -f bc/jupyterhub-nb
 
     ```
 

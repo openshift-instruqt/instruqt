@@ -18,7 +18,7 @@ challenges:
 
     ```
 
-    oc get imagestreams -o name`
+    oc get imagestreams -o name
 
     ```
 
@@ -31,7 +31,7 @@ challenges:
 
     ```
 
-    oc describe imagestream s2i-minimal-notebook`
+    oc describe imagestream s2i-minimal-notebook
 
     ```
 
@@ -69,7 +69,7 @@ challenges:
 
     ```
 
-    oc get templates`
+    oc get templates
 
     ```
 
@@ -109,7 +109,7 @@ challenges:
 
     ```
 
-    oc describe template notebook-deployer`
+    oc describe template notebook-deployer
 
     ```
 
@@ -303,7 +303,7 @@ challenges:
 
     ```
 
-    oc get all --selector app=custom-notebook -o name`
+    oc get all --selector app=custom-notebook -o name
 
     ```
 
@@ -316,7 +316,7 @@ challenges:
 
     ```
 
-    oc delete all --selector app=custom-notebook`
+    oc delete all --selector app=custom-notebook
 
     ```
 

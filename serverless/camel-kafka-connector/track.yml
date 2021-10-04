@@ -29,7 +29,7 @@ challenges:
 
     ```
 
-    oc login -u admin -p admin`
+    oc login -u admin -p admin
 
     ```
 
@@ -57,7 +57,7 @@ challenges:
 
     ```
 
-    oc project camel-kafka`
+    oc project camel-kafka
 
     ```
 
@@ -75,7 +75,7 @@ challenges:
 
     ```
 
-    oc create -f strimzi/kafka-cluster.yaml`
+    oc create -f strimzi/kafka-cluster.yaml
 
     ```
 
@@ -94,7 +94,7 @@ challenges:
 
     ```
 
-    oc get pod -w`
+    oc get pod -w
 
     ```
 
@@ -137,11 +137,11 @@ challenges:
   type: challenge
 - assignment: "## Setup the Minio generic object datastore\n\nLets start Minio, it\
     \ provide a S3 compatible protocol for storing the objects.\nTo create the minio\
-    \ backend, just apply the provided file:\n\n```\noc apply -f minio/minio.yaml`\n\
+    \ backend, just apply the provided file:\n\n```\noc apply -f minio/minio.yaml\n\
     ```\n\nAnd now, you have a working generic object datastore.\n\n\n## Setup the\
     \ SFTP Server for the file store\n\nRun the following script to start up the SFTP\
-    \ Server in the system:\n\n```\nbash sftp/sftp.sh`\n```\n\nIf everything goes\
-    \ as planned, you should see the following message:\n```\nclusterrole.rbac.authorization.k8s.io/system:openshift:scc:anyuid\
+    \ Server in the system:\n\n```\nbash sftp/sftp.sh\n```\n\nIf everything goes as\
+    \ planned, you should see the following message:\n```\nclusterrole.rbac.authorization.k8s.io/system:openshift:scc:anyuid\
     \ added: \"default\"\n--> Found container image d87b9ff (10 hours old) from Docker\
     \ Hub for \"atmoz/sftp\"\n\n    * An image stream tag will be created as \"ftpserver:latest\"\
     \ that will track this image\n    * This image will be deployed in deployment\
@@ -157,12 +157,12 @@ challenges:
     \ created\ninfo: Generated volume name: volume-dpt6b\ndeploymentconfig.apps.openshift.io/ftpserver\
     \ volume updated\ninfo: Generated volume name: volume-mrld4\ndeploymentconfig.apps.openshift.io/ftpserver\
     \ volume updated\n```\n\nTake note at the secret/sftp-ssh-key, we will be using\
-    \ this secret for configuring our sink connector.\n\n```\noc get secret/sftp-ssh-key`\n\
-    ```\n\nWaiting until the _RUNNING_ status\n\n```\noc get pod -w | grep ftpserver`\n\
+    \ this secret for configuring our sink connector.\n\n```\noc get secret/sftp-ssh-key\n\
+    ```\n\nWaiting until the _RUNNING_ status\n\n```\noc get pod -w | grep ftpserver\n\
     ```\n\nHit Ctrl+C to exit the mode.\n\nTake a look at the folder, and it should\
     \ be empty at the moment. This is where we want our file files to be at.\n\n```\n\
     oc exec -i `oc get pod -l deploymentconfig=ftpserver -o=jsonpath='{.items[0].metadata.name}'`\
-    \ -- ls /home/foo/upload/`\n```\n\n\n## Setup Source2Image\n\nFor the Kafka Connect\
+    \ -- ls /home/foo/upload/\n```\n\n\n## Setup Source2Image\n\nFor the Kafka Connect\
     \ image, we will need the connector libraries to run.\nSource2Image will be used\
     \ to setup and build the connectors.Go to the text editor on the right, under\
     \ the folder /root/camel-kafka. Right click on the directory and choose New ->\
@@ -180,9 +180,9 @@ challenges:
     \nNotice here it connects to the Kafka cluster that we initiated in the previous\
     \ step, and also points to the secret in the SFTP server (we will need this later)\
     \ as an external configuration. Go ahead execute the command to setup the KafkaConnect\
-    \ Source2Image.\n\n```\noc apply -f camel-kafka/kafka-connect-s2i.yaml`\n```\n\
-    \n\nEnable Kafka Connectors to be able to instantiated via custom resource:\n\
-    ```\noc annotate kafkaconnects2is my-connect-cluster strimzi.io/use-connector-resources=true`\n\
+    \ Source2Image.\n\n```\noc apply -f camel-kafka/kafka-connect-s2i.yaml\n```\n\n\
+    \nEnable Kafka Connectors to be able to instantiated via custom resource:\n```\n\
+    oc annotate kafkaconnects2is my-connect-cluster strimzi.io/use-connector-resources=true\n\
     ```\n"
   difficulty: basic
   slug: step2
@@ -199,18 +199,18 @@ challenges:
   type: challenge
 - assignment: "\n## Add and build the Camel Kafka Connector binary to the connector\n\
     \nTake a look at the plugin folder, you will find two folders named\n\n```\nls\
-    \ ./plugin/`\n```\n\n- camel-minio-kafka-connector\n- camel-sftp-kafka-connector\n\
+    \ ./plugin/\n```\n\n- camel-minio-kafka-connector\n- camel-sftp-kafka-connector\n\
     \nThey are the libraries needed for the connectors. Now let's use Source2Image\
     \ to add these connectors libraries to the existing images. We now need to build\
     \ the connectors and add them to the image.\n\n```\noc start-build my-connect-cluster-connect\
-    \ --from-dir=./plugin/ --follow`\n```\n\n\nWait for the rollout of the new image\
+    \ --from-dir=./plugin/ --follow\n```\n\n\nWait for the rollout of the new image\
     \ to finish and the replica set with the new connector to become ready. Once it\
     \ is done, we can check that the connectors are available in our Kafka Connect\
     \ cluster. Since AMQ Streams is running Kafka Connect in a distributed mode. We\
     \ will use HTTP to interact with it. To check the available connector plugins,\
     \ you can run the following command:\n\n```\noc exec -i `oc get pods --field-selector\
     \ status.phase=Running -l strimzi.io/name=my-connect-cluster-connect -o=jsonpath='{.items[0].metadata.name}'`\
-    \ -- curl -s http://my-connect-cluster-connect-api:8083/connector-plugins`\n```\n\
+    \ -- curl -s http://my-connect-cluster-connect-api:8083/connector-plugins\n```\n\
     \n\nYou will find the two connectors that we are have added in the image.\n\n\
     ```\n[\n   ........\n   {\n      \"class\":\"org.apache.camel.kafkaconnector.minio.CamelMinioSinkConnector\"\
     ,\n      \"type\":\"sink\",\n      \"version\":\"0.5.0\"\n   },\n   {\n      \"\
@@ -237,16 +237,16 @@ challenges:
     \ in the Minio object store, when detected content from the Minio source, the\
     \ connector will capture it and place it in the Kafka topic _*demo-topic*_ and\
     \ ready to be subscribed by the consumers. Execute following command to create\
-    \ the source connector.\n\n```\noc create -f camel-kafka/minio-connector.yaml`\n\
+    \ the source connector.\n\n```\noc create -f camel-kafka/minio-connector.yaml\n\
     ```\n\nNow, let's go ahead and place a file in the object store. This is going\
     \ to copy the healthcare related files that we have prepared into the object store.\n\
-    \n```\noc rsync ./file/ `oc get pod -l app=minio -o=jsonpath='{.items[0].metadata.name}'`:/data/camel-kafka`\n\
+    \n```\noc rsync ./file/ `oc get pod -l app=minio -o=jsonpath='{.items[0].metadata.name}'`:/data/camel-kafka\n\
     ```\n\nNote the name of the two files.\n\n```\nWARNING: cannot use rsync: rsync\
     \ not available in container\nsample01.json\n```\n\nYou will find the file in\
     \ the Kafka Topic _*demo-topic*_\n\n```\noc exec -i `oc get pods --field-selector\
     \ status.phase=Running -l strimzi.io/name=my-connect-cluster-connect -o=jsonpath='{.items[0].metadata.name}'`\
     \ -- bin/kafka-console-consumer.sh --topic demo-topic --from-beginning --bootstrap-server\
-    \ my-cluster-kafka-bootstrap:9092`\n```\n\n\nWith content starting like following:\n\
+    \ my-cluster-kafka-bootstrap:9092\n```\n\n\nWith content starting like following:\n\
     \n```\nOpenJDK 64-Bit Server VM warning: If the number of processors is expected\
     \ to increase from one, then you should configure the number of parallel GC threads\
     \ appropriately using -XX:ParallelGCThreads=N\n{\n  \"resourceType\": \"Observation\"\
@@ -328,12 +328,12 @@ challenges:
     \ the incoming event data into the SFTP server under the upload folder as configured,\
     \ with the name of the file changed to the yyyyMMddhhmmss format. Also points\
     \ to the keyfile that we have configured earlier in the secrets.\n\nRun command\
-    \ to create the sink connector.\n\n```\noc create -f camel-kafka/sftp-connector.yaml`\n\
+    \ to create the sink connector.\n\n```\noc create -f camel-kafka/sftp-connector.yaml\n\
     ```\n\nCheck if the file appears in the SFTP server.\n\n```\noc exec -i `oc get\
     \ pod -l deploymentconfig=ftpserver -o=jsonpath='{.items[0].metadata.name}'` --\
-    \ ls /home/foo/upload/`\n```\n\nYou should be seeing the same file that was updloaded!\n\
+    \ ls /home/foo/upload/\n```\n\nYou should be seeing the same file that was updloaded!\n\
     ```\noc exec -i `oc get pod -l deploymentconfig=ftpserver -o=jsonpath='{.items[0].metadata.name}'`\
-    \ -- find /home/foo/upload/ -type f -exec cat {} \\;`\n```\n\n\n```\nOpenJDK 64-Bit\
+    \ -- find /home/foo/upload/ -type f -exec cat {} \\;\n```\n\n\n```\nOpenJDK 64-Bit\
     \ Server VM warning: If the number of processors is expected to increase from\
     \ one, then you should configure the number of parallel GC threads appropriately\
     \ using -XX:ParallelGCThreads=N\n{\n  \"resourceType\": \"Observation\",\n  \"\

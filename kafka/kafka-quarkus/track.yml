@@ -2,10 +2,10 @@ challenges:
 - assignment: "You start this scenario with a basic Maven-based application, which\
     \ is created using the Quarkus maven plugin.\n\n### Add an extension to integrate\
     \ with Kafka\n\nThe current project needs the extensions to be added to integrate\
-    \ Quarkus with Apache Kafka.\n\nChange to the project folder:\n\n```\ncd /opt/projects/kafka-quarkus`\n\
+    \ Quarkus with Apache Kafka.\n\nChange to the project folder:\n\n```\ncd /opt/projects/kafka-quarkus\n\
     ```\n\nInstall the extension into the project with the following command:\n\n\
     ```\nmvn quarkus:add-extension -Dextension=\"quarkus-smallrye-reactive-messaging-kafka\"\
-    `\n```\n\n>The first time you add the extension will take longer, as Maven downloads\
+    \n```\n\n>The first time you add the extension will take longer, as Maven downloads\
     \ new dependencies.\n\nThis will add the necessary entries in your `pom.xml`{{open}}\
     \ to bring in the Kafka extension. You should see a fragment similar to this around\
     \ line 50:\n\n```xml\n...\n<dependency>\n    <groupId>io.quarkus</groupId>\n \
@@ -136,33 +136,33 @@ challenges:
 - assignment: "The application will now generate a new event with vehicle information\
     \ every 5 seconds.\n\n### Wait for the application deployment\n\nThe deployment\
     \ will start the application pods. You can monitor the pods with the following\
-    \ command:\n\n```\noc get pods -l deploymentconfig=kafka-quarkus -w`\n```\n\n\
-    You will see the pod changing the status to `running`:\n\n```sh\nNAME        \
-    \            READY   STATUS    RESTARTS   AGE\nkafka-quarkus-1-mg8cv   0/1   \
-    \  Pending   0          0s\nkafka-quarkus-1-mg8cv   0/1     Pending   0      \
-    \    0s\nkafka-quarkus-1-mg8cv   0/1     ContainerCreating   0          0s\nkafka-quarkus-1-mg8cv\
-    \   0/1     ContainerCreating   0          2s\nkafka-quarkus-1-mg8cv   0/1   \
-    \  ContainerCreating   0          8s\nkafka-quarkus-1-mg8cv   1/1     Running\
-    \             0          13s\n```\n\nPress <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop\
-    \ the process.\n\n`^C`{{execute ctrl-seq}}\n\n# Check the application log\n\n\
-    To verify there was no problem with the application, we can check the logs with\
-    \ the following command:\n\n``oc logs dc/kafka-quarkus -f``{{execute interrupt}}\n\
-    \nYou should see the information of the Quarkus application connecting to Kafka\
-    \ as well as the output of the sent events:\n\n```sh\n...\nINFO [io.quarkus] (main)\
-    \ kafka-quarkus 1.0.0 on JVM (powered by Quarkus 1.10.3.Final) started in 2.394s.\
-    \ Listening on: http://0.0.0.0:8080\nINFO [io.quarkus] (main) Profile prod activated.\n\
-    INFO [io.quarkus] (main) Installed features: [cdi, kubernetes, mutiny, smallrye-context-propagation,\
-    \ smallrye-reactive-messaging, smallrye-reactive-messaging-kafka, vertx]\nINFO\
-    \ [com.red.kat.kaf.VehicleGenerator] (RxComputationThreadPool-1) dispatching vehicle:\
-    \ VehicleInfo{provider='uber', vehicleId=1, pricePerMinute=9.633610913249816,\
-    \ timeToPickup=4, availableSpace=2, available=true}\nWARN [org.apa.kaf.cli.NetworkClient]\
+    \ command:\n\n```\noc get pods -l deploymentconfig=kafka-quarkus -w\n```\n\nYou\
+    \ will see the pod changing the status to `running`:\n\n```sh\nNAME          \
+    \          READY   STATUS    RESTARTS   AGE\nkafka-quarkus-1-mg8cv   0/1     Pending\
+    \   0          0s\nkafka-quarkus-1-mg8cv   0/1     Pending   0          0s\nkafka-quarkus-1-mg8cv\
+    \   0/1     ContainerCreating   0          0s\nkafka-quarkus-1-mg8cv   0/1   \
+    \  ContainerCreating   0          2s\nkafka-quarkus-1-mg8cv   0/1     ContainerCreating\
+    \   0          8s\nkafka-quarkus-1-mg8cv   1/1     Running             0     \
+    \     13s\n```\n\nPress <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.\n\n\
+    `^C`{{execute ctrl-seq}}\n\n# Check the application log\n\nTo verify there was\
+    \ no problem with the application, we can check the logs with the following command:\n\
+    \n``oc logs dc/kafka-quarkus -f``{{execute interrupt}}\n\nYou should see the information\
+    \ of the Quarkus application connecting to Kafka as well as the output of the\
+    \ sent events:\n\n```sh\n...\nINFO [io.quarkus] (main) kafka-quarkus 1.0.0 on\
+    \ JVM (powered by Quarkus 1.10.3.Final) started in 2.394s. Listening on: http://0.0.0.0:8080\n\
+    INFO [io.quarkus] (main) Profile prod activated.\nINFO [io.quarkus] (main) Installed\
+    \ features: [cdi, kubernetes, mutiny, smallrye-context-propagation, smallrye-reactive-messaging,\
+    \ smallrye-reactive-messaging-kafka, vertx]\nINFO [com.red.kat.kaf.VehicleGenerator]\
+    \ (RxComputationThreadPool-1) dispatching vehicle: VehicleInfo{provider='uber',\
+    \ vehicleId=1, pricePerMinute=9.633610913249816, timeToPickup=4, availableSpace=2,\
+    \ available=true}\nWARN [org.apa.kaf.cli.NetworkClient] (kafka-producer-network-thread\
+    \ | kafka-producer-uber) [Producer clientId=kafka-producer-uber] Error while fetching\
+    \ metadata with correlation id 3 : {uber=LEADER_NOT_AVAILABLE}\nWARN [org.apa.kaf.cli.NetworkClient]\
     \ (kafka-producer-network-thread | kafka-producer-uber) [Producer clientId=kafka-producer-uber]\
-    \ Error while fetching metadata with correlation id 3 : {uber=LEADER_NOT_AVAILABLE}\n\
+    \ Error while fetching metadata with correlation id 4 : {uber=LEADER_NOT_AVAILABLE}\n\
     WARN [org.apa.kaf.cli.NetworkClient] (kafka-producer-network-thread | kafka-producer-uber)\
     \ [Producer clientId=kafka-producer-uber] Error while fetching metadata with correlation\
-    \ id 4 : {uber=LEADER_NOT_AVAILABLE}\nWARN [org.apa.kaf.cli.NetworkClient] (kafka-producer-network-thread\
-    \ | kafka-producer-uber) [Producer clientId=kafka-producer-uber] Error while fetching\
-    \ metadata with correlation id 5 : {uber=LEADER_NOT_AVAILABLE}\nINFO [com.red.kat.kaf.VehicleGenerator]\
+    \ id 5 : {uber=LEADER_NOT_AVAILABLE}\nINFO [com.red.kat.kaf.VehicleGenerator]\
     \ (RxComputationThreadPool-1) dispatching vehicle: VehicleInfo{provider='uber',\
     \ vehicleId=2, pricePerMinute=4.502112907514153, timeToPickup=15, availableSpace=5,\
     \ available=true}\n```\n\nThen you will see new events every few seconds.\n\n\

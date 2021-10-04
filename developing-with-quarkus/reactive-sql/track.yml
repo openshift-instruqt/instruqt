@@ -143,7 +143,7 @@ challenges:
     \nIt's working! We'll leave it running and use Quarkus' Remote Live Reload feature\
     \ to automatically update our app as we make changes.\n\n# Remote Dev Connection\n\
     \nNow we are ready to run our in dev mode and connect it to the remote application.\
-    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com``\n\
+    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com\n\
     ```\n\nYou should see a bunch of log output including:\n\n```console\nINFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient]\
     \ (Remote dev client thread) Connected to remote server\n```\n\nYour locally running\
     \ Quarkus app is now connected to the remote side running on OpenShift, and changes\

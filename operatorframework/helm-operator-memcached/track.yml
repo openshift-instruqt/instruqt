@@ -1,13 +1,13 @@
 challenges:
 - assignment: "Let's begin my creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n\n```\n\nMemcached is an in-memory key-value store\
+    oc new-project myproject\n```\n`\n```\n\nMemcached is an in-memory key-value store\
     \ for small chunks of arbitrary data (strings, objects) from results of database\
     \ calls, API calls, or page rendering.\n\n\nLet's now create a new directory for\
-    \ our project:\n\n```\nmkdir -p $HOME/projects/memcached-operator\n```\n\n```\n\
+    \ our project:\n\n```\nmkdir -p $HOME/projects/memcached-operator\n```\n`\n```\n\
     <br>\nNavigate to the directory:\n\n```\ncd $HOME/projects/memcached-operator\n\
-    ```\n\n```\n<br>\nCreate a new Helm-based Operator SDK project for the Memcached\
+    ```\n`\n```\n<br>\nCreate a new Helm-based Operator SDK project for the Memcached\
     \ Operator:\n\n```\noperator-sdk init --plugins helm --domain example.com\n```\n\
-    \n```\n\n<br>\nFor Helm-based projects, `operator-sdk` init also generates the\
+    `\n```\n\n<br>\nFor Helm-based projects, `operator-sdk` init also generates the\
     \ RBAC rules in `config/rbac/role.yaml` based on the resources that would be deployed\
     \ by the chart\u2019s default manifest. Be sure to double check that the rules\
     \ generated in `config/rbac/role.yaml` meet the operator\u2019s permission requirements.\n\
@@ -17,9 +17,9 @@ challenges:
     \ and `--helm-chart-version` to use an existing chart, either from your local\
     \ filesystem or a remote chart repository.\n\n<br>\nAutomatically fetch the Memcached\
     \ Helm Chart and generate the CRD/API:\n\n```\noperator-sdk create api --helm-chart\
-    \ memcached --helm-chart-repo=https://charts.helm.sh/stable``\n```\n<br>\n###\
-    \ Project Scaffolding Layout\n\nAfter creating a new operator project the directory\
-    \ has numerous generated folders and files. The following\ntable describes a basic\
+    \ memcached --helm-chart-repo=https://charts.helm.sh/stable\n```\n<br>\n### Project\
+    \ Scaffolding Layout\n\nAfter creating a new operator project the directory has\
+    \ numerous generated folders and files. The following\ntable describes a basic\
     \ rundown of each generated file/directory.\n\n| File/Folders   | Purpose    \
     \                       |\n| :---           | :--- |\n| config | Kustomize YAML\
     \ definitions required to launch our controller on a cluster. It is the target\
@@ -52,6 +52,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic
@@ -76,6 +77,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -105,6 +107,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -123,7 +126,7 @@ challenges:
   title: Apply the Memcached Custom Resource Definition
   type: challenge
 - assignment: "Open a new terminal window and navigate to the `memcached-operator`\
-    \ top-level directory:\n\n```\ncd projects/memcached-operator\n```\n\n```\nBefore\
+    \ top-level directory:\n\n```\ncd projects/memcached-operator\n```\n`\n```\nBefore\
     \ applying the Memcached Custom Resource, observe the Memcached Helm Chart `values.yaml`:\n\
     \n[Memcached Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/memcached/values.yaml)\n\
     \nUpdate the Memcached Custom Resource at `config/samples/charts_v1alpha1_memcached.yaml`\
@@ -141,16 +144,16 @@ challenges:
     \ {}\n  tolerations: {}\n  updateStrategy:\n    type: RollingUpdate\n</pre>\n\n\
     You can easily update this file by running the following command:\n\n```\n\\cp\
     \ /tmp/charts_v1alpha1_memcached.yaml config/samples/charts_v1alpha1_memcached.yaml\n\
-    ```\n\n```\n<br>\nAfter updating the Memcached Custom Resource with our desired\
+    ```\n`\n```\n<br>\nAfter updating the Memcached Custom Resource with our desired\
     \ spec, apply it to the cluster. Ensure you are currently scoped to the `myproject`\
-    \ Namespace:\n\n```\noc project myproject\n```\n\n```\n\n```\noc apply -f config/samples/charts_v1alpha1_memcached.yaml\n\
-    ```\n\n```\n<br>\nConfirm that the Custom Resource was created:\n\n```\noc get\
-    \ memcached\n```\n\n```\n<br>\nIt may take some time for the environment to pull\
+    \ Namespace:\n\n```\noc project myproject\n```\n`\n```\n\n```\noc apply -f config/samples/charts_v1alpha1_memcached.yaml\n\
+    ```\n`\n```\n<br>\nConfirm that the Custom Resource was created:\n\n```\noc get\
+    \ memcached\n```\n`\n```\n<br>\nIt may take some time for the environment to pull\
     \ down the Memcached container image. Confirm that the Stateful Set was created:\n\
-    \n```\noc get statefulset\n```\n\n```\n<br>\nConfirm that the Stateful Set's pod\
-    \ is currently running:\n\n```\noc get pods\n```\n\n```\n<br>\nConfirm that the\
-    \ Memcached \"internal\" and \"public\" ClusterIP Service were created:\n\n```\n\
-    oc get services\n```\n\n```\n"
+    \n```\noc get statefulset\n```\n`\n```\n<br>\nConfirm that the Stateful Set's\
+    \ pod is currently running:\n\n```\noc get pods\n```\n`\n```\n<br>\nConfirm that\
+    \ the Memcached \"internal\" and \"public\" ClusterIP Service were created:\n\n\
+    ```\noc get services\n```\n`\n```\n"
   difficulty: basic
   slug: step4
   tabs:
@@ -174,6 +177,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -189,6 +193,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -217,6 +222,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -231,6 +237,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -258,6 +265,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -276,6 +284,7 @@ challenges:
 
     ```
 
+    `
 
     ```'
   difficulty: basic

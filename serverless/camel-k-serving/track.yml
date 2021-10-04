@@ -7,23 +7,23 @@ challenges:
     \ in to the Cluster via CLI\n\nBefore creating any applications, login as admin.\
     \ This will be required if you want to log in to the web console and\nuse it.\n\
     \nTo login to the OpenShift cluster from the _Terminal_ run:\n\n```\noc login\
-    \ -u admin -p admin`\n```\n\nThis will log you in using the credentials:\n\n*\
-    \ **Username:** ``admin``\n* **Password:** ``admin``\n\nUse the same credentials\
-    \ to log into the web console.\n\n\n## Creating your own Project\n\nTo create\
-    \ a new project called ``camel-api`` run the command:\n\n```\noc new-project camel-api`\n\
-    ```\n\n## Install Camel K Operator\n\nThe Catalog Operator is responsible for\
-    \ building, deploying Camel Applications and also creating surrounding resources.\
-    \ It is also responsible for watching any code or configuration updates and automatically\
-    \ updates it. To install simply run the command.\n\n\n```\nkamel install`\n```\n\
+    \ -u admin -p admin\n```\n\nThis will log you in using the credentials:\n\n* **Username:**\
+    \ ``admin``\n* **Password:** ``admin``\n\nUse the same credentials to log into\
+    \ the web console.\n\n\n## Creating your own Project\n\nTo create a new project\
+    \ called ``camel-api`` run the command:\n\n```\noc new-project camel-api\n```\n\
+    \n## Install Camel K Operator\n\nThe Catalog Operator is responsible for building,\
+    \ deploying Camel Applications and also creating surrounding resources. It is\
+    \ also responsible for watching any code or configuration updates and automatically\
+    \ updates it. To install simply run the command.\n\n\n```\nkamel install\n```\n\
     \n you will see this prompt:\n\n```\nCamel K installed in namespace camel-api\n\
     ```\n\nTo check if Camel K operator has successfully installed,\n```\noc get pod\
-    \ -w`\n```\n\nonce camel-k-operator starts the Running status, it means it is\
-    \ successfully installed.\n```\nNAME                                READY   STATUS\
-    \    RESTARTS   AGE\ncamel-k-operator-554df8d75c-d2dx5   1/1     Running   0 \
-    \         84s\n```\n\n\n## Setup the generic object datastore\n\nLets start Minio,\
-    \ it provide a S3 compatible protocol for storing the objects.\nTo create the\
-    \ minio backend, just apply the provided file:\n\n```\noc apply -f minio/minio.yaml`\n\
-    ```\n\nNow you have a working generic object datastore.\n"
+    \ -w\n```\n\nonce camel-k-operator starts the Running status, it means it is successfully\
+    \ installed.\n```\nNAME                                READY   STATUS    RESTARTS\
+    \   AGE\ncamel-k-operator-554df8d75c-d2dx5   1/1     Running   0          84s\n\
+    ```\n\n\n## Setup the generic object datastore\n\nLets start Minio, it provide\
+    \ a S3 compatible protocol for storing the objects.\nTo create the minio backend,\
+    \ just apply the provided file:\n\n```\noc apply -f minio/minio.yaml\n```\n\n\
+    Now you have a working generic object datastore.\n"
   difficulty: basic
   slug: step1
   tabs:
@@ -104,30 +104,29 @@ challenges:
     \ OpenAPI standard document and along with the implemented Camel K application.\
     \ Notice we are also pointing to the configuration file too.\n\n```\nkamel run\
     \ --name api camel-api/API.java --property-file camel-api/minio.properties --open-api\
-    \ helper/openapi.yaml`\n```\n\nWait for the integration to be running (you should\
+    \ helper/openapi.yaml\n```\n\nWait for the integration to be running (you should\
     \ see the logs streaming in the terminal window).\n\n```\nlog\n```\n\nAfter running\
     \ the integration API, you should be able to call the API endpoints to check its\
     \ behavior.\nMake sure the integration is running, by checking its status:\n\n\
-    ```\noc get integrations`\n```\n\nAn integration named api should be present in\
+    ```\noc get integrations\n```\n\nAn integration named api should be present in\
     \ the list and it should be in status Running.\n\n``\nNAME    PHASE   KIT\napi\
     \     Running kit-bte009bi9eodqqhokkkg\n``\n\nThere's also a kamel get command\
     \ which is an alternative way to list all running integrations.\n```\nkamel get\
-    \ `\n```\n\nNOTE: it may take some time, the first time you run the integration,\
+    \ \n```\n\nNOTE: it may take some time, the first time you run the integration,\
     \ for it to reach the Running state.\n\nAfter the integration has reached the\
     \ running state, you can get the route corresponding to it via the following command:\n\
-    \n```\nURL=http://$(oc get route api -o jsonpath='{.spec.host}')`\n```\n\nGet\
-    \ the list of objects:\n```\ncurl $URL/`\n```\n\nSince there are nothing in the\
-    \ storage, you won't see anything for now.\n\nUpload an object:\n```\ncurl -i\
-    \ -X PUT --header \"Content-Type: application/octet-stream\" --data-binary \"\
-    /root/camel-api/API.java\" $URL/example`\n```\n\nGet the new list of objects:\n\
-    ```\ncurl -i $URL/`\n```\n\nYou will see the *['example']* that we have just uploaded\
-    \ from previous step\n\nGet the content of a file:\n```\ncurl -i $URL/example`\n\
-    ```\n\nYou will see what was in your *API.java* file\n\nDelete the file:\n```\n\
-    curl -i -X DELETE $URL/example`\n```\n\nGet the list of objects for the last time:\n\
-    ```\ncurl -i $URL/`\n```\n\nThe storage is emtpy again, so nothing will return.\n\
-    \nCongratulations, you now have a running Restful web Application base on the\
-    \ OpenAPI Document.\n\nNow, let's go ahead and uninstall the API instance.\n\n\
-    ```\nkamel delete api`\n```\n"
+    \n```\nURL=http://$(oc get route api -o jsonpath='{.spec.host}')\n```\n\nGet the\
+    \ list of objects:\n```\ncurl $URL/\n```\n\nSince there are nothing in the storage,\
+    \ you won't see anything for now.\n\nUpload an object:\n```\ncurl -i -X PUT --header\
+    \ \"Content-Type: application/octet-stream\" --data-binary \"/root/camel-api/API.java\"\
+    \ $URL/example\n```\n\nGet the new list of objects:\n```\ncurl -i $URL/\n```\n\
+    \nYou will see the *['example']* that we have just uploaded from previous step\n\
+    \nGet the content of a file:\n```\ncurl -i $URL/example\n```\n\nYou will see what\
+    \ was in your *API.java* file\n\nDelete the file:\n```\ncurl -i -X DELETE $URL/example\n\
+    ```\n\nGet the list of objects for the last time:\n```\ncurl -i $URL/\n```\n\n\
+    The storage is emtpy again, so nothing will return.\n\nCongratulations, you now\
+    \ have a running Restful web Application base on the OpenAPI Document.\n\nNow,\
+    \ let's go ahead and uninstall the API instance.\n\n```\nkamel delete api\n```\n"
   difficulty: basic
   slug: step2
   tabs:
@@ -141,86 +140,27 @@ challenges:
   timelimit: '300'
   title: Step 2
   type: challenge
-- assignment: '## Setup Serverless
-
-
-    The API integration can also run as Knative service and be able to scale to zero
-    and scale out automatically, based on the received load.
-
-
-    To expose the integration as Knative service, you need to have OpenShift Serverless
-    installed in the cluster. Let''s subscribe to the OpenShift Serverless.
-
-
-    ```
-
-    oc apply -f serverless/subscription.yaml`
-
-    ```
-
-
-    subscription.operators.coreos.com/servicemeshoperator created
-
-    subscription.operators.coreos.com/serverless-operator created
-
-
-    Next up, you must create a KnativeServing object to install Knative Serving using
-    the OpenShift Serverless Operator.
-
-
-    ```
-
-    oc apply -f serverless/serving.yaml`
-
-    ```
-
-
-    The KnativeServing instance will take a minute to install. As you might have noticed,
-    the resources for KnativeServing can be found in the knative-serving project.
-
-
-
-
-    We can further validate an install being successful by seeing the following pods
-    in knative-serving project:
-
-
-    ```
-
-    oc get pod -n knative-serving -w `
-
-    ```
-
-
-    When completed, you should see all pods with the status of Running.
-
-
-    ```
-
-    NAME                                READY   STATUS    RESTARTS   AGE
-
-    activator-d6478496f-x689c           1/1     Running   0          2m10s
-
-    autoscaler-6ff6d5659c-5nq44         1/1     Running   0          2m9s
-
-    autoscaler-hpa-868c8b56b4-s6jln     1/1     Running   0          2m10s
-
-    controller-55b4748bc5-h5wxc         1/1     Running   0          2m6s
-
-    networking-istio-679dfcd5d7-mbt8v   1/1     Running   0          2m4s
-
-    webhook-55b96d44f6-k7qmk            1/1     Running   0          2m6s
-
-    ```
-
-
-    Ctrl-C to exit.
-
-
-    Congratulations, you now have a serverless platform installed, lets move on and
-    make our API application serverless.
-
-    '
+- assignment: "## Setup Serverless\n\nThe API integration can also run as Knative\
+    \ service and be able to scale to zero and scale out automatically, based on the\
+    \ received load.\n\nTo expose the integration as Knative service, you need to\
+    \ have OpenShift Serverless installed in the cluster. Let's subscribe to the OpenShift\
+    \ Serverless.\n\n```\noc apply -f serverless/subscription.yaml\n```\n\nsubscription.operators.coreos.com/servicemeshoperator\
+    \ created\nsubscription.operators.coreos.com/serverless-operator created\n\nNext\
+    \ up, you must create a KnativeServing object to install Knative Serving using\
+    \ the OpenShift Serverless Operator.\n\n```\noc apply -f serverless/serving.yaml\n\
+    ```\n\nThe KnativeServing instance will take a minute to install. As you might\
+    \ have noticed, the resources for KnativeServing can be found in the knative-serving\
+    \ project.\n\n\n\nWe can further validate an install being successful by seeing\
+    \ the following pods in knative-serving project:\n\n```\noc get pod -n knative-serving\
+    \ -w \n```\n\nWhen completed, you should see all pods with the status of Running.\n\
+    \n```\nNAME                                READY   STATUS    RESTARTS   AGE\n\
+    activator-d6478496f-x689c           1/1     Running   0          2m10s\nautoscaler-6ff6d5659c-5nq44\
+    \         1/1     Running   0          2m9s\nautoscaler-hpa-868c8b56b4-s6jln \
+    \    1/1     Running   0          2m10s\ncontroller-55b4748bc5-h5wxc         1/1\
+    \     Running   0          2m6s\nnetworking-istio-679dfcd5d7-mbt8v   1/1     Running\
+    \   0          2m4s\nwebhook-55b96d44f6-k7qmk            1/1     Running   0 \
+    \         2m6s\n```\n\nCtrl-C to exit.\n\nCongratulations, you now have a serverless\
+    \ platform installed, lets move on and make our API application serverless.\n"
   difficulty: basic
   slug: step3
   tabs:
@@ -244,7 +184,7 @@ challenges:
     ```
 
     kamel run camel-api/API.java --open-api helper/openapi.yaml --property-file camel-api/minio.properties
-    --dependency camel-quarkus-openapi-java --profile Knative`
+    --dependency camel-quarkus-openapi-java --profile Knative
 
     ```
 
@@ -259,7 +199,7 @@ challenges:
 
     ```
 
-    oc get integrations`
+    oc get integrations
 
     ```
 
@@ -281,7 +221,7 @@ challenges:
 
     ```
 
-    oc get services.serving.knative.dev api -n camel-api`
+    oc get services.serving.knative.dev api -n camel-api
 
     ```
 
@@ -292,7 +232,7 @@ challenges:
 
     ```
 
-    oc get routes.serving.knative.dev api -n camel-api`
+    oc get routes.serving.knative.dev api -n camel-api
 
     ```
 
@@ -310,7 +250,7 @@ challenges:
 
     ```
 
-    URL=$(oc get routes.serving.knative.dev api -o jsonpath=''{.status.url}'')`
+    URL=$(oc get routes.serving.knative.dev api -o jsonpath=''{.status.url}'')
 
     ```
 
@@ -320,7 +260,7 @@ challenges:
 
     ```
 
-    curl -i $URL/`
+    curl -i $URL/
 
     ```
 

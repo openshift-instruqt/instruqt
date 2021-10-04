@@ -18,7 +18,7 @@ challenges:
 
     ```
 
-    oc get imagestreams -o name`
+    oc get imagestreams -o name
 
     ```
 
@@ -31,7 +31,7 @@ challenges:
 
     ```
 
-    oc describe imagestream s2i-minimal-notebook`
+    oc describe imagestream s2i-minimal-notebook
 
     ```
 
@@ -69,7 +69,7 @@ challenges:
 
     ```
 
-    oc get templates`
+    oc get templates
 
     ```
 
@@ -109,7 +109,7 @@ challenges:
 
     ```
 
-    oc describe template notebook-workspace`
+    oc describe template notebook-workspace
 
     ```
 
@@ -333,7 +333,7 @@ challenges:
 
     ```
 
-    oc get pods -l app=custom-notebook`
+    oc get pods -l app=custom-notebook
 
     ```
 
@@ -343,7 +343,7 @@ challenges:
 
     ```
 
-    oc rollout latest dc/custom-notebook`
+    oc rollout latest dc/custom-notebook
 
     ```
 
@@ -353,7 +353,7 @@ challenges:
 
     ```
 
-    oc rollout status dc/custom-notebook`
+    oc rollout status dc/custom-notebook
 
     ```
 
@@ -379,7 +379,7 @@ challenges:
 
     ```
 
-    oc get pods -l app=custom-notebook`
+    oc get pods -l app=custom-notebook
 
     ```
 
@@ -419,7 +419,7 @@ challenges:
 
     ```
 
-    oc get all --selector app=custom-notebook -o name`
+    oc get all --selector app=custom-notebook -o name
 
     ```
 
@@ -432,7 +432,7 @@ challenges:
 
     ```
 
-    oc delete all --selector app=custom-notebook`
+    oc delete all --selector app=custom-notebook
 
     ```
 

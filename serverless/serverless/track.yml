@@ -118,12 +118,12 @@ challenges:
     \ serverless resources without ever working with yaml.  In this tutorial we will\
     \ use the `kn` CLI tool to work with serverless. \n\nTo deploy the service execute:\n\
     ```bash\nkn service create greeter \\\n   --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus\
-    \ \\\n   --namespace serverless-tutorial\n```\n\n```\n\n> **Note:** *The equivalent\
+    \ \\\n   --namespace serverless-tutorial\n```\n`\n```\n\n> **Note:** *The equivalent\
     \ yaml for the service above can be seen by executing: ```\ncat 02-serving/service.yaml\n\
     ```*.\n\nWatch the status using the commands:\n```bash\n# ./assets/02-serving/watch-service.bash\n\
     \n#!/usr/bin/env bash\nwhile : ;\ndo\n  output=`oc get pod -n serverless-tutorial`\n\
     \  echo \"$output\"\n  if [ -z \"${output##*'Running'*}\" ] ; then echo \"Service\
-    \ is ready.\"; break; fi;\n  sleep 5\ndone\n\n```\n\n```\n\nA successful service\
+    \ is ready.\"; break; fi;\n  sleep 5\ndone\n\n```\n`\n```\n\nA successful service\
     \ deployment will show the following `greeter` pods:\n\n```shell\nNAME       \
     \                                 READY   STATUS    RESTARTS   AGE\ngreeter-6vzt6-deployment-5dc8bd556c-42lqh\
     \   2/2     Running   0          11s\n```\n\n> **Question:** *If you run the watch\
@@ -174,7 +174,7 @@ challenges:
     \ resource to enable automatic scaling of Pods in an OpenShift Container Platform\
     \ cluster.\n\nBefore inspecting revisions, update the image of the service by\
     \ executing:\n```bash\nkn service update greeter \\\n   --image quay.io/rhdevelopers/knative-tutorial-greeter:latest\
-    \ \\\n   --namespace serverless-tutorial\n```\n\n```.\n\n> **Note:** *Updating\
+    \ \\\n   --namespace serverless-tutorial\n```\n`\n```.\n\n> **Note:** *Updating\
     \ the image of the service will create a new revision, or point-in-time snapshot\
     \ of the workload.*\n \nWe can see the revision by executing: ```\nkn revision\
     \ list\n```\n\nThe output should be similar to:\n```bash\nNAME              SERVICE\
@@ -226,13 +226,13 @@ challenges:
     \ again, but this time set its **revision name** to `greeter-v1` by executing:\n\
     ```bash\nkn service create greeter \\\n   --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus\
     \ \\\n   --namespace serverless-tutorial \\\n   --revision-name greeter-v1\n```\n\
-    \n``` \n\n> **Note:** *The equivalent yaml for the service above can be seen by\
-    \ executing: ```\ncat 03-traffic-distribution/greeter-v1-service.yaml\n```*.\n\
+    `\n``` \n\n> **Note:** *The equivalent yaml for the service above can be seen\
+    \ by executing: ```\ncat 03-traffic-distribution/greeter-v1-service.yaml\n```*.\n\
     \nNext, we are going to update the greeter service to add a message prefix environment\
     \ variable and change the revision name to `greeter-v2`.  Do so by executing:\n\
     ```bash\nkn service update greeter \\\n   --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus\
     \ \\\n   --namespace serverless-tutorial \\\n   --revision-name greeter-v2 \\\n\
-    \   --env MESSAGE_PREFIX=GreeterV2\n```\n\n``` \n\n> **Note:** *The equivalent\
+    \   --env MESSAGE_PREFIX=GreeterV2\n```\n`\n``` \n\n> **Note:** *The equivalent\
     \ yaml for the service above can be seen by executing: ```\ncat 03-traffic-distribution/greeter-v2-service.yaml\n\
     ```*.\n\nSee that the two greeter services have deployed successfully by executing\
     \ ```\nkn revision list\n```\n\nThe last command should output two revisions,\
@@ -250,7 +250,7 @@ challenges:
     \ us assume that we need to roll back `greeter-v2` to `greeter-v1` for some reason.\n\
     \nUpdate the greeter service by executing:\n```bash\nkn service update greeter\
     \ \\\n   --traffic greeter-v1=100 \\\n   --tag greeter-v1=current \\\n   --tag\
-    \ greeter-v2=prev \\\n   --tag @latest=latest\n```\n\n```\n\nThe above service\
+    \ greeter-v2=prev \\\n   --tag @latest=latest\n```\n`\n```\n\nThe above service\
     \ definition creates three sub-routes(named after traffic tags) to the existing\
     \ `greeter` route.\n- **current**: The revision will receive 100% of the traffic\
     \ distribution\n- **prev**: The previously active revision, which will now receive\
@@ -302,24 +302,24 @@ challenges:
     \ --namespace serverless-tutorial --revision-name greeter-v1\nkn service update\
     \ greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace\
     \ serverless-tutorial --revision-name greeter-v2 --env MESSAGE_PREFIX=GreeterV2\n\
-    ```\n\n```\n\n## Applying a Canary Release Pattern\nA Canary release is more effective\
-    \ when looking to reduce the risk of introducing new features. Using this type\
-    \ of deployment model allows a more effective feature-feedback loop before rolling\
-    \ out the change to the entire user base.  Using this deployment approach with\
-    \ Serverless allows splitting the traffic between revisions in increments as small\
-    \ as 1%.\n\nTo see this in action, apply the following service update that will\
-    \ split the traffic 80% to 20% between `greeter-v1` and `greeter-v2` by executing:\n\
-    ```bash\nkn service update greeter \\\n   --traffic greeter-v1=80 \\\n   --traffic\
-    \ greeter-v2=20 \\\n   --traffic @latest=0\n```\n\n```\n\nIn the service configuration\
-    \ above see the 80/20 split between v1 and v2 of the greeter service.  Also see\
-    \ that the current service is set to receive 0% of the traffic using the `latest`\
-    \ tag.\n\n> **Note:** *The equivalent yaml for the service above can be seen by\
-    \ executing: ```\ncat 04-canary-releases/greeter-canary-service.yaml\n```\n\n\
-    As in the previous section on Applying Blue-Green Deployment Pattern deployments,\
+    ```\n`\n```\n\n## Applying a Canary Release Pattern\nA Canary release is more\
+    \ effective when looking to reduce the risk of introducing new features. Using\
+    \ this type of deployment model allows a more effective feature-feedback loop\
+    \ before rolling out the change to the entire user base.  Using this deployment\
+    \ approach with Serverless allows splitting the traffic between revisions in increments\
+    \ as small as 1%.\n\nTo see this in action, apply the following service update\
+    \ that will split the traffic 80% to 20% between `greeter-v1` and `greeter-v2`\
+    \ by executing:\n```bash\nkn service update greeter \\\n   --traffic greeter-v1=80\
+    \ \\\n   --traffic greeter-v2=20 \\\n   --traffic @latest=0\n```\n`\n```\n\nIn\
+    \ the service configuration above see the 80/20 split between v1 and v2 of the\
+    \ greeter service.  Also see that the current service is set to receive 0% of\
+    \ the traffic using the `latest` tag.\n\n> **Note:** *The equivalent yaml for\
+    \ the service above can be seen by executing: ```\ncat 04-canary-releases/greeter-canary-service.yaml\n\
+    ```\n\nAs in the previous section on Applying Blue-Green Deployment Pattern deployments,\
     \ the command will not create a new configuration, revision, or deployment.\n\n\
     To observe the new traffic distribution execute the following:\n\n```bash\n# ./assets/04-canary-releases/poll-svc-10.bash\n\
     \n#!/usr/bin/env bash\nfor run in {1..10}\ndo\n  curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com\n\
-    done\n```\n\n```\n\n80% of the responses are returned from greeter-v1 and 20%\
+    done\n```\n`\n```\n\n80% of the responses are returned from greeter-v1 and 20%\
     \ from greeter-v2. See the listing below for sample output:\n\n```bash\nHi  greeter\
     \ => '6fee83923a9f' : 1\nHi  greeter => '6fee83923a9f' : 2\nHi  greeter => '6fee83923a9f'\
     \ : 3\nGreeterV2  greeter => '4d1c551aac4f' : 1\nHi  greeter => '6fee83923a9f'\
@@ -422,7 +422,7 @@ challenges:
     \ service definition.\n\nDeploy the service by executing:\n```bash\nkn service\
     \ create prime-generator \\\n   --namespace serverless-tutorial \\\n   --annotation\
     \ autoscaling.knative.dev/minScale=2 \\\n   --annotation autoscaling.knative.dev/maxScale=5\
-    \ \\\n   --image quay.io/rhdevelopers/prime-generator:v27-quarkus\n```\n\n```\n\
+    \ \\\n   --image quay.io/rhdevelopers/prime-generator:v27-quarkus\n```\n`\n```\n\
     \nSee that the ```\nprime-generator` is deployed and it will never be scaled outside\
     \ of 2-5 pods available by checking: `oc get pods -n serverless-tutorial\n```\n\
     \nThis now guarantee that there will always be at least two instances available\
@@ -444,7 +444,7 @@ challenges:
     \ scale up sooner, say 50 concurrent requests via configuring an annotation of\
     \ `autoscaling.knative.dev/target`.\n\nUpdate the prime-generator service by executing:\n\
     ```bash\nkn service update prime-generator \\\n   --annotation autoscaling.knative.dev/target=50\n\
-    ```\n\n```\n\n> **Note:** *The equivalent yaml for the service above can be seen\
+    ```\n`\n```\n\n> **Note:** *The equivalent yaml for the service above can be seen\
     \ by executing: ```\ncat 05-scaling/service-50.yaml\n```*.\n\nAgain test the scaling\
     \ by loading the service.  This time send 275 concurrent requests totaling 1100.\n\
     \n```\nab -n 1100 -c 275 -t 60 \"http://prime-generator-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/?sleep=3&upto=10000&memload=100\"\
@@ -461,8 +461,8 @@ challenges:
     \ prime-generator \\\n   --annotation autoscaling.knative.dev/minScale- \\\n \
     \  --annotation autoscaling.knative.dev/maxScale- \\\n   --annotation autoscaling.knative.dev/target=70\
     \ \\\n   --annotation autoscaling.knative.dev/metric=cpu \\\n   --annotation autoscaling.knative.dev/class=hpa.autoscaling.knative.dev\n\
-    ```\n\n```\n\n> **Note:** *Notice that the above `kn` command removes, adds, and\
-    \ updates existing annotations to the service.  To delete use `\u2014annotation\
+    ```\n`\n```\n\n> **Note:** *Notice that the above `kn` command removes, adds,\
+    \ and updates existing annotations to the service.  To delete use `\u2014annotation\
     \ name-`.*\n>\n> *Getting the service to scale on the large CPU nodes that this\
     \ tutorial is running on is relatively hard.  If you have any ideas to see this\
     \ in action put an issue in at [this tutorial's github][learn-katacoda]*\n>\n\

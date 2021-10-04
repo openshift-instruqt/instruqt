@@ -128,7 +128,7 @@ for course in hcourses['courses']:
             with open('learn-katacoda/' + pathway_id + '/' + course_id + '/' + step["text"], 'r') as myassign:
                 assign_data=myassign.read()
             
-            md=re.sub(r'`{1,3}(.*)`{1,3}\{\{execute\}\}', r'```\n\1\n```', assign_data )
+            md=re.sub(r'`{1,3}(.+?)`{1,3}\{\{execute\}\}', r'```\n\1\n```', assign_data )
             md=re.sub(r'\{\{copy\}\}',r'', md)
             md=re.sub(r'\(\.\.\/\.\.\/assets',r'(https://katacoda.com/openshift/assets',md)
             

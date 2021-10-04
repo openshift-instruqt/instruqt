@@ -1,24 +1,24 @@
 challenges:
 - assignment: "Let's begin by creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n\n```\n<br>\nCreate a new pod manifest that specifies\
+    oc new-project myproject\n```\n`\n```\n<br>\nCreate a new pod manifest that specifies\
     \ two containers:\n\n```\ncat > pod-multi-container.yaml <<EOF\napiVersion: v1\n\
     kind: Pod\nmetadata:\n  name: my-two-container-pod\n  namespace: myproject\n \
     \ labels:\n    environment: dev\nspec:\n  containers:\n    - name: server\n  \
     \    image: nginx:1.13-alpine\n      ports:\n        - containerPort: 80\n   \
     \       protocol: TCP\n    - name: side-car\n      image: alpine:latest\n    \
     \  command: [\"/usr/bin/tail\", \"-f\", \"/dev/null\"]\n  restartPolicy: Never\n\
-    EOF\n```\n\n```\n<br>\nCreate the pod by specifying the manifest:\n\n```\noc create\
-    \ -f pod-multi-container.yaml\n```\n\n```\n<br>\nView the detail for the pod and\
-    \ look at the events:\n\n```\noc describe pod my-two-container-pod\n```\n\n```\n\
-    <br>\nLet's first execute a shell session inside the server container by using\
-    \ the\n`-c` flag:\n\n```\noc exec -it my-two-container-pod -c server -- /bin/sh\n\
-    ```\n\n```\n<br>\nRun some commands inside the server container:\n\n```\nip address\n\
-    netstat -ntlp\nhostname\nps\nexit\n```\n\n```\n<br>\nLet's now execute a shell\
-    \ session inside the side-car container:\n\n```\noc exec -it my-two-container-pod\
-    \ -c side-car -- /bin/sh\n```\n\n```\n<br>\nRun the same commands in side-car\
-    \ container. Each container within a pod runs\nit's own cgroup, but shares IPC,\
-    \ Network, and UTC (hostname) namespaces:\n\n```\nip address\nnetstat -ntlp\n\
-    hostname\nexit\n```\n\n```"
+    EOF\n```\n`\n```\n<br>\nCreate the pod by specifying the manifest:\n\n```\noc\
+    \ create -f pod-multi-container.yaml\n```\n`\n```\n<br>\nView the detail for the\
+    \ pod and look at the events:\n\n```\noc describe pod my-two-container-pod\n```\n\
+    `\n```\n<br>\nLet's first execute a shell session inside the server container\
+    \ by using the\n`-c` flag:\n\n```\noc exec -it my-two-container-pod -c server\
+    \ -- /bin/sh\n```\n`\n```\n<br>\nRun some commands inside the server container:\n\
+    \n```\nip address\nnetstat -ntlp\nhostname\nps\nexit\n```\n`\n```\n<br>\nLet's\
+    \ now execute a shell session inside the side-car container:\n\n```\noc exec -it\
+    \ my-two-container-pod -c side-car -- /bin/sh\n```\n`\n```\n<br>\nRun the same\
+    \ commands in side-car container. Each container within a pod runs\nit's own cgroup,\
+    \ but shares IPC, Network, and UTC (hostname) namespaces:\n\n```\nip address\n\
+    netstat -ntlp\nhostname\nexit\n```\n`\n```"
   difficulty: basic
   slug: step1
   tabs:
@@ -41,6 +41,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -56,6 +57,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -71,6 +73,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -91,6 +94,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -105,6 +109,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -119,6 +124,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -133,6 +139,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -147,6 +154,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -161,6 +169,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -175,6 +184,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -189,6 +199,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -204,6 +215,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -220,6 +232,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -234,6 +247,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -248,6 +262,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -262,6 +277,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -280,29 +296,29 @@ challenges:
   title: Basic Operations with the Kubernetes API
   type: challenge
 - assignment: "Get a list of all pods in the `myproject` Namespace:\n\n```\noc get\
-    \ pods -n myproject\n```\n\n```\n<br>\nCreate a ReplicaSet object manifest file:\n\
+    \ pods -n myproject\n```\n`\n```\n<br>\nCreate a ReplicaSet object manifest file:\n\
     \n```\ncat > replica-set.yaml <<EOF\napiVersion: apps/v1\nkind: ReplicaSet\nmetadata:\n\
     \  name: myfirstreplicaset\n  namespace: myproject\nspec:\n  selector:\n    matchLabels:\n\
     \     app: myfirstapp\n  replicas: 3\n  template:\n    metadata:\n      labels:\n\
     \        app: myfirstapp\n    spec:\n      containers:\n        - name: nodejs\n\
-    \          image: openshiftkatacoda/blog-django-py\nEOF\n```\n\n```\n<br>\nCreate\
-    \ the ReplicaSet:\n\n```\noc apply -f replica-set.yaml\n```\n\n```\n<br>\nIn a\
-    \ new terminal window, select all pods that match `app=myfirstapp`:\n\n```\noc\
-    \ get pods -l app=myfirstapp --show-labels -w\n```\n\n```\n<br>\nDelete the pods\
-    \ and watch new ones spawn:\n\n```\noc delete pod -l app=myfirstapp\n```\n\n```\n\
-    <br>\nImperatively scale the ReplicaSet to 6 replicas:\n\n```\noc scale replicaset\
-    \ myfirstreplicaset --replicas=6\n```\n\n```\n<br>\nImperatively scale down the\
-    \ ReplicaSet to 3 replicas:\n\n```\noc scale replicaset myfirstreplicaset --replicas=3\n\
-    ```\n\n```\n<br>\nThe `oc scale` command interacts with the `/scale` endpoint:\n\
-    \n```\ncurl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale\n\
-    ```\n\n```\n<br>\nUse the `PUT` method against the `/scale` endpoint to change\
+    \          image: openshiftkatacoda/blog-django-py\nEOF\n```\n`\n```\n<br>\nCreate\
+    \ the ReplicaSet:\n\n```\noc apply -f replica-set.yaml\n```\n`\n```\n<br>\nIn\
+    \ a new terminal window, select all pods that match `app=myfirstapp`:\n\n```\n\
+    oc get pods -l app=myfirstapp --show-labels -w\n```\n`\n```\n<br>\nDelete the\
+    \ pods and watch new ones spawn:\n\n```\noc delete pod -l app=myfirstapp\n```\n\
+    `\n```\n<br>\nImperatively scale the ReplicaSet to 6 replicas:\n\n```\noc scale\
+    \ replicaset myfirstreplicaset --replicas=6\n```\n`\n```\n<br>\nImperatively scale\
+    \ down the ReplicaSet to 3 replicas:\n\n```\noc scale replicaset myfirstreplicaset\
+    \ --replicas=3\n```\n`\n```\n<br>\nThe `oc scale` command interacts with the `/scale`\
+    \ endpoint:\n\n```\ncurl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale\n\
+    ```\n`\n```\n<br>\nUse the `PUT` method against the `/scale` endpoint to change\
     \ the number of replicas to 5:\n\n```\ncurl  -X PUT localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale\
     \ -H \"Content-type: application/json\" -d '{\"kind\":\"Scale\",\"apiVersion\"\
     :\"autoscaling/v1\",\"metadata\":{\"name\":\"myfirstreplicaset\",\"namespace\"\
-    :\"myproject\"},\"spec\":{\"replicas\":5}}'\n```\n\n```\n<br>\nYou can also get\
+    :\"myproject\"},\"spec\":{\"replicas\":5}}'\n```\n`\n```\n<br>\nYou can also get\
     \ information regarding the pod by using the `GET` method against the `/status`\
     \ endpoint\n\n```\ncurl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/status\n\
-    ```\n\n```\n<br>\nThe status endpoint's primary purpose is to allow a controller\
+    ```\n`\n```\n<br>\nThe status endpoint's primary purpose is to allow a controller\
     \ (with proper RBAC permissions) to send a `PUT` method along with the desired\
     \ status.\n"
   difficulty: basic
@@ -326,30 +342,30 @@ challenges:
     \      labels:\n        app: finalizer-test\n    spec:\n      containers:\n  \
     \      - name: hieveryone\n          image: openshiftkatacoda/blog-django-py\n\
     \          imagePullPolicy: Always\n          ports:\n            - name: helloworldport\n\
-    \              containerPort: 8080\nEOF\n```\n\n```\n<br>\nCreate the Deployment.\n\
-    \n```\noc create -f finalizer-test.yaml\n```\n\n```\n<br>\nVerify the Deployment\
-    \ has been created.\n\n```\noc get deploy\n```\n\n```\n<br>\nVerify the ReplicaSet\
-    \ has been created:\n\n```\noc get replicaset\n```\n\n```\n<br>\nVerify the pods\
-    \ are running:\n\n```\noc get pods\n```\n\n```\n<br>\nAttempt to delete the Deployment.\n\
-    \n```\noc delete deployment finalizer-test\n```\n\n```\n<br>\nOpen up another\
+    \              containerPort: 8080\nEOF\n```\n`\n```\n<br>\nCreate the Deployment.\n\
+    \n```\noc create -f finalizer-test.yaml\n```\n`\n```\n<br>\nVerify the Deployment\
+    \ has been created.\n\n```\noc get deploy\n```\n`\n```\n<br>\nVerify the ReplicaSet\
+    \ has been created:\n\n```\noc get replicaset\n```\n`\n```\n<br>\nVerify the pods\
+    \ are running:\n\n```\noc get pods\n```\n`\n```\n<br>\nAttempt to delete the Deployment.\n\
+    \n```\noc delete deployment finalizer-test\n```\n`\n```\n<br>\nOpen up another\
     \ terminal by clicking the **+** button and select `Open New Terminal`.\n<br>\n\
     <br>\nObserve the Deployment still exits and has been updated with the `deletionGracePeriodSeconds`\
     \ and `deletionTimestamp` fields.\n\n```\noc get deployment finalizer-test -o\
-    \ yaml | grep 'deletionGracePeriodSeconds\\|deletionTimestamp'\n```\n\n```\n<br>\n\
-    Attempt to scale the Deployment up and down. Although status is updated, pods\
-    \ will not be created/deleted:\n\n```\noc scale deploy finalizer-test --replicas=5\n\
-    oc scale deploy finalizer-test --replicas=1\n```\n\n```\n<br>\n\n```\noc get deploy\n\
-    oc get pods\n```\n\n```\n<br>\n\nUpdate the Deployment with the Finalizer value\
-    \ unset.\n\n```\ncat > finalizer-test-remove.yaml<<EOF\napiVersion: apps/v1\n\
+    \ yaml | grep 'deletionGracePeriodSeconds\\|deletionTimestamp'\n```\n`\n```\n\
+    <br>\nAttempt to scale the Deployment up and down. Although status is updated,\
+    \ pods will not be created/deleted:\n\n```\noc scale deploy finalizer-test --replicas=5\n\
+    oc scale deploy finalizer-test --replicas=1\n```\n`\n```\n<br>\n\n```\noc get\
+    \ deploy\noc get pods\n```\n`\n```\n<br>\n\nUpdate the Deployment with the Finalizer\
+    \ value unset.\n\n```\ncat > finalizer-test-remove.yaml<<EOF\napiVersion: apps/v1\n\
     kind: Deployment\nmetadata:\n  name: finalizer-test\n  namespace: myproject\n\
     \  labels:\n    app: finalizer-test\n  finalizers:\nspec:\n  selector:\n    matchLabels:\n\
     \      app: finalizer-test\n  replicas: 3\n  template:\n    metadata:\n      labels:\n\
     \        app: finalizer-test\n    spec:\n      containers:\n        - name: hieveryone\n\
     \          image: openshiftkatacoda/blog-django-py\n          imagePullPolicy:\
     \ Always\n          ports:\n            - name: helloworldport\n             \
-    \ containerPort: 8080\nEOF\n```\n\n```\n<br>\nReplace the Deployment.\n\n```\n\
-    oc replace -f finalizer-test-remove.yaml\n```\n\n```\n<br>\nThe Deployment will\
-    \ now be deleted.\n\n```\noc get deploy\noc get pods\n```\n\n```\n<br>\nSee the\
+    \ containerPort: 8080\nEOF\n```\n`\n```\n<br>\nReplace the Deployment.\n\n```\n\
+    oc replace -f finalizer-test-remove.yaml\n```\n`\n```\n<br>\nThe Deployment will\
+    \ now be deleted.\n\n```\noc get deploy\noc get pods\n```\n`\n```\n<br>\nSee the\
     \ following:\n\n[Deployment Controller (DeletionTimestamp != nil)](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/deployment_controller.go#L613-L615)\n\
     \n[SyncStatusOnly Method](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/sync.go#L36-L45)\n"
   difficulty: basic
@@ -366,7 +382,7 @@ challenges:
   title: Deployments/Finalizers
   type: challenge
 - assignment: "Begin by running a proxy to the Kubernetes API server:\n\n```\noc proxy\
-    \ --port=8001\n```\n\n```\n<br>\nOpen up another terminal by clicking the **+**\
+    \ --port=8001\n```\n`\n```\n<br>\nOpen up another terminal by clicking the **+**\
     \ button and select `Open New Terminal`.\n<br>\n<br>\n\nLet's create a new Custom\
     \ Resource Definition (CRD) object manifest for Postgres:\n\n```\ncat >> postgres-crd.yaml\
     \ <<EOF\napiVersion: apiextensions.k8s.io/v1\nkind: CustomResourceDefinition\n\
@@ -375,24 +391,24 @@ challenges:
     \    singular: postgres\n    shortNames:\n    - pg\n  scope: Namespaced\n  versions:\n\
     \  - name: v1alpha1\n    schema:\n      openAPIV3Schema:\n        type: object\n\
     \        x-kubernetes-preserve-unknown-fields: true\n    served: true\n    storage:\
-    \ true\nEOF\n```\n\n```\n<br>\nCreate the ***CRD*** resource object:\n\n```\n\
-    oc create -f postgres-crd.yaml\n```\n\n```\n<br>\nYou should now see the Kubernetes\
+    \ true\nEOF\n```\n`\n```\n<br>\nCreate the ***CRD*** resource object:\n\n```\n\
+    oc create -f postgres-crd.yaml\n```\n`\n```\n<br>\nYou should now see the Kubernetes\
     \ API reflect a brand new *api group* called **rd.example.com**:\n\n```\ncurl\
-    \ http://localhost:8001/apis | jq .groups[].name\n```\n\n```\n<br>\nThis will\
+    \ http://localhost:8001/apis | jq .groups[].name\n```\n`\n```\n<br>\nThis will\
     \ also be reflected in the `oc api-versions` command:\n\n```\noc api-versions\n\
-    ```\n\n```\n<br>\nWithin the `rd.example.com` group there will be an *api version*\
+    ```\n`\n```\n<br>\nWithin the `rd.example.com` group there will be an *api version*\
     \ **v1alpha1** (per our CRD resource object). The database resource resides here.\n\
-    \n```\ncurl http://localhost:8001/apis/rd.example.com/v1alpha1 | jq\n```\n\n```\n\
-    <br>\nNotice how `oc` now recognize postgres as a present resource (although there\
-    \ will be no current resource objects at this time).\n\n```\noc get postgres\n\
-    ```\n\n```\n<br>\nLet's create a new Custom Resource (CR) object manifest for\
+    \n```\ncurl http://localhost:8001/apis/rd.example.com/v1alpha1 | jq\n```\n`\n\
+    ```\n<br>\nNotice how `oc` now recognize postgres as a present resource (although\
+    \ there will be no current resource objects at this time).\n\n```\noc get postgres\n\
+    ```\n`\n```\n<br>\nLet's create a new Custom Resource (CR) object manifest for\
     \ the database:\n\n```\ncat >> wordpress-database.yaml <<EOF\napiVersion: \"rd.example.com/v1alpha1\"\
     \nkind: Postgres\nmetadata:\n  name: wordpressdb\nspec:\n  user: postgres\n  password:\
-    \ postgres\n  database: primarydb\n  nodes: 3\nEOF\n```\n\n```\n<br>\nCreate the\
-    \ new object:\n\n```\noc create -f wordpress-database.yaml\n```\n\n```\n<br>\n\
-    Verify the resource was created:\n\n```\noc get postgres\n```\n\n```\n<br>\nView\
-    \ the details about the wordpressdb object:\n\n```\noc get postgres wordpressdb\
-    \ -o yaml\n```\n\n```"
+    \ postgres\n  database: primarydb\n  nodes: 3\nEOF\n```\n`\n```\n<br>\nCreate\
+    \ the new object:\n\n```\noc create -f wordpress-database.yaml\n```\n`\n```\n\
+    <br>\nVerify the resource was created:\n\n```\noc get postgres\n```\n`\n```\n\
+    <br>\nView the details about the wordpressdb object:\n\n```\noc get postgres wordpressdb\
+    \ -o yaml\n```\n`\n```"
   difficulty: basic
   slug: step5
   tabs:

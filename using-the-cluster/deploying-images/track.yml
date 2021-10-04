@@ -1,12 +1,12 @@
 challenges:
 - assignment: "Before we get started, you need to login and create a project in OpenShift\n\
     to work in.\n\nTo login to the OpenShift cluster used for this course from the\
-    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer`\n```\n\nThis will\
+    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer\n```\n\nThis will\
     \ log you in using the credentials:\n\n* **Username:** ``developer``\n* **Password:**\
     \ ``developer``\n\nYou should see the output:\n\n```\nLogin successful.\n\nYou\
     \ don't have any projects. You can try to create a new project, by running\n\n\
     \    oc new-project <projectname>\n```\n\nTo create a new project called ``myproject``\
-    \ run the command:\n\n```\noc new-project myproject`\n```\n\nYou should see output\
+    \ run the command:\n\n```\noc new-project myproject\n```\n\nYou should see output\
     \ similar to:\n\n```\nNow using project \"myproject\" on server \"https://openshift:6443\"\
     .\n\nYou can add applications to this project with the 'new-app' command. For\
     \ example, try:\n\n    oc new-app django-psql-example\n\nto build a new example\
@@ -157,7 +157,7 @@ challenges:
     \ each resource type created and delete them one at a time. The simpler way to\
     \ delete an application is from the command line using the ``oc`` program.\n\n\
     To see a list of all the resources that have been created in the project so far,\
-    \ you can run the command:\n\n```\noc get all -o name`\n```\n\nThis will display\
+    \ you can run the command:\n\n```\noc get all -o name\n```\n\nThis will display\
     \ output similar to:\n\n```\npod/blog-django-py-1-cbp96\npod/blog-django-py-1-deploy\n\
     replicationcontroller/blog-django-py-1\nservice/blog-django-py\ndeploymentconfig.apps.openshift.io/blog-django-py\n\
     imagestream.image.openshift.io/blog-django-py\nroute.route.openshift.io/blog-django-py\n\
@@ -167,8 +167,8 @@ challenges:
     \ delete. You can do this by applying a command to a subset of resources using\
     \ a label selector.\n\nTo determine what labels may have been added to the resources,\
     \ select one and display the details on it. To look at the _Route_ which was created,\
-    \ you can run the command:\n\n```\noc describe route/blog-django-py`\n```\n\n\
-    This should display output similar to:\n\n```\nName:                   blog-django-py\n\
+    \ you can run the command:\n\n```\noc describe route/blog-django-py\n```\n\nThis\
+    \ should display output similar to:\n\n```\nName:                   blog-django-py\n\
     Namespace:              myproject\nCreated:                2 minutes ago\nLabels:\
     \                 app=blog-django-py\n                        app.kubernetes.io/component=blog-django-py\n\
     \                        app.kubernetes.io/instance=blog-django-py\n         \
@@ -182,15 +182,15 @@ challenges:
     ```\n\nIn this case when deploying the existing container image via the OpenShift\
     \ web console, OpenShift has applied automatically to all resources the label\
     \ ``app=blog-django-py``. You can confirm this by running the command:\n\n```\n\
-    oc get all --selector app=blog-django-py -o name`\n```\n\nThis should display\
-    \ the same list of resources as when ``oc get all -o name`` was run. To double\
-    \ check that this is doing what is being described, run instead:\n\n```\noc get\
-    \ all --selector app=blog -o name`\n```\n\nIn this case, because there are no\
-    \ resources with the label ``app=blog``, the result will be empty.\n\nHaving a\
-    \ way of selecting just the resources for the one application, you can now schedule\
-    \ them for deletion by running the command:\n\n```\noc delete all --selector app=blog-django-py`\n\
+    oc get all --selector app=blog-django-py -o name\n```\n\nThis should display the\
+    \ same list of resources as when ``oc get all -o name`` was run. To double check\
+    \ that this is doing what is being described, run instead:\n\n```\noc get all\
+    \ --selector app=blog -o name\n```\n\nIn this case, because there are no resources\
+    \ with the label ``app=blog``, the result will be empty.\n\nHaving a way of selecting\
+    \ just the resources for the one application, you can now schedule them for deletion\
+    \ by running the command:\n\n```\noc delete all --selector app=blog-django-py\n\
     ```\n\nTo confirm that the resources have been deleted, run again the command:\n\
-    \n```\noc get all -o name`\n```\n\nIf you do still see any resources listed, keep\
+    \n```\noc get all -o name\n```\n\nIf you do still see any resources listed, keep\
     \ running this command until it shows they have all been deleted. You can find\
     \ that resources may not be deleted immediately as you only scheduled them for\
     \ deletion and how quickly they can be deleted will depend on how quickly the\
@@ -219,12 +219,12 @@ challenges:
     \ name of the image you used previously was:\n\n```\nopenshiftkatacoda/blog-django-py\n\
     ```\n\nIf you have been given the name of an image to deploy and want to verify\
     \ that it is valid from the command line, you can use the ``oc new-app --search``\
-    \ command. For this image run:\n\n```\noc new-app --search openshiftkatacoda/blog-django-py`\n\
+    \ command. For this image run:\n\n```\noc new-app --search openshiftkatacoda/blog-django-py\n\
     ```\n\nThis should display output similar to:\n\n```\nDocker images (oc new-app\
     \ --docker-image=<docker-image> [--code=<source>])\n-----\nopenshiftkatacoda/blog-django-py\n\
     \  Registry: Docker Hub\n  Tags:     latest\n```\n\nIt confirms that the image\
     \ is found on the Docker Hub Registry.\n\nTo deploy the image, you can run the\
-    \ command:\n\n```\noc new-app openshiftkatacoda/blog-django-py`\n```\n\nThis will\
+    \ command:\n\n```\noc new-app openshiftkatacoda/blog-django-py\n```\n\nThis will\
     \ display out similar to:\n\n```\n--> Found container image 927f823 (4 months\
     \ old) from Docker Hub for \"openshiftkatacoda/blog-django-py\"\n\n    Python\
     \ 3.5\n    ----------\n    Python 3.5 available as container is a base platform\
@@ -250,12 +250,12 @@ challenges:
     \nUnlike how it is possible when deploying an existing container image from the\
     \ web console, the application is not exposed outside of the OpenShift cluster\
     \ by default. To expose the application created so it is available outside of\
-    \ the OpenShift cluster, you can run the command:\n\n```\noc expose service/blog-django-py`\n\
+    \ the OpenShift cluster, you can run the command:\n\n```\noc expose service/blog-django-py\n\
     ```\n\nSwitch to the OpenShift web console by selecting on _Console_ to verify\
     \ that the application has been deployed. Select on the URL shortcut icon displayed\
     \ for the application on the _Topology_ view for the project to visit the application.\n\
     \nAlternatively, to view the hostname assigned to the route created from the command\
-    \ line, you can run the command:\n\n```\noc get route/blog-django-py`\n```\n"
+    \ line, you can run the command:\n\n```\noc get route/blog-django-py\n```\n"
   difficulty: basic
   slug: 05-deploying-using-the-command-line
   tabs:

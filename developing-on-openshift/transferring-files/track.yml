@@ -1,12 +1,12 @@
 challenges:
 - assignment: "Before we get started, you need to login and create a project in OpenShift\n\
     to work in.\n\nTo login to the OpenShift cluster used for this course from the\
-    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer`\n```\n\nThis will\
+    \ _Terminal_,\nrun:\n\n```\noc login -u developer -p developer\n```\n\nThis will\
     \ log you in using the credentials:\n\n* **Username:** ``developer``\n* **Password:**\
     \ ``developer``\n\nYou should see the output:\n\n```\nLogin successful.\n\nYou\
     \ don't have any projects. You can try to create a new project, by running\n\n\
     \    oc new-project <projectname>\n```\n\nTo create a new project called ``myproject``\
-    \ run the command:\n\n```\noc new-project myproject`\n```\n\nYou should see output\
+    \ run the command:\n\n```\noc new-project myproject\n```\n\nYou should see output\
     \ similar to:\n\n```\nNow using project \"myproject\" on server \"https://openshift:6443\"\
     .\n\nYou can add applications to this project with the 'new-app' command. For\
     \ example, try:\n\n    oc new-app django-psql-example\n\nto build a new example\
@@ -30,14 +30,14 @@ challenges:
   type: challenge
 - assignment: "To demonstrate transferring files to and from a running container we\
     \ first need to deploy an application. To do this run the command:\n\n```\noc\
-    \ new-app openshiftkatacoda/blog-django-py --name blog`\n```\n\nSo that we can\
+    \ new-app openshiftkatacoda/blog-django-py --name blog\n```\n\nSo that we can\
     \ access it from a web browser, we also need to expose it by creating a _Route_.\n\
-    \n```\noc expose service/blog`\n```\n\nTo monitor the deployment of the application\
-    \ run:\n\n```\noc rollout status deployment/blog`\n```\n\nThe command will exit\
+    \n```\noc expose service/blog\n```\n\nTo monitor the deployment of the application\
+    \ run:\n\n```\noc rollout status deployment/blog\n```\n\nThe command will exit\
     \ once the deployment has completed and the web application is ready.\n\nThe result\
     \ of the deployment will be the running container. You can see the name of the\
     \ pods corresponding to the running containers for this application, by running:\n\
-    \n```\noc get pods --selector deployment=blog`\n```\n\nYou only have one instance\
+    \n```\noc get pods --selector deployment=blog\n```\n\nYou only have one instance\
     \ of the application so only one pod will be listed, similar to:\n\n```\nNAME\
     \                    READY   STATUS    RESTARTS   AGE\nblog-5dc99d7545-rkvzt \
     \  1/1     Running   0          1m12s\n```\n\nFor subsequent commands which need\
@@ -47,17 +47,17 @@ challenges:
     \ variable. That environment variable will then be used in the commands you run.\n\
     \nThe command we will run from the shell function to get out just the name of\
     \ the pod will be:\n\n```\noc get pods --selector deployment=blog -o jsonpath='{.items[?(@.status.phase==\"\
-    Running\")].metadata.name}'`\n```\n\nAs above this uses ``oc get pods`` with a\
+    Running\")].metadata.name}'\n```\n\nAs above this uses ``oc get pods`` with a\
     \ label selector, but we also use a ``jsonpath`` query to extract the name of\
     \ the running pod.\n\nTo create the shell function run:\n\n```\npod() { local\
     \ selector=$1; local query='?(@.status.phase==\"Running\")'; oc get pods --selector\
-    \ $selector -o jsonpath=\"{.items[$query].metadata.name}\"; }`\n```\n\nTo capture\
+    \ $selector -o jsonpath=\"{.items[$query].metadata.name}\"; }\n```\n\nTo capture\
     \ the name of the pod for this application in the ``POD`` environment variable,\
-    \ run:\n\n```\nPOD=`pod deployment=blog`; echo $POD`\n```\n\nTo create an interactive\
+    \ run:\n\n```\nPOD=`pod deployment=blog`; echo $POD\n```\n\nTo create an interactive\
     \ shell within the same container running the application, you can use the ``oc\
     \ rsh`` command, supplying it the environment variable holding the name of the\
-    \ pod.\n\n```\noc rsh $POD`\n```\n\nFrom within the interactive shell, see what\
-    \ files exist in the application directory.\n\n```\nls -las`\n```\n\nThis will\
+    \ pod.\n\n```\noc rsh $POD\n```\n\nFrom within the interactive shell, see what\
+    \ files exist in the application directory.\n\n```\nls -las\n```\n\nThis will\
     \ yield output similar to:\n\n```\ntotal 80\n 0 drwxrwxr-x. 1 default    root\
     \    52 Oct 24 02:51 .\n 0 drwxrwxr-x. 1 default    root    28 Jun 18 02:10 ..\n\
     \ 4 -rwxrwxr-x. 1 default    root  1454 Jun 18 02:07 app.sh\n 0 drwxrwxr-x. 1\
@@ -78,16 +78,16 @@ challenges:
     44 -rw-r--r--. 1 1000520000 root 44032 Oct 24 02:51 db.sqlite3\n```\n\nLets look\
     \ at how this database file can be copied back to the local machine.\n\nTo confirm\
     \ what directory the file is located in, inside of the container, run:\n\n```\n\
-    pwd`\n```\n\nThis should display:\n\n```\n/opt/app-root/src\n```\n\nTo exit the\
-    \ interactive shell and return to the local machine run:\n\n```\nexit`\n```\n\n\
+    pwd\n```\n\nThis should display:\n\n```\n/opt/app-root/src\n```\n\nTo exit the\
+    \ interactive shell and return to the local machine run:\n\n```\nexit\n```\n\n\
     To copy files from the container to the local machine the ``oc rsync`` command\
     \ can be used.\n\nThe form of the command when copying a single file from the\
     \ container to the local machine is:\n\n```\noc rsync <pod-name>:/remote/dir/filename\
     \ ./local/dir\n```\n\nTo copy the single database file run:\n\n```\noc rsync $POD:/opt/app-root/src/db.sqlite3\
-    \ .`\n```\n\nThis should display output similar to:\n\n```\nreceiving incremental\
+    \ .\n```\n\nThis should display output similar to:\n\n```\nreceiving incremental\
     \ file list\ndb.sqlite3\n\nsent 43 bytes  received 44,129 bytes  88,344.00 bytes/sec\n\
     total size is 44,032  speedup is 1.00\n```\n\nCheck the contents of the current\
-    \ directory by running:\n\n```\nls -las`\n```\n\nand you should see that the local\
+    \ directory by running:\n\n```\nls -las\n```\n\nand you should see that the local\
     \ machine now has a copy of the file.\n\n```\n44 -rw-r--r--  1 root root 44032\
     \ Oct 24 04:15 db.sqlite3\n```\n\nNote that the local directory into which you\
     \ want the file copied must exist. If you didn't want to copy it into the current\
@@ -95,11 +95,11 @@ challenges:
     \ to copying a single file, a directory can also be copied. The form of the command\
     \ when copying a directory to the local machine is:\n\n```\noc rsync <pod-name>:/remote/dir\
     \ ./local/dir\n```\n\nTo copy the ``media`` directory from the container, run:\n\
-    \n```\noc rsync $POD:/opt/app-root/src/media .`\n```\n\nIf you wanted to rename\
+    \n```\noc rsync $POD:/opt/app-root/src/media .\n```\n\nIf you wanted to rename\
     \ the directory when it is being copied, you should create the target directory\
-    \ with the name you want to use first.\n\n```\nmkdir uploads`\n```\n\nand then\
+    \ with the name you want to use first.\n\n```\nmkdir uploads\n```\n\nand then\
     \ to copy the files use the command:\n\n```\noc rsync $POD:/opt/app-root/src/media/.\
-    \ uploads`\n```\n\nTo ensure only the contents of the directory on the container\
+    \ uploads\n```\n\nTo ensure only the contents of the directory on the container\
     \ are copied, and not the directory itself, the remote directory is suffixed with\
     \ ``/.``.\n\nNote that if the target directory contains existing files with the\
     \ same name as a file in the container, the local file will be overwritten. If\
@@ -158,7 +158,7 @@ challenges:
 
     ```
 
-    curl --head http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt`
+    curl --head http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt
 
     ```
 
@@ -172,10 +172,7 @@ challenges:
 
     Disallow: /
 
-    !```
-
-
-    ```
+    !``{{execute}}
 
 
     For the web application being used, it hosts static files out of the ``htdocs``
@@ -185,7 +182,7 @@ challenges:
 
     ```
 
-    oc rsync . $POD:/opt/app-root/src/htdocs --exclude=* --include=robots.txt --no-perms`
+    oc rsync . $POD:/opt/app-root/src/htdocs --exclude=* --include=robots.txt --no-perms
 
     ```
 
@@ -217,7 +214,7 @@ challenges:
 
     ```
 
-    curl http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt`
+    curl http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt
 
     ```
 
@@ -234,7 +231,7 @@ challenges:
 
     ```
 
-    oc rsync . $POD:/opt/app-root/src/htdocs --no-perms`
+    oc rsync . $POD:/opt/app-root/src/htdocs --no-perms
 
     ```
 
@@ -289,7 +286,7 @@ challenges:
 
     ```
 
-    git clone https://github.com/openshift-katacoda/blog-django-py`
+    git clone https://github.com/openshift-katacoda/blog-django-py
 
     ```
 
@@ -324,7 +321,7 @@ challenges:
 
     ```
 
-    oc rsync blog-django-py/. $POD:/opt/app-root/src --no-perms --watch &`
+    oc rsync blog-django-py/. $POD:/opt/app-root/src --no-perms --watch &
 
     ```
 
@@ -339,7 +336,7 @@ challenges:
 
     ```
 
-    jobs`
+    jobs
 
     ```
 
@@ -367,7 +364,7 @@ challenges:
 
     ```
 
-    echo "BLOG_BANNER_COLOR = ''blue''" >> blog-django-py/blog/context_processors.py`
+    echo "BLOG_BANNER_COLOR = ''blue''" >> blog-django-py/blog/context_processors.py
 
     ```
 
@@ -387,7 +384,7 @@ challenges:
 
     ```
 
-    oc rsh $POD kill -HUP 1`
+    oc rsh $POD kill -HUP 1
 
     ```
 
@@ -422,7 +419,7 @@ challenges:
 
     ```
 
-    oc set env deployment/blog MOD_WSGI_RELOAD_ON_CHANGES=1`
+    oc set env deployment/blog MOD_WSGI_RELOAD_ON_CHANGES=1
 
     ```
 
@@ -437,7 +434,7 @@ challenges:
 
     ```
 
-    oc rollout status deployment/blog`
+    oc rollout status deployment/blog
 
     ```
 
@@ -448,7 +445,7 @@ challenges:
 
     ```
 
-    POD=`pod deployment=blog`; echo $POD`
+    POD=`pod deployment=blog`; echo $POD
 
     ```
 
@@ -462,7 +459,7 @@ challenges:
 
     ```
 
-    jobs`
+    jobs
 
     ```
 
@@ -473,7 +470,7 @@ challenges:
 
     ```
 
-    kill -9 %1`
+    kill -9 %1
 
     ```
 
@@ -483,7 +480,7 @@ challenges:
 
     ```
 
-    jobs`
+    jobs
 
     ```
 
@@ -493,7 +490,7 @@ challenges:
 
     ```
 
-    oc rsync blog-django-py/. $POD:/opt/app-root/src --no-perms --watch &`
+    oc rsync blog-django-py/. $POD:/opt/app-root/src --no-perms --watch &
 
     ```
 
@@ -507,7 +504,7 @@ challenges:
 
     ```
 
-    echo "BLOG_BANNER_COLOR = ''green''" >> blog-django-py/blog/context_processors.py`
+    echo "BLOG_BANNER_COLOR = ''green''" >> blog-django-py/blog/context_processors.py
 
     ```
 
@@ -526,7 +523,7 @@ challenges:
 
     ```
 
-    kill -9 %1`
+    kill -9 %1
 
     ```
 
@@ -577,7 +574,7 @@ challenges:
 
     ```
 
-    oc new-app centos/httpd-24-centos7 --name dummy`
+    oc new-app centos/httpd-24-centos7 --name dummy
 
     ```
 
@@ -591,7 +588,7 @@ challenges:
 
     ```
 
-    oc rollout status deployment/dummy`
+    oc rollout status deployment/dummy
 
     ```
 
@@ -606,7 +603,7 @@ challenges:
     ```
 
     oc set volume deployment/dummy --add --name=tmp-mount --claim-name=data --type
-    pvc --claim-size=1G --mount-path /mnt`
+    pvc --claim-size=1G --mount-path /mnt
 
     ```
 
@@ -618,7 +615,7 @@ challenges:
 
     ```
 
-    oc rollout status deployment/dummy`
+    oc rollout status deployment/dummy
 
     ```
 
@@ -628,7 +625,7 @@ challenges:
 
     ```
 
-    oc get pvc`
+    oc get pvc
 
     ```
 
@@ -639,7 +636,7 @@ challenges:
 
     ```
 
-    POD=`pod deployment=dummy`; echo $POD`
+    POD=`pod deployment=dummy`; echo $POD
 
     ```
 
@@ -652,7 +649,7 @@ challenges:
 
     ```
 
-    oc rsync ./ $POD:/mnt --strategy=tar`
+    oc rsync ./ $POD:/mnt --strategy=tar
 
     ```
 
@@ -663,7 +660,7 @@ challenges:
 
     ```
 
-    oc rsh $POD ls -las /mnt`
+    oc rsh $POD ls -las /mnt
 
     ```
 
@@ -675,7 +672,7 @@ challenges:
 
     ```
 
-    oc set volume deployment/dummy --remove --name=tmp-mount`
+    oc set volume deployment/dummy --remove --name=tmp-mount
 
     ```
 
@@ -685,7 +682,7 @@ challenges:
 
     ```
 
-    oc rollout status deployment/dummy`
+    oc rollout status deployment/dummy
 
     ```
 
@@ -695,7 +692,7 @@ challenges:
 
     ```
 
-    POD=`pod deployment=dummy`; echo $POD`
+    POD=`pod deployment=dummy`; echo $POD
 
     ```
 
@@ -707,7 +704,7 @@ challenges:
 
     ```
 
-    oc rsh $POD ls -las /mnt`
+    oc rsh $POD ls -las /mnt
 
     ```
 
@@ -721,7 +718,7 @@ challenges:
     ```
 
     oc set volume deployment/dummy --add --name=tmp-mount --claim-name=data --mount-path
-    /mnt`
+    /mnt
 
     ```
 
@@ -731,7 +728,7 @@ challenges:
 
     ```
 
-    oc rollout status deployment/dummy`
+    oc rollout status deployment/dummy
 
     ```
 
@@ -741,7 +738,7 @@ challenges:
 
     ```
 
-    POD=`pod deployment=dummy`; echo $POD`
+    POD=`pod deployment=dummy`; echo $POD
 
     ```
 
@@ -752,7 +749,7 @@ challenges:
 
     ```
 
-    oc rsh $POD ls -las /mnt`
+    oc rsh $POD ls -las /mnt
 
     ```
 
@@ -764,7 +761,7 @@ challenges:
 
     ```
 
-    oc delete all --selector deployment=dummy`
+    oc delete all --selector deployment=dummy
 
     ```
 
@@ -774,7 +771,7 @@ challenges:
 
     ```
 
-    oc get all --selector deployment=dummy -o name`
+    oc get all --selector deployment=dummy -o name
 
     ```
 
@@ -786,7 +783,7 @@ challenges:
 
     ```
 
-    oc get pvc`
+    oc get pvc
 
     ```
 

@@ -48,20 +48,14 @@ challenges:
 
     cd fedora
 
-    podman pull fedora```
-
-
-    ```
+    podman pull fedora``{{execute}}
 
 
     Now, export the image to a tar, file and extract it:
 
     ``podman save -o fedora.tar fedora
 
-    tar xvf fedora.tar```
-
-
-    ```
+    tar xvf fedora.tar``{{execute}}
 
 
     Finally, let''s take a look at three important parts of the container repository
@@ -86,7 +80,7 @@ challenges:
 
     ```
 
-    cat manifest.json | jq`
+    cat manifest.json | jq
 
     ```
 
@@ -98,7 +92,7 @@ challenges:
     ```
 
     cat $(cat manifest.json | awk -F ''Config'' ''{print $2}'' | awk -F ''["]'' ''{print
-    $3}'') | jq`
+    $3}'') | jq
 
     ```
 
@@ -110,7 +104,7 @@ challenges:
     ```
 
     tar tvf $(cat manifest.json | awk -F ''Layers'' ''{print $2}'' | awk -F ''["]''
-    ''{print $3}'')`
+    ''{print $3}'')
 
     ```
 
@@ -162,18 +156,18 @@ challenges:
     \ \n\nNow, let's start with some experiments. Being the reference implementation\
     \ for the runtime specifiction, runc has the ability to create a very simple spec\
     \ file. Let's create one and take a quick look at the fairly simple set of directives:\n\
-    \n``runc spec\ncat config.json | jq```\n\n```\n\nThe simple file created by runc\
-    \ is a good introduction, but to truly understand the breadth of what a container\
+    \n``runc spec\ncat config.json | jq``{{execute}}\n\nThe simple file created by\
+    \ runc is a good introduction, but to truly understand the breadth of what a container\
     \ engine does, we need to look at a more complex example. Podman has the ability\
     \ to create a container and generate a spec file without actually starting the\
-    \ container:\n\n``podman create --name fedora -t fedora bash\npodman init fedora```\n\
-    \n```\n\nThe \"podman init\" command generates a config.json and we can take a\
-    \ look at it in /var/lib/containers:\n\n``cat $(find /var/lib/containers/ | grep\
-    \  $(podman ps --no-trunc -q | tail -n 1)/userdata/config.json) | jq``{{Execute}}\n\
-    \nTake a minute to browse through the json output. See if you can spot directives\
-    \ which come from the container image, the container engine, and the user.\n\n\
-    Now that we have a basic understanding of the runtime spec file, lets move on\
-    \ to starting a container...\n"
+    \ container:\n\n``podman create --name fedora -t fedora bash\npodman init fedora``{{execute}}\n\
+    \nThe \"podman init\" command generates a config.json and we can take a look at\
+    \ it in /var/lib/containers:\n\n``cat $(find /var/lib/containers/ | grep  $(podman\
+    \ ps --no-trunc -q | tail -n 1)/userdata/config.json) | jq``{{Execute}}\n\nTake\
+    \ a minute to browse through the json output. See if you can spot directives which\
+    \ come from the container image, the container engine, and the user.\n\nNow that\
+    \ we have a basic understanding of the runtime spec file, lets move on to starting\
+    \ a container...\n"
   difficulty: intermediate
   slug: 03-runtime-specification
   tabs:
@@ -214,7 +208,7 @@ challenges:
 
     ```
 
-    rsync -av $(podman mount $(podman create fedora bash))/ /root/fedora/rootfs/`
+    rsync -av $(podman mount $(podman create fedora bash))/ /root/fedora/rootfs/
 
     ```
 
@@ -224,7 +218,7 @@ challenges:
 
     ```
 
-    ls -alh /root/fedora/rootfs`
+    ls -alh /root/fedora/rootfs
 
     ```
 
@@ -236,10 +230,7 @@ challenges:
 
     runc spec -b /root/fedora/
 
-    sed -i ''s/"terminal": true/"terminal": false/'' /root/fedora/config.json```
-
-
-    ```
+    sed -i ''s/"terminal": true/"terminal": false/'' /root/fedora/config.json``{{execute}}
 
 
     Now, we have ourselves a full "bundle" which is a collequial way of referring
@@ -248,7 +239,7 @@ challenges:
 
     ```
 
-    ls -alh /root/fedora`
+    ls -alh /root/fedora
 
     ```
 
@@ -262,7 +253,7 @@ challenges:
 
     ```
 
-    runc create -b /root/fedora/ fedora`
+    runc create -b /root/fedora/ fedora
 
     ```
 
@@ -272,7 +263,7 @@ challenges:
 
     ```
 
-    runc list`
+    runc list
 
     ```
 
@@ -284,7 +275,7 @@ challenges:
 
     ```
 
-    runc exec --tty fedora bash`
+    runc exec --tty fedora bash
 
     ```
 
@@ -295,7 +286,7 @@ challenges:
 
     ```
 
-    ls`
+    ls
 
     ```
 
@@ -305,7 +296,7 @@ challenges:
 
     ```
 
-    exit`
+    exit
 
     ```
 
@@ -317,10 +308,7 @@ challenges:
 
     ``runc delete fedora
 
-    runc list```
-
-
-    ```
+    runc list``{{execute}}
 
 
     In summary, we have learned how to create containers with a terse little program

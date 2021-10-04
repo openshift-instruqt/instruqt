@@ -77,7 +77,7 @@ challenges:
 
     ```
 
-    oc login -u admin -p admin`
+    oc login -u admin -p admin
 
     ```
 
@@ -109,7 +109,7 @@ challenges:
 
     ```
 
-    oc new-project knative-eventing`
+    oc new-project knative-eventing
 
     ```
 
@@ -120,7 +120,7 @@ challenges:
 
     ```
 
-    oc apply -f serverless/eventing.yaml -n knative-eventing`
+    oc apply -f serverless/eventing.yaml -n knative-eventing
 
     ```
 
@@ -131,7 +131,7 @@ challenges:
 
     ```
 
-    oc get pod -w`
+    oc get pod -w
 
     ```
 
@@ -190,9 +190,9 @@ challenges:
     \ it in order to being triggered when events of specific types are available.\
     \ Subscribers of the eventing broker are Knative serving services, that can scale\
     \ down to zero when no events are available for them.\n\n\n\nCreate a new OpenShift\
-    \ project ``camel-knative``:\n```\noc new-project camel-knative`\n```\n\n\nTo\
-    \ enable the eventing broker, we create a default broker in the current namespace\
-    \ using namespace labeling:\n```\noc label namespace camel-knative knative-eventing-injection=enabled`\n\
+    \ project ``camel-knative``:\n```\noc new-project camel-knative\n```\n\n\nTo enable\
+    \ the eventing broker, we create a default broker in the current namespace using\
+    \ namespace labeling:\n```\noc label namespace camel-knative knative-eventing-injection=enabled\n\
     ```\n\nLet go ahead create predictors for market and load the market events\n\n\
     #### Run a prediction algorithms\n\nThe market data feed available in the mesh\
     \ can be now used to create different prediction algorithms that can publish events\
@@ -235,7 +235,7 @@ challenges:
     , \"sell\");\n        return res;\n      }\n      return null;\n    }\n  }\n}\n\
     \n</pre>\n\nRun the following command to start the first predictor:\n\n```\nkamel\
     \ run --name simple-predictor -p predictor.name=simple camel-eventing/Predictor.java\
-    \ -t knative-service.max-scale=1 --logs`\n```\n\nThe command above will deploy\
+    \ -t knative-service.max-scale=1 --logs\n```\n\nThe command above will deploy\
     \ the integration and wait for it to run, then it will show the logs in the console.\n\
     \nYou will see the following log if everything is working correctly.\n```\n[1]\
     \ 2020-10-02 00:09:32.499 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper\
@@ -256,7 +256,7 @@ challenges:
     \ The integration will keep running on the cluster.\n\n\n\n#### Create the second\
     \ prediction algorithms\n\nThe second predictor with more sensitivity called better-predictor,\
     \ in the command line run:\n\n```\nkamel run --name better-predictor -p predictor.name=better\
-    \ -p algorithm.sensitivity=0.0005 camel-eventing/Predictor.java -t knative-service.max-scale=1`\n\
+    \ -p algorithm.sensitivity=0.0005 camel-eventing/Predictor.java -t knative-service.max-scale=1\n\
     ```\n\nYou will be prompted with the following result, but please give a couple\
     \ of minutes for the route to be deployed.\n``integration \"better-predictor\"\
     \ created``\n\nYou can view both predictors from the [Developer Console Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).\n\
@@ -286,9 +286,9 @@ challenges:
     \ throws Exception {\n\n    from(\"knative:event/predictor.simple\")\n      .unmarshal().json()\n\
     \      .log(\"Let's ${body[operation]} at price ${body[value]} immediately!!\"\
     )\n      .setBody().constant(\"\");\n\n  }\n}\n</pre>\n\nTo run it:\n```\nkamel\
-    \ run camel-eventing/Investor.java --logs`\n```\n\nYou will see the following\
-    \ log if everything is working correctly.\n```\n[1] 2020-10-02 00:19:19.308 INFO\
-    \  [main] RuntimeSupport - Apply ContextCustomizer with id=platform-http and type=org.apache.camel.k.http.PlatformHttpServiceContextCustomizer\n\
+    \ run camel-eventing/Investor.java --logs\n```\n\nYou will see the following log\
+    \ if everything is working correctly.\n```\n[1] 2020-10-02 00:19:19.308 INFO \
+    \ [main] RuntimeSupport - Apply ContextCustomizer with id=platform-http and type=org.apache.camel.k.http.PlatformHttpServiceContextCustomizer\n\
     [1] 2020-10-02 00:19:19.335 INFO  [main] VertxPlatformHttpServer - Creating new\
     \ Vert.x instance\n[1] 2020-10-02 00:19:19.685 INFO  [main] ApplicationRuntime\
     \ - Listener org.apache.camel.k.listener.ContextConfigurer@93cf163 executed in\
@@ -320,8 +320,8 @@ challenges:
     \ BTC/USDT data to the broker: ${body}\"\n      - set-header:\n          constant:\
     \ market.btc.usdt\n          name: CE-Type\n      - to: \"knative:event\"\n</pre>\n\
     \nStart the Camel K application\n\n```\nkamel run camel-eventing/market-source.yaml\
-    \ -d camel-jackson`\n```\n\nThe integration will be deployed on the cluster.\n\
-    \nAfter successfully deployed, you will be able to see it in the [Developer Console\
+    \ -d camel-jackson\n```\n\nThe integration will be deployed on the cluster.\n\n\
+    After successfully deployed, you will be able to see it in the [Developer Console\
     \ Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).\n\
     \nWhen the Bitcoin data start floating into the data, all predictor services and\
     \ the investor service will automatically start up.\n\n![startsup](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step3-01-startsup.png)\n"
@@ -357,7 +357,7 @@ challenges:
 
     ```
 
-    kamel delete market-source`
+    kamel delete market-source
 
     ```
 

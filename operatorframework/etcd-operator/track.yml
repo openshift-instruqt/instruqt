@@ -1,6 +1,6 @@
 challenges:
 - assignment: "Let's begin by creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n\n```\n<br>\nCreate the Custom Resource Definition\
+    oc new-project myproject\n```\n`\n```\n<br>\nCreate the Custom Resource Definition\
     \ (CRD) for the Etcd Operator:\n\n```\ncat > etcd-operator-crd.yaml<<EOF\napiVersion:\
     \ apiextensions.k8s.io/v1\nkind: CustomResourceDefinition\nmetadata:\n  name:\
     \ etcdclusters.etcd.database.coreos.com\nspec:\n  group: etcd.database.coreos.com\n\
@@ -8,9 +8,10 @@ challenges:
     \    shortNames:\n    - etcdclus\n    - etcd\n    singular: etcdcluster\n  scope:\
     \ Namespaced\n  version: v1beta2\n  versions:\n  - name: v1beta2\n    schema:\n\
     \      openAPIV3Schema:\n        type: object\n        x-kubernetes-preserve-unknown-fields:\
-    \ true\n    served: true\n    storage: true\nEOF\n```\n\n```\n<br>\n```\noc create\
-    \ -f etcd-operator-crd.yaml\n```\n\n```\n<br>\nVerify the CRD was successfully\
-    \ created.\n\n```\noc get crd etcdclusters.etcd.database.coreos.com\n```\n\n```\n"
+    \ true\n    served: true\n    storage: true\nEOF\n```\n`\n```\n<br>\n```\noc create\
+    \ -f etcd-operator-crd.yaml\n```\n`\n```\n<br>\nVerify the CRD was successfully\
+    \ created.\n\n```\noc get crd etcdclusters.etcd.database.coreos.com\n```\n`\n\
+    ```\n"
   difficulty: basic
   slug: step1
   tabs:
@@ -26,9 +27,9 @@ challenges:
   type: challenge
 - assignment: "Create a dedicated Service Account responsible for running the Etcd\
     \ Operator:\n\n```\ncat > etcd-operator-sa.yaml<<EOF\napiVersion: v1\nkind: ServiceAccount\n\
-    metadata:\n  name: etcd-operator-sa\nEOF\n```\n\n```\n<br>\n```\noc create -f\
-    \ etcd-operator-sa.yaml\n```\n\n```\n<br>\nVerify the Service Account was successfully\
-    \ created:\n\n```\noc get sa\n```\n\n```\n<br>\nCreate the Role that the `etcd-operator-sa`\
+    metadata:\n  name: etcd-operator-sa\nEOF\n```\n`\n```\n<br>\n```\noc create -f\
+    \ etcd-operator-sa.yaml\n```\n`\n```\n<br>\nVerify the Service Account was successfully\
+    \ created:\n\n```\noc get sa\n```\n`\n```\n<br>\nCreate the Role that the `etcd-operator-sa`\
     \ Service Account will need for authorization to perform actions against the Kubernetes\
     \ API:\n\n```\ncat > etcd-operator-role.yaml<<EOF\napiVersion: rbac.authorization.k8s.io/v1\n\
     kind: Role\nmetadata:\n  name: etcd-operator-role\nrules:\n- apiGroups:\n  - etcd.database.coreos.com\n\
@@ -36,17 +37,17 @@ challenges:
     \  - '*'\n- apiGroups:\n  - \"\"\n  resources:\n  - pods\n  - services\n  - endpoints\n\
     \  - persistentvolumeclaims\n  - events\n  verbs:\n  - '*'\n- apiGroups:\n  -\
     \ apps\n  resources:\n  - deployments\n  verbs:\n  - '*'\n- apiGroups:\n  - \"\
-    \"\n  resources:\n  - secrets\n  verbs:\n  - get\nEOF\n```\n\n```\n<br>\n```\n\
-    oc create -f etcd-operator-role.yaml\n```\n\n```\n<br>\nVerify the Role was successfully\
-    \ created:\n\n```\noc get roles\n```\n\n```\n<br>\nCreate the RoleBinding to bind\
-    \ the `etcd-operator-role` Role to the `etcd-operator-sa` Service Account:\n\n\
-    ```\ncat > etcd-operator-rolebinding.yaml<<EOF\napiVersion: rbac.authorization.k8s.io/v1\n\
+    \"\n  resources:\n  - secrets\n  verbs:\n  - get\nEOF\n```\n`\n```\n<br>\n```\n\
+    oc create -f etcd-operator-role.yaml\n```\n`\n```\n<br>\nVerify the Role was successfully\
+    \ created:\n\n```\noc get roles\n```\n`\n```\n<br>\nCreate the RoleBinding to\
+    \ bind the `etcd-operator-role` Role to the `etcd-operator-sa` Service Account:\n\
+    \n```\ncat > etcd-operator-rolebinding.yaml<<EOF\napiVersion: rbac.authorization.k8s.io/v1\n\
     kind: RoleBinding\nmetadata:\n  name: etcd-operator-rolebinding\nroleRef:\n  apiGroup:\
     \ rbac.authorization.k8s.io\n  kind: Role\n  name: etcd-operator-role\nsubjects:\n\
     - kind: ServiceAccount\n  name: etcd-operator-sa\n  namespace: myproject\nEOF\n\
-    ```\n\n```\n<br>\n```\noc create -f etcd-operator-rolebinding.yaml\n```\n\n```\n\
-    <br>\nVerify the RoleBinding was successfully created:\n\n```\noc get rolebindings\n\
-    ```\n\n```"
+    ```\n`\n```\n<br>\n```\noc create -f etcd-operator-rolebinding.yaml\n```\n`\n\
+    ```\n<br>\nVerify the RoleBinding was successfully created:\n\n```\noc get rolebindings\n\
+    ```\n`\n```"
   difficulty: basic
   slug: step2
   tabs:
@@ -72,15 +73,15 @@ challenges:
     \            apiVersion: v1\n              fieldPath: metadata.name\n        image:\
     \ quay.io/coreos/etcd-operator@sha256:c0301e4686c3ed4206e370b42de5a3bd2229b9fb4906cf85f3f30650424abec2\n\
     \        imagePullPolicy: IfNotPresent\n        name: etcd-operator\n      serviceAccountName:\
-    \ etcd-operator-sa\nEOF\n```\n\n```\n<br>\n```\noc create -f etcd-operator-deployment.yaml\
-    \ \n```\n\n```\n<br>\nVerify the Etcd Operator Deployment was successfully created:\n\
-    \n```\noc get deploy\n```\n\n```\n<br>\nVerify the Etcd Operator Deployment pods\
-    \ are running:\n\n```\noc get pods\n```\n\n```\n<br>\nOpen a new terminal window\
+    \ etcd-operator-sa\nEOF\n```\n`\n```\n<br>\n```\noc create -f etcd-operator-deployment.yaml\
+    \ \n```\n`\n```\n<br>\nVerify the Etcd Operator Deployment was successfully created:\n\
+    \n```\noc get deploy\n```\n`\n```\n<br>\nVerify the Etcd Operator Deployment pods\
+    \ are running:\n\n```\noc get pods\n```\n`\n```\n<br>\nOpen a new terminal window\
     \ to follow Etcd Operator logs in real-time:\n\n```\nexport ETCD_OPERATOR_POD=$(oc\
     \ get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}')\noc\
-    \ logs $ETCD_OPERATOR_POD -f\n```\n\n```\n<br>\nObserve the leader-election lease\
+    \ logs $ETCD_OPERATOR_POD -f\n```\n`\n```\n<br>\nObserve the leader-election lease\
     \ on the Etcd Operator Endpoint:\n\n```\noc get endpoints etcd-operator -o yaml\n\
-    ```\n\n```\n<br>\n"
+    ```\n`\n```\n<br>\n"
   difficulty: basic
   slug: step3
   tabs:
@@ -95,16 +96,16 @@ challenges:
   title: Creating the Etcd Operator Deployment
   type: challenge
 - assignment: "Ensure you are currently scoped to the `myproject` Namespace:\n\n```\n\
-    oc project myproject\n```\n\n```\n\nCreate an Etcd cluster by referring to the\
+    oc project myproject\n```\n`\n```\n\nCreate an Etcd cluster by referring to the\
     \ new Custom Resource, `EtcdCluster`, defined in the Custom Resource Definition\
     \ on Step 1:\n\n```\ncat > etcd-operator-cr.yaml<<EOF\napiVersion: etcd.database.coreos.com/v1beta2\n\
     kind: EtcdCluster\nmetadata:\n  name: example-etcd-cluster\nspec:\n  size: 3\n\
-    \  version: 3.1.10\nEOF\n```\n\n```\n<br>\n```\noc create -f etcd-operator-cr.yaml\n\
-    ```\n\n```\n<br>\nVerify the cluster object was created:\n\n```\noc get etcdclusters\n\
-    ```\n\n```\n<br>\nWatch the pods in the Etcd cluster get created:\n\n```\noc get\
-    \ pods -l etcd_cluster=example-etcd-cluster -w\n```\n\n```\n<br>\nVerify the cluster\
-    \ has been exposed via a ClusterIP service:\n\n```\noc get services -l etcd_cluster=example-etcd-cluster\n\
-    ```\n\n```\n<br>\n"
+    \  version: 3.1.10\nEOF\n```\n`\n```\n<br>\n```\noc create -f etcd-operator-cr.yaml\n\
+    ```\n`\n```\n<br>\nVerify the cluster object was created:\n\n```\noc get etcdclusters\n\
+    ```\n`\n```\n<br>\nWatch the pods in the Etcd cluster get created:\n\n```\noc\
+    \ get pods -l etcd_cluster=example-etcd-cluster -w\n```\n`\n```\n<br>\nVerify\
+    \ the cluster has been exposed via a ClusterIP service:\n\n```\noc get services\
+    \ -l etcd_cluster=example-etcd-cluster\n```\n`\n```\n<br>\n"
   difficulty: basic
   slug: step4
   tabs:
@@ -120,14 +121,15 @@ challenges:
   type: challenge
 - assignment: "Let's now create another pod and attempt to connect to the etcd cluster\
     \ via `etcdctl`:\n\n```\noc run etcdclient --image=busybox busybox --restart=Never\
-    \ -- /usr/bin/tail -f /dev/null\n```\n\n```\n<br>\nAccess the pod:\n\n``` \noc\
-    \ rsh etcdclient\n```\n\n```\n<br>\n\nInstall the Etcd Client:\n\n```\nwget https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz\n\
+    \ -- /usr/bin/tail -f /dev/null\n```\n`\n```\n<br>\nAccess the pod:\n\n``` \n\
+    oc rsh etcdclient\n```\n`\n```\n<br>\n\nInstall the Etcd Client:\n\n```\nwget\
+    \ https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz\n\
     tar -xvf etcd-v3.1.4-linux-amd64.tar.gz\ncp etcd-v3.1.4-linux-amd64/etcdctl .\n\
-    ```\n\n```\n<br>\nSet the etcd version and endpoint variables:\n\n```\nexport\
+    ```\n`\n```\n<br>\nSet the etcd version and endpoint variables:\n\n```\nexport\
     \ ETCDCTL_API=3\nexport ETCDCTL_ENDPOINTS=example-etcd-cluster-client:2379\n```\n\
-    \n```\n<br>\nAttempt to write a key/value into the Etcd cluster:\n\n```\n./etcdctl\
-    \ put operator sdk\n./etcdctl get operator\n```\n\n```\n<br>\nExit out of the\
-    \ client pod:\n\n```\nexit\n```\n\n```\n<br>\n"
+    `\n```\n<br>\nAttempt to write a key/value into the Etcd cluster:\n\n```\n./etcdctl\
+    \ put operator sdk\n./etcdctl get operator\n```\n`\n```\n<br>\nExit out of the\
+    \ client pod:\n\n```\nexit\n```\n`\n```\n<br>\n"
   difficulty: basic
   slug: step5
   tabs:
@@ -153,6 +155,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -171,6 +174,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -202,6 +206,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -230,6 +235,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -244,6 +250,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 
@@ -258,6 +265,7 @@ challenges:
 
     ```
 
+    `
 
     ```
 

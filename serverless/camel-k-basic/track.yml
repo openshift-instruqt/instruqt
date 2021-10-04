@@ -33,7 +33,7 @@ challenges:
 
     ```
 
-    oc login -u admin -p admin`
+    oc login -u admin -p admin
 
     ```
 
@@ -58,7 +58,7 @@ challenges:
 
     ```
 
-    oc new-project camel-basic`
+    oc new-project camel-basic
 
     ```
 
@@ -68,7 +68,7 @@ challenges:
 
     ```
 
-    oc apply -f /opt/operator-install.yaml -n camel-basic`
+    oc apply -f /opt/operator-install.yaml -n camel-basic
 
     ```
 
@@ -100,7 +100,7 @@ challenges:
     \ in the folder, Camel K will figure it out, and inject it during the build. So\
     \ all you need is to JUST write your application. In this case, the Kamel binary\
     \ will push it to the cluster and the operator will do all the tedious footworks\
-    \ for you.\n\n```\nkamel run camel-basic/Basic.java --dev`\n```\n\nWait for the\
+    \ for you.\n\n```\nkamel run camel-basic/Basic.java --dev\n```\n\nWait for the\
     \ integration to be running (you should see the logs streaming in the terminal\
     \ window).\n```\nintegration \"basic\" created\nProgress: integration \"basic\"\
     \ in phase Initialization\nIntegrationPlatformAvailable for Integration basic:\
@@ -202,7 +202,7 @@ challenges:
     \ *chair\n\n# Marker to identify priority items\npriority-marker=*\n</pre>\n\n\
     To run the integration, we should link the integration to the property file providing\
     \ configuration for it:\n\n```\nkamel run camel-basic/Routing.java --property-file\
-    \  camel-basic/routing.properties --dev`\n```\nOnce it started. You can find the\
+    \  camel-basic/routing.properties --dev\n```\nOnce it started. You can find the\
     \ pod running this Routing application in the terminal.\n\n```\n[1] 2020-04-17\
     \ 03:35:40.528 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard\
     \ item: door\n[1] 2020-04-17 03:35:43.532 INFO  [Camel (camel-k) thread #1 - timer://java]\
@@ -251,7 +251,7 @@ challenges:
 
     ```
 
-    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties`
+    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties
 
     ```
 
@@ -262,7 +262,7 @@ challenges:
 
     ```
 
-    oc get cronjob`
+    oc get cronjob
 
     ```
 
@@ -288,7 +288,7 @@ challenges:
 
     ```
 
-    oc get pod -w`
+    oc get pod -w
 
     ```
 
@@ -300,7 +300,7 @@ challenges:
 
     ```
 
-    kamel log routing`
+    kamel log routing
 
     ```
 
@@ -321,7 +321,7 @@ challenges:
     ```
 
     kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties
-    -t cron.enabled=false`
+    -t cron.enabled=false
 
     ```
 
@@ -337,7 +337,7 @@ challenges:
 
     ```
 
-    kamel log routing`
+    kamel log routing
 
     ```
 

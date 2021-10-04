@@ -14,7 +14,7 @@ challenges:
     \  \n    </dependency>\n`\n\nYou may notice that there is no `<version>` tag here.\
     \ That's because the version numbers are managed and automatically derived by\
     \ the BOM mentioned in the previous trainings. \n\n**2. Test the application locally**\n\
-    \nRun the application by executing the following command:\n\n```\nmvn spring-boot:run`\n\
+    \nRun the application by executing the following command:\n\n```\nmvn spring-boot:run\n\
     ```\n\nYou should eventually see a log line like `Started Application in 4.497\
     \ seconds (JVM running for 9.785)`. Open the application by clicking on the **Local\
     \ Web Browser** tab or clicking [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/).\
@@ -91,7 +91,7 @@ challenges:
     \ last segment will be captured as the variable `id` which we declare to be a\
     \ Long. This method would therefore be servicing routes like `GET /api/fruits/1`.\n\
     \n**3. Test the service from a web browser locally**\n\nRun the application by\
-    \ executing the below command:\n\n```\nmvn spring-boot:run`\n```\n\nWhen the console\
+    \ executing the below command:\n\n```\nmvn spring-boot:run\n```\n\nWhen the console\
     \ reports that Spring is up and running navigate to [the new REST API](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/api/fruits).\
     \ You should see something like this in your browser:\n\n```json\n[{\"name\":\"\
     Cherry\"},{\"name\":\"Apple\"},{\"name\":\"Banana\"}]\n```\n\nThese values are\
@@ -118,7 +118,7 @@ challenges:
     \ We can then do whatever we need to do with the Java Object (in this case - save\
     \ it off). We have omitted input checking for brevity but always remember to sanitize\
     \ your inputs in real applications!\n\nRun the application again by executing\
-    \ the ```\nmvn spring-boot:run`\n``` command. This time we will use the included\
+    \ the ```\nmvn spring-boot:run\n``` command. This time we will use the included\
     \ [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
     \ to POST new Fruits to the application. Add a Fruit name into the `Add a Fruit`\
     \ text box and click the `Save` button. If all is well it should show up in the\
@@ -136,7 +136,7 @@ challenges:
     \ routes like `PUT /api/fruits/1`. The route defines the ID being updated and\
     \ the `@RequestBody`, just like in the POST mapping, contains the JSON payload\
     \ for the Fruit change. \n\nRun the application again by executing the ```\nmvn\
-    \ spring-boot:run`\n``` command. Again we will use the included [web application](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
+    \ spring-boot:run\n``` command. Again we will use the included [web application](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
     \ to edit existing Fruits with a HTTP PUT to the application. Click the `Edit`\
     \ button on one of the Fruits. It's name will populate the `Add a Fruit` text\
     \ box. Change it to something else and click the `Save` button. If all is well\
@@ -150,7 +150,7 @@ challenges:
     \        public void delete(@PathVariable(\"id\") Long id) {\n            repository.deleteById(id);\n\
     \        }\n</pre>\n\nWe are again utilizing a route segment to specify an ID\
     \ in the route. Thus this handler will handle routes like `DELETE /api/fruits/1`.\
-    \ \n\nRun the application once more by executing the ```\nmvn spring-boot:run`\n\
+    \ \n\nRun the application once more by executing the ```\nmvn spring-boot:run\n\
     ``` command. This time we will use the included [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
     \ to DELETE Fruits from the application. Click the `Remove` button next to any\
     \ of the Fruit entries. If all is well it should remove that Fruit from the List.\n\
@@ -185,22 +185,22 @@ challenges:
     \ a friendly interface to work with applications deployed to the platform. \n\n\
     **1. Login to the OpenShift Container Platform**\n\nThis sandbox has already authenticated\
     \ you to OpenShift. To validate, you will use the `oc whoami` command:\n\n```\n\
-    oc whoami`\n```\n\nThen you'll create the project:\n\n```\noc new-project dev\
-    \ --display-name=\"Dev - Spring Boot App\"`\n```\n\nNow create a database:\n\n\
-    ``oc new-app -e POSTGRESQL_USER=dev \\\n             -e POSTGRESQL_PASSWORD=secret\
-    \ \\\n             -e POSTGRESQL_DATABASE=my_data \\\n             openshift/postgresql:12-el8\
-    \ \\\n             --name=my-database```\n\n```\n\nOur application knows how to\
-    \ interact with the database because you defined the properties in the ``src/main/resources/application-openshift.properties``{{open}}\
+    oc whoami\n```\n\nThen you'll create the project:\n\n```\noc new-project dev --display-name=\"\
+    Dev - Spring Boot App\"\n```\n\nNow create a database:\n\n``oc new-app -e POSTGRESQL_USER=dev\
+    \ \\\n             -e POSTGRESQL_PASSWORD=secret \\\n             -e POSTGRESQL_DATABASE=my_data\
+    \ \\\n             openshift/postgresql:12-el8 \\\n             --name=my-database``{{execute}}\n\
+    \nOur application knows how to interact with the database because you defined\
+    \ the properties in the ``src/main/resources/application-openshift.properties``{{open}}\
     \ file. You can see below that the URL, username, password, and driver for the\
     \ database have been supplied.\n```\nspring.datasource.url=jdbc:postgresql://${MY_DATABASE_SERVICE_HOST}:${MY_DATABASE_SERVICE_PORT}/my_data\n\
     spring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\n\
     spring.datasource.driver-class-name=org.postgresql.Driver\nspring.jpa.hibernate.ddl-auto=create\n\
     ```\nRun the following command to deploy the application to OpenShift:\n\n```\n\
-    mvn package oc:deploy -Popenshift -DskipTests`\n```\n\nThis step may take some\
+    mvn package oc:deploy -Popenshift -DskipTests\n```\n\nThis step may take some\
     \ time to do the Maven build and the OpenShift deployment. After the build completes\
     \ you can verify that everything is started by running the following command:\n\
-    \n```\noc rollout status dc/spring-rest-services`\n```\n\n\nAfter the rollout\
-    \ is complete you can go to the OpenShift web console, login with **admin**/**admin**\
+    \n```\noc rollout status dc/spring-rest-services\n```\n\n\nAfter the rollout is\
+    \ complete you can go to the OpenShift web console, login with **admin**/**admin**\
     \ credentials, select **dev** project and find the route to your application under\
     \ **Routes**. \n\n![Route from Web Console](/openshift/assets/middleware/rhoar-spring-rest-services/route.png)\n\
     \nYou can also click [here](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/fruits)\

@@ -206,7 +206,7 @@ challenges:
     \ PEOPLE_URL=http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com;\
     \ echo \"export PEOPLE_URL='$PEOPLE_URL'\" >> ~/.bashrc\n```\n\n# Remote Dev Connection\n\
     \nNow we are ready to run our in dev mode and connect it to the remote application.\
-    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL``\n\
+    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL\n\
     ```\n\nYou should see a bunch of log output including:\n\n```console\nINFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient]\
     \ (Remote dev client thread) Connected to remote server\n```\n\nYour locally running\
     \ Quarkus app is now connected to the remote side running on OpenShift, and changes\

@@ -10,14 +10,14 @@ challenges:
     \ by a cluster admin.\n\nBefore creating any applications, it is recommended you\
     \ login as a distinct\nuser. This will be required if you want to log in to the\
     \ web console and\nuse it.\n\nTo login to the OpenShift cluster from the _Terminal_\
-    \ run:\n\n```\noc login -u admin -p admin`\n```\n\nThis will log you in using\
-    \ the credentials:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\n\
-    Use the same credentials to log into the web console.\nFor simplicity we are logging\
+    \ run:\n\n```\noc login -u admin -p admin\n```\n\nThis will log you in using the\
+    \ credentials:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\nUse\
+    \ the same credentials to log into the web console.\nFor simplicity we are logging\
     \ in here as admin.\n\n## Creating your own Project\n\nTo create a new project\
-    \ called ``myproject`` run the command:\n\n```\noc new-project myproject`\n```\n\
+    \ called ``myproject`` run the command:\n\n```\noc new-project myproject\n```\n\
     \nYou could instead create the project from the web console. If you do this,\n\
     to change to the project from the command line run the command:\n\n```\noc project\
-    \ myproject`\n```\n\nNow that you have created your own project, me move to the\
+    \ myproject\n```\n\nNow that you have created your own project, me move to the\
     \ next\nstep. "
   difficulty: intermediate
   slug: setup
@@ -108,7 +108,7 @@ challenges:
     \ in the OpenShift cluster lets deploy - \n\nAs the cluster is ready now, let's\
     \ try deploying the application using Thoth S2I build process - \n\n```\noc process\
     \ -f https://raw.githubusercontent.com/thoth-station/s2i-example/log-thoth-broken/openshift.yaml\
-    \ | oc apply -f -`\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
+    \ | oc apply -f -\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
     \ on the right, you should see this - \n```\nbuildconfig.build.openshift.io/s2i-example-log\
     \ created\ndeploymentconfig.apps.openshift.io/s2i-example-log created\nimagestream.image.openshift.io/s2i-example-log\
     \ created\nimagestream.image.openshift.io/s2i-thoth-ubi8-py38 created\n```\n\n\
@@ -117,7 +117,7 @@ challenges:
     \ the OpenShift UI in the other tab, under `Builds`, you would see `s2i-example-log`\
     \ and under logs you could inspect the build process. \nYou would see `thamos\
     \ provenance-check` being run your stack. \n\nYou can also check the logs from\
-    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f`\n\
+    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f\n\
     ```\n\nYou should keep a eye for these things in the log - \n - Thoth's configuration\
     \ file after hardware and software discovery (that's the .thoth.yaml being expanded\
     \ from the template.)\n - Asking Thoth for provenance check... (That is where\
@@ -128,7 +128,7 @@ challenges:
     \ \nRight there at line 29, we have the corrupt SHA that was caught during the\
     \ provenance check and we prevented a potentially unsafe package from being uninstalled.\
     \ \n\nNow let's pull down the app you deployed and deploy a version that is not\
-    \ broken - \n\n```\noc delete all --selector 'app=s2i-example-log'`\n```"
+    \ broken - \n\n```\noc delete all --selector 'app=s2i-example-log'\n```"
   difficulty: intermediate
   slug: deploy
   tabs:
@@ -148,7 +148,7 @@ challenges:
     \ we have fixed the corrupt hash here. \nWe have `THOTH_PROVENANCE_CHECK` turned\
     \ on, let's try deploying this version. \n\nYou can deploy the fixed version using\
     \ - \n\n```\noc process -f https://raw.githubusercontent.com/thoth-station/s2i-example/log-thoth-provenance/openshift.yaml\
-    \ | oc apply -f -`\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
+    \ | oc apply -f -\n```\n\n\nNow that you have scheduled it in the katacoda terminal\
     \ on the right, you should see this - \n```\nbuildconfig.build.openshift.io/s2i-example-log\
     \ created\ndeploymentconfig.apps.openshift.io/s2i-example-log created\nimagestream.image.openshift.io/s2i-example-log\
     \ created\nimagestream.image.openshift.io/s2i-thoth-ubi8-py38 created\n```\n\n\
@@ -157,14 +157,14 @@ challenges:
     \ the OpenShift UI in the other tab, under `Builds`, you would see `s2i-example-log`\
     \ and under logs you could inspect the build process. \nYou would see `thamos\
     \ provenance-check` being run your stack. \n\nYou can also check the logs from\
-    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f`\n\
+    \ the terminal. Lets check the logs - \n\n```\noc logs bc/s2i-example-log -f\n\
     ```\n\nYou should keep a eye for these things in the log - \n - Thoth's configuration\
     \ file after hardware and software discovery (that's the .thoth.yaml being expanded\
     \ from the template.)\n - Asking Thoth for provenance check... (That is where\
     \ Thamos interacts with Thoth API)\n\nIf you scroll to the end of it, you should\
     \ see something similar to this - \n![provenance pass](https://raw.githubusercontent.com/saisankargochhayat/katacoda-scenarios/master/thoth-provenance/assets/provenance_pass.png)\n\
     \nProvenance check passed! \\o/\n\nYou can check the logs from the deployed app\
-    \ using - \n\n```\noc logs -f dc/s2i-example-log`\n```"
+    \ using - \n\n```\noc logs -f dc/s2i-example-log\n```"
   difficulty: intermediate
   slug: fix
   tabs:
