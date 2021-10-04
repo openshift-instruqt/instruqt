@@ -1,414 +1,852 @@
-challenges:
-- assignment: "Debezium uses the Apache Kafka Connect framework. Debezium connectors\
-    \ are implemented as Kafka Connector source connectors.\n\nDebezium connectors\
-    \ capture change events from database tables and emit records of those changes\
-    \ to a [Red Hat AMQ Streams](https://developers.redhat.com/blog/2018/10/29/how-to-run-kafka-on-openshift-the-enterprise-kubernetes-with-amq-streams/)\
-    \ Kafka cluster. Applications can consume event records through AMQ Streams.\n\
-    \nIn AMQ Streams, you use Kafka Connect custom Kubernetes resources to deploy\
-    \ and manage the Debezium connectors.\n\n### Logging in to the cluster from the\
-    \ OpenShift CLI\n\nLog in to the OpenShift cluster from a _terminal_ with the\
-    \ following command:\n\n```\noc login -u developer -p developer\n```\n\nThe command\
-    \ logs you in with the following credentials:\n\n* **Username:** ``developer``\n\
-    * **Password:** ``developer``\n\nYou can use the same credentials to log into\
-    \ the web console.\n\n### Creating a namespace\n\nCreate a namespace (project)\
-    \ with the name ``debezium`` for the AMQ Streams Kafka Cluster Operator:\n\n```\n\
-    oc new-project debezium\n```\n\n### Creating a Kafka cluster\n\nNow we'll create\
-    \ a Kafka cluster named `my-cluster` that has one ZooKeeper node and one Kafka\
-    \ broker node.\nTo simplify the deployment, the YAML file that we'll use to create\
-    \ the cluster specifies the use of `ephemeral` storage.\n\n> **Note:**\n    Red\
-    \ Hat AMQ Streams Operators are pre-installed in the cluster. Because we don't\
-    \ have to install the Operators in this scenario,`admin` permissions are not required\
-    \ to complete the steps that follow. In an actual deployment, to make an Operator\
-    \ available from all projects in a cluster, you must be logged in with `admin`\
-    \ permission before you install the Operator.\n\nCreate the Kafka cluster by applying\
-    \ the following command:\n\n```\noc -n debezium apply -f /root/projects/debezium/kafka-cluster.yaml\n\
-    ```\n\n### Checking the status of the Kafka cluster\n\nVerify that the ZooKeeper\
-    \ and Kafka pods are deployed and running in the cluster.\n\nEnter the following\
-    \ command to check the status of the pods:\n\n```\noc -n debezium get pods -w\n\
-    ```\n\nAfter a few minutes, the status of the pods for ZooKeeper, Kafka, and the\
-    \ AMQ Streams Entity Operator change to `running`.\nThe output of the `get pods`\
-    \ command should look similar to the following example:\n\n```bash\nNAME     \
-    \                                    READY  STATUS              \nmy-cluster-zookeeper-0\
-    \                       0/1    ContainerCreating    \nmy-cluster-zookeeper-0 \
-    \                      1/1    Running           \nmy-cluster-kafka-0         \
-    \                  0/2    Pending                   \nmy-cluster-kafka-0     \
-    \                      0/2    ContainerCreating   \nmy-cluster-kafka-0       \
-    \                    0/2    Running           \nmy-cluster-kafka-0           \
-    \                1/2    Running             \nmy-cluster-kafka-0             \
-    \              2/2    Running             \nmy-cluster-entity-operator-57bb594d9d-z4gs6\
-    \  0/2    Pending               \nmy-cluster-entity-operator-57bb594d9d-z4gs6\
-    \  0/2    ContainerCreating   \nmy-cluster-entity-operator-57bb594d9d-z4gs6  0/2\
-    \    Running            \nmy-cluster-entity-operator-57bb594d9d-z4gs6  1/2   \
-    \ Running             \nmy-cluster-entity-operator-57bb594d9d-z4gs6  2/2    Running\
-    \             \n```\n\n> Notice that the Cluster Operator starts the Apache ZooKeeper\
-    \ clusters, as well as the broker nodes and the Entity Operator.\nThe ZooKeeper\
-    \ and Kafka clusters are based in Kubernetes StatefulSets.\n\nEnter <kbd>Ctrl</kbd>+<kbd>C</kbd>\
-    \ to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\n### Verifying that the broker\
-    \ is running\n\nEnter the following command to send a message to the broker that\
-    \ you just deployed:\n\n``echo \"Hello world\" | oc exec -i -c kafka my-cluster-kafka-0\
-    \ -- /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server localhost:9092\
-    \ --topic test``{{execute interrupt}}\n\nThe command does not return any output\
-    \ unless it fails.\nIf you see warning messages in the following format, you can\
-    \ ignore them:\n\n```\n>[DATE] WARN [Producer clientId=console-producer] Error\
-    \ while fetching metadata with correlation id 1 : {test=LEADER_NOT_AVAILABLE}\
-    \ (org.apache.kafka.clients.NetworkClient)\n```\n\nThe error is generated when\
-    \ the producer requests metadata for the topic, because the producer wants to\
-    \ write to a topic and broker partition leader that does not exit yet.\n\nTo verify\
-    \ that the broker is available, enter the following command to retrieve a message\
-    \ from the broker:\n\n```\noc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh\
-    \ --bootstrap-server localhost:9092 --topic test --from-beginning --max-messages\
-    \ 1\n```\n\nThe broker processes the message that you sent in the previous command,\
-    \ and it returns the ``Hello world`` string.\n\nYou have successfully deployed\
-    \ the Kafka broker service and made it available to clients to produce and consume\
-    \ messages.\n\nIn the next step of this scenario, we will deploy a single instance\
-    \ of Debezium.\n"
-  difficulty: intermediate
-  slug: 01-deploying-a-broker
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Deploying a Kafka broker
-  type: challenge
-- assignment: "After you set up a Kafka cluster, deploy Kafka Connect in a custom\
-    \ container image for Debezium.\nThe Kafka Connect service provides a framework\
-    \ for managing Debezium connectors.\n\nYou can create a custom container image\
-    \ by downloading the Debezium MySQL connector archive from the [Red Hat Integration](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?product=red.hat.integration&downloadType=distributions)\
-    \ download site and extracting it to create the directory structure for the connector\
-    \ plugin.\n\nAfter you obtain the connector plugin, you can create and publish\
-    \ a custom Linux container image by running the `docker build` or `podman build`\
-    \ commands with a custom Dockerfile.\n\n>For detailed information about deploying\
-    \ Kafka Connect with Debezium, see the [Debezium documentation](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q1/html-single/getting_started_with_debezium/index#deploying-kafka-connect).\n\
-    \nTo save some time, we have already created an image for you.\n\nTo deploy the\
-    \ Kafka Connect cluster with the custom image, enter the following command:\n\n\
-    ``oc -n debezium apply -f /root/projects/debezium/kafka-connect.yaml``{{execute\
-    \ interrupt}}\n\nThe Kafka Connect node is deployed.\n\nCheck the pod status:\n\
-    \n```\noc get pods -w -l app.kubernetes.io/name=kafka-connect\n```\n\nThe command\
-    \ returns status in the following format:\n\n```bash\nNAME                   \
-    \            READY  STATUS             \ndebezium-connect-6fc5b7f97d-g4h2l  0/1\
-    \    ContainerCreating   \ndebezium-connect-6fc5b7f97d-g4h2l  1/1    Running \
-    \          \n```\nAfter a couple of minutes, the pod status changes to `Running`.\
-    \  \nWhen the **READY** column shows **1/1**, you are ready to proceed.\n\nEnter\
-    \ <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\
-    \n## Verify that Kafka Connect is running with Debezium\n\nAfter the Connect node\
-    \ is running, you can verify that the Debezium connectors are available.\nBecause\
-    \ AMQ Streams lets you manage most components of the Kafka ecosystem as Kubernetes\
-    \ custom resources, you can obtain information about Kafka Connect from the `status`\
-    \ of the `KafkaConnect` resource.\n\nList the connector plugins that are available\
-    \ on the Kafka Connect node:\n\n``oc get kafkaconnect/debezium -o json | jq .status.connectorPlugins``{{execute\
-    \ interrupt}}\n\nThe output shows the type and version for the connector plugins:\n\
-    \n```json\n[\n  {\n    \"class\": \"io.debezium.connector.db2.Db2Connector\",\n\
-    \    \"type\": \"source\",\n    \"version\": \"1.2.4.Final-redhat-00001\"\n  },\n\
-    \  {\n    \"class\": \"io.debezium.connector.mongodb.MongoDbConnector\",\n   \
-    \ \"type\": \"source\",\n    \"version\": \"1.2.4.Final-redhat-00001\"\n  },\n\
-    \  {\n    \"class\": \"io.debezium.connector.mysql.MySqlConnector\",\n    \"type\"\
-    : \"source\",\n    \"version\": \"1.2.4.Final-redhat-00001\"\n  },\n  {\n    \"\
-    class\": \"io.debezium.connector.postgresql.PostgresConnector\",\n    \"type\"\
-    : \"source\",\n    \"version\": \"1.2.4.Final-redhat-00001\"\n  },\n  {\n    \"\
-    class\": \"io.debezium.connector.sqlserver.SqlServerConnector\",\n    \"type\"\
-    : \"source\",\n    \"version\": \"1.2.4.Final-redhat-00001\"\n  }\n  ...\n]\n\
-    ```\n\n> Note: The output shown is formatted to improve readability\n\nThe Debezium\
-    \ `MySqlConnector` connector is now available for use on the Connect node.\n\n\
-    You have successfully deployed a Kafka Connect node and configured it to contain\
-    \ Debezium.\n\nIn the next step of this scenario, we will finish the deployment\
-    \ by creating a connection between the MySQL database source and Kafka Connect.\n"
-  difficulty: intermediate
-  slug: 02-deploying-a-kafka-connect
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Deploying Kafka Connect with Debezium
-  type: challenge
-- assignment: "Our final step is to create a link between Debezium and a MySQL database\
-    \ source.\n\nAs we mentioned in the previous step, we use AMQ Streams custom resources\
-    \ to interact with the Kafka Connect node.\n\nSo let's create a `KafkaConnector`\
-    \ custom resource that will register a MySQL source database to the Debezium MySQL\
-    \ connector.\n\n### Create a KafkaConnector resource\n\nWe'll use the following\
-    \ registration resource, which is included in the scenario environment: `kafka-connector.yaml`{{open}}.\n\
-    \nRegister the database source:\n\n``oc -n debezium apply -f /root/projects/debezium/kafka-connector.yaml``{{execute\
-    \ interrupt}}\n\nCheck the Kafka Connect log file to verify that the registration\
-    \ succeeded and Debezium started:\n\n```\noc logs -f deploy/debezium-connect\n\
-    ```\n\nConnection to the database is confirmed in the output as `Connected to\
-    \ mysql.default.svc:3306`:\n\n```bash\n...\n2020-11-19 22:44:19,632 INFO Transitioning\
-    \ from the snapshot reader to the binlog reader (io.debezium.connector.mysql.ChainedReader)\
-    \ [task-thread-debezium-connector-0]\n2020-11-19 22:44:19,662 INFO Creating thread\
-    \ debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads)\
-    \ [task-thread-debezium-connector-0]\n2020-11-19 22:44:19,667 INFO Creating thread\
-    \ debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads)\
-    \ [blc-mysql.default.svc:3306]\nNov 19, 2020 10:44:19 PM com.github.shyiko.mysql.binlog.BinaryLogClient\
-    \ connect\nINFO: Connected to mysql.default.svc:3306 at mysql-bin.000003/154 (sid:184054,\
-    \ cid:5)\n2020-11-19 22:44:19,817 INFO Connected to MySQL binlog at mysql.default.svc:3306,\
-    \ starting at binlog file 'mysql-bin.000003', pos=154, skipping 0 events plus\
-    \ 0 rows (io.debezium.connector.mysql.BinlogReader) [blc-mysql.default.svc:3306]\n\
-    2020-11-19 22:44:19,818 INFO Waiting for keepalive thread to start (io.debezium.connector.mysql.BinlogReader)\
-    \ [task-thread-debezium-connector-0]\n2020-11-19 22:44:19,819 INFO Creating thread\
-    \ debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads)\
-    \ [blc-mysql.default.svc:3306]\n2020-11-19 22:44:19,823 INFO Keepalive thread\
-    \ is running (io.debezium.connector.mysql.BinlogReader) [task-thread-debezium-connector-0]\n\
-    ```\n>The output shown is formatted to improve readability.\n\nEnter <kbd>Ctrl</kbd>+<kbd>C</kbd>\
-    \ to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\n### Inspect KafkaTopics\n\
-    \nNow that the database is connected, as changes are committed to the database,\
-    \ Debezium emits change event messages to Kafka topics.\n\nList the topics that\
-    \ Debezium has created:\n\n``oc get kafkatopics``{{execute interrupt}}\n\nThe\
-    \ output shows us the topics that correspond to tables in the database:\n\n```bash\n\
-    NAME                                                                         \
-    \          PARTITIONS   REPLICATION FACTOR\nconsumer-offsets---84e7a678d08f4bd226872e5cdd4eb527fadc1c6a\
-    \                            50           1\ndbserver-mysql                  \
-    \                                                       1            1\ndbserver-mysql.inventory.addresses\
-    \                                                     1            1\ndbserver-mysql.inventory.customers\
-    \                                                     1            1\ndbserver-mysql.inventory.geom\
-    \                                                          1            1\ndbserver-mysql.inventory.orders\
-    \                                                        1            1\ndbserver-mysql.inventory.products\
-    \                                                      1            1\ndbserver-mysql.inventory.products-on-hand---326f249c4c062fa00e3ec95752c453df16be9264\
-    \   1            1\ndebezium-cluster-configs                                 \
-    \                              1            1\ndebezium-cluster-offsets      \
-    \                                                         25           1\ndebezium-cluster-status\
-    \                                                                5           \
-    \ 1\nmysql.schema-changes.inventory                                          \
-    \               1            1\ntest                                         \
-    \                                          1            1\n```\n\n> Remember that\
-    \ AMQ Streams Operators also manage the topics of the Apache Kafka ecosystem.\n\
-    \n### Verify that data is emitted from MySQL to Kafka\n\nNow let's check the contents\
-    \ of the `customers` table in MySQL.\n\nDisplay the source table:\n\n```\noc -n\
-    \ default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD\
-    \ -e \"SELECT * from customers\" inventory'\n```\n\nThe command returns the contents\
-    \ of the `customers` table:\n\n```bash\nmysql: [Warning] Using a password on the\
-    \ command line interface can be insecure.\n+------+------------+-----------+-----------------------+\n\
-    | id   | first_name | last_name | email                 |\n+------+------------+-----------+-----------------------+\n\
-    | 1001 | Sally      | Thomas    | sally.thomas@acme.com |\n| 1002 | George   \
-    \  | Bailey    | gbailey@foobar.com    |\n| 1003 | Edward     | Walker    | ed@walker.com\
-    \         |\n| 1004 | Anne       | Kretchmar | annek@noanswer.org    |\n+------+------------+-----------+-----------------------+\n\
-    ```\n\nThe topic `dbserver-mysql.inventory.customers` on the Kafka broker contains\
-    \ messages that represent the data change events from this table in [Debezium\
-    \ change event format](http://debezium.io/docs/configuration/event-flattening/)\n\
-    \nLet's look at the messages in the topic:\n\n```\noc exec -c kafka my-cluster-kafka-0\
-    \ -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092\
-    \ --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 4\
-    \ | jq\n```\n\nFrom the output, you can see the change events for the table:\n\
-    \n```json\n...\n{\n  \"schema\": {\n    \"type\": \"struct\",\n    \"fields\"\
-    : [\n      {\n        \"type\": \"struct\",\n        \"fields\": [\n         \
-    \ {\n            \"type\": \"int32\",\n            \"optional\": false,\n    \
-    \        \"field\": \"id\"\n          },\n          {\n            \"type\": \"\
-    string\",\n            \"optional\": false,\n            \"field\": \"first_name\"\
-    \n          },\n          {\n            \"type\": \"string\",\n            \"\
-    optional\": false,\n            \"field\": \"last_name\"\n          },\n     \
-    \     {\n            \"type\": \"string\",\n            \"optional\": false,\n\
-    \            \"field\": \"email\"\n          }\n        ],\n        \"optional\"\
-    : true,\n        \"name\": \"dbserver_mysql.inventory.customers.Value\",\n   \
-    \     \"field\": \"before\"\n      },\n      {\n        \"type\": \"struct\",\n\
-    \        \"fields\": [\n          {\n            \"type\": \"int32\",\n      \
-    \      \"optional\": false,\n            \"field\": \"id\"\n          },\n   \
-    \       {\n            \"type\": \"string\",\n            \"optional\": false,\n\
-    \            \"field\": \"first_name\"\n          },\n          {\n          \
-    \  \"type\": \"string\",\n            \"optional\": false,\n            \"field\"\
-    : \"last_name\"\n          },\n          {\n            \"type\": \"string\",\n\
-    \            \"optional\": false,\n            \"field\": \"email\"\n        \
-    \  }\n        ],\n        \"optional\": true,\n        \"name\": \"dbserver_mysql.inventory.customers.Value\"\
-    ,\n        \"field\": \"after\"\n      },\n      {\n        \"type\": \"struct\"\
-    ,\n        \"fields\": [\n          {\n            \"type\": \"string\",\n   \
-    \         \"optional\": false,\n            \"field\": \"version\"\n         \
-    \ },\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : false,\n            \"field\": \"connector\"\n          },\n          {\n  \
-    \          \"type\": \"string\",\n            \"optional\": false,\n         \
-    \   \"field\": \"name\"\n          },\n          {\n            \"type\": \"int64\"\
-    ,\n            \"optional\": false,\n            \"field\": \"ts_ms\"\n      \
-    \    },\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : true,\n            \"name\": \"io.debezium.data.Enum\",\n            \"version\"\
-    : 1,\n            \"parameters\": {\n              \"allowed\": \"true,last,false\"\
-    \n            },\n            \"default\": \"false\",\n            \"field\":\
-    \ \"snapshot\"\n          },\n          {\n            \"type\": \"string\",\n\
-    \            \"optional\": false,\n            \"field\": \"db\"\n          },\n\
-    \          {\n            \"type\": \"string\",\n            \"optional\": true,\n\
-    \            \"field\": \"table\"\n          },\n          {\n            \"type\"\
-    : \"int64\",\n            \"optional\": false,\n            \"field\": \"server_id\"\
-    \n          },\n          {\n            \"type\": \"string\",\n            \"\
-    optional\": true,\n            \"field\": \"gtid\"\n          },\n          {\n\
-    \            \"type\": \"string\",\n            \"optional\": false,\n       \
-    \     \"field\": \"file\"\n          },\n          {\n            \"type\": \"\
-    int64\",\n            \"optional\": false,\n            \"field\": \"pos\"\n \
-    \         },\n          {\n            \"type\": \"int32\",\n            \"optional\"\
-    : false,\n            \"field\": \"row\"\n          },\n          {\n        \
-    \    \"type\": \"int64\",\n            \"optional\": true,\n            \"field\"\
-    : \"thread\"\n          },\n          {\n            \"type\": \"string\",\n \
-    \           \"optional\": true,\n            \"field\": \"query\"\n          }\n\
-    \        ],\n        \"optional\": false,\n        \"name\": \"io.debezium.connector.mysql.Source\"\
-    ,\n        \"field\": \"source\"\n      },\n      {\n        \"type\": \"string\"\
-    ,\n        \"optional\": false,\n        \"field\": \"op\"\n      },\n      {\n\
-    \        \"type\": \"int64\",\n        \"optional\": true,\n        \"field\"\
-    : \"ts_ms\"\n      },\n      {\n        \"type\": \"struct\",\n        \"fields\"\
-    : [\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : false,\n            \"field\": \"id\"\n          },\n          {\n         \
-    \   \"type\": \"int64\",\n            \"optional\": false,\n            \"field\"\
-    : \"total_order\"\n          },\n          {\n            \"type\": \"int64\"\
-    ,\n            \"optional\": false,\n            \"field\": \"data_collection_order\"\
-    \n          }\n        ],\n        \"optional\": true,\n        \"field\": \"\
-    transaction\"\n      }\n    ],\n    \"optional\": false,\n    \"name\": \"dbserver_mysql.inventory.customers.Envelope\"\
-    \n  },\n  \"payload\": {\n    \"before\": null,\n    \"after\": {\n      \"id\"\
-    : 1004,\n      \"first_name\": \"Anne\",\n      \"last_name\": \"Kretchmar\",\n\
-    \      \"email\": \"annek@noanswer.org\"\n    },\n    \"source\": {\n      \"\
-    version\": \"1.2.4.Final-redhat-00001\",\n      \"connector\": \"mysql\",\n  \
-    \    \"name\": \"dbserver-mysql\",\n      \"ts_ms\": 0,\n      \"snapshot\": \"\
-    true\",\n      \"db\": \"inventory\",\n      \"table\": \"customers\",\n     \
-    \ \"server_id\": 0,\n      \"gtid\": null,\n      \"file\": \"mysql-bin.000003\"\
-    ,\n      \"pos\": 154,\n      \"row\": 0,\n      \"thread\": null,\n      \"query\"\
-    : null\n    },\n    \"op\": \"c\",\n    \"ts_ms\": 1605824079863,\n    \"transaction\"\
-    : null\n  }\n}\nProcessed a total of 4 messages\n```\n\n>The output shown is formatted\
-    \ to improve readability.\n\nNow, let's add a new customer record to the table:\n\
-    \n```\noc -n default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER\
-    \ -p$MYSQL_PASSWORD -e \"INSERT INTO customers VALUES(default,\\\"John\\\",\\\"\
-    Doe\\\",\\\"john.doe@example.org\\\")\" inventory'\n```\n\nAfter we add the record\
-    \ to the database, Debezium emits a new message to the associated topic.\n\nView\
-    \ the messages in the topic again:\n\n```\noc exec -c kafka my-cluster-kafka-0\
-    \ -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092\
-    \ --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 5\
-    \ | jq\n```\n\nThe command returns output that includes the newly added record\
-    \ for the user _John Doe_:\n\n```json\n...\n{\n  \"schema\": {\n    \"type\":\
-    \ \"struct\",\n    \"fields\": [\n      {\n        \"type\": \"struct\",\n   \
-    \     \"fields\": [\n          {\n            \"type\": \"int32\",\n         \
-    \   \"optional\": false,\n            \"field\": \"id\"\n          },\n      \
-    \    {\n            \"type\": \"string\",\n            \"optional\": false,\n\
-    \            \"field\": \"first_name\"\n          },\n          {\n          \
-    \  \"type\": \"string\",\n            \"optional\": false,\n            \"field\"\
-    : \"last_name\"\n          },\n          {\n            \"type\": \"string\",\n\
-    \            \"optional\": false,\n            \"field\": \"email\"\n        \
-    \  }\n        ],\n        \"optional\": true,\n        \"name\": \"dbserver_mysql.inventory.customers.Value\"\
-    ,\n        \"field\": \"before\"\n      },\n      {\n        \"type\": \"struct\"\
-    ,\n        \"fields\": [\n          {\n            \"type\": \"int32\",\n    \
-    \        \"optional\": false,\n            \"field\": \"id\"\n          },\n \
-    \         {\n            \"type\": \"string\",\n            \"optional\": false,\n\
-    \            \"field\": \"first_name\"\n          },\n          {\n          \
-    \  \"type\": \"string\",\n            \"optional\": false,\n            \"field\"\
-    : \"last_name\"\n          },\n          {\n            \"type\": \"string\",\n\
-    \            \"optional\": false,\n            \"field\": \"email\"\n        \
-    \  }\n        ],\n        \"optional\": true,\n        \"name\": \"dbserver_mysql.inventory.customers.Value\"\
-    ,\n        \"field\": \"after\"\n      },\n      {\n        \"type\": \"struct\"\
-    ,\n        \"fields\": [\n          {\n            \"type\": \"string\",\n   \
-    \         \"optional\": false,\n            \"field\": \"version\"\n         \
-    \ },\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : false,\n            \"field\": \"connector\"\n          },\n          {\n  \
-    \          \"type\": \"string\",\n            \"optional\": false,\n         \
-    \   \"field\": \"name\"\n          },\n          {\n            \"type\": \"int64\"\
-    ,\n            \"optional\": false,\n            \"field\": \"ts_ms\"\n      \
-    \    },\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : true,\n            \"name\": \"io.debezium.data.Enum\",\n            \"version\"\
-    : 1,\n            \"parameters\": {\n              \"allowed\": \"true,last,false\"\
-    \n            },\n            \"default\": \"false\",\n            \"field\":\
-    \ \"snapshot\"\n          },\n          {\n            \"type\": \"string\",\n\
-    \            \"optional\": false,\n            \"field\": \"db\"\n          },\n\
-    \          {\n            \"type\": \"string\",\n            \"optional\": true,\n\
-    \            \"field\": \"table\"\n          },\n          {\n            \"type\"\
-    : \"int64\",\n            \"optional\": false,\n            \"field\": \"server_id\"\
-    \n          },\n          {\n            \"type\": \"string\",\n            \"\
-    optional\": true,\n            \"field\": \"gtid\"\n          },\n          {\n\
-    \            \"type\": \"string\",\n            \"optional\": false,\n       \
-    \     \"field\": \"file\"\n          },\n          {\n            \"type\": \"\
-    int64\",\n            \"optional\": false,\n            \"field\": \"pos\"\n \
-    \         },\n          {\n            \"type\": \"int32\",\n            \"optional\"\
-    : false,\n            \"field\": \"row\"\n          },\n          {\n        \
-    \    \"type\": \"int64\",\n            \"optional\": true,\n            \"field\"\
-    : \"thread\"\n          },\n          {\n            \"type\": \"string\",\n \
-    \           \"optional\": true,\n            \"field\": \"query\"\n          }\n\
-    \        ],\n        \"optional\": false,\n        \"name\": \"io.debezium.connector.mysql.Source\"\
-    ,\n        \"field\": \"source\"\n      },\n      {\n        \"type\": \"string\"\
-    ,\n        \"optional\": false,\n        \"field\": \"op\"\n      },\n      {\n\
-    \        \"type\": \"int64\",\n        \"optional\": true,\n        \"field\"\
-    : \"ts_ms\"\n      },\n      {\n        \"type\": \"struct\",\n        \"fields\"\
-    : [\n          {\n            \"type\": \"string\",\n            \"optional\"\
-    : false,\n            \"field\": \"id\"\n          },\n          {\n         \
-    \   \"type\": \"int64\",\n            \"optional\": false,\n            \"field\"\
-    : \"total_order\"\n          },\n          {\n            \"type\": \"int64\"\
-    ,\n            \"optional\": false,\n            \"field\": \"data_collection_order\"\
-    \n          }\n        ],\n        \"optional\": true,\n        \"field\": \"\
-    transaction\"\n      }\n    ],\n    \"optional\": false,\n    \"name\": \"dbserver_mysql.inventory.customers.Envelope\"\
-    \n  },\n  \"payload\": {\n    \"before\": null,\n    \"after\": {\n      \"id\"\
-    : 1005,\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n    \
-    \  \"email\": \"john.doe@example.org\"\n    },\n    \"source\": {\n      \"version\"\
-    : \"1.2.4.Final-redhat-00001\",\n      \"connector\": \"mysql\",\n      \"name\"\
-    : \"dbserver-mysql\",\n      \"ts_ms\": 1605824880000,\n      \"snapshot\": \"\
-    false\",\n      \"db\": \"inventory\",\n      \"table\": \"customers\",\n    \
-    \  \"server_id\": 223344,\n      \"gtid\": null,\n      \"file\": \"mysql-bin.000003\"\
-    ,\n      \"pos\": 364,\n      \"row\": 0,\n      \"thread\": 7,\n      \"query\"\
-    : null\n    },\n    \"op\": \"c\",\n    \"ts_ms\": 1605824880548,\n    \"transaction\"\
-    : null\n  }\n}\nProcessed a total of 5 messages\n```\n\n## Congratulations\n\n\
-    You have completed a basic deployment of Debezium to stream changes from a database.\n\
-    Now you can add, change, or remove data from MySQL and see how the changes are\
-    \ reflected on the Kafka broker.\n\nSee the Red Hat Integration [Debezium documentation](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q1/html/debezium_user_guide/index)\
-    \ for more tips and details.\n"
-  difficulty: intermediate
-  slug: 03-streaming-data-from-database
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Streaming data from a database
-  type: challenge
-description: "Change data capture, or CDC, is a well-established software design pattern\
-  \ for capturing changes to tables in a database.\nCDC captures row-level changes\
-  \ that occur in database tables and emits event records for those changes to a Kafka\
-  \ data streaming bus.\nYou can configure applications that rely on the data in particular\
-  \ tables to consume the change event streams for those tables.\nConsuming applications\
-  \ read the streams of event records in the order in which the events occurred.\n\
-  \n### What you will learn\n\nIn this scenario you will learn about [Debezium](https://debezium.io/),\
-  \ a component of [Red Hat Integration](https://www.redhat.com/en/products/integration)\
-  \ that provides change data capture for the following supported databases:\n\n*\
-  \ Db2\n* Microsoft SQL Server\n* MongoDB\n* MySQL\n* PostgreSQL\n\nYou will deploy\
-  \ a complete end-to-end solution that captures events from database transaction\
-  \ logs and makes those events available for processing by downstream consumers through\
-  \ an [Apache Kafka](https://kafka.apache.org/) broker.\n\n### What is Debezium?\n\
-  \n![Logo](../../../assets/middleware/debezium-getting-started/debezium-logo.png)\n\
-  \n[Debezium](https://debezium.io/) is a set of distributed services that capture\
-  \ row-level changes in a database.\nDebezium records the change events for each\
-  \ table in a database to a dedicated Kafka topic.\nYou can configure applications\
-  \ to read from the topics that contain change event records for data in specific\
-  \ tables.\nThe consuming applications can then respond to the change events with\
-  \ minimal latency.\nApplications read event records from a topic in the same order\
-  \ in which the events occurred.\n\n A Debezium source connector captures change\
-  \ events from a database and uses the [Apache Kafka](https://kafka.apache.org/)\
-  \ streaming platform to distribute and publish the captured event records to a [Kafka\
-  \ broker](https://kafka.apache.org/documentation/#uses_messaging).\nEach Debezium\
-  \ source connector is built as a plugin for [Kafka Connect](https://kafka.apache.org/documentation/#connect).\n\
-  \nIn this scenario we will deploy a Debezium MySQL connector and use it to set up\
-  \ a data flow between a MySQL database and a Kafka broker.\n"
+slug: kafka-kafka-debezium
+id: vrbjwexemqym
+type: track
+title: Debezium for change data capture
+description: |
+  Change data capture, or CDC, is a well-established software design pattern for capturing changes to tables in a database.
+  CDC captures row-level changes that occur in database tables and emits event records for those changes to a Kafka data streaming bus.
+  You can configure applications that rely on the data in particular tables to consume the change event streams for those tables.
+  Consuming applications read the streams of event records in the order in which the events occurred.
+
+  ### What you will learn
+
+  In this scenario you will learn about [Debezium](https://debezium.io/), a component of [Red Hat Integration](https://www.redhat.com/en/products/integration) that provides change data capture for the following supported databases:
+
+  * Db2
+  * Microsoft SQL Server
+  * MongoDB
+  * MySQL
+  * PostgreSQL
+
+  You will deploy a complete end-to-end solution that captures events from database transaction logs and makes those events available for processing by downstream consumers through an [Apache Kafka](https://kafka.apache.org/) broker.
+
+  ### What is Debezium?
+
+  ![Logo](../../../assets/middleware/debezium-getting-started/debezium-logo.png)
+
+  [Debezium](https://debezium.io/) is a set of distributed services that capture row-level changes in a database.
+  Debezium records the change events for each table in a database to a dedicated Kafka topic.
+  You can configure applications to read from the topics that contain change event records for data in specific tables.
+  The consuming applications can then respond to the change events with minimal latency.
+  Applications read event records from a topic in the same order in which the events occurred.
+
+   A Debezium source connector captures change events from a database and uses the [Apache Kafka](https://kafka.apache.org/) streaming platform to distribute and publish the captured event records to a [Kafka broker](https://kafka.apache.org/documentation/#uses_messaging).
+  Each Debezium source connector is built as a plugin for [Kafka Connect](https://kafka.apache.org/documentation/#connect).
+
+  In this scenario we will deploy a Debezium MySQL connector and use it to set up a data flow between a MySQL database and a Kafka broker.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: kafka-kafka-debezium
-tags:
-- openshift
-title: Debezium for change data capture
-type: track
+challenges:
+- slug: 01-deploying-a-broker
+  id: nuacijqbugf2
+  type: challenge
+  title: Deploying a Kafka broker
+  assignment: |
+    Debezium uses the Apache Kafka Connect framework. Debezium connectors are implemented as Kafka Connector source connectors.
+
+    Debezium connectors capture change events from database tables and emit records of those changes to a [Red Hat AMQ Streams](https://developers.redhat.com/blog/2018/10/29/how-to-run-kafka-on-openshift-the-enterprise-kubernetes-with-amq-streams/) Kafka cluster. Applications can consume event records through AMQ Streams.
+
+    In AMQ Streams, you use Kafka Connect custom Kubernetes resources to deploy and manage the Debezium connectors.
+
+    ### Logging in to the cluster from the OpenShift CLI
+
+    Log in to the OpenShift cluster from a _terminal_ with the following command:
+
+    ```
+    oc login -u developer -p developer
+    ```
+
+    The command logs you in with the following credentials:
+
+    * **Username:** ``developer``
+    * **Password:** ``developer``
+
+    You can use the same credentials to log into the web console.
+
+    ### Creating a namespace
+
+    Create a namespace (project) with the name ``debezium`` for the AMQ Streams Kafka Cluster Operator:
+
+    ```
+    oc new-project debezium
+    ```
+
+    ### Creating a Kafka cluster
+
+    Now we'll create a Kafka cluster named `my-cluster` that has one ZooKeeper node and one Kafka broker node.
+    To simplify the deployment, the YAML file that we'll use to create the cluster specifies the use of `ephemeral` storage.
+
+    > **Note:**
+        Red Hat AMQ Streams Operators are pre-installed in the cluster. Because we don't have to install the Operators in this scenario,`admin` permissions are not required to complete the steps that follow. In an actual deployment, to make an Operator available from all projects in a cluster, you must be logged in with `admin` permission before you install the Operator.
+
+    Create the Kafka cluster by applying the following command:
+
+    ```
+    oc -n debezium apply -f /root/projects/debezium/kafka-cluster.yaml
+    ```
+
+    ### Checking the status of the Kafka cluster
+
+    Verify that the ZooKeeper and Kafka pods are deployed and running in the cluster.
+
+    Enter the following command to check the status of the pods:
+
+    ```
+    oc -n debezium get pods -w
+    ```
+
+    After a few minutes, the status of the pods for ZooKeeper, Kafka, and the AMQ Streams Entity Operator change to `running`.
+    The output of the `get pods` command should look similar to the following example:
+
+    ```bash
+    NAME                                         READY  STATUS
+    my-cluster-zookeeper-0                       0/1    ContainerCreating
+    my-cluster-zookeeper-0                       1/1    Running
+    my-cluster-kafka-0                           0/2    Pending
+    my-cluster-kafka-0                           0/2    ContainerCreating
+    my-cluster-kafka-0                           0/2    Running
+    my-cluster-kafka-0                           1/2    Running
+    my-cluster-kafka-0                           2/2    Running
+    my-cluster-entity-operator-57bb594d9d-z4gs6  0/2    Pending
+    my-cluster-entity-operator-57bb594d9d-z4gs6  0/2    ContainerCreating
+    my-cluster-entity-operator-57bb594d9d-z4gs6  0/2    Running
+    my-cluster-entity-operator-57bb594d9d-z4gs6  1/2    Running
+    my-cluster-entity-operator-57bb594d9d-z4gs6  2/2    Running
+    ```
+
+    > Notice that the Cluster Operator starts the Apache ZooKeeper clusters, as well as the broker nodes and the Entity Operator.
+    The ZooKeeper and Kafka clusters are based in Kubernetes StatefulSets.
+
+    Enter <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ### Verifying that the broker is running
+
+    Enter the following command to send a message to the broker that you just deployed:
+
+    ``echo "Hello world" | oc exec -i -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test``{{execute interrupt}}
+
+    The command does not return any output unless it fails.
+    If you see warning messages in the following format, you can ignore them:
+
+    ```
+    >[DATE] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {test=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+    ```
+
+    The error is generated when the producer requests metadata for the topic, because the producer wants to write to a topic and broker partition leader that does not exit yet.
+
+    To verify that the broker is available, enter the following command to retrieve a message from the broker:
+
+    ```
+    oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning --max-messages 1
+    ```
+
+    The broker processes the message that you sent in the previous command, and it returns the ``Hello world`` string.
+
+    You have successfully deployed the Kafka broker service and made it available to clients to produce and consume messages.
+
+    In the next step of this scenario, we will deploy a single instance of Debezium.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 02-deploying-a-kafka-connect
+  id: i39snxwibara
+  type: challenge
+  title: Deploying Kafka Connect with Debezium
+  assignment: |
+    After you set up a Kafka cluster, deploy Kafka Connect in a custom container image for Debezium.
+    The Kafka Connect service provides a framework for managing Debezium connectors.
+
+    You can create a custom container image by downloading the Debezium MySQL connector archive from the [Red Hat Integration](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?product=red.hat.integration&downloadType=distributions) download site and extracting it to create the directory structure for the connector plugin.
+
+    After you obtain the connector plugin, you can create and publish a custom Linux container image by running the `docker build` or `podman build` commands with a custom Dockerfile.
+
+    >For detailed information about deploying Kafka Connect with Debezium, see the [Debezium documentation](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q1/html-single/getting_started_with_debezium/index#deploying-kafka-connect).
+
+    To save some time, we have already created an image for you.
+
+    To deploy the Kafka Connect cluster with the custom image, enter the following command:
+
+    ``oc -n debezium apply -f /root/projects/debezium/kafka-connect.yaml``{{execute interrupt}}
+
+    The Kafka Connect node is deployed.
+
+    Check the pod status:
+
+    ```
+    oc get pods -w -l app.kubernetes.io/name=kafka-connect
+    ```
+
+    The command returns status in the following format:
+
+    ```bash
+    NAME                               READY  STATUS
+    debezium-connect-6fc5b7f97d-g4h2l  0/1    ContainerCreating
+    debezium-connect-6fc5b7f97d-g4h2l  1/1    Running
+    ```
+    After a couple of minutes, the pod status changes to `Running`.
+    When the **READY** column shows **1/1**, you are ready to proceed.
+
+    Enter <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ## Verify that Kafka Connect is running with Debezium
+
+    After the Connect node is running, you can verify that the Debezium connectors are available.
+    Because AMQ Streams lets you manage most components of the Kafka ecosystem as Kubernetes custom resources, you can obtain information about Kafka Connect from the `status` of the `KafkaConnect` resource.
+
+    List the connector plugins that are available on the Kafka Connect node:
+
+    ``oc get kafkaconnect/debezium -o json | jq .status.connectorPlugins``{{execute interrupt}}
+
+    The output shows the type and version for the connector plugins:
+
+    ```json
+    [
+      {
+        "class": "io.debezium.connector.db2.Db2Connector",
+        "type": "source",
+        "version": "1.2.4.Final-redhat-00001"
+      },
+      {
+        "class": "io.debezium.connector.mongodb.MongoDbConnector",
+        "type": "source",
+        "version": "1.2.4.Final-redhat-00001"
+      },
+      {
+        "class": "io.debezium.connector.mysql.MySqlConnector",
+        "type": "source",
+        "version": "1.2.4.Final-redhat-00001"
+      },
+      {
+        "class": "io.debezium.connector.postgresql.PostgresConnector",
+        "type": "source",
+        "version": "1.2.4.Final-redhat-00001"
+      },
+      {
+        "class": "io.debezium.connector.sqlserver.SqlServerConnector",
+        "type": "source",
+        "version": "1.2.4.Final-redhat-00001"
+      }
+      ...
+    ]
+    ```
+
+    > Note: The output shown is formatted to improve readability
+
+    The Debezium `MySqlConnector` connector is now available for use on the Connect node.
+
+    You have successfully deployed a Kafka Connect node and configured it to contain Debezium.
+
+    In the next step of this scenario, we will finish the deployment by creating a connection between the MySQL database source and Kafka Connect.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 03-streaming-data-from-database
+  id: ujoddseec79h
+  type: challenge
+  title: Streaming data from a database
+  assignment: |
+    Our final step is to create a link between Debezium and a MySQL database source.
+
+    As we mentioned in the previous step, we use AMQ Streams custom resources to interact with the Kafka Connect node.
+
+    So let's create a `KafkaConnector` custom resource that will register a MySQL source database to the Debezium MySQL connector.
+
+    ### Create a KafkaConnector resource
+
+    We'll use the following registration resource, which is included in the scenario environment: `kafka-connector.yaml`{{open}}.
+
+    Register the database source:
+
+    ``oc -n debezium apply -f /root/projects/debezium/kafka-connector.yaml``{{execute interrupt}}
+
+    Check the Kafka Connect log file to verify that the registration succeeded and Debezium started:
+
+    ```
+    oc logs -f deploy/debezium-connect
+    ```
+
+    Connection to the database is confirmed in the output as `Connected to mysql.default.svc:3306`:
+
+    ```bash
+    ...
+    2020-11-19 22:44:19,632 INFO Transitioning from the snapshot reader to the binlog reader (io.debezium.connector.mysql.ChainedReader) [task-thread-debezium-connector-0]
+    2020-11-19 22:44:19,662 INFO Creating thread debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads) [task-thread-debezium-connector-0]
+    2020-11-19 22:44:19,667 INFO Creating thread debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads) [blc-mysql.default.svc:3306]
+    Nov 19, 2020 10:44:19 PM com.github.shyiko.mysql.binlog.BinaryLogClient connect
+    INFO: Connected to mysql.default.svc:3306 at mysql-bin.000003/154 (sid:184054, cid:5)
+    2020-11-19 22:44:19,817 INFO Connected to MySQL binlog at mysql.default.svc:3306, starting at binlog file 'mysql-bin.000003', pos=154, skipping 0 events plus 0 rows (io.debezium.connector.mysql.BinlogReader) [blc-mysql.default.svc:3306]
+    2020-11-19 22:44:19,818 INFO Waiting for keepalive thread to start (io.debezium.connector.mysql.BinlogReader) [task-thread-debezium-connector-0]
+    2020-11-19 22:44:19,819 INFO Creating thread debezium-mysqlconnector-dbserver-mysql-binlog-client (io.debezium.util.Threads) [blc-mysql.default.svc:3306]
+    2020-11-19 22:44:19,823 INFO Keepalive thread is running (io.debezium.connector.mysql.BinlogReader) [task-thread-debezium-connector-0]
+    ```
+    >The output shown is formatted to improve readability.
+
+    Enter <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ### Inspect KafkaTopics
+
+    Now that the database is connected, as changes are committed to the database, Debezium emits change event messages to Kafka topics.
+
+    List the topics that Debezium has created:
+
+    ``oc get kafkatopics``{{execute interrupt}}
+
+    The output shows us the topics that correspond to tables in the database:
+
+    ```bash
+    NAME                                                                                   PARTITIONS   REPLICATION FACTOR
+    consumer-offsets---84e7a678d08f4bd226872e5cdd4eb527fadc1c6a                            50           1
+    dbserver-mysql                                                                         1            1
+    dbserver-mysql.inventory.addresses                                                     1            1
+    dbserver-mysql.inventory.customers                                                     1            1
+    dbserver-mysql.inventory.geom                                                          1            1
+    dbserver-mysql.inventory.orders                                                        1            1
+    dbserver-mysql.inventory.products                                                      1            1
+    dbserver-mysql.inventory.products-on-hand---326f249c4c062fa00e3ec95752c453df16be9264   1            1
+    debezium-cluster-configs                                                               1            1
+    debezium-cluster-offsets                                                               25           1
+    debezium-cluster-status                                                                5            1
+    mysql.schema-changes.inventory                                                         1            1
+    test                                                                                   1            1
+    ```
+
+    > Remember that AMQ Streams Operators also manage the topics of the Apache Kafka ecosystem.
+
+    ### Verify that data is emitted from MySQL to Kafka
+
+    Now let's check the contents of the `customers` table in MySQL.
+
+    Display the source table:
+
+    ```
+    oc -n default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD -e "SELECT * from customers" inventory'
+    ```
+
+    The command returns the contents of the `customers` table:
+
+    ```bash
+    mysql: [Warning] Using a password on the command line interface can be insecure.
+    +------+------------+-----------+-----------------------+
+    | id   | first_name | last_name | email                 |
+    +------+------------+-----------+-----------------------+
+    | 1001 | Sally      | Thomas    | sally.thomas@acme.com |
+    | 1002 | George     | Bailey    | gbailey@foobar.com    |
+    | 1003 | Edward     | Walker    | ed@walker.com         |
+    | 1004 | Anne       | Kretchmar | annek@noanswer.org    |
+    +------+------------+-----------+-----------------------+
+    ```
+
+    The topic `dbserver-mysql.inventory.customers` on the Kafka broker contains messages that represent the data change events from this table in [Debezium change event format](http://debezium.io/docs/configuration/event-flattening/)
+
+    Let's look at the messages in the topic:
+
+    ```
+    oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 4 | jq
+    ```
+
+    From the output, you can see the change events for the table:
+
+    ```json
+    ...
+    {
+      "schema": {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "first_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "last_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "email"
+              }
+            ],
+            "optional": true,
+            "name": "dbserver_mysql.inventory.customers.Value",
+            "field": "before"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "first_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "last_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "email"
+              }
+            ],
+            "optional": true,
+            "name": "dbserver_mysql.inventory.customers.Value",
+            "field": "after"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "string",
+                "optional": false,
+                "field": "version"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "connector"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "name"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "ts_ms"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "name": "io.debezium.data.Enum",
+                "version": 1,
+                "parameters": {
+                  "allowed": "true,last,false"
+                },
+                "default": "false",
+                "field": "snapshot"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "db"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "table"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "server_id"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "gtid"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "file"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "pos"
+              },
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "row"
+              },
+              {
+                "type": "int64",
+                "optional": true,
+                "field": "thread"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "query"
+              }
+            ],
+            "optional": false,
+            "name": "io.debezium.connector.mysql.Source",
+            "field": "source"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "op"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "ts_ms"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "string",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "total_order"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "data_collection_order"
+              }
+            ],
+            "optional": true,
+            "field": "transaction"
+          }
+        ],
+        "optional": false,
+        "name": "dbserver_mysql.inventory.customers.Envelope"
+      },
+      "payload": {
+        "before": null,
+        "after": {
+          "id": 1004,
+          "first_name": "Anne",
+          "last_name": "Kretchmar",
+          "email": "annek@noanswer.org"
+        },
+        "source": {
+          "version": "1.2.4.Final-redhat-00001",
+          "connector": "mysql",
+          "name": "dbserver-mysql",
+          "ts_ms": 0,
+          "snapshot": "true",
+          "db": "inventory",
+          "table": "customers",
+          "server_id": 0,
+          "gtid": null,
+          "file": "mysql-bin.000003",
+          "pos": 154,
+          "row": 0,
+          "thread": null,
+          "query": null
+        },
+        "op": "c",
+        "ts_ms": 1605824079863,
+        "transaction": null
+      }
+    }
+    Processed a total of 4 messages
+    ```
+
+    >The output shown is formatted to improve readability.
+
+    Now, let's add a new customer record to the table:
+
+    ```
+    oc -n default exec -i deploy/mysql -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD -e "INSERT INTO customers VALUES(default,\"John\",\"Doe\",\"john.doe@example.org\")" inventory'
+    ```
+
+    After we add the record to the database, Debezium emits a new message to the associated topic.
+
+    View the messages in the topic again:
+
+    ```
+    oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dbserver-mysql.inventory.customers --from-beginning --max-messages 5 | jq
+    ```
+
+    The command returns output that includes the newly added record for the user _John Doe_:
+
+    ```json
+    ...
+    {
+      "schema": {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "first_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "last_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "email"
+              }
+            ],
+            "optional": true,
+            "name": "dbserver_mysql.inventory.customers.Value",
+            "field": "before"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "first_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "last_name"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "email"
+              }
+            ],
+            "optional": true,
+            "name": "dbserver_mysql.inventory.customers.Value",
+            "field": "after"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "string",
+                "optional": false,
+                "field": "version"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "connector"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "name"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "ts_ms"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "name": "io.debezium.data.Enum",
+                "version": 1,
+                "parameters": {
+                  "allowed": "true,last,false"
+                },
+                "default": "false",
+                "field": "snapshot"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "db"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "table"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "server_id"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "gtid"
+              },
+              {
+                "type": "string",
+                "optional": false,
+                "field": "file"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "pos"
+              },
+              {
+                "type": "int32",
+                "optional": false,
+                "field": "row"
+              },
+              {
+                "type": "int64",
+                "optional": true,
+                "field": "thread"
+              },
+              {
+                "type": "string",
+                "optional": true,
+                "field": "query"
+              }
+            ],
+            "optional": false,
+            "name": "io.debezium.connector.mysql.Source",
+            "field": "source"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "op"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "ts_ms"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "string",
+                "optional": false,
+                "field": "id"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "total_order"
+              },
+              {
+                "type": "int64",
+                "optional": false,
+                "field": "data_collection_order"
+              }
+            ],
+            "optional": true,
+            "field": "transaction"
+          }
+        ],
+        "optional": false,
+        "name": "dbserver_mysql.inventory.customers.Envelope"
+      },
+      "payload": {
+        "before": null,
+        "after": {
+          "id": 1005,
+          "first_name": "John",
+          "last_name": "Doe",
+          "email": "john.doe@example.org"
+        },
+        "source": {
+          "version": "1.2.4.Final-redhat-00001",
+          "connector": "mysql",
+          "name": "dbserver-mysql",
+          "ts_ms": 1605824880000,
+          "snapshot": "false",
+          "db": "inventory",
+          "table": "customers",
+          "server_id": 223344,
+          "gtid": null,
+          "file": "mysql-bin.000003",
+          "pos": 364,
+          "row": 0,
+          "thread": 7,
+          "query": null
+        },
+        "op": "c",
+        "ts_ms": 1605824880548,
+        "transaction": null
+      }
+    }
+    Processed a total of 5 messages
+    ```
+
+    ## Congratulations
+
+    You have completed a basic deployment of Debezium to stream changes from a database.
+    Now you can add, change, or remove data from MySQL and see how the changes are reflected on the Kafka broker.
+
+    See the Red Hat Integration [Debezium documentation](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q1/html/debezium_user_guide/index) for more tips and details.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+checksum: "4110511532584509663"

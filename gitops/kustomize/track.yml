@@ -1,461 +1,303 @@
-challenges:
-- assignment: 'Welcome! In this section we will be exploring the `kustomize` CLI and
-    the
+slug: gitops-kustomize
+id: 8sy0nyxias34
+type: track
+title: Working with Kustomize
+description: |
+  ## Goal
 
-    capabilities built into the `kubectl` command.
+  This guide helps you get familiar with how to use Kustomize on Argo CD on OpenShift.
 
 
-    ## Exploring the Kustomize CLI
+  ## Concepts
 
+  [Kustomize](https://kustomize.io/) traverses a Kubernetes manifest to add, remove or update configuration options without forking. It is available both as a standalone binary and as a native feature of `kubectl` (and by extension `oc`).
 
-    The `kustomize` CLI should have been installed as part of the lab
+  The principals of `kustomize` are:
 
-    setup. Verify that it has been installed.
+  * Purely declarative approach to configuration customization
+  * Manage an arbitrary number of distinctly customized Kubernetes configurations
+  * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
+  * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
+  ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
 
-    ```
+  ## Use case
 
-    kustomize version --short
+  This is a simple guide that takes you through the following steps:
 
-    ```
+  * Exploring the Kustomize syntax
+  * Deploying a Kustomized application
 
-
-    This should display the version, it should look something like this.
-
-
-    ```shell
-
-    {kustomize/v4.0.5  2021-02-13T21:21:14Z  }
-
-    ```
-
-
-    Kustomize, at its core, is meant to build native Kubernetes manifests
-
-    based on YAML, while leaving the original YAML in tact. It achives this
-
-    in a "template-less" templating format. This is done by providing a `kustomization.yaml`
-    file.
-
-
-    We will be focusing on two sub-commands the `build` command and the
-
-    `edit` command.
-
-
-    The `build` command takes the YAML source (via a path or URL) and creates
-
-    a new YAML that can be piped into `kubectl create`. We will work with
-
-    an example in the `~/resources/openshift-gitops-examples/components/kustomize-build/`
-    directory.
-
-
-    ```
-
-    cd ~/resources/openshift-gitops-examples/components/kustomize-build/
-
-    ```
-
-
-    Here you should see two files, a `kustomization.yaml` file and a `welcome.yaml`
-    file
-
-
-    ```
-
-    ls -l
-
-    ```
-
-
-    Taking a look at the `openshift-gitops-examples/components/kustomize-build/welcome.yaml`{{open}}
-
-    file shows nothing special. Just a standard Kubernetes manifest.
-
-
-    What if, for example, we wanted to add a `label` to this manifest without editing
-    it? This is where the `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}}
-    file comes in.
-
-
-    As you can see in the output there isn''t much. The two sections for this
-
-    example are the `resources` and the `patchesJson6902` sections.
-
-
-    `resources` is an array of individual files, directories, and/or URLs where other
-    manifests are stored. In this example we are just loading in one file. The [`patchesJson6902`
-    is a patching RFC](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patchesjson6902/)
-    that `kustomize` supports. As you can see, in the `patchesJson6902` file, I am
-    adding a label to this manifest.
-
-
-    > **NOTE** You can read about what options are available for patching in the [official
-    documentaion site](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
-
-
-    Build this manifest by running: ```
-
-    kustomize build .
-
-    ``` , and
-
-    you can see that the new label got added to the manifest!
-
-
-    You can use the `kustomize edit` command instead of writing YAML. For
-
-    example, you can change the image tag this `Deployment` uses from `latest`
-
-    to `ffcd15` by running the following:
-
-
-    ```
-
-    kustomize edit set image quay.io/redhatworkshops/welcome-php:ffcd15
-
-    ```
-
-
-    This will update the
-
-    `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}}
-    file with a
-
-    ```
-
-    images` section. Now when you run `kustomize build .
-
-    ``` -
-
-    you should see not only the new label but also the new `ffcd15` image tag.
-
-
-    > **NOTE** You may have to close the `kustomization.yaml` tab and re-open it to
-    see the changes.
-
-
-    You can see how you can take existing YAML and modify it for
-
-    your specific environment without the need to copy or edit the original.
-
-
-    Kustomize can be used to write a new YAML file or be pipped into
-
-    the `kubectl` (or `oc`) command. Example:
-
-
-    ```shell
-
-    kustomize build . | oc apply -f -
-
-    ```
-
-
-    ## Exploring Kustomize with Kubectl
-
-
-    Since Kubernetes 1.14, The `kubectl` command (and by extention the
-
-    `oc` cli) has support for Kustomize built in.  You can see this by
-
-    running the ```
-
-    kubectl kustomize --help
-
-    ``` command.
-
-
-    This runs the ```
-
-    kustomize build` command. You can see this by running: `kubectl kustomize
-
-    ```
-
-
-    Although you can use this to pipe it into the apply command, you
-
-    don''t have to. The `kubectl apply` command has the `-k` option that
-
-    will run the build before it applies the manifest.
-
-
-    To test this out, first create a project: ```
-
-    oc new-project kustomize-test
-
-    ```
-
-
-    Next make sure you are on the project: ```
-
-    oc project kustomize-test
-
-    ```
-
-
-    Finally run the command to build and apply the manifests: ```
-
-    kubectl apply -k ./
-
-    ```
-
-
-    > **NOTE** You can pass not only directories, but URLs as well. The
-
-    > only requirement is that you have a `kustomization.yaml` file in
-
-    > the path.
-
-
-    This should create the deployment and you should see the pods running in the namespace:
-    ```
-
-    kubectl get pods -n kustomize-test
-
-    ```
-
-
-    You can see the deployment was created with the additional labels: ```
-
-    kubectl get deployment welcome-php -o jsonpath=''{.metadata.labels}'' | jq -r
-
-    ```
-
-
-    Also, the image was updated based on the customization that was made: ```
-
-    kubectl get deploy welcome-php  -o jsonpath=''{.spec.template.spec.containers[].image}{"\n"}''
-
-    ```
-
-
-    As you can see `kustomize` can be a powerful tool.
-
-    '
-  difficulty: basic
-  slug: 01-exploring-kustomize
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Exploring Kustomize
-  type: challenge
-- assignment: 'In previous scenarios, you learned that in a GitOps workflow; the
-
-    entire application stack (including infrastructure) is reflected
-
-    in a git repo. The challenge is how to do this without duplicating
-
-    YAML.
-
-
-    So now that you''ve explored `kustomize`, let''s see how it fits into Argo
-
-    CD and how it can be used in a GitOps workflow.
-
-
-    Before preceeding, move back into the home directory: ```
-
-    cd ~
-
-    ```
-
-
-    ## The Argo CD Web Console
-
-
-    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
-    tab.
-
-
-    Once you have accepted the self signed certificate, you should be
-
-    presented with the Argo CD login screen.
-
-
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
-
-
-    You can login with the following
-
-    * **Username:** ``admin``
-
-    * **Password:** ```
-
-    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
-
-    ```
-
-
-    ## Base Application
-
-
-    In a previous scenario, we deployed a sample appication that had a
-
-    picture of a blue square. To deploy the application, run the following
-
-    command:
-
-
-    ```
-
-    oc apply -f resources/openshift-gitops-examples/components/applications/bgd-app.yaml
-
-    ```
-
-
-    This should create an `Application` in the Argo CD UI.
-
-
-    ![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgdk-app.png)
-
-
-    You can wait for the rollout of the application by running ```
-
-    oc rollout status deploy/bgd -n bgd
-
-    ```
-
-
-    Once it''s done rolling out, you can open the application''s URL by [CLICKING
-    HERE](http://bgd-bgd.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
-
-
-    It should look something like this.
-
-
-    ![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)
-
-
-    If you did the previous scenario, this should be familiar. But what
-
-    if I wanted to deploy this application with modifications?
-
-
-    ## Kustomized Application
-
-
-    Argo CD has native support for Kustomize. You can use this to avoid
-
-    duplicating YAML for each deployment. This is especially good to
-
-    use if you have different environements or clusters you''re deploying
-
-    to.
-
-
-    Take a look at the `Application` definition:  `openshift-gitops-examples/components/applications/bgdk-app.yaml`{{open}}
-
-
-    This application is pointed to the [same repo](https://github.com/redhat-developer-demos/openshift-gitops-examples)
-    but [different directory](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgdk).
-
-
-    This is using a concept of an "overlay", where you have a "base"
-
-    set of manifests and you overlay your customizations. Take a look
-
-    at the `openshift-gitops-examples/apps/bgd/overlays/bgdk/kustomization.yaml`{{open}}
-    example
-
-    file.
-
-
-    This `kustomization.yaml` takes the base application and patches the
-
-    manifest so that we get a yellow square instead of a blue one. It
-
-    also deploys the application to the `bgdk` namespace (denoted by
-
-    the `namespace:` section of the file).
-
-
-    Deploy this application:  ```
-
-    oc apply -f resources/openshift-gitops-examples/components/applications/bgdk-app.yaml
-
-    ```
-
-
-    This should show you two apps on the Argo CD UI.
-
-
-    ![two-apps](https://katacoda.com/openshift/assets/gitops/two-apps.png)
-
-
-    Open the applicaiton''s route by [CLICKING HERE](http://bgd-bgdk.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
-
-
-    ![yellow-square](https://katacoda.com/openshift/assets/gitops/yellow-square.png)
-
-
-    As you can see, the application deployed with your customizations! To review what
-    we just did.
-
-
-    * Deployed an Application called `bgd` with a blue square.
-
-    * Deployed another Application based on `bgd` called `bgdk`
-
-    * The Application `bgdk` was deployed in it''s own namespace, with deployment
-    customizations.
-
-    * ALL without having to duplicate YAML!
-
-    '
-  difficulty: basic
-  slug: 02-deploying-kustomized-application
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Deploying Kustomized Applicaton
-  type: challenge
-description: "## Goal\n\nThis guide helps you get familiar with how to use Kustomize\
-  \ on Argo CD on OpenShift.\n\n\n## Concepts\n\n[Kustomize](https://kustomize.io/)\
-  \ traverses a Kubernetes manifest to add, remove or update configuration options\
-  \ without forking. It is available both as a standalone binary and as a native feature\
-  \ of `kubectl` (and by extension `oc`). \n\nThe principals of `kustomize` are:\n\
-  \n* Purely declarative approach to configuration customization \n* Manage an arbitrary\
-  \ number of distinctly customized Kubernetes configurations \n* Every artifact that\
-  \ kustomize uses is plain YAML and can be validated and processed as such \n* As\
-  \ a \"templateless\" templating system; it encourages using YAML without forking\
-  \ the repo it.\n\n![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)\n\
-  \n## Use case\n\nThis is a simple guide that takes you through the following steps:\n\
-  \n* Exploring the Kustomize syntax\n* Deploying a Kustomized application\n\nThis\
-  \ OpenShift cluster will self-destruct in one hour.\n"
+  This OpenShift cluster will self-destruct in one hour.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: gitops-kustomize
-tags:
-- openshift
-title: Working with Kustomize
-type: track
+challenges:
+- slug: 01-exploring-kustomize
+  id: ny98eul3axsh
+  type: challenge
+  title: Exploring Kustomize
+  assignment: |
+    Welcome! In this section we will be exploring the `kustomize` CLI and the
+    capabilities built into the `kubectl` command.
+
+    ## Exploring the Kustomize CLI
+
+    The `kustomize` CLI should have been installed as part of the lab
+    setup. Verify that it has been installed.
+
+    ```
+    kustomize version --short
+    ```
+
+    This should display the version, it should look something like this.
+
+    ```shell
+    {kustomize/v4.0.5  2021-02-13T21:21:14Z  }
+    ```
+
+    Kustomize, at its core, is meant to build native Kubernetes manifests
+    based on YAML, while leaving the original YAML in tact. It achives this
+    in a "template-less" templating format. This is done by providing a `kustomization.yaml` file.
+
+    We will be focusing on two sub-commands the `build` command and the
+    `edit` command.
+
+    The `build` command takes the YAML source (via a path or URL) and creates
+    a new YAML that can be piped into `kubectl create`. We will work with
+    an example in the `~/resources/openshift-gitops-examples/components/kustomize-build/` directory.
+
+    ```
+    cd ~/resources/openshift-gitops-examples/components/kustomize-build/
+    ```
+
+    Here you should see two files, a `kustomization.yaml` file and a `welcome.yaml` file
+
+    ```
+    ls -l
+    ```
+
+    Taking a look at the `openshift-gitops-examples/components/kustomize-build/welcome.yaml`{{open}}
+    file shows nothing special. Just a standard Kubernetes manifest.
+
+    What if, for example, we wanted to add a `label` to this manifest without editing it? This is where the `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}} file comes in.
+
+    As you can see in the output there isn't much. The two sections for this
+    example are the `resources` and the `patchesJson6902` sections.
+
+    `resources` is an array of individual files, directories, and/or URLs where other manifests are stored. In this example we are just loading in one file. The [`patchesJson6902` is a patching RFC](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patchesjson6902/) that `kustomize` supports. As you can see, in the `patchesJson6902` file, I am adding a label to this manifest.
+
+    > **NOTE** You can read about what options are available for patching in the [official documentaion site](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
+
+    Build this manifest by running: ```
+    kustomize build .
+    ``` , and
+    you can see that the new label got added to the manifest!
+
+    You can use the `kustomize edit` command instead of writing YAML. For
+    example, you can change the image tag this `Deployment` uses from `latest`
+    to `ffcd15` by running the following:
+
+    ```
+    kustomize edit set image quay.io/redhatworkshops/welcome-php:ffcd15
+    ```
+
+    This will update the
+    `openshift-gitops-examples/components/kustomize-build/kustomization.yaml`{{open}} file with a
+    ```
+    images` section. Now when you run `kustomize build .
+    ``` -
+    you should see not only the new label but also the new `ffcd15` image tag.
+
+    > **NOTE** You may have to close the `kustomization.yaml` tab and re-open it to see the changes.
+
+    You can see how you can take existing YAML and modify it for
+    your specific environment without the need to copy or edit the original.
+
+    Kustomize can be used to write a new YAML file or be pipped into
+    the `kubectl` (or `oc`) command. Example:
+
+    ```shell
+    kustomize build . | oc apply -f -
+    ```
+
+    ## Exploring Kustomize with Kubectl
+
+    Since Kubernetes 1.14, The `kubectl` command (and by extention the
+    `oc` cli) has support for Kustomize built in.  You can see this by
+    running the ```
+    kubectl kustomize --help
+    ``` command.
+
+    This runs the ```
+    kustomize build` command. You can see this by running: `kubectl kustomize
+    ```
+
+    Although you can use this to pipe it into the apply command, you
+    don't have to. The `kubectl apply` command has the `-k` option that
+    will run the build before it applies the manifest.
+
+    To test this out, first create a project: ```
+    oc new-project kustomize-test
+    ```
+
+    Next make sure you are on the project: ```
+    oc project kustomize-test
+    ```
+
+    Finally run the command to build and apply the manifests: ```
+    kubectl apply -k ./
+    ```
+
+    > **NOTE** You can pass not only directories, but URLs as well. The
+    > only requirement is that you have a `kustomization.yaml` file in
+    > the path.
+
+    This should create the deployment and you should see the pods running in the namespace: ```
+    kubectl get pods -n kustomize-test
+    ```
+
+    You can see the deployment was created with the additional labels: ```
+    kubectl get deployment welcome-php -o jsonpath='{.metadata.labels}' | jq -r
+    ```
+
+    Also, the image was updated based on the customization that was made: ```
+    kubectl get deploy welcome-php  -o jsonpath='{.spec.template.spec.containers[].image}{"\n"}'
+    ```
+
+    As you can see `kustomize` can be a powerful tool.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-deploying-kustomized-application
+  id: ymcnj2jfasb3
+  type: challenge
+  title: Deploying Kustomized Applicaton
+  assignment: |
+    In previous scenarios, you learned that in a GitOps workflow; the
+    entire application stack (including infrastructure) is reflected
+    in a git repo. The challenge is how to do this without duplicating
+    YAML.
+
+    So now that you've explored `kustomize`, let's see how it fits into Argo
+    CD and how it can be used in a GitOps workflow.
+
+    Before preceeding, move back into the home directory: ```
+    cd ~
+    ```
+
+    ## The Argo CD Web Console
+
+    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) tab.
+
+    Once you have accepted the self signed certificate, you should be
+    presented with the Argo CD login screen.
+
+    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+
+    You can login with the following
+    * **Username:** ``admin``
+    * **Password:** ```
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+    ```
+
+    ## Base Application
+
+    In a previous scenario, we deployed a sample appication that had a
+    picture of a blue square. To deploy the application, run the following
+    command:
+
+    ```
+    oc apply -f resources/openshift-gitops-examples/components/applications/bgd-app.yaml
+    ```
+
+    This should create an `Application` in the Argo CD UI.
+
+    ![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgdk-app.png)
+
+    You can wait for the rollout of the application by running ```
+    oc rollout status deploy/bgd -n bgd
+    ```
+
+    Once it's done rolling out, you can open the application's URL by [CLICKING HERE](http://bgd-bgd.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+
+    It should look something like this.
+
+    ![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)
+
+    If you did the previous scenario, this should be familiar. But what
+    if I wanted to deploy this application with modifications?
+
+    ## Kustomized Application
+
+    Argo CD has native support for Kustomize. You can use this to avoid
+    duplicating YAML for each deployment. This is especially good to
+    use if you have different environements or clusters you're deploying
+    to.
+
+    Take a look at the `Application` definition:  `openshift-gitops-examples/components/applications/bgdk-app.yaml`{{open}}
+
+    This application is pointed to the [same repo](https://github.com/redhat-developer-demos/openshift-gitops-examples) but [different directory](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgdk).
+
+    This is using a concept of an "overlay", where you have a "base"
+    set of manifests and you overlay your customizations. Take a look
+    at the `openshift-gitops-examples/apps/bgd/overlays/bgdk/kustomization.yaml`{{open}} example
+    file.
+
+    This `kustomization.yaml` takes the base application and patches the
+    manifest so that we get a yellow square instead of a blue one. It
+    also deploys the application to the `bgdk` namespace (denoted by
+    the `namespace:` section of the file).
+
+    Deploy this application:  ```
+    oc apply -f resources/openshift-gitops-examples/components/applications/bgdk-app.yaml
+    ```
+
+    This should show you two apps on the Argo CD UI.
+
+    ![two-apps](https://katacoda.com/openshift/assets/gitops/two-apps.png)
+
+    Open the applicaiton's route by [CLICKING HERE](http://bgd-bgdk.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+
+    ![yellow-square](https://katacoda.com/openshift/assets/gitops/yellow-square.png)
+
+    As you can see, the application deployed with your customizations! To review what we just did.
+
+    * Deployed an Application called `bgd` with a blue square.
+    * Deployed another Application based on `bgd` called `bgdk`
+    * The Application `bgdk` was deployed in it's own namespace, with deployment customizations.
+    * ALL without having to duplicate YAML!
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "12772963493670603474"

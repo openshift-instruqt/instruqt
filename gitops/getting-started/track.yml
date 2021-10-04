@@ -1,5 +1,5 @@
 slug: gitops-getting-started
-id: jr9adckoqznx
+id: ec9auzkeypbz
 type: track
 title: Getting Started with ArgoCD and OpenShift GitOps Operator
 description: |
@@ -54,7 +54,7 @@ private: true
 published: false
 challenges:
 - slug: 01-exploring-openshift-operator
-  id: bscf6cujdxzo
+  id: gydto0xa2ng1
   type: challenge
   title: Exploring the OpenShift GitOps Operator
   assignment: |
@@ -133,7 +133,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-connecting-to-argocd
-  id: 8ikfwxgezflw
+  id: zjjxjkyzqpht
   type: challenge
   title: Connecting to ArgoCD
   assignment: |
@@ -215,7 +215,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-deploying-sample-application
-  id: s8k4jhnqdiy6
+  id: 9sw7uqelvqxy
   type: challenge
   title: Deploying a Sample Application
   assignment: |-
@@ -355,4 +355,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "226796542773316317"
+checksum: "3343090918082787900"

@@ -1,479 +1,351 @@
-challenges:
-- assignment: 'Red Hat AMQ Streams simplifies the process of running Apache Kafka
-    in an OpenShift cluster. This tutorial provides instructions for deploying a working
-    environment of AMQ Streams.
+slug: kafka-kafka-basic
+id: ssyttqtvjbgy
+type: track
+title: Apache Kafka basics
+description: |2
 
+  This scenario will show how to deploy and connecto to [Apache Kafka on Kubernetes](https://developers.redhat.com/topics/kafka-kubernetes).
 
-    ### Logging in to the Cluster via OpenShift CLI
+  ### What is Apache Kafka?
 
+  [Apache Kafka](https://www.redhat.com/en/topics/integration/what-is-apache-kafka) has become the leading platform for building real-time data pipelines. Today, Kafka is heavily used for developing event-driven applications, where it lets services communicate with each other through events. Using Kubernetes for this type of workload requires adding specialized components such as Kubernetes Operators and connectors to bridge the rest of your systems and applications to the Kafka ecosystem.
 
-    Before creating any applications, login as admin. This is required if you want
-    to log in to the web console and use it.
+  Apache Kafka is a distributed data streaming platform that is a popular event processing choice. It can handle publishing, subscribing to, storing, and processing event streams in real-time. Apache Kafka supports a range of use cases where high throughput and scalability are vital, and by minimizing the need for point-to-point integrations for data sharing in certain applications, it can reduce latency to milliseconds.
 
+  ### Strimzi: Kubernetes Operator for Apache Kafka
 
-    To log in to the OpenShift cluster from the _Terminal_ run:
+  [Strimzi](https://strimzi.io/) simplifies the process of running Apache Kafka in a Kubernetes cluster.
+  Strimzi is a CNCF Sandbox project which provides the leading community Operators for deploying and managing the components to run an Apache Kafka cluster on Kubernetes in various deployment configurations. This includes the Kafka brokers, Apache ZooKeeper, MirrorMaker and Kafka Connect.
 
+  ### Red Hat Integration
 
-    ```
+  To respond to business demands quickly and efficiently, you need a way to integrate applications and data spread across your enterprise. [Red Hat AMQ](https://www.redhat.com/en/technologies/jboss-middleware/amq) — based on open source communities like Apache ActiveMQ and Apache Kafka — is a flexible messaging platform that delivers information reliably, enabling real-time integration, and connecting the Internet of Things (IoT).
 
-    oc login -u admin -p admin
+  AMQ streams is a [Red Hat Integration](https://www.redhat.com/en/products/integration) component that supports Apache Kafka on OpenShift. Through AMQ Streams, Kafka operates as an “OpenShift-native” platform through the use of powerful AMQ Streams Operators that simplify the deployment, configuration, management, and use of Apache Kafka on OpenShift.
 
-    ```
+  ![Operators within the AMQ Streams architecture](https://access.redhat.com/webassets/avalon/d/Red_Hat_AMQ-7.7-Evaluating_AMQ_Streams_on_OpenShift-en-US/images/320e68d6e4b4080e7469bea094ec8fbf/operators.png)
 
-
-    This will log you in using the credentials:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    Use the same credentials to log into the web console.
-
-
-    ### Creating your own namespace
-
-
-    To create a new (project) namespace called ``kafka`` for the AMQ Streams Kafka
-    Cluster Operator run the command:
-
-
-    ```
-
-    oc new-project kafka
-
-    ```
-
-
-    ### Install AMQ Streams Operators
-
-
-    AMQ Streams provides container images and Operators for running Kafka on OpenShift.
-    AMQ Streams Operators are fundamental to the running of AMQ Streams. The Operators
-    provided with AMQ Streams are purpose-built with specialist operational knowledge
-    to effectively manage Kafka.
-
-
-    Deploy the Operator Lifecycle Manager Operator Group and Susbcription to install
-    the Operator in the previously created namespace:
-
-
-    ```
-
-    oc -n kafka apply -f /opt/operator-install.yaml
-
-    ```
-
-
-    You will see the following result:
-
-
-    ```bash
-
-    operatorgroup.operators.coreos.com/streams-operatorgroup created
-
-    subscription.operators.coreos.com/amq-streams created
-
-    ```
-
-
-    > You can also deploy the AMQ streams Operator from the OpenShift OperatorHub
-    from within the OpenShift administration console.
-
-
-    ### Check the Operator deployment
-
-
-    Check the Operator deployment is running.
-
-
-    To watch the status of the pods run the following command:
-
-
-    ```
-
-    oc -n kafka get pods -w
-
-    ```
-
-
-    You will see the status of the pod for the Cluster Operator changing to `Running`:
-
-
-    ```bash
-
-    NAME                                                   READY   STATUS              RESTARTS   AGE
-
-    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   0/1     ContainerCreating   0          10s
-
-    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   0/1     Running             0          18s
-
-    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   1/1     Running             0          34s
-
-    ```
-
-
-    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
-
-
-    `^C`{{execute ctrl-seq}}
-
-    '
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Installing Red Hat AMQ Streams Operators
-  type: challenge
-- assignment: 'With AMQ Streams installed, create a Kafka cluster, then a topic within
-    the cluster.
-
-
-    When you create a cluster, the Cluster Operator you deployed when installing AMQ
-    Streams watches for new Kafka resources.
-
-
-    ### Creating a Kafka cluster
-
-
-    Create a new Kafka cluster named `my-cluster`, with 1 ZooKeeper, 1 broker node,
-    and `ephemeral` storage to simplify the deployment. In production case scenarios,
-    you will want to increase the amount of nodes and use persistent storage.
-
-
-    Check the configuration for the `Kafka` custom resource:
-
-
-    `cat /opt/kafka-cluster.yaml`{{execute interrupt}}
-
-
-    Then create the Kafka cluster by applying the configuration:
-
-
-    ```
-
-    oc -n kafka apply -f /opt/kafka-cluster.yaml
-
-    ```
-
-
-    ### Checking the Kafka cluster deployment
-
-
-    Check the ZooKeeper and Kafka deployment is running.
-
-
-    To watch the status of the pods run the following command:
-
-
-    ```
-
-    oc -n kafka get pods -w
-
-    ```
-
-
-    You will see the status of the pods for ZooKeeper, Kafka, and the Entity Operator
-    changing to `Running`:
-
-
-    ```bash
-
-    NAME                                                   READY   STATUS              RESTARTS   AGE
-
-    amq-streams-cluster-operator-v1.5.3-59666d98cb-frcv9   1/1     Running             0          4m27s
-
-    my-cluster-zookeeper-0                                 0/1     ContainerCreating   0          3s
-
-    my-cluster-zookeeper-0                                 0/1     ContainerCreating   0          5s
-
-    my-cluster-zookeeper-0                                 0/1     Running             0          23s
-
-    my-cluster-zookeeper-0                                 1/1     Running             0          38s
-
-    my-cluster-kafka-0                                     0/2     Pending             0          0s
-
-    my-cluster-kafka-0                                     0/2     Pending             0          0s
-
-    my-cluster-kafka-0                                     0/2     ContainerCreating   0          0s
-
-    my-cluster-kafka-0                                     0/2     ContainerCreating   0          2s
-
-    my-cluster-kafka-0                                     0/2     Running             0          4s
-
-    my-cluster-kafka-0                                     1/2     Running             0          20s
-
-    my-cluster-kafka-0                                     2/2     Running             0          27s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Pending             0          0s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Pending             0          0s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     ContainerCreating   0          1s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     ContainerCreating   0          3s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Running             0          4s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            1/2     Running             0          18s
-
-    my-cluster-entity-operator-57bb594d9d-z4gs6            2/2     Running             0          21s
-
-    ```
-
-
-    The Entity Operator contains the Topic Operator.
-
-
-    > You can notice the Cluster Operator starts the Apache ZooKeeper cluster as well
-    as the broker nodes and the Entity Operator. The Zookeeper and Kafka cluster are
-    based on Kubernetes StatetulSets.
-
-
-    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
-
-
-    `^C`{{execute ctrl-seq}}
-
-
-    ### Create a Kafka Topic to store your events
-
-
-    When your cluster is ready, create a topic to subscribe and publish to from your
-    external client.
-
-
-    Create a `my-topic` custom resource definition with 1 replica and 1 partition
-    in the `my-cluster` Kafka cluster.
-
-
-    Check the configuration for the `KafkaTopic` custom resource:
-
-
-    `cat /opt/kafka-topic.yaml`{{execute interrupt}}
-
-
-    Then apply the custom resource for the Topic Operator to pick up:
-
-
-    ```
-
-    oc -n kafka apply -f /opt/kafka-topic.yaml
-
-    ```
-
-
-    This creates a Kafka topic in the cluster for sending and receiving events. Now
-    we are ready to interact with the cluster.
-
-    '
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Deploying a Kafka cluster
-  type: challenge
-- assignment: "Time to check that the deployment is working, and the Topic Operator\
-    \ successfully created the topic.\n\n### Accessing the running Kafka broker pod\n\
-    \nAMQ streams provides container images with the Apache Kafka distribution, including\
-    \ console scripts. Let's connect to the running broker to execute those scripts.\n\
-    \nSupport for remote container command execution is built into the `oc` CLI. `Bash`\
-    \ is one of the commands we can execute. To get an interactive terminal issue\
-    \ the following command:\n\n```\noc exec -it my-cluster-kafka-0 -- bash\n```\n\
-    \nYou are now running a terminal into the Kafka broker container. Here you can\
-    \ execute the scripts available in the `/bin` directory.\n\n### Reviewing topic\
-    \ information\n\nUse the `kafka-topics` shell script as a command line tool that\
-    \ can alter, create, delete and list topic information from a Kafka cluster.\n\
-    \nLet's use it to describe the `my-topic` we asked the Topic Operator to create\
-    \ for us in the previous step:\n\n```\nbin/kafka-topics.sh --bootstrap-server\
-    \ localhost:9092 --describe\n```\n\n> We are using localhost:9092 as we are running\
-    \ within the same container.\n\nYou will get output similar to this:\n\n```\n\
-    OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase\
-    \ from one, then you should configure the number of parallel GC threads appropriately\
-    \ using -XX:ParallelGCThreads=N\nTopic: my-topic PartitionCount: 1       ReplicationFactor:\
-    \ 1    Configs:\n        Topic: my-topic Partition: 0    Leader: 0       Replicas:\
-    \ 0     Isr: 0\n```\n\n> The `my-topic` topic has 1 partition and a replication\
-    \ factor of 1 as defined in the KafkaTopic resouce.\n\nTime to send and receive\
-    \ events!\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Accessing the Kafka cluster from a console
-  type: challenge
-- assignment: 'Kafka clients connect through the network to the Kafka brokers where
-    the topic contains partitions for writing (producing) and reading (consuming)
-    events.
-
-
-    ### Producing events
-
-
-    We will use a producer shell script to write events.
-
-
-    Run the console producer to send one message per line:
-
-
-    ```
-
-    bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic my-topic
-
-    ```
-
-
-    You will get a prompt to start sending the messages, try with _hello world!_
-
-
-    ```
-
-    hello world!
-
-    ```
-
-
-    Enter some more messages, then press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the
-    process.
-
-
-    `^C`{{execute ctrl-seq}}
-
-
-    ### Consuming events
-
-
-    Time to read the messages you wrote.
-
-
-    Run the console consumer shell script:
-
-
-    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic
-    --from-beginning`{{execute interrupt}}
-
-
-    You should see the messages you wrote:
-
-
-    ```
-
-    hello world!
-
-    #...
-
-    ```
-
-
-    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
-
-
-    `^C`{{execute ctrl-seq}}
-
-
-    ### Congratulations
-
-
-    You successfully completed this scenario! You now know how to deploy a simple
-    Apache Kafka cluster on top of OpenShift using AMQ Streams.
-
-    '
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Producing and consuming records
-  type: challenge
-description: "\nThis scenario will show how to deploy and connecto to [Apache Kafka\
-  \ on Kubernetes](https://developers.redhat.com/topics/kafka-kubernetes).\n\n###\
-  \ What is Apache Kafka?\n\n[Apache Kafka](https://www.redhat.com/en/topics/integration/what-is-apache-kafka)\
-  \ has become the leading platform for building real-time data pipelines. Today,\
-  \ Kafka is heavily used for developing event-driven applications, where it lets\
-  \ services communicate with each other through events. Using Kubernetes for this\
-  \ type of workload requires adding specialized components such as Kubernetes Operators\
-  \ and connectors to bridge the rest of your systems and applications to the Kafka\
-  \ ecosystem.\n\nApache Kafka is a distributed data streaming platform that is a\
-  \ popular event processing choice. It can handle publishing, subscribing to, storing,\
-  \ and processing event streams in real-time. Apache Kafka supports a range of use\
-  \ cases where high throughput and scalability are vital, and by minimizing the need\
-  \ for point-to-point integrations for data sharing in certain applications, it can\
-  \ reduce latency to milliseconds.\n\n### Strimzi: Kubernetes Operator for Apache\
-  \ Kafka\n\n[Strimzi](https://strimzi.io/) simplifies the process of running Apache\
-  \ Kafka in a Kubernetes cluster.\nStrimzi is a CNCF Sandbox project which provides\
-  \ the leading community Operators for deploying and managing the components to run\
-  \ an Apache Kafka cluster on Kubernetes in various deployment configurations. This\
-  \ includes the Kafka brokers, Apache ZooKeeper, MirrorMaker and Kafka Connect.\n\
-  \n### Red Hat Integration\n\nTo respond to business demands quickly and efficiently,\
-  \ you need a way to integrate applications and data spread across your enterprise.\
-  \ [Red Hat AMQ](https://www.redhat.com/en/technologies/jboss-middleware/amq) \u2014\
-  \ based on open source communities like Apache ActiveMQ and Apache Kafka \u2014\
-  \ is a flexible messaging platform that delivers information reliably, enabling\
-  \ real-time integration, and connecting the Internet of Things (IoT).\n\nAMQ streams\
-  \ is a [Red Hat Integration](https://www.redhat.com/en/products/integration) component\
-  \ that supports Apache Kafka on OpenShift. Through AMQ Streams, Kafka operates as\
-  \ an \u201COpenShift-native\u201D platform through the use of powerful AMQ Streams\
-  \ Operators that simplify the deployment, configuration, management, and use of\
-  \ Apache Kafka on OpenShift.\n\n![Operators within the AMQ Streams architecture](https://access.redhat.com/webassets/avalon/d/Red_Hat_AMQ-7.7-Evaluating_AMQ_Streams_on_OpenShift-en-US/images/320e68d6e4b4080e7469bea094ec8fbf/operators.png)\n\
-  \n* **Cluster Operator**\nDeploys and manages Apache Kafka clusters, Kafka Connect,\
-  \ Kafka MirrorMaker, Kafka Bridge, Kafka Exporter, and the Entity Operator\n* **Entity\
-  \ Operator**\nComprises the Topic Operator and User Operator\n* **Topic Operator**\n\
-  Manages Kafka topics\n* **User Operator**\nManages Kafka users\n"
+  * **Cluster Operator**
+  Deploys and manages Apache Kafka clusters, Kafka Connect, Kafka MirrorMaker, Kafka Bridge, Kafka Exporter, and the Entity Operator
+  * **Entity Operator**
+  Comprises the Topic Operator and User Operator
+  * **Topic Operator**
+  Manages Kafka topics
+  * **User Operator**
+  Manages Kafka users
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: kafka-kafka-basic
-tags:
-- openshift
-title: Apache Kafka basics
-type: track
+challenges:
+- slug: step1
+  id: yynok7yvyjmz
+  type: challenge
+  title: Installing Red Hat AMQ Streams Operators
+  assignment: |
+    Red Hat AMQ Streams simplifies the process of running Apache Kafka in an OpenShift cluster. This tutorial provides instructions for deploying a working environment of AMQ Streams.
+
+    ### Logging in to the Cluster via OpenShift CLI
+
+    Before creating any applications, login as admin. This is required if you want to log in to the web console and use it.
+
+    To log in to the OpenShift cluster from the _Terminal_ run:
+
+    ```
+    oc login -u admin -p admin
+    ```
+
+    This will log you in using the credentials:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    Use the same credentials to log into the web console.
+
+    ### Creating your own namespace
+
+    To create a new (project) namespace called ``kafka`` for the AMQ Streams Kafka Cluster Operator run the command:
+
+    ```
+    oc new-project kafka
+    ```
+
+    ### Install AMQ Streams Operators
+
+    AMQ Streams provides container images and Operators for running Kafka on OpenShift. AMQ Streams Operators are fundamental to the running of AMQ Streams. The Operators provided with AMQ Streams are purpose-built with specialist operational knowledge to effectively manage Kafka.
+
+    Deploy the Operator Lifecycle Manager Operator Group and Susbcription to install the Operator in the previously created namespace:
+
+    ```
+    oc -n kafka apply -f /opt/operator-install.yaml
+    ```
+
+    You will see the following result:
+
+    ```bash
+    operatorgroup.operators.coreos.com/streams-operatorgroup created
+    subscription.operators.coreos.com/amq-streams created
+    ```
+
+    > You can also deploy the AMQ streams Operator from the OpenShift OperatorHub from within the OpenShift administration console.
+
+    ### Check the Operator deployment
+
+    Check the Operator deployment is running.
+
+    To watch the status of the pods run the following command:
+
+    ```
+    oc -n kafka get pods -w
+    ```
+
+    You will see the status of the pod for the Cluster Operator changing to `Running`:
+
+    ```bash
+    NAME                                                   READY   STATUS              RESTARTS   AGE
+    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   0/1     ContainerCreating   0          10s
+    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   0/1     Running             0          18s
+    amq-streams-cluster-operator-v1.5.3-59666d98cb-8ptlz   1/1     Running             0          34s
+    ```
+
+    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: bkdlablmqenx
+  type: challenge
+  title: Deploying a Kafka cluster
+  assignment: |
+    With AMQ Streams installed, create a Kafka cluster, then a topic within the cluster.
+
+    When you create a cluster, the Cluster Operator you deployed when installing AMQ Streams watches for new Kafka resources.
+
+    ### Creating a Kafka cluster
+
+    Create a new Kafka cluster named `my-cluster`, with 1 ZooKeeper, 1 broker node, and `ephemeral` storage to simplify the deployment. In production case scenarios, you will want to increase the amount of nodes and use persistent storage.
+
+    Check the configuration for the `Kafka` custom resource:
+
+    `cat /opt/kafka-cluster.yaml`{{execute interrupt}}
+
+    Then create the Kafka cluster by applying the configuration:
+
+    ```
+    oc -n kafka apply -f /opt/kafka-cluster.yaml
+    ```
+
+    ### Checking the Kafka cluster deployment
+
+    Check the ZooKeeper and Kafka deployment is running.
+
+    To watch the status of the pods run the following command:
+
+    ```
+    oc -n kafka get pods -w
+    ```
+
+    You will see the status of the pods for ZooKeeper, Kafka, and the Entity Operator changing to `Running`:
+
+    ```bash
+    NAME                                                   READY   STATUS              RESTARTS   AGE
+    amq-streams-cluster-operator-v1.5.3-59666d98cb-frcv9   1/1     Running             0          4m27s
+    my-cluster-zookeeper-0                                 0/1     ContainerCreating   0          3s
+    my-cluster-zookeeper-0                                 0/1     ContainerCreating   0          5s
+    my-cluster-zookeeper-0                                 0/1     Running             0          23s
+    my-cluster-zookeeper-0                                 1/1     Running             0          38s
+    my-cluster-kafka-0                                     0/2     Pending             0          0s
+    my-cluster-kafka-0                                     0/2     Pending             0          0s
+    my-cluster-kafka-0                                     0/2     ContainerCreating   0          0s
+    my-cluster-kafka-0                                     0/2     ContainerCreating   0          2s
+    my-cluster-kafka-0                                     0/2     Running             0          4s
+    my-cluster-kafka-0                                     1/2     Running             0          20s
+    my-cluster-kafka-0                                     2/2     Running             0          27s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Pending             0          0s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Pending             0          0s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     ContainerCreating   0          1s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     ContainerCreating   0          3s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            0/2     Running             0          4s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            1/2     Running             0          18s
+    my-cluster-entity-operator-57bb594d9d-z4gs6            2/2     Running             0          21s
+    ```
+
+    The Entity Operator contains the Topic Operator.
+
+    > You can notice the Cluster Operator starts the Apache ZooKeeper cluster as well as the broker nodes and the Entity Operator. The Zookeeper and Kafka cluster are based on Kubernetes StatetulSets.
+
+    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ### Create a Kafka Topic to store your events
+
+    When your cluster is ready, create a topic to subscribe and publish to from your external client.
+
+    Create a `my-topic` custom resource definition with 1 replica and 1 partition in the `my-cluster` Kafka cluster.
+
+    Check the configuration for the `KafkaTopic` custom resource:
+
+    `cat /opt/kafka-topic.yaml`{{execute interrupt}}
+
+    Then apply the custom resource for the Topic Operator to pick up:
+
+    ```
+    oc -n kafka apply -f /opt/kafka-topic.yaml
+    ```
+
+    This creates a Kafka topic in the cluster for sending and receiving events. Now we are ready to interact with the cluster.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: nk8dgvyxy3w6
+  type: challenge
+  title: Accessing the Kafka cluster from a console
+  assignment: |
+    Time to check that the deployment is working, and the Topic Operator successfully created the topic.
+
+    ### Accessing the running Kafka broker pod
+
+    AMQ streams provides container images with the Apache Kafka distribution, including console scripts. Let's connect to the running broker to execute those scripts.
+
+    Support for remote container command execution is built into the `oc` CLI. `Bash` is one of the commands we can execute. To get an interactive terminal issue the following command:
+
+    ```
+    oc exec -it my-cluster-kafka-0 -- bash
+    ```
+
+    You are now running a terminal into the Kafka broker container. Here you can execute the scripts available in the `/bin` directory.
+
+    ### Reviewing topic information
+
+    Use the `kafka-topics` shell script as a command line tool that can alter, create, delete and list topic information from a Kafka cluster.
+
+    Let's use it to describe the `my-topic` we asked the Topic Operator to create for us in the previous step:
+
+    ```
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe
+    ```
+
+    > We are using localhost:9092 as we are running within the same container.
+
+    You will get output similar to this:
+
+    ```
+    OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+    Topic: my-topic PartitionCount: 1       ReplicationFactor: 1    Configs:
+            Topic: my-topic Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+    ```
+
+    > The `my-topic` topic has 1 partition and a replication factor of 1 as defined in the KafkaTopic resouce.
+
+    Time to send and receive events!
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: ykn1xqzoupbd
+  type: challenge
+  title: Producing and consuming records
+  assignment: |
+    Kafka clients connect through the network to the Kafka brokers where the topic contains partitions for writing (producing) and reading (consuming) events.
+
+    ### Producing events
+
+    We will use a producer shell script to write events.
+
+    Run the console producer to send one message per line:
+
+    ```
+    bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic my-topic
+    ```
+
+    You will get a prompt to start sending the messages, try with _hello world!_
+
+    ```
+    hello world!
+    ```
+
+    Enter some more messages, then press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ### Consuming events
+
+    Time to read the messages you wrote.
+
+    Run the console consumer shell script:
+
+    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning`{{execute interrupt}}
+
+    You should see the messages you wrote:
+
+    ```
+    hello world!
+    #...
+    ```
+
+    Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
+
+    `^C`{{execute ctrl-seq}}
+
+    ### Congratulations
+
+    You successfully completed this scenario! You now know how to deploy a simple Apache Kafka cluster on top of OpenShift using AMQ Streams.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "16425364808088625280"

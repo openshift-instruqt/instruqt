@@ -1,165 +1,170 @@
-challenges:
-- assignment: '### What is Prometheus?
+slug: ai-machine-learning-prometheus-api-client
+id: 1wqs7rfyn9ge
+type: track
+title: Prometheus metrics for Data Science on OpenShift
+description: |
+  # Introduction
 
-    [Prometheus](https://prometheus.io/docs/introduction/overview/#what-is-prometheus)
-    is an open-source systems monitoring and alerting toolkit originally built at
-    SoundCloud.
-
-
-    ### What is Prometheus API Client?
-
-    [Prometheus-api-client](https://prometheus-api-client-python.readthedocs.io/en/master/source/prometheus_api_client.html)
-    is a python client we built to collect metric data from Prometheus and change
-    it in a more  data science suitable format of a [Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas-dataframe).
-
-    '
-  difficulty: basic
-  slug: 01-loading-the-notebook-images
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: More about Prometheus
-  type: challenge
-- assignment: "\n### Waiting for the test data to be generated\nWe need to generate\
-    \ some test data for Prometheus which can take a couple of minutes. <br>\nOnce\
-    \ the environment is set up, lets see how to access it.\n\n### Accessing the Prometheus\
-    \ Console\n* The Prometheus console can be accessed using the following url: <br>\n\
-    http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/\n\
-    \n  ![Prometheus Console](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console.png)\n\
-    \n* To check if the test data was generated successfully, go to the following\
-    \ url: <br>\n  http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/graph?g0.range_input=12h&g0.expr=test&g0.tab=0\n\
-    \n* The above link will query the Prometheus instance for a metric called `test`\
-    \ for the past 12 hours and if the data was generated successfully your Prometheus\
-    \ console should look like this:\n  ![Prometheus Console Data](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console-data.png)\n\
-    \n### Accessing the Jupyter Notebooks Environment\n\n* The Jupyter environment\
-    \ with the workshop notebooks is available here: <br>\nhttps://prometheus-anomaly-detection-workshop-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/\n\
-    \n* You might see a warning like in the image below, this is because we don't\
-    \ generate valid ssl certificates for all our routes. You can click on `Advanced...`\
-    \ and then click on `Accept the Risk and Continue` to continue to the Jupyter\
-    \ environment.\n\n  ![Cert Warning Page](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-cert-warning-page.png)\n\
-    \  \n* You will need a password to access the environment. <br>\n  The password\
-    \ is `secret` <br>\n  ![Jupyter Environment Secret](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-secret.png)\n\
-    \n* There are 2 notebooks available in the Jupyter environment:\n  1. `(Exercises)\
-    \ Introduction_Prometheus_API_Client.ipynb` - In this notebook you will explore\
-    \ and solve few exercises on using the Prometheus API client.\n  2. `(Solutions)\
-    \ Introduction_Prometheus_API_Client.ipynb` - You will find the solutions to the\
-    \ exercises in this notebook. <br><br>\n\n  ![Jupyter Notebook List](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-notebook-list.png)\n\
-    \n* The idea behind this scenario is to work through the `Exercises` notebook\
-    \ and only check the solutions notebook when you need help.\n\nThat's it, once\
-    \ you are done with the notebooks you have finished this scenario. <br>\nThe next\
-    \ step will just show you how to access the backend for this scenario, you can\
-    \ safely skip it.\n"
-  difficulty: basic
-  slug: 02-loading-the-notebook-templates
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Accessing the workshop environment
-  type: challenge
-- assignment: "\n\n### Accessing the OpenShift Console\n\nYou don't need to access\
-    \ the OpenShift Console for the purposes of this workshop. <br>\nBut if you want\
-    \ to look at what's going on under the hood, you can follow the instructions below:\n\
-    \nTo access the OpenShift console:\n\n* Click on the _Console_ tab in the workshop\
-    \ dashboard. You will be presented with the OpenShift login screen.\n\n  ![Web\
-    \ Console Login](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-login-page.png)\n\
-    \n  For the credentials, enter:\n\n  * **Username:** ``developer``\n  * **Password:**\
-    \ ``developer``\n\nOnce you have logged in, you should be shown the list of projects\
-    \ you have access to. A project called `myproject` is where this workshop is deployed.\n\
-    \nYou should be able to see the deployment in the OpenShift Web Console by switching\
-    \ over to the **Developer** perspective of the OpenShift Web Console. Change from\
-    \ **Administrator** to **Developer** from the drop-down as shown below:\n\n![Web\
-    \ Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)\n\
-    \nMake sure you are on the `myproject` project by selecting it from the projects\
-    \ list or **Project** dropdown menu.\n\n* In this project you should be able to\
-    \ see two different applications that have been deployed. <br>\n  ![Web Console\
-    \ Project](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-console-page.png)\n\
-    \n  * The `prometheus-anomaly-detection-workshop` application is the Jupyter notebook\
-    \ environment.\n\n  * The `prometheus-demo` application is the Prometheus instance\
-    \ with the test metric data.\n\nWhile playing around the backend keep in mind\
-    \ that this environment will only be active for 1 hour. <br>\nThe source for this\
-    \ scenario is available [here](https://github.com/openshift-labs/learn-katacoda/tree/master/ai-machine-learning/prometheus-api-client).\n"
-  difficulty: basic
-  slug: 03-accessing-the-web-console
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Accessing the workshop environment (Backend)
-  type: challenge
-description: '# Introduction
-
-
-  In this tutorial you will learn how to use the [Prometheus API Client](https://github.com/AICoE/prometheus-api-client-python)
-  for Python to collect and manipulate [Prometheus](https://github.com/prometheus/prometheus#prometheus)
-  time-series metric data. <br>
-
-  We will use a [Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/stable/)
-  to interact with a Prometheus instance which is currently being deployed. <br>
-
+  In this tutorial you will learn how to use the [Prometheus API Client](https://github.com/AICoE/prometheus-api-client-python) for Python to collect and manipulate [Prometheus](https://github.com/prometheus/prometheus#prometheus) time-series metric data. <br>
+  We will use a [Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/stable/) to interact with a Prometheus instance which is currently being deployed. <br>
   Please give the environment a couple of minutes to set up. <br>
-
-  Once the environment is ready to be used, you will see the links to access it in
-  your workshop terminal.
-
+  Once the environment is ready to be used, you will see the links to access it in your workshop terminal.
 
 
   ### The Environment
 
-
-  During this tutorial you will be using a hosted OpenShift 4.7 environment that is
-  created just for you. This environment is not shared with other users of the system.
-  <br>
-
-  Your environment will only be active for a one hour period. Keep this in mind before
-  embarking on getting through the content. <br>
-
+  During this tutorial you will be using a hosted OpenShift 4.7 environment that is created just for you. This environment is not shared with other users of the system. <br>
+  Your environment will only be active for a one hour period. Keep this in mind before embarking on getting through the content. <br>
   Each time you start this tutorial, a new environment will be created on the fly.
 
-
-  Let''s get started!
-
-  '
+  Let's get started!
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: ai-machine-learning-prometheus-api-client
-tags:
-- openshift
-title: Prometheus metrics for Data Science on OpenShift
-type: track
+challenges:
+- slug: 01-loading-the-notebook-images
+  id: r8vf7bnhbff9
+  type: challenge
+  title: More about Prometheus
+  assignment: |
+    ### What is Prometheus?
+    [Prometheus](https://prometheus.io/docs/introduction/overview/#what-is-prometheus) is an open-source systems monitoring and alerting toolkit originally built at SoundCloud.
+
+    ### What is Prometheus API Client?
+    [Prometheus-api-client](https://prometheus-api-client-python.readthedocs.io/en/master/source/prometheus_api_client.html) is a python client we built to collect metric data from Prometheus and change it in a more  data science suitable format of a [Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas-dataframe).
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-loading-the-notebook-templates
+  id: yvuuxe48pnxd
+  type: challenge
+  title: Accessing the workshop environment
+  assignment: |2
+
+    ### Waiting for the test data to be generated
+    We need to generate some test data for Prometheus which can take a couple of minutes. <br>
+    Once the environment is set up, lets see how to access it.
+
+    ### Accessing the Prometheus Console
+    * The Prometheus console can be accessed using the following url: <br>
+    http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
+
+      ![Prometheus Console](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console.png)
+
+    * To check if the test data was generated successfully, go to the following url: <br>
+      http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/graph?g0.range_input=12h&g0.expr=test&g0.tab=0
+
+    * The above link will query the Prometheus instance for a metric called `test` for the past 12 hours and if the data was generated successfully your Prometheus console should look like this:
+      ![Prometheus Console Data](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console-data.png)
+
+    ### Accessing the Jupyter Notebooks Environment
+
+    * The Jupyter environment with the workshop notebooks is available here: <br>
+    https://prometheus-anomaly-detection-workshop-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
+
+    * You might see a warning like in the image below, this is because we don't generate valid ssl certificates for all our routes. You can click on `Advanced...` and then click on `Accept the Risk and Continue` to continue to the Jupyter environment.
+
+      ![Cert Warning Page](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-cert-warning-page.png)
+
+    * You will need a password to access the environment. <br>
+      The password is `secret` <br>
+      ![Jupyter Environment Secret](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-secret.png)
+
+    * There are 2 notebooks available in the Jupyter environment:
+      1. `(Exercises) Introduction_Prometheus_API_Client.ipynb` - In this notebook you will explore and solve few exercises on using the Prometheus API client.
+      2. `(Solutions) Introduction_Prometheus_API_Client.ipynb` - You will find the solutions to the exercises in this notebook. <br><br>
+
+      ![Jupyter Notebook List](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-notebook-list.png)
+
+    * The idea behind this scenario is to work through the `Exercises` notebook and only check the solutions notebook when you need help.
+
+    That's it, once you are done with the notebooks you have finished this scenario. <br>
+    The next step will just show you how to access the backend for this scenario, you can safely skip it.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 03-accessing-the-web-console
+  id: 80eizyvtgp7u
+  type: challenge
+  title: Accessing the workshop environment (Backend)
+  assignment: |2
+
+
+    ### Accessing the OpenShift Console
+
+    You don't need to access the OpenShift Console for the purposes of this workshop. <br>
+    But if you want to look at what's going on under the hood, you can follow the instructions below:
+
+    To access the OpenShift console:
+
+    * Click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
+
+      ![Web Console Login](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-login-page.png)
+
+      For the credentials, enter:
+
+      * **Username:** ``developer``
+      * **Password:** ``developer``
+
+    Once you have logged in, you should be shown the list of projects you have access to. A project called `myproject` is where this workshop is deployed.
+
+    You should be able to see the deployment in the OpenShift Web Console by switching over to the **Developer** perspective of the OpenShift Web Console. Change from **Administrator** to **Developer** from the drop-down as shown below:
+
+    ![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+
+    Make sure you are on the `myproject` project by selecting it from the projects list or **Project** dropdown menu.
+
+    * In this project you should be able to see two different applications that have been deployed. <br>
+      ![Web Console Project](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-console-page.png)
+
+      * The `prometheus-anomaly-detection-workshop` application is the Jupyter notebook environment.
+
+      * The `prometheus-demo` application is the Prometheus instance with the test metric data.
+
+    While playing around the backend keep in mind that this environment will only be active for 1 hour. <br>
+    The source for this scenario is available [here](https://github.com/openshift-labs/learn-katacoda/tree/master/ai-machine-learning/prometheus-api-client).
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "6657252348682566947"

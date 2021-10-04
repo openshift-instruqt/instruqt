@@ -1,193 +1,224 @@
-challenges:
-- assignment: "# Import the code\nLet's refresh the code we'll be using. Run the following\
-    \ command to clone the sample project:\n\n```\ncd /root/projects && rm -rf rhoar-getting-started\
-    \ && git clone https://github.com/openshift-katacoda/rhoar-getting-started &&\
-    \ cd rhoar-getting-started/spring/microservices-externalized-config\n```\n\n#\
-    \ Review the base structure of the application\n**1. Understanding the Application**\n\
-    \nThe project is a simple Greeting application, where a user inputs a fruit name\
-    \ and is greeted by our service. Opening up our ``src/main/java/com/example/service/FruitController.java``{{open}}\
-    \ file we can see the logic used to respond to our user. The interesting part\
-    \ of this logic is right here, where we retrieve the message:\n\n```java\nString\
-    \ message = String.format(properties.getMessage(), name);\n```\n\nIf we take a\
-    \ closer look at this `properties` object, we see that it's of type `MessageProperties`.\
-    \ When we look at that file ``src/main/java/com/example/service/MessageProperties.java``{{open}}\
-    \ we see an annotation linking to a configuration prefix, `@ConfigurationProperties(\"\
-    greeting\")`, which is pointing to our ``src/main/resources/application-local.properties``{{open}}\
-    \ file.\n\nOur `application-local.properties` file contains only one property,\
-    \ `greeting.message`. This is the message that we return and display to the user.\
-    \ In order to get an understanding of the flow, let's run the application locally.\
-    \ On the terminal build the project:\n\n```\nmvn spring-boot:run\n```  \n\nWhen\
-    \ the application finishes building, click the **local web browser** or click\
-    \ [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com).\
-    \ You should see the same message that is in the `application-local.properties`\
-    \ file.\n\nBe sure to stop the application with `ctrl-c`.\n\n## Congratulations\n\
-    \nYou have now successfully executed the first step in this scenario. in the next\
-    \ step we're going to be deploying the project and testing it our for ourselves,\
-    \ as well as modifying this greeting through External Configuration."
-  difficulty: basic
-  slug: 01-review-the-initial-project
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 1
-  type: challenge
-- assignment: "# Deploy to OpenShift Application Platform\n\n**1. Create a project**\n\
-    \nLet's first create a new project:\n\n```\noc new-project dev --display-name=\"\
-    Dev - Spring Boot App\"\n```\n\n**2. Additional Configuration**\n\nBefore we deploy\
-    \ the application, we have to make a few changes so our application runs smoothly\
-    \ using External Configurations.\n\nThe first step is we're going to assign view\
-    \ access rights to the service account we're logged in as. We have to do this\
-    \ before deploying the application so that it's able to access the OpenShift API\
-    \ and read the contents of the `ConfigMap`. We can do that with the following\
-    \ command:\n\n```\noc policy add-role-to-user view -n $(oc project -q) -z default\n\
-    ```\n\nWe should see `clusterrole.rbac.authorization.k8s.io/view added: \"default\"\
-    ` as output. The next step is to create our `ConfigMap` configuration and deploy\
-    \ it to OpenShift using:\n\n```\noc create configmap spring-boot-configmap-greeting\
-    \ --from-file=src/main/etc/application.properties\n```\n\nWe will talk about `ConfigMap`s\
-    \ in greater detail in the next section.\n\n>**NOTE:** The only two parameters\
-    \ this command needs are the name of the ConfigMap to create and the file location.\
-    \ This command is creating a `ConfigMap` named `spring-boot-configmap-greeting`,\
-    \ which also happens to be the name of the application we're deploying. We're\
-    \ going to be using that name in future commands. If you decide to manually run\
-    \ the command or give the `ConfigMap` a different name, make sure you modify the\
-    \ other commands and configuration accordingly.\n\nNow we're ready to deploy!\n\
-    \n**3. Deploy the application to OpenShift**\n\nRun the following command to deploy\
-    \ the application to OpenShift:\n\n```\nmvn oc:deploy -Popenshift\n```\n\nThere's\
-    \ a lot that happens here so lets break it down:\n\nFor the deployment to OpenShift\
-    \ we are using the [JKube](https://www.eclipse.org/jkube/) tool through the [`openshift-maven-plugin`](https://www.eclipse.org/jkube/docs/openshift-maven-plugin),\
-    \ which is configured in our ``pom.xml``{{open}} (found in the `<profiles/>` section).\
-    \ The deployment may take a few minutes to complete.\n\nYou can run the command\
-    \ ```\noc rollout status -w dc/spring-boot-configmap-greeting\n``` to watch and\
-    \ wait for the deployment to complete.\n\nOnce the application deployment completes,\
-    \ navigate to our route in the OpenShift Web View or click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/).\
-    \ We should see the following screen, meaning everything was successful:\n\n![Greeting\
-    \ Service](/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)\n\
-    \n**4. Test functionality**\n\nAs the page suggests, we're going to put in a name\
-    \ of a fruit and let our greeting service reply with a given greeting. Since our\
-    \ default value in our `ConfigMap` is `Greetings, you picked %s as your favorite\
-    \ fruit!`, that's what we should see after we fill in the textbox and click the\
-    \ button. \n\n## Congratulations\n\nWe've now deployed our application to OpenShift\
-    \ and we're ready to see how we can modify certain aspects of our application\
-    \ without downtime through the use of External Configuration via our ConfigMap."
-  difficulty: basic
-  slug: 02-deploy-to-openshift
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 2
-  type: challenge
-- assignment: "# Making modifications to the Configuration Map\n\n**1. The ConfigMap**\n\
-    \n`ConfigMap`s are a useful tool for decoupling configuration settings from the\
-    \ code. `ConfigMap`s can be used to inject configuration data into a container\
-    \ in much the same way that secrets do, though `ConfigMap`s should not store confidential\
-    \ information. `ConfigMap` objects hold key-pair values representing all of your\
-    \ configuration data. \n\nNotice the following dependency that was added to our\
-    \ `pom.xml`{{open}}. This allows us to integrate with OpenShift's ConfigMaps.\n\
-    \n```    \n     <dependency>\n       <groupId>org.springframework.cloud</groupId>\n\
-    \       <artifactId>spring-cloud-starter-kubernetes-config</artifactId>\n    \
-    \ </dependency>\n```\n\n**2. Modify the ConfigMap**\n\nLet's modify the greeting\
-    \ that our service is returning to the user. Since we set up the greeting in a\
-    \ properties file, we will not need to make any code change to change the functionality.\
-    \ This means that we won't need to have any downtime for this change, we're able\
-    \ to modify the response through our newly created `ConfigMap` from the previous\
-    \ step. We can edit our config map in the OpenShift Console. [Click here](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/dev/configmaps/spring-boot-configmap-greeting/yaml)\
-    \ to open our `ConfigMap` in a YAML editor.\n\n   > **NOTE:** The username/password\
-    \ for the OpenShift console is `admin`.\n\nChange the `greeting.message` property\
-    \ to: `greeting.message=Bonjour, you picked %s as your favorite fruit!`\n\n![Greeting\
-    \ Service](/openshift/assets/middleware/rhoar-microservices/editconfigmap.png)\n\
-    \nHit `Save` (at the bottom of the editor) and that's all there is to it!\n\n\
-    **3. Test changes**\n\nNow that we've modified the `ConfigMap` and deployed our\
-    \ changes, let's test the greeting service and see if it's returning our new value.\n\
-    Click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ and put in a test value and click the button. Now instead of seeing `Greetings\
-    \ ...`, we should be seeing:\n\n`Bonjour, you picked %s as your favorite fruit!`\n\
-    \nThis means that we were able to modify our application behavior through External\
-    \ Configuration of the `application.properties` file using a ConfigMap without\
-    \ having to even take down the application. That's pretty powerful!\n\n# Open\
-    \ the solution in an IDE in the Cloud!\nWant to continue exploring this solution\
-    \ on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
-    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
-    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
-    \ are a new user. This free service expires after 30 days, but you can always\
-    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/microservices-externalized-config/devfile.yaml)\
-    \ to open the solution for this project in the cloud IDE. While loading, if it\
-    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
-    \ code to your own GitHub!\nWant to experiment more with the solution code you\
-    \ just worked with? If so, you can fork the repository containing the solution\
-    \ to your own GitHub repository by clicking on the following command to execute\
-    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
-    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
-    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
-    \ to open a new browser tab to GitHub and paste in the code you were presented\
-    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
-    \ close the browser tab and return to the console and press `Enter` to complete\
-    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
-    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
-    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
-    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
-    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
-    \ repo will be forked in your own GitHub account. On the `solution` branch in\
-    \ the repo, the `microservices-externalized-config` project inside the `spring`\
-    \ folder contains the completed solution for this scenario.\n\n## Congratulations\n\
-    \nYou have now learned how to handle Externalized Configuration with ConfigMaps\
-    \ through OpenShift. By creating a `ConfigMap`, we're able to modify application\
-    \ properties on the fly and simply rollout the new changes to our application."
-  difficulty: basic
-  slug: 03-modify-the-configmap
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 3
-  type: challenge
-description: 'In this scenario you will learn more about developing Spring Boot Microservices
-  using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform.
-  You will learn about Externalized Configurations and how we can use Externalized
-  Configurations to change specific values/variables without having to take down the
-  entire application.
-
-  '
+slug: developing-with-spring-microservices-1
+id: lhjyjnl1agnf
+type: track
+title: Externalized Configuration
+description: |
+  In this scenario you will learn more about developing Spring Boot Microservices using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. You will learn about Externalized Configurations and how we can use Externalized Configurations to change specific values/variables without having to take down the entire application.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: developing-with-spring-microservices-1
-tags:
-- openshift
-title: Externalized Configuration
-type: track
+challenges:
+- slug: 01-review-the-initial-project
+  id: ncgjinibgoaf
+  type: challenge
+  title: Step 1
+  assignment: |-
+    # Import the code
+    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+
+    ```
+    cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/microservices-externalized-config
+    ```
+
+    # Review the base structure of the application
+    **1. Understanding the Application**
+
+    The project is a simple Greeting application, where a user inputs a fruit name and is greeted by our service. Opening up our ``src/main/java/com/example/service/FruitController.java``{{open}} file we can see the logic used to respond to our user. The interesting part of this logic is right here, where we retrieve the message:
+
+    ```java
+    String message = String.format(properties.getMessage(), name);
+    ```
+
+    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java``{{open}} we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our ``src/main/resources/application-local.properties``{{open}} file.
+
+    Our `application-local.properties` file contains only one property, `greeting.message`. This is the message that we return and display to the user. In order to get an understanding of the flow, let's run the application locally. On the terminal build the project:
+
+    ```
+    mvn spring-boot:run
+    ```
+
+    When the application finishes building, click the **local web browser** or click [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com). You should see the same message that is in the `application-local.properties` file.
+
+    Be sure to stop the application with `ctrl-c`.
+
+    ## Congratulations
+
+    You have now successfully executed the first step in this scenario. in the next step we're going to be deploying the project and testing it our for ourselves, as well as modifying this greeting through External Configuration.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-deploy-to-openshift
+  id: kwx7d74xf62q
+  type: challenge
+  title: Step 2
+  assignment: |-
+    # Deploy to OpenShift Application Platform
+
+    **1. Create a project**
+
+    Let's first create a new project:
+
+    ```
+    oc new-project dev --display-name="Dev - Spring Boot App"
+    ```
+
+    **2. Additional Configuration**
+
+    Before we deploy the application, we have to make a few changes so our application runs smoothly using External Configurations.
+
+    The first step is we're going to assign view access rights to the service account we're logged in as. We have to do this before deploying the application so that it's able to access the OpenShift API and read the contents of the `ConfigMap`. We can do that with the following command:
+
+    ```
+    oc policy add-role-to-user view -n $(oc project -q) -z default
+    ```
+
+    We should see `clusterrole.rbac.authorization.k8s.io/view added: "default"` as output. The next step is to create our `ConfigMap` configuration and deploy it to OpenShift using:
+
+    ```
+    oc create configmap spring-boot-configmap-greeting --from-file=src/main/etc/application.properties
+    ```
+
+    We will talk about `ConfigMap`s in greater detail in the next section.
+
+    >**NOTE:** The only two parameters this command needs are the name of the ConfigMap to create and the file location. This command is creating a `ConfigMap` named `spring-boot-configmap-greeting`, which also happens to be the name of the application we're deploying. We're going to be using that name in future commands. If you decide to manually run the command or give the `ConfigMap` a different name, make sure you modify the other commands and configuration accordingly.
+
+    Now we're ready to deploy!
+
+    **3. Deploy the application to OpenShift**
+
+    Run the following command to deploy the application to OpenShift:
+
+    ```
+    mvn oc:deploy -Popenshift
+    ```
+
+    There's a lot that happens here so lets break it down:
+
+    For the deployment to OpenShift we are using the [JKube](https://www.eclipse.org/jkube/) tool through the [`openshift-maven-plugin`](https://www.eclipse.org/jkube/docs/openshift-maven-plugin), which is configured in our ``pom.xml``{{open}} (found in the `<profiles/>` section). The deployment may take a few minutes to complete.
+
+    You can run the command ```
+    oc rollout status -w dc/spring-boot-configmap-greeting
+    ``` to watch and wait for the deployment to complete.
+
+    Once the application deployment completes, navigate to our route in the OpenShift Web View or click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/). We should see the following screen, meaning everything was successful:
+
+    ![Greeting Service](/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)
+
+    **4. Test functionality**
+
+    As the page suggests, we're going to put in a name of a fruit and let our greeting service reply with a given greeting. Since our default value in our `ConfigMap` is `Greetings, you picked %s as your favorite fruit!`, that's what we should see after we fill in the textbox and click the button.
+
+    ## Congratulations
+
+    We've now deployed our application to OpenShift and we're ready to see how we can modify certain aspects of our application without downtime through the use of External Configuration via our ConfigMap.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 03-modify-the-configmap
+  id: 9mjq4gelfad2
+  type: challenge
+  title: Step 3
+  assignment: |-
+    # Making modifications to the Configuration Map
+
+    **1. The ConfigMap**
+
+    `ConfigMap`s are a useful tool for decoupling configuration settings from the code. `ConfigMap`s can be used to inject configuration data into a container in much the same way that secrets do, though `ConfigMap`s should not store confidential information. `ConfigMap` objects hold key-pair values representing all of your configuration data.
+
+    Notice the following dependency that was added to our `pom.xml`{{open}}. This allows us to integrate with OpenShift's ConfigMaps.
+
+    ```
+         <dependency>
+           <groupId>org.springframework.cloud</groupId>
+           <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+         </dependency>
+    ```
+
+    **2. Modify the ConfigMap**
+
+    Let's modify the greeting that our service is returning to the user. Since we set up the greeting in a properties file, we will not need to make any code change to change the functionality. This means that we won't need to have any downtime for this change, we're able to modify the response through our newly created `ConfigMap` from the previous step. We can edit our config map in the OpenShift Console. [Click here](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/dev/configmaps/spring-boot-configmap-greeting/yaml) to open our `ConfigMap` in a YAML editor.
+
+       > **NOTE:** The username/password for the OpenShift console is `admin`.
+
+    Change the `greeting.message` property to: `greeting.message=Bonjour, you picked %s as your favorite fruit!`
+
+    ![Greeting Service](/openshift/assets/middleware/rhoar-microservices/editconfigmap.png)
+
+    Hit `Save` (at the bottom of the editor) and that's all there is to it!
+
+    **3. Test changes**
+
+    Now that we've modified the `ConfigMap` and deployed our changes, let's test the greeting service and see if it's returning our new value.
+    Click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/) and put in a test value and click the button. Now instead of seeing `Greetings ...`, we should be seeing:
+
+    `Bonjour, you picked %s as your favorite fruit!`
+
+    This means that we were able to modify our application behavior through External Configuration of the `application.properties` file using a ConfigMap without having to even take down the application. That's pretty powerful!
+
+    # Open the solution in an IDE in the Cloud!
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+
+    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/microservices-externalized-config/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+
+    # Fork the source code to your own GitHub!
+    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
+
+    `/root/projects/forkrepo.sh`{{execute T1}}
+    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
+    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
+    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
+    - If asked to clone the fork, press `n` and then `Enter`.
+    - If asked to confirm logout, press `y` and the `Enter`.
+
+       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
+
+    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `microservices-externalized-config` project inside the `spring` folder contains the completed solution for this scenario.
+
+    ## Congratulations
+
+    You have now learned how to handle Externalized Configuration with ConfigMaps through OpenShift. By creating a `ConfigMap`, we're able to modify application properties on the fly and simply rollout the new changes to our application.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "4501652212251102519"

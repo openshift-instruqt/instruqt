@@ -1,393 +1,550 @@
-challenges:
-- assignment: "In order to run Camel K, you will need access to an Kubernetes/OpenShift\
-    \ environment. Let's setup the fundamentals.\n\n## Logging in to the Cluster via\
-    \ Dashboard\n\nClick the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)\
-    \ tab to open the dashboard.\n\nYou will then able able to login with admin permissions\
-    \ with:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\n\n## Logging\
-    \ in to the Cluster via CLI\n\nBefore creating any applications, login as admin.\
-    \ This will be required if you want to log in to the web console and\nuse it.\n\
-    \nTo login to the OpenShift cluster from the _Terminal_ run:\n\n```\noc login\
-    \ -u admin -p admin\n```\n\nThis will log you in using the credentials:\n\n* **Username:**\
-    \ ``admin``\n* **Password:** ``admin``\n\nUse the same credentials to log into\
-    \ the web console.\n\n\n## Creating your own Project\n\nTo create a new project\
-    \ called ``camel-api`` run the command:\n\n```\noc new-project camel-api\n```\n\
-    \n## Install Camel K Operator\n\nThe Catalog Operator is responsible for building,\
-    \ deploying Camel Applications and also creating surrounding resources. It is\
-    \ also responsible for watching any code or configuration updates and automatically\
-    \ updates it. To install simply run the command.\n\n\n```\nkamel install\n```\n\
-    \n you will see this prompt:\n\n```\nCamel K installed in namespace camel-api\n\
-    ```\n\nTo check if Camel K operator has successfully installed,\n```\noc get pod\
-    \ -w\n```\n\nonce camel-k-operator starts the Running status, it means it is successfully\
-    \ installed.\n```\nNAME                                READY   STATUS    RESTARTS\
-    \   AGE\ncamel-k-operator-554df8d75c-d2dx5   1/1     Running   0          84s\n\
-    ```\n\n\n## Setup the generic object datastore\n\nLets start Minio, it provide\
-    \ a S3 compatible protocol for storing the objects.\nTo create the minio backend,\
-    \ just apply the provided file:\n\n```\noc apply -f minio/minio.yaml\n```\n\n\
-    Now you have a working generic object datastore.\n"
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 1
-  type: challenge
-- assignment: "## Running the API integration\n\nYou have access to an OpenAPI standard\
-    \ document under `helper` called `openapi.yaml`, that contains operations for:\n\
-    \ - Listing the name of the contained objects\n - Creating a new object\n - Getting\
-    \ the content of an object\n - Deleting an object\n\n#### (OPTIONAL)\nThe document\
-    \ is written in YAML, this is what it looks like.\nYou can take this and view\
-    \ it in https://www.apicur.io, as a web based UI to design and view your OpenAPI\
-    \ based APIs.\n![apicurio](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)\n\
-    \n\n```\nopenapi: 3.0.2\ninfo:\n    title: Camel K Object API\n    version: 1.0.0\n\
-    \    description: A CRUD API for an object store\npaths:\n    /:\n        get:\n\
-    \            responses:\n                '200':\n                    content:\n\
-    \                        application/json:\n                            schema:\n\
-    \                                type: array\n                               \
-    \ items:\n                                    type: string\n                 \
-    \   description: Object list\n            operationId: list\n            summary:\
-    \ List the objects\n    '/{name}':\n        get:\n            responses:\n   \
-    \             '200':\n                    content:\n                        application/octet-stream:\
-    \ {}\n                    description: The object content\n            operationId:\
-    \ get\n            summary: Get the content of an object\n        put:\n     \
-    \       requestBody:\n                description: The object content\n      \
-    \          content:\n                    application/octet-stream: {}\n      \
-    \          required: true\n            responses:\n                '200':\n  \
-    \                  description: The object has been created\n            operationId:\
-    \ create\n            summary: Save an object\n        delete:\n            responses:\n\
-    \                '204':\n                    description: Object has been deleted\n\
-    \            operationId: delete\n            summary: Delete an object\n    \
-    \    parameters:\n            -\n                name: name\n                description:\
-    \ Name of the object\n                schema:\n                    type: string\n\
-    \                in: path\n                required: true\n    /list:\n      \
-    \  get:\n            responses:\n                '200':\n                    content:\n\
-    \                        application/json:\n                            schema:\n\
-    \                                type: array\n                               \
-    \ items:\n                                    type: string\n            operationId:\
-    \ list\n            summary: List the objects\n\n```\n\n\n\n#### IMPLEMENT API\
-    \ WIH CAMEL K\nLet's create the camel route that implements the operations that\
-    \ was defined in the API.  \nGo to the text editor on the right, under the folder\
-    \ /root/camel-api. Right click on the directory and choose New -> File and name\
-    \ it `API.java`.\n\nPaste the following code into the application.\n\n<pre class=\"\
-    file\" data-filename=\"API.java\" data-target=\"replace\">\n// camel-k: language=java\
-    \ dependency=camel-quarkus-openapi-java\n\nimport org.apache.camel.builder.AggregationStrategies;\n\
-    import org.apache.camel.builder.RouteBuilder;\n\npublic class API extends RouteBuilder\
-    \ {\n  @Override\n  public void configure() throws Exception {\n\n    // All endpoints\
-    \ starting from \"direct:...\" reference an operationId defined\n    // in the\
-    \ \"openapi.yaml\" file.\n\n    // List the object names available in the S3 bucket\n\
-    \    from(\"direct:list\")\n      .to(\"aws2-s3://{{api.bucket}}?operation=listObjects\"\
-    )\n      .split(simple(\"${body}\"), AggregationStrategies.groupedBody())\n  \
-    \      .transform().simple(\"${body.key}\")\n      .end()\n      .marshal().json();\n\
-    \n\n    // Get an object from the S3 bucket\n    from(\"direct:get\")\n      .setHeader(\"\
-    CamelAwsS3Key\", simple(\"${header.name}\"))\n      .to(\"aws2-s3://{{api.bucket}}?operation=getObject\"\
-    )\n      .convertBodyTo(String.class);\n\n    // Upload a new object into the\
-    \ S3 bucket\n    from(\"direct:create\")\n      .setHeader(\"CamelAwsS3Key\",\
-    \ simple(\"${header.name}\"))\n      .to(\"aws2-s3://{{api.bucket}}\");\n\n\n\
-    \    // Delete an object from the S3 bucket\n    from(\"direct:delete\")\n   \
-    \   .setHeader(\"CamelAwsS3Key\", simple(\"${header.name}\"))\n      .to(\"aws2-s3://{{api.bucket}}?operation=deleteObject\"\
-    )\n      .setBody().constant(\"\");\n\n  }\n}\n\n</pre>\n\nLet's add the for configuring\
-    \ and connecting to Minio.  \nGo to the text editor on the right, under the folder\
-    \ /root/camel-api. Right click on the directory and choose New -> File and name\
-    \ it `minio.properties`.\n\n\n<pre class=\"file\" data-filename=\"minio.properties\"\
-    \ data-target=\"replace\">\n# Bucket (referenced in the routes)\napi.bucket=camel-k\n\
-    \n# Minio information injected into the MinioCustomizer\nminio.endpoint=http://minio:9000\n\
-    minio.access-key=minio\nminio.secret-key=minio123\n\n# Camel AWS2 S3\ncamel.component.aws2-s3.region=EU_WEST_1\n\
-    camel.component.aws2-s3.access-key={{minio.access-key}}\ncamel.component.aws2-s3.secret-key={{minio.secret-key}}\n\
-    camel.component.aws2-s3.uri-endpoint-override = {{minio.endpoint}}\ncamel.component.aws2-s3.override-endpoint\
-    \ = true\n\n# General configuration\ncamel.context.rest-configuration.api-context-path=/api-doc\n\
-    </pre>\n\n\nWe are now ready to start up the application, simply point to the\
-    \ OpenAPI standard document and along with the implemented Camel K application.\
-    \ Notice we are also pointing to the configuration file too.\n\n```\nkamel run\
-    \ --name api camel-api/API.java --property-file camel-api/minio.properties --open-api\
-    \ helper/openapi.yaml\n```\n\nWait for the integration to be running (you should\
-    \ see the logs streaming in the terminal window).\n\n```\nlog\n```\n\nAfter running\
-    \ the integration API, you should be able to call the API endpoints to check its\
-    \ behavior.\nMake sure the integration is running, by checking its status:\n\n\
-    ```\noc get integrations\n```\n\nAn integration named api should be present in\
-    \ the list and it should be in status Running.\n\n``\nNAME    PHASE   KIT\napi\
-    \     Running kit-bte009bi9eodqqhokkkg\n``\n\nThere's also a kamel get command\
-    \ which is an alternative way to list all running integrations.\n```\nkamel get\
-    \ \n```\n\nNOTE: it may take some time, the first time you run the integration,\
-    \ for it to reach the Running state.\n\nAfter the integration has reached the\
-    \ running state, you can get the route corresponding to it via the following command:\n\
-    \n```\nURL=http://$(oc get route api -o jsonpath='{.spec.host}')\n```\n\nGet the\
-    \ list of objects:\n```\ncurl $URL/\n```\n\nSince there are nothing in the storage,\
-    \ you won't see anything for now.\n\nUpload an object:\n```\ncurl -i -X PUT --header\
-    \ \"Content-Type: application/octet-stream\" --data-binary \"/root/camel-api/API.java\"\
-    \ $URL/example\n```\n\nGet the new list of objects:\n```\ncurl -i $URL/\n```\n\
-    \nYou will see the *['example']* that we have just uploaded from previous step\n\
-    \nGet the content of a file:\n```\ncurl -i $URL/example\n```\n\nYou will see what\
-    \ was in your *API.java* file\n\nDelete the file:\n```\ncurl -i -X DELETE $URL/example\n\
-    ```\n\nGet the list of objects for the last time:\n```\ncurl -i $URL/\n```\n\n\
-    The storage is emtpy again, so nothing will return.\n\nCongratulations, you now\
-    \ have a running Restful web Application base on the OpenAPI Document.\n\nNow,\
-    \ let's go ahead and uninstall the API instance.\n\n```\nkamel delete api\n```\n"
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 2
-  type: challenge
-- assignment: "## Setup Serverless\n\nThe API integration can also run as Knative\
-    \ service and be able to scale to zero and scale out automatically, based on the\
-    \ received load.\n\nTo expose the integration as Knative service, you need to\
-    \ have OpenShift Serverless installed in the cluster. Let's subscribe to the OpenShift\
-    \ Serverless.\n\n```\noc apply -f serverless/subscription.yaml\n```\n\nsubscription.operators.coreos.com/servicemeshoperator\
-    \ created\nsubscription.operators.coreos.com/serverless-operator created\n\nNext\
-    \ up, you must create a KnativeServing object to install Knative Serving using\
-    \ the OpenShift Serverless Operator.\n\n```\noc apply -f serverless/serving.yaml\n\
-    ```\n\nThe KnativeServing instance will take a minute to install. As you might\
-    \ have noticed, the resources for KnativeServing can be found in the knative-serving\
-    \ project.\n\n\n\nWe can further validate an install being successful by seeing\
-    \ the following pods in knative-serving project:\n\n```\noc get pod -n knative-serving\
-    \ -w \n```\n\nWhen completed, you should see all pods with the status of Running.\n\
-    \n```\nNAME                                READY   STATUS    RESTARTS   AGE\n\
-    activator-d6478496f-x689c           1/1     Running   0          2m10s\nautoscaler-6ff6d5659c-5nq44\
-    \         1/1     Running   0          2m9s\nautoscaler-hpa-868c8b56b4-s6jln \
-    \    1/1     Running   0          2m10s\ncontroller-55b4748bc5-h5wxc         1/1\
-    \     Running   0          2m6s\nnetworking-istio-679dfcd5d7-mbt8v   1/1     Running\
-    \   0          2m4s\nwebhook-55b96d44f6-k7qmk            1/1     Running   0 \
-    \         2m6s\n```\n\nCtrl-C to exit.\n\nCongratulations, you now have a serverless\
-    \ platform installed, lets move on and make our API application serverless.\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 3
-  type: challenge
-- assignment: '## Making Camel K Serverless
+slug: serverless-camel-k-serving
+id: uxa1a3iktb6p
+type: track
+title: Serverless Camel K
+description: |
+  # Serverless Camel K
 
+  This scenario demonstrates how to create a simple API based [Camel K](https://camel.apache.org/camel-k/latest/index.html) integration with an OpenAPI definition.
 
+  The simple API application enable users to Create, Read, Update, and Delete to an generic online objects datastore.
 
-    With the same set of code written in Camel K, you can run it as a Serverless integration:
-
-
-    ```
-
-    kamel run camel-api/API.java --open-api helper/openapi.yaml --property-file camel-api/minio.properties
-    --dependency camel-quarkus-openapi-java --profile Knative
-
-    ```
-
-
-    Notice, when you allow, Camel K will automatically deploy the camel routes as
-    Serverless services so the routes can be auto scalable and scale down to zero
-    when not needed.
-
-
-    Check the integrations to see when they are ready:
-
-
-    ```
-
-    oc get integrations
-
-    ```
-
-
-    An integration named api should be present in the list and it should be in status
-    Running.
-
-
-    ``
-
-    NAME    PHASE   KIT
-
-    api     Running kit-bte009bi9eodqqhokkkg
-
-    ``
-
-    We can see the Serverless Service that we just created by executing:
-
-
-    ```
-
-    oc get services.serving.knative.dev api -n camel-api
-
-    ```
-
-
-
-    We can see the route by executing:
-
-
-    ```
-
-    oc get routes.serving.knative.dev api -n camel-api
-
-    ```
-
-
-
-    The Camel K API service will automatically scale down to zero if it does not get
-    request for approximately 90 seconds. Try watching the service scaling down from
-    [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph).
-
-
-    ![scalezero](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
-
-
-    Invoking the service to see the service scaling up.
-
-    ```
-
-    URL=$(oc get routes.serving.knative.dev api -o jsonpath=''{.status.url}'')
-
-    ```
-
-
-    Get the list of objects:
-
-
-    ```
-
-    curl -i $URL/
-
-    ```
-
-
-    It should be empty.
-
-
-    Watch the service scaling up from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph)
-    login with *admin/admin*. If you wait at another 90 seconds without invoking the
-    API, you''ll find that the pod will disappear. Calling the API again will make
-    the pod appear to serve the request.
-
-
-    ![scaleup](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
-
-
-
-    ## Congratulations
-
-
-    In this scenario you got to play with Camel K. Exposing RESTFul service using
-    and OpenAPI Standard document. And also making it SERVERLESS. There are much more
-    to Camel K. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html)
-    to learn even more about the architecture and capabilities of this exciting new
-    framework.
-
-    '
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 4
-  type: challenge
-description: '# Serverless Camel K
-
-
-  This scenario demonstrates how to create a simple API based [Camel K](https://camel.apache.org/camel-k/latest/index.html)
-  integration with an OpenAPI definition.
-
-
-  The simple API application enable users to Create, Read, Update, and Delete to an
-  generic online objects datastore.
-
-
-  Will also make this RESTFul application Serverless. By allowing this application
-  to scale down to zero. And quickly comes back up and run after being called.
-
+  Will also make this RESTFul application Serverless. By allowing this application to scale down to zero. And quickly comes back up and run after being called.
 
 
   ## What is Camel K?
 
-
   ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
-
 
   ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
 
+  Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-  Apache Camel K is a lightweight integration framework built from Apache Camel that
-  runs natively on Kubernetes and is specifically designed for serverless and microservice
-  architectures.
+  Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
 
-
-  Camel K supports multiple languages for writing integrations. Based the Operator
-  Pattern, Camel K performs operations on Kubernetes resources. Bringing integration
-  to the next level. utilizing the benefit of the Apache Camel project, such as the
-  wide variety of components and Enterprise Integration Patterns (EIP).
-
-
-  Camel K integrate seamlessly with Knative making it the best serverless technology
-  for integration. This scenario will get you started and hands on Camel K.
-
+  Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
 
   ## Why Serverless?
+  Deploying applications as Serverless services is becoming a popular architectural style.
 
-  Deploying applications as Serverless services is becoming a popular architectural
-  style.
-
-
-  You will need a  platform that can run serverless workloads, while also enabling
-  you to have complete control of the configuration, building, and deployment. Ideally,
-  the platform also supports deploying the applications as linux containers.
-
+  You will need a  platform that can run serverless workloads, while also enabling you to have complete control of the configuration, building, and deployment. Ideally, the platform also supports deploying the applications as linux containers.
 
   ##  OpenShift Serverless
 
-
-  OpenShift Serverless helps developers to deploy and run applications that will scale
-  up or scale to zero on-demand. Applications are packaged as OCI compliant Linux
-  containers that can be run anywhere. This is known as Serving.
-
-  '
+  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere. This is known as Serving.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: serverless-camel-k-serving
-tags:
-- openshift
-title: Serverless Camel K
-type: track
+challenges:
+- slug: step1
+  id: kaet0pxxe9ua
+  type: challenge
+  title: Step 1
+  assignment: |
+    In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
+
+    ## Logging in to the Cluster via Dashboard
+
+    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+
+    You will then able able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+
+    ## Logging in to the Cluster via CLI
+
+    Before creating any applications, login as admin. This will be required if you want to log in to the web console and
+    use it.
+
+    To login to the OpenShift cluster from the _Terminal_ run:
+
+    ```
+    oc login -u admin -p admin
+    ```
+
+    This will log you in using the credentials:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    Use the same credentials to log into the web console.
+
+
+    ## Creating your own Project
+
+    To create a new project called ``camel-api`` run the command:
+
+    ```
+    oc new-project camel-api
+    ```
+
+    ## Install Camel K Operator
+
+    The Catalog Operator is responsible for building, deploying Camel Applications and also creating surrounding resources. It is also responsible for watching any code or configuration updates and automatically updates it. To install simply run the command.
+
+
+    ```
+    kamel install
+    ```
+
+     you will see this prompt:
+
+    ```
+    Camel K installed in namespace camel-api
+    ```
+
+    To check if Camel K operator has successfully installed,
+    ```
+    oc get pod -w
+    ```
+
+    once camel-k-operator starts the Running status, it means it is successfully installed.
+    ```
+    NAME                                READY   STATUS    RESTARTS   AGE
+    camel-k-operator-554df8d75c-d2dx5   1/1     Running   0          84s
+    ```
+
+
+    ## Setup the generic object datastore
+
+    Lets start Minio, it provide a S3 compatible protocol for storing the objects.
+    To create the minio backend, just apply the provided file:
+
+    ```
+    oc apply -f minio/minio.yaml
+    ```
+
+    Now you have a working generic object datastore.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: ixy4k2cbxaiy
+  type: challenge
+  title: Step 2
+  assignment: |
+    ## Running the API integration
+
+    You have access to an OpenAPI standard document under `helper` called `openapi.yaml`, that contains operations for:
+     - Listing the name of the contained objects
+     - Creating a new object
+     - Getting the content of an object
+     - Deleting an object
+
+    #### (OPTIONAL)
+    The document is written in YAML, this is what it looks like.
+    You can take this and view it in https://www.apicur.io, as a web based UI to design and view your OpenAPI based APIs.
+    ![apicurio](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)
+
+
+    ```
+    openapi: 3.0.2
+    info:
+        title: Camel K Object API
+        version: 1.0.0
+        description: A CRUD API for an object store
+    paths:
+        /:
+            get:
+                responses:
+                    '200':
+                        content:
+                            application/json:
+                                schema:
+                                    type: array
+                                    items:
+                                        type: string
+                        description: Object list
+                operationId: list
+                summary: List the objects
+        '/{name}':
+            get:
+                responses:
+                    '200':
+                        content:
+                            application/octet-stream: {}
+                        description: The object content
+                operationId: get
+                summary: Get the content of an object
+            put:
+                requestBody:
+                    description: The object content
+                    content:
+                        application/octet-stream: {}
+                    required: true
+                responses:
+                    '200':
+                        description: The object has been created
+                operationId: create
+                summary: Save an object
+            delete:
+                responses:
+                    '204':
+                        description: Object has been deleted
+                operationId: delete
+                summary: Delete an object
+            parameters:
+                -
+                    name: name
+                    description: Name of the object
+                    schema:
+                        type: string
+                    in: path
+                    required: true
+        /list:
+            get:
+                responses:
+                    '200':
+                        content:
+                            application/json:
+                                schema:
+                                    type: array
+                                    items:
+                                        type: string
+                operationId: list
+                summary: List the objects
+
+    ```
+
+
+
+    #### IMPLEMENT API WIH CAMEL K
+    Let's create the camel route that implements the operations that was defined in the API.
+    Go to the text editor on the right, under the folder /root/camel-api. Right click on the directory and choose New -> File and name it `API.java`.
+
+    Paste the following code into the application.
+
+    <pre class="file" data-filename="API.java" data-target="replace">
+    // camel-k: language=java dependency=camel-quarkus-openapi-java
+
+    import org.apache.camel.builder.AggregationStrategies;
+    import org.apache.camel.builder.RouteBuilder;
+
+    public class API extends RouteBuilder {
+      @Override
+      public void configure() throws Exception {
+
+        // All endpoints starting from "direct:..." reference an operationId defined
+        // in the "openapi.yaml" file.
+
+        // List the object names available in the S3 bucket
+        from("direct:list")
+          .to("aws2-s3://{{api.bucket}}?operation=listObjects")
+          .split(simple("${body}"), AggregationStrategies.groupedBody())
+            .transform().simple("${body.key}")
+          .end()
+          .marshal().json();
+
+
+        // Get an object from the S3 bucket
+        from("direct:get")
+          .setHeader("CamelAwsS3Key", simple("${header.name}"))
+          .to("aws2-s3://{{api.bucket}}?operation=getObject")
+          .convertBodyTo(String.class);
+
+        // Upload a new object into the S3 bucket
+        from("direct:create")
+          .setHeader("CamelAwsS3Key", simple("${header.name}"))
+          .to("aws2-s3://{{api.bucket}}");
+
+
+        // Delete an object from the S3 bucket
+        from("direct:delete")
+          .setHeader("CamelAwsS3Key", simple("${header.name}"))
+          .to("aws2-s3://{{api.bucket}}?operation=deleteObject")
+          .setBody().constant("");
+
+      }
+    }
+
+    </pre>
+
+    Let's add the for configuring and connecting to Minio.
+    Go to the text editor on the right, under the folder /root/camel-api. Right click on the directory and choose New -> File and name it `minio.properties`.
+
+
+    <pre class="file" data-filename="minio.properties" data-target="replace">
+    # Bucket (referenced in the routes)
+    api.bucket=camel-k
+
+    # Minio information injected into the MinioCustomizer
+    minio.endpoint=http://minio:9000
+    minio.access-key=minio
+    minio.secret-key=minio123
+
+    # Camel AWS2 S3
+    camel.component.aws2-s3.region=EU_WEST_1
+    camel.component.aws2-s3.access-key={{minio.access-key}}
+    camel.component.aws2-s3.secret-key={{minio.secret-key}}
+    camel.component.aws2-s3.uri-endpoint-override = {{minio.endpoint}}
+    camel.component.aws2-s3.override-endpoint = true
+
+    # General configuration
+    camel.context.rest-configuration.api-context-path=/api-doc
+    </pre>
+
+
+    We are now ready to start up the application, simply point to the OpenAPI standard document and along with the implemented Camel K application. Notice we are also pointing to the configuration file too.
+
+    ```
+    kamel run --name api camel-api/API.java --property-file camel-api/minio.properties --open-api helper/openapi.yaml
+    ```
+
+    Wait for the integration to be running (you should see the logs streaming in the terminal window).
+
+    ```
+    log
+    ```
+
+    After running the integration API, you should be able to call the API endpoints to check its behavior.
+    Make sure the integration is running, by checking its status:
+
+    ```
+    oc get integrations
+    ```
+
+    An integration named api should be present in the list and it should be in status Running.
+
+    ``
+    NAME    PHASE   KIT
+    api     Running kit-bte009bi9eodqqhokkkg
+    ``
+
+    There's also a kamel get command which is an alternative way to list all running integrations.
+    ```
+    kamel get
+    ```
+
+    NOTE: it may take some time, the first time you run the integration, for it to reach the Running state.
+
+    After the integration has reached the running state, you can get the route corresponding to it via the following command:
+
+    ```
+    URL=http://$(oc get route api -o jsonpath='{.spec.host}')
+    ```
+
+    Get the list of objects:
+    ```
+    curl $URL/
+    ```
+
+    Since there are nothing in the storage, you won't see anything for now.
+
+    Upload an object:
+    ```
+    curl -i -X PUT --header "Content-Type: application/octet-stream" --data-binary "/root/camel-api/API.java" $URL/example
+    ```
+
+    Get the new list of objects:
+    ```
+    curl -i $URL/
+    ```
+
+    You will see the *['example']* that we have just uploaded from previous step
+
+    Get the content of a file:
+    ```
+    curl -i $URL/example
+    ```
+
+    You will see what was in your *API.java* file
+
+    Delete the file:
+    ```
+    curl -i -X DELETE $URL/example
+    ```
+
+    Get the list of objects for the last time:
+    ```
+    curl -i $URL/
+    ```
+
+    The storage is emtpy again, so nothing will return.
+
+    Congratulations, you now have a running Restful web Application base on the OpenAPI Document.
+
+    Now, let's go ahead and uninstall the API instance.
+
+    ```
+    kamel delete api
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: vy77cgjpdncx
+  type: challenge
+  title: Step 3
+  assignment: |
+    ## Setup Serverless
+
+    The API integration can also run as Knative service and be able to scale to zero and scale out automatically, based on the received load.
+
+    To expose the integration as Knative service, you need to have OpenShift Serverless installed in the cluster. Let's subscribe to the OpenShift Serverless.
+
+    ```
+    oc apply -f serverless/subscription.yaml
+    ```
+
+    subscription.operators.coreos.com/servicemeshoperator created
+    subscription.operators.coreos.com/serverless-operator created
+
+    Next up, you must create a KnativeServing object to install Knative Serving using the OpenShift Serverless Operator.
+
+    ```
+    oc apply -f serverless/serving.yaml
+    ```
+
+    The KnativeServing instance will take a minute to install. As you might have noticed, the resources for KnativeServing can be found in the knative-serving project.
+
+
+
+    We can further validate an install being successful by seeing the following pods in knative-serving project:
+
+    ```
+    oc get pod -n knative-serving -w
+    ```
+
+    When completed, you should see all pods with the status of Running.
+
+    ```
+    NAME                                READY   STATUS    RESTARTS   AGE
+    activator-d6478496f-x689c           1/1     Running   0          2m10s
+    autoscaler-6ff6d5659c-5nq44         1/1     Running   0          2m9s
+    autoscaler-hpa-868c8b56b4-s6jln     1/1     Running   0          2m10s
+    controller-55b4748bc5-h5wxc         1/1     Running   0          2m6s
+    networking-istio-679dfcd5d7-mbt8v   1/1     Running   0          2m4s
+    webhook-55b96d44f6-k7qmk            1/1     Running   0          2m6s
+    ```
+
+    Ctrl-C to exit.
+
+    Congratulations, you now have a serverless platform installed, lets move on and make our API application serverless.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: twqw1tlkv1ue
+  type: challenge
+  title: Step 4
+  assignment: |
+    ## Making Camel K Serverless
+
+
+    With the same set of code written in Camel K, you can run it as a Serverless integration:
+
+    ```
+    kamel run camel-api/API.java --open-api helper/openapi.yaml --property-file camel-api/minio.properties --dependency camel-quarkus-openapi-java --profile Knative
+    ```
+
+    Notice, when you allow, Camel K will automatically deploy the camel routes as Serverless services so the routes can be auto scalable and scale down to zero when not needed.
+
+    Check the integrations to see when they are ready:
+
+    ```
+    oc get integrations
+    ```
+
+    An integration named api should be present in the list and it should be in status Running.
+
+    ``
+    NAME    PHASE   KIT
+    api     Running kit-bte009bi9eodqqhokkkg
+    ``
+    We can see the Serverless Service that we just created by executing:
+
+    ```
+    oc get services.serving.knative.dev api -n camel-api
+    ```
+
+
+    We can see the route by executing:
+
+    ```
+    oc get routes.serving.knative.dev api -n camel-api
+    ```
+
+
+    The Camel K API service will automatically scale down to zero if it does not get request for approximately 90 seconds. Try watching the service scaling down from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph).
+
+    ![scalezero](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
+
+    Invoking the service to see the service scaling up.
+    ```
+    URL=$(oc get routes.serving.knative.dev api -o jsonpath='{.status.url}')
+    ```
+
+    Get the list of objects:
+
+    ```
+    curl -i $URL/
+    ```
+
+    It should be empty.
+
+    Watch the service scaling up from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph) login with *admin/admin*. If you wait at another 90 seconds without invoking the API, you'll find that the pod will disappear. Calling the API again will make the pod appear to serve the request.
+
+    ![scaleup](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
+
+
+    ## Congratulations
+
+    In this scenario you got to play with Camel K. Exposing RESTFul service using and OpenAPI Standard document. And also making it SERVERLESS. There are much more to Camel K. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to learn even more about the architecture and capabilities of this exciting new framework.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "8321647092688772124"

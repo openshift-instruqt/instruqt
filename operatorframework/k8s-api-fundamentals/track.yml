@@ -1,464 +1,718 @@
-challenges:
-- assignment: "Let's begin by creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n`\n```\n<br>\nCreate a new pod manifest that specifies\
-    \ two containers:\n\n```\ncat > pod-multi-container.yaml <<EOF\napiVersion: v1\n\
-    kind: Pod\nmetadata:\n  name: my-two-container-pod\n  namespace: myproject\n \
-    \ labels:\n    environment: dev\nspec:\n  containers:\n    - name: server\n  \
-    \    image: nginx:1.13-alpine\n      ports:\n        - containerPort: 80\n   \
-    \       protocol: TCP\n    - name: side-car\n      image: alpine:latest\n    \
-    \  command: [\"/usr/bin/tail\", \"-f\", \"/dev/null\"]\n  restartPolicy: Never\n\
-    EOF\n```\n`\n```\n<br>\nCreate the pod by specifying the manifest:\n\n```\noc\
-    \ create -f pod-multi-container.yaml\n```\n`\n```\n<br>\nView the detail for the\
-    \ pod and look at the events:\n\n```\noc describe pod my-two-container-pod\n```\n\
-    `\n```\n<br>\nLet's first execute a shell session inside the server container\
-    \ by using the\n`-c` flag:\n\n```\noc exec -it my-two-container-pod -c server\
-    \ -- /bin/sh\n```\n`\n```\n<br>\nRun some commands inside the server container:\n\
-    \n```\nip address\nnetstat -ntlp\nhostname\nps\nexit\n```\n`\n```\n<br>\nLet's\
-    \ now execute a shell session inside the side-car container:\n\n```\noc exec -it\
-    \ my-two-container-pod -c side-car -- /bin/sh\n```\n`\n```\n<br>\nRun the same\
-    \ commands in side-car container. Each container within a pod runs\nit's own cgroup,\
-    \ but shares IPC, Network, and UTC (hostname) namespaces:\n\n```\nip address\n\
-    netstat -ntlp\nhostname\nexit\n```\n`\n```"
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Kubernetes Manifests
-  type: challenge
-- assignment: 'Verify the currently available Kubernetes API versions:
-
-
-    ```
-
-    oc api-versions
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Use the `--v` flag to set a verbosity level. This will allow you to see the request/responses
-    against the Kubernetes API:
-
-
-    ```
-
-    oc get pods --v=8
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Use the `oc proxy` command to proxy local requests on port 8001 to the Kubernetes
-    API:
-
-
-    ```
-
-    oc proxy --port=8001
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
-
-    <br>
-
-    <br>
-
-    Send a `GET` request to the Kubernetes API using `curl`:
-
-
-    ```
-
-    curl -X GET http://localhost:8001
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    We can explore the OpenAPI definition file to see complete API details.
-
-
-    ```
-
-    curl localhost:8001/openapi/v2
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Send a `GET` request to list all pods in the environment:
-
-
-    ```
-
-    curl -X GET http://localhost:8001/api/v1/pods
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Use `jq` to parse the json response:
-
-
-    ```
-
-    curl -X GET http://localhost:8001/api/v1/pods | jq .items[].metadata.name
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    We can scope the response by only viewing all pods in a particular namespace:
-
-
-    ```
-
-    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Get more details on a particular pod within the `myproject` namespace:
-
-
-    ```
-
-    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Export the manifest associated with `my-two-container-pod` in json format:
-
-
-    ```
-
-    oc get pods my-two-container-pod --export -o json > podmanifest.json
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Within the manifest, replace the `1.13` version of alpine with `1.14`:
-
-
-    ```
-
-    sed -i ''s|nginx:1.13-alpine|nginx:1.14-alpine|g'' podmanifest.json
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Update/Replace the current pod manifest with the newly updated manifest:
-
-
-    ```
-
-    curl -X PUT http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-    -H "Content-type: application/json" -d @podmanifest.json
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Patch the current pod with a newer container image (`1.15`):
-
-
-    ```
-
-    curl -X PATCH http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-    -H "Content-type: application/strategic-merge-patch+json" -d ''{"spec":{"containers":[{"name":
-    "server","image":"nginx:1.15-alpine"}]}}''
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Delete the current pod by sending the `DELETE` request method:
-
-
-    ```
-
-    curl -X DELETE http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Verify the pod is in `Terminating` status:
-
-
-    ```
-
-    oc get pods
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Verify the pod no longer exists:
-
-
-    ```
-
-    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-
-    ```
-
-    `
-
-    ```
-
-    '
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Basic Operations with the Kubernetes API
-  type: challenge
-- assignment: "Get a list of all pods in the `myproject` Namespace:\n\n```\noc get\
-    \ pods -n myproject\n```\n`\n```\n<br>\nCreate a ReplicaSet object manifest file:\n\
-    \n```\ncat > replica-set.yaml <<EOF\napiVersion: apps/v1\nkind: ReplicaSet\nmetadata:\n\
-    \  name: myfirstreplicaset\n  namespace: myproject\nspec:\n  selector:\n    matchLabels:\n\
-    \     app: myfirstapp\n  replicas: 3\n  template:\n    metadata:\n      labels:\n\
-    \        app: myfirstapp\n    spec:\n      containers:\n        - name: nodejs\n\
-    \          image: openshiftkatacoda/blog-django-py\nEOF\n```\n`\n```\n<br>\nCreate\
-    \ the ReplicaSet:\n\n```\noc apply -f replica-set.yaml\n```\n`\n```\n<br>\nIn\
-    \ a new terminal window, select all pods that match `app=myfirstapp`:\n\n```\n\
-    oc get pods -l app=myfirstapp --show-labels -w\n```\n`\n```\n<br>\nDelete the\
-    \ pods and watch new ones spawn:\n\n```\noc delete pod -l app=myfirstapp\n```\n\
-    `\n```\n<br>\nImperatively scale the ReplicaSet to 6 replicas:\n\n```\noc scale\
-    \ replicaset myfirstreplicaset --replicas=6\n```\n`\n```\n<br>\nImperatively scale\
-    \ down the ReplicaSet to 3 replicas:\n\n```\noc scale replicaset myfirstreplicaset\
-    \ --replicas=3\n```\n`\n```\n<br>\nThe `oc scale` command interacts with the `/scale`\
-    \ endpoint:\n\n```\ncurl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale\n\
-    ```\n`\n```\n<br>\nUse the `PUT` method against the `/scale` endpoint to change\
-    \ the number of replicas to 5:\n\n```\ncurl  -X PUT localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale\
-    \ -H \"Content-type: application/json\" -d '{\"kind\":\"Scale\",\"apiVersion\"\
-    :\"autoscaling/v1\",\"metadata\":{\"name\":\"myfirstreplicaset\",\"namespace\"\
-    :\"myproject\"},\"spec\":{\"replicas\":5}}'\n```\n`\n```\n<br>\nYou can also get\
-    \ information regarding the pod by using the `GET` method against the `/status`\
-    \ endpoint\n\n```\ncurl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/status\n\
-    ```\n`\n```\n<br>\nThe status endpoint's primary purpose is to allow a controller\
-    \ (with proper RBAC permissions) to send a `PUT` method along with the desired\
-    \ status.\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Replica Sets
-  type: challenge
-- assignment: "Create a manifest for a Deployment with a Finalizer:\n\n```\ncat >\
-    \ finalizer-test.yaml<<EOF\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n\
-    \  name: finalizer-test\n  namespace: myproject\n  labels:\n    app: finalizer-test\n\
-    \  finalizers:\n    - finalizer.extensions/v1beta1  \nspec:\n  selector:\n   \
-    \ matchLabels:\n      app: finalizer-test\n  replicas: 3\n  template:\n    metadata:\n\
-    \      labels:\n        app: finalizer-test\n    spec:\n      containers:\n  \
-    \      - name: hieveryone\n          image: openshiftkatacoda/blog-django-py\n\
-    \          imagePullPolicy: Always\n          ports:\n            - name: helloworldport\n\
-    \              containerPort: 8080\nEOF\n```\n`\n```\n<br>\nCreate the Deployment.\n\
-    \n```\noc create -f finalizer-test.yaml\n```\n`\n```\n<br>\nVerify the Deployment\
-    \ has been created.\n\n```\noc get deploy\n```\n`\n```\n<br>\nVerify the ReplicaSet\
-    \ has been created:\n\n```\noc get replicaset\n```\n`\n```\n<br>\nVerify the pods\
-    \ are running:\n\n```\noc get pods\n```\n`\n```\n<br>\nAttempt to delete the Deployment.\n\
-    \n```\noc delete deployment finalizer-test\n```\n`\n```\n<br>\nOpen up another\
-    \ terminal by clicking the **+** button and select `Open New Terminal`.\n<br>\n\
-    <br>\nObserve the Deployment still exits and has been updated with the `deletionGracePeriodSeconds`\
-    \ and `deletionTimestamp` fields.\n\n```\noc get deployment finalizer-test -o\
-    \ yaml | grep 'deletionGracePeriodSeconds\\|deletionTimestamp'\n```\n`\n```\n\
-    <br>\nAttempt to scale the Deployment up and down. Although status is updated,\
-    \ pods will not be created/deleted:\n\n```\noc scale deploy finalizer-test --replicas=5\n\
-    oc scale deploy finalizer-test --replicas=1\n```\n`\n```\n<br>\n\n```\noc get\
-    \ deploy\noc get pods\n```\n`\n```\n<br>\n\nUpdate the Deployment with the Finalizer\
-    \ value unset.\n\n```\ncat > finalizer-test-remove.yaml<<EOF\napiVersion: apps/v1\n\
-    kind: Deployment\nmetadata:\n  name: finalizer-test\n  namespace: myproject\n\
-    \  labels:\n    app: finalizer-test\n  finalizers:\nspec:\n  selector:\n    matchLabels:\n\
-    \      app: finalizer-test\n  replicas: 3\n  template:\n    metadata:\n      labels:\n\
-    \        app: finalizer-test\n    spec:\n      containers:\n        - name: hieveryone\n\
-    \          image: openshiftkatacoda/blog-django-py\n          imagePullPolicy:\
-    \ Always\n          ports:\n            - name: helloworldport\n             \
-    \ containerPort: 8080\nEOF\n```\n`\n```\n<br>\nReplace the Deployment.\n\n```\n\
-    oc replace -f finalizer-test-remove.yaml\n```\n`\n```\n<br>\nThe Deployment will\
-    \ now be deleted.\n\n```\noc get deploy\noc get pods\n```\n`\n```\n<br>\nSee the\
-    \ following:\n\n[Deployment Controller (DeletionTimestamp != nil)](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/deployment_controller.go#L613-L615)\n\
-    \n[SyncStatusOnly Method](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/sync.go#L36-L45)\n"
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Deployments/Finalizers
-  type: challenge
-- assignment: "Begin by running a proxy to the Kubernetes API server:\n\n```\noc proxy\
-    \ --port=8001\n```\n`\n```\n<br>\nOpen up another terminal by clicking the **+**\
-    \ button and select `Open New Terminal`.\n<br>\n<br>\n\nLet's create a new Custom\
-    \ Resource Definition (CRD) object manifest for Postgres:\n\n```\ncat >> postgres-crd.yaml\
-    \ <<EOF\napiVersion: apiextensions.k8s.io/v1\nkind: CustomResourceDefinition\n\
-    metadata:\n  name: postgreses.rd.example.com\nspec:\n  group: rd.example.com\n\
-    \  names:\n    kind: Postgres\n    listKind: PostgresList\n    plural: postgreses\n\
-    \    singular: postgres\n    shortNames:\n    - pg\n  scope: Namespaced\n  versions:\n\
-    \  - name: v1alpha1\n    schema:\n      openAPIV3Schema:\n        type: object\n\
-    \        x-kubernetes-preserve-unknown-fields: true\n    served: true\n    storage:\
-    \ true\nEOF\n```\n`\n```\n<br>\nCreate the ***CRD*** resource object:\n\n```\n\
-    oc create -f postgres-crd.yaml\n```\n`\n```\n<br>\nYou should now see the Kubernetes\
-    \ API reflect a brand new *api group* called **rd.example.com**:\n\n```\ncurl\
-    \ http://localhost:8001/apis | jq .groups[].name\n```\n`\n```\n<br>\nThis will\
-    \ also be reflected in the `oc api-versions` command:\n\n```\noc api-versions\n\
-    ```\n`\n```\n<br>\nWithin the `rd.example.com` group there will be an *api version*\
-    \ **v1alpha1** (per our CRD resource object). The database resource resides here.\n\
-    \n```\ncurl http://localhost:8001/apis/rd.example.com/v1alpha1 | jq\n```\n`\n\
-    ```\n<br>\nNotice how `oc` now recognize postgres as a present resource (although\
-    \ there will be no current resource objects at this time).\n\n```\noc get postgres\n\
-    ```\n`\n```\n<br>\nLet's create a new Custom Resource (CR) object manifest for\
-    \ the database:\n\n```\ncat >> wordpress-database.yaml <<EOF\napiVersion: \"rd.example.com/v1alpha1\"\
-    \nkind: Postgres\nmetadata:\n  name: wordpressdb\nspec:\n  user: postgres\n  password:\
-    \ postgres\n  database: primarydb\n  nodes: 3\nEOF\n```\n`\n```\n<br>\nCreate\
-    \ the new object:\n\n```\noc create -f wordpress-database.yaml\n```\n`\n```\n\
-    <br>\nVerify the resource was created:\n\n```\noc get postgres\n```\n`\n```\n\
-    <br>\nView the details about the wordpressdb object:\n\n```\noc get postgres wordpressdb\
-    \ -o yaml\n```\n`\n```"
-  difficulty: basic
-  slug: step5
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Custom Resource Definitions
-  type: challenge
-description: Before diving into the [Operator Framework](https://github.com/operator-framework),
-  this section will give an overview of Kubernetes API fundamentals.  Although the
-  [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating
-  an Operator fun and easy, understanding the structure and features of the Kubernetes
-  API is required.
+slug: operatorframework-k8s-api-fundamentals
+id: mvxpk334juek
+type: track
+title: Kubernetes API Fundamentals
+description: Before diving into the [Operator Framework](https://github.com/operator-framework), this section will give an overview of Kubernetes API fundamentals.  Although the [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating an Operator fun and easy, understanding the structure and features of the Kubernetes API is required.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: operatorframework-k8s-api-fundamentals
-tags:
-- openshift
-title: Kubernetes API Fundamentals
-type: track
+challenges:
+- slug: step1
+  id: eg3r8bdfkegr
+  type: challenge
+  title: Kubernetes Manifests
+  assignment: |-
+    Let's begin by creating a new project called `myproject`:
+
+    ```
+    oc new-project myproject
+    ```
+    `
+    ```
+    <br>
+    Create a new pod manifest that specifies two containers:
+
+    ```
+    cat > pod-multi-container.yaml <<EOF
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: my-two-container-pod
+      namespace: myproject
+      labels:
+        environment: dev
+    spec:
+      containers:
+        - name: server
+          image: nginx:1.13-alpine
+          ports:
+            - containerPort: 80
+              protocol: TCP
+        - name: side-car
+          image: alpine:latest
+          command: ["/usr/bin/tail", "-f", "/dev/null"]
+      restartPolicy: Never
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Create the pod by specifying the manifest:
+
+    ```
+    oc create -f pod-multi-container.yaml
+    ```
+    `
+    ```
+    <br>
+    View the detail for the pod and look at the events:
+
+    ```
+    oc describe pod my-two-container-pod
+    ```
+    `
+    ```
+    <br>
+    Let's first execute a shell session inside the server container by using the
+    `-c` flag:
+
+    ```
+    oc exec -it my-two-container-pod -c server -- /bin/sh
+    ```
+    `
+    ```
+    <br>
+    Run some commands inside the server container:
+
+    ```
+    ip address
+    netstat -ntlp
+    hostname
+    ps
+    exit
+    ```
+    `
+    ```
+    <br>
+    Let's now execute a shell session inside the side-car container:
+
+    ```
+    oc exec -it my-two-container-pod -c side-car -- /bin/sh
+    ```
+    `
+    ```
+    <br>
+    Run the same commands in side-car container. Each container within a pod runs
+    it's own cgroup, but shares IPC, Network, and UTC (hostname) namespaces:
+
+    ```
+    ip address
+    netstat -ntlp
+    hostname
+    exit
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: w7jheqszmw74
+  type: challenge
+  title: Basic Operations with the Kubernetes API
+  assignment: |
+    Verify the currently available Kubernetes API versions:
+
+    ```
+    oc api-versions
+    ```
+    `
+    ```
+    <br>
+    Use the `--v` flag to set a verbosity level. This will allow you to see the request/responses against the Kubernetes API:
+
+    ```
+    oc get pods --v=8
+    ```
+    `
+    ```
+    <br>
+    Use the `oc proxy` command to proxy local requests on port 8001 to the Kubernetes API:
+
+    ```
+    oc proxy --port=8001
+    ```
+    `
+    ```
+    <br>
+    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
+    <br>
+    <br>
+    Send a `GET` request to the Kubernetes API using `curl`:
+
+    ```
+    curl -X GET http://localhost:8001
+    ```
+    `
+    ```
+    <br>
+    We can explore the OpenAPI definition file to see complete API details.
+
+    ```
+    curl localhost:8001/openapi/v2
+    ```
+    `
+    ```
+    <br>
+    Send a `GET` request to list all pods in the environment:
+
+    ```
+    curl -X GET http://localhost:8001/api/v1/pods
+    ```
+    `
+    ```
+    <br>
+    Use `jq` to parse the json response:
+
+    ```
+    curl -X GET http://localhost:8001/api/v1/pods | jq .items[].metadata.name
+    ```
+    `
+    ```
+    <br>
+    We can scope the response by only viewing all pods in a particular namespace:
+
+    ```
+    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods
+    ```
+    `
+    ```
+    <br>
+    Get more details on a particular pod within the `myproject` namespace:
+
+    ```
+    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
+    ```
+    `
+    ```
+    <br>
+    Export the manifest associated with `my-two-container-pod` in json format:
+
+    ```
+    oc get pods my-two-container-pod --export -o json > podmanifest.json
+    ```
+    `
+    ```
+    <br>
+    Within the manifest, replace the `1.13` version of alpine with `1.14`:
+
+    ```
+    sed -i 's|nginx:1.13-alpine|nginx:1.14-alpine|g' podmanifest.json
+    ```
+    `
+    ```
+    <br>
+    Update/Replace the current pod manifest with the newly updated manifest:
+
+    ```
+    curl -X PUT http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod -H "Content-type: application/json" -d @podmanifest.json
+    ```
+    `
+    ```
+    <br>
+    Patch the current pod with a newer container image (`1.15`):
+
+    ```
+    curl -X PATCH http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod -H "Content-type: application/strategic-merge-patch+json" -d '{"spec":{"containers":[{"name": "server","image":"nginx:1.15-alpine"}]}}'
+    ```
+    `
+    ```
+    <br>
+    Delete the current pod by sending the `DELETE` request method:
+
+    ```
+    curl -X DELETE http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
+    ```
+    `
+    ```
+    <br>
+    Verify the pod is in `Terminating` status:
+
+    ```
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+    Verify the pod no longer exists:
+
+    ```
+    curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: 4nx33bjydye7
+  type: challenge
+  title: Replica Sets
+  assignment: |
+    Get a list of all pods in the `myproject` Namespace:
+
+    ```
+    oc get pods -n myproject
+    ```
+    `
+    ```
+    <br>
+    Create a ReplicaSet object manifest file:
+
+    ```
+    cat > replica-set.yaml <<EOF
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    metadata:
+      name: myfirstreplicaset
+      namespace: myproject
+    spec:
+      selector:
+        matchLabels:
+         app: myfirstapp
+      replicas: 3
+      template:
+        metadata:
+          labels:
+            app: myfirstapp
+        spec:
+          containers:
+            - name: nodejs
+              image: openshiftkatacoda/blog-django-py
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Create the ReplicaSet:
+
+    ```
+    oc apply -f replica-set.yaml
+    ```
+    `
+    ```
+    <br>
+    In a new terminal window, select all pods that match `app=myfirstapp`:
+
+    ```
+    oc get pods -l app=myfirstapp --show-labels -w
+    ```
+    `
+    ```
+    <br>
+    Delete the pods and watch new ones spawn:
+
+    ```
+    oc delete pod -l app=myfirstapp
+    ```
+    `
+    ```
+    <br>
+    Imperatively scale the ReplicaSet to 6 replicas:
+
+    ```
+    oc scale replicaset myfirstreplicaset --replicas=6
+    ```
+    `
+    ```
+    <br>
+    Imperatively scale down the ReplicaSet to 3 replicas:
+
+    ```
+    oc scale replicaset myfirstreplicaset --replicas=3
+    ```
+    `
+    ```
+    <br>
+    The `oc scale` command interacts with the `/scale` endpoint:
+
+    ```
+    curl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale
+    ```
+    `
+    ```
+    <br>
+    Use the `PUT` method against the `/scale` endpoint to change the number of replicas to 5:
+
+    ```
+    curl  -X PUT localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale -H "Content-type: application/json" -d '{"kind":"Scale","apiVersion":"autoscaling/v1","metadata":{"name":"myfirstreplicaset","namespace":"myproject"},"spec":{"replicas":5}}'
+    ```
+    `
+    ```
+    <br>
+    You can also get information regarding the pod by using the `GET` method against the `/status` endpoint
+
+    ```
+    curl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/status
+    ```
+    `
+    ```
+    <br>
+    The status endpoint's primary purpose is to allow a controller (with proper RBAC permissions) to send a `PUT` method along with the desired status.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: rlvbcr9ec7kt
+  type: challenge
+  title: Deployments/Finalizers
+  assignment: |
+    Create a manifest for a Deployment with a Finalizer:
+
+    ```
+    cat > finalizer-test.yaml<<EOF
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: finalizer-test
+      namespace: myproject
+      labels:
+        app: finalizer-test
+      finalizers:
+        - finalizer.extensions/v1beta1
+    spec:
+      selector:
+        matchLabels:
+          app: finalizer-test
+      replicas: 3
+      template:
+        metadata:
+          labels:
+            app: finalizer-test
+        spec:
+          containers:
+            - name: hieveryone
+              image: openshiftkatacoda/blog-django-py
+              imagePullPolicy: Always
+              ports:
+                - name: helloworldport
+                  containerPort: 8080
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Create the Deployment.
+
+    ```
+    oc create -f finalizer-test.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the Deployment has been created.
+
+    ```
+    oc get deploy
+    ```
+    `
+    ```
+    <br>
+    Verify the ReplicaSet has been created:
+
+    ```
+    oc get replicaset
+    ```
+    `
+    ```
+    <br>
+    Verify the pods are running:
+
+    ```
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+    Attempt to delete the Deployment.
+
+    ```
+    oc delete deployment finalizer-test
+    ```
+    `
+    ```
+    <br>
+    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
+    <br>
+    <br>
+    Observe the Deployment still exits and has been updated with the `deletionGracePeriodSeconds` and `deletionTimestamp` fields.
+
+    ```
+    oc get deployment finalizer-test -o yaml | grep 'deletionGracePeriodSeconds\|deletionTimestamp'
+    ```
+    `
+    ```
+    <br>
+    Attempt to scale the Deployment up and down. Although status is updated, pods will not be created/deleted:
+
+    ```
+    oc scale deploy finalizer-test --replicas=5
+    oc scale deploy finalizer-test --replicas=1
+    ```
+    `
+    ```
+    <br>
+
+    ```
+    oc get deploy
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+
+    Update the Deployment with the Finalizer value unset.
+
+    ```
+    cat > finalizer-test-remove.yaml<<EOF
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: finalizer-test
+      namespace: myproject
+      labels:
+        app: finalizer-test
+      finalizers:
+    spec:
+      selector:
+        matchLabels:
+          app: finalizer-test
+      replicas: 3
+      template:
+        metadata:
+          labels:
+            app: finalizer-test
+        spec:
+          containers:
+            - name: hieveryone
+              image: openshiftkatacoda/blog-django-py
+              imagePullPolicy: Always
+              ports:
+                - name: helloworldport
+                  containerPort: 8080
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Replace the Deployment.
+
+    ```
+    oc replace -f finalizer-test-remove.yaml
+    ```
+    `
+    ```
+    <br>
+    The Deployment will now be deleted.
+
+    ```
+    oc get deploy
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+    See the following:
+
+    [Deployment Controller (DeletionTimestamp != nil)](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/deployment_controller.go#L613-L615)
+
+    [SyncStatusOnly Method](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/sync.go#L36-L45)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step5
+  id: jmoksmwgrzv4
+  type: challenge
+  title: Custom Resource Definitions
+  assignment: |-
+    Begin by running a proxy to the Kubernetes API server:
+
+    ```
+    oc proxy --port=8001
+    ```
+    `
+    ```
+    <br>
+    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
+    <br>
+    <br>
+
+    Let's create a new Custom Resource Definition (CRD) object manifest for Postgres:
+
+    ```
+    cat >> postgres-crd.yaml <<EOF
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      name: postgreses.rd.example.com
+    spec:
+      group: rd.example.com
+      names:
+        kind: Postgres
+        listKind: PostgresList
+        plural: postgreses
+        singular: postgres
+        shortNames:
+        - pg
+      scope: Namespaced
+      versions:
+      - name: v1alpha1
+        schema:
+          openAPIV3Schema:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        served: true
+        storage: true
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Create the ***CRD*** resource object:
+
+    ```
+    oc create -f postgres-crd.yaml
+    ```
+    `
+    ```
+    <br>
+    You should now see the Kubernetes API reflect a brand new *api group* called **rd.example.com**:
+
+    ```
+    curl http://localhost:8001/apis | jq .groups[].name
+    ```
+    `
+    ```
+    <br>
+    This will also be reflected in the `oc api-versions` command:
+
+    ```
+    oc api-versions
+    ```
+    `
+    ```
+    <br>
+    Within the `rd.example.com` group there will be an *api version* **v1alpha1** (per our CRD resource object). The database resource resides here.
+
+    ```
+    curl http://localhost:8001/apis/rd.example.com/v1alpha1 | jq
+    ```
+    `
+    ```
+    <br>
+    Notice how `oc` now recognize postgres as a present resource (although there will be no current resource objects at this time).
+
+    ```
+    oc get postgres
+    ```
+    `
+    ```
+    <br>
+    Let's create a new Custom Resource (CR) object manifest for the database:
+
+    ```
+    cat >> wordpress-database.yaml <<EOF
+    apiVersion: "rd.example.com/v1alpha1"
+    kind: Postgres
+    metadata:
+      name: wordpressdb
+    spec:
+      user: postgres
+      password: postgres
+      database: primarydb
+      nodes: 3
+    EOF
+    ```
+    `
+    ```
+    <br>
+    Create the new object:
+
+    ```
+    oc create -f wordpress-database.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the resource was created:
+
+    ```
+    oc get postgres
+    ```
+    `
+    ```
+    <br>
+    View the details about the wordpressdb object:
+
+    ```
+    oc get postgres wordpressdb -o yaml
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "3826076875713671563"

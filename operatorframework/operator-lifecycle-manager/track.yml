@@ -1,549 +1,550 @@
-challenges:
-- assignment: "The Operator Lifecycle Manager (OLM) is included with [OpenShift 4](https://try.openshift.com)\
-    \ and can easily be installed in a non-OpenShift Kubernetes environment by running\
-    \ [this simple command](https://operatorhub.io/how-to-install-an-operator#).\n\
-    \nLet's get started exploring OLM by viewing its Custom Resource Definitions (CRDs).\n\
-    \nOLM ships with 6 CRDs:\n\n* **CatalogSource**:\n    * A collection of Operator\
-    \ metadata (ClusterServiceVersions, CRDs, and PackageManifests). OLM uses CatalogSources\
-    \ to build the list of available operators that can be installed from OperatorHub\
-    \ in the OpenShift web console. In OpenShift 4, the web console has added support\
-    \ for managing the out-of-the-box CatalogSources as well as adding your own custom\
-    \ CatalogSources. You can create a custom CatalogSource using the [OLM Operator\
-    \ Registry](https://github.com/operator-framework/operator-registry).\n* **Subscription**:\n\
-    \    * Relates an operator to a CatalogSource. Subscriptions describe which channel\
-    \ of an operator package to subscribe to and whether to perform updates automatically\
-    \ or manually. If set to automatic, the Subscription ensures OLM will manage and\
-    \ upgrade the operator to ensure the latest version is always running in the cluster.\n\
-    * **ClusterServiceVersion (CSV)**:\n    * The metadata that accompanies your Operator\
-    \ container image. It can be used to populate user interfaces with info like your\
-    \ logo/description/version and it is also a source of technical information needed\
-    \ to run the Operator. It includes RBAC rules and which Custom Resources it manages\
-    \ or depends on. OLM will parse this and do all of the hard work to wire up the\
-    \ correct Roles and Role Bindings, ensuring that the Operator is started (or updated)\
-    \ within the desired namespace and check for various other requirements, all without\
-    \ the end users having to do anything. You can easily build your own CSV with\
-    \ [this handy website](https://operatorhub.io/packages) and read about the [full\
-    \ CSV architecture in more detail](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/architecture.md#what-is-a-clusterserviceversion).\n\
-    * **PackageManifest**:\n    * An entry in the CatalogSource that associates a\
-    \ package identity with sets of CSVs. Within a package, channels point to a particular\
-    \ CSV. Because CSVs explicitly reference the CSV that they replace, a PackageManifest\
-    \ provides OLM with all of the information that is required to update a CSV to\
-    \ the latest version in a channel (stepping through each intermediate version).\n\
-    * **InstallPlan**:\n    * Calculated list of resources to be created in order\
-    \ to automatically install or upgrade a CSV.\n* **OperatorGroup**:\n    * Configures\
-    \ all Operators deployed in the same namespace as the OperatorGroup object to\
-    \ watch for their Custom Resource (CR) in a list of namespaces or cluster-wide.\n\
-    \nObserve these CRDs by running the following command:\n\n```\noc get crd | grep\
-    \ -E 'catalogsource|subscription|clusterserviceversion|packagemanifest|installplan|operatorgroup'\n\
-    ```\n`\n```\n\n\nOLM is powered by controllers that reside within the `openshift-operator-lifecycle-manager`\
-    \ namespace as three Deployments (catalog-operator, olm-operator, and packageserver):\n\
-    \n```\noc -n openshift-operator-lifecycle-manager get deploy\n```\n`\n```"
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Exploring OLM
-  type: challenge
-- assignment: "Observe the CatalogSources that ship with OLM and OpenShift 4:\n\n\
-    ```\noc get catalogsources -n openshift-marketplace\n```\n`\n```\n\n\nHere is\
-    \ a brief summary of each CatalogSource:\n\n* **Certified Operators**:\n    *\
-    \ All Certified Operators have passed [Red Hat OpenShift Operator Certification](http://connect.redhat.com/explore/red-hat-openshift-operator-certification),\
-    \ an offering under Red Hat Partner Connect, our technology partner program. In\
-    \ this program, Red Hat partners can certify their Operators for use on Red Hat\
-    \ OpenShift. With OpenShift Certified Operators, customers can benefit from validated,\
-    \ well-integrated, mature and supported Operators from Red Hat or partner ISVs\
-    \ in their hybrid cloud environments.\n\nTo view the Operators included in the\
-    \ **Certified Operators** CatalogSource, run the following:\n\n```\noc get packagemanifests\
-    \ -l catalog=certified-operators\n```\n`\n```\n\n* **Community Operators**:\n\
-    \    * With access to community Operators, customers can try out Operators at\
-    \ a variety of maturity levels. Delivering the OperatorHub community, Operators\
-    \ on OpenShift fosters iterative software development and deployment as Developers\
-    \ get self-service access to popular components like databases, message queues\
-    \ or tracing in a managed-service fashion on the platform. These Operators are\
-    \ maintained by relevant representatives in the [operator-framework/community-operators\
-    \ GitHub repository](https://github.com/operator-framework/community-operators).\n\
-    \nTo view the Operators included in the **Community Operators** CatalogSource,\
-    \ run the following:\n\n```\noc get packagemanifests -l catalog=community-operators\n\
-    ```\n`\n```\n\n* **Red Hat Operators**:\n    * These Operators are packaged, shipped,\
-    \ and supported by Red Hat.\n\nTo view the Operators included with the **RedHat\
-    \ Operators** CatalogSource, run the following:\n\n```\noc get packagemanifests\
-    \ -l catalog=redhat-operators\n```\n`\n```\n\n* **Red Hat Marketplace**:\n   \
-    \ * Built in partnership by Red Hat and IBM, the Red Hat Marketplace helps organizations\
-    \ deliver enterprise software and improve workload portability. Learn more at\
-    \ [marketplace.redhat.com](https://marketplace.redhat.com).\n\nTo view the Operators\
-    \ included in the **Red Hat Marketplace** CatalogSource, run the following:\n\n\
-    ```\noc get packagemanifests -l catalog=redhat-marketplace\n```\n`\n```"
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: CatalogSources
-  type: challenge
-- assignment: 'You can access OLM via the OpenShift console by clicking the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)
-    tab to open the dashboard.
-
-
-    You will then able able to login with admin permissions:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    The OLM panel appears in the **Operators** pane:
-
-
-    ![OLM on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-console.png)
-
-    '
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Accessing OLM on the OpenShift Console
-  type: challenge
-- assignment: "Let's begin my creating a new project called `myproject`.\n\n```\n\
-    oc new-project myproject\n```\n`\n```\n\n\nWe should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html)\
-    \ to ensure Operators installed to this namespace will be capable of watching\
-    \ for Custom Resources within the `myproject` namespace:\n\n```\ncat > argocd-operatorgroup.yaml\
-    \ <<EOF\napiVersion: operators.coreos.com/v1\nkind: OperatorGroup\nmetadata:\n\
-    \  name: argocd-operatorgroup\n  namespace: myproject\nspec:\n  targetNamespaces:\n\
-    \    - myproject\nEOF\n```\n`\n```\n\n\nCreate the OperatorGroup:\n\n```\noc create\
-    \ -f argocd-operatorgroup.yaml\n```\n`\n```\n\n\nVerify the OperatorGroup has\
-    \ been successfully created:\n\n```\noc get operatorgroup argocd-operatorgroup\
-    \ \n```\n`\n```\nCreate a Subscription manifest for the [ArgoCD Operator](https://github.com/argoproj-labs/argocd-operator).\
-    \ Ensure the `installPlanApproval` is set to `Manual`. This will allow us to review\
-    \ the InstallPlan before choosing to install the Operator:\n\n```\ncat > argocd-subscription.yaml\
-    \ <<EOF\napiVersion: operators.coreos.com/v1alpha1\nkind: Subscription\nmetadata:\n\
-    \  name: argocd-operator\n  namespace: myproject \nspec:\n  channel: alpha\n \
-    \ installPlanApproval: Manual\n  name: argocd-operator\n  source: community-operators\n\
-    \  sourceNamespace: openshift-marketplace\nEOF\n```\n`\n```\n\n\nCreate the Subscription:\n\
-    \n```\noc create -f argocd-subscription.yaml\n```\n`\n```\n\n\nVerify the Subscription\
-    \ was created:\n\n```\noc get subscription\n```\n`\n```\n\n\nThe creation of the\
-    \ subscription will also trigger OLM to automatically generate an InstallPlan:\n\
-    \n```\noc get installplan\n```\n`\n```"
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the OperatorGroup and Subscription
-  type: challenge
-- assignment: 'Fetch the InstallPlan and observe the Kubernetes objects that will
-    be created once approved:
-
-
-    ```
-
-    ARGOCD_INSTALLPLAN=`oc get installplan -o jsonpath={$.items[0].metadata.name}`
-
-    oc get installplan $ARGOCD_INSTALLPLAN -o yaml
-
-    ```
-
-    `
-
-    ```
-
-
-    You can get a better view of the InstallPlan by navigating to the ArgoCD Operator
-    in the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/).
-
-
-    Navigate to the Operators section of the UI and select the ArgoCD Operator under
-    **Installed Operators**. Ensure you are scoped to the **myproject** namespace.
-    You should click on the InstallPlan on the bottom right of the screen:
-
-
-    ![InstallPlan on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-installplan.png)
-
-
-    You can install the Operator by approving the InstallPlan via the OpenShift console
-    or with the following command:
-
-
-    ```
-
-    oc patch installplan $ARGOCD_INSTALLPLAN --type=''json'' -p ''[{"op": "replace",
-    "path": "/spec/approved", "value":true}]''
-
-    ```
-
-    `
-
-    ```
-
-
-
-    Once the InstallPlan is approved, you will see the newly provisioned ClusterServiceVersion,
-    ClusterResourceDefinition, Role and RoleBindings, Service Accounts, and Argo-CD
-    Operator Deployment.
-
-
-    ```
-
-    oc get clusterserviceversion
-
-    ```
-
-    `
-
-    ```
-
-
-    ```
-
-    oc get crd | grep argoproj.io
-
-    ```
-
-    `
-
-    ```
-
-
-    ```
-
-    oc get sa | grep argocd
-
-    ```
-
-    `
-
-    ```
-
-
-    ```
-
-    oc get roles | grep argocd
-
-    ```
-
-    `
-
-    ```
-
-
-    ```
-
-    oc get rolebindings | grep argocd
-
-    ```
-
-    `
-
-    ```
-
-
-    ```
-
-    oc get deployments
-
-    ```
-
-    `
-
-    ```
-
-
-
-    When the ArgoCD Operator is running, we can observe its logs by running the following:
-
-
-    ```
-
-    ARGOCD_OPERATOR=`oc get pods -o jsonpath={$.items[0].metadata.name}`
-
-    oc logs $ARGOCD_OPERATOR
-
-    ```
-
-    `
-
-    ```
-
-
-    The ArgoCD Operator is now waiting for the creation of an ArgoCD Custom Resource
-    within the `myproject` namespace.'
-  difficulty: basic
-  slug: step5
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Reviewing the InstallPlan and Installing the Operator
-  type: challenge
-- assignment: "Let's deploy our ArgoCD Server \"operand\" by creating the ArgoCD manifest\
-    \ via the CLI. You can also do this on the OpenShift console.\n\n```\ncat > argocd-cr.yaml\
-    \ <<EOF\napiVersion: argoproj.io/v1alpha1\nkind: ArgoCD\nmetadata:\n  name: example-argocd\n\
-    \  namespace: myproject\nspec:\n  dex:\n    image: quay.io/ablock/dex\n    openShiftOAuth:\
-    \ true\n    version: openshift-connector\n  rbac:\n    policy: |\n      g, system:cluster-admins,\
-    \ role:admin\n  server:\n    route:\n      enabled: true\nEOF\n```\n`\n```\n\n\
-    \nCreate the ArgoCD Custom Resource:\n\n```\noc create -f argocd-cr.yaml\n```\n\
-    `\n```\n\n\nThe ArgoCD Operator should now begin to generate the ArgoCD Operand\
-    \ artifacts. This can take up to one minute:\n\n```\noc get deployments\noc get\
-    \ secrets\noc get services\noc get routes\n```\n`\n```"
-  difficulty: basic
-  slug: step6
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the Custom Resource
-  type: challenge
-- assignment: 'Let''s access the ArgoCD Dashboard via an OpenShift Route:
-
-
-    ```
-
-    ARGOCD_ROUTE=`oc get routes example-argocd-server -o jsonpath={$.spec.host}`
-
-    echo $ARGOCD_ROUTE
-
-    ```
-
-    `
-
-    ```
-
-
-    Select **Login via OpenShift** to use OpenShift as our identity provider.
-
-
-    For more information on getting started with ArgoCD on OpenShift 4, check out
-    [this video](https://www.youtube.com/watch?v=xYCX2EejSMc).'
-  difficulty: basic
-  slug: step7
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Accessing the ArgoCD Dashboard
-  type: challenge
-- assignment: 'You can easily uninstall your operator by first removing the ArgoCD
-    Custom Resource:
-
-
-    ```
-
-    oc delete argocd example-argocd
-
-    ```
-
-    `
-
-    ```
-
-
-    Removing the ArgoCD Custom Resource, should remove all of the Operator''s Operands:
-
-
-    ```
-
-    oc get deployments
-
-    ```
-
-    `
-
-    ```
-
-
-    And then uninstalling the Operator:
-
-
-    ```
-
-    oc delete -f argocd-subscription.yaml
-
-    ARGOCD_CSV=`oc get csv -o jsonpath={$.items[0].metadata.name}`
-
-    oc delete csv $ARGOCD_CSV
-
-    ```
-
-    `
-
-    ```
-
-
-
-    Once the Subscription and ClusterServiceVersion have been removed, the Operator
-    and associated artifacts will be removed from the cluster:
-
-
-    ```
-
-    oc get pods
-
-    oc get roles
-
-    ```
-
-    `
-
-    ```'
-  difficulty: basic
-  slug: step8
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Uninstalling the Operator
-  type: challenge
-description: '![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
-
-
-  The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager)
-  project is a component of the Operator Framework, an open source toolkit to manage
-  Kubernetes native applications, called Operators, in an effective, automated, and
-  scalable way.
-
-
-  OLM extends Kubernetes to provide a declarative way to install, manage, and upgrade
-  operators and their dependencies in a cluster. It also enforces some constraints
-  on the components it manages in order to ensure a good user experience.
-
+slug: operatorframework-operator-lifecycle-manager
+id: gs6uksswufnj
+type: track
+title: Operator Lifecycle Manager
+description: |-
+  ![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+
+  The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) project is a component of the Operator Framework, an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
+
+  OLM extends Kubernetes to provide a declarative way to install, manage, and upgrade operators and their dependencies in a cluster. It also enforces some constraints on the components it manages in order to ensure a good user experience.
 
   OLM enables users to do the following:
 
-
   # Over-the-Air Updates and Catalogs
 
-
-  Kubernetes clusters are being kept up to date using elaborate update mechanisms
-  today, more often automatically and in the background. Operators, being cluster
-  extensions, should follow that. OLM has a concept of catalogs from which Operators
-  are available to install and being kept up to date. In this model OLM allows maintainers
-  granular authoring of the update path and gives commercial vendors a flexible publishing
-  mechanism using channels.
-
+  Kubernetes clusters are being kept up to date using elaborate update mechanisms today, more often automatically and in the background. Operators, being cluster extensions, should follow that. OLM has a concept of catalogs from which Operators are available to install and being kept up to date. In this model OLM allows maintainers granular authoring of the update path and gives commercial vendors a flexible publishing mechanism using channels.
 
   # Dependency Model
 
-
-  With OLM''s packaging format, Operators can express dependencies on the platform
-  and on other Operators. They can rely on OLM to respect these requirements as long
-  as the cluster is up. In this way, OLM''s dependency model ensures Operators stay
-  working during their long lifecycle across multiple updates of the platform or other
-  Operators.
-
+  With OLM's packaging format, Operators can express dependencies on the platform and on other Operators. They can rely on OLM to respect these requirements as long as the cluster is up. In this way, OLM's dependency model ensures Operators stay working during their long lifecycle across multiple updates of the platform or other Operators.
 
   # Discoverability
 
-
-  OLM advertises installed Operators and their services into the namespaces of tenants.
-  They can discover which managed services are available and which Operator provides
-  them. Administrators can rely on catalog content projected into a cluster, enabling
-  discovery of Operators available to install.
-
+  OLM advertises installed Operators and their services into the namespaces of tenants. They can discover which managed services are available and which Operator provides them. Administrators can rely on catalog content projected into a cluster, enabling discovery of Operators available to install.
 
   # Cluster Stability
 
-
-  Operators must claim ownership of their APIs. OLM will prevent conflicting Operators
-  owning the same APIs being installed, ensuring cluster stability.
-
+  Operators must claim ownership of their APIs. OLM will prevent conflicting Operators owning the same APIs being installed, ensuring cluster stability.
 
   # Declarative UI controls
 
-
-  Operators can behave like managed service providers. Their user interface on the
-  command line are APIs. For graphical consoles OLM annotates those APIs with descriptors
-  that drive the creation of rich interfaces and forms for users to interact with
-  the Operator in a natural, cloud-like way.'
+  Operators can behave like managed service providers. Their user interface on the command line are APIs. For graphical consoles OLM annotates those APIs with descriptors that drive the creation of rich interfaces and forms for users to interact with the Operator in a natural, cloud-like way.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: operatorframework-operator-lifecycle-manager
-tags:
-- openshift
-title: Operator Lifecycle Manager
-type: track
+challenges:
+- slug: step1
+  id: bkfs9drsncef
+  type: challenge
+  title: Exploring OLM
+  assignment: |-
+    The Operator Lifecycle Manager (OLM) is included with [OpenShift 4](https://try.openshift.com) and can easily be installed in a non-OpenShift Kubernetes environment by running [this simple command](https://operatorhub.io/how-to-install-an-operator#).
+
+    Let's get started exploring OLM by viewing its Custom Resource Definitions (CRDs).
+
+    OLM ships with 6 CRDs:
+
+    * **CatalogSource**:
+        * A collection of Operator metadata (ClusterServiceVersions, CRDs, and PackageManifests). OLM uses CatalogSources to build the list of available operators that can be installed from OperatorHub in the OpenShift web console. In OpenShift 4, the web console has added support for managing the out-of-the-box CatalogSources as well as adding your own custom CatalogSources. You can create a custom CatalogSource using the [OLM Operator Registry](https://github.com/operator-framework/operator-registry).
+    * **Subscription**:
+        * Relates an operator to a CatalogSource. Subscriptions describe which channel of an operator package to subscribe to and whether to perform updates automatically or manually. If set to automatic, the Subscription ensures OLM will manage and upgrade the operator to ensure the latest version is always running in the cluster.
+    * **ClusterServiceVersion (CSV)**:
+        * The metadata that accompanies your Operator container image. It can be used to populate user interfaces with info like your logo/description/version and it is also a source of technical information needed to run the Operator. It includes RBAC rules and which Custom Resources it manages or depends on. OLM will parse this and do all of the hard work to wire up the correct Roles and Role Bindings, ensuring that the Operator is started (or updated) within the desired namespace and check for various other requirements, all without the end users having to do anything. You can easily build your own CSV with [this handy website](https://operatorhub.io/packages) and read about the [full CSV architecture in more detail](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/architecture.md#what-is-a-clusterserviceversion).
+    * **PackageManifest**:
+        * An entry in the CatalogSource that associates a package identity with sets of CSVs. Within a package, channels point to a particular CSV. Because CSVs explicitly reference the CSV that they replace, a PackageManifest provides OLM with all of the information that is required to update a CSV to the latest version in a channel (stepping through each intermediate version).
+    * **InstallPlan**:
+        * Calculated list of resources to be created in order to automatically install or upgrade a CSV.
+    * **OperatorGroup**:
+        * Configures all Operators deployed in the same namespace as the OperatorGroup object to watch for their Custom Resource (CR) in a list of namespaces or cluster-wide.
+
+    Observe these CRDs by running the following command:
+
+    ```
+    oc get crd | grep -E 'catalogsource|subscription|clusterserviceversion|packagemanifest|installplan|operatorgroup'
+    ```
+    `
+    ```
+
+
+    OLM is powered by controllers that reside within the `openshift-operator-lifecycle-manager` namespace as three Deployments (catalog-operator, olm-operator, and packageserver):
+
+    ```
+    oc -n openshift-operator-lifecycle-manager get deploy
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: 7i1y8pvqyo3l
+  type: challenge
+  title: CatalogSources
+  assignment: |-
+    Observe the CatalogSources that ship with OLM and OpenShift 4:
+
+    ```
+    oc get catalogsources -n openshift-marketplace
+    ```
+    `
+    ```
+
+
+    Here is a brief summary of each CatalogSource:
+
+    * **Certified Operators**:
+        * All Certified Operators have passed [Red Hat OpenShift Operator Certification](http://connect.redhat.com/explore/red-hat-openshift-operator-certification), an offering under Red Hat Partner Connect, our technology partner program. In this program, Red Hat partners can certify their Operators for use on Red Hat OpenShift. With OpenShift Certified Operators, customers can benefit from validated, well-integrated, mature and supported Operators from Red Hat or partner ISVs in their hybrid cloud environments.
+
+    To view the Operators included in the **Certified Operators** CatalogSource, run the following:
+
+    ```
+    oc get packagemanifests -l catalog=certified-operators
+    ```
+    `
+    ```
+
+    * **Community Operators**:
+        * With access to community Operators, customers can try out Operators at a variety of maturity levels. Delivering the OperatorHub community, Operators on OpenShift fosters iterative software development and deployment as Developers get self-service access to popular components like databases, message queues or tracing in a managed-service fashion on the platform. These Operators are maintained by relevant representatives in the [operator-framework/community-operators GitHub repository](https://github.com/operator-framework/community-operators).
+
+    To view the Operators included in the **Community Operators** CatalogSource, run the following:
+
+    ```
+    oc get packagemanifests -l catalog=community-operators
+    ```
+    `
+    ```
+
+    * **Red Hat Operators**:
+        * These Operators are packaged, shipped, and supported by Red Hat.
+
+    To view the Operators included with the **RedHat Operators** CatalogSource, run the following:
+
+    ```
+    oc get packagemanifests -l catalog=redhat-operators
+    ```
+    `
+    ```
+
+    * **Red Hat Marketplace**:
+        * Built in partnership by Red Hat and IBM, the Red Hat Marketplace helps organizations deliver enterprise software and improve workload portability. Learn more at [marketplace.redhat.com](https://marketplace.redhat.com).
+
+    To view the Operators included in the **Red Hat Marketplace** CatalogSource, run the following:
+
+    ```
+    oc get packagemanifests -l catalog=redhat-marketplace
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: o41ycuapowkt
+  type: challenge
+  title: Accessing OLM on the OpenShift Console
+  assignment: |
+    You can access OLM via the OpenShift console by clicking the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+
+    You will then able able to login with admin permissions:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    The OLM panel appears in the **Operators** pane:
+
+    ![OLM on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-console.png)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: wptdqwlrvwya
+  type: challenge
+  title: Creating the OperatorGroup and Subscription
+  assignment: |-
+    Let's begin my creating a new project called `myproject`.
+
+    ```
+    oc new-project myproject
+    ```
+    `
+    ```
+
+
+    We should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html) to ensure Operators installed to this namespace will be capable of watching for Custom Resources within the `myproject` namespace:
+
+    ```
+    cat > argocd-operatorgroup.yaml <<EOF
+    apiVersion: operators.coreos.com/v1
+    kind: OperatorGroup
+    metadata:
+      name: argocd-operatorgroup
+      namespace: myproject
+    spec:
+      targetNamespaces:
+        - myproject
+    EOF
+    ```
+    `
+    ```
+
+
+    Create the OperatorGroup:
+
+    ```
+    oc create -f argocd-operatorgroup.yaml
+    ```
+    `
+    ```
+
+
+    Verify the OperatorGroup has been successfully created:
+
+    ```
+    oc get operatorgroup argocd-operatorgroup
+    ```
+    `
+    ```
+    Create a Subscription manifest for the [ArgoCD Operator](https://github.com/argoproj-labs/argocd-operator). Ensure the `installPlanApproval` is set to `Manual`. This will allow us to review the InstallPlan before choosing to install the Operator:
+
+    ```
+    cat > argocd-subscription.yaml <<EOF
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: Subscription
+    metadata:
+      name: argocd-operator
+      namespace: myproject
+    spec:
+      channel: alpha
+      installPlanApproval: Manual
+      name: argocd-operator
+      source: community-operators
+      sourceNamespace: openshift-marketplace
+    EOF
+    ```
+    `
+    ```
+
+
+    Create the Subscription:
+
+    ```
+    oc create -f argocd-subscription.yaml
+    ```
+    `
+    ```
+
+
+    Verify the Subscription was created:
+
+    ```
+    oc get subscription
+    ```
+    `
+    ```
+
+
+    The creation of the subscription will also trigger OLM to automatically generate an InstallPlan:
+
+    ```
+    oc get installplan
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step5
+  id: ydz5ytb6gdsz
+  type: challenge
+  title: Reviewing the InstallPlan and Installing the Operator
+  assignment: |-
+    Fetch the InstallPlan and observe the Kubernetes objects that will be created once approved:
+
+    ```
+    ARGOCD_INSTALLPLAN=`oc get installplan -o jsonpath={$.items[0].metadata.name}`
+    oc get installplan $ARGOCD_INSTALLPLAN -o yaml
+    ```
+    `
+    ```
+
+    You can get a better view of the InstallPlan by navigating to the ArgoCD Operator in the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/).
+
+    Navigate to the Operators section of the UI and select the ArgoCD Operator under **Installed Operators**. Ensure you are scoped to the **myproject** namespace. You should click on the InstallPlan on the bottom right of the screen:
+
+    ![InstallPlan on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-installplan.png)
+
+    You can install the Operator by approving the InstallPlan via the OpenShift console or with the following command:
+
+    ```
+    oc patch installplan $ARGOCD_INSTALLPLAN --type='json' -p '[{"op": "replace", "path": "/spec/approved", "value":true}]'
+    ```
+    `
+    ```
+
+
+    Once the InstallPlan is approved, you will see the newly provisioned ClusterServiceVersion, ClusterResourceDefinition, Role and RoleBindings, Service Accounts, and Argo-CD Operator Deployment.
+
+    ```
+    oc get clusterserviceversion
+    ```
+    `
+    ```
+
+    ```
+    oc get crd | grep argoproj.io
+    ```
+    `
+    ```
+
+    ```
+    oc get sa | grep argocd
+    ```
+    `
+    ```
+
+    ```
+    oc get roles | grep argocd
+    ```
+    `
+    ```
+
+    ```
+    oc get rolebindings | grep argocd
+    ```
+    `
+    ```
+
+    ```
+    oc get deployments
+    ```
+    `
+    ```
+
+
+    When the ArgoCD Operator is running, we can observe its logs by running the following:
+
+    ```
+    ARGOCD_OPERATOR=`oc get pods -o jsonpath={$.items[0].metadata.name}`
+    oc logs $ARGOCD_OPERATOR
+    ```
+    `
+    ```
+
+    The ArgoCD Operator is now waiting for the creation of an ArgoCD Custom Resource within the `myproject` namespace.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step6
+  id: xjqoi42yuzti
+  type: challenge
+  title: Creating the Custom Resource
+  assignment: |-
+    Let's deploy our ArgoCD Server "operand" by creating the ArgoCD manifest via the CLI. You can also do this on the OpenShift console.
+
+    ```
+    cat > argocd-cr.yaml <<EOF
+    apiVersion: argoproj.io/v1alpha1
+    kind: ArgoCD
+    metadata:
+      name: example-argocd
+      namespace: myproject
+    spec:
+      dex:
+        image: quay.io/ablock/dex
+        openShiftOAuth: true
+        version: openshift-connector
+      rbac:
+        policy: |
+          g, system:cluster-admins, role:admin
+      server:
+        route:
+          enabled: true
+    EOF
+    ```
+    `
+    ```
+
+
+    Create the ArgoCD Custom Resource:
+
+    ```
+    oc create -f argocd-cr.yaml
+    ```
+    `
+    ```
+
+
+    The ArgoCD Operator should now begin to generate the ArgoCD Operand artifacts. This can take up to one minute:
+
+    ```
+    oc get deployments
+    oc get secrets
+    oc get services
+    oc get routes
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step7
+  id: zkcuhcnvjxyn
+  type: challenge
+  title: Accessing the ArgoCD Dashboard
+  assignment: |-
+    Let's access the ArgoCD Dashboard via an OpenShift Route:
+
+    ```
+    ARGOCD_ROUTE=`oc get routes example-argocd-server -o jsonpath={$.spec.host}`
+    echo $ARGOCD_ROUTE
+    ```
+    `
+    ```
+
+    Select **Login via OpenShift** to use OpenShift as our identity provider.
+
+    For more information on getting started with ArgoCD on OpenShift 4, check out [this video](https://www.youtube.com/watch?v=xYCX2EejSMc).
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step8
+  id: l7phfcxwqgh8
+  type: challenge
+  title: Uninstalling the Operator
+  assignment: |-
+    You can easily uninstall your operator by first removing the ArgoCD Custom Resource:
+
+    ```
+    oc delete argocd example-argocd
+    ```
+    `
+    ```
+
+    Removing the ArgoCD Custom Resource, should remove all of the Operator's Operands:
+
+    ```
+    oc get deployments
+    ```
+    `
+    ```
+
+    And then uninstalling the Operator:
+
+    ```
+    oc delete -f argocd-subscription.yaml
+    ARGOCD_CSV=`oc get csv -o jsonpath={$.items[0].metadata.name}`
+    oc delete csv $ARGOCD_CSV
+    ```
+    `
+    ```
+
+
+    Once the Subscription and ClusterServiceVersion have been removed, the Operator and associated artifacts will be removed from the cluster:
+
+    ```
+    oc get pods
+    oc get roles
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "3239865713117282539"

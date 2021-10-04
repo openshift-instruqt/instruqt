@@ -1,369 +1,600 @@
-challenges:
-- assignment: "Let's begin by creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n`\n```\n<br>\nCreate the Custom Resource Definition\
-    \ (CRD) for the Etcd Operator:\n\n```\ncat > etcd-operator-crd.yaml<<EOF\napiVersion:\
-    \ apiextensions.k8s.io/v1\nkind: CustomResourceDefinition\nmetadata:\n  name:\
-    \ etcdclusters.etcd.database.coreos.com\nspec:\n  group: etcd.database.coreos.com\n\
-    \  names:\n    kind: EtcdCluster\n    listKind: EtcdClusterList\n    plural: etcdclusters\n\
-    \    shortNames:\n    - etcdclus\n    - etcd\n    singular: etcdcluster\n  scope:\
-    \ Namespaced\n  version: v1beta2\n  versions:\n  - name: v1beta2\n    schema:\n\
-    \      openAPIV3Schema:\n        type: object\n        x-kubernetes-preserve-unknown-fields:\
-    \ true\n    served: true\n    storage: true\nEOF\n```\n`\n```\n<br>\n```\noc create\
-    \ -f etcd-operator-crd.yaml\n```\n`\n```\n<br>\nVerify the CRD was successfully\
-    \ created.\n\n```\noc get crd etcdclusters.etcd.database.coreos.com\n```\n`\n\
-    ```\n"
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the Custom Resource Definition (CRD)
-  type: challenge
-- assignment: "Create a dedicated Service Account responsible for running the Etcd\
-    \ Operator:\n\n```\ncat > etcd-operator-sa.yaml<<EOF\napiVersion: v1\nkind: ServiceAccount\n\
-    metadata:\n  name: etcd-operator-sa\nEOF\n```\n`\n```\n<br>\n```\noc create -f\
-    \ etcd-operator-sa.yaml\n```\n`\n```\n<br>\nVerify the Service Account was successfully\
-    \ created:\n\n```\noc get sa\n```\n`\n```\n<br>\nCreate the Role that the `etcd-operator-sa`\
-    \ Service Account will need for authorization to perform actions against the Kubernetes\
-    \ API:\n\n```\ncat > etcd-operator-role.yaml<<EOF\napiVersion: rbac.authorization.k8s.io/v1\n\
-    kind: Role\nmetadata:\n  name: etcd-operator-role\nrules:\n- apiGroups:\n  - etcd.database.coreos.com\n\
-    \  resources:\n  - etcdclusters\n  - etcdbackups\n  - etcdrestores\n  verbs:\n\
-    \  - '*'\n- apiGroups:\n  - \"\"\n  resources:\n  - pods\n  - services\n  - endpoints\n\
-    \  - persistentvolumeclaims\n  - events\n  verbs:\n  - '*'\n- apiGroups:\n  -\
-    \ apps\n  resources:\n  - deployments\n  verbs:\n  - '*'\n- apiGroups:\n  - \"\
-    \"\n  resources:\n  - secrets\n  verbs:\n  - get\nEOF\n```\n`\n```\n<br>\n```\n\
-    oc create -f etcd-operator-role.yaml\n```\n`\n```\n<br>\nVerify the Role was successfully\
-    \ created:\n\n```\noc get roles\n```\n`\n```\n<br>\nCreate the RoleBinding to\
-    \ bind the `etcd-operator-role` Role to the `etcd-operator-sa` Service Account:\n\
-    \n```\ncat > etcd-operator-rolebinding.yaml<<EOF\napiVersion: rbac.authorization.k8s.io/v1\n\
-    kind: RoleBinding\nmetadata:\n  name: etcd-operator-rolebinding\nroleRef:\n  apiGroup:\
-    \ rbac.authorization.k8s.io\n  kind: Role\n  name: etcd-operator-role\nsubjects:\n\
-    - kind: ServiceAccount\n  name: etcd-operator-sa\n  namespace: myproject\nEOF\n\
-    ```\n`\n```\n<br>\n```\noc create -f etcd-operator-rolebinding.yaml\n```\n`\n\
-    ```\n<br>\nVerify the RoleBinding was successfully created:\n\n```\noc get rolebindings\n\
-    ```\n`\n```"
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the Service Account, Role, and RoleBinding
-  type: challenge
-- assignment: "Create the Deployment containing the Etcd Operator container image:\n\
-    \n```\ncat > etcd-operator-deployment.yaml<<EOF\napiVersion: apps/v1\nkind: Deployment\n\
-    metadata:\n  labels:\n    name: etcdoperator\n  name: etcd-operator\nspec:\n \
-    \ replicas: 1\n  selector:\n    matchLabels:\n      name: etcd-operator\n  template:\n\
-    \    metadata:\n      labels:\n        name: etcd-operator\n    spec:\n      containers:\n\
-    \      - command:\n        - etcd-operator\n        - --create-crd=false\n   \
-    \     env:\n        - name: MY_POD_NAMESPACE\n          valueFrom:\n         \
-    \   fieldRef:\n              apiVersion: v1\n              fieldPath: metadata.namespace\n\
-    \        - name: MY_POD_NAME\n          valueFrom:\n            fieldRef:\n  \
-    \            apiVersion: v1\n              fieldPath: metadata.name\n        image:\
-    \ quay.io/coreos/etcd-operator@sha256:c0301e4686c3ed4206e370b42de5a3bd2229b9fb4906cf85f3f30650424abec2\n\
-    \        imagePullPolicy: IfNotPresent\n        name: etcd-operator\n      serviceAccountName:\
-    \ etcd-operator-sa\nEOF\n```\n`\n```\n<br>\n```\noc create -f etcd-operator-deployment.yaml\
-    \ \n```\n`\n```\n<br>\nVerify the Etcd Operator Deployment was successfully created:\n\
-    \n```\noc get deploy\n```\n`\n```\n<br>\nVerify the Etcd Operator Deployment pods\
-    \ are running:\n\n```\noc get pods\n```\n`\n```\n<br>\nOpen a new terminal window\
-    \ to follow Etcd Operator logs in real-time:\n\n```\nexport ETCD_OPERATOR_POD=$(oc\
-    \ get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}')\noc\
-    \ logs $ETCD_OPERATOR_POD -f\n```\n`\n```\n<br>\nObserve the leader-election lease\
-    \ on the Etcd Operator Endpoint:\n\n```\noc get endpoints etcd-operator -o yaml\n\
-    ```\n`\n```\n<br>\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the Etcd Operator Deployment
-  type: challenge
-- assignment: "Ensure you are currently scoped to the `myproject` Namespace:\n\n```\n\
-    oc project myproject\n```\n`\n```\n\nCreate an Etcd cluster by referring to the\
-    \ new Custom Resource, `EtcdCluster`, defined in the Custom Resource Definition\
-    \ on Step 1:\n\n```\ncat > etcd-operator-cr.yaml<<EOF\napiVersion: etcd.database.coreos.com/v1beta2\n\
-    kind: EtcdCluster\nmetadata:\n  name: example-etcd-cluster\nspec:\n  size: 3\n\
-    \  version: 3.1.10\nEOF\n```\n`\n```\n<br>\n```\noc create -f etcd-operator-cr.yaml\n\
-    ```\n`\n```\n<br>\nVerify the cluster object was created:\n\n```\noc get etcdclusters\n\
-    ```\n`\n```\n<br>\nWatch the pods in the Etcd cluster get created:\n\n```\noc\
-    \ get pods -l etcd_cluster=example-etcd-cluster -w\n```\n`\n```\n<br>\nVerify\
-    \ the cluster has been exposed via a ClusterIP service:\n\n```\noc get services\
-    \ -l etcd_cluster=example-etcd-cluster\n```\n`\n```\n<br>\n"
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Creating the EtcdCluster Custom Resource (CR)
-  type: challenge
-- assignment: "Let's now create another pod and attempt to connect to the etcd cluster\
-    \ via `etcdctl`:\n\n```\noc run etcdclient --image=busybox busybox --restart=Never\
-    \ -- /usr/bin/tail -f /dev/null\n```\n`\n```\n<br>\nAccess the pod:\n\n``` \n\
-    oc rsh etcdclient\n```\n`\n```\n<br>\n\nInstall the Etcd Client:\n\n```\nwget\
-    \ https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz\n\
-    tar -xvf etcd-v3.1.4-linux-amd64.tar.gz\ncp etcd-v3.1.4-linux-amd64/etcdctl .\n\
-    ```\n`\n```\n<br>\nSet the etcd version and endpoint variables:\n\n```\nexport\
-    \ ETCDCTL_API=3\nexport ETCDCTL_ENDPOINTS=example-etcd-cluster-client:2379\n```\n\
-    `\n```\n<br>\nAttempt to write a key/value into the Etcd cluster:\n\n```\n./etcdctl\
-    \ put operator sdk\n./etcdctl get operator\n```\n`\n```\n<br>\nExit out of the\
-    \ client pod:\n\n```\nexit\n```\n`\n```\n<br>\n"
-  difficulty: basic
-  slug: step5
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Interacting with a Live Etcd Cluster
-  type: challenge
-- assignment: 'Let''s change the size of the Etcd `example-etcd-cluster` CR. The Etcd
-    Operator pod will detect the CR `spec.size` change and modify the number of pods
-    in the cluster:
-
-
-    ```
-
-    oc patch etcdcluster example-etcd-cluster --type=''json'' -p ''[{"op": "replace",
-    "path": "/spec/size", "value":5}]''
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-
-    Let''s change the version of our `example-etcd-cluster` CR. The etcd-operator
-    pod will detect the CR `spec.version` change and create a new cluster with the
-    newly specified image:
-
-
-    ```
-
-    oc patch etcdcluster example-etcd-cluster --type=''json'' -p ''[{"op": "replace",
-    "path": "/spec/version", "value":3.2.13}]''
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    '
-  difficulty: basic
-  slug: step6
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Scaling and Modifying the Etcd Version
-  type: challenge
-- assignment: 'In another session delete a pod from the cluster and watch recovery
-    in real-time.
-
-
-    ```
-
-    export EXAMPLE_ETCD_CLUSTER_POD=$(oc get pods -l app=etcd -o jsonpath=''{.items[0].metadata.name}'')
-
-    oc delete pod $EXAMPLE_ETCD_CLUSTER_POD
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    '
-  difficulty: basic
-  slug: step7
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Disaster Recovery in Action
-  type: challenge
-- assignment: 'Delete your Etcd cluster:
-
-
-    ```
-
-    oc delete etcdcluster example-etcd-cluster
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Delete the Etcd Operator:
-
-
-    ```
-
-    oc delete deployment etcd-operator
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Delete the Etcd CRD:
-
-
-    ```
-
-    oc delete crd etcdclusters.etcd.database.coreos.com
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    '
-  difficulty: basic
-  slug: step8
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Clean Up
-  type: challenge
-description: 'The etcd operator manages etcd clusters deployed to Kubernetes and automates
-  tasks related to operating an etcd cluster.
-
+slug: operatorframework-etcd-operator
+id: wt4etvcedo9u
+type: track
+title: Etcd Operator
+description: |
+  The etcd operator manages etcd clusters deployed to Kubernetes and automates tasks related to operating an etcd cluster.
 
   - [Create and Destroy](https://github.com/coreos/etcd-operator#create-and-destroy-an-etcd-cluster)
-
   - [Resize](https://github.com/coreos/etcd-operator#resize-an-etcd-cluster)
-
   - [Failover](https://github.com/coreos/etcd-operator#failover)
-
   - [Rolling upgrade](https://github.com/coreos/etcd-operator#upgrade-an-etcd-cluster)
-
   - [Backup and Restore](https://github.com/coreos/etcd-operator#backup-and-restore-an-etcd-cluster)
 
+  There are [more spec examples](https://github.com/coreos/etcd-operator/blob/master/doc/user/spec_examples.md) on setting up clusters with different configurations
 
-  There are [more spec examples](https://github.com/coreos/etcd-operator/blob/master/doc/user/spec_examples.md)
-  on setting up clusters with different configurations
+  Read [Best Practices](https://github.com/coreos/etcd-operator/blob/master/doc/best_practices.md) for more information on how to better use etcd operator.
 
+  Read [RBAC docs](https://github.com/coreos/etcd-operator/blob/master/doc/user/rbac.md) for how to setup RBAC rules for etcd operator if RBAC is in place.
 
-  Read [Best Practices](https://github.com/coreos/etcd-operator/blob/master/doc/best_practices.md)
-  for more information on how to better use etcd operator.
+  Read [Developer Guide](https://github.com/coreos/etcd-operator/blob/master/doc/dev/developer_guide.md) for setting up a development environment if you want to contribute.
 
-
-  Read [RBAC docs](https://github.com/coreos/etcd-operator/blob/master/doc/user/rbac.md)
-  for how to setup RBAC rules for etcd operator if RBAC is in place.
-
-
-  Read [Developer Guide](https://github.com/coreos/etcd-operator/blob/master/doc/dev/developer_guide.md)
-  for setting up a development environment if you want to contribute.
-
-
-  See the [Resources and Labels](https://github.com/coreos/etcd-operator/blob/master/doc/user/resource_labels.md)
-  doc for an overview of the resources created by the etcd-operator.
-
-  '
+  See the [Resources and Labels](https://github.com/coreos/etcd-operator/blob/master/doc/user/resource_labels.md) doc for an overview of the resources created by the etcd-operator.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: operatorframework-etcd-operator
-tags:
-- openshift
-title: Etcd Operator
-type: track
+challenges:
+- slug: step1
+  id: x4b6fbdxfsry
+  type: challenge
+  title: Creating the Custom Resource Definition (CRD)
+  assignment: |
+    Let's begin by creating a new project called `myproject`:
+
+    ```
+    oc new-project myproject
+    ```
+    `
+    ```
+    <br>
+    Create the Custom Resource Definition (CRD) for the Etcd Operator:
+
+    ```
+    cat > etcd-operator-crd.yaml<<EOF
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      name: etcdclusters.etcd.database.coreos.com
+    spec:
+      group: etcd.database.coreos.com
+      names:
+        kind: EtcdCluster
+        listKind: EtcdClusterList
+        plural: etcdclusters
+        shortNames:
+        - etcdclus
+        - etcd
+        singular: etcdcluster
+      scope: Namespaced
+      version: v1beta2
+      versions:
+      - name: v1beta2
+        schema:
+          openAPIV3Schema:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        served: true
+        storage: true
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-crd.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the CRD was successfully created.
+
+    ```
+    oc get crd etcdclusters.etcd.database.coreos.com
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: cctic2jq37ol
+  type: challenge
+  title: Creating the Service Account, Role, and RoleBinding
+  assignment: |-
+    Create a dedicated Service Account responsible for running the Etcd Operator:
+
+    ```
+    cat > etcd-operator-sa.yaml<<EOF
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: etcd-operator-sa
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-sa.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the Service Account was successfully created:
+
+    ```
+    oc get sa
+    ```
+    `
+    ```
+    <br>
+    Create the Role that the `etcd-operator-sa` Service Account will need for authorization to perform actions against the Kubernetes API:
+
+    ```
+    cat > etcd-operator-role.yaml<<EOF
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: etcd-operator-role
+    rules:
+    - apiGroups:
+      - etcd.database.coreos.com
+      resources:
+      - etcdclusters
+      - etcdbackups
+      - etcdrestores
+      verbs:
+      - '*'
+    - apiGroups:
+      - ""
+      resources:
+      - pods
+      - services
+      - endpoints
+      - persistentvolumeclaims
+      - events
+      verbs:
+      - '*'
+    - apiGroups:
+      - apps
+      resources:
+      - deployments
+      verbs:
+      - '*'
+    - apiGroups:
+      - ""
+      resources:
+      - secrets
+      verbs:
+      - get
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-role.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the Role was successfully created:
+
+    ```
+    oc get roles
+    ```
+    `
+    ```
+    <br>
+    Create the RoleBinding to bind the `etcd-operator-role` Role to the `etcd-operator-sa` Service Account:
+
+    ```
+    cat > etcd-operator-rolebinding.yaml<<EOF
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: etcd-operator-rolebinding
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: etcd-operator-role
+    subjects:
+    - kind: ServiceAccount
+      name: etcd-operator-sa
+      namespace: myproject
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-rolebinding.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the RoleBinding was successfully created:
+
+    ```
+    oc get rolebindings
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: 2ouepxtqpl5y
+  type: challenge
+  title: Creating the Etcd Operator Deployment
+  assignment: |
+    Create the Deployment containing the Etcd Operator container image:
+
+    ```
+    cat > etcd-operator-deployment.yaml<<EOF
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        name: etcdoperator
+      name: etcd-operator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          name: etcd-operator
+      template:
+        metadata:
+          labels:
+            name: etcd-operator
+        spec:
+          containers:
+          - command:
+            - etcd-operator
+            - --create-crd=false
+            env:
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            image: quay.io/coreos/etcd-operator@sha256:c0301e4686c3ed4206e370b42de5a3bd2229b9fb4906cf85f3f30650424abec2
+            imagePullPolicy: IfNotPresent
+            name: etcd-operator
+          serviceAccountName: etcd-operator-sa
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-deployment.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the Etcd Operator Deployment was successfully created:
+
+    ```
+    oc get deploy
+    ```
+    `
+    ```
+    <br>
+    Verify the Etcd Operator Deployment pods are running:
+
+    ```
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+    Open a new terminal window to follow Etcd Operator logs in real-time:
+
+    ```
+    export ETCD_OPERATOR_POD=$(oc get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}')
+    oc logs $ETCD_OPERATOR_POD -f
+    ```
+    `
+    ```
+    <br>
+    Observe the leader-election lease on the Etcd Operator Endpoint:
+
+    ```
+    oc get endpoints etcd-operator -o yaml
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: t6eo6yolqn6n
+  type: challenge
+  title: Creating the EtcdCluster Custom Resource (CR)
+  assignment: |
+    Ensure you are currently scoped to the `myproject` Namespace:
+
+    ```
+    oc project myproject
+    ```
+    `
+    ```
+
+    Create an Etcd cluster by referring to the new Custom Resource, `EtcdCluster`, defined in the Custom Resource Definition on Step 1:
+
+    ```
+    cat > etcd-operator-cr.yaml<<EOF
+    apiVersion: etcd.database.coreos.com/v1beta2
+    kind: EtcdCluster
+    metadata:
+      name: example-etcd-cluster
+    spec:
+      size: 3
+      version: 3.1.10
+    EOF
+    ```
+    `
+    ```
+    <br>
+    ```
+    oc create -f etcd-operator-cr.yaml
+    ```
+    `
+    ```
+    <br>
+    Verify the cluster object was created:
+
+    ```
+    oc get etcdclusters
+    ```
+    `
+    ```
+    <br>
+    Watch the pods in the Etcd cluster get created:
+
+    ```
+    oc get pods -l etcd_cluster=example-etcd-cluster -w
+    ```
+    `
+    ```
+    <br>
+    Verify the cluster has been exposed via a ClusterIP service:
+
+    ```
+    oc get services -l etcd_cluster=example-etcd-cluster
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step5
+  id: 0wzxh38lrypa
+  type: challenge
+  title: Interacting with a Live Etcd Cluster
+  assignment: |
+    Let's now create another pod and attempt to connect to the etcd cluster via `etcdctl`:
+
+    ```
+    oc run etcdclient --image=busybox busybox --restart=Never -- /usr/bin/tail -f /dev/null
+    ```
+    `
+    ```
+    <br>
+    Access the pod:
+
+    ```
+    oc rsh etcdclient
+    ```
+    `
+    ```
+    <br>
+
+    Install the Etcd Client:
+
+    ```
+    wget https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz
+    tar -xvf etcd-v3.1.4-linux-amd64.tar.gz
+    cp etcd-v3.1.4-linux-amd64/etcdctl .
+    ```
+    `
+    ```
+    <br>
+    Set the etcd version and endpoint variables:
+
+    ```
+    export ETCDCTL_API=3
+    export ETCDCTL_ENDPOINTS=example-etcd-cluster-client:2379
+    ```
+    `
+    ```
+    <br>
+    Attempt to write a key/value into the Etcd cluster:
+
+    ```
+    ./etcdctl put operator sdk
+    ./etcdctl get operator
+    ```
+    `
+    ```
+    <br>
+    Exit out of the client pod:
+
+    ```
+    exit
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step6
+  id: kzfxywdtiwyq
+  type: challenge
+  title: Scaling and Modifying the Etcd Version
+  assignment: |
+    Let's change the size of the Etcd `example-etcd-cluster` CR. The Etcd Operator pod will detect the CR `spec.size` change and modify the number of pods in the cluster:
+
+    ```
+    oc patch etcdcluster example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/size", "value":5}]'
+    ```
+    `
+    ```
+    <br>
+
+    Let's change the version of our `example-etcd-cluster` CR. The etcd-operator pod will detect the CR `spec.version` change and create a new cluster with the newly specified image:
+
+    ```
+    oc patch etcdcluster example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/version", "value":3.2.13}]'
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step7
+  id: jsy7meylt6vz
+  type: challenge
+  title: Disaster Recovery in Action
+  assignment: |
+    In another session delete a pod from the cluster and watch recovery in real-time.
+
+    ```
+    export EXAMPLE_ETCD_CLUSTER_POD=$(oc get pods -l app=etcd -o jsonpath='{.items[0].metadata.name}')
+    oc delete pod $EXAMPLE_ETCD_CLUSTER_POD
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step8
+  id: rcrospznqmgy
+  type: challenge
+  title: Clean Up
+  assignment: |
+    Delete your Etcd cluster:
+
+    ```
+    oc delete etcdcluster example-etcd-cluster
+    ```
+    `
+    ```
+    <br>
+    Delete the Etcd Operator:
+
+    ```
+    oc delete deployment etcd-operator
+    ```
+    `
+    ```
+    <br>
+    Delete the Etcd CRD:
+
+    ```
+    oc delete crd etcdclusters.etcd.database.coreos.com
+    ```
+    `
+    ```
+    <br>
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "5543397443305086265"

@@ -1,281 +1,350 @@
-challenges:
-- assignment: "# Import the code\n\nLet's refresh the code we'll be using. Run the\
-    \ following command to clone the sample project:\n\n```\ncd /root/projects &&\
-    \ rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started\
-    \ && cd rhoar-getting-started/spring/spring-rest-services\n```\n\n# Get project\
-    \ set up\n\n**1. Adding Spring MVC and Tomcat to the application**\n\nSince our\
-    \ application will be a web application, we need to use a servlet container like\
-    \ Apache Tomcat or Undertow to handle incoming connections from clients. Since\
-    \ Red Hat offers support for Apache Tomcat (e.g., security patches, bug fixes,\
-    \ etc.), we will use it here. \n\nIn addition we are going to utilize the Spring\
-    \ MVC project which contains many of the abstractions we will use to build our\
-    \ APIs. Observe the following code block in the ``pom.xml``{{open}}\n\n`    <dependency>\
-    \  \n      <groupId>org.springframework.boot</groupId>  \n      <artifactId>spring-boot-starter-web</artifactId>\
-    \  \n    </dependency>\n`\n\nYou may notice that there is no `<version>` tag here.\
-    \ That's because the version numbers are managed and automatically derived by\
-    \ the BOM mentioned in the previous trainings. \n\n**2. Test the application locally**\n\
-    \nRun the application by executing the following command:\n\n```\nmvn spring-boot:run\n\
-    ```\n\nYou should eventually see a log line like `Started Application in 4.497\
-    \ seconds (JVM running for 9.785)`. Open the application by clicking on the **Local\
-    \ Web Browser** tab or clicking [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/).\
-    \ Then stop the application by pressing **<kbd>CTRL</kbd>+<kbd>C</kbd>**.\n\n\
-    ## Congratulations\n\nYou have now successfully executed the first step in this\
-    \ scenario. \n"
-  difficulty: basic
-  slug: 01-review-the-initial-project
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 1
-  type: challenge
-- assignment: "# Create REST services for the fruit web application\n\nRESTful web\
-    \ services are one of the core use cases for the Spring Boot framework as Spring\
-    \ makes it very easy to create HTTP APIs serving a variety of data types. We'll\
-    \ be learning how to use the standard HTTP verbs: GET, POST, PUT, and DELETE,\
-    \ how to use path segments, and how to return JSON content in this scenario.\n\
-    \n**1. Review the Model**\n\nWe have already created the model for our Fruit objects\
-    \ due to it being necessary for the Repository. Click on the following link which\
-    \ will open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``{{open}}.\
-    \ As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific\
-    \ annotations. Don't worry about the annotations. They are not important for this\
-    \ module.\n\n**2. Add a Controller**\n\nNext we need to create a Spring Controller\
-    \ to handle HTTP requests to our application. The `@RestController` annotation\
-    \ on a Java class marks the class as a Controller (intended to be of the REST\
-    \ variety) which Spring will register automatically for you on application start.\
-    \ Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitController.java``{{open}}\n\
-    \nThen, copy the below content into the file (or use the `Copy to Editor` button):\n\
-    \n<pre class=\"file\" data-filename=\"src/main/java/com/example/service/FruitController.java\"\
-    \ data-target=\"replace\">\npackage com.example.service;\n\nimport org.springframework.beans.factory.annotation.Autowired;\n\
-    import org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\n\n\
-    @RestController\n@RequestMapping(\"/api/fruits\")\npublic class FruitController\
-    \ {\n\n    @Autowired FruitRepository repository; // Ignore this\n    \n    //\
-    \ TODO GET mappings\n    // TODO POST mapping\n    // TODO PUT mapping\n    //\
-    \ TODO DELETE mapping\n\n}\n</pre>\n\nThe `@RestController` annotation tells Spring\
-    \ that this is a special kind of Controller meant to be returning data (not views)\
-    \ when called. If we used the standard Spring `@Controller` annotation instead\
-    \ we would have to also annotate the `getAll()` method (and any other API methods\
-    \ for that matter) with the `@ResponseBody` annotation. `@RestController` implies\
-    \ the `@ResponseBody` annotation for us so we don't have to type it every time!\n\
-    \n`@RequestMapping` is our way to tell Spring which URIs this Controller services.\
-    \ In this case we say we service the `/api/fruits` URI. Spring will thus route\
-    \ HTTP requests to that URI to this Controller.\n\n**2. Add GET Mappings**\n\n\
-    At the moment our Controller doesn't actually do any work. We need to add some\
-    \ handler methods. Let's start with the two HTTP GET methods, one for fetching\
-    \ all fruits and one for fetching a specific fruit. Copy the following at the\
-    \ ``// TODO GET actions`` line (or use to `Copy to Editor` button):\n\n<pre class=\"\
-    file\" data-filename=\"src/main/java/com/example/service/FruitController.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO GET mappings\">\n        @GetMapping\n\
-    \        public List&lt;Fruit&gt; getAll() {\n            return repository.findAll();\n\
-    \        }\n\n        @GetMapping(\"/{id}\")\n        public Fruit getFruit(@PathVariable(\"\
-    id\") Long id) {\n            return repository.findById(id).orElse(null);\n \
-    \       }\n</pre>\n\nTo mark a method as a handler for HTTP GET verbs we use the\
-    \ `@GetMapping` annotation. There are a couple arguments that can be passed as\
-    \ arguments to the annotation. The most common argument is a `path` String. Like\
-    \ `@RequestMapping` (which `@GetMapping` is a specialized form of), if we provide\
-    \ a `path` to the annotation it tells Spring that `HTTP GET` requests to that\
-    \ path are to be handled by that method. In the absence of a path String, however,\
-    \ it tries to fall back to the `current path context`. In this case it falls back\
-    \ to the path we specified in the `@RequestMapping` annotation at the class level.\
-    \ This means that the actual route for this method is `GET /api/fruits`.\n\nThe\
-    \ second `@GetMapping` for finding a specific Fruit by ID also inherits the path\
-    \ specified by `@RequestMapping` (and all subsequent Mapping annotations in this\
-    \ class will as well). The second one, however, adds context to that path by specifying\
-    \ it's own path. In the second method the route is `GET /api/fruits/{id}` where\
-    \ `id` is a `Path Variable`. This means that whatever value is specified in the\
-    \ last segment will be captured as the variable `id` which we declare to be a\
-    \ Long. This method would therefore be servicing routes like `GET /api/fruits/1`.\n\
-    \n**3. Test the service from a web browser locally**\n\nRun the application by\
-    \ executing the below command:\n\n```\nmvn spring-boot:run\n```\n\nWhen the console\
-    \ reports that Spring is up and running navigate to [the new REST API](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/api/fruits).\
-    \ You should see something like this in your browser:\n\n```json\n[{\"name\":\"\
-    Cherry\"},{\"name\":\"Apple\"},{\"name\":\"Banana\"}]\n```\n\nThese values are\
-    \ seeded values we've added to the project for you. What is important to note\
-    \ is that Spring automatically serialized our Fruit models to JSON, created the\
-    \ appropriate HTTP header for clients, and returned that response to the client\
-    \ without any extra code from us! \n\n>**NOTE:** JSON is not the only Media Type\
-    \ supported in Spring Boot. JSON is simply the default chosen by the framework.\n\
-    \nYou can also try adding a `/1` to the end of the browser URL. It should just\
-    \ return `{\"name\":\"Cherry\"}`. \n\nPress **<kbd>CTRL</kbd>+<kbd>C</kbd>** to\
-    \ stop the application when you are done.\n\n**4. Add POST Mapping**\n\nNext let's\
-    \ add a handler for accepting HTTP POST requests to create new entries. Copy the\
-    \ following to the `// TODO POST mapping` line (or use the `Copy to Editor` button):\n\
-    \n<pre class=\"file\" data-filename=\"src/main/java/com/example/service/FruitController.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO POST mapping\">\n        @PostMapping\n\
-    \        public Fruit createFruit(@RequestBody Fruit fruit) {\n            return\
-    \ repository.save(fruit);\n        }\n</pre>\n\nFor a `@PostMapping` we are expecting\
-    \ a JSON Request Body to be sent to our application that follows the `Fruit` form.\
-    \ As a reminder from above, a Fruit in JSON form looks like `{\"name\":\"Cherry\"\
-    }`. This Request Body will be automatically deserialized from JSON to a Java Object\
-    \ by Spring if we have a POJO that matches. In this case we have our `Fruit` class.\
-    \ The `@RequestBody` annotation instructs Spring to try to deserialize the Request\
-    \ JSON into a `Fruit` object and inject it as an argument to our handler method.\
-    \ We can then do whatever we need to do with the Java Object (in this case - save\
-    \ it off). We have omitted input checking for brevity but always remember to sanitize\
-    \ your inputs in real applications!\n\nRun the application again by executing\
-    \ the ```\nmvn spring-boot:run\n``` command. This time we will use the included\
-    \ [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ to POST new Fruits to the application. Add a Fruit name into the `Add a Fruit`\
-    \ text box and click the `Save` button. If all is well it should show up in the\
-    \ right-hand `Fruits List` view.\n\n>**NOTE:** You can also click the `Local Browser`\
-    \ tab in the right-hand terminal to access the web UI.\n\nPress **<kbd>CTRL</kbd>+<kbd>C</kbd>**\
-    \ to stop the application.\n\n**5. Add PUT Mapping**\n\nNext let's add a handler\
-    \ for accepting HTTP PUT requests to update existing entries. Copy the following\
-    \ to the `// TODO POST mapping` line (or use the `Copy to Editor` button):\n\n\
-    <pre class=\"file\" data-filename=\"src/main/java/com/example/service/FruitController.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO PUT mapping\">\n        @PutMapping(\"\
-    /{id}\")\n        public Fruit updateFruit(@PathVariable(\"id\") Long id, @RequestBody\
-    \ Fruit fruit) {\n            fruit.setId(id);\n            return repository.save(fruit);\n\
-    \        }\n</pre>\n\nJust like the `@GetMapping` above this PUT handler handles\
-    \ requests to a path segment of the `/api/fruits` URI. In this case it handles\
-    \ routes like `PUT /api/fruits/1`. The route defines the ID being updated and\
-    \ the `@RequestBody`, just like in the POST mapping, contains the JSON payload\
-    \ for the Fruit change. \n\nRun the application again by executing the ```\nmvn\
-    \ spring-boot:run\n``` command. Again we will use the included [web application](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ to edit existing Fruits with a HTTP PUT to the application. Click the `Edit`\
-    \ button on one of the Fruits. It's name will populate the `Add a Fruit` text\
-    \ box. Change it to something else and click the `Save` button. If all is well\
-    \ it should show up in the right-hand `Fruits List` view with the new name.\n\n\
-    Press **<kbd>CTRL</kbd>+<kbd>C</kbd>** to stop the application.\n\n**6. Add DELETE\
-    \ Mapping**\n\nFinally, let's add a handler for accepting HTTP DELETE requests\
-    \ to delete existing entries. Copy the following to the `// TODO POST mapping`\
-    \ line (or use the `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"\
-    src/main/java/com/example/service/FruitController.java\" data-target=\"insert\"\
-    \ data-marker=\"// TODO DELETE mapping\">\n        @DeleteMapping(\"/{id}\")\n\
-    \        public void delete(@PathVariable(\"id\") Long id) {\n            repository.deleteById(id);\n\
-    \        }\n</pre>\n\nWe are again utilizing a route segment to specify an ID\
-    \ in the route. Thus this handler will handle routes like `DELETE /api/fruits/1`.\
-    \ \n\nRun the application once more by executing the ```\nmvn spring-boot:run\n\
-    ``` command. This time we will use the included [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ to DELETE Fruits from the application. Click the `Remove` button next to any\
-    \ of the Fruit entries. If all is well it should remove that Fruit from the List.\n\
-    \n>**NOTE**: Do not blindly accept IDs like this in your path for deletion in\
-    \ production applications! Make sure there is some level of security to ensure\
-    \ this functionality cannot be abused.\n\nPress **<kbd>CTRL</kbd>+<kbd>C</kbd>**\
-    \ to stop the application.\n\n## Congratulations\n\nYou have now learned how to\
-    \ how to create RESTful Web APIs with Spring Boot! \n\nIn next step of this scenario,\
-    \ you will learn how to access and login to your OpenShift environment. "
-  difficulty: basic
-  slug: 02-create-rest-services
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 2
-  type: challenge
-- assignment: "# Login and Deploy to OpenShift Container Platform\n\n**Red Hat OpenShift\
-    \ Container Platform** is the preferred runtime for **Red Hat Runtimes** like\
-    \ **Spring Boot**, **Vert.x**, etc. The OpenShift Container Platform is based\
-    \ on **Kubernetes** which is a Container Orchestrator that has grown in popularity\
-    \ and adoption over the last years. **OpenShift** is currently the only container\
-    \ platform based on Kubernetes that offers multitenancy. This means that developers\
-    \ can have their own personal, isolated projects to test and verify applications\
-    \ before committing to a shared code repository.\n\nOpenShift also ships with\
-    \ a feature rich web console as well as command line tools to provide users with\
-    \ a friendly interface to work with applications deployed to the platform. \n\n\
-    **1. Login to the OpenShift Container Platform**\n\nThis sandbox has already authenticated\
-    \ you to OpenShift. To validate, you will use the `oc whoami` command:\n\n```\n\
-    oc whoami\n```\n\nThen you'll create the project:\n\n```\noc new-project dev --display-name=\"\
-    Dev - Spring Boot App\"\n```\n\nNow create a database:\n\n``oc new-app -e POSTGRESQL_USER=dev\
-    \ \\\n             -e POSTGRESQL_PASSWORD=secret \\\n             -e POSTGRESQL_DATABASE=my_data\
-    \ \\\n             openshift/postgresql:12-el8 \\\n             --name=my-database``{{execute}}\n\
-    \nOur application knows how to interact with the database because you defined\
-    \ the properties in the ``src/main/resources/application-openshift.properties``{{open}}\
-    \ file. You can see below that the URL, username, password, and driver for the\
-    \ database have been supplied.\n```\nspring.datasource.url=jdbc:postgresql://${MY_DATABASE_SERVICE_HOST}:${MY_DATABASE_SERVICE_PORT}/my_data\n\
-    spring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\n\
-    spring.datasource.driver-class-name=org.postgresql.Driver\nspring.jpa.hibernate.ddl-auto=create\n\
-    ```\nRun the following command to deploy the application to OpenShift:\n\n```\n\
-    mvn package oc:deploy -Popenshift -DskipTests\n```\n\nThis step may take some\
-    \ time to do the Maven build and the OpenShift deployment. After the build completes\
-    \ you can verify that everything is started by running the following command:\n\
-    \n```\noc rollout status dc/spring-rest-services\n```\n\n\nAfter the rollout is\
-    \ complete you can go to the OpenShift web console, login with **admin**/**admin**\
-    \ credentials, select **dev** project and find the route to your application under\
-    \ **Routes**. \n\n![Route from Web Console](/openshift/assets/middleware/rhoar-spring-rest-services/route.png)\n\
-    \nYou can also click [here](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/fruits)\
-    \ to directly access the running application. \n\nYou should see the same JSON\
-    \ output as the previous step:\n\n```json\n[{\"name\":\"Cherry\"},{\"name\":\"\
-    Apple\"},{\"name\":\"Banana\"}]\n```\nAnd if you open the [web application](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ the same functionality from the previous steps should still work.\n\n# Open\
-    \ the solution in an IDE in the Cloud!\nWant to continue exploring this solution\
-    \ on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
-    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
-    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
-    \ are a new user. This free service expires after 30 days, but you can always\
-    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-rest-services/devfile.yaml)\
-    \ to open the solution for this project in the cloud IDE. While loading, if it\
-    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
-    \ code to your own GitHub!\nWant to experiment more with the solution code you\
-    \ just worked with? If so, you can fork the repository containing the solution\
-    \ to your own GitHub repository by clicking on the following command to execute\
-    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
-    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
-    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
-    \ to open a new browser tab to GitHub and paste in the code you were presented\
-    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
-    \ close the browser tab and return to the console and press `Enter` to complete\
-    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
-    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
-    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
-    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
-    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
-    \ repo will be forked in your own GitHub account. On the `solution` branch in\
-    \ the repo, the `spring-rest-services` project inside the `spring` folder contains\
-    \ the completed solution for this scenario.\n\n## Congratulations\n\nYou have\
-    \ now learned how to deploy a RESTful Spring Boot application to OpenShift Container\
-    \ Platform. \n\nYou'll find additional resources and other suggested scenarios\
-    \ in the next page."
-  difficulty: basic
-  slug: 03-login-to-openshift
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 3
-  type: challenge
-description: "In this scenario you will learn more about developing Spring Boot applications\
-  \ using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform.\
-  \ We will be building a RESTful application using Spring Rest. \n\n\n"
+slug: developing-with-spring-spring-rest-services
+id: 6t2lk7uaminr
+type: track
+title: Spring REST
+description: |+
+  In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a RESTful application using Spring Rest.
+
+
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: developing-with-spring-spring-rest-services
-tags:
-- openshift
-title: Spring REST
-type: track
+challenges:
+- slug: 01-review-the-initial-project
+  id: llzx1lulmzra
+  type: challenge
+  title: Step 1
+  assignment: |
+    # Import the code
+
+    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+
+    ```
+    cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-rest-services
+    ```
+
+    # Get project set up
+
+    **1. Adding Spring MVC and Tomcat to the application**
+
+    Since our application will be a web application, we need to use a servlet container like Apache Tomcat or Undertow to handle incoming connections from clients. Since Red Hat offers support for Apache Tomcat (e.g., security patches, bug fixes, etc.), we will use it here.
+
+    In addition we are going to utilize the Spring MVC project which contains many of the abstractions we will use to build our APIs. Observe the following code block in the ``pom.xml``{{open}}
+
+    `    <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    `
+
+    You may notice that there is no `<version>` tag here. That's because the version numbers are managed and automatically derived by the BOM mentioned in the previous trainings.
+
+    **2. Test the application locally**
+
+    Run the application by executing the following command:
+
+    ```
+    mvn spring-boot:run
+    ```
+
+    You should eventually see a log line like `Started Application in 4.497 seconds (JVM running for 9.785)`. Open the application by clicking on the **Local Web Browser** tab or clicking [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/). Then stop the application by pressing **<kbd>CTRL</kbd>+<kbd>C</kbd>**.
+
+    ## Congratulations
+
+    You have now successfully executed the first step in this scenario.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-create-rest-services
+  id: 3nxhlpnca5wy
+  type: challenge
+  title: Step 2
+  assignment: |-
+    # Create REST services for the fruit web application
+
+    RESTful web services are one of the core use cases for the Spring Boot framework as Spring makes it very easy to create HTTP APIs serving a variety of data types. We'll be learning how to use the standard HTTP verbs: GET, POST, PUT, and DELETE, how to use path segments, and how to return JSON content in this scenario.
+
+    **1. Review the Model**
+
+    We have already created the model for our Fruit objects due to it being necessary for the Repository. Click on the following link which will open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``{{open}}. As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific annotations. Don't worry about the annotations. They are not important for this module.
+
+    **2. Add a Controller**
+
+    Next we need to create a Spring Controller to handle HTTP requests to our application. The `@RestController` annotation on a Java class marks the class as a Controller (intended to be of the REST variety) which Spring will register automatically for you on application start. Click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitController.java``{{open}}
+
+    Then, copy the below content into the file (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="replace">
+    package com.example.service;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.web.bind.annotation.*;
+
+    import java.util.List;
+
+    @RestController
+    @RequestMapping("/api/fruits")
+    public class FruitController {
+
+        @Autowired FruitRepository repository; // Ignore this
+
+        // TODO GET mappings
+        // TODO POST mapping
+        // TODO PUT mapping
+        // TODO DELETE mapping
+
+    }
+    </pre>
+
+    The `@RestController` annotation tells Spring that this is a special kind of Controller meant to be returning data (not views) when called. If we used the standard Spring `@Controller` annotation instead we would have to also annotate the `getAll()` method (and any other API methods for that matter) with the `@ResponseBody` annotation. `@RestController` implies the `@ResponseBody` annotation for us so we don't have to type it every time!
+
+    `@RequestMapping` is our way to tell Spring which URIs this Controller services. In this case we say we service the `/api/fruits` URI. Spring will thus route HTTP requests to that URI to this Controller.
+
+    **2. Add GET Mappings**
+
+    At the moment our Controller doesn't actually do any work. We need to add some handler methods. Let's start with the two HTTP GET methods, one for fetching all fruits and one for fetching a specific fruit. Copy the following at the ``// TODO GET actions`` line (or use to `Copy to Editor` button):
+
+    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="insert" data-marker="// TODO GET mappings">
+            @GetMapping
+            public List&lt;Fruit&gt; getAll() {
+                return repository.findAll();
+            }
+
+            @GetMapping("/{id}")
+            public Fruit getFruit(@PathVariable("id") Long id) {
+                return repository.findById(id).orElse(null);
+            }
+    </pre>
+
+    To mark a method as a handler for HTTP GET verbs we use the `@GetMapping` annotation. There are a couple arguments that can be passed as arguments to the annotation. The most common argument is a `path` String. Like `@RequestMapping` (which `@GetMapping` is a specialized form of), if we provide a `path` to the annotation it tells Spring that `HTTP GET` requests to that path are to be handled by that method. In the absence of a path String, however, it tries to fall back to the `current path context`. In this case it falls back to the path we specified in the `@RequestMapping` annotation at the class level. This means that the actual route for this method is `GET /api/fruits`.
+
+    The second `@GetMapping` for finding a specific Fruit by ID also inherits the path specified by `@RequestMapping` (and all subsequent Mapping annotations in this class will as well). The second one, however, adds context to that path by specifying it's own path. In the second method the route is `GET /api/fruits/{id}` where `id` is a `Path Variable`. This means that whatever value is specified in the last segment will be captured as the variable `id` which we declare to be a Long. This method would therefore be servicing routes like `GET /api/fruits/1`.
+
+    **3. Test the service from a web browser locally**
+
+    Run the application by executing the below command:
+
+    ```
+    mvn spring-boot:run
+    ```
+
+    When the console reports that Spring is up and running navigate to [the new REST API](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/api/fruits). You should see something like this in your browser:
+
+    ```json
+    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
+    ```
+
+    These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
+
+    >**NOTE:** JSON is not the only Media Type supported in Spring Boot. JSON is simply the default chosen by the framework.
+
+    You can also try adding a `/1` to the end of the browser URL. It should just return `{"name":"Cherry"}`.
+
+    Press **<kbd>CTRL</kbd>+<kbd>C</kbd>** to stop the application when you are done.
+
+    **4. Add POST Mapping**
+
+    Next let's add a handler for accepting HTTP POST requests to create new entries. Copy the following to the `// TODO POST mapping` line (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="insert" data-marker="// TODO POST mapping">
+            @PostMapping
+            public Fruit createFruit(@RequestBody Fruit fruit) {
+                return repository.save(fruit);
+            }
+    </pre>
+
+    For a `@PostMapping` we are expecting a JSON Request Body to be sent to our application that follows the `Fruit` form. As a reminder from above, a Fruit in JSON form looks like `{"name":"Cherry"}`. This Request Body will be automatically deserialized from JSON to a Java Object by Spring if we have a POJO that matches. In this case we have our `Fruit` class. The `@RequestBody` annotation instructs Spring to try to deserialize the Request JSON into a `Fruit` object and inject it as an argument to our handler method. We can then do whatever we need to do with the Java Object (in this case - save it off). We have omitted input checking for brevity but always remember to sanitize your inputs in real applications!
+
+    Run the application again by executing the ```
+    mvn spring-boot:run
+    ``` command. This time we will use the included [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/) to POST new Fruits to the application. Add a Fruit name into the `Add a Fruit` text box and click the `Save` button. If all is well it should show up in the right-hand `Fruits List` view.
+
+    >**NOTE:** You can also click the `Local Browser` tab in the right-hand terminal to access the web UI.
+
+    Press **<kbd>CTRL</kbd>+<kbd>C</kbd>** to stop the application.
+
+    **5. Add PUT Mapping**
+
+    Next let's add a handler for accepting HTTP PUT requests to update existing entries. Copy the following to the `// TODO POST mapping` line (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="insert" data-marker="// TODO PUT mapping">
+            @PutMapping("/{id}")
+            public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit) {
+                fruit.setId(id);
+                return repository.save(fruit);
+            }
+    </pre>
+
+    Just like the `@GetMapping` above this PUT handler handles requests to a path segment of the `/api/fruits` URI. In this case it handles routes like `PUT /api/fruits/1`. The route defines the ID being updated and the `@RequestBody`, just like in the POST mapping, contains the JSON payload for the Fruit change.
+
+    Run the application again by executing the ```
+    mvn spring-boot:run
+    ``` command. Again we will use the included [web application](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/) to edit existing Fruits with a HTTP PUT to the application. Click the `Edit` button on one of the Fruits. It's name will populate the `Add a Fruit` text box. Change it to something else and click the `Save` button. If all is well it should show up in the right-hand `Fruits List` view with the new name.
+
+    Press **<kbd>CTRL</kbd>+<kbd>C</kbd>** to stop the application.
+
+    **6. Add DELETE Mapping**
+
+    Finally, let's add a handler for accepting HTTP DELETE requests to delete existing entries. Copy the following to the `// TODO POST mapping` line (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="insert" data-marker="// TODO DELETE mapping">
+            @DeleteMapping("/{id}")
+            public void delete(@PathVariable("id") Long id) {
+                repository.deleteById(id);
+            }
+    </pre>
+
+    We are again utilizing a route segment to specify an ID in the route. Thus this handler will handle routes like `DELETE /api/fruits/1`.
+
+    Run the application once more by executing the ```
+    mvn spring-boot:run
+    ``` command. This time we will use the included [web application](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/) to DELETE Fruits from the application. Click the `Remove` button next to any of the Fruit entries. If all is well it should remove that Fruit from the List.
+
+    >**NOTE**: Do not blindly accept IDs like this in your path for deletion in production applications! Make sure there is some level of security to ensure this functionality cannot be abused.
+
+    Press **<kbd>CTRL</kbd>+<kbd>C</kbd>** to stop the application.
+
+    ## Congratulations
+
+    You have now learned how to how to create RESTful Web APIs with Spring Boot!
+
+    In next step of this scenario, you will learn how to access and login to your OpenShift environment.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 03-login-to-openshift
+  id: 4oyzr2xrtxfr
+  type: challenge
+  title: Step 3
+  assignment: |-
+    # Login and Deploy to OpenShift Container Platform
+
+    **Red Hat OpenShift Container Platform** is the preferred runtime for **Red Hat Runtimes** like **Spring Boot**, **Vert.x**, etc. The OpenShift Container Platform is based on **Kubernetes** which is a Container Orchestrator that has grown in popularity and adoption over the last years. **OpenShift** is currently the only container platform based on Kubernetes that offers multitenancy. This means that developers can have their own personal, isolated projects to test and verify applications before committing to a shared code repository.
+
+    OpenShift also ships with a feature rich web console as well as command line tools to provide users with a friendly interface to work with applications deployed to the platform.
+
+    **1. Login to the OpenShift Container Platform**
+
+    This sandbox has already authenticated you to OpenShift. To validate, you will use the `oc whoami` command:
+
+    ```
+    oc whoami
+    ```
+
+    Then you'll create the project:
+
+    ```
+    oc new-project dev --display-name="Dev - Spring Boot App"
+    ```
+
+    Now create a database:
+
+    ``oc new-app -e POSTGRESQL_USER=dev \
+                 -e POSTGRESQL_PASSWORD=secret \
+                 -e POSTGRESQL_DATABASE=my_data \
+                 openshift/postgresql:12-el8 \
+                 --name=my-database``{{execute}}
+
+    Our application knows how to interact with the database because you defined the properties in the ``src/main/resources/application-openshift.properties``{{open}} file. You can see below that the URL, username, password, and driver for the database have been supplied.
+    ```
+    spring.datasource.url=jdbc:postgresql://${MY_DATABASE_SERVICE_HOST}:${MY_DATABASE_SERVICE_PORT}/my_data
+    spring.datasource.username=${DB_USERNAME}
+    spring.datasource.password=${DB_PASSWORD}
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.jpa.hibernate.ddl-auto=create
+    ```
+    Run the following command to deploy the application to OpenShift:
+
+    ```
+    mvn package oc:deploy -Popenshift -DskipTests
+    ```
+
+    This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
+
+    ```
+    oc rollout status dc/spring-rest-services
+    ```
+
+
+    After the rollout is complete you can go to the OpenShift web console, login with **admin**/**admin** credentials, select **dev** project and find the route to your application under **Routes**.
+
+    ![Route from Web Console](/openshift/assets/middleware/rhoar-spring-rest-services/route.png)
+
+    You can also click [here](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/fruits) to directly access the running application.
+
+    You should see the same JSON output as the previous step:
+
+    ```json
+    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
+    ```
+    And if you open the [web application](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/) the same functionality from the previous steps should still work.
+
+    # Open the solution in an IDE in the Cloud!
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+
+    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-rest-services/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+
+    # Fork the source code to your own GitHub!
+    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
+
+    `/root/projects/forkrepo.sh`{{execute T1}}
+    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
+    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
+    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
+    - If asked to clone the fork, press `n` and then `Enter`.
+    - If asked to confirm logout, press `y` and the `Enter`.
+
+       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
+
+    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring-rest-services` project inside the `spring` folder contains the completed solution for this scenario.
+
+    ## Congratulations
+
+    You have now learned how to deploy a RESTful Spring Boot application to OpenShift Container Platform.
+
+    You'll find additional resources and other suggested scenarios in the next page.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "12894529665180547941"

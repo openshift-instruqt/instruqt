@@ -1,566 +1,758 @@
-challenges:
-- assignment: "In this step, you will start with a simple RESTful application generated\
-    \ from the Quarkus tooling, and then define a new entity to work on, which will\
-    \ be persisted in a typical database through JDBC.\n\n# Inspect Java runtime\n\
-    \nAn appropriate Java runtime has been installed for you. Ensure you can use it\
-    \ by running this command:\n\n> If the command fails, wait a few moments and try\
-    \ again (it is installed in a background process and make take a few moments depending\
-    \ on system load).\n\n```\n$JAVA_HOME/bin/java --version\n```\n\nThe command should\
-    \ report the version in use, for example (the versions and dates may be slightly\
-    \ different than the below example):\n\n```console\nopenjdk 11.0.10 2021-01-19\n\
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)\nOpenJDK 64-Bit Server\
-    \ VM AdoptOpenJDK (build 11.0.10+9, mixed mode)\n```\n\n## Import the code\n\n\
-    Let's refresh the code we'll be using. Run the following command to clone the\
-    \ sample project:\n\n```\ncd /root/projects && rm -rf rhoar-getting-started &&\
-    \ git clone https://github.com/openshift-katacoda/rhoar-getting-started\n```\n\
-    \n# Inspect project\n\nMake sure you're in the right project directory by clicking:\n\
-    \n```\ncd /root/projects/rhoar-getting-started/quarkus/panache\n```\n\nInitially,\
-    \ the project is almost empty and doesn't do anything. Start by reviewing the\
-    \ content by executing a ```\ntree\n``` in your terminal.\n\nAs you can see, there\
-    \ are some files that we have prepared for you in the project. Under `src/main/resources/META-INF/resources`\
-    \ we have for example prepared an html file for you, and some skeletal model files\
-    \ and utilities. This matches what you might get when generating sample projects\
-    \ [using the Quarkus Project Generator](https://code.quarkus.io).\n\nWe need to\
-    \ add a few extensions to the app for Panache and Postgres. We'll use the Quarkus\
-    \ Maven Plugin.\n\nClick this command to add the Hibernate ORM with Panache and\
-    \ PostgreSQL JDBC extensions:\n\n```\nmvn quarkus:add-extension -Dextensions=\"\
-    hibernate-orm-panache, jdbc-postgresql\"\n```\n\nYou should see:\n\n```console\n\
-    [SUCCESS] \u2705 Extension io.quarkus:quarkus-hibernate-orm-panache has been installed\n\
-    [SUCCESS] \u2705 Extension io.quarkus:quarkus-jdbc-postgresql has been installed\n\
-    ```\n\nDone!\n\n> There are [many more extensions](https://quarkus.io/extensions/)\
-    \ for Quarkus for popular frameworks like [Eclipse Vert.x](https://vertx.io),\
-    \ [Apache Camel](http://camel.apache.org/), [Infinispan](http://infinispan.org/),\
-    \ Spring DI compatibility (e.g. `@Autowired`), and more.\n\nFor more detail on\
-    \ basic Quarkus usage, check out the [Getting Started](https://learn.openshift.com/middleware/courses/middleware-quarkus/getting-started)\
-    \ scenario. We'll assume you've worked through that and understand the basics\
-    \ of a Quarkus app.\n\n# Define the entity\n\nThis app will be a database of people,\
-    \ each of which have a name, birthdate, and eye color. We'll need an entity, so\
-    \ open up the `src/main/java/org/acme/person/model/Person.java`{{open}} file,\
-    \ and add the following entity definition:\n\n<pre class=\"file\" data-filename=\"\
-    ./src/main/java/org/acme/person/model/Person.java\" data-target=\"replace\">\n\
-    package org.acme.person.model;\n\nimport java.time.LocalDate;\nimport java.util.List;\n\
-    import java.util.stream.Collectors;\n\nimport javax.persistence.Column;\nimport\
-    \ javax.persistence.Entity;\nimport javax.persistence.EnumType;\nimport javax.persistence.Enumerated;\n\
-    \nimport io.quarkus.hibernate.orm.panache.PanacheEntity;\n\n@Entity\npublic class\
-    \ Person extends PanacheEntity {\n    // the person's name\n    public String\
-    \ name;\n\n    // the person's birthdate\n    public LocalDate birth;\n\n    //\
-    \ the person's eye color\n    @Enumerated(EnumType.STRING)\n    @Column(length\
-    \ = 8)\n    public EyeColor eyes;\n\n    // TODO: Add more queries\n}\n</pre>\n\
-    \n> You'll see a `// TODO` line - **do not delete it!** We will use this later\
-    \ on.\n\nAs you can see we've defined the three fields `name`, `birth`, and `eyes`.\
-    \ We're using the Java Persistence API's `@Enumerated` field type for our eye\
-    \ color.\n\nWe'll also need the definition of eye colors, so let's create an `enum`.\
-    \ Open up the `src/main/java/org/acme/person/model/EyeColor.java`{{open}} file,\
-    \ and add the following enum definition:\n\n<pre class=\"file\" data-filename=\"\
-    ./src/main/java/org/acme/person/model/EyeColor.java\" data-target=\"replace\"\
-    >\npackage org.acme.person.model;\n\npublic enum EyeColor {\n    BLUE, GREEN,\
-    \ HAZEL, BROWN\n}\n</pre>\n\n# Define the RESTful endpoint\n\nNext, we'll create\
-    \ a `PersonResource` class which we will use for our RESTful endpoint. Open up\
-    \ that file by clicking: `src/main/java/org/acme/person/PersonResource.java`{{open}}\
-    \ and click **Copy To Editor** to add its code:\n\n<pre class=\"file\" data-filename=\"\
-    ./src/main/java/org/acme/person/PersonResource.java\" data-target=\"replace\"\
-    >\npackage org.acme.person;\n\nimport java.time.LocalDate;\nimport java.util.List;\n\
-    import java.util.stream.Collectors;\n\nimport javax.enterprise.event.Observes;\n\
-    import javax.transaction.Transactional;\nimport javax.ws.rs.GET;\nimport javax.ws.rs.Path;\n\
-    import javax.ws.rs.PathParam;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.QueryParam;\n\
-    import javax.ws.rs.core.MediaType;\n\nimport org.acme.person.model.DataTable;\n\
-    import org.acme.person.model.EyeColor;\nimport org.acme.person.model.Person;\n\
-    \nimport io.smallrye.common.annotation.Blocking;\nimport io.quarkus.panache.common.Parameters;\n\
-    import io.quarkus.runtime.StartupEvent;\nimport io.quarkus.hibernate.orm.panache.PanacheQuery;\n\
-    \n@Path(\"/person\")\n@Blocking\npublic class PersonResource {\n\n    @GET\n \
-    \   @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; getAll()\
-    \ {\n        return Person.listAll();\n    }\n\n    // TODO: add basic queries\n\
-    \n    // TODO: add datatable query\n\n    // TODO: Add lifecycle hook\n\n}\n</pre>\n\
-    \n> You'll see a lot of `// TODO` lines - **do not delete them!** We will use\
-    \ these later on.\n\nAs you can see we've implemented our first Panache-based\
-    \ query, the `getAll` method, which will return our list of people as a JSON object\
-    \ when we access the `GET /person` endpoint. This is defined using standard JAX-RS\
-    \ `@Path` and `@GET` and `@Produces` annotations.\n\n# Add sample data\n\nLet's\
-    \ add some sample data to the database so we can test things out. Open up the\
-    \ `src/main/resources/import.sql`{{open}} file and click to add some SQL statements\
-    \ to run on startup:\n\n<pre class=\"file\" data-filename=\"./src/main/resources/import.sql\"\
-    \ data-target=\"replace\">\nINSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'),\
-    \ 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');\nINSERT INTO\
-    \ person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Salvador\
-    \ L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');\nINSERT INTO person(id,\
-    \ name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Hu\u1EF3nh Kim Hu\xEA\
-    ', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');\n</pre>\n\nThese statements\
-    \ will add some fake people to our database.\n\n"
-  difficulty: basic
-  slug: 01-define-entity
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Define Entity
-  type: challenge
-- assignment: "# Remote Live Coding\n\nWhat if you want to expand the inner loop development\
-    \ cycle to a remote container environment such as Kubernetes or OpenShift? You\
-    \ can configure your application in remote development mode to make changes to\
-    \ your local files immediately visible in your remote container environment. This\
-    \ allows you to develop in the same environment you will actually run your app\
-    \ in, and with access to the same services.\n\nWe'll deploy our base application\
-    \ to OpenShift and connect it to your local environment. The end result will be\
-    \ a fully functional app, already running on the target platform (OpenShift).\n\
-    \n## Login to OpenShift\n\nIn order to login, we will use the **oc** command and\
-    \ then specify the server that we\nwant to authenticate to:\n\n```\noc login -u\
-    \ developer -p developer\n```\n\nThis will automatically log you in as the user\
-    \ `developer` whose password is `developer`.\n\n> If the above `oc login` command\
-    \ doesn't seem to do anything, you may have forgotten to stop the application\
-    \ from the previous\nstep. Click in the first terminal and press CTRL-C to stop\
-    \ the application and try to `oc login` again!\n\n## Access OpenShift Project\n\
-    \nFor this scenario, let's create a project that you will use to house your applications.\
-    \ Click:\n\n```\noc new-project quarkus --display-name=\"Sample Quarkus Datatable\
-    \ App\"\n```\n\n**3. Open the OpenShift Web Console**\n\nOpenShift ships with\
-    \ a web-based console that will allow users to\nperform various tasks via a browser.\
-    \ To get a feel for how the web console\nworks, click this link to open the [Overview\
-    \ in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph)\n\
-    \nThe first screen you will see is the authentication screen. Enter your username\
-    \ and password and\nthen log in:\n\n* Username: `developer`\n* Password: `developer`\n\
-    \n![Web Console Login](/openshift/assets/middleware/quarkus/login.png)\n\nClick\
-    \ **Skip Tour** to skip the new user introduction.\n\nThere's nothing there now\
-    \ (\"No workloads found\"), but that's about to change.\n\n## Deploy Postgres\n\
-    \nOur app will need a Postgres database. Click the next command to quickly deploy\
-    \ a Postgres instance to your new project:\n\n`oc new-app \\\n    -e POSTGRESQL_USER=sa\
-    \ \\\n    -e POSTGRESQL_PASSWORD=sa \\\n    -e POSTGRESQL_DATABASE=person \\\n\
-    \    --name=postgres-database \\\n    -l app.openshift.io/runtime=postgresql \\\
-    \n    openshift/postgresql`{{execute}}\n\nYou'll see the Postgres pod spinning\
-    \ up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).\n\
-    \n![Postgres pod](/openshift/assets/middleware/quarkus/people-postgres.png)\n\n\
-    ## Add Quarkus OpenShift extension\n\nQuarkus offers the ability to automatically\
-    \ generate OpenShift resources based on sane defaults and user supplied configuration.\
-    \ The OpenShift extension is actually a wrapper extension that brings together\
-    \ the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i)\
-    \ extensions with defaults so that it\u2019s easier for the user to get started\
-    \ with Quarkus on OpenShift.\n\nClick the following command to add it to our project:\n\
-    \n```\nmvn quarkus:add-extension -Dextensions=\"openshift\"\n```\n\nYou will see:\n\
-    \n```console\n[SUCCESS] \u2705 Extension io.quarkus:quarkus-openshift has been\
-    \ installed\n```\n\n## Configure Quarkus for remote live coding\n\nClick: `./src/main/resources/application.properties`{{open}}\
-    \ to open this file. This file contains Quarkus configuration.\n\nClick **Copy\
-    \ to Editor** to add the following values to the `application.properties` file:\n\
-    \n<pre class=\"file\" data-filename=\"./src/main/resources/application.properties\"\
-    \ data-target=\"replace\">\n# Remote Live Coding setup\nquarkus.package.type=mutable-jar\n\
-    quarkus.live-reload.password=changeit\n\n# OpenShift Production Configuration\n\
-    quarkus.datasource.db-kind=postgresql\nquarkus.datasource.jdbc.url=jdbc:postgresql://postgres-database:5432/person\n\
-    quarkus.datasource.username=sa\nquarkus.datasource.password=sa\nquarkus.hibernate-orm.database.generation=drop-and-create\n\
-    quarkus.hibernate-orm.sql-load-script = import.sql\n</pre>\n\nThe `quarkus.package.type=mutable-jar`\
-    \ instructs Quarkus to package the app as a _mutable_ app. Mutable applications\
-    \ also include the deployment time parts of Quarkus (need for dev mode), so they\
-    \ take up a bit more disk space. If run normally they start just as fast and use\
-    \ the same memory as an immutable application, however they can also be started\
-    \ in dev mode.\n\nWe also configure Quarkus to use the Postgres database, using\
-    \ `postgres-database` as the hostname (which is resolved by OpenShift to the running\
-    \ Postgres database host).\n\n> **NOTE:** that you can change the remote live-reload\
-    \ password to whatever you want. It is used to secure communication between the\
-    \ remote side and the local side.\n\n## Deploy application to OpenShift\n\nRun\
-    \ the following command which will build and deploy the Quarkus app in Openshift.\
-    \ There's a number of arguments (which could optionally be put in `application.properties`)\
-    \ that are explained below.\n\n`mvn clean package -DskipTests \\\n-Dquarkus.kubernetes.deploy=true\
-    \ \\\n-Dquarkus.container-image.build=true \\\n-Dquarkus.kubernetes-client.trust-certs=true\
-    \ \\\n-Dquarkus.kubernetes.deployment-target=openshift \\\n-Dquarkus.openshift.route.expose=true\
-    \ \\\n-Dquarkus.openshift.annotations.\\\"app.openshift.io/connects-to\\\"=postgres-database\
-    \ \\\n-Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`{{execute}}\n\n\
-    The output should end with `BUILD SUCCESS`.\n\nFor more details of the above options:\n\
-    \n* `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift\
-    \ after the container image is built\n* `quarkus.container-image.build=true` -\
-    \ Instructs the extension to build a container image\n* `quarkus.kubernetes-client.trust-certs=true`\
-    \ - We are using self-signed certs in this simple example, so this simply says\
-    \ to the extension to trust them.\n* `quarkus.kubernetes.deployment-target=openshift`\
-    \ - Instructs the extension to generate and create the OpenShift resources (like\
-    \ `DeploymentConfig`s and `Service`s) after building the container\n* `quarkus.openshift.route.expose=true`\
-    \ - Instructs the extension to generate an OpenShift `Route` so we can access\
-    \ it from our browser.\n* `quarkus.kubernetes.annotations.\"app.openshift.io/connects-to\"\
-    =postgres-database` - Adds a visual connector to show the DB connection in the\
-    \ web console topology view.\n* `quarkus.openshift.env.vars.quarkus-launch-devmode=true`\
-    \ - Sets an environment variable in the container to tell Quarkus to launch in\
-    \ dev mode (not production mode which is the default when deploying to Kubernetes\
-    \ or OpenShift)\n\nFinally, make sure it's actually done rolling out:\n\n```\n\
-    oc rollout status -w dc/people\n```\n\nWait (about 30 seconds) for that command\
-    \ to report `replication controller \"people-1\" successfully rolled out` before\
-    \ continuing.\n\n> If the `oc rollout` command appears to not finish, just `CTRL-C`\
-    \ it and run it again.\n\nYou can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph):\n\
-    \n![Quarkus pod](/openshift/assets/middleware/quarkus/people-quarkus.png)\n\n\n\
-    Do a quick test to ensure the remote app is running by using `curl` to retrieve\
-    \ the list of sample people:\n\n```\ncurl -s http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/person\
-    \ | jq\n```\n\n> You may need to click this again if the initial click opens a\
-    \ Terminal but doesn't run the command for you.\n\nYou should see:\n\n```json\n\
-    [\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\"\
-    ,\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\":\
-    \ \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\
-    \n  },\n  {\n    \"id\": 3,\n    \"birth\": \"1999-04-25\",\n    \"eyes\": \"\
-    HAZEL\",\n    \"name\": \"Hu\u1EF3nh Kim Hu\xEA\"\n  }\n]\n```\n\nThe app is now\
-    \ running on OpenShift. In the next step we will connect to it via Quarkus' Remote\
-    \ Development feature so that the running app is updated as we make changes.\n\
-    \n# Save Environment variable\n\nWe'll refer to this URL often, so click this\
-    \ command to save it in an environment variable called `PEOPLE_URL` (and put it\
-    \ in the Bash shell startup in case we open new terminals later):\n\n```\nexport\
-    \ PEOPLE_URL=http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com;\
-    \ echo \"export PEOPLE_URL='$PEOPLE_URL'\" >> ~/.bashrc\n```\n\n# Remote Dev Connection\n\
-    \nNow we are ready to run our in dev mode and connect it to the remote application.\
-    \ Click here to run:\n\n```\nmvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL\n\
-    ```\n\nYou should see a bunch of log output including:\n\n```console\nINFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient]\
-    \ (Remote dev client thread) Connected to remote server\n```\n\nYour locally running\
-    \ Quarkus app is now connected to the remote side running on OpenShift, and changes\
-    \ you make here will be immediately reflected live in the remote application.\
-    \ Cool!\n\nYou will leave this connection up and running and live code using it\
-    \ in the next step.\n\n> **NOTE**: If you accidently quit (e.g. CTRL-C) the locally\
-    \ running app, no problem. The remote side continues to execute normally, and\
-    \ you can reconnect by re-running the above `quarkus:remote-dev` command!\n\n\
-    # Congratulations!\n\nYou've seen how to build a basic app and add a simple query\
-    \ using Panache, and setup a remote connection to live code your application as\
-    \ it runs in the target environment.\n\nIn the next step we'll add some more Panache\
-    \ queries and compare and contrast vs. ordinary Hibernate/JQL queries.\n\n"
-  difficulty: basic
-  slug: 02-remote-dev
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Setup Remove Development
-  type: challenge
-- assignment: "In the previous step you created a basic RESTful Java application with\
-    \ Quarkus and a single Panache-based query. In this step we'll add a few more\
-    \ queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL\
-    \ queries.\n\n## Add Queries\n\nLet\u2019s modify the application and add some\
-    \ queries. Much like traditional object-oriented programming, Panache and Quarkus\
-    \ recommend you place your custom entity queries as close to the entity definition\
-    \ as possible, in this case in the entity definition itself. Open the `Person`\
-    \ entity by clicking: `src/main/java/org/acme/person/model/Person.java`{{open}}.\n\
-    \nNext, click **Copy to Editor** to add the following two new queries to this\
-    \ file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static\
-    \ List&lt;Person&gt; findByColor(EyeColor color) {\n        return list(\"eyes\"\
-    , color);\n\t}\n\n\tpublic static List&lt;Person&gt; getBeforeYear(int year) {\n\
-    \        return Person.&lt;Person&gt;streamAll()\n        .filter(p -&gt; p.birth.getYear()\
-    \ &lt;= year)\n        .collect(Collectors.toList());\n\t}\n</pre>\n\nThese two\
-    \ queries will find a list of people in our database based on eye color, or birth\
-    \ year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n\
-    > All list methods in Panache-based entities (those that extend from `PanacheEntity`)\
-    \ have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll`\
-    \ and so on.\n\nWith our custom entity queries implemented in our `Person` entity\
-    \ class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen\
-    \ the `src/main/java/org/acme/person/PersonResource.java`{{open}} resource class\
-    \ and then click **Copy To Editor** once again to inject the new endpoints which\
-    \ will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n \
-    \   @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public\
-    \ List&lt;Person&gt; findByColor(@PathParam(value = \"color\") EyeColor color)\
-    \ {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"\
-    /birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public\
-    \ List&lt;Person&gt; getBeforeYear(@PathParam(value = \"year\") int year) {\n\
-    \        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\
-    \nWhen you make these changes, Quarkus will notice all of these changes and live\
-    \ reload them across the remoet connection.\n\nCheck that it works as expected\
-    \ by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\
-    \n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`{{execute T2}}\n\n> This will open\
-    \ a new Terminal to execute the command. If the command fails to run just click\
-    \ the above command again!\n\nYou should only see **one** person with BLUE eyes:\n\
-    \n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\"\
-    : \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  }\n]\n```\nThis also confirms\
-    \ that our remote live coding is working as expected.\n\nNext, let's find people\
-    \ born in 1990 or earlier:\n\n`curl -s $PEOPLE_URL/person/birth/before/1990 |\
-    \ jq`{{execute T2}}\n\nYou should see **two** people born in 1990 or earlier:\n\
-    \n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\"\
-    : \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"\
-    birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L.\
-    \ Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass\
-    \ comes with lots of super useful static methods and you can add your own in your\
-    \ entity class. Users can just start using your entity `Person` by typing `Person`,\
-    \ and getting completion for all the operations in a single place.\n\nIn the next\
-    \ step we'll show you how Panache can help to adapt entities to high performance\
-    \ frontends, even in the face of millions of records. On to the next scenario!\n"
-  difficulty: basic
-  slug: 03-add-query-endpoints
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Add Queries
-  type: challenge
-- assignment: "In the previous step you added a few more custom queries to your entity\
-    \ and the associated RESTful endpoints. In this step we'll build a slightly more\
-    \ complex query including filtering, searching and paging capabilities.\n\n# Showing\
-    \ data in tables\n\nEarlier we used `curl` to access our data, which is very useful\
-    \ for testing, but for real applications you will usually surface the data in\
-    \ other ways, like on web pages using tables, with options for searching, sorting,\
-    \ filtering, paging, etc. Quarkus and Panache make this easy to adapt your application\
-    \ for any display library or framework.\n\nLet's use a popular jQuery-based plugin\
-    \ called [DataTables](https://www.datatables.net/). It features a *server-side*\
-    \ processing mode where it depends on the server (in this case our Quarkus app)\
-    \ to do searching, filtering, sorting, and paging. This is useful for very large\
-    \ datasets, on the order of hundreds of thousands of records or more. Transmitting\
-    \ the entire data set to the client browser is ineffecient at best, and will crash\
-    \ browsers, increase networking usage, and frustrate users at worst. So let's\
-    \ just return the exact data needed to be shown.\n\n# Add new endpoint\n\n[DataTables\
-    \ documentation](https://www.datatables.net/manual/server-side) shows that its\
-    \ frontend will call an endpoint on the backend to retrieve some amount of data.\
-    \ It will pass several query parameters to tell the server what to sort, filter,\
-    \ search, and which data to return based on the page size and current page the\
-    \ user is viewing. For this example, we'll only support a subset:\n\n* `start`\
-    \ - The index of the first element needed\n* `length` - Total number records to\
-    \ return (or less, if there are less records that meet criteria)\n* `search[value]`\
-    \ - The value of the search box\n* `draw` - DataTables does asnychronous processing,\
-    \ so this value is sent with each request, expecting it to be returned as-is,\
-    \ so DataTables can piece things back together on the frontend if a user clicks\
-    \ things quickly.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java`{{open}}\
-    \ resource class and then click **Copy To Editor** once again to inject the new\
-    \ endpoint:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: add datatable query\">\n@GET\n\
-    \    @Path(\"/datatable\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public\
-    \ DataTable datatable(\n        @QueryParam(value = \"draw\") int draw,\n    \
-    \    @QueryParam(value = \"start\") int start,\n        @QueryParam(value = \"\
-    length\") int length,\n        @QueryParam(value = \"search[value]\") String searchVal\n\
-    \n        ) {\n            // TODO: Begin result\n\n            // TODO: Filter\
-    \ based on search\n\n            // TODO: Page and return\n\n    }\n</pre>\n\n\
-    Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters\
-    \ and be able to use them when the frontend calls the `GET /person/datatable`\
-    \ endpoint.\n\nWe'll fill in the `TODO`s to build this method.\n\nDataTables requires\
-    \ a specific JSON payload to be returned from this, and we've pre-created a POJO\
-    \ `DataTable` class representing this structure in `src/main/java/org/acme/person/model/DataTable.java`.\
-    \ This simple structure includes these fields:\n\n* `draw` - The async processing\
-    \ record id\n* `recordsTotal` - Total records in database\n* `recordsFiltered`\
-    \ - Total records that match filtering criteria\n* `data` - The actual array of\
-    \ records\n* `error` - Error string, if any\n\nSo, in our `PersonResource` endpoint,\
-    \ we'll start with an empty `result` object using the pre-created `DataTable`\
-    \ model. Click **Copy To Editor** to add this code:\n\n<pre class=\"file\" data-filename=\"\
-    ./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"\
-    // TODO: Begin result\">\nDataTable result = new DataTable();\n            result.setDraw(draw);\n\
-    </pre>\n\nNext, if the request includes a search parameter, let's take care of\
-    \ that by including a search query, otherwise just collect all records:\n\n<pre\
-    \ class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Filter based on search\">\nPanacheQuery&lt;Person&gt;\
-    \ filteredPeople;\n\n            if (searchVal != null && !searchVal.isEmpty())\
-    \ {\n                filteredPeople = Person.&lt;Person&gt;find(\"name like :search\"\
-    ,\n                  Parameters.with(\"search\", \"%\" + searchVal + \"%\"));\n\
-    \            } else {\n                filteredPeople = Person.findAll();\n  \
-    \          }\n</pre>\n\nAnd finally, we use the built-in Panache `page` operator\
-    \ to seek to the correct page of records and stream the number of entries desired,\
-    \ set the values into the `result` and return it:\n\n<pre class=\"file\" data-filename=\"\
-    ./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"\
-    // TODO: Page and return\">\nint page_number = start / length;\n            filteredPeople.page(page_number,\
-    \ length);\n\n            result.setRecordsFiltered(filteredPeople.count());\n\
-    \            result.setData(filteredPeople.list());\n            result.setRecordsTotal(Person.count());\n\
-    \n            return result;\n</pre>\n\nLet's test out our new endpoint using\
-    \ `curl` to search for names with `yan` in their name:\n\n`curl -s \"$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\\\
-    [value\\]=yan\" | jq`{{execute T2}}\n\nThis should return a single entity (since\
-    \ in our 3-person sample data, only one has `yan` in their name), embedded in\
-    \ the return object that DataTable is expecting (with the `draw`, `recordsFiltered`,\
-    \ `recordsTotal` etc):\n\n```json\n{\n  \"data\": [\n    {\n      \"id\": 1,\n\
-    \      \"birth\": \"1974-08-15\",\n      \"eyes\": \"BLUE\",\n      \"name\":\
-    \ \"Farid Ulyanov\"\n    }\n  ],\n  \"draw\": 1,\n  \"recordsFiltered\": 1,\n\
-    \  \"recordsTotal\": 3\n}\n```\n# Congratulations\n\nYou have successfully written\
-    \ an endpoint that can be used with 3rd-party frontend plugins like DataTable.\
-    \ In the next step we'll create a lot more data and deploy to OpenShift.\n\n"
-  difficulty: basic
-  slug: 04-add-paging-filtering
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Add Paging/Filtering
-  type: challenge
-- assignment: "In the previous step you built a slightly more complex query including\
-    \ filtering, searching and paging capabilities.  In this step we'll add a Quarkus\
-    \ Lifecycle Hook to pre-populate the database with 10k records.\n\n# Adding Lifecycle\
-    \ hook\n\nYou often need to execute custom actions when the application starts\
-    \ and clean up everything when the application stops. In this case we'll add an\
-    \ action that will pre-generate a lot of fake data.\n\nManaged beans (like our\
-    \ `PersonResource`) can listen for lifecycle events by using the `@Observes` annotation\
-    \ on method signatures, which will be called when the associated event occurs.\n\
-    \nOpen the `src/main/java/org/acme/person/PersonResource.java`{{open}} resource\
-    \ class and then click **Copy To Editor** once again to inject the lifecycle listener:\n\
-    \n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Add lifecycle hook\">\n@Transactional\n\
-    \    void onStart(@Observes StartupEvent ev) {\n        for (int i = 0; i < 10000;\
-    \ i++) {\n            String name = CuteNameGenerator.generate();\n          \
-    \  LocalDate birth = LocalDate.now().plusWeeks(Math.round(Math.floor(Math.random()\
-    \ * 20 * 52 * -1)));\n            EyeColor color = EyeColor.values()[(int)(Math.floor(Math.random()\
-    \ * EyeColor.values().length))];\n            Person p = new Person();\n     \
-    \       p.birth = birth;\n            p.eyes = color;\n            p.name = name;\n\
-    \            Person.persist(p);\n        }\n    }\n</pre>\n\nThis code will insert\
-    \ 10,000 fake people with random birthdates, eye colors, and names at startup.\n\
-    \nAlthough this is listening for `StartupEvent`, and our application has already\
-    \ started, in `quarkus:dev` mode Quarkus will still fire this event once. So let's\
-    \ test it out and see if it picks up our new data. We'll search for a single letter\
-    \ `F` and limit the results to `2`:\n\n> Note that adding 10k entries will make\
-    \ startup time artificially high, around 5-10 seconds.\n\n`curl -s \"$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\\\
-    [value\\]=F\" | jq`{{execute T2}}\n\nYou should get up to 2 records returned,\
-    \ but the total number available should show many more indicating our search found\
-    \ many more, and the total number of records should now be `10003` (the 10k we\
-    \ added plus the 3 original values):\n\n```json\n{\n  \"data\": [\n    {\n   \
-    \   \"id\": 1,\n      \"birth\": \"1974-08-15\",\n      \"eyes\": \"BLUE\",\n\
-    \      \"name\": \"Farid Ulyanov\"\n    },\n    {\n      \"id\": 10,\n      \"\
-    birth\": \"2001-11-26\",\n      \"eyes\": \"GREEN\",\n      \"name\": \"Phantom\
-    \ Finger\"\n    }\n  ],\n  \"draw\": 1,\n  \"recordsFiltered\": 1316,\n  \"recordsTotal\"\
-    : 10003\n}\n```\n\nNote the values for `recordsFiltered` (the number of records\
-    \ with the letter `F` in the name), and `recordsTotal`. The value you see for\
-    \ `recordsFiltered` may be different than the above value, since the number of\
-    \ records with an `F` in the name may vary since the data is random.\n\n# Congratulations\n\
-    \nYou have successfully written a lifecycle hook to listen for `StartupEvent`.\
-    \ Anytime the application is started it will fire this method. You can also use\
-    \ `@Observes ShutdownEvent` to do cleanup when the application is gracefully stopped.\n\
-    \nIn the next step we'll exercise the DataTables GUI, backed by our remotely developed,\
-    \ high performance Quarkus app!\n"
-  difficulty: basic
-  slug: 05-add-lifecycle-task
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Add Startup Task
-  type: challenge
-- assignment: "Now that we have our app running on OpenShift, let's see what we can\
-    \ do.\n\nClick to [access the graphical frontend which includes our DataTable](http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
-    \nIt should look like:\n\n![Web Console Overview](/openshift/assets/middleware/quarkus/panache-datatable.png)\n\
-    \nNotice the total number of records reported at the bottom. Type in a single\
-    \ letter, e.g. `F` in the search box and see how responsive the app is. Type additional\
-    \ letters to narrow the search. Rather than having all 10k records loaded in the\
-    \ browser, DataTable makes a call back to our `/person/datatable` REST endpoint\
-    \ to fetch only those records that should be shown, based on page size, current\
-    \ page you're looking at, and any search filters. With a page size of `10` each\
-    \ REST call will only return up to 10 records, no matter how many there are in\
-    \ the database.\n\nSkip around a few pages, try some different searches, and notice\
-    \ that the data is only loaded when needed. The overall performance is very good\
-    \ even for low-bandwidth connections or huge data sets.\n\n# Open the solution\
-    \ in an IDE in the Cloud!\nWant to continue exploring this solution on your own\
-    \ in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview)\
-    \ IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).\
-    \ [Click here](https://workspaces.openshift.com) to login or to register if you\
-    \ are a new user. This free service expires after 30 days, but you can always\
-    \ enable a new free 30-day subscription.\n\nOnce logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/panache/devfile.yaml)\
-    \ to open the solution for this project in the cloud IDE. While loading, if it\
-    \ asks you to update or install any plugins, you can say no.\n\n# Fork the source\
-    \ code to your own GitHub!\nWant to experiment more with the solution code you\
-    \ just worked with? If so, you can fork the repository containing the solution\
-    \ to your own GitHub repository by clicking on the following command to execute\
-    \ it:\n\n`/root/projects/forkrepo.sh`{{execute T1}}\n- Make sure to follow the\
-    \ prompts. An error saying `Failed opening a web browser at https://github.com/login/device\
-    \ exit status 127` is expected.\n- [Click here](https://github.com/login/device)\
-    \ to open a new browser tab to GitHub and paste in the code you were presented\
-    \ with and you copied.\n- Once done with the GitHub authorization in the browser,\
-    \ close the browser tab and return to the console and press `Enter` to complete\
-    \ the authentication process.\n- If asked to clone the fork, press `n` and then\
-    \ `Enter`.\n- If asked to confirm logout, press `y` and the `Enter`.\n\n   > **NOTE:**\
-    \ This process uses the [GitHub CLI](https://cli.github.com) to authenticate with\
-    \ GitHub. The learn.openshift.com site is not requesting nor will have access\
-    \ to your GitHub credentials.\n\nAfter completing these steps the `rhoar-getting-started`\
-    \ repo will be forked in your own GitHub account. On the `solution` branch in\
-    \ the repo, the `panache` project inside the `quarkus` folder contains the completed\
-    \ solution for this scenario.\n\n## Congratulations\n\nIn this scenario you got\
-    \ a glimpse of the power of Quarkus apps when dealing with large amounts of data.\n\
-    \nYou also got to experience Quarkus Remote Development, where local changes are\
-    \ immediately reflected in remote applications. You deployed the app to OpenShift\
-    \ and live-coded changes on the fly.\n\nThere is much more to Quarkus than this,\
-    \ so keep on exploring additional scenarios to learn more, and be sure to visit\
-    \ [quarkus.io](https://quarkus.io) to learn even more about the architecture and\
-    \ capabilities of this exciting new framework for Java developers.\n\n# Extra\
-    \ Credit\n\nThere are [many other features of DataTables](https://datatables.net/manual/server-side)\
-    \ that could be supported on the server side with Quarkus and Panache. For example,\
-    \ when our endpoint is accessed, the set of columns to order on is also passed\
-    \ using the `order` and `columns` arrays, which we do not cover in this scenario.\
-    \ If you have time, try to add additional code to support these incoming parameters\
-    \ and order the resulting records accordingly!\n"
-  difficulty: basic
-  slug: 06-exercise-table
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Exercise Table
-  type: challenge
-description: "In this scenario, you will get an introduction to **Panache**, one of\
-  \ the many features of [Quarkus](https://quarkus.io).\n\n## What is Panache?\n\n\
-  Hibernate ORM is the de facto JPA implementation and offers you the full breadth\
-  \ of an Object Relational Mapper. It makes complex mappings possible, but many simple\
-  \ and common mappings can also be complex. Hibernate ORM with **Panache** focuses\
-  \ on making your entities trivial and fun to write and use with Quarkus.\n\nWith\
-  \ Panache, we took an opinionated approach to make hibernate as easy as possible.\
-  \ Hibernate ORM with Panache offers the following:\n\n* By extending `PanacheEntity`\
-  \ in your entities, you will get an ID field that is auto-generated. If you require\
-  \ a custom ID strategy, you can extend `PanacheEntityBase` instead and handle the\
-  \ ID yourself.\n\n* By using Use public fields, there is no need for functionless\
-  \ getters and setters (those that simply get or set the field). You simply refer\
-  \ to fields like `Person.name` without the need to write a `Person.getName()` implementation.\
-  \ Panache will auto-generate any getters and setters you do not write, or you can\
-  \ develop your own getters/setters that do more than get/set, which will be called\
-  \ when the field is accessed directly.\n\n* The `PanacheEntity` superclass comes\
-  \ with lots of super useful static methods and you can add your own in your derived\
-  \ entity class, and much like traditional object-oriented programming it's natural\
-  \ and recommended to place custom queries as close to the entity as possible, ideally\
-  \ within the entity definition itself. Users can just start using your entity `Person`\
-  \ by typing `Person`, and getting completion for all the operations in a single\
-  \ place.\n\n* You don't need to write parts of the query that you don\u2019t need:\
-  \ write `Person.find(\"order by name\")` or `Person.find(\"name = ?1 and status\
-  \ = ?2\", \"stef\", Status.Alive)` or even better `Person.find(\"name\", \"stef\"\
-  )`.\n\nThat\u2019s all there is to it: with Panache, Hibernate ORM has never looked\
-  \ so trim and neat.\n\n### Other possibilities\n\nLearn more at [quarkus.io](https://quarkus.io),\
-  \ or just drive on and get hands-on!"
+slug: developing-with-quarkus-panache
+id: epiodrxuvz7f
+type: track
+title: Effective Data with Hibernate and Panache
+description: |-
+  In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
+
+  ## What is Panache?
+
+  Hibernate ORM is the de facto JPA implementation and offers you the full breadth of an Object Relational Mapper. It makes complex mappings possible, but many simple and common mappings can also be complex. Hibernate ORM with **Panache** focuses on making your entities trivial and fun to write and use with Quarkus.
+
+  With Panache, we took an opinionated approach to make hibernate as easy as possible. Hibernate ORM with Panache offers the following:
+
+  * By extending `PanacheEntity` in your entities, you will get an ID field that is auto-generated. If you require a custom ID strategy, you can extend `PanacheEntityBase` instead and handle the ID yourself.
+
+  * By using Use public fields, there is no need for functionless getters and setters (those that simply get or set the field). You simply refer to fields like `Person.name` without the need to write a `Person.getName()` implementation. Panache will auto-generate any getters and setters you do not write, or you can develop your own getters/setters that do more than get/set, which will be called when the field is accessed directly.
+
+  * The `PanacheEntity` superclass comes with lots of super useful static methods and you can add your own in your derived entity class, and much like traditional object-oriented programming it's natural and recommended to place custom queries as close to the entity as possible, ideally within the entity definition itself. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.
+
+  * You don't need to write parts of the query that you don’t need: write `Person.find("order by name")` or `Person.find("name = ?1 and status = ?2", "stef", Status.Alive)` or even better `Person.find("name", "stef")`.
+
+  That’s all there is to it: with Panache, Hibernate ORM has never looked so trim and neat.
+
+  ### Other possibilities
+
+  Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: developing-with-quarkus-panache
-tags:
-- openshift
-title: Effective Data with Hibernate and Panache
-type: track
+challenges:
+- slug: 01-define-entity
+  id: 7in1zxnwmlxs
+  type: challenge
+  title: Define Entity
+  assignment: |+
+    In this step, you will start with a simple RESTful application generated from the Quarkus tooling, and then define a new entity to work on, which will be persisted in a typical database through JDBC.
+
+    # Inspect Java runtime
+
+    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
+
+    > If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
+
+    ```
+    $JAVA_HOME/bin/java --version
+    ```
+
+    The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
+
+    ```console
+    openjdk 11.0.10 2021-01-19
+    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    ```
+
+    ## Import the code
+
+    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+
+    ```
+    cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started
+    ```
+
+    # Inspect project
+
+    Make sure you're in the right project directory by clicking:
+
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/panache
+    ```
+
+    Initially, the project is almost empty and doesn't do anything. Start by reviewing the content by executing a ```
+    tree
+    ``` in your terminal.
+
+    As you can see, there are some files that we have prepared for you in the project. Under `src/main/resources/META-INF/resources` we have for example prepared an html file for you, and some skeletal model files and utilities. This matches what you might get when generating sample projects [using the Quarkus Project Generator](https://code.quarkus.io).
+
+    We need to add a few extensions to the app for Panache and Postgres. We'll use the Quarkus Maven Plugin.
+
+    Click this command to add the Hibernate ORM with Panache and PostgreSQL JDBC extensions:
+
+    ```
+    mvn quarkus:add-extension -Dextensions="hibernate-orm-panache, jdbc-postgresql"
+    ```
+
+    You should see:
+
+    ```console
+    [SUCCESS] ✅ Extension io.quarkus:quarkus-hibernate-orm-panache has been installed
+    [SUCCESS] ✅ Extension io.quarkus:quarkus-jdbc-postgresql has been installed
+    ```
+
+    Done!
+
+    > There are [many more extensions](https://quarkus.io/extensions/) for Quarkus for popular frameworks like [Eclipse Vert.x](https://vertx.io), [Apache Camel](http://camel.apache.org/), [Infinispan](http://infinispan.org/), Spring DI compatibility (e.g. `@Autowired`), and more.
+
+    For more detail on basic Quarkus usage, check out the [Getting Started](https://learn.openshift.com/middleware/courses/middleware-quarkus/getting-started) scenario. We'll assume you've worked through that and understand the basics of a Quarkus app.
+
+    # Define the entity
+
+    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, so open up the `src/main/java/org/acme/person/model/Person.java`{{open}} file, and add the following entity definition:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/model/Person.java" data-target="replace">
+    package org.acme.person.model;
+
+    import java.time.LocalDate;
+    import java.util.List;
+    import java.util.stream.Collectors;
+
+    import javax.persistence.Column;
+    import javax.persistence.Entity;
+    import javax.persistence.EnumType;
+    import javax.persistence.Enumerated;
+
+    import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+    @Entity
+    public class Person extends PanacheEntity {
+        // the person's name
+        public String name;
+
+        // the person's birthdate
+        public LocalDate birth;
+
+        // the person's eye color
+        @Enumerated(EnumType.STRING)
+        @Column(length = 8)
+        public EyeColor eyes;
+
+        // TODO: Add more queries
+    }
+    </pre>
+
+    > You'll see a `// TODO` line - **do not delete it!** We will use this later on.
+
+    As you can see we've defined the three fields `name`, `birth`, and `eyes`. We're using the Java Persistence API's `@Enumerated` field type for our eye color.
+
+    We'll also need the definition of eye colors, so let's create an `enum`. Open up the `src/main/java/org/acme/person/model/EyeColor.java`{{open}} file, and add the following enum definition:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/model/EyeColor.java" data-target="replace">
+    package org.acme.person.model;
+
+    public enum EyeColor {
+        BLUE, GREEN, HAZEL, BROWN
+    }
+    </pre>
+
+    # Define the RESTful endpoint
+
+    Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. Open up that file by clicking: `src/main/java/org/acme/person/PersonResource.java`{{open}} and click **Copy To Editor** to add its code:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="replace">
+    package org.acme.person;
+
+    import java.time.LocalDate;
+    import java.util.List;
+    import java.util.stream.Collectors;
+
+    import javax.enterprise.event.Observes;
+    import javax.transaction.Transactional;
+    import javax.ws.rs.GET;
+    import javax.ws.rs.Path;
+    import javax.ws.rs.PathParam;
+    import javax.ws.rs.Produces;
+    import javax.ws.rs.QueryParam;
+    import javax.ws.rs.core.MediaType;
+
+    import org.acme.person.model.DataTable;
+    import org.acme.person.model.EyeColor;
+    import org.acme.person.model.Person;
+
+    import io.smallrye.common.annotation.Blocking;
+    import io.quarkus.panache.common.Parameters;
+    import io.quarkus.runtime.StartupEvent;
+    import io.quarkus.hibernate.orm.panache.PanacheQuery;
+
+    @Path("/person")
+    @Blocking
+    public class PersonResource {
+
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public List&lt;Person&gt; getAll() {
+            return Person.listAll();
+        }
+
+        // TODO: add basic queries
+
+        // TODO: add datatable query
+
+        // TODO: Add lifecycle hook
+
+    }
+    </pre>
+
+    > You'll see a lot of `// TODO` lines - **do not delete them!** We will use these later on.
+
+    As you can see we've implemented our first Panache-based query, the `getAll` method, which will return our list of people as a JSON object when we access the `GET /person` endpoint. This is defined using standard JAX-RS `@Path` and `@GET` and `@Produces` annotations.
+
+    # Add sample data
+
+    Let's add some sample data to the database so we can test things out. Open up the `src/main/resources/import.sql`{{open}} file and click to add some SQL statements to run on startup:
+
+    <pre class="file" data-filename="./src/main/resources/import.sql" data-target="replace">
+    INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');
+    INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Salvador L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');
+    INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Huỳnh Kim Huê', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
+    </pre>
+
+    These statements will add some fake people to our database.
+
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 02-remote-dev
+  id: oqzshi35erkq
+  type: challenge
+  title: Setup Remove Development
+  assignment: |+
+    # Remote Live Coding
+
+    What if you want to expand the inner loop development cycle to a remote container environment such as Kubernetes or OpenShift? You can configure your application in remote development mode to make changes to your local files immediately visible in your remote container environment. This allows you to develop in the same environment you will actually run your app in, and with access to the same services.
+
+    We'll deploy our base application to OpenShift and connect it to your local environment. The end result will be a fully functional app, already running on the target platform (OpenShift).
+
+    ## Login to OpenShift
+
+    In order to login, we will use the **oc** command and then specify the server that we
+    want to authenticate to:
+
+    ```
+    oc login -u developer -p developer
+    ```
+
+    This will automatically log you in as the user `developer` whose password is `developer`.
+
+    > If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
+    step. Click in the first terminal and press CTRL-C to stop the application and try to `oc login` again!
+
+    ## Access OpenShift Project
+
+    For this scenario, let's create a project that you will use to house your applications. Click:
+
+    ```
+    oc new-project quarkus --display-name="Sample Quarkus Datatable App"
+    ```
+
+    **3. Open the OpenShift Web Console**
+
+    OpenShift ships with a web-based console that will allow users to
+    perform various tasks via a browser. To get a feel for how the web console
+    works, click this link to open the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph)
+
+    The first screen you will see is the authentication screen. Enter your username and password and
+    then log in:
+
+    * Username: `developer`
+    * Password: `developer`
+
+    ![Web Console Login](/openshift/assets/middleware/quarkus/login.png)
+
+    Click **Skip Tour** to skip the new user introduction.
+
+    There's nothing there now ("No workloads found"), but that's about to change.
+
+    ## Deploy Postgres
+
+    Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
+
+    `oc new-app \
+        -e POSTGRESQL_USER=sa \
+        -e POSTGRESQL_PASSWORD=sa \
+        -e POSTGRESQL_DATABASE=person \
+        --name=postgres-database \
+        -l app.openshift.io/runtime=postgresql \
+        openshift/postgresql`{{execute}}
+
+    You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).
+
+    ![Postgres pod](/openshift/assets/middleware/quarkus/people-postgres.png)
+
+    ## Add Quarkus OpenShift extension
+
+    Quarkus offers the ability to automatically generate OpenShift resources based on sane defaults and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
+
+    Click the following command to add it to our project:
+
+    ```
+    mvn quarkus:add-extension -Dextensions="openshift"
+    ```
+
+    You will see:
+
+    ```console
+    [SUCCESS] ✅ Extension io.quarkus:quarkus-openshift has been installed
+    ```
+
+    ## Configure Quarkus for remote live coding
+
+    Click: `./src/main/resources/application.properties`{{open}} to open this file. This file contains Quarkus configuration.
+
+    Click **Copy to Editor** to add the following values to the `application.properties` file:
+
+    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    # Remote Live Coding setup
+    quarkus.package.type=mutable-jar
+    quarkus.live-reload.password=changeit
+
+    # OpenShift Production Configuration
+    quarkus.datasource.db-kind=postgresql
+    quarkus.datasource.jdbc.url=jdbc:postgresql://postgres-database:5432/person
+    quarkus.datasource.username=sa
+    quarkus.datasource.password=sa
+    quarkus.hibernate-orm.database.generation=drop-and-create
+    quarkus.hibernate-orm.sql-load-script = import.sql
+    </pre>
+
+    The `quarkus.package.type=mutable-jar` instructs Quarkus to package the app as a _mutable_ app. Mutable applications also include the deployment time parts of Quarkus (need for dev mode), so they take up a bit more disk space. If run normally they start just as fast and use the same memory as an immutable application, however they can also be started in dev mode.
+
+    We also configure Quarkus to use the Postgres database, using `postgres-database` as the hostname (which is resolved by OpenShift to the running Postgres database host).
+
+    > **NOTE:** that you can change the remote live-reload password to whatever you want. It is used to secure communication between the remote side and the local side.
+
+    ## Deploy application to OpenShift
+
+    Run the following command which will build and deploy the Quarkus app in Openshift. There's a number of arguments (which could optionally be put in `application.properties`) that are explained below.
+
+    `mvn clean package -DskipTests \
+    -Dquarkus.kubernetes.deploy=true \
+    -Dquarkus.container-image.build=true \
+    -Dquarkus.kubernetes-client.trust-certs=true \
+    -Dquarkus.kubernetes.deployment-target=openshift \
+    -Dquarkus.openshift.route.expose=true \
+    -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=postgres-database \
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`{{execute}}
+
+    The output should end with `BUILD SUCCESS`.
+
+    For more details of the above options:
+
+    * `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift after the container image is built
+    * `quarkus.container-image.build=true` - Instructs the extension to build a container image
+    * `quarkus.kubernetes-client.trust-certs=true` - We are using self-signed certs in this simple example, so this simply says to the extension to trust them.
+    * `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension to generate and create the OpenShift resources (like `DeploymentConfig`s and `Service`s) after building the container
+    * `quarkus.openshift.route.expose=true` - Instructs the extension to generate an OpenShift `Route` so we can access it from our browser.
+    * `quarkus.kubernetes.annotations."app.openshift.io/connects-to"=postgres-database` - Adds a visual connector to show the DB connection in the web console topology view.
+    * `quarkus.openshift.env.vars.quarkus-launch-devmode=true` - Sets an environment variable in the container to tell Quarkus to launch in dev mode (not production mode which is the default when deploying to Kubernetes or OpenShift)
+
+    Finally, make sure it's actually done rolling out:
+
+    ```
+    oc rollout status -w dc/people
+    ```
+
+    Wait (about 30 seconds) for that command to report `replication controller "people-1" successfully rolled out` before continuing.
+
+    > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
+
+    You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph):
+
+    ![Quarkus pod](/openshift/assets/middleware/quarkus/people-quarkus.png)
+
+
+    Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
+
+    ```
+    curl -s http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/person | jq
+    ```
+
+    > You may need to click this again if the initial click opens a Terminal but doesn't run the command for you.
+
+    You should see:
+
+    ```json
+    [
+      {
+        "id": 1,
+        "birth": "1974-08-15",
+        "eyes": "BLUE",
+        "name": "Farid Ulyanov"
+      },
+      {
+        "id": 2,
+        "birth": "1984-05-24",
+        "eyes": "BROWN",
+        "name": "Salvador L. Witcher"
+      },
+      {
+        "id": 3,
+        "birth": "1999-04-25",
+        "eyes": "HAZEL",
+        "name": "Huỳnh Kim Huê"
+      }
+    ]
+    ```
+
+    The app is now running on OpenShift. In the next step we will connect to it via Quarkus' Remote Development feature so that the running app is updated as we make changes.
+
+    # Save Environment variable
+
+    We'll refer to this URL often, so click this command to save it in an environment variable called `PEOPLE_URL` (and put it in the Bash shell startup in case we open new terminals later):
+
+    ```
+    export PEOPLE_URL=http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com; echo "export PEOPLE_URL='$PEOPLE_URL'" >> ~/.bashrc
+    ```
+
+    # Remote Dev Connection
+
+    Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
+
+    ```
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL
+    ```
+
+    You should see a bunch of log output including:
+
+    ```console
+    INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Connected to remote server
+    ```
+
+    Your locally running Quarkus app is now connected to the remote side running on OpenShift, and changes you make here will be immediately reflected live in the remote application. Cool!
+
+    You will leave this connection up and running and live code using it in the next step.
+
+    > **NOTE**: If you accidently quit (e.g. CTRL-C) the locally running app, no problem. The remote side continues to execute normally, and you can reconnect by re-running the above `quarkus:remote-dev` command!
+
+    # Congratulations!
+
+    You've seen how to build a basic app and add a simple query using Panache, and setup a remote connection to live code your application as it runs in the target environment.
+
+    In the next step we'll add some more Panache queries and compare and contrast vs. ordinary Hibernate/JQL queries.
+
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 03-add-query-endpoints
+  id: g5mxwxny4a5y
+  type: challenge
+  title: Add Queries
+  assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`{{open}}.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static List&lt;Person&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static List&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n        .filter(p -&gt; p.birth.getYear() &lt;= year)\n        .collect(Collectors.toList());\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java`{{open}} resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; findByColor(@PathParam(value = \"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; getBeforeYear(@PathParam(value = \"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`{{execute T2}}\n\n> This will open a new Terminal to execute the command. If the command fails to run just click the above command again!\n\nYou should only see **one** person with BLUE eyes:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  }\n]\n```\nThis also confirms that our remote live coding is working as expected.\n\nNext, let's find people born in 1990 or earlier:\n\n`curl -s $PEOPLE_URL/person/birth/before/1990 | jq`{{execute T2}}\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful static methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 04-add-paging-filtering
+  id: avofhwixqeju
+  type: challenge
+  title: Add Paging/Filtering
+  assignment: |+
+    In the previous step you added a few more custom queries to your entity and the associated RESTful endpoints. In this step we'll build a slightly more complex query including filtering, searching and paging capabilities.
+
+    # Showing data in tables
+
+    Earlier we used `curl` to access our data, which is very useful for testing, but for real applications you will usually surface the data in other ways, like on web pages using tables, with options for searching, sorting, filtering, paging, etc. Quarkus and Panache make this easy to adapt your application for any display library or framework.
+
+    Let's use a popular jQuery-based plugin called [DataTables](https://www.datatables.net/). It features a *server-side* processing mode where it depends on the server (in this case our Quarkus app) to do searching, filtering, sorting, and paging. This is useful for very large datasets, on the order of hundreds of thousands of records or more. Transmitting the entire data set to the client browser is ineffecient at best, and will crash browsers, increase networking usage, and frustrate users at worst. So let's just return the exact data needed to be shown.
+
+    # Add new endpoint
+
+    [DataTables documentation](https://www.datatables.net/manual/server-side) shows that its frontend will call an endpoint on the backend to retrieve some amount of data. It will pass several query parameters to tell the server what to sort, filter, search, and which data to return based on the page size and current page the user is viewing. For this example, we'll only support a subset:
+
+    * `start` - The index of the first element needed
+    * `length` - Total number records to return (or less, if there are less records that meet criteria)
+    * `search[value]` - The value of the search box
+    * `draw` - DataTables does asnychronous processing, so this value is sent with each request, expecting it to be returned as-is, so DataTables can piece things back together on the frontend if a user clicks things quickly.
+
+    Open the `src/main/java/org/acme/person/PersonResource.java`{{open}} resource class and then click **Copy To Editor** once again to inject the new endpoint:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: add datatable query">
+    @GET
+        @Path("/datatable")
+        @Produces(MediaType.APPLICATION_JSON)
+        public DataTable datatable(
+            @QueryParam(value = "draw") int draw,
+            @QueryParam(value = "start") int start,
+            @QueryParam(value = "length") int length,
+            @QueryParam(value = "search[value]") String searchVal
+
+            ) {
+                // TODO: Begin result
+
+                // TODO: Filter based on search
+
+                // TODO: Page and return
+
+        }
+    </pre>
+
+    Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters and be able to use them when the frontend calls the `GET /person/datatable` endpoint.
+
+    We'll fill in the `TODO`s to build this method.
+
+    DataTables requires a specific JSON payload to be returned from this, and we've pre-created a POJO `DataTable` class representing this structure in `src/main/java/org/acme/person/model/DataTable.java`. This simple structure includes these fields:
+
+    * `draw` - The async processing record id
+    * `recordsTotal` - Total records in database
+    * `recordsFiltered` - Total records that match filtering criteria
+    * `data` - The actual array of records
+    * `error` - Error string, if any
+
+    So, in our `PersonResource` endpoint, we'll start with an empty `result` object using the pre-created `DataTable` model. Click **Copy To Editor** to add this code:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Begin result">
+    DataTable result = new DataTable();
+                result.setDraw(draw);
+    </pre>
+
+    Next, if the request includes a search parameter, let's take care of that by including a search query, otherwise just collect all records:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Filter based on search">
+    PanacheQuery&lt;Person&gt; filteredPeople;
+
+                if (searchVal != null && !searchVal.isEmpty()) {
+                    filteredPeople = Person.&lt;Person&gt;find("name like :search",
+                      Parameters.with("search", "%" + searchVal + "%"));
+                } else {
+                    filteredPeople = Person.findAll();
+                }
+    </pre>
+
+    And finally, we use the built-in Panache `page` operator to seek to the correct page of records and stream the number of entries desired, set the values into the `result` and return it:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Page and return">
+    int page_number = start / length;
+                filteredPeople.page(page_number, length);
+
+                result.setRecordsFiltered(filteredPeople.count());
+                result.setData(filteredPeople.list());
+                result.setRecordsTotal(Person.count());
+
+                return result;
+    </pre>
+
+    Let's test out our new endpoint using `curl` to search for names with `yan` in their name:
+
+    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq`{{execute T2}}
+
+    This should return a single entity (since in our 3-person sample data, only one has `yan` in their name), embedded in the return object that DataTable is expecting (with the `draw`, `recordsFiltered`, `recordsTotal` etc):
+
+    ```json
+    {
+      "data": [
+        {
+          "id": 1,
+          "birth": "1974-08-15",
+          "eyes": "BLUE",
+          "name": "Farid Ulyanov"
+        }
+      ],
+      "draw": 1,
+      "recordsFiltered": 1,
+      "recordsTotal": 3
+    }
+    ```
+    # Congratulations
+
+    You have successfully written an endpoint that can be used with 3rd-party frontend plugins like DataTable. In the next step we'll create a lot more data and deploy to OpenShift.
+
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 05-add-lifecycle-task
+  id: 1oxbwp29uego
+  type: challenge
+  title: Add Startup Task
+  assignment: |
+    In the previous step you built a slightly more complex query including filtering, searching and paging capabilities.  In this step we'll add a Quarkus Lifecycle Hook to pre-populate the database with 10k records.
+
+    # Adding Lifecycle hook
+
+    You often need to execute custom actions when the application starts and clean up everything when the application stops. In this case we'll add an action that will pre-generate a lot of fake data.
+
+    Managed beans (like our `PersonResource`) can listen for lifecycle events by using the `@Observes` annotation on method signatures, which will be called when the associated event occurs.
+
+    Open the `src/main/java/org/acme/person/PersonResource.java`{{open}} resource class and then click **Copy To Editor** once again to inject the lifecycle listener:
+
+    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Add lifecycle hook">
+    @Transactional
+        void onStart(@Observes StartupEvent ev) {
+            for (int i = 0; i < 10000; i++) {
+                String name = CuteNameGenerator.generate();
+                LocalDate birth = LocalDate.now().plusWeeks(Math.round(Math.floor(Math.random() * 20 * 52 * -1)));
+                EyeColor color = EyeColor.values()[(int)(Math.floor(Math.random() * EyeColor.values().length))];
+                Person p = new Person();
+                p.birth = birth;
+                p.eyes = color;
+                p.name = name;
+                Person.persist(p);
+            }
+        }
+    </pre>
+
+    This code will insert 10,000 fake people with random birthdates, eye colors, and names at startup.
+
+    Although this is listening for `StartupEvent`, and our application has already started, in `quarkus:dev` mode Quarkus will still fire this event once. So let's test it out and see if it picks up our new data. We'll search for a single letter `F` and limit the results to `2`:
+
+    > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
+
+    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq`{{execute T2}}
+
+    You should get up to 2 records returned, but the total number available should show many more indicating our search found many more, and the total number of records should now be `10003` (the 10k we added plus the 3 original values):
+
+    ```json
+    {
+      "data": [
+        {
+          "id": 1,
+          "birth": "1974-08-15",
+          "eyes": "BLUE",
+          "name": "Farid Ulyanov"
+        },
+        {
+          "id": 10,
+          "birth": "2001-11-26",
+          "eyes": "GREEN",
+          "name": "Phantom Finger"
+        }
+      ],
+      "draw": 1,
+      "recordsFiltered": 1316,
+      "recordsTotal": 10003
+    }
+    ```
+
+    Note the values for `recordsFiltered` (the number of records with the letter `F` in the name), and `recordsTotal`. The value you see for `recordsFiltered` may be different than the above value, since the number of records with an `F` in the name may vary since the data is random.
+
+    # Congratulations
+
+    You have successfully written a lifecycle hook to listen for `StartupEvent`. Anytime the application is started it will fire this method. You can also use `@Observes ShutdownEvent` to do cleanup when the application is gracefully stopped.
+
+    In the next step we'll exercise the DataTables GUI, backed by our remotely developed, high performance Quarkus app!
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: 06-exercise-table
+  id: db0qh93avmua
+  type: challenge
+  title: Exercise Table
+  assignment: |
+    Now that we have our app running on OpenShift, let's see what we can do.
+
+    Click to [access the graphical frontend which includes our DataTable](http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+
+    It should look like:
+
+    ![Web Console Overview](/openshift/assets/middleware/quarkus/panache-datatable.png)
+
+    Notice the total number of records reported at the bottom. Type in a single letter, e.g. `F` in the search box and see how responsive the app is. Type additional letters to narrow the search. Rather than having all 10k records loaded in the browser, DataTable makes a call back to our `/person/datatable` REST endpoint to fetch only those records that should be shown, based on page size, current page you're looking at, and any search filters. With a page size of `10` each REST call will only return up to 10 records, no matter how many there are in the database.
+
+    Skip around a few pages, try some different searches, and notice that the data is only loaded when needed. The overall performance is very good even for low-bandwidth connections or huge data sets.
+
+    # Open the solution in an IDE in the Cloud!
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+
+    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/panache/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+
+    # Fork the source code to your own GitHub!
+    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
+
+    `/root/projects/forkrepo.sh`{{execute T1}}
+    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
+    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
+    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
+    - If asked to clone the fork, press `n` and then `Enter`.
+    - If asked to confirm logout, press `y` and the `Enter`.
+
+       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
+
+    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `panache` project inside the `quarkus` folder contains the completed solution for this scenario.
+
+    ## Congratulations
+
+    In this scenario you got a glimpse of the power of Quarkus apps when dealing with large amounts of data.
+
+    You also got to experience Quarkus Remote Development, where local changes are immediately reflected in remote applications. You deployed the app to OpenShift and live-coded changes on the fly.
+
+    There is much more to Quarkus than this, so keep on exploring additional scenarios to learn more, and be sure to visit [quarkus.io](https://quarkus.io) to learn even more about the architecture and capabilities of this exciting new framework for Java developers.
+
+    # Extra Credit
+
+    There are [many other features of DataTables](https://datatables.net/manual/server-side) that could be supported on the server side with Quarkus and Panache. For example, when our endpoint is accessed, the set of columns to order on is also passed using the `order` and `columns` arrays, which we do not cover in this scenario. If you have time, try to add additional code to support these incoming parameters and order the resulting records accordingly!
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "5992857772519405542"

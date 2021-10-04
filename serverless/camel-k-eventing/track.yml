@@ -1,486 +1,468 @@
-challenges:
-- assignment: 'In order to run Camel K, you will need access to an Kubernetes/OpenShift
-    environment. Let''s setup the fundamentals.
-
-
-    ## Logging in to the Cluster via Dashboard
-
-
-    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)
-    tab to open the dashboard.
-
-
-    You will then able able to login with admin permissions with:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    ## Installing Camel K from the OpenShift OperatorHub
-
-    Camel K Operator can be deployed on the OpenShift cluster from the OperatorHub.
-    The OperatorHub is available from the OpenShift Container Platform web console
-    and provides an interface for cluster administrators to discover and install Operators.
-
-
-    It is responsible for building, deploying Camel Applications and also creating
-    surrounding resources. It is also responsible for watching any code or configuration
-    updates and automatically updates it. To install simply run the command.
-
-
-    In the left navigation menu, click *Catalog* > *OperatorHub*
-
-    In the Filter by keyword text box, enter Camel K to find the *Camel K Operator*.
-
-    Read the information about the Operator, and click *Install*. This displays the
-    Create Operator Subscription page.
-
-
-    ![operatorhub](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-01-operatorhub.png)
-
-
-    Select the following subscription settings:
-
-    - Update Channel > *Stable*
-
-    - Installation Mode > *All namespaces on the cluster (default)*
-
-    - Approval Strategy > Automatic
-
-
-    ![installoperator](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-02-installoperator.png)
-
-
-    Click Subscribe. This displays the Operators > Installed Operators page.
-
-
-    Wait a few moments until the Status for the Camel K Operator displays Succeeded
-    and the subscription is Up to Date.
-
-
-    ![installed](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-03-installed.png)
-
-
-    ## Logging in to the Cluster via CLI
-
-
-    Before creating any applications, login as admin. This will be required if you
-    want to log in to the web console and
-
-    use it.
-
-
-    To login to the OpenShift cluster from the _Terminal_ run:
-
-
-    ```
-
-    oc login -u admin -p admin
-
-    ```
-
-
-    This will log you in using the credentials:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    Use the same credentials to log into the web console.
-
-
-    ## Setup Knative Eventing
-
-
-
-    OpenShift Serverless Eventing is designed to address a common need for cloud native
-    development and provides composable primitives to enable late-binding event sources
-    and event consumers. OpenShift Serverless Operator is subscribed in the cluster
-    already.Let''s go ahead and setup Knative Eventing to set the ground for the event
-    mesh.
-
-
-    Creating the knative-eventing namespace:
-
-
-    ```
-
-    oc new-project knative-eventing
-
-    ```
-
-
-
-    Let''s go ahead setup KnativeEventing in the namespace
-
-
-    ```
-
-    oc apply -f serverless/eventing.yaml -n knative-eventing
-
-    ```
-
-
-    Once Knative Eventing complete it''s setup. You will see all the pod in *Running
-    status*, it means it is successfully installed.
-
-
-    ```
-
-    oc get pod -w
-
-    ```
-
-
-    ```
-
-    NAME                                    READY   STATUS      RESTARTS   AGE
-
-    broker-controller-6b4659f8cc-nz7hl      1/1     Running     0          89s
-
-    broker-filter-659f5549b8-4gcwm          1/1     Running     0          88s
-
-    broker-ingress-86c4b766dc-bwn4r         1/1     Running     0          87s
-
-    eventing-controller-7d654894f4-mgdvp    1/1     Running     0          97s
-
-    eventing-webhook-658fb449b6-hsv66       1/1     Running     0          97s
-
-    imc-controller-6bf889454d-k79lf         1/1     Running     0          81s
-
-    imc-dispatcher-7dbddfbd5f-9ltlh         1/1     Running     0          81s
-
-    mt-broker-controller-5b9986bd46-6svnk   1/1     Running     0          86s
-
-    ```
-
-
-    Ctrl+C to exit the command.
-
-    '
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 1
-  type: challenge
-- assignment: "## Auto Bitcoin Trading System\n\nThe example shows a simplified trading\
-    \ application that analyzes price variations of Bitcoins (BTC / USDT), and automate\
-    \ trading base on the predicted returns. In order to keep the system flexible\
-    \ with pluggable prediction logics, we are going to break the system into three\
-    \ separate parts.\n- *Source* - Load realtime Bitcoins values.\n- *Predictors*\
-    \ - Pluggable predictors with various strategy.  \n- *Seller Alert* - Seller alert\
-    \ (Mainly to display the result).\n\nAssume the market only open for couple of\
-    \ hours, serverless application can optimize resource usage.\nIn between these\
-    \ separate serverless services, events are pass through an *event mesh*.\n\n![overview](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-00-overview.png)\n\
-    \n\n#### Enabling the Knative Eventing Broker\n\nThe central piece of the event\
-    \ mesh that we're going to create is the Knative Eventing broker. It is a publish/subscribe\
-    \ entity that Camel K integrations will use to publish events or subscribe to\
-    \ it in order to being triggered when events of specific types are available.\
-    \ Subscribers of the eventing broker are Knative serving services, that can scale\
-    \ down to zero when no events are available for them.\n\n\n\nCreate a new OpenShift\
-    \ project ``camel-knative``:\n```\noc new-project camel-knative\n```\n\n\nTo enable\
-    \ the eventing broker, we create a default broker in the current namespace using\
-    \ namespace labeling:\n```\noc label namespace camel-knative knative-eventing-injection=enabled\n\
-    ```\n\nLet go ahead create predictors for market and load the market events\n\n\
-    #### Run a prediction algorithms\n\nThe market data feed available in the mesh\
-    \ can be now used to create different prediction algorithms that can publish events\
-    \ when they believe it's the right time to sell or buy bitcoins, depending on\
-    \ the trend of the exchange.\n\nWe're going to run the same (basic) algorithm\
-    \ with different parameters, obtaining two predictors. The algorithm is basic\
-    \ and it's just computing if the BTC variation respect to the last observed value\
-    \ is higher than a threshold (expressed in percentage). The algorithm is bound\
-    \ to the event mesh via the Predictor.java integration file.\n\nIn real life,\
-    \ algorithms can be also much more complicated. For example, Camel K can be used\
-    \ to bridge an external machine learning as-a-service system that will compute\
-    \ much more accurate predictions. Algorithms can also be developed with other\
-    \ ad hoc tools and plugged directly inside the Knative mesh using the Knative\
-    \ APIs.\n\n\n#### Create the first prediction algorithms\n\nGo to the text editor\
-    \ on the right, under the folder /root/camel-eventing. Right click on the directory\
-    \ and choose New -> File and name it `Predictor.java`.\nPaste the following code\
-    \ into the application.\n\n<pre class=\"file\" data-filename=\"Predictor.java\"\
-    \ data-target=\"replace\">\n\n// camel-k: language=java\nimport org.apache.camel.builder.RouteBuilder;\n\
-    \nimport java.util.HashMap;\nimport java.util.Map;\n\nimport org.apache.camel.BindToRegistry;\n\
-    import org.apache.camel.PropertyInject;\nimport org.apache.camel.builder.RouteBuilder;\n\
-    \npublic class Predictor extends RouteBuilder {\n\n  @Override\n  public void\
-    \ configure() throws Exception {\n\n      from(\"knative:event/market.btc.usdt\"\
-    )\n        .unmarshal().json()\n        .transform().simple(\"${body[last]}\"\
-    )\n        .log(\"Latest value for BTC/USDT is: ${body}\")\n        .to(\"seda:evaluate?waitForTaskToComplete=Never\"\
-    )\n        .setBody().constant(\"\");\n\n      from(\"seda:evaluate\")\n     \
-    \   .bean(\"algorithm\")\n        .choice()\n          .when(body().isNotNull())\n\
-    \            .log(\"Predicted action: ${body}\")\n            .to(\"direct:publish\"\
-    );\n\n      from(\"direct:publish\")\n        .marshal().json()\n        .removeHeaders(\"\
-    *\")\n        .setHeader(\"CE-Type\", constant(\"predictor.{{predictor.name}}\"\
-    ))\n        .to(\"knative:event\");\n\n  }\n  \n  @BindToRegistry(\"algorithm\"\
-    )\n  public static class SimpleAlgorithm {\n\n    @PropertyInject(value=\"algorithm.sensitivity\"\
-    , defaultValue = \"0.0001\")\n    private double sensitivity;\n\n    private Double\
-    \ previous;\n    \n    public Map<String, Object> predict(double value) {\n  \
-    \    Double reference = previous;\n      this.previous = value;\n\n      if (reference\
-    \ != null && value < reference * (1 - sensitivity)) {\n        Map<String, Object>\
-    \ res = new HashMap<>();\n        res.put(\"value\", value);\n        res.put(\"\
-    operation\", \"buy\");\n        return res;\n      } else if (reference != null\
-    \ && value > reference * (1 + sensitivity)) {\n        Map<String, Object> res\
-    \ = new HashMap<>();\n        res.put(\"value\", value);\n        res.put(\"operation\"\
-    , \"sell\");\n        return res;\n      }\n      return null;\n    }\n  }\n}\n\
-    \n</pre>\n\nRun the following command to start the first predictor:\n\n```\nkamel\
-    \ run --name simple-predictor -p predictor.name=simple camel-eventing/Predictor.java\
-    \ -t knative-service.max-scale=1 --logs\n```\n\nThe command above will deploy\
-    \ the integration and wait for it to run, then it will show the logs in the console.\n\
-    \nYou will see the following log if everything is working correctly.\n```\n[1]\
-    \ 2020-10-02 00:09:32.499 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper\
-    \ is set to false, Camel won't search in the registry\n[1] 2020-10-02 00:09:32.509\
-    \ INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper is set\
-    \ to false, Camel won't search in the registry\n[1] 2020-10-02 00:09:32.811 INFO\
-    \  [vert.x-eventloop-thread-0] VertxPlatformHttpServer - Vert.x HttpServerstarted\
-    \ on 0.0.0.0:8080\n[1] 2020-10-02 00:09:32.817 INFO  [main] InternalRouteStartupManager\
-    \ - Route: route1 started and consuming from: knative://event/market.btc.usdt\n\
-    [1] 2020-10-02 00:09:32.819 INFO  [main] InternalRouteStartupManager - Route:\
-    \ route2 started and consuming from: seda://evaluate\n[1] 2020-10-02 00:09:32.820\
-    \ INFO  [main] InternalRouteStartupManager - Route: route3 started and consuming\
-    \ from: direct://publish\n[1] 2020-10-02 00:09:32.821 INFO  [main] AbstractCamelContext\
-    \ - Total 3 routes, of which 3 are started\n[1] 2020-10-02 00:09:32.821 INFO \
-    \ [main] AbstractCamelContext - Apache Camel 3.4.0 (camel-k) started in 0.343\
-    \ seconds\nCondition \"Ready\" is \"True\" for Integration simple-predictor\n\
-    ```\nTo exit the log view, just click here or hit ctrl+c on the terminal window.\
-    \ The integration will keep running on the cluster.\n\n\n\n#### Create the second\
-    \ prediction algorithms\n\nThe second predictor with more sensitivity called better-predictor,\
-    \ in the command line run:\n\n```\nkamel run --name better-predictor -p predictor.name=better\
-    \ -p algorithm.sensitivity=0.0005 camel-eventing/Predictor.java -t knative-service.max-scale=1\n\
-    ```\n\nYou will be prompted with the following result, but please give a couple\
-    \ of minutes for the route to be deployed.\n``integration \"better-predictor\"\
-    \ created``\n\nYou can view both predictors from the [Developer Console Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).\n\
-    (If Katacoda is slow, you might need to refresh the page to see the correct result.)\n\
-    \n![predictors](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-01-predictors.png)\n\
-    \nIt will be running first and shutdown since there are no activities yet.\n"
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 2
-  type: challenge
-- assignment: "#### Run a subscriber investor service\n\nWe are going to deploy a\
-    \ service that will listen to the events from the simple predictor.And Display\
-    \ the result from in log.\n\nGo to the text editor on the right, under the folder\
-    \ /root/camel-eventing. Right click on the directory and choose New -> File and\
-    \ name it `Investor.java`.\n\n\n<pre class=\"file\" data-filename=\"Investor.java\
-    \ \" data-target=\"replace\">\n// camel-k: language=java\n\nimport org.apache.camel.builder.RouteBuilder;\n\
-    \npublic class Investor extends RouteBuilder {\n  @Override\n  public void configure()\
-    \ throws Exception {\n\n    from(\"knative:event/predictor.simple\")\n      .unmarshal().json()\n\
-    \      .log(\"Let's ${body[operation]} at price ${body[value]} immediately!!\"\
-    )\n      .setBody().constant(\"\");\n\n  }\n}\n</pre>\n\nTo run it:\n```\nkamel\
-    \ run camel-eventing/Investor.java --logs\n```\n\nYou will see the following log\
-    \ if everything is working correctly.\n```\n[1] 2020-10-02 00:19:19.308 INFO \
-    \ [main] RuntimeSupport - Apply ContextCustomizer with id=platform-http and type=org.apache.camel.k.http.PlatformHttpServiceContextCustomizer\n\
-    [1] 2020-10-02 00:19:19.335 INFO  [main] VertxPlatformHttpServer - Creating new\
-    \ Vert.x instance\n[1] 2020-10-02 00:19:19.685 INFO  [main] ApplicationRuntime\
-    \ - Listener org.apache.camel.k.listener.ContextConfigurer@93cf163 executed in\
-    \ phase ConfigureContext\n[1] 2020-10-02 00:19:19.806 INFO  [main] KnativeComponent\
-    \ - found knative transport: org.apache.camel.component.knative.http.KnativeHttpTransport@1de6932a\
-    \ for protocol: http\n[1] 2020-10-02 00:19:20.428 INFO  [main] AbstractCamelContext\
-    \ - Apache Camel 3.4.0 (camel-k) is starting\n[1] 2020-10-02 00:19:20.431 INFO\
-    \  [main] AbstractCamelContext - StreamCaching is not in use. If using streams\
-    \ then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html\n\
-    [1] 2020-10-02 00:19:20.456 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper\
-    \ is set to false, Camel won't search in the registry\n[1] 2020-10-02 00:19:20.773\
-    \ INFO  [vert.x-eventloop-thread-1] VertxPlatformHttpServer - Vert.x HttpServerstarted\
-    \ on 0.0.0.0:8080\n[1] 2020-10-02 00:19:20.786 INFO  [main] InternalRouteStartupManager\
-    \ - Route: route1 started and consuming from: knative://event/predictor.simple\n\
-    [1] 2020-10-02 00:19:20.787 INFO  [main] AbstractCamelContext - Total 1 routes,\
-    \ of which 1 are started\n[1] 2020-10-02 00:19:20.788 INFO  [main] AbstractCamelContext\
-    \ - Apache Camel 3.4.0 (camel-k) started in 0.359 seconds\n```\nTo exit the log\
-    \ view, just click here or hit ctrl+c on the terminal window. The integration\
-    \ will keep running on the cluster.\n\n\n#### Loading the Bitcoin live data\n\
-    Now, let's go ahead and start taking live data from the Bitcoin market and pushing\
-    \ it to the event mesh.\nGo to the text editor on the right, under the folder\
-    \ /root/camel-eventing. Right click on the directory and choose New -> File and\
-    \ name it `market-source.yaml`.\nCreate the camel route loads Bitcoin market data\
-    \ every 10 seconds.   \n\nPaste the following code into the application.\n\n<pre\
-    \ class=\"file\" data-filename=\"market-source.yaml\" data-target=\"replace\"\
-    >\n- from:\n    uri: \"timer:tick\"\n    parameters:\n      period: 10000\n  \
-    \  steps:\n      - to: \"xchange:binance?currencyPair=BTC/USDT&service=marketdata&method=ticker\"\
-    \n      - marshal:\n          json: {}\n      - log:\n          message: \"Sending\
-    \ BTC/USDT data to the broker: ${body}\"\n      - set-header:\n          constant:\
-    \ market.btc.usdt\n          name: CE-Type\n      - to: \"knative:event\"\n</pre>\n\
-    \nStart the Camel K application\n\n```\nkamel run camel-eventing/market-source.yaml\
-    \ -d camel-jackson\n```\n\nThe integration will be deployed on the cluster.\n\n\
-    After successfully deployed, you will be able to see it in the [Developer Console\
-    \ Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).\n\
-    \nWhen the Bitcoin data start floating into the data, all predictor services and\
-    \ the investor service will automatically start up.\n\n![startsup](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step3-01-startsup.png)\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 3
-  type: challenge
-- assignment: '## When the market closes...
-
-
-    Bitcoin market never closes, but closing hours are expected to be present for
-    standard markets. We''re going to simulate a closing on the market by stopping
-    the source integration.
-
-
-    When the market closes and updates are no longer pushed into the event mesh, all
-    downstream services will scale down to zero. This includes the two prediction
-    algorithms, the two services that receive events from the mesh and also the external
-    investor service.
-
-
-    To simulate a market close, we will delete the market-source:
-
-
-    ```
-
-    kamel delete market-source
-
-    ```
-
-
-    To see the other services going down, go to the [Developer Console Topology view](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph)
-    after two minutes, you will see the pod slowly shutdown.
-
-
-    ![marketclose](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step4-01-marketclose.png)
-
-
-    ## Congratulations
-
-
-    In this scenario you got to play with Camel K and Serverless - Knative Eventing.
-    We use Camel K as a Source to load data into event mesh based on Broker. And create
-    couple of functions using Camel K that subscribe to the events in the mesh. There
-    are much more to Camel K. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html)
-    to learn even more about the architecture and capabilities of this exciting new
-    framework.
-
-    '
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Step 4
-  type: challenge
-description: '# Serverless Eventing Camel K
-
-
-  This example demonstrates the idiomatic way of using [Camel K](https://camel.apache.org/camel-k/latest/index.html)
-  in Knative for building event-driven applications. It leverages the Knative eventing
-  broker as the central point that lets various services communicate via event pub/sub.
-  It also shows how Camel K can be used for connecting the Knative event mesh with
-  external systems, with integrations that can play the roles of "event source" or
-  "event sink".
-
+slug: serverless-camel-k-eventing
+id: raxnmcoechtw
+type: track
+title: Serverless Eventing with Camel K
+description: |
+  # Serverless Eventing Camel K
+
+  This example demonstrates the idiomatic way of using [Camel K](https://camel.apache.org/camel-k/latest/index.html) in Knative for building event-driven applications. It leverages the Knative eventing broker as the central point that lets various services communicate via event pub/sub. It also shows how Camel K can be used for connecting the Knative event mesh with external systems, with integrations that can play the roles of "event source" or "event sink".
 
   ## What is Camel K?
 
-
   ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
-
 
   ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
 
+  Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-  Apache Camel K is a lightweight integration framework built from Apache Camel that
-  runs natively on Kubernetes and is specifically designed for serverless and microservice
-  architectures.
+  Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
 
-
-  Camel K supports multiple languages for writing integrations. Based the Operator
-  Pattern, Camel K performs operations on Kubernetes resources. Bringing integration
-  to the next level. utilizing the benefit of the Apache Camel project, such as the
-  wide variety of components and Enterprise Integration Patterns (EIP).
-
-
-  Camel K integrate seamlessly with Knative making it the best serverless technology
-  for integration.
-
+  Camel K integrate seamlessly with Knative making it the best serverless technology for integration.
 
   ## Why Serverless?
+  Deploying applications as Serverless services is becoming a popular architectural style.
 
-  Deploying applications as Serverless services is becoming a popular architectural
-  style.
-
-
-  You will need a  platform that can run serverless workloads, while also enabling
-  you to have complete control of the configuration, building, and deployment. Ideally,
-  the platform also supports deploying the applications as linux containers.
-
+  You will need a  platform that can run serverless workloads, while also enabling you to have complete control of the configuration, building, and deployment. Ideally, the platform also supports deploying the applications as linux containers.
 
   ##  OpenShift Serverless Eventing
+  Knative Eventing on OpenShift Container Platform enables developers to use an event-driven architecture with serverless applications. An event-driven architecture is based on the concept of decoupled relationships between event producers that create events, and event sinks, or consumers, that receive them.
 
-  Knative Eventing on OpenShift Container Platform enables developers to use an event-driven
-  architecture with serverless applications. An event-driven architecture is based
-  on the concept of decoupled relationships between event producers that create events,
-  and event sinks, or consumers, that receive them.
-
-
-  Knative Eventing uses standard HTTP POST requests to send and receive events between
-  event producers and consumers. These events conform to the CloudEvents specifications,
-  which enables creating, parsing, sending, and receiving events in any programming
-  language.
-
-  '
+  Knative Eventing uses standard HTTP POST requests to send and receive events between event producers and consumers. These events conform to the CloudEvents specifications, which enables creating, parsing, sending, and receiving events in any programming language.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: serverless-camel-k-eventing
-tags:
-- openshift
-title: Serverless Eventing with Camel K
-type: track
+challenges:
+- slug: step1
+  id: 1jax6vp2pdsl
+  type: challenge
+  title: Step 1
+  assignment: |
+    In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
+
+    ## Logging in to the Cluster via Dashboard
+
+    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+
+    You will then able able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    ## Installing Camel K from the OpenShift OperatorHub
+    Camel K Operator can be deployed on the OpenShift cluster from the OperatorHub. The OperatorHub is available from the OpenShift Container Platform web console and provides an interface for cluster administrators to discover and install Operators.
+
+    It is responsible for building, deploying Camel Applications and also creating surrounding resources. It is also responsible for watching any code or configuration updates and automatically updates it. To install simply run the command.
+
+    In the left navigation menu, click *Catalog* > *OperatorHub*
+    In the Filter by keyword text box, enter Camel K to find the *Camel K Operator*.
+    Read the information about the Operator, and click *Install*. This displays the Create Operator Subscription page.
+
+    ![operatorhub](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-01-operatorhub.png)
+
+    Select the following subscription settings:
+    - Update Channel > *Stable*
+    - Installation Mode > *All namespaces on the cluster (default)*
+    - Approval Strategy > Automatic
+
+    ![installoperator](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-02-installoperator.png)
+
+    Click Subscribe. This displays the Operators > Installed Operators page.
+
+    Wait a few moments until the Status for the Camel K Operator displays Succeeded and the subscription is Up to Date.
+
+    ![installed](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-03-installed.png)
+
+    ## Logging in to the Cluster via CLI
+
+    Before creating any applications, login as admin. This will be required if you want to log in to the web console and
+    use it.
+
+    To login to the OpenShift cluster from the _Terminal_ run:
+
+    ```
+    oc login -u admin -p admin
+    ```
+
+    This will log you in using the credentials:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    Use the same credentials to log into the web console.
+
+    ## Setup Knative Eventing
+
+
+    OpenShift Serverless Eventing is designed to address a common need for cloud native development and provides composable primitives to enable late-binding event sources and event consumers. OpenShift Serverless Operator is subscribed in the cluster already.Let's go ahead and setup Knative Eventing to set the ground for the event mesh.
+
+    Creating the knative-eventing namespace:
+
+    ```
+    oc new-project knative-eventing
+    ```
+
+
+    Let's go ahead setup KnativeEventing in the namespace
+
+    ```
+    oc apply -f serverless/eventing.yaml -n knative-eventing
+    ```
+
+    Once Knative Eventing complete it's setup. You will see all the pod in *Running status*, it means it is successfully installed.
+
+    ```
+    oc get pod -w
+    ```
+
+    ```
+    NAME                                    READY   STATUS      RESTARTS   AGE
+    broker-controller-6b4659f8cc-nz7hl      1/1     Running     0          89s
+    broker-filter-659f5549b8-4gcwm          1/1     Running     0          88s
+    broker-ingress-86c4b766dc-bwn4r         1/1     Running     0          87s
+    eventing-controller-7d654894f4-mgdvp    1/1     Running     0          97s
+    eventing-webhook-658fb449b6-hsv66       1/1     Running     0          97s
+    imc-controller-6bf889454d-k79lf         1/1     Running     0          81s
+    imc-dispatcher-7dbddfbd5f-9ltlh         1/1     Running     0          81s
+    mt-broker-controller-5b9986bd46-6svnk   1/1     Running     0          86s
+    ```
+
+    Ctrl+C to exit the command.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: fi676vwjykbh
+  type: challenge
+  title: Step 2
+  assignment: |
+    ## Auto Bitcoin Trading System
+
+    The example shows a simplified trading application that analyzes price variations of Bitcoins (BTC / USDT), and automate trading base on the predicted returns. In order to keep the system flexible with pluggable prediction logics, we are going to break the system into three separate parts.
+    - *Source* - Load realtime Bitcoins values.
+    - *Predictors* - Pluggable predictors with various strategy.
+    - *Seller Alert* - Seller alert (Mainly to display the result).
+
+    Assume the market only open for couple of hours, serverless application can optimize resource usage.
+    In between these separate serverless services, events are pass through an *event mesh*.
+
+    ![overview](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-00-overview.png)
+
+
+    #### Enabling the Knative Eventing Broker
+
+    The central piece of the event mesh that we're going to create is the Knative Eventing broker. It is a publish/subscribe entity that Camel K integrations will use to publish events or subscribe to it in order to being triggered when events of specific types are available. Subscribers of the eventing broker are Knative serving services, that can scale down to zero when no events are available for them.
+
+
+
+    Create a new OpenShift project ``camel-knative``:
+    ```
+    oc new-project camel-knative
+    ```
+
+
+    To enable the eventing broker, we create a default broker in the current namespace using namespace labeling:
+    ```
+    oc label namespace camel-knative knative-eventing-injection=enabled
+    ```
+
+    Let go ahead create predictors for market and load the market events
+
+    #### Run a prediction algorithms
+
+    The market data feed available in the mesh can be now used to create different prediction algorithms that can publish events when they believe it's the right time to sell or buy bitcoins, depending on the trend of the exchange.
+
+    We're going to run the same (basic) algorithm with different parameters, obtaining two predictors. The algorithm is basic and it's just computing if the BTC variation respect to the last observed value is higher than a threshold (expressed in percentage). The algorithm is bound to the event mesh via the Predictor.java integration file.
+
+    In real life, algorithms can be also much more complicated. For example, Camel K can be used to bridge an external machine learning as-a-service system that will compute much more accurate predictions. Algorithms can also be developed with other ad hoc tools and plugged directly inside the Knative mesh using the Knative APIs.
+
+
+    #### Create the first prediction algorithms
+
+    Go to the text editor on the right, under the folder /root/camel-eventing. Right click on the directory and choose New -> File and name it `Predictor.java`.
+    Paste the following code into the application.
+
+    <pre class="file" data-filename="Predictor.java" data-target="replace">
+
+    // camel-k: language=java
+    import org.apache.camel.builder.RouteBuilder;
+
+    import java.util.HashMap;
+    import java.util.Map;
+
+    import org.apache.camel.BindToRegistry;
+    import org.apache.camel.PropertyInject;
+    import org.apache.camel.builder.RouteBuilder;
+
+    public class Predictor extends RouteBuilder {
+
+      @Override
+      public void configure() throws Exception {
+
+          from("knative:event/market.btc.usdt")
+            .unmarshal().json()
+            .transform().simple("${body[last]}")
+            .log("Latest value for BTC/USDT is: ${body}")
+            .to("seda:evaluate?waitForTaskToComplete=Never")
+            .setBody().constant("");
+
+          from("seda:evaluate")
+            .bean("algorithm")
+            .choice()
+              .when(body().isNotNull())
+                .log("Predicted action: ${body}")
+                .to("direct:publish");
+
+          from("direct:publish")
+            .marshal().json()
+            .removeHeaders("*")
+            .setHeader("CE-Type", constant("predictor.{{predictor.name}}"))
+            .to("knative:event");
+
+      }
+
+      @BindToRegistry("algorithm")
+      public static class SimpleAlgorithm {
+
+        @PropertyInject(value="algorithm.sensitivity", defaultValue = "0.0001")
+        private double sensitivity;
+
+        private Double previous;
+
+        public Map<String, Object> predict(double value) {
+          Double reference = previous;
+          this.previous = value;
+
+          if (reference != null && value < reference * (1 - sensitivity)) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("value", value);
+            res.put("operation", "buy");
+            return res;
+          } else if (reference != null && value > reference * (1 + sensitivity)) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("value", value);
+            res.put("operation", "sell");
+            return res;
+          }
+          return null;
+        }
+      }
+    }
+
+    </pre>
+
+    Run the following command to start the first predictor:
+
+    ```
+    kamel run --name simple-predictor -p predictor.name=simple camel-eventing/Predictor.java -t knative-service.max-scale=1 --logs
+    ```
+
+    The command above will deploy the integration and wait for it to run, then it will show the logs in the console.
+
+    You will see the following log if everything is working correctly.
+    ```
+    [1] 2020-10-02 00:09:32.499 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper is set to false, Camel won't search in the registry
+    [1] 2020-10-02 00:09:32.509 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper is set to false, Camel won't search in the registry
+    [1] 2020-10-02 00:09:32.811 INFO  [vert.x-eventloop-thread-0] VertxPlatformHttpServer - Vert.x HttpServerstarted on 0.0.0.0:8080
+    [1] 2020-10-02 00:09:32.817 INFO  [main] InternalRouteStartupManager - Route: route1 started and consuming from: knative://event/market.btc.usdt
+    [1] 2020-10-02 00:09:32.819 INFO  [main] InternalRouteStartupManager - Route: route2 started and consuming from: seda://evaluate
+    [1] 2020-10-02 00:09:32.820 INFO  [main] InternalRouteStartupManager - Route: route3 started and consuming from: direct://publish
+    [1] 2020-10-02 00:09:32.821 INFO  [main] AbstractCamelContext - Total 3 routes, of which 3 are started
+    [1] 2020-10-02 00:09:32.821 INFO  [main] AbstractCamelContext - Apache Camel 3.4.0 (camel-k) started in 0.343 seconds
+    Condition "Ready" is "True" for Integration simple-predictor
+    ```
+    To exit the log view, just click here or hit ctrl+c on the terminal window. The integration will keep running on the cluster.
+
+
+
+    #### Create the second prediction algorithms
+
+    The second predictor with more sensitivity called better-predictor, in the command line run:
+
+    ```
+    kamel run --name better-predictor -p predictor.name=better -p algorithm.sensitivity=0.0005 camel-eventing/Predictor.java -t knative-service.max-scale=1
+    ```
+
+    You will be prompted with the following result, but please give a couple of minutes for the route to be deployed.
+    ``integration "better-predictor" created``
+
+    You can view both predictors from the [Developer Console Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).
+    (If Katacoda is slow, you might need to refresh the page to see the correct result.)
+
+    ![predictors](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-01-predictors.png)
+
+    It will be running first and shutdown since there are no activities yet.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: at65c5yseufe
+  type: challenge
+  title: Step 3
+  assignment: |
+    #### Run a subscriber investor service
+
+    We are going to deploy a service that will listen to the events from the simple predictor.And Display the result from in log.
+
+    Go to the text editor on the right, under the folder /root/camel-eventing. Right click on the directory and choose New -> File and name it `Investor.java`.
+
+
+    <pre class="file" data-filename="Investor.java " data-target="replace">
+    // camel-k: language=java
+
+    import org.apache.camel.builder.RouteBuilder;
+
+    public class Investor extends RouteBuilder {
+      @Override
+      public void configure() throws Exception {
+
+        from("knative:event/predictor.simple")
+          .unmarshal().json()
+          .log("Let's ${body[operation]} at price ${body[value]} immediately!!")
+          .setBody().constant("");
+
+      }
+    }
+    </pre>
+
+    To run it:
+    ```
+    kamel run camel-eventing/Investor.java --logs
+    ```
+
+    You will see the following log if everything is working correctly.
+    ```
+    [1] 2020-10-02 00:19:19.308 INFO  [main] RuntimeSupport - Apply ContextCustomizer with id=platform-http and type=org.apache.camel.k.http.PlatformHttpServiceContextCustomizer
+    [1] 2020-10-02 00:19:19.335 INFO  [main] VertxPlatformHttpServer - Creating new Vert.x instance
+    [1] 2020-10-02 00:19:19.685 INFO  [main] ApplicationRuntime - Listener org.apache.camel.k.listener.ContextConfigurer@93cf163 executed in phase ConfigureContext
+    [1] 2020-10-02 00:19:19.806 INFO  [main] KnativeComponent - found knative transport: org.apache.camel.component.knative.http.KnativeHttpTransport@1de6932a for protocol: http
+    [1] 2020-10-02 00:19:20.428 INFO  [main] AbstractCamelContext - Apache Camel 3.4.0 (camel-k) is starting
+    [1] 2020-10-02 00:19:20.431 INFO  [main] AbstractCamelContext - StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+    [1] 2020-10-02 00:19:20.456 INFO  [main] JacksonDataFormat - The option autoDiscoverObjectMapper is set to false, Camel won't search in the registry
+    [1] 2020-10-02 00:19:20.773 INFO  [vert.x-eventloop-thread-1] VertxPlatformHttpServer - Vert.x HttpServerstarted on 0.0.0.0:8080
+    [1] 2020-10-02 00:19:20.786 INFO  [main] InternalRouteStartupManager - Route: route1 started and consuming from: knative://event/predictor.simple
+    [1] 2020-10-02 00:19:20.787 INFO  [main] AbstractCamelContext - Total 1 routes, of which 1 are started
+    [1] 2020-10-02 00:19:20.788 INFO  [main] AbstractCamelContext - Apache Camel 3.4.0 (camel-k) started in 0.359 seconds
+    ```
+    To exit the log view, just click here or hit ctrl+c on the terminal window. The integration will keep running on the cluster.
+
+
+    #### Loading the Bitcoin live data
+    Now, let's go ahead and start taking live data from the Bitcoin market and pushing it to the event mesh.
+    Go to the text editor on the right, under the folder /root/camel-eventing. Right click on the directory and choose New -> File and name it `market-source.yaml`.
+    Create the camel route loads Bitcoin market data every 10 seconds.
+
+    Paste the following code into the application.
+
+    <pre class="file" data-filename="market-source.yaml" data-target="replace">
+    - from:
+        uri: "timer:tick"
+        parameters:
+          period: 10000
+        steps:
+          - to: "xchange:binance?currencyPair=BTC/USDT&service=marketdata&method=ticker"
+          - marshal:
+              json: {}
+          - log:
+              message: "Sending BTC/USDT data to the broker: ${body}"
+          - set-header:
+              constant: market.btc.usdt
+              name: CE-Type
+          - to: "knative:event"
+    </pre>
+
+    Start the Camel K application
+
+    ```
+    kamel run camel-eventing/market-source.yaml -d camel-jackson
+    ```
+
+    The integration will be deployed on the cluster.
+
+    After successfully deployed, you will be able to see it in the [Developer Console Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).
+
+    When the Bitcoin data start floating into the data, all predictor services and the investor service will automatically start up.
+
+    ![startsup](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step3-01-startsup.png)
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: kty3fr1gaty3
+  type: challenge
+  title: Step 4
+  assignment: |
+    ## When the market closes...
+
+    Bitcoin market never closes, but closing hours are expected to be present for standard markets. We're going to simulate a closing on the market by stopping the source integration.
+
+    When the market closes and updates are no longer pushed into the event mesh, all downstream services will scale down to zero. This includes the two prediction algorithms, the two services that receive events from the mesh and also the external investor service.
+
+    To simulate a market close, we will delete the market-source:
+
+    ```
+    kamel delete market-source
+    ```
+
+    To see the other services going down, go to the [Developer Console Topology view](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph) after two minutes, you will see the pod slowly shutdown.
+
+    ![marketclose](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step4-01-marketclose.png)
+
+    ## Congratulations
+
+    In this scenario you got to play with Camel K and Serverless - Knative Eventing. We use Camel K as a Source to load data into event mesh based on Broker. And create couple of functions using Camel K that subscribe to the events in the mesh. There are much more to Camel K. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to learn even more about the architecture and capabilities of this exciting new framework.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "6648302044050310750"

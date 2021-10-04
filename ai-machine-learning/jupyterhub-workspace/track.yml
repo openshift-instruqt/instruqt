@@ -1,595 +1,347 @@
-challenges:
-- assignment: 'The Jupyter on OpenShift project provides Jupyter notebook and JupyterHub
-    images which have been purpose built to work best with OpenShift.
-
-
-    Before you can deploy JupyterHub, you first need to load the images for the Jupyter
-    notebook application and JupyterHub into your project in OpenShift. You only need
-    to load this once in a project. You can then use it in creating as many different
-    JupyterHub deployments as you need.
-
-
-    In this workshop the step of loading the Jupyter notebook and JupyterHub images
-    has already been done for you.
-
-
-    To verify that the images have been loaded run the command:
-
-
-    ```
-
-    oc get imagestreams -o name
-
-    ```
-
-
-
-    You should see that the `s2i-minimal-notebook` and `jupyterhub` image stream exists.
-
-
-    You can inspect the image stream by running:
-
-
-    ```
-
-    oc describe imagestream s2i-minimal-notebook
-
-    ```
-
-
-    You should see that the image stream includes tags for `3.5` and `3.6`. These
-    correspond to versions of the image for Python 3.5 and Python 3.6.
-
-
-    When deploying JupyterHub, either of these images for the Jupyter notebook can
-    be used, or a custom Jupyter notebook image you built could instead be used.
-
-    '
-  difficulty: intermediate
-  slug: 01-loading-the-required-images
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 1 - Loading the Required Images
-  type: challenge
-- assignment: 'Deploying JupyterHub requires a bit more work to setup than just deploying
-    the JupyterHub image, so templates are available to make this task easier.
-
-
-    As with the Jupyter notebook and JupyterHub images, for this workshop these have
-    already been loaded for you.
-
-
-    To verify that the templates have been loaded for you, run:
-
-
-    ```
-
-    oc get templates
-
-    ```
-
-
-    The purpose of the OpenShift templates which have been loaded are:
-
-
-    * `jupyterhub-deployer` - Template for deploying a JupyterHub service using an
-    existing Jupyter notebook image.
-
-
-    * `jupyterhub-builder` - Template for building a custom JupyterHub image using
-    Source-to-Image (S2I) against a hosted Git repository. Custom JupyterHub configuration
-    will be combined with the base JupyterHub image.
-
-
-    * `jupyterhub-quickstart` - Template for deploying a JupyterHub service, using
-    a custom Jupyter notebook image built using Source-to-Image (S2I).
-
-
-    * `jupyterhub-workspace` - Template for deploying a JupyterHub service, with optional
-    persistent storage for Jupyter notebooks and with access gated using OpenShift
-    cluster authentication. Instances will also have access to the cluster to deploy
-    additional workloads required by the notebooks.
-
-
-    In this workshop you will be using the `jupyterhub-workspace` template.
-
-    '
-  difficulty: intermediate
-  slug: 02-loading-the-required-templates
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 2 - Loading the Required Templates
-  type: challenge
-- assignment: 'You can work with the templates using either the command line or the
-    OpenShift web console. We will use the command line to deploy the template in
-    this workshop.
-
-
-    If you still want to make use of the web console, click on the _Console_ tab in
-    the workshop dashboard. You will be presented with the OpenShift login screen.
-
-
-    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/03-web-console-login.png)
-
-
-    For the credentials, enter:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    Once you have logged in, you can then interact with the cluster and examine what
-    happens as we work through the workshop.
-
-    '
-  difficulty: intermediate
-  slug: 03-accessing-the-web-console
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 3 - Accessing the Web Console
-  type: challenge
-- assignment: 'To see details about the `jupyterhub-workspace` template we will use
-    in this workshop, and what parameters can be provided when using the template,
-    run the command:
-
-
-    ```
-
-    oc describe template jupyterhub-workspace
-
-    ```
-
-
-    The purpose of the template parameters are:
-
-
-    * ``SPAWNER_NAMESPACE`` - The name of the project into which the JupyterHub instance
-    is being deployed.
-
-    * ``CLUSTER_SUBDOMAIN`` - The subdomain used for generated host names when exposing
-    services via a route.
-
-    * ``APPLICATION_NAME`` - The name of the deployment.
-
-    * ``JUPYTERHUB_IMAGE`` - The name of the image stream for the JupyterHub image,
-    and the version tag, which you wish to use.
-
-    * ``NOTEBOOK_IMAGE`` - The name of the image stream for the Jupyter notebook image,
-    and the version tag, which you wish to use.
-
-    * ``JUPYTERHUB_CONFIG`` - Contents for a custom `jupyterhub_config.py` file to
-    override any JupyterHub defaults.
-
-    * ``JUPYTERHUB_ENVVARS`` - Contents for a shell script to be executed to set any
-    special environment variables to customise the JupyterHub deployment.
-
-    * ``ADMIN_USERS`` - The optional list of users who should have admin access to
-    the JupyterHub instance.
-
-    * ``REGISTERED_USERS`` - An optional whitelist of users permitted access to the
-    JupyterHub instance if you want to control access.
-
-    * ``DATABASE_PASSWORD`` - Password for accessing the database used by JupyterHub.
-
-    * ``COOKIE_SECRET`` - Secret used with cookies to encode information about the
-    JupyterHub session.
-
-    * ``JUPYTERHUB_MEMORY`` - The maximum amount of memory the JupyterHub deployment
-    is allowed to use.
-
-    * ``DATABASE_MEMORY`` - The maximum amount of memory the JupyterHub database application
-    is allowed to use.
-
-    * ``NOTEBOOK_MEMORY`` - The maximum amount of memory each Jupyter noteboook deployment
-    is allowed to use.
-
-    * ``NOTEBOOK_INTERFACE`` - The style of web interface to be displayed for the
-    Jupyter notebooks.
-
-    * ``OPENSHIFT_PROJECT`` - A name template for an optional OpenShift project which
-    should be automatically created and/or made the default project for a user. For
-    example ``{username}-workspace``.
-
-    * ``VOLUME_SIZE`` - The size of an optional persistent volume into which a users
-    workspace is stored.
-
-    * ``IDLE_TIMEOUT`` - Optional time in seconds after which idle Jupyter notebook
-    sessions should be shutdown.
-
-    * ``OAUTH_CLIENT_SECRET`` - Secret used in communicating with the OpenShift OAuth
-    client endpoint.
-
-
-    The ``SPAWNER_NAMESPACE`` and ``CLUSTER_SUBDOMAIN`` template parameters are required
-    as they can''t be calculated by the template when instantiated.
-
-
-    All the other fields can be left as their defaults, but we will enable a few extra
-    features.
-
-
-    To create the JupyterHub instance run:
-
-
-    ```
-
-    oc process jupyterhub-workspace --param SPAWNER_NAMESPACE=`oc project --short`
-    --param CLUSTER_SUBDOMAIN="[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"
-    --param NOTEBOOK_INTERFACE=lab --param OPENSHIFT_PROJECT=''{username}-workspace''
-    --param VOLUME_SIZE=1Gi --param IDLE_TIMEOUT=3600 | oc apply -f -
-
-    ```
-
-
-    Note that to deploy JupyterHub using the ``jupyterhub-workspace`` template, you
-    must be a cluster admin. In this workshop you are already logged in on the command
-    line as a cluster admin.
-
-
-    This is necessary as a resource of type ``oauthclient`` needs to be created, and
-    only a cluster admin would usually have the require role to create it.
-
-
-    To monitor the deployment, run:
-
-
-    ```
-
-    oc rollout status dc/jupyterhub
-
-    ```
-
-
-    When the deployment has completed, click on the URL:
-
-
-    https://jupyterhub-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
-
-
-    Because a secure HTTP connection is used, but an environment may in some cases
-    use a self signed SSL certificate, you will need to accept the certificate to
-    proceed.
-
-
-    In this deployment of JupyterHub, user authentication is handled by the OpenShift
-    cluster. When you are presented with the OpenShift login page, enter a username
-    of ``user1``, and a password of ``user1``.
-
-
-    What you will see is a progress screen as a separate Jupyter notebook instance
-    is started up for the user ``user1``. Once the instance has started, you will
-    have access to the JupyterLab web interface.
-
-
-    ![JupyterLab Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/04-lab-notebook-interface.png)
-
-
-    At this point you can create new notebooks or upload existing notebooks. If you
-    need to install additional Python packages, when using this type of deployment
-    you would need to start a terminal from the Jupyter notebook web interface and
-    install the packages manually.
-
-
-    In this configuration, because we specified ``VOLUME_SIZE`` any changes you make
-    are persistent. If the notebook instance were restarted, you would not loose any
-    work.
-
-
-    Because JupyterHub is used to handle spawning of JupyterHub notebook instances
-    on demand, a separate user visiting the same URL, will be given access to their
-    own notebook session, with their own persistent storage.
-
-    '
-  difficulty: intermediate
-  slug: 04-deploying-jupyterhub-service
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 4 - Deploying JupyterHub Service
-  type: challenge
-- assignment: 'For each user session, a separate pod is created in the same project
-    as JupyterHub is running. It is in this pod that the Jupyter notebook application
-    runs. You can see a list of the pods for the active user sessions by running:
-
-
-    ```
-
-    oc get pod -l component=singleuser-server
-
-    ```
-
-
-    How much memory each user is allowed to use for their Jupyter notebook instance
-    is defined by the ``NOTEBOOK_MEMORY`` template parameter.
-
-
-    Because the ``VOLUME_SIZE`` template parameter was specified, each user will be
-    assigned their own persistent volume. The first time that they start up a Jupyter
-    notebook, files from the Jupyter notebook image will be copied from the image
-    into the persistent volume. Any subsequent changes made to the files will then
-    be written back to the persistent volume. If the Jupyter notebook instance is
-    stopped and then started again, the changes will be preserved.
-
-
-    You can see a list of the persistent volumes claimed for each user session by
-    running:
-
-
-    ```
-
-    oc get pvc -l component=singleuser-storage
-
-    ```
-
-
-    If a user manages to delete all their files, or they want to revert back to the
-    original files from the Jupyter notebook image, they should create the file ``/opt/app-root/.delete-volume``
-    by running:
-
-
-    ``touch /opt/app-root/.delete-volume``
-
-
-    This can be done from a terminal created from the Jupyter notebook web interface.
-    Having created the file, they can visit the JupyterHub _Control Panel_, stop their
-    server instance, and start it again. When it starts again, the file above will
-    trigger the deletion of the contents of the persistent volume and it will be restored
-    to the original contents from the Jupyter notebook image.
-
-
-    If for some reason changes made to the persistent volume prevent the Jupyter notebook
-    instance starting and the file cannot be created, it would be necessary to stop
-    the Jupyter notebook instance as a JupyterHub admin from the JupyterHub admin
-    control panel, and delete the persistent volume claim using the ``oc delete pvc``
-    command.
-
-
-    When the pod is created for a users Jupyter notebook instance, access from that
-    pod is given to the OpenShift cluster with access rights governed by what user
-    they logged in as.
-
-
-    The user would not have any access to the project the pod is running in, unless
-    they would normally have access to that project.
-
-
-    In this example deployment, because the ``OPENSHIFT_PROJECT`` template parameter
-    was defined as ``{username}-workspace``, a project will be automatically created
-    using that name, where ``{username}`` is replace with the users own name. In this
-    case that would be ``user1-workspace``. You can check this was the case by running:
-
-
-    ```
-
-    oc get project/user1-workspace
-
-    ```
-
-
-    This relied on the user having the ability to create new projects. What workloads
-    they can deploy to the project will be dictated by whatever global resource quotas
-    and limits would be applied to the project for the user.
-
-
-    If a user cannot normally create projects, you can instead pre-create required
-    projects as a cluster admin, setting a per project resource quota, limit ranges,
-    and granting access to the project by the user, or a group of users, as necessary.
-    In this case, as the project will not need to be created, it will just be made
-    the active project for the user.
-
-
-    A user can deploy workloads to the project using the cluster REST API using code
-    running in their notebooks. The Jupyter notebook image also supplies the ``oc``
-    and ``kustomize`` command line tools, which can be used from a terminal created
-    from the Jupyter notebook interface.
-
-
-    To test access to the cluster, from the Jupyter notebook web interface, create
-    a terminal instance. At the login prompt of the terminal running in the Jupyter
-    notebook, run:
-
-
-    ``oc projects``
-
-
-    You will see what projects you can access.
-
-
-    ![Terminal Session](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/05-jupyter-notebook-terminal-session.png)
-
-
-    Where the JupyterHub environment was created and a custom Jupyter notebook image
-    was used containing a set of Jupyter notebook files, it could also include an
-    OpenShift template, or set of resources for ``kustomize`` which can then be used
-    to deploy any workloads required for the Jupyter notebook. For example, you might
-    deploy a Dask or Spark cluster within the project right from the Jupyter notebook
-    terminal interface.
-
-
-    If you need to know the name of any associated project, you can work out the name
-    from the ``PROJECT_NAMESPACE`` environment variable. This will be available in
-    both the Jupyter notebook and terminal.
-
-    '
-  difficulty: intermediate
-  slug: 05-user-workspace-and-project
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 5 - User Workspace and Project
-  type: challenge
-- assignment: 'When you are done with the JupyterHub service you can delete it from
-    the command line.
-
-
-    To validate that you are deleting the correct resources, first run:
-
-
-    ```
-
-    oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
-    -o name
-
-    ```
-
-
-    This uses a label selector to reference only the resources for this deployment.
-
-
-    When happy that you will be deleting the correct resources, run:
-
-
-    ```
-
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
-
-    ```
-
-
-    This will only delete resources from the project JupyterHub is deployed to.
-
-
-    You will also need to delete the global ``oauthclient`` resource. Do this as a
-    separate step so you can double check you are deleting the correct resource.
-
-
-    To list the ``oauthclient`` resources run:
-
-
-    ```
-
-    oc get oauthclient --selector app=jupyterhub
-
-    ```
-
-
-    Delete by name the one entry corresponding to the JupyterHub deployment in this
-    project. In this case the project name was ``myproject``, so you would run:
-
-
-    ```
-
-    oc delete oauthclient/jupyterhub-myproject-users
-
-    ```
-
-
-    Note that this will not delete any projects which have been created for or by
-    users. If users had not deleted the projects themselves, you as a cluster admin
-    will need to identify them and delete them.
-
-    '
-  difficulty: intermediate
-  slug: 06-deleting-the-jupyterhub-service
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Topic 6 - Deleting the JupyterHub Service
-  type: challenge
-description: 'The [Project Jupyter](https://jupyter.org/) web site describes Jupyter
-  notebooks as:
-
-
-  > an open-source web application that allows you to create and share documents that
-  contain live code, equations, visualizations and narrative text. Uses include: data
-  cleaning and transformation, numerical simulation, statistical modeling, data visualization,
-  machine learning, and much more.
-
-
-  Jupyter notebooks can be deployed direct to Linux, macOS or Windows environments,
-  or in containerized environments such as Docker, Kubernetes and OpenShift.
-
-
-  In this workshop you will learn how you can provide persistent workspaces for multiple
-  users, for working on Jupyter notebooks, using JupyterHub. Access to the Jupyter
-  notebooks will be gated using OpenShift cluster authentication. The Jupyter notebook
-  instance will be attached to the OpenShift cluster so that users can interact with
-  and deploy workloads to the cluster required by the Jupyter notebooks.
-
-
-  The examples shown will make use of sample Jupyter notebook images, JupyterHub images,
-  and templates, from the [Jupyter on OpenShift](https://github.com/jupyter-on-openshift)
-  project, a community project for demonstrating how Jupyter notebooks and JupyterHub
-  can be deployed to OpenShift.
-
-  '
+slug: ai-machine-learning-jupyterhub-workspace
+id: qsmfkjlqprr5
+type: track
+title: Multi-user Workspace Using JupyterHub
+description: |
+  The [Project Jupyter](https://jupyter.org/) web site describes Jupyter notebooks as:
+
+  > an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, and much more.
+
+  Jupyter notebooks can be deployed direct to Linux, macOS or Windows environments, or in containerized environments such as Docker, Kubernetes and OpenShift.
+
+  In this workshop you will learn how you can provide persistent workspaces for multiple users, for working on Jupyter notebooks, using JupyterHub. Access to the Jupyter notebooks will be gated using OpenShift cluster authentication. The Jupyter notebook instance will be attached to the OpenShift cluster so that users can interact with and deploy workloads to the cluster required by the Jupyter notebooks.
+
+  The examples shown will make use of sample Jupyter notebook images, JupyterHub images, and templates, from the [Jupyter on OpenShift](https://github.com/jupyter-on-openshift) project, a community project for demonstrating how Jupyter notebooks and JupyterHub can be deployed to OpenShift.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: ai-machine-learning-jupyterhub-workspace
-tags:
-- openshift
-title: Multi-user Workspace Using JupyterHub
-type: track
+challenges:
+- slug: 01-loading-the-required-images
+  id: 1zlpbgyknf8v
+  type: challenge
+  title: Topic 1 - Loading the Required Images
+  assignment: |
+    The Jupyter on OpenShift project provides Jupyter notebook and JupyterHub images which have been purpose built to work best with OpenShift.
+
+    Before you can deploy JupyterHub, you first need to load the images for the Jupyter notebook application and JupyterHub into your project in OpenShift. You only need to load this once in a project. You can then use it in creating as many different JupyterHub deployments as you need.
+
+    In this workshop the step of loading the Jupyter notebook and JupyterHub images has already been done for you.
+
+    To verify that the images have been loaded run the command:
+
+    ```
+    oc get imagestreams -o name
+    ```
+
+
+    You should see that the `s2i-minimal-notebook` and `jupyterhub` image stream exists.
+
+    You can inspect the image stream by running:
+
+    ```
+    oc describe imagestream s2i-minimal-notebook
+    ```
+
+    You should see that the image stream includes tags for `3.5` and `3.6`. These correspond to versions of the image for Python 3.5 and Python 3.6.
+
+    When deploying JupyterHub, either of these images for the Jupyter notebook can be used, or a custom Jupyter notebook image you built could instead be used.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 02-loading-the-required-templates
+  id: vrsumie89djq
+  type: challenge
+  title: Topic 2 - Loading the Required Templates
+  assignment: |
+    Deploying JupyterHub requires a bit more work to setup than just deploying the JupyterHub image, so templates are available to make this task easier.
+
+    As with the Jupyter notebook and JupyterHub images, for this workshop these have already been loaded for you.
+
+    To verify that the templates have been loaded for you, run:
+
+    ```
+    oc get templates
+    ```
+
+    The purpose of the OpenShift templates which have been loaded are:
+
+    * `jupyterhub-deployer` - Template for deploying a JupyterHub service using an existing Jupyter notebook image.
+
+    * `jupyterhub-builder` - Template for building a custom JupyterHub image using Source-to-Image (S2I) against a hosted Git repository. Custom JupyterHub configuration will be combined with the base JupyterHub image.
+
+    * `jupyterhub-quickstart` - Template for deploying a JupyterHub service, using a custom Jupyter notebook image built using Source-to-Image (S2I).
+
+    * `jupyterhub-workspace` - Template for deploying a JupyterHub service, with optional persistent storage for Jupyter notebooks and with access gated using OpenShift cluster authentication. Instances will also have access to the cluster to deploy additional workloads required by the notebooks.
+
+    In this workshop you will be using the `jupyterhub-workspace` template.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 03-accessing-the-web-console
+  id: htvtdajcvxwt
+  type: challenge
+  title: Topic 3 - Accessing the Web Console
+  assignment: |
+    You can work with the templates using either the command line or the OpenShift web console. We will use the command line to deploy the template in this workshop.
+
+    If you still want to make use of the web console, click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/03-web-console-login.png)
+
+    For the credentials, enter:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    Once you have logged in, you can then interact with the cluster and examine what happens as we work through the workshop.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 04-deploying-jupyterhub-service
+  id: mkpnefxhznsw
+  type: challenge
+  title: Topic 4 - Deploying JupyterHub Service
+  assignment: |
+    To see details about the `jupyterhub-workspace` template we will use in this workshop, and what parameters can be provided when using the template, run the command:
+
+    ```
+    oc describe template jupyterhub-workspace
+    ```
+
+    The purpose of the template parameters are:
+
+    * ``SPAWNER_NAMESPACE`` - The name of the project into which the JupyterHub instance is being deployed.
+    * ``CLUSTER_SUBDOMAIN`` - The subdomain used for generated host names when exposing services via a route.
+    * ``APPLICATION_NAME`` - The name of the deployment.
+    * ``JUPYTERHUB_IMAGE`` - The name of the image stream for the JupyterHub image, and the version tag, which you wish to use.
+    * ``NOTEBOOK_IMAGE`` - The name of the image stream for the Jupyter notebook image, and the version tag, which you wish to use.
+    * ``JUPYTERHUB_CONFIG`` - Contents for a custom `jupyterhub_config.py` file to override any JupyterHub defaults.
+    * ``JUPYTERHUB_ENVVARS`` - Contents for a shell script to be executed to set any special environment variables to customise the JupyterHub deployment.
+    * ``ADMIN_USERS`` - The optional list of users who should have admin access to the JupyterHub instance.
+    * ``REGISTERED_USERS`` - An optional whitelist of users permitted access to the JupyterHub instance if you want to control access.
+    * ``DATABASE_PASSWORD`` - Password for accessing the database used by JupyterHub.
+    * ``COOKIE_SECRET`` - Secret used with cookies to encode information about the JupyterHub session.
+    * ``JUPYTERHUB_MEMORY`` - The maximum amount of memory the JupyterHub deployment is allowed to use.
+    * ``DATABASE_MEMORY`` - The maximum amount of memory the JupyterHub database application is allowed to use.
+    * ``NOTEBOOK_MEMORY`` - The maximum amount of memory each Jupyter noteboook deployment is allowed to use.
+    * ``NOTEBOOK_INTERFACE`` - The style of web interface to be displayed for the Jupyter notebooks.
+    * ``OPENSHIFT_PROJECT`` - A name template for an optional OpenShift project which should be automatically created and/or made the default project for a user. For example ``{username}-workspace``.
+    * ``VOLUME_SIZE`` - The size of an optional persistent volume into which a users workspace is stored.
+    * ``IDLE_TIMEOUT`` - Optional time in seconds after which idle Jupyter notebook sessions should be shutdown.
+    * ``OAUTH_CLIENT_SECRET`` - Secret used in communicating with the OpenShift OAuth client endpoint.
+
+    The ``SPAWNER_NAMESPACE`` and ``CLUSTER_SUBDOMAIN`` template parameters are required as they can't be calculated by the template when instantiated.
+
+    All the other fields can be left as their defaults, but we will enable a few extra features.
+
+    To create the JupyterHub instance run:
+
+    ```
+    oc process jupyterhub-workspace --param SPAWNER_NAMESPACE=`oc project --short` --param CLUSTER_SUBDOMAIN="[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com" --param NOTEBOOK_INTERFACE=lab --param OPENSHIFT_PROJECT='{username}-workspace' --param VOLUME_SIZE=1Gi --param IDLE_TIMEOUT=3600 | oc apply -f -
+    ```
+
+    Note that to deploy JupyterHub using the ``jupyterhub-workspace`` template, you must be a cluster admin. In this workshop you are already logged in on the command line as a cluster admin.
+
+    This is necessary as a resource of type ``oauthclient`` needs to be created, and only a cluster admin would usually have the require role to create it.
+
+    To monitor the deployment, run:
+
+    ```
+    oc rollout status dc/jupyterhub
+    ```
+
+    When the deployment has completed, click on the URL:
+
+    https://jupyterhub-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+
+    Because a secure HTTP connection is used, but an environment may in some cases use a self signed SSL certificate, you will need to accept the certificate to proceed.
+
+    In this deployment of JupyterHub, user authentication is handled by the OpenShift cluster. When you are presented with the OpenShift login page, enter a username of ``user1``, and a password of ``user1``.
+
+    What you will see is a progress screen as a separate Jupyter notebook instance is started up for the user ``user1``. Once the instance has started, you will have access to the JupyterLab web interface.
+
+    ![JupyterLab Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/04-lab-notebook-interface.png)
+
+    At this point you can create new notebooks or upload existing notebooks. If you need to install additional Python packages, when using this type of deployment you would need to start a terminal from the Jupyter notebook web interface and install the packages manually.
+
+    In this configuration, because we specified ``VOLUME_SIZE`` any changes you make are persistent. If the notebook instance were restarted, you would not loose any work.
+
+    Because JupyterHub is used to handle spawning of JupyterHub notebook instances on demand, a separate user visiting the same URL, will be given access to their own notebook session, with their own persistent storage.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 05-user-workspace-and-project
+  id: j3cw4f66wzqr
+  type: challenge
+  title: Topic 5 - User Workspace and Project
+  assignment: |
+    For each user session, a separate pod is created in the same project as JupyterHub is running. It is in this pod that the Jupyter notebook application runs. You can see a list of the pods for the active user sessions by running:
+
+    ```
+    oc get pod -l component=singleuser-server
+    ```
+
+    How much memory each user is allowed to use for their Jupyter notebook instance is defined by the ``NOTEBOOK_MEMORY`` template parameter.
+
+    Because the ``VOLUME_SIZE`` template parameter was specified, each user will be assigned their own persistent volume. The first time that they start up a Jupyter notebook, files from the Jupyter notebook image will be copied from the image into the persistent volume. Any subsequent changes made to the files will then be written back to the persistent volume. If the Jupyter notebook instance is stopped and then started again, the changes will be preserved.
+
+    You can see a list of the persistent volumes claimed for each user session by running:
+
+    ```
+    oc get pvc -l component=singleuser-storage
+    ```
+
+    If a user manages to delete all their files, or they want to revert back to the original files from the Jupyter notebook image, they should create the file ``/opt/app-root/.delete-volume`` by running:
+
+    ``touch /opt/app-root/.delete-volume``
+
+    This can be done from a terminal created from the Jupyter notebook web interface. Having created the file, they can visit the JupyterHub _Control Panel_, stop their server instance, and start it again. When it starts again, the file above will trigger the deletion of the contents of the persistent volume and it will be restored to the original contents from the Jupyter notebook image.
+
+    If for some reason changes made to the persistent volume prevent the Jupyter notebook instance starting and the file cannot be created, it would be necessary to stop the Jupyter notebook instance as a JupyterHub admin from the JupyterHub admin control panel, and delete the persistent volume claim using the ``oc delete pvc`` command.
+
+    When the pod is created for a users Jupyter notebook instance, access from that pod is given to the OpenShift cluster with access rights governed by what user they logged in as.
+
+    The user would not have any access to the project the pod is running in, unless they would normally have access to that project.
+
+    In this example deployment, because the ``OPENSHIFT_PROJECT`` template parameter was defined as ``{username}-workspace``, a project will be automatically created using that name, where ``{username}`` is replace with the users own name. In this case that would be ``user1-workspace``. You can check this was the case by running:
+
+    ```
+    oc get project/user1-workspace
+    ```
+
+    This relied on the user having the ability to create new projects. What workloads they can deploy to the project will be dictated by whatever global resource quotas and limits would be applied to the project for the user.
+
+    If a user cannot normally create projects, you can instead pre-create required projects as a cluster admin, setting a per project resource quota, limit ranges, and granting access to the project by the user, or a group of users, as necessary. In this case, as the project will not need to be created, it will just be made the active project for the user.
+
+    A user can deploy workloads to the project using the cluster REST API using code running in their notebooks. The Jupyter notebook image also supplies the ``oc`` and ``kustomize`` command line tools, which can be used from a terminal created from the Jupyter notebook interface.
+
+    To test access to the cluster, from the Jupyter notebook web interface, create a terminal instance. At the login prompt of the terminal running in the Jupyter notebook, run:
+
+    ``oc projects``
+
+    You will see what projects you can access.
+
+    ![Terminal Session](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/05-jupyter-notebook-terminal-session.png)
+
+    Where the JupyterHub environment was created and a custom Jupyter notebook image was used containing a set of Jupyter notebook files, it could also include an OpenShift template, or set of resources for ``kustomize`` which can then be used to deploy any workloads required for the Jupyter notebook. For example, you might deploy a Dask or Spark cluster within the project right from the Jupyter notebook terminal interface.
+
+    If you need to know the name of any associated project, you can work out the name from the ``PROJECT_NAMESPACE`` environment variable. This will be available in both the Jupyter notebook and terminal.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+- slug: 06-deleting-the-jupyterhub-service
+  id: zji4m4qxwyfu
+  type: challenge
+  title: Topic 6 - Deleting the JupyterHub Service
+  assignment: |
+    When you are done with the JupyterHub service you can delete it from the command line.
+
+    To validate that you are deleting the correct resources, first run:
+
+    ```
+    oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub -o name
+    ```
+
+    This uses a label selector to reference only the resources for this deployment.
+
+    When happy that you will be deleting the correct resources, run:
+
+    ```
+    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
+    ```
+
+    This will only delete resources from the project JupyterHub is deployed to.
+
+    You will also need to delete the global ``oauthclient`` resource. Do this as a separate step so you can double check you are deleting the correct resource.
+
+    To list the ``oauthclient`` resources run:
+
+    ```
+    oc get oauthclient --selector app=jupyterhub
+    ```
+
+    Delete by name the one entry corresponding to the JupyterHub deployment in this project. In this case the project name was ``myproject``, so you would run:
+
+    ```
+    oc delete oauthclient/jupyterhub-myproject-users
+    ```
+
+    Note that this will not delete any projects which have been created for or by users. If users had not deleted the projects themselves, you as a cluster admin will need to identify them and delete them.
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: intermediate
+  timelimit: 300
+checksum: "9015995714494470423"

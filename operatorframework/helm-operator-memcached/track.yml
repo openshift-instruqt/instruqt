@@ -1,365 +1,423 @@
-challenges:
-- assignment: "Let's begin my creating a new project called `myproject`:\n\n```\n\
-    oc new-project myproject\n```\n`\n```\n\nMemcached is an in-memory key-value store\
-    \ for small chunks of arbitrary data (strings, objects) from results of database\
-    \ calls, API calls, or page rendering.\n\n\nLet's now create a new directory for\
-    \ our project:\n\n```\nmkdir -p $HOME/projects/memcached-operator\n```\n`\n```\n\
-    <br>\nNavigate to the directory:\n\n```\ncd $HOME/projects/memcached-operator\n\
-    ```\n`\n```\n<br>\nCreate a new Helm-based Operator SDK project for the Memcached\
-    \ Operator:\n\n```\noperator-sdk init --plugins helm --domain example.com\n```\n\
-    `\n```\n\n<br>\nFor Helm-based projects, `operator-sdk` init also generates the\
-    \ RBAC rules in `config/rbac/role.yaml` based on the resources that would be deployed\
-    \ by the chart\u2019s default manifest. Be sure to double check that the rules\
-    \ generated in `config/rbac/role.yaml` meet the operator\u2019s permission requirements.\n\
-    \nTo learn more about the project directory structure, see the [project layout](https://sdk.operatorframework.io/docs/overview/project-layout)\
-    \ doc.\n\n** Use an existing chart **\n\nInstead of creating your project with\
-    \ a boilerplate Helm chart, you can also use `--helm-chart`, `--helm-chart-repo`,\
-    \ and `--helm-chart-version` to use an existing chart, either from your local\
-    \ filesystem or a remote chart repository.\n\n<br>\nAutomatically fetch the Memcached\
-    \ Helm Chart and generate the CRD/API:\n\n```\noperator-sdk create api --helm-chart\
-    \ memcached --helm-chart-repo=https://charts.helm.sh/stable\n```\n<br>\n### Project\
-    \ Scaffolding Layout\n\nAfter creating a new operator project the directory has\
-    \ numerous generated folders and files. The following\ntable describes a basic\
-    \ rundown of each generated file/directory.\n\n| File/Folders   | Purpose    \
-    \                       |\n| :---           | :--- |\n| config | Kustomize YAML\
-    \ definitions required to launch our controller on a cluster. It is the target\
-    \ directory to hold our CustomResourceDefinitions, RBAC configuration, and WebhookConfigurations.\n\
-    | Dockerfile | The container build file used to build your Ansible Operator container\
-    \ image. |\n| helm-charts | The location for the specified helm-charts. |\n| Makefile\
-    \ | Make targets for building and deploying your controller. |\n| PROJECT | Kubebuilder\
-    \ metadata for scaffolding new components. |\n| watches.yaml | Contains Group,\
-    \ Version, Kind, and desired chart. |\n"
-  difficulty: basic
-  slug: step1
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Initialize the Project
-  type: challenge
-- assignment: 'The `watches.yaml` file maps a Group, Version, and Kind to a specific
-    Helm Chart. Observe the contents of the `watches.yaml`:
+slug: operatorframework-helm-operator-memcached
+id: pf390uz7x5wc
+type: track
+title: Operator SDK with Helm, Memcached
+description: |-
+  In the previous learning modules, we covered how to easily create the following types of Operators with the Operator SDK:
 
+  * **Go**:
+  Ideal for traditional software development teams that want to get to a fully auto-pilot Operator. It gives you the ability to leverage the same Kubernetes libraries the upstream projects uses under the hood. Check out the [Go Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/golang/).
 
-    ```
+  * **Ansible**:
+  Useful for infrastructure-focused teams that have investment in Ansible modules but want to use them in a Kubernetes-native way. Also great for using Ansible to configure off-cluster objects like hardware load balancers. Check out the [Ansible Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/ansible/).
 
-    cat watches.yaml
+  We will now focus on the easiest way to get started developing an Operator:
 
-    ```
+  * **Helm**:
+  Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
 
-    `
+  ## Creating a Memcached Operator from a Helm Chart
 
-    ```'
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Update the Watches File
-  type: challenge
-- assignment: 'Apply the Memcached Custom Resource Definition to the cluster:
+  In this tutorial, we will create a Memcached Operator from an existing [Memcached Helm Chart](https://github.com/helm/charts/blob/master/stable/memcached/Chart.yaml).
 
+  [Memcached](https://memcached.org/) is a Free & open source, high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
 
-    ```
-
-    oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Once the CRD is registered, there are two ways to run the Operator:
-
-
-    * As a Pod inside a Kubernetes cluster
-
-    * As a Go program outside the cluster using Operator-SDK. This is great for local
-    development of your Operator.
-
-
-    For the sake of this tutorial, we will run the Operator as a Go program outside
-    the cluster using Operator-SDK and our `kubeconfig` credentials
-
-
-    Once running, the command will block the current session. You can continue interacting
-    with the OpenShift cluster by opening a new terminal window. You can quit the
-    session by pressing `CTRL + C`.
-
-
-    ```
-
-    WATCH_NAMESPACE=myproject make run
-
-    ```
-
-    `
-
-    ```
-
-    '
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Apply the Memcached Custom Resource Definition
-  type: challenge
-- assignment: "Open a new terminal window and navigate to the `memcached-operator`\
-    \ top-level directory:\n\n```\ncd projects/memcached-operator\n```\n`\n```\nBefore\
-    \ applying the Memcached Custom Resource, observe the Memcached Helm Chart `values.yaml`:\n\
-    \n[Memcached Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/memcached/values.yaml)\n\
-    \nUpdate the Memcached Custom Resource at `config/samples/charts_v1alpha1_memcached.yaml`\
-    \ with the following values:\n\n* `spec.replicaCount: 3`\n\n<pre class=\"file\"\
-    >\napiVersion: charts.example.com/v1alpha1\nkind: Memcached\nmetadata:\n  name:\
-    \ memcached-sample\nspec:\n  # Default values copied from <project_dir>/helm-charts/memcached/values.yaml\n\
-    \  AntiAffinity: soft\n  affinity: {}\n  extraContainers: \"\"\n  extraVolumes:\
-    \ \"\"\n  image: memcached:1.5.20\n  kind: StatefulSet\n  memcached:\n    extendedOptions:\
-    \ modern\n    extraArgs: []\n    maxItemMemory: 64\n    verbosity: v\n  metrics:\n\
-    \    enabled: false\n    image: quay.io/prometheus/memcached-exporter:v0.6.0\n\
-    \    resources: {}\n    serviceMonitor:\n      enabled: false\n      interval:\
-    \ 15s\n  nodeSelector: {}\n  pdbMinAvailable: 2\n  podAnnotations: {}\n  replicaCount:\
-    \ 3\n  resources:\n    requests:\n      cpu: 50m\n      memory: 64Mi\n  securityContext:\n\
-    \    enabled: false \n    fsGroup: 1001\n    runAsUser: 1001\n  serviceAnnotations:\
-    \ {}\n  tolerations: {}\n  updateStrategy:\n    type: RollingUpdate\n</pre>\n\n\
-    You can easily update this file by running the following command:\n\n```\n\\cp\
-    \ /tmp/charts_v1alpha1_memcached.yaml config/samples/charts_v1alpha1_memcached.yaml\n\
-    ```\n`\n```\n<br>\nAfter updating the Memcached Custom Resource with our desired\
-    \ spec, apply it to the cluster. Ensure you are currently scoped to the `myproject`\
-    \ Namespace:\n\n```\noc project myproject\n```\n`\n```\n\n```\noc apply -f config/samples/charts_v1alpha1_memcached.yaml\n\
-    ```\n`\n```\n<br>\nConfirm that the Custom Resource was created:\n\n```\noc get\
-    \ memcached\n```\n`\n```\n<br>\nIt may take some time for the environment to pull\
-    \ down the Memcached container image. Confirm that the Stateful Set was created:\n\
-    \n```\noc get statefulset\n```\n`\n```\n<br>\nConfirm that the Stateful Set's\
-    \ pod is currently running:\n\n```\noc get pods\n```\n`\n```\n<br>\nConfirm that\
-    \ the Memcached \"internal\" and \"public\" ClusterIP Service were created:\n\n\
-    ```\noc get services\n```\n`\n```\n"
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Apply the Memcached Custom Resource
-  type: challenge
-- assignment: 'Let''s now update the Memcached `example` Custom Resource and increase
-    the desired number of replicas to `5`:
-
-
-    ```
-
-    oc patch memcached memcached-sample -p ''{"spec":{"replicaCount": 5}}'' --type=merge
-
-    ```
-
-    `
-
-    ```
-
-
-    <br>
-
-    Verify that the Memcached Stateful Set is creating two additional pods:
-
-
-    ```
-
-    oc get pods
-
-    ```
-
-    `
-
-    ```
-
-    '
-  difficulty: basic
-  slug: step5
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Update the Memcached Custom Resource
-  type: challenge
-- assignment: 'If any Memcached member fails it gets restarted or recreated automatically
-    by the Kubernetes infrastructure, and will rejoin the cluster automatically when
-    it comes back up. You can test this scenario by killing any of the pods:
-
-
-    ```
-
-    oc delete pods -l app.kubernetes.io/name=memcached
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Watch the pods respawn:
-
-
-    ```
-
-    oc get pods -l app.kubernetes.io/name=memcached
-
-    ```
-
-    `
-
-    ```
-
-    '
-  difficulty: basic
-  slug: step6
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Test Memcached Cluster Failover
-  type: challenge
-- assignment: 'Delete the Memcached cluster and all associated resources by deleting
-    the `example` Custom Resource:
-
-
-    ```
-
-    oc delete memcached memcached-sample
-
-    ```
-
-    `
-
-    ```
-
-    <br>
-
-    Verify that the Stateful Set, pods, and services are removed:
-
-
-    ```
-
-    oc get statefulset
-
-    oc get pods
-
-    oc get services
-
-    ```
-
-    `
-
-    ```'
-  difficulty: basic
-  slug: step7
-  tabs:
-  - hostname: crc-nonest-1
-    title: CLI
-    type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
-    type: service
-  - hostname: crc-nonest-1
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 300
-  title: Clean Up
-  type: challenge
-description: "In the previous learning modules, we covered how to easily create the\
-  \ following types of Operators with the Operator SDK:\n\n* **Go**:\nIdeal for traditional\
-  \ software development teams that want to get to a fully auto-pilot Operator. It\
-  \ gives you the ability to leverage the same Kubernetes libraries the upstream projects\
-  \ uses under the hood. Check out the [Go Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/golang/).\n\
-  \n* **Ansible**:\nUseful for infrastructure-focused teams that have investment in\
-  \ Ansible modules but want to use them in a Kubernetes-native way. Also great for\
-  \ using Ansible to configure off-cluster objects like hardware load balancers. Check\
-  \ out the [Ansible Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/ansible/).\n\
-  \nWe will now focus on the easiest way to get started developing an Operator:\n\n\
-  * **Helm**:\nUseful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller)\
-  \ and  it doesn\u2019t rely on manual invocation of Helm to reconfigure your apps.\
-  \ Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/)\
-  \ for more information.\n\n## Creating a Memcached Operator from a Helm Chart\n\n\
-  In this tutorial, we will create a Memcached Operator from an existing [Memcached\
-  \ Helm Chart](https://github.com/helm/charts/blob/master/stable/memcached/Chart.yaml).\n\
-  \n[Memcached](https://memcached.org/) is a Free & open source, high-performance,\
-  \ distributed memory object caching system, generic in nature, but intended for\
-  \ use in speeding up dynamic web applications by alleviating database load.\n\n\
-  Let's begin!"
+  Let's begin!
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: true
 published: false
-skipping_enabled: false
-slug: operatorframework-helm-operator-memcached
-tags:
-- openshift
-title: Operator SDK with Helm, Memcached
-type: track
+challenges:
+- slug: step1
+  id: uqyoeqb1qym9
+  type: challenge
+  title: Initialize the Project
+  assignment: |
+    Let's begin my creating a new project called `myproject`:
+
+    ```
+    oc new-project myproject
+    ```
+    `
+    ```
+
+    Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) from results of database calls, API calls, or page rendering.
+
+
+    Let's now create a new directory for our project:
+
+    ```
+    mkdir -p $HOME/projects/memcached-operator
+    ```
+    `
+    ```
+    <br>
+    Navigate to the directory:
+
+    ```
+    cd $HOME/projects/memcached-operator
+    ```
+    `
+    ```
+    <br>
+    Create a new Helm-based Operator SDK project for the Memcached Operator:
+
+    ```
+    operator-sdk init --plugins helm --domain example.com
+    ```
+    `
+    ```
+
+    <br>
+    For Helm-based projects, `operator-sdk` init also generates the RBAC rules in `config/rbac/role.yaml` based on the resources that would be deployed by the chart’s default manifest. Be sure to double check that the rules generated in `config/rbac/role.yaml` meet the operator’s permission requirements.
+
+    To learn more about the project directory structure, see the [project layout](https://sdk.operatorframework.io/docs/overview/project-layout) doc.
+
+    ** Use an existing chart **
+
+    Instead of creating your project with a boilerplate Helm chart, you can also use `--helm-chart`, `--helm-chart-repo`, and `--helm-chart-version` to use an existing chart, either from your local filesystem or a remote chart repository.
+
+    <br>
+    Automatically fetch the Memcached Helm Chart and generate the CRD/API:
+
+    ```
+    operator-sdk create api --helm-chart memcached --helm-chart-repo=https://charts.helm.sh/stable
+    ```
+    <br>
+    ### Project Scaffolding Layout
+
+    After creating a new operator project the directory has numerous generated folders and files. The following
+    table describes a basic rundown of each generated file/directory.
+
+    | File/Folders   | Purpose                           |
+    | :---           | :--- |
+    | config | Kustomize YAML definitions required to launch our controller on a cluster. It is the target directory to hold our CustomResourceDefinitions, RBAC configuration, and WebhookConfigurations.
+    | Dockerfile | The container build file used to build your Ansible Operator container image. |
+    | helm-charts | The location for the specified helm-charts. |
+    | Makefile | Make targets for building and deploying your controller. |
+    | PROJECT | Kubebuilder metadata for scaffolding new components. |
+    | watches.yaml | Contains Group, Version, Kind, and desired chart. |
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step2
+  id: 9aqkmr9qsgzj
+  type: challenge
+  title: Update the Watches File
+  assignment: |-
+    The `watches.yaml` file maps a Group, Version, and Kind to a specific Helm Chart. Observe the contents of the `watches.yaml`:
+
+    ```
+    cat watches.yaml
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step3
+  id: 9bpvqqtywt1b
+  type: challenge
+  title: Apply the Memcached Custom Resource Definition
+  assignment: |
+    Apply the Memcached Custom Resource Definition to the cluster:
+
+    ```
+    oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
+    ```
+    `
+    ```
+    <br>
+    Once the CRD is registered, there are two ways to run the Operator:
+
+    * As a Pod inside a Kubernetes cluster
+    * As a Go program outside the cluster using Operator-SDK. This is great for local development of your Operator.
+
+    For the sake of this tutorial, we will run the Operator as a Go program outside the cluster using Operator-SDK and our `kubeconfig` credentials
+
+    Once running, the command will block the current session. You can continue interacting with the OpenShift cluster by opening a new terminal window. You can quit the session by pressing `CTRL + C`.
+
+    ```
+    WATCH_NAMESPACE=myproject make run
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step4
+  id: q73uei07neen
+  type: challenge
+  title: Apply the Memcached Custom Resource
+  assignment: |
+    Open a new terminal window and navigate to the `memcached-operator` top-level directory:
+
+    ```
+    cd projects/memcached-operator
+    ```
+    `
+    ```
+    Before applying the Memcached Custom Resource, observe the Memcached Helm Chart `values.yaml`:
+
+    [Memcached Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/memcached/values.yaml)
+
+    Update the Memcached Custom Resource at `config/samples/charts_v1alpha1_memcached.yaml` with the following values:
+
+    * `spec.replicaCount: 3`
+
+    <pre class="file">
+    apiVersion: charts.example.com/v1alpha1
+    kind: Memcached
+    metadata:
+      name: memcached-sample
+    spec:
+      # Default values copied from <project_dir>/helm-charts/memcached/values.yaml
+      AntiAffinity: soft
+      affinity: {}
+      extraContainers: ""
+      extraVolumes: ""
+      image: memcached:1.5.20
+      kind: StatefulSet
+      memcached:
+        extendedOptions: modern
+        extraArgs: []
+        maxItemMemory: 64
+        verbosity: v
+      metrics:
+        enabled: false
+        image: quay.io/prometheus/memcached-exporter:v0.6.0
+        resources: {}
+        serviceMonitor:
+          enabled: false
+          interval: 15s
+      nodeSelector: {}
+      pdbMinAvailable: 2
+      podAnnotations: {}
+      replicaCount: 3
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      securityContext:
+        enabled: false
+        fsGroup: 1001
+        runAsUser: 1001
+      serviceAnnotations: {}
+      tolerations: {}
+      updateStrategy:
+        type: RollingUpdate
+    </pre>
+
+    You can easily update this file by running the following command:
+
+    ```
+    \cp /tmp/charts_v1alpha1_memcached.yaml config/samples/charts_v1alpha1_memcached.yaml
+    ```
+    `
+    ```
+    <br>
+    After updating the Memcached Custom Resource with our desired spec, apply it to the cluster. Ensure you are currently scoped to the `myproject` Namespace:
+
+    ```
+    oc project myproject
+    ```
+    `
+    ```
+
+    ```
+    oc apply -f config/samples/charts_v1alpha1_memcached.yaml
+    ```
+    `
+    ```
+    <br>
+    Confirm that the Custom Resource was created:
+
+    ```
+    oc get memcached
+    ```
+    `
+    ```
+    <br>
+    It may take some time for the environment to pull down the Memcached container image. Confirm that the Stateful Set was created:
+
+    ```
+    oc get statefulset
+    ```
+    `
+    ```
+    <br>
+    Confirm that the Stateful Set's pod is currently running:
+
+    ```
+    oc get pods
+    ```
+    `
+    ```
+    <br>
+    Confirm that the Memcached "internal" and "public" ClusterIP Service were created:
+
+    ```
+    oc get services
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step5
+  id: 28hu8lyeda97
+  type: challenge
+  title: Update the Memcached Custom Resource
+  assignment: |
+    Let's now update the Memcached `example` Custom Resource and increase the desired number of replicas to `5`:
+
+    ```
+    oc patch memcached memcached-sample -p '{"spec":{"replicaCount": 5}}' --type=merge
+    ```
+    `
+    ```
+
+    <br>
+    Verify that the Memcached Stateful Set is creating two additional pods:
+
+    ```
+    oc get pods
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step6
+  id: w3rbgdgt0gox
+  type: challenge
+  title: Test Memcached Cluster Failover
+  assignment: |
+    If any Memcached member fails it gets restarted or recreated automatically by the Kubernetes infrastructure, and will rejoin the cluster automatically when it comes back up. You can test this scenario by killing any of the pods:
+
+    ```
+    oc delete pods -l app.kubernetes.io/name=memcached
+    ```
+    `
+    ```
+    <br>
+    Watch the pods respawn:
+
+    ```
+    oc get pods -l app.kubernetes.io/name=memcached
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+- slug: step7
+  id: i3q6s16jry9d
+  type: challenge
+  title: Clean Up
+  assignment: |-
+    Delete the Memcached cluster and all associated resources by deleting the `example` Custom Resource:
+
+    ```
+    oc delete memcached memcached-sample
+    ```
+    `
+    ```
+    <br>
+    Verify that the Stateful Set, pods, and services are removed:
+
+    ```
+    oc get statefulset
+    oc get pods
+    oc get services
+    ```
+    `
+    ```
+  tabs:
+  - title: CLI
+    type: terminal
+    hostname: crc-nonest-1
+  - title: OpenShift Web Console
+    type: service
+    hostname: crc-nonest-1
+    port: 30443
+  - title: Visual Editor
+    type: code
+    hostname: crc-nonest-1
+    path: /root
+  difficulty: basic
+  timelimit: 300
+checksum: "8661173924035451721"
