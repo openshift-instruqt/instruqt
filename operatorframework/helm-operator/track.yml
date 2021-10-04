@@ -120,12 +120,16 @@ challenges:
   slug: step1
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Initialize the Project
   type: challenge
@@ -146,12 +150,16 @@ challenges:
   slug: step2
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Update the Watches File
   type: challenge
@@ -203,12 +211,16 @@ challenges:
   slug: step3
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Apply the CockroachDB Custom Resource Definition
   type: challenge
@@ -238,12 +250,16 @@ challenges:
   slug: step4
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Apply the CockroachDB Custom Resource
   type: challenge
@@ -283,12 +299,16 @@ challenges:
   slug: step5
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Access the CockroachDB Web UI
   type: challenge
@@ -376,12 +396,16 @@ challenges:
   slug: step6
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Connect to the CockroachDB Cluster
   type: challenge
@@ -424,12 +448,16 @@ challenges:
   slug: step7
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Update the CockroachDB Custom Resource
   type: challenge
@@ -517,12 +545,16 @@ challenges:
   slug: step8
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Test CockroachDB Cluster Failover
   type: challenge
@@ -562,12 +594,16 @@ challenges:
   slug: step9
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Clean Up
   type: challenge
@@ -603,7 +639,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: helm-operator
+slug: operatorframework-helm-operator
 tags:
 - openshift
 title: Operator SDK with Helm

@@ -26,12 +26,16 @@ challenges:
   slug: 01-overview
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Overview of The OCI Specifications
   type: challenge
@@ -118,12 +122,16 @@ challenges:
   slug: 02-image-specification
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: The OCI Image Specification
   type: challenge
@@ -172,12 +180,16 @@ challenges:
   slug: 03-runtime-specification
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: The OCI Runtime Specification
   type: challenge
@@ -323,12 +335,16 @@ challenges:
   slug: 04-runc
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: The OCI Runtime Reference Implementation
   type: challenge
@@ -383,7 +399,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-6
+slug: subsystems-container-internals-lab-2-0-part-6
 tags:
 - openshift
 title: Container Standards

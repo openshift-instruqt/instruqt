@@ -23,12 +23,16 @@ challenges:
   slug: step1
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Kubernetes Manifests
   type: challenge
@@ -286,12 +290,16 @@ challenges:
   slug: step2
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Basic Operations with the Kubernetes API
   type: challenge
@@ -325,12 +333,16 @@ challenges:
   slug: step3
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Replica Sets
   type: challenge
@@ -372,12 +384,16 @@ challenges:
   slug: step4
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deployments/Finalizers
   type: challenge
@@ -413,12 +429,16 @@ challenges:
   slug: step5
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Custom Resource Definitions
   type: challenge
@@ -437,7 +457,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: k8s-api-fundamentals
+slug: operatorframework-k8s-api-fundamentals
 tags:
 - openshift
 title: Kubernetes API Fundamentals

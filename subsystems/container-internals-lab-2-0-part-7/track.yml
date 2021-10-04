@@ -47,12 +47,16 @@ challenges:
   slug: 01-overview-container-tools
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: An Overview of Container Tools
   type: challenge
@@ -101,12 +105,16 @@ challenges:
   slug: 02-different-streams
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using the Fast and Stable Streams
   type: challenge
@@ -199,12 +207,16 @@ challenges:
   slug: 03-podman
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Podman: Familiar Territory'
   type: challenge
@@ -596,12 +608,16 @@ challenges:
   slug: 04-buildah
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Buildah: Granularity & Control'
   type: challenge
@@ -775,12 +791,16 @@ challenges:
   slug: 05-skopeo
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Skopeo: Moving & Sharing'
   type: challenge
@@ -841,12 +861,16 @@ challenges:
   slug: 06-criu
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'CRIU: Checkpointing and Restoring'
   type: challenge
@@ -885,12 +909,16 @@ challenges:
   slug: 07-udica
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Udica: Custom SELinux Policies'
   type: challenge
@@ -950,12 +978,16 @@ challenges:
   slug: 08-oscap-podman
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'OSCAP Podman: Trust but Verify'
   type: challenge
@@ -986,7 +1018,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-7
+slug: subsystems-container-internals-lab-2-0-part-7
 tags:
 - openshift
 title: Container Tools Ecosystem

@@ -90,12 +90,16 @@ challenges:
   slug: 01-define-entity
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Define Entity
   type: challenge
@@ -219,12 +223,16 @@ challenges:
   slug: 02-remote-dev
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Setup Remove Development
   type: challenge
@@ -283,12 +291,16 @@ challenges:
   slug: 03-add-query-endpoints
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Add Queries
   type: challenge
@@ -370,12 +382,16 @@ challenges:
   slug: 04-add-paging-filtering
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Add Paging/Filtering
   type: challenge
@@ -425,12 +441,16 @@ challenges:
   slug: 05-add-lifecycle-task
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Add Startup Task
   type: challenge
@@ -489,12 +509,16 @@ challenges:
   slug: 06-exercise-table
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Exercise Table
   type: challenge
@@ -535,7 +559,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: panache
+slug: developing-with-quarkus-panache
 tags:
 - openshift
 title: Effective Data with Hibernate and Panache

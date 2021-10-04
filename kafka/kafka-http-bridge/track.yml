@@ -152,12 +152,16 @@ challenges:
   slug: step1
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploying the HTTP Bridge
   type: challenge
@@ -198,12 +202,16 @@ challenges:
   slug: step2
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Producing messages
   type: challenge
@@ -241,12 +249,16 @@ challenges:
   slug: step3
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Subscribing to the topic
   type: challenge
@@ -289,12 +301,16 @@ challenges:
   slug: step4
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Consuming messages
   type: challenge
@@ -343,7 +359,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: kafka-http-bridge
+slug: kafka-kafka-http-bridge
 tags:
 - openshift
 title: Exposing Apache Kafka through the HTTP Bridge

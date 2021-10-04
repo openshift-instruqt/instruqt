@@ -121,12 +121,16 @@ challenges:
   slug: 01-loading-the-notebook-images
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: SARIMA model to forecast timeseries metrics
   type: challenge
@@ -155,12 +159,16 @@ challenges:
   slug: 02-loading-the-notebook-templates
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using a Jupyter Notebook to play with the SARIMA model
   type: challenge
@@ -187,12 +195,16 @@ challenges:
   slug: 03-accessing-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Accessing the OpenShift console
   type: challenge
@@ -222,7 +234,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: prometheus-timeseries-forecasting
+slug: ai-machine-learning-prometheus-timeseries-forecasting
 tags:
 - openshift
 title: Time series forecasting for Prometheus metrics

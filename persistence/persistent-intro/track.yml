@@ -134,12 +134,16 @@ challenges:
   slug: rwo
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using RWO storage
   type: challenge
@@ -227,12 +231,16 @@ challenges:
   slug: rwx
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using RWX storage
   type: challenge
@@ -264,7 +272,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: persistent-intro
+slug: persistence-persistent-intro
 tags:
 - openshift
 title: Making Persistent Storage Calls in Your Application

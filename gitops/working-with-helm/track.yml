@@ -71,12 +71,16 @@ challenges:
   slug: 01-helm-integration
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Helm Integration
   type: challenge
@@ -141,12 +145,16 @@ challenges:
   slug: 02-helm-gitops
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Helm GitOps Deployment
   type: challenge
@@ -172,7 +180,7 @@ description: '## Goal
 
 
 
-  ![Helm Logo](../../assets/gitops/helm-logo.png)
+  ![Helm Logo](https://katacoda.com/openshift/assets/gitops/helm-logo.png)
 
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous
@@ -206,7 +214,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: working-with-helm
+slug: gitops-working-with-helm
 tags:
 - openshift
 title: Working with Helm

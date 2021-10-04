@@ -47,12 +47,16 @@ challenges:
   slug: tips
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: OpenShift Playground
   type: challenge
@@ -96,7 +100,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: openshift47
+slug: playgrounds-openshift47
 tags:
 - openshift
 title: OpenShift 4.7 Playground

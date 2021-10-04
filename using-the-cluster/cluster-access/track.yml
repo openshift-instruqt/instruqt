@@ -71,12 +71,16 @@ challenges:
   slug: 01-logging-in-via-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Logging in Via the Web Console
   type: challenge
@@ -125,12 +129,16 @@ challenges:
   slug: 02-logging-in-via-the-command-line
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Logging in Via the Command Line
   type: challenge
@@ -266,12 +274,16 @@ challenges:
   slug: 03-collaborating-with-other-users
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Collaborating with Other Users
   type: challenge
@@ -373,12 +385,16 @@ challenges:
   slug: 04-switching-between-accounts
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Switching Between Accounts
   type: challenge
@@ -421,7 +437,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: cluster-access
+slug: using-the-cluster-cluster-access
 tags:
 - openshift
 title: Logging in to an OpenShift Cluster

@@ -23,11 +23,11 @@ challenges:
   slug: 1explore-cli
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 1 - Exploring The Command Line
@@ -68,11 +68,11 @@ challenges:
   slug: 2explore-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 2 - Exploring The Web Console
@@ -120,11 +120,11 @@ challenges:
   slug: 3deploy-docker
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 3 - Deploying a Docker Image
@@ -214,11 +214,11 @@ challenges:
   slug: 4scaling
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 4 - Scaling Your Application
@@ -301,11 +301,11 @@ challenges:
   slug: 5routes
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 5 - Routing HTTP Requests
@@ -460,11 +460,11 @@ challenges:
   slug: 6s2i
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Step 6 - Building From Source Code
@@ -514,7 +514,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: getting-started
+slug: developing-on-openshift-getting-started
 tags:
 - openshift
 title: Getting Started with OpenShift for Developers

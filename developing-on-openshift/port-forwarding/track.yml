@@ -19,11 +19,11 @@ challenges:
   slug: 01-creating-an-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 1 - Creating an Initial Project
@@ -71,11 +71,11 @@ challenges:
   slug: 02-deploying-a-postgresql-database
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 2 - Deploying a PostgreSQL Database
@@ -118,11 +118,11 @@ challenges:
   slug: 03-starting-an-interactive-shell
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 3 - Starting an Interactive Shell
@@ -182,11 +182,11 @@ challenges:
   slug: 04-creating-a-remote-connection
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 4 - Creating a Remote Connection
@@ -236,7 +236,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: port-forwarding
+slug: developing-on-openshift-port-forwarding
 tags:
 - openshift
 title: Connecting to a Database Using Port Forwarding

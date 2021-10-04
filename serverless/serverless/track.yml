@@ -61,12 +61,16 @@ challenges:
   slug: 01-prepare
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Prepare for Exercises
   type: challenge
@@ -205,12 +209,16 @@ challenges:
   slug: 02-serving
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploying your service
   type: challenge
@@ -286,12 +294,16 @@ challenges:
   slug: 03-traffic-distribution
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Traffic Distribution
   type: challenge
@@ -342,12 +354,16 @@ challenges:
   slug: 04-canary-releases
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Canary Releases
   type: challenge
@@ -475,12 +491,16 @@ challenges:
   slug: 05-scaling
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Scaling
   type: challenge
@@ -601,7 +621,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: serverless
+slug: serverless-serverless
 tags:
 - openshift
 title: Getting Started with OpenShift Serverless

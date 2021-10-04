@@ -19,12 +19,16 @@ challenges:
   slug: 01-creating-an-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Creating an Initial Project
   type: challenge
@@ -116,12 +120,16 @@ challenges:
   slug: 02-downloading-files-from-a-container
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Downloading Files from a Container
   type: challenge
@@ -246,12 +254,16 @@ challenges:
   slug: 03-uploading-files-to-a-container
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Uploading Files to a Container
   type: challenge
@@ -546,12 +558,16 @@ challenges:
   slug: 04-synchronizing-files-with-a-container
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Synchronizing Files with a Container
   type: challenge
@@ -792,12 +808,16 @@ challenges:
   slug: 05-copying-files-to-a-persistent-volume
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 5 - Copying Files to a Persistent Volume
   type: challenge
@@ -821,7 +841,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: transferring-files
+slug: using-the-cluster-transferring-files
 tags:
 - openshift
 title: Transferring Files in and out of Containers

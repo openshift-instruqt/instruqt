@@ -72,12 +72,16 @@ challenges:
   slug: 01-base-multi-layer-images
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers
     and history'
@@ -191,12 +195,16 @@ challenges:
   slug: 02-image-urls
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace,
     Repository and Tag'
@@ -335,12 +343,16 @@ challenges:
   slug: 03-image-internals
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating
     system components in a container image'
@@ -396,7 +408,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-2
+slug: subsystems-container-internals-lab-2-0-part-2
 tags:
 - openshift
 title: Container Images

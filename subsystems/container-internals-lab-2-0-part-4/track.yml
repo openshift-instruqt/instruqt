@@ -67,12 +67,16 @@ challenges:
   slug: 01-engines-kernel
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Container Engines & The Linux Kernel
   type: challenge
@@ -317,12 +321,16 @@ challenges:
   slug: 02-create-container
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step by step creation of a container
   type: challenge
@@ -419,12 +427,16 @@ challenges:
   slug: 03-selinux-svirt
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'SELinux & sVirt: Dynamically generated contexts to protect your containers'
   type: challenge
@@ -445,12 +457,16 @@ challenges:
   slug: 04-cgroups
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Cgroups: Dynamically created with container instantiation'
   type: challenge
@@ -466,12 +482,16 @@ challenges:
   slug: 05-seccomp
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'SECCOMP: Limiting how a containerized process can interact with the kernel'
   type: challenge
@@ -550,7 +570,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-4
+slug: subsystems-container-internals-lab-2-0-part-4
 tags:
 - openshift
 title: Container Hosts

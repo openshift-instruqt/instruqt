@@ -38,12 +38,16 @@ challenges:
   slug: 01-add-extension
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 1
   type: challenge
@@ -160,12 +164,16 @@ challenges:
   slug: 02-remote-dev
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 2
   type: challenge
@@ -223,12 +231,16 @@ challenges:
   slug: 03-add-resource
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 3
   type: challenge
@@ -264,12 +276,16 @@ challenges:
   slug: 04-add-model
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 4
   type: challenge
@@ -325,12 +341,16 @@ challenges:
   slug: 05-package-and-run
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 5
   type: challenge
@@ -419,7 +439,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: reactive-sql
+slug: developing-with-quarkus-reactive-sql
 tags:
 - openshift
 title: Reactive programming with Quarkus Reactive SQL

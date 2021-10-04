@@ -102,12 +102,16 @@ challenges:
   slug: 01-review-the-weather-app
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Review the weather application
   type: challenge
@@ -365,12 +369,16 @@ challenges:
   slug: 02-deploy-to-openshift
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploy to OpenShift
   type: challenge
@@ -540,12 +548,16 @@ challenges:
   slug: 03-jpa
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Basics of Java Persistance
   type: challenge
@@ -618,12 +630,16 @@ challenges:
   slug: 04-cdi
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Basics of CDI
   type: challenge
@@ -690,12 +706,16 @@ challenges:
   slug: 05-database
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Externalize the data storage
   type: challenge
@@ -711,7 +731,7 @@ description: "## What you will learn ##\n\nIn this scenario, you will learn how 
   \ as more traditional environments like Virtual or Bare metal.\n\nThis scenario\
   \ exclusively uses JBoss EAP on OpenShift, which is the leading container platform\
   \ for Kubernetes and containers, but as a developer, you can also apply what you\
-  \ learn here on other environments.\n\n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
+  \ learn here on other environments.\n\n![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/eap-logo.png)\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
@@ -722,7 +742,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: middleware-javaee8
+slug: enterprise-java-middleware-javaee8
 tags:
 - openshift
 title: Jakarta EE 8 Development

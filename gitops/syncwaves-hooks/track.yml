@@ -40,12 +40,16 @@ challenges:
   slug: 01-using-syncwaves
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using Syncwaves
   type: challenge
@@ -103,12 +107,16 @@ challenges:
   slug: 02-exploring-resource-hooks
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Exploring Resource Hooks
   type: challenge
@@ -252,12 +260,16 @@ challenges:
   slug: 03-using-syncwaves-and-hooks
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Using Syncwaves and Hooks Together
   type: challenge
@@ -280,7 +292,7 @@ description: '## Goal
   breaks up the delivery of these manifests in different phases.
 
 
-  ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
 
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous
@@ -317,7 +329,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: syncwaves-hooks
+slug: gitops-syncwaves-hooks
 tags:
 - openshift
 title: Syncwaves and Hooks

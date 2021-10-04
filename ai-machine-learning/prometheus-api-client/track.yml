@@ -17,12 +17,16 @@ challenges:
   slug: 01-loading-the-notebook-images
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: More about Prometheus
   type: challenge
@@ -59,12 +63,16 @@ challenges:
   slug: 02-loading-the-notebook-templates
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Accessing the workshop environment
   type: challenge
@@ -94,12 +102,16 @@ challenges:
   slug: 03-accessing-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Accessing the workshop environment (Backend)
   type: challenge
@@ -146,7 +158,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: prometheus-api-client
+slug: ai-machine-learning-prometheus-api-client
 tags:
 - openshift
 title: Prometheus metrics for Data Science on OpenShift

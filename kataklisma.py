@@ -22,6 +22,8 @@ import shutil
 
 track_d={}
 
+visualEditor=False
+
 with open('learn-katacoda/homepage-pathway.json', 'r') as hfile:
     hdata=hfile.read()
 
@@ -58,7 +60,7 @@ for course in hcourses['courses']:
         
         
         track_d["title"] = title
-        track_d["slug"] = course_id
+        track_d["slug"] = pathway + "-" + course_id
         track_d["type"] = "track"
         
         if not os.path.exists(pathway + '/' + trackDir):
@@ -113,8 +115,8 @@ for course in hcourses['courses']:
         with open('learn-katacoda/' + pathway_id + '/' + course_id + '/' + introText, 'r') as myintro:
           intro_data=myintro.read()
         
-        
-        track_d["description"] = intro_data
+        intro_md=re.sub(r'\(\.\.\/\.\.\/assets',r'(https://katacoda.com/openshift/assets',intro_data)
+        track_d["description"] = intro_md
         
         #for asset in course_json["assets"]["clients"]:
         #    script=asset["file"]
@@ -127,6 +129,8 @@ for course in hcourses['courses']:
         except KeyError:
           pass
         
+        if course_json["environment"]["uilayout"] == "editor-terminal":
+          visualEditor=True
         
         for step in course_json["details"]["steps"]:
             slug = step["text"]
@@ -153,8 +157,13 @@ for course in hcourses['courses']:
             
             d_challenges["assignment"] =  md
             
-            d_challenges["tabs"] = [{"title": "cli", "type": "terminal","hostname":"crc-nonest-1"},
-                                    {"title": "web-ui", "type" : "service", "hostname" : "crc-nonest-1", "port" : 30443}]
+            l_tabs = [{"title": "CLI", "type": "terminal","hostname":"crc-nonest-1"},
+                      {"title": "OpenShift Web Console", "type" : "service", "hostname" : "crc-nonest-1", "port" : 30443}]
+            
+            if visualEditor:
+              l_tabs.append({"title": "Visual Editor", "type": "code","hostname":"crc-nonest-1", "path":"/root"})
+            
+            d_challenges["tabs"] = l_tabs
             
             d_challenges["difficulty"]= difficulty
             d_challenges["timelimit"]= time

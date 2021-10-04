@@ -63,12 +63,16 @@ challenges:
   slug: 01-basics-trust
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Understanding the Basics of Trust - Quality & Provenance
   type: challenge
@@ -165,12 +169,16 @@ challenges:
   slug: 02-evaluating-trust
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Evaluating Trust - Images and Registry Servers
   type: challenge
@@ -210,12 +218,16 @@ challenges:
   slug: 03-analyzing-storage
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Analyzing Storage and Graph Drivers
   type: challenge
@@ -268,7 +280,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-3
+slug: subsystems-container-internals-lab-2-0-part-3
 tags:
 - openshift
 title: Container Registries

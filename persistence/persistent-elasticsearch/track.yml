@@ -59,12 +59,16 @@ challenges:
   slug: '01'
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Create Project and PVC
   type: challenge
@@ -85,12 +89,16 @@ challenges:
   slug: '02'
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploy Elasticsearch on ODF
   type: challenge
@@ -110,12 +118,16 @@ challenges:
   slug: '03'
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploy app backend & frontend
   type: challenge
@@ -177,12 +189,16 @@ challenges:
   slug: '04'
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Ingest dataset to Elasticsearch
   type: challenge
@@ -207,7 +223,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: persistent-elasticsearch
+slug: persistence-persistent-elasticsearch
 tags:
 - openshift
 title: Persistent Storage for Elasticsearch Powered by OpenShift Container Storage

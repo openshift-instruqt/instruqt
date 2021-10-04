@@ -34,11 +34,11 @@ challenges:
   slug: 00-application-overview
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Application Overview
@@ -92,11 +92,11 @@ challenges:
   slug: 01-creating-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Creating an Initial Project
@@ -169,11 +169,11 @@ challenges:
   slug: 02-creating-new-binary-component
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Creating new binary component
@@ -224,11 +224,11 @@ challenges:
   slug: 03-deploying-component-from-source-code
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Deploying component from source-code
@@ -256,11 +256,11 @@ challenges:
   slug: 04-configuring-components
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Configuring components
@@ -285,11 +285,11 @@ challenges:
   slug: 05-exposing-components-to-public
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Exposing components to public
@@ -319,11 +319,11 @@ challenges:
   slug: 06-making-changes-to-source-code
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Making changes to source-code
@@ -349,7 +349,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: developing-with-odo
+slug: developing-on-openshift-developing-with-odo
 tags:
 - openshift
 title: Developing with odo

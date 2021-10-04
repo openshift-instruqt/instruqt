@@ -30,12 +30,16 @@ challenges:
   slug: 01-create-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 1
   type: challenge
@@ -68,12 +72,16 @@ challenges:
   slug: 02-implement-domain-model
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 2
   type: challenge
@@ -116,12 +124,16 @@ challenges:
   slug: 03-implement-the-ruleunit
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 3
   type: challenge
@@ -181,12 +193,16 @@ challenges:
   slug: 04-ruleunit-rules
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 4
   type: challenge
@@ -231,12 +247,16 @@ challenges:
   slug: 05-ruleunit-variables
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 5
   type: challenge
@@ -273,7 +293,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: rules
+slug: developing-with-kogito-rules
 tags:
 - openshift
 title: Kogito and Rules with RuleUnits

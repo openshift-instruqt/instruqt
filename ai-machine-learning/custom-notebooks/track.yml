@@ -44,12 +44,16 @@ challenges:
   slug: 01-loading-the-notebook-images
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Loading the Notebook Images
   type: challenge
@@ -145,12 +149,16 @@ challenges:
   slug: 02-loading-the-notebook-templates
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Loading the Notebook Templates
   type: challenge
@@ -203,12 +211,16 @@ challenges:
   slug: 03-accessing-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
@@ -331,12 +343,16 @@ challenges:
   slug: 04-building-the-notebook-image
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Building the Notebook Image
   type: challenge
@@ -445,12 +461,16 @@ challenges:
   slug: 05-deploying-the-notebook-image
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 5 - Deploying the Notebook Image
   type: challenge
@@ -512,12 +532,16 @@ challenges:
   slug: 06-deleting-the-jupyter-notebook
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 6 - Deleting the Jupyter Notebook
   type: challenge
@@ -628,12 +652,16 @@ challenges:
   slug: 07-build-and-deploy-the-notebooks
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 7 - Build and Deploy the Notebooks
   type: challenge
@@ -672,7 +700,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: custom-notebooks
+slug: ai-machine-learning-custom-notebooks
 tags:
 - openshift
 title: Building Custom Notebook Images

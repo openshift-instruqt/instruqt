@@ -27,11 +27,11 @@ challenges:
   slug: 01-creating-an-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 1 - Creating an Initial Project
@@ -127,11 +127,11 @@ challenges:
   slug: 02-deploying-using-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 2 - Deploying Using the Web Console
@@ -153,11 +153,11 @@ challenges:
   slug: 03-viewing-the-builder-logs
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 3 - Viewing the Builder Logs
@@ -193,11 +193,11 @@ challenges:
   slug: 04-accessing-the-application
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 4 - Accessing the Application
@@ -259,11 +259,11 @@ challenges:
   slug: 05-deleting-the-application
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 5 - Deleting the Application
@@ -321,11 +321,11 @@ challenges:
   slug: 06-deploying-using-the-command-line
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 6 - Deploying Using the Command Line
@@ -432,11 +432,11 @@ challenges:
   slug: 07-triggering-a-new-build
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
   timelimit: 300
   title: Topic 7 - Triggering a New Build
@@ -484,7 +484,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: deploying-python
+slug: developing-on-openshift-deploying-python
 tags:
 - openshift
 title: Deploying Applications From Source

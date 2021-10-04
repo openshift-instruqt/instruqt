@@ -93,12 +93,16 @@ challenges:
   slug: 01-multi-container-applications
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
   type: challenge
@@ -130,12 +134,16 @@ challenges:
   slug: 02-openshift-web-interface
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
   type: challenge
@@ -178,12 +186,16 @@ challenges:
   slug: 03-load-testing
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Cluster Performance: Scaling applications horizontally with containers'
   type: challenge
@@ -236,12 +248,16 @@ challenges:
   slug: 04-troubleshooting-distributed-applications
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
   type: challenge
@@ -268,7 +284,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: container-internals-lab-2-0-part-5
+slug: subsystems-container-internals-lab-2-0-part-5
 tags:
 - openshift
 title: Container Orchestration

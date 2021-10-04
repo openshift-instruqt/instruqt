@@ -27,12 +27,16 @@ challenges:
   slug: 01-creating-an-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Creating an Initial Project
   type: challenge
@@ -101,12 +105,16 @@ challenges:
   slug: 02-deploying-using-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Deploying Using the Web Console
   type: challenge
@@ -142,12 +150,16 @@ challenges:
   slug: 03-exploring-the-topology-view
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Exploring the Topology View
   type: challenge
@@ -205,12 +217,16 @@ challenges:
   slug: 04-deleting-the-application
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Deleting the Application
   type: challenge
@@ -260,12 +276,16 @@ challenges:
   slug: 05-deploying-using-the-command-line
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 5 - Deploying Using the Command Line
   type: challenge
@@ -286,7 +306,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: deploying-images
+slug: using-the-cluster-deploying-images
 tags:
 - openshift
 title: Deploying Applications From Images

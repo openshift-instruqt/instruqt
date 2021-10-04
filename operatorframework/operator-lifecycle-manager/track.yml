@@ -42,12 +42,16 @@ challenges:
   slug: step1
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Exploring OLM
   type: challenge
@@ -84,12 +88,16 @@ challenges:
   slug: step2
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: CatalogSources
   type: challenge
@@ -115,12 +123,16 @@ challenges:
   slug: step3
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Accessing OLM on the OpenShift Console
   type: challenge
@@ -148,12 +160,16 @@ challenges:
   slug: step4
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Creating the OperatorGroup and Subscription
   type: challenge
@@ -297,12 +313,16 @@ challenges:
   slug: step5
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Reviewing the InstallPlan and Installing the Operator
   type: challenge
@@ -320,12 +340,16 @@ challenges:
   slug: step6
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Creating the Custom Resource
   type: challenge
@@ -354,12 +378,16 @@ challenges:
   slug: step7
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Accessing the ArgoCD Dashboard
   type: challenge
@@ -430,16 +458,20 @@ challenges:
   slug: step8
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Uninstalling the Operator
   type: challenge
-description: '![Operator Lifecycle Manager](../../assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+description: '![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
 
 
   The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager)
@@ -510,7 +542,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: operator-lifecycle-manager
+slug: operatorframework-operator-lifecycle-manager
 tags:
 - openshift
 title: Operator Lifecycle Manager

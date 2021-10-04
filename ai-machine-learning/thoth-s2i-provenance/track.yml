@@ -23,12 +23,16 @@ challenges:
   slug: setup
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Getting Started
   type: challenge
@@ -55,12 +59,16 @@ challenges:
   slug: app
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Getting the sample Python app
   type: challenge
@@ -93,12 +101,16 @@ challenges:
   slug: parameter
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Thoth s2i parameters
   type: challenge
@@ -133,12 +145,16 @@ challenges:
   slug: deploy
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Let's Deploy
   type: challenge
@@ -169,12 +185,16 @@ challenges:
   slug: fix
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Fix the error
   type: challenge
@@ -218,7 +238,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: thoth-s2i-provenance
+slug: ai-machine-learning-thoth-s2i-provenance
 tags:
 - openshift
 title: Thoth S2I build with Provenance check on OpenShift

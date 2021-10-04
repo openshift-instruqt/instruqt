@@ -28,12 +28,16 @@ challenges:
   slug: 01-callback-based-trader
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 1
   type: challenge
@@ -61,12 +65,16 @@ challenges:
   slug: 02-rx-java2-trader
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 2
   type: challenge
@@ -90,12 +98,16 @@ challenges:
   slug: 03-deploy-to-openshift
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 3
   type: challenge
@@ -132,7 +144,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: compulsive-traders
+slug: developing-with-vertx-compulsive-traders
 tags:
 - openshift
 title: 'MicroTrader App Part 3: Compulsive Traders'

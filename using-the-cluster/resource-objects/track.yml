@@ -57,12 +57,16 @@ challenges:
   slug: 01-deploying-an-application
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Deploying an Application
   type: challenge
@@ -235,12 +239,16 @@ challenges:
   slug: 02-resource-object-types
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Resource Object Types
   type: challenge
@@ -275,12 +283,16 @@ challenges:
   slug: 03-querying-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Querying Resource Objects
   type: challenge
@@ -336,12 +348,16 @@ challenges:
   slug: 04-editing-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Editing Resource Objects
   type: challenge
@@ -379,12 +395,16 @@ challenges:
   slug: 05-creating-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 5 - Creating Resource Objects
   type: challenge
@@ -422,12 +442,16 @@ challenges:
   slug: 06-replacing-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 6 - Replacing Resource Objects
   type: challenge
@@ -520,12 +544,16 @@ challenges:
   slug: 07-labelling-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 7 - Labelling Resource Objects
   type: challenge
@@ -600,12 +628,16 @@ challenges:
   slug: 08-deleting-resource-objects
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 8 - Deleting Resource Objects
   type: challenge
@@ -646,7 +678,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: resource-objects
+slug: using-the-cluster-resource-objects
 tags:
 - openshift
 title: Using the CLI to Manage Resource Objects

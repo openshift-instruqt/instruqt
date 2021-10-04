@@ -43,12 +43,16 @@ challenges:
   slug: 01-what-is-service-mesh
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: What is Service Mesh and why we need it?
   type: challenge
@@ -121,12 +125,16 @@ challenges:
   slug: 02-details
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Service Mesh Details
   type: challenge
@@ -154,12 +162,16 @@ challenges:
   slug: 03-playground
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Service Mesh Playground
   type: challenge
@@ -167,7 +179,7 @@ description: "In this self-paced tutorial, you will learn the basics of how to u
   \ OpenShift Service Mesh, which provide a way to control how different parts of\
   \ an application share data with one another.\n\nIn this scenario, you will:\n*\
   \ Learn what Red Hat OpenShift Service Mesh is.\n* Use the Red Hat OpenShift Service\
-  \ Mesh in a playground type environment.\n\n![Red Hat OpenShift Service Mesh](../../assets/servicemesh/1-introduction/ossm.png)\n\
+  \ Mesh in a playground type environment.\n\n![Red Hat OpenShift Service Mesh](https://katacoda.com/openshift/assets/servicemesh/1-introduction/ossm.png)\n\
   \n## Why Service Mesh?\n\nRed Hat OpenShift Service Mesh provides a platform for\
   \ behavioral insight and operational control over your networked microservices in\
   \ a service mesh. With Red Hat OpenShift Service Mesh, you can connect, secure,\
@@ -196,7 +208,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: 1-introduction
+slug: servicemesh-1-introduction
 tags:
 - openshift
 title: Red Hat OpenShift Service Mesh and Istio Playground

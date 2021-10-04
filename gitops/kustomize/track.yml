@@ -238,12 +238,16 @@ challenges:
   slug: 01-exploring-kustomize
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Exploring Kustomize
   type: challenge
@@ -414,12 +418,16 @@ challenges:
   slug: 02-deploying-kustomized-application
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploying Kustomized Applicaton
   type: challenge
@@ -432,8 +440,8 @@ description: "## Goal\n\nThis guide helps you get familiar with how to use Kusto
   \ number of distinctly customized Kubernetes configurations \n* Every artifact that\
   \ kustomize uses is plain YAML and can be validated and processed as such \n* As\
   \ a \"templateless\" templating system; it encourages using YAML without forking\
-  \ the repo it.\n\n![Kustomize Logo](../../assets/gitops/kustomize_logo.png)\n\n\
-  ## Use case\n\nThis is a simple guide that takes you through the following steps:\n\
+  \ the repo it.\n\n![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)\n\
+  \n## Use case\n\nThis is a simple guide that takes you through the following steps:\n\
   \n* Exploring the Kustomize syntax\n* Deploying a Kustomized application\n\nThis\
   \ OpenShift cluster will self-destruct in one hour.\n"
 developers:
@@ -446,7 +454,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: kustomize
+slug: gitops-kustomize
 tags:
 - openshift
 title: Working with Kustomize

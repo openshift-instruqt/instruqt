@@ -24,12 +24,16 @@ challenges:
   slug: 01-review-the-initial-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 1
   type: challenge
@@ -194,12 +198,16 @@ challenges:
   slug: 02-read-content-from-a-database
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 2
   type: challenge
@@ -286,12 +294,16 @@ challenges:
   slug: 03-deploy-to-openshift
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 3
   type: challenge
@@ -312,7 +324,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: spring-db-access
+slug: developing-with-spring-spring-db-access
 tags:
 - openshift
 title: Spring Data with JPA/Hibernate

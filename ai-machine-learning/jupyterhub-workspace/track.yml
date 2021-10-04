@@ -49,12 +49,16 @@ challenges:
   slug: 01-loading-the-required-images
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 1 - Loading the Required Images
   type: challenge
@@ -105,12 +109,16 @@ challenges:
   slug: 02-loading-the-required-templates
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 2 - Loading the Required Templates
   type: challenge
@@ -142,12 +150,16 @@ challenges:
   slug: 03-accessing-the-web-console
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 3 - Accessing the Web Console
   type: challenge
@@ -307,12 +319,16 @@ challenges:
   slug: 04-deploying-jupyterhub-service
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 4 - Deploying JupyterHub Service
   type: challenge
@@ -444,12 +460,16 @@ challenges:
   slug: 05-user-workspace-and-project
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 5 - User Workspace and Project
   type: challenge
@@ -518,12 +538,16 @@ challenges:
   slug: 06-deleting-the-jupyterhub-service
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Topic 6 - Deleting the JupyterHub Service
   type: challenge
@@ -564,7 +588,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: jupyterhub-workspace
+slug: ai-machine-learning-jupyterhub-workspace
 tags:
 - openshift
 title: Multi-user Workspace Using JupyterHub

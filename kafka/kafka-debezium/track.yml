@@ -66,12 +66,16 @@ challenges:
   slug: 01-deploying-a-broker
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploying a Kafka broker
   type: challenge
@@ -121,12 +125,16 @@ challenges:
   slug: 02-deploying-a-kafka-connect
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Deploying Kafka Connect with Debezium
   type: challenge
@@ -349,12 +357,16 @@ challenges:
   slug: 03-streaming-data-from-database
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Streaming data from a database
   type: challenge
@@ -395,7 +407,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: kafka-debezium
+slug: kafka-kafka-debezium
 tags:
 - openshift
 title: Debezium for change data capture

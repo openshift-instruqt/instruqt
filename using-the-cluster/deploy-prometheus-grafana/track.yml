@@ -19,12 +19,16 @@ challenges:
   slug: 1deploy-demo-app
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 1 - Example of Prometheus metrics being exposed by an application
   type: challenge
@@ -92,12 +96,16 @@ challenges:
   slug: 2deploy-prometheus
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 2 - Deploying Prometheus to collect exposed metrics
   type: challenge
@@ -138,12 +146,16 @@ challenges:
   slug: 3deploy-grafana
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 3 - Deploying Grafana to visualize Prometheus metrics
   type: challenge
@@ -184,12 +196,16 @@ challenges:
   slug: 4create-dashboard
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Step 4 - Visualize metrics in Grafana
   type: challenge
@@ -233,7 +249,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: deploy-prometheus-grafana
+slug: using-the-cluster-deploy-prometheus-grafana
 tags:
 - openshift
 title: How to set up Prometheus and Grafana on OpenShift

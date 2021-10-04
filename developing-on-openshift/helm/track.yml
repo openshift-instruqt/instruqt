@@ -69,12 +69,16 @@ challenges:
   slug: 01-cli
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Explore Helm CLI
   type: challenge
@@ -129,12 +133,16 @@ challenges:
   slug: 02-first-chart
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Create your first Helm Chart
   type: challenge
@@ -180,17 +188,21 @@ challenges:
   slug: 03-revision
   tabs:
   - hostname: crc-nonest-1
-    title: cli
+    title: CLI
     type: terminal
   - hostname: crc-nonest-1
     port: 30443
-    title: web-ui
+    title: OpenShift Web Console
     type: service
+  - hostname: crc-nonest-1
+    path: /root
+    title: Visual Editor
+    type: code
   timelimit: 300
   title: Manage Revisions
   type: challenge
 description: "## Goal\n\nLearn how to use the [Helm](https://helm.sh/), a package\
-  \ manager that helps you managing and deploying applications on OpenShift.\n\n![Logo](../../assets/developing-on-openshift/helm/logo.png)\n\
+  \ manager that helps you managing and deploying applications on OpenShift.\n\n![Logo](https://katacoda.com/openshift/assets/developing-on-openshift/helm/logo.png)\n\
   \n[Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes\
   \ which helps users create templated packages called Helm Charts to include all\
   \ Kubernetes resources that are required to deploy a particular application.  Helm\
@@ -218,7 +230,7 @@ owner: openshift
 private: true
 published: false
 skipping_enabled: false
-slug: helm
+slug: developing-on-openshift-helm
 tags:
 - openshift
 title: Getting Started with Helm 3 on OpenShift
