@@ -30,11 +30,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: usdd8zjmjdtp
+  id: txny9c7j7cyh
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -95,7 +95,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 02-deploying-a-postgresql-database
-  id: ndrfpbzgf0f5
+  id: blc0hlrnwojr
   type: challenge
   title: Topic 2 - Deploying a PostgreSQL Database
   assignment: |-
@@ -133,7 +133,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 03-starting-an-interactive-shell
-  id: byuqjnj5wivr
+  id: 8wst8bb27upd
   type: challenge
   title: Topic 3 - Starting an Interactive Shell
   assignment: |
@@ -233,7 +233,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 04-creating-a-remote-connection
-  id: dy6tt8khpzyv
+  id: fexecpmr5xst
   type: challenge
   title: Topic 4 - Creating a Remote Connection
   assignment: |-
@@ -328,5 +328,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "16781271087196407757"
-_: ""
+checksum: "16949552498693068104"

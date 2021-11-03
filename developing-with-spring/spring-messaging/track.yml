@@ -14,11 +14,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: gws2nokvqvuc
+  id: iyg7xiqpubph
   type: challenge
   title: Step 1
   assignment: |
@@ -73,7 +73,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 02-create-message-listeners
-  id: j8ej5jwjmqp1
+  id: jcx81nfzstne
   type: challenge
   title: Step 2
   assignment: |
@@ -312,7 +312,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 03-login-to-openshift
-  id: yoogp1rwm1pt
+  id: taolukcg6bvx
   type: challenge
   title: Step 3
   assignment: |-
@@ -396,7 +396,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 04-deploy-to-openshift
-  id: viejypahoxt3
+  id: 8xbyq9kf32wa
   type: challenge
   title: Step 4
   assignment: |-
@@ -485,5 +485,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "17497649004089995584"
-_: ""
+checksum: "9382679721800287922"

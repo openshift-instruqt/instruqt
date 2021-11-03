@@ -12,11 +12,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: cnspqqyv4fzc
+  id: hbcwcqxaliof
   type: challenge
   title: Kubernetes Manifests
   assignment: |-
@@ -126,7 +126,7 @@ challenges:
   difficulty: basic
   timelimit: 360
 - slug: step2
-  id: ufbpg2sr3tvi
+  id: hx3paykbz5ol
   type: challenge
   title: Basic Operations with the Kubernetes API
   assignment: |
@@ -275,7 +275,7 @@ challenges:
   difficulty: basic
   timelimit: 360
 - slug: step3
-  id: ali2jwmc2ndy
+  id: 0nkozmzaegxk
   type: challenge
   title: Replica Sets
   assignment: |
@@ -394,7 +394,7 @@ challenges:
   difficulty: basic
   timelimit: 360
 - slug: step4
-  id: tey8pyxyxrgf
+  id: ri1xezrmnzex
   type: challenge
   title: Deployments/Finalizers
   assignment: |
@@ -573,7 +573,7 @@ challenges:
   difficulty: basic
   timelimit: 360
 - slug: step5
-  id: 5tzmjrul4xbk
+  id: 7unye6hcxwun
   type: challenge
   title: Custom Resource Definitions
   assignment: |-
@@ -715,5 +715,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "6278760580897945593"
-_: ""
+checksum: "905426285507369946"

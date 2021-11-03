@@ -36,11 +36,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-overview-container-tools
-  id: jnctzqy7mdox
+  id: hsy5o0vrvwwp
   type: challenge
   title: An Overview of Container Tools
   assignment: |
@@ -78,7 +78,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 02-different-streams
-  id: eutcckkphvja
+  id: vb8igcwusmby
   type: challenge
   title: Using the Fast and Stable Streams
   assignment: |
@@ -170,7 +170,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 03-podman
-  id: bfos0zciftqr
+  id: ocdnqzapmjlu
   type: challenge
   title: 'Podman: Familiar Territory'
   assignment: |
@@ -311,7 +311,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 04-buildah
-  id: shclkqqyv7pl
+  id: 68i8e43grops
   type: challenge
   title: 'Buildah: Granularity & Control'
   assignment: |
@@ -522,7 +522,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 05-skopeo
-  id: fvffbo8fe0gr
+  id: 3obaaxbbjudy
   type: challenge
   title: 'Skopeo: Moving & Sharing'
   assignment: |
@@ -624,7 +624,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 06-criu
-  id: nnryfmtqy0b6
+  id: vzf75isbo0sc
   type: challenge
   title: 'CRIU: Checkpointing and Restoring'
   assignment: |
@@ -724,7 +724,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 07-udica
-  id: tknjfvfoccby
+  id: kt35hrauti2q
   type: challenge
   title: 'Udica: Custom SELinux Policies'
   assignment: |
@@ -802,7 +802,7 @@ challenges:
   difficulty: intermediate
   timelimit: 300
 - slug: 08-oscap-podman
-  id: x8f1nm84clye
+  id: e6mgil6pv2jo
   type: challenge
   title: 'OSCAP Podman: Trust but Verify'
   assignment: |
@@ -859,5 +859,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 300
-checksum: "7235176383423161098"
-_: ""
+checksum: "11897900969465637729"

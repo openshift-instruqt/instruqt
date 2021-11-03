@@ -19,11 +19,11 @@ developers:
 - btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: pojxuuwabzaq
+  id: dqmjucblbrsy
   type: challenge
   title: Step 1
   assignment: |-
@@ -122,7 +122,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 02-create-data
-  id: tzg8xujzdbis
+  id: iodpyq9gprmk
   type: challenge
   title: Step 2
   assignment: |-
@@ -264,7 +264,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 03-create-beans
-  id: 5jqfkoukuyzg
+  id: ckygqwg2wkym
   type: challenge
   title: Step 3
   assignment: |
@@ -434,7 +434,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 04-create-web
-  id: hleopjxalygt
+  id: ivfhhtevskhi
   type: challenge
   title: Step 4
   assignment: |+
@@ -787,7 +787,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 05-build-app
-  id: 8dlaxyfexvgw
+  id: z1e8npxmemxn
   type: challenge
   title: Step 5
   assignment: |
@@ -845,7 +845,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 06-deploy-and-test
-  id: tmcj09bfwvwc
+  id: elsi5ym3urbu
   type: challenge
   title: Step 6
   assignment: |-
@@ -1043,5 +1043,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "15743192154725482484"
-_: ""
+checksum: "3279382600858358074"

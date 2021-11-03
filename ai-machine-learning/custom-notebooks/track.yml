@@ -21,11 +21,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: jnbvccwqqmrp
+  id: ybmrgi4chthj
   type: challenge
   title: Topic 1 - Loading the Notebook Images
   assignment: |
@@ -65,7 +65,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 02-loading-the-notebook-templates
-  id: 8hn1o9wpnbbw
+  id: 1mtfenutbkqs
   type: challenge
   title: Topic 2 - Loading the Notebook Templates
   assignment: |
@@ -125,7 +125,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 03-accessing-the-web-console
-  id: ken01hwychsp
+  id: jen3b912aqiy
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -167,7 +167,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 04-building-the-notebook-image
-  id: z8iqiopmqzom
+  id: lqflljx2oa5z
   type: challenge
   title: Topic 4 - Building the Notebook Image
   assignment: |
@@ -241,7 +241,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 05-deploying-the-notebook-image
-  id: mamxxur1aa8s
+  id: alntfhyoc4sj
   type: challenge
   title: Topic 5 - Deploying the Notebook Image
   assignment: |
@@ -307,7 +307,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 06-deleting-the-jupyter-notebook
-  id: ulcmntxderwp
+  id: t4rg5ogvd4ad
   type: challenge
   title: Topic 6 - Deleting the Jupyter Notebook
   assignment: |
@@ -357,7 +357,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 07-build-and-deploy-the-notebooks
-  id: qy6lf28lxmhq
+  id: epzbbityrwnf
   type: challenge
   title: Topic 7 - Build and Deploy the Notebooks
   assignment: |
@@ -426,5 +426,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "10634257397473778689"
-_: ""
+checksum: "16599533419178918621"

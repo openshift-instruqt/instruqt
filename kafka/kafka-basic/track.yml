@@ -42,11 +42,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: w0xnilexbzdn
+  id: rgkd7erkpqua
   type: challenge
   title: Installing Red Hat AMQ Streams Operators
   assignment: |
@@ -133,7 +133,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: step2
-  id: eoyvnhx87m0q
+  id: q1db09vxepyx
   type: challenge
   title: Deploying a Kafka cluster
   assignment: |
@@ -230,7 +230,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: step3
-  id: mq0avjbpakqz
+  id: vbxeonzninks
   type: challenge
   title: Accessing the Kafka cluster from a console
   assignment: |
@@ -286,7 +286,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: step4
-  id: nmi0i4nutxbu
+  id: cdjcozbnkrg9
   type: challenge
   title: Producing and consuming records
   assignment: |
@@ -348,5 +348,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "14995459864527200800"
-_: ""
+checksum: "6957481599838917013"

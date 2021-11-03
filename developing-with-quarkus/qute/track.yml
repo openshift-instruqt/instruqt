@@ -5,7 +5,7 @@ title: Templating with Qute Templating Engine
 description: |
   This exercise demonstrates how your Quarkus application can utilize the [Qute Templating Engine](https://quarkus.io/guides/qute) feature to build type-safe, server-side templates which can be rendered at will in Quarkus applications.
 
-  ![Logo](/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
 
   Qute is a templating engine designed specifically to meet Quarkus' needs. The usage of reflection is minimized to reduce the size of native images. The API combines both the imperative and the non-blocking reactive style of coding. In the development mode, all files located in `src/main/resources/templates` are watched for changes and modifications are immediately visible. Furthermore, we try to detect most of the template problems at build time. In this exercise, you will learn how to easily render templates in your application.
 
@@ -25,11 +25,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-basics
-  id: gqymgsvs51mx
+  id: 7u6yhyu16x4i
   type: challenge
   title: Step 1
   assignment: |-
@@ -193,7 +193,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 02-typesafe
-  id: mnsf7qclgu7p
+  id: wjp4mfpvrr65
   type: challenge
   title: Step 2
   assignment: |+
@@ -343,7 +343,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 03-parameters
-  id: v5iblebhvy5d
+  id: hubdp4ceyfkq
   type: challenge
   title: Step 3
   assignment: |+
@@ -564,7 +564,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 04-extensions
-  id: u00wfxonfoxb
+  id: qk8yrqenhfsr
   type: challenge
   title: Step 4
   assignment: |+
@@ -645,7 +645,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 05-periodic
-  id: j5bxxlx0al8q
+  id: ioyhoknxry2r
   type: challenge
   title: Step 5
   assignment: |
@@ -812,7 +812,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 06-reactive
-  id: akviev4fnpok
+  id: j0gixrireojl
   type: challenge
   title: Step 6
   assignment: |+
@@ -919,5 +919,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "8964048366090671171"
-_: ""
+checksum: "6905017516073520799"

@@ -7,7 +7,7 @@ description: |
 
   ## What is Kogito?
 
-  ![Logo](/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
 
   ### Cloud Native Business Automation
 
@@ -47,11 +47,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: bo4cp6gxjphd
+  id: nxbq889xzrwj
   type: challenge
   title: Step 1
   assignment: |
@@ -170,7 +170,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 02-implement-process
-  id: t4xbx8xeybjy
+  id: 5bbtpijwwsam
   type: challenge
   title: Step 2
   assignment: |
@@ -388,7 +388,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 03-package-and-run
-  id: pq6al0jyuuue
+  id: o9moyexj8i7u
   type: challenge
   title: Step 3
   assignment: |
@@ -463,7 +463,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 04-build-native
-  id: qhydbak7ieb5
+  id: tqmh249ygirx
   type: challenge
   title: Step 4
   assignment: |
@@ -596,7 +596,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 05-deploy-to-openshift
-  id: wrsb8clfm54f
+  id: vkjsxb5iaic4
   type: challenge
   title: Step 5
   assignment: |
@@ -712,7 +712,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 06-scaling
-  id: qv3ixbqccd55
+  id: uuoaywmyiuxc
   type: challenge
   title: Step 6
   assignment: |
@@ -783,5 +783,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "13168417596418779739"
-_: ""
+checksum: "16326182897387686312"

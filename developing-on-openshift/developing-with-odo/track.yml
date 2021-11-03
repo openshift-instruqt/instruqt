@@ -29,11 +29,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 00-application-overview
-  id: vypoetsnmfaa
+  id: xcdoohdyvzza
   type: challenge
   title: Application Overview
   assignment: |
@@ -61,7 +61,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 01-creating-initial-project
-  id: qlz2y8uoxfqn
+  id: uqrvcey7rrjz
   type: challenge
   title: Creating an Initial Project
   assignment: |
@@ -154,7 +154,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 02-creating-new-binary-component
-  id: 1weuw1u3memq
+  id: sda3u6vktlbz
   type: challenge
   title: Creating new binary component
   assignment: |
@@ -270,7 +270,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 03-deploying-component-from-source-code
-  id: oewaw2k8yma1
+  id: qvmix1vaxee3
   type: challenge
   title: Deploying component from source-code
   assignment: |
@@ -362,7 +362,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 04-configuring-components
-  id: etcf4yykt4t2
+  id: waiycal8kdtk
   type: challenge
   title: Configuring components
   assignment: |
@@ -402,7 +402,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 05-exposing-components-to-public
-  id: f52rv2188hlh
+  id: p1gpwct77mej
   type: challenge
   title: Exposing components to public
   assignment: |
@@ -456,7 +456,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 06-making-changes-to-source-code
-  id: dlrwgmhgfd0i
+  id: fbutonp4en3w
   type: challenge
   title: Making changes to source-code
   assignment: |
@@ -510,5 +510,4 @@ challenges:
     port: 30443
   difficulty: basic
   timelimit: 128
-checksum: "17063413539169458776"
-_: ""
+checksum: "3157586131064139417"

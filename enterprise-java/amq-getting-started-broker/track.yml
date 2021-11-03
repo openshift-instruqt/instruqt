@@ -293,8 +293,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: enterprise-java-amq-getting-started-broker
 tags:

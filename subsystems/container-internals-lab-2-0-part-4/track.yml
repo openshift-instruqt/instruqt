@@ -567,8 +567,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: advanced
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: subsystems-container-internals-lab-2-0-part-4
 tags:

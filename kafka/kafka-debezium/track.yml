@@ -43,11 +43,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-deploying-a-broker
-  id: r3wilcyqvqjo
+  id: gpoeay7wxokl
   type: challenge
   title: Deploying a Kafka broker
   assignment: |
@@ -171,7 +171,7 @@ challenges:
   difficulty: intermediate
   timelimit: 400
 - slug: 02-deploying-a-kafka-connect
-  id: gvf4dhjnliip
+  id: itb74zhftvi2
   type: challenge
   title: Deploying Kafka Connect with Debezium
   assignment: |
@@ -228,27 +228,32 @@ challenges:
       {
         "class": "io.debezium.connector.db2.Db2Connector",
         "type": "source",
-        "version": "1.2.4.Final-redhat-00001"
+        "version": "1.4.2.Final-redhat-00002"
       },
       {
         "class": "io.debezium.connector.mongodb.MongoDbConnector",
         "type": "source",
-        "version": "1.2.4.Final-redhat-00001"
+        "version": "1.4.2.Final-redhat-00002"
       },
       {
         "class": "io.debezium.connector.mysql.MySqlConnector",
         "type": "source",
-        "version": "1.2.4.Final-redhat-00001"
+        "version": "1.4.2.Final-redhat-00002"
+      },
+      {
+        "class": "io.debezium.connector.oracle.OracleConnector",
+        "type": "source",
+        "version": "1.4.2.Final-redhat-00002"
       },
       {
         "class": "io.debezium.connector.postgresql.PostgresConnector",
         "type": "source",
-        "version": "1.2.4.Final-redhat-00001"
+        "version": "1.4.2.Final-redhat-00002"
       },
       {
         "class": "io.debezium.connector.sqlserver.SqlServerConnector",
         "type": "source",
-        "version": "1.2.4.Final-redhat-00001"
+        "version": "1.4.2.Final-redhat-00002"
       }
       ...
     ]
@@ -276,7 +281,7 @@ challenges:
   difficulty: intermediate
   timelimit: 400
 - slug: 03-streaming-data-from-database
-  id: u3hxfrcb9han
+  id: chqneonaukxp
   type: challenge
   title: Streaming data from a database
   assignment: |
@@ -849,5 +854,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 400
-checksum: "7806841365664535753"
-_: ""
+checksum: "13417449580318417713"

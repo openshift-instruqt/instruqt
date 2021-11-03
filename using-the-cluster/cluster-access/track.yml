@@ -28,11 +28,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-logging-in-via-the-web-console
-  id: q8hlygbymw5o
+  id: va8f0lp2moar
   type: challenge
   title: Topic 1 - Logging in Via the Web Console
   assignment: |
@@ -85,7 +85,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 02-logging-in-via-the-command-line
-  id: gzlxerbly8ei
+  id: 1wikfboywy2d
   type: challenge
   title: Topic 2 - Logging in Via the Command Line
   assignment: |
@@ -176,7 +176,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 03-collaborating-with-other-users
-  id: zcbrefygs4di
+  id: iixkm13wehtw
   type: challenge
   title: Topic 3 - Collaborating with Other Users
   assignment: |
@@ -263,7 +263,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 04-switching-between-accounts
-  id: 3sheshtm1k2m
+  id: r2ydv5jjyywm
   type: challenge
   title: Topic 4 - Switching Between Accounts
   assignment: |
@@ -326,5 +326,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "5858777391166663590"
-_: ""
+checksum: "3304944470458189021"

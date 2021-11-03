@@ -28,11 +28,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: wxof3pm8fgfi
+  id: lhttzhfnsxbz
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -112,7 +112,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 02-deploying-using-the-web-console
-  id: hep1rwqzcmm7
+  id: vcmnsh0fkzxx
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -158,7 +158,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 03-exploring-the-topology-view
-  id: bdyfjzkixpqk
+  id: ezkb2p4uucyf
   type: challenge
   title: Topic 3 - Exploring the Topology View
   assignment: |
@@ -192,7 +192,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 04-deleting-the-application
-  id: mr5jtrj8dxtd
+  id: fiix7zmcfa4s
   type: challenge
   title: Topic 4 - Deleting the Application
   assignment: |
@@ -294,7 +294,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 05-deploying-using-the-command-line
-  id: 96tat0xuyhdb
+  id: efofr8dk2tku
   type: challenge
   title: Topic 5 - Deploying Using the Command Line
   assignment: |
@@ -385,5 +385,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 180
-checksum: "5836300861180102649"
-_: ""
+checksum: "6093941246566269596"

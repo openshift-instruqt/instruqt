@@ -32,11 +32,11 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - btannous@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-add-extension
-  id: fzpolxa3l5tv
+  id: hjm8y39jaygb
   type: challenge
   title: Step 1
   assignment: |
@@ -111,7 +111,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 02-create-generator
-  id: igij55fervo4
+  id: ixtanodtinhk
   type: challenge
   title: Step 2
   assignment: |
@@ -167,7 +167,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 03-create-converter
-  id: zbgycgbnlz3r
+  id: wvog9uces9ix
   type: challenge
   title: Step 3
   assignment: |
@@ -225,7 +225,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 04-create-resource
-  id: ckkeavbsujhs
+  id: oym6nb8dwowc
   type: challenge
   title: Step 4
   assignment: |
@@ -316,7 +316,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 05-configure-app
-  id: azxfyx8gdm5g
+  id: xp1gcm6raqzg
   type: challenge
   title: Step 5
   assignment: |
@@ -379,7 +379,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 06-deploy-kafka
-  id: jy51rp8zqztk
+  id: d6m9u0bzvwpx
   type: challenge
   title: Step 6
   assignment: |+
@@ -498,7 +498,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 07-deploy-and-test
-  id: iljxfmplqm30
+  id: vpwjqbu856kp
   type: challenge
   title: Step 7
   assignment: |
@@ -630,5 +630,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "6347596634833983278"
-_: ""
+checksum: "4457503857784321121"

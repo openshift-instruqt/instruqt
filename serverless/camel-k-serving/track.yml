@@ -41,11 +41,11 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - btannous@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: txayvdtlhmyb
+  id: fexheqjuvizg
   type: challenge
   title: Step 1
   assignment: |
@@ -140,7 +140,7 @@ challenges:
   difficulty: basic
   timelimit: 450
 - slug: step2
-  id: 44z4yrcleubt
+  id: xn4wayoxyybu
   type: challenge
   title: Step 2
   assignment: |
@@ -404,7 +404,7 @@ challenges:
   difficulty: basic
   timelimit: 450
 - slug: step3
-  id: lfia6kngqwvh
+  id: y9gakhfbjjis
   type: challenge
   title: Step 3
   assignment: |
@@ -467,7 +467,7 @@ challenges:
   difficulty: basic
   timelimit: 450
 - slug: step4
-  id: nqsolohsjhxh
+  id: dds9nztfuvhu
   type: challenge
   title: Step 4
   assignment: |
@@ -547,5 +547,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 450
-checksum: "3933469558049817333"
-_: ""
+checksum: "12132944472577294603"

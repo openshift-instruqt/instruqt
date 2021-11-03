@@ -19,7 +19,7 @@ description: |
   * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
   * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
-  ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
+  ![Kustomize Logo](../../assets/gitops/kustomize_logo.png)
 
   ## Use case
 
@@ -38,11 +38,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-exploring-kustomize
-  id: 18sofrgknkzm
+  id: atyibapxayxb
   type: challenge
   title: Exploring Kustomize
   assignment: |
@@ -189,7 +189,7 @@ challenges:
   difficulty: basic
   timelimit: 900
 - slug: 02-deploying-kustomized-application
-  id: ko3pt0bv7dwy
+  id: copczfyhp27j
   type: challenge
   title: Deploying Kustomized Applicaton
   assignment: |
@@ -300,5 +300,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "8901408527511938855"
-_: ""
+checksum: "10222757893342641554"

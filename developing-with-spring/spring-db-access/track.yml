@@ -14,11 +14,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: v4n5diifthj2
+  id: iszmnjewco7q
   type: challenge
   title: Step 1
   assignment: |-
@@ -70,7 +70,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-read-content-from-a-database
-  id: bvq8bha6xsvk
+  id: ywbq0eavl8bf
   type: challenge
   title: Step 2
   assignment: |
@@ -289,7 +289,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-deploy-to-openshift
-  id: cll3xbwnajn5
+  id: gt8ftxiqaqxw
   type: challenge
   title: Step 3
   assignment: |
@@ -411,5 +411,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "4711411395424901949"
-_: ""
+checksum: "1497644997203899336"

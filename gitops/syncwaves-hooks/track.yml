@@ -15,7 +15,7 @@ description: |
   are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
   breaks up the delivery of these manifests in different phases.
 
-  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -39,11 +39,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-using-syncwaves
-  id: nzlrorerrgtr
+  id: f73sbceiqj44
   type: challenge
   title: Using Syncwaves
   assignment: |
@@ -149,7 +149,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 02-exploring-resource-hooks
-  id: s0fetuwqjun1
+  id: aw7uqgnla7qe
   type: challenge
   title: Exploring Resource Hooks
   assignment: |-
@@ -270,7 +270,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 03-using-syncwaves-and-hooks
-  id: wyxhxnhiulzh
+  id: p0r9ypykfdze
   type: challenge
   title: Using Syncwaves and Hooks Together
   assignment: |
@@ -366,5 +366,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "17864307423818915063"
-_: ""
+checksum: "11878472665329527429"

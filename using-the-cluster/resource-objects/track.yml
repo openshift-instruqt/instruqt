@@ -28,11 +28,11 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - btannous@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-deploying-an-application
-  id: fagvt4xlczr8
+  id: cmjpmjfb9evb
   type: challenge
   title: Topic 1 - Deploying an Application
   assignment: |
@@ -80,7 +80,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 02-resource-object-types
-  id: d0s8uokj1amj
+  id: lyy31pxndf4d
   type: challenge
   title: Topic 2 - Resource Object Types
   assignment: |
@@ -185,7 +185,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 03-querying-resource-objects
-  id: 7z8srodnfd4h
+  id: iy3xcifhhtpg
   type: challenge
   title: Topic 3 - Querying Resource Objects
   assignment: |
@@ -275,7 +275,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 04-editing-resource-objects
-  id: kfgc8ceoaflb
+  id: ar5ztetxcpk1
   type: challenge
   title: Topic 4 - Editing Resource Objects
   assignment: |
@@ -317,7 +317,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 05-creating-resource-objects
-  id: za9decokckrs
+  id: ffaiagzgx0se
   type: challenge
   title: Topic 5 - Creating Resource Objects
   assignment: |
@@ -399,7 +399,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 06-replacing-resource-objects
-  id: pp5xdoflxsla
+  id: ag5o3rwrum4o
   type: challenge
   title: Topic 6 - Replacing Resource Objects
   assignment: |
@@ -469,7 +469,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 07-labelling-resource-objects
-  id: w8sghnim60nq
+  id: gxuhadfxyjxn
   type: challenge
   title: Topic 7 - Labelling Resource Objects
   assignment: |
@@ -533,7 +533,7 @@ challenges:
   difficulty: basic
   timelimit: 112
 - slug: 08-deleting-resource-objects
-  id: ncbvwsaoprnd
+  id: dhskd27gvimh
   type: challenge
   title: Topic 8 - Deleting Resource Objects
   assignment: |
@@ -584,5 +584,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 112
-checksum: "4853810085779153203"
-_: ""
+checksum: "13878086641695919933"

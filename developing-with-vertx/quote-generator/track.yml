@@ -346,7 +346,7 @@ description: "In this scenario, you will learn more about Reactive Microservices
   \ event bus and address. It then stores theses in a database. It also provides a\
   \ REST endpoint to retrieve the latest set of operations.\n* The dashboard - some\
   \ UI to let us know when we become rich.\n\nLet\u2019s have a look at the architecture:\n\
-  \n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/reactive-ms-architecture.png)\n\
+  \n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/reactive-ms-architecture.png)\n\
   \nThe application uses several types of services:\n\n* HTTP endpoint (i.e. REST\
   \ API) - this service is located using an HTTP URL.\n* gRPC - gRPC is a secure and\
   \ fast RPC framework built on top of HTTP/2\n* Message sources - these are components\
@@ -355,7 +355,7 @@ description: "In this scenario, you will learn more about Reactive Microservices
   \ namespace (project), and will form a cluster.\n\nThe dashboard presents the available\
   \ services, the value of each company\u2019s quotes, the latest set of operations\
   \ made by our traders and the current state of our portfolio. It also shows the\
-  \ state of the different circuit breakers.\n\n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/dashboard.png)\n\
+  \ state of the different circuit breakers.\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/dashboard.png)\n\
   \n## The first microservice - the quote generator\n\nIn this scenario, you are going\
   \ to create the first microservice - the quote generator. In each subsequent scenario,\
   \ you will create a microservice (from the set above) that will together form the\
@@ -367,8 +367,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: developing-with-vertx-quote-generator
 tags:

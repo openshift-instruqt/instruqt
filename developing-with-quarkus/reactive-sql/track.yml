@@ -5,7 +5,7 @@ title: Reactive programming with Quarkus Reactive SQL
 description: |-
   In this scenario, you will get an introduction to the reactive programming model of Quarkus
 
-  ![Logo](/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
 
   ### Unifies Imperative and Reactive
 
@@ -15,7 +15,7 @@ description: |-
 
   Quarkus uses Vert.x and Netty at its core. And uses a bunch of reactive frameworks and extensions on top to enable the developers. Quarkus is not just for HTTP microservices, but also for Event-Driven Architecture. The secret behind this is to use a single reactive engine for both imperative and reactive code.
 
-  ![Reactive](/openshift/assets/middleware/quarkus/reactive-quarkus.png)
+  ![Reactive](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-quarkus.png)
 
 
   Quarkus does this quite brilliantly. Between imperative and reactive the obvious choice is to have a reactive core. What that helps with is a fast non-blocking core that handles almost everything going via the event-loop. So if you were creating a typical REST application or a client-side application, Quarkus also gives you the imperative programming model. For example, Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Vert.x and Netty). All the HTTP requests your application receive are handled by event loops (IO Thread) and then are routed towards the code that manages the request. Depending on the destination, it can invoke the code managing the request on a worker thread (Servlet, Jax-RS) or use the IO Thread (reactive route)
@@ -46,11 +46,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-add-extension
-  id: sqmjwnvmxadk
+  id: 4c3ay28vnfi0
   type: challenge
   title: Step 1
   assignment: |
@@ -135,7 +135,7 @@ challenges:
   difficulty: basic
   timelimit: 120
 - slug: 02-remote-dev
-  id: 9751ifet7w3n
+  id: s3vo7g3ykp2k
   type: challenge
   title: Step 2
   assignment: |+
@@ -334,7 +334,7 @@ challenges:
   difficulty: basic
   timelimit: 120
 - slug: 03-add-resource
-  id: 6axkuzvmqrlx
+  id: v1drkoxef9jv
   type: challenge
   title: Step 3
   assignment: |-
@@ -435,7 +435,7 @@ challenges:
   difficulty: basic
   timelimit: 120
 - slug: 04-add-model
-  id: c3achjbjsudc
+  id: 94bxi4cospef
   type: challenge
   title: Step 4
   assignment: |-
@@ -501,7 +501,7 @@ challenges:
   difficulty: basic
   timelimit: 120
 - slug: 05-package-and-run
-  id: tzevegbqkd5l
+  id: uov8sm5l1ys9
   type: challenge
   title: Step 5
   assignment: |
@@ -576,5 +576,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 120
-checksum: "7079273085265592686"
-_: ""
+checksum: "2198868956588556814"

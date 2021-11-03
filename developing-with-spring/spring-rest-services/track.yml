@@ -15,11 +15,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: bfl69cwpnfp9
+  id: qzjwbnw8tccv
   type: challenge
   title: Step 1
   assignment: |
@@ -75,7 +75,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-create-rest-services
-  id: hxkiaz5x5tvh
+  id: jujkgmxpx9gw
   type: challenge
   title: Step 2
   assignment: |-
@@ -243,7 +243,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-login-to-openshift
-  id: xvtik0wou2yq
+  id: 4fhiaubpoeos
   type: challenge
   title: Step 3
   assignment: |-
@@ -347,5 +347,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "425630700294992571"
-_: ""
+checksum: "15462259596196060343"

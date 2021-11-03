@@ -28,11 +28,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 1deploy-demo-app
-  id: lllfbozpgwbj
+  id: z7hgraaen6bo
   type: challenge
   title: Step 1 - Example of Prometheus metrics being exposed by an application
   assignment: |
@@ -74,7 +74,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 2deploy-prometheus
-  id: bc29argnx2zx
+  id: kkx7gipn4idq
   type: challenge
   title: Step 2 - Deploying Prometheus to collect exposed metrics
   assignment: |2
@@ -201,7 +201,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 3deploy-grafana
-  id: n28939d2pyc9
+  id: vmla5bqma8wd
   type: challenge
   title: Step 3 - Deploying Grafana to visualize Prometheus metrics
   assignment: |2
@@ -287,7 +287,7 @@ challenges:
   difficulty: basic
   timelimit: 225
 - slug: 4create-dashboard
-  id: 5ohhjbjl4rxf
+  id: pchpf3bvan2a
   type: challenge
   title: Step 4 - Visualize metrics in Grafana
   assignment: |2
@@ -357,5 +357,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "14754801374372878435"
-_: ""
+checksum: "13153259071494789987"

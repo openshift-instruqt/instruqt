@@ -23,11 +23,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: vgae5cp0q0ea
+  id: ef30lzehx2aj
   type: challenge
   title: Step 1
   assignment: |
@@ -168,7 +168,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 02-read-content-from-a-database
-  id: avtpiiz22lus
+  id: x7zya0cvkr1i
   type: challenge
   title: Step 2
   assignment: |
@@ -413,7 +413,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 03-create-rest-services
-  id: zdtcybbszf09
+  id: pkmsvpk2ltsg
   type: challenge
   title: Step 3
   assignment: |
@@ -577,7 +577,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 04-login-to-openshift
-  id: 13nhecl4yo8w
+  id: de7fl7ubnmel
   type: challenge
   title: Step 4
   assignment: |
@@ -648,7 +648,7 @@ challenges:
   difficulty: basic
   timelimit: 180
 - slug: 05-deploy-to-openshift
-  id: 9edtnniirbie
+  id: xpfok2ixy2qj
   type: challenge
   title: Step 5
   assignment: |
@@ -759,5 +759,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 180
-checksum: "2661738245038217206"
-_: ""
+checksum: "3728520050317172323"

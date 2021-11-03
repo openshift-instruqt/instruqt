@@ -7,7 +7,7 @@ description: |-
 
   ## What is Quarkus?
 
-  ![Logo](/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
 
   ### Supersonic, Subatomic Java
 
@@ -47,11 +47,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: 22rvaw31zqpu
+  id: ldys76xjajvj
   type: challenge
   title: Step 1
   assignment: |
@@ -237,7 +237,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 02-inject-bean
-  id: 36ofbejerazo
+  id: um6uuhma0fhr
   type: challenge
   title: Step 2
   assignment: |
@@ -374,7 +374,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 03-package-and-run
-  id: kcujhqctfbj9
+  id: cp4135vvq63y
   type: challenge
   title: Step 3
   assignment: |+
@@ -446,7 +446,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 04-build-native
-  id: ndr95kjbouxd
+  id: locp5rxy5bsn
   type: challenge
   title: Step 4
   assignment: |+
@@ -568,7 +568,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 05-deploy-to-openshift
-  id: i9pf9c0g2ysm
+  id: pspfnlk4vxdi
   type: challenge
   title: Step 5
   assignment: |+
@@ -679,7 +679,7 @@ challenges:
   difficulty: basic
   timelimit: 100
 - slug: 06-scaling
-  id: imcug7whrxdy
+  id: igjx7cx6mjp6
   type: challenge
   title: Step 6
   assignment: |
@@ -769,5 +769,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "2005489998199821808"
-_: ""
+checksum: "11837571564397061663"

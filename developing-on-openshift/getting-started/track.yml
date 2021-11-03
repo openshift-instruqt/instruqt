@@ -29,11 +29,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 1explore-cli
-  id: vrbnwr9rd163
+  id: 2hxp02cl7kax
   type: challenge
   title: Step 1 - Exploring The Command Line
   assignment: |
@@ -88,7 +88,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 2explore-console
-  id: 9njw2xk4cyuk
+  id: 3aucs93wxuyw
   type: challenge
   title: Step 2 - Exploring The Web Console
   assignment: |+
@@ -152,7 +152,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 3deploy-docker
-  id: kveynhiegrvm
+  id: fz5kubmhynhn
   type: challenge
   title: Step 3 - Deploying a Docker Image
   assignment: |
@@ -202,7 +202,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 4scaling
-  id: shdcycjipsio
+  id: h3hlkobegnme
   type: challenge
   title: Step 4 - Scaling Your Application
   assignment: |
@@ -259,7 +259,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 5routes
-  id: 4fhixztjaqip
+  id: rkkxbgw6ojdv
   type: challenge
   title: Step 5 - Routing HTTP Requests
   assignment: |
@@ -311,7 +311,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 6s2i
-  id: yskr3ncdwoy8
+  id: 19v1rtfcafv3
   type: challenge
   title: Step 6 - Building From Source Code
   assignment: |
@@ -391,5 +391,4 @@ challenges:
     port: 30443
   difficulty: basic
   timelimit: 150
-checksum: "13277756299076397611"
-_: ""
+checksum: "5775256658815902318"

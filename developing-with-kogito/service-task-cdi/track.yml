@@ -5,7 +5,7 @@ title: Kogito and CDI
 description: |
   In this scenario, you will learn how to implement process and workflow logic with CDI beans in [Kogito](https://kogito.kie.org).
 
-  ![Logo](/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
 
   ### BPMN2 Service Task and CDI
 
@@ -25,11 +25,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: xcwv4kw4zxns
+  id: opwpyemehl9g
   type: challenge
   title: Step 1
   assignment: |
@@ -111,7 +111,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 02-implement-cdi-bean
-  id: cyjuzily6okm
+  id: ehmnqdbaippx
   type: challenge
   title: Step 2
   assignment: |
@@ -178,7 +178,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 03-implement-the-process
-  id: 9fldegj3cg9b
+  id: boa4e6vozhug
   type: challenge
   title: Step 3
   assignment: |
@@ -265,5 +265,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "5032714159239590160"
-_: ""
+checksum: "10096994581527599425"

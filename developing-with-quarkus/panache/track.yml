@@ -33,11 +33,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-define-entity
-  id: zsot35a7btqo
+  id: kxb7mc4priif
   type: challenge
   title: Define Entity
   assignment: |+
@@ -232,7 +232,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 02-remote-dev
-  id: djzv5krnrnxp
+  id: yintayezf3ts
   type: challenge
   title: Setup Remove Development
   assignment: |+
@@ -464,7 +464,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 03-add-query-endpoints
-  id: zdgelabjaolc
+  id: 5yxvgbh2f4yx
   type: challenge
   title: Add Queries
   assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static List&lt;Person&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static List&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n        .filter(p -&gt; p.birth.getYear() &lt;= year)\n        .collect(Collectors.toList());\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; findByColor(@PathParam(value = \"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; getBeforeYear(@PathParam(value = \"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`{{execute T2}}\n\n> This will open a new Terminal to execute the command. If the command fails to run just click the above command again!\n\nYou should only see **one** person with BLUE eyes:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  }\n]\n```\nThis also confirms that our remote live coding is working as expected.\n\nNext, let's find people born in 1990 or earlier:\n\n`curl -s $PEOPLE_URL/person/birth/before/1990 | jq`{{execute T2}}\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful static methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
@@ -483,7 +483,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 04-add-paging-filtering
-  id: 3yqdwglstsqh
+  id: h1pvk5sl2bvu
   type: challenge
   title: Add Paging/Filtering
   assignment: |+
@@ -611,7 +611,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 05-add-lifecycle-task
-  id: 8goukowxdjtw
+  id: 3z8naxolska4
   type: challenge
   title: Add Startup Task
   assignment: |
@@ -695,7 +695,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 06-exercise-table
-  id: owb7if5s8yzt
+  id: tmarzhtnznbv
   type: challenge
   title: Exercise Table
   assignment: |
@@ -755,5 +755,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "9324070697011815596"
-_: ""
+checksum: "1090577188706810727"

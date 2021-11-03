@@ -27,11 +27,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: vynctj3xrqln
+  id: 678vlmmcp8hg
   type: challenge
   title: Deploying the HTTP Bridge
   assignment: |2
@@ -131,7 +131,7 @@ challenges:
   difficulty: intermediate
   timelimit: 225
 - slug: step2
-  id: 6zmz8hpahukw
+  id: mphpmpygkstd
   type: challenge
   title: Producing messages
   assignment: |
@@ -210,7 +210,7 @@ challenges:
   difficulty: intermediate
   timelimit: 225
 - slug: step3
-  id: 9sa8vzbproqi
+  id: bxtmmybzmcha
   type: challenge
   title: Subscribing to the topic
   assignment: |
@@ -271,7 +271,7 @@ challenges:
   difficulty: intermediate
   timelimit: 225
 - slug: step4
-  id: cw3xx2bxplxw
+  id: irmcfuovyyhy
   type: challenge
   title: Consuming messages
   assignment: |
@@ -344,5 +344,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 225
-checksum: "795506367884409026"
-_: ""
+checksum: "13465045576172298428"

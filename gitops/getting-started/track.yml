@@ -23,7 +23,7 @@ description: |
   * Associate templated configuration with different environments.
 
 
-  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -50,11 +50,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-exploring-openshift-operator
-  id: 2kqytmhzrbtj
+  id: uttxecthuis5
   type: challenge
   title: Exploring the OpenShift GitOps Operator
   assignment: |
@@ -133,7 +133,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 02-connecting-to-argocd
-  id: xifhmvgynucl
+  id: nqhws1rvfyg9
   type: challenge
   title: Connecting to ArgoCD
   assignment: |
@@ -215,7 +215,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 03-deploying-sample-application
-  id: vfvw8jpxdj9x
+  id: orecim7w7gsl
   type: challenge
   title: Deploying a Sample Application
   assignment: |-
@@ -355,5 +355,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "15158444902626755236"
-_: ""
+checksum: "16720578038957718445"

@@ -17,7 +17,7 @@ description: |
   applications.
 
 
-  ![Helm Logo](https://katacoda.com/openshift/assets/gitops/helm-logo.png)
+  ![Helm Logo](../../assets/gitops/helm-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -40,11 +40,11 @@ developers:
 - btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-helm-integration
-  id: w87hmalpnocf
+  id: grqhkurevple
   type: challenge
   title: Helm Integration
   assignment: |-
@@ -216,7 +216,7 @@ challenges:
   difficulty: basic
   timelimit: 900
 - slug: 02-helm-gitops
-  id: gzbgjbyiggo5
+  id: uvengrnypy8f
   type: challenge
   title: Helm GitOps Deployment
   assignment: |
@@ -376,5 +376,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "1466675669529580549"
-_: ""
+checksum: "2186478826459963203"

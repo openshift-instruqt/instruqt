@@ -84,8 +84,8 @@ for course in hcourses['courses']:
         track_d["tags"] = ["openshift"]
         track_d["owner"] = "openshift"
         track_d["developers"] = [ "btannous@redhat.com", "nvinto@redhat.com","rjarvine@redhat.com"]
-        track_d["private"] =  True
-        track_d["published"] = False
+        track_d["private"] =  False
+        track_d["published"] = True
         track_d["skipping_enabled"] = False
         
         difficulty="intermediate"
@@ -130,6 +130,8 @@ for course in hcourses['courses']:
           intro_data=myintro.read()
         
         intro_md=re.sub(r'\(\.\.\/\.\.\/assets',r'(https://katacoda.com/openshift/assets',intro_data)
+        intro_md=re.sub(r'\(\/openshift\/assets',r'(https://katacoda.com/openshift/assets',intro_data)
+
         track_d["description"] = intro_md
         
         #for asset in course_json["assets"]["clients"]:

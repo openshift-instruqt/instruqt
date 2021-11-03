@@ -7,7 +7,7 @@ description: |
 
   ## What is Kogito?
 
-  ![Logo](/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
 
   ### BPMN2 and Services
 
@@ -27,11 +27,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: gb8kmisxussd
+  id: naygoiltpnrt
   type: challenge
   title: Step 1
   assignment: |
@@ -141,7 +141,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-implement-process
-  id: vxyj2mywjbo8
+  id: 3cmirac7rrfu
   type: challenge
   title: Step 2
   assignment: |
@@ -335,7 +335,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-implement-jaxrs-client
-  id: x6cyuhxnrjj9
+  id: u0glnnwqawxc
   type: challenge
   title: Step 3
   assignment: |
@@ -575,7 +575,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 04-implement-camel-client
-  id: gdmso7872i7y
+  id: qvqjypxccz6z
   type: challenge
   title: Step 4
   assignment: |
@@ -764,5 +764,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "13409666868092811123"
-_: ""
+checksum: "3201217992569894050"

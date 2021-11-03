@@ -30,11 +30,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: 0iuirkyydpw4
+  id: bhi0gfdvkvwl
   type: challenge
   title: Topic 1 - Creating an Initial Project
   assignment: |
@@ -115,7 +115,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 02-deploying-using-the-web-console
-  id: c4vizqy8r0by
+  id: 8e9foc4rmjft
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -175,7 +175,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 03-viewing-the-builder-logs
-  id: wf12ytazbqx6
+  id: jcynjpre0qms
   type: challenge
   title: Topic 3 - Viewing the Builder Logs
   assignment: |
@@ -199,7 +199,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 04-accessing-the-application
-  id: m0ykvrd1gdhc
+  id: erdnzxquxyty
   type: challenge
   title: Topic 4 - Accessing the Application
   assignment: |
@@ -231,7 +231,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 05-deleting-the-application
-  id: qmyhtivbedj3
+  id: qw2qcgsrr3tk
   type: challenge
   title: Topic 5 - Deleting the Application
   assignment: |
@@ -338,7 +338,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 06-deploying-using-the-command-line
-  id: 9oourr3abhia
+  id: ihnxocf85883
   type: challenge
   title: Topic 6 - Deploying Using the Command Line
   assignment: |
@@ -444,7 +444,7 @@ challenges:
   difficulty: basic
   timelimit: 171
 - slug: 07-triggering-a-new-build
-  id: si9row1ptlju
+  id: 6o78ctxmqd49
   type: challenge
   title: Topic 7 - Triggering a New Build
   assignment: |
@@ -643,5 +643,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 171
-checksum: "13543600746929665830"
-_: ""
+checksum: "14886123929650846151"

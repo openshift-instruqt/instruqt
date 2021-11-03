@@ -33,11 +33,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-multi-container-applications
-  id: dyxyw7jtiy6w
+  id: ylfl2pdykfnd
   type: challenge
   title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
   assignment: |
@@ -162,7 +162,7 @@ challenges:
   difficulty: intermediate
   timelimit: 675
 - slug: 02-openshift-web-interface
-  id: nnjowpzyqw2b
+  id: zjw5mkvedf3c
   type: challenge
   title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
   assignment: |
@@ -204,7 +204,7 @@ challenges:
   difficulty: intermediate
   timelimit: 675
 - slug: 03-load-testing
-  id: eejplbme33xc
+  id: apkjicxlnkko
   type: challenge
   title: 'Cluster Performance: Scaling applications horizontally with containers'
   assignment: |
@@ -286,7 +286,7 @@ challenges:
   difficulty: intermediate
   timelimit: 675
 - slug: 04-troubleshooting-distributed-applications
-  id: snmrvcx4jbgw
+  id: rcrwyzxonsjp
   type: challenge
   title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
   assignment: |
@@ -412,5 +412,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 675
-checksum: "10483393307621717364"
-_: ""
+checksum: "3367344645924267629"

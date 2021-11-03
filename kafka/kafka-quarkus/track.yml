@@ -43,11 +43,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: sh82xijndwib
+  id: xhy5ojkwcex4
   type: challenge
   title: Adding a Quarkus Reactive Messaging Extension
   assignment: |
@@ -129,7 +129,7 @@ challenges:
   difficulty: basic
   timelimit: 75
 - slug: step2
-  id: lemwx3hnjuqy
+  id: y2wkg6cdloew
   type: challenge
   title: Creating an event generator
   assignment: |
@@ -177,7 +177,7 @@ challenges:
   difficulty: basic
   timelimit: 75
 - slug: step3
-  id: 30cruu57wjlt
+  id: 8hfvznsbhm8a
   type: challenge
   title: Deploying the application to OpenShift
   assignment: |
@@ -273,7 +273,7 @@ challenges:
   difficulty: basic
   timelimit: 75
 - slug: step4
-  id: bbzenxwjjccy
+  id: oph7s8tmgeyn
   type: challenge
   title: Checking Kafka records
   assignment: |
@@ -376,5 +376,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 75
-checksum: "11962047499969958372"
-_: ""
+checksum: "9563694805869784143"

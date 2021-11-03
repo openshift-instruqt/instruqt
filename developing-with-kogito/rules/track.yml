@@ -5,7 +5,7 @@ title: Kogito and Rules with RuleUnits
 description: |
   In this scenario, you will learn how to implement (business) rules in [Kogito](https://kogito.kie.org) using _rule units_.
 
-  ![Logo](/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
 
   ### Rule Units
 
@@ -24,11 +24,11 @@ developers:
 - btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-create-project
-  id: bz9q8ydhn61n
+  id: ymg6fm3c6cdn
   type: challenge
   title: Step 1
   assignment: |
@@ -109,7 +109,7 @@ challenges:
   difficulty: basic
   timelimit: 240
 - slug: 02-implement-domain-model
-  id: mhl9395yishn
+  id: vjk5yjyl24ju
   type: challenge
   title: Step 2
   assignment: |
@@ -196,7 +196,7 @@ challenges:
   difficulty: basic
   timelimit: 240
 - slug: 03-implement-the-ruleunit
-  id: cyllgqleyywn
+  id: emrj5qfnibd7
   type: challenge
   title: Step 3
   assignment: |
@@ -277,7 +277,7 @@ challenges:
   difficulty: basic
   timelimit: 240
 - slug: 04-ruleunit-rules
-  id: 8lfozkimdlh2
+  id: tnykcbwivost
   type: challenge
   title: Step 4
   assignment: |
@@ -385,7 +385,7 @@ challenges:
   difficulty: basic
   timelimit: 240
 - slug: 05-ruleunit-variables
-  id: okpws7xfqysk
+  id: cainerzor525
   type: challenge
   title: Step 5
   assignment: |
@@ -464,5 +464,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 240
-checksum: "13257129693466557833"
-_: ""
+checksum: "5614412730508772185"

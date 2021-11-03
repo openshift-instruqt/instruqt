@@ -35,11 +35,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: setup
-  id: wzbvyxv7kwoy
+  id: letzb7tqxfns
   type: challenge
   title: Getting Started
   assignment: |-
@@ -113,7 +113,7 @@ challenges:
   difficulty: intermediate
   timelimit: 600
 - slug: app
-  id: x3irgfquavg8
+  id: fzupghbntls4
   type: challenge
   title: Getting the sample Python app
   assignment: |-
@@ -172,7 +172,7 @@ challenges:
   difficulty: intermediate
   timelimit: 600
 - slug: parameter
-  id: kulaenrblbi1
+  id: c7hgn823wdgr
   type: challenge
   title: Thoth s2i parameters
   assignment: |-
@@ -221,7 +221,7 @@ challenges:
   difficulty: intermediate
   timelimit: 600
 - slug: deploy
-  id: vzapy0qr9m6q
+  id: f4wb5qephjpw
   type: challenge
   title: Let's Deploy
   assignment: |-
@@ -293,5 +293,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 600
-checksum: "4241742961253060320"
-_: ""
+checksum: "10362359440322735464"

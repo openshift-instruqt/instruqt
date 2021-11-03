@@ -7,7 +7,7 @@ description: |+
 
   Learn how to use the [Helm](https://helm.sh/), a package manager that helps you managing and deploying applications on OpenShift.
 
-  ![Logo](https://katacoda.com/openshift/assets/developing-on-openshift/helm/logo.png)
+  ![Logo](../../assets/developing-on-openshift/helm/logo.png)
 
   [Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes which helps users create templated packages called Helm Charts to include all Kubernetes resources that are required to deploy a particular application.  Helm then assists with installing the Helm Chart on Kubernetes, and afterwards it can upgrade or rollback the installed package when new versions are available.
 
@@ -40,11 +40,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-cli
-  id: gaqfdokhs6dg
+  id: v6swvyfw4xyq
   type: challenge
   title: Explore Helm CLI
   assignment: |+
@@ -239,7 +239,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 02-first-chart
-  id: my4aqfgyb6rj
+  id: mvfb1xqiy2xl
   type: challenge
   title: Create your first Helm Chart
   assignment: |
@@ -346,7 +346,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 03-revision
-  id: f1ex2qcmxtym
+  id: xksykxp8yigy
   type: challenge
   title: Manage Revisions
   assignment: |
@@ -474,5 +474,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "15581340313190799192"
-_: ""
+checksum: "12322300437226716553"

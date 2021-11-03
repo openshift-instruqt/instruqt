@@ -30,13 +30,13 @@ tags:
 owner: openshift
 developers:
 - btannous@redhat.com
-- nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+- nvinto@redhat.com
+private: false
+published: true
 challenges:
 - slug: 01-base-multi-layer-images
-  id: t1myugtexgb2
+  id: ogzdnh71ec6o
   type: challenge
   title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers and history'
   assignment: |
@@ -88,7 +88,7 @@ challenges:
   difficulty: intermediate
   timelimit: 900
 - slug: 02-image-urls
-  id: 6d56ovybryvn
+  id: ccly6pcxin9l
   type: challenge
   title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag'
   assignment: |
@@ -162,7 +162,7 @@ challenges:
   difficulty: intermediate
   timelimit: 900
 - slug: 03-image-internals
-  id: k2y1js8sg1fw
+  id: lvo0eczplelr
   type: challenge
   title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image'
   assignment: |
@@ -246,5 +246,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 900
-checksum: "3731953612352659768"
-_: ""
+checksum: "14947692368428795042"

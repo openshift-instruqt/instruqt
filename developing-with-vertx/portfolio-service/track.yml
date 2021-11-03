@@ -266,11 +266,11 @@ description: "## Event bus services - Porfolio service\n\nIn this scenario, we a
   \ component by doing a local procedure call, which results in the request being\
   \ packaged in a message and sent to the callee. Likewise, the result is sent back\
   \ and returned to the caller component as the result of the procedure call:\n\n\
-  ![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/rpc-sequence.png)\n\
+  ![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/rpc-sequence.png)\n\
   \nSuch interactions has the advantages to introduce typing, and so is less error-prone\
   \ than unstructured messages. However, it also introduces a tighter coupling between\
   \ the caller and the callee. The caller knows how to call the callee:\n\n1. how\
-  \ the service is called\n2. where the service is living (location)\n\n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/async-rpc-sequence.png)\n\
+  \ the service is called\n2. where the service is living (location)\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/async-rpc-sequence.png)\n\
   \nThe AsyncResult notifies the Handler whether the invocation succeeded or failed.\
   \ Upon success, the handler can retrieve the result.\n\nSuch async-RPC has several\
   \ advantages:\n\n* the caller is not blocked\n* it deals with failures\n* it avoids\
@@ -283,8 +283,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: developing-with-vertx-portfolio-service
 tags:

@@ -28,11 +28,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: es4njwatmco0
+  id: wztob6cealp9
   type: challenge
   title: SARIMA model to forecast timeseries metrics
   assignment: |
@@ -95,7 +95,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: swsajj6ehkdx
+  id: sxvofyweceq1
   type: challenge
   title: Using a Jupyter Notebook to play with the SARIMA model
   assignment: |
@@ -137,7 +137,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: jzanlwd9pvqk
+  id: kc6yeougpbym
   type: challenge
   title: Accessing the OpenShift console
   assignment: |
@@ -184,5 +184,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "11061572028252058178"
-_: ""
+checksum: "5841197333967572377"

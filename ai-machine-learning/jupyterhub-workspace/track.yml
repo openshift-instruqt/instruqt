@@ -21,11 +21,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-loading-the-required-images
-  id: 4no3oye3olg3
+  id: ymoa3jioaxqx
   type: challenge
   title: Topic 1 - Loading the Required Images
   assignment: |
@@ -68,7 +68,7 @@ challenges:
   difficulty: intermediate
   timelimit: 200
 - slug: 02-loading-the-required-templates
-  id: ebp05xkxgwsa
+  id: rvejjtymshdv
   type: challenge
   title: Topic 2 - Loading the Required Templates
   assignment: |
@@ -108,7 +108,7 @@ challenges:
   difficulty: intermediate
   timelimit: 200
 - slug: 03-accessing-the-web-console
-  id: k4co5zjbbldt
+  id: ramsmzztzhyv
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -139,7 +139,7 @@ challenges:
   difficulty: intermediate
   timelimit: 200
 - slug: 04-deploying-jupyterhub-service
-  id: crxhgd8dlixm
+  id: 6f6iotgtjgqs
   type: challenge
   title: Topic 4 - Deploying JupyterHub Service
   assignment: |
@@ -223,7 +223,7 @@ challenges:
   difficulty: intermediate
   timelimit: 200
 - slug: 05-user-workspace-and-project
-  id: qugslthe18ar
+  id: xley6ce3ehao
   type: challenge
   title: Topic 5 - User Workspace and Project
   assignment: |
@@ -293,7 +293,7 @@ challenges:
   difficulty: intermediate
   timelimit: 200
 - slug: 06-deleting-the-jupyterhub-service
-  id: aq2waqbsics7
+  id: rc28toy66tuz
   type: challenge
   title: Topic 6 - Deleting the JupyterHub Service
   assignment: |
@@ -344,5 +344,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 200
-checksum: "12077456534769423904"
-_: ""
+checksum: "4401365265161884477"

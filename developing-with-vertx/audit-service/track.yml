@@ -309,7 +309,7 @@ description: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxle
   \ you know what\u2019s definitely blocking? Database accesses and more particularly\
   \ JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.\n\nThe\
   \ principle is simple (and is applied to all clients accessing blocking systems):\n\
-  \n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
+  \n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
   \nHowever, interactions with databases are rarely a single operation, but a composition\
   \ of operations. For example:\n\n1. Get a connection\n2. Drop some tables\n3. Create\
   \ some tables\n4. Close the connection\n\n**3. The Audit service**\n\nThe Audit\
@@ -326,8 +326,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: developing-with-vertx-audit-service
 tags:

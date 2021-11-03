@@ -1,5 +1,0 @@
-version: "2"
-virtualmachines:
-- name: crc-nonest-1
-  image: crc-image-test/crc-6102
-  machine_type: n1-standard-8

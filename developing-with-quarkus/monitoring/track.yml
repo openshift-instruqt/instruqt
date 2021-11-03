@@ -21,11 +21,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-install-prometheus
-  id: nn1wmjfmzpwt
+  id: qzhlnbyc4yvi
   type: challenge
   title: Step 1
   assignment: |
@@ -140,7 +140,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 02-create-and-instrument-app
-  id: 1kcyj7oveaus
+  id: yxupu4qgvwfm
   type: challenge
   title: Step 2
   assignment: |-
@@ -253,7 +253,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 03-add-additional-metrics
-  id: 0sv2lyxfdjyd
+  id: mm661vee8vge
   type: challenge
   title: Step 3
   assignment: |+
@@ -532,7 +532,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 04-deploy-to-openshift
-  id: 4k0clwjkvbjl
+  id: r3yeujfyzktx
   type: challenge
   title: Step 4
   assignment: |-
@@ -623,7 +623,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 05-query-with-prometheus
-  id: w4qfjyzefslg
+  id: kxumdkiqimza
   type: challenge
   title: Step 4
   assignment: |-
@@ -688,7 +688,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 06-install-grafana
-  id: 3ldwefrgibr7
+  id: 76hxxkokrmyz
   type: challenge
   title: Step 5
   assignment: |+
@@ -753,7 +753,7 @@ challenges:
   difficulty: basic
   timelimit: 128
 - slug: 07-create-dashboard
-  id: zfhsrcyyykvp
+  id: 7maxxw8mzje3
   type: challenge
   title: Step 6
   assignment: |
@@ -873,5 +873,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "6002368377117858831"
-_: ""
+checksum: "2612468204413170261"

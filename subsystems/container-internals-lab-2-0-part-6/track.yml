@@ -32,11 +32,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-overview
-  id: phdqtsplqhlp
+  id: n54zuremulsr
   type: challenge
   title: Overview of The OCI Specifications
   assignment: |
@@ -64,7 +64,7 @@ challenges:
   difficulty: intermediate
   timelimit: 375
 - slug: 02-image-specification
-  id: vczmlyiwgmrb
+  id: s2ivcx7t5iw7
   type: challenge
   title: The OCI Image Specification
   assignment: |
@@ -120,7 +120,7 @@ challenges:
   difficulty: intermediate
   timelimit: 375
 - slug: 03-runtime-specification
-  id: xq4b7vbzyvef
+  id: jdelyhd8d91h
   type: challenge
   title: The OCI Runtime Specification
   assignment: |
@@ -168,7 +168,7 @@ challenges:
   difficulty: intermediate
   timelimit: 375
 - slug: 04-runc
-  id: rhzcphrzlhqh
+  id: suxh236xjhgc
   type: challenge
   title: The OCI Runtime Reference Implementation
   assignment: |
@@ -258,5 +258,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 375
-checksum: "14811913732921297683"
-_: ""
+checksum: "5271357085537206776"

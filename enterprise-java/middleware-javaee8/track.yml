@@ -730,7 +730,7 @@ description: "## What you will learn ##\n\nIn this scenario, you will learn how 
   \ as more traditional environments like Virtual or Bare metal.\n\nThis scenario\
   \ exclusively uses JBoss EAP on OpenShift, which is the leading container platform\
   \ for Kubernetes and containers, but as a developer, you can also apply what you\
-  \ learn here on other environments.\n\n![EAP Logo](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/eap-logo.png)\n"
+  \ learn here on other environments.\n\n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
 developers:
 - btannous@redhat.com
 - nvinto@redhat.com
@@ -738,8 +738,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: intermediate
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: enterprise-java-middleware-javaee8
 tags:

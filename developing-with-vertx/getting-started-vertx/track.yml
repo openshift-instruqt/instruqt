@@ -366,7 +366,7 @@ description: 'In this scenario, you will learn more about [Eclipse Vert.x](https
   ## What is Eclipse Vert.x?
 
 
-  ![Local Web Browser Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
+  ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
 
 
   Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot
@@ -425,8 +425,8 @@ developers:
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 owner: openshift
-private: true
-published: false
+private: false
+published: true
 skipping_enabled: false
 slug: developing-with-vertx-getting-started-vertx
 tags:

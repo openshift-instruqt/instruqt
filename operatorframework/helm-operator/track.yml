@@ -36,11 +36,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: step1
-  id: 2cr93oswbakl
+  id: tpwqdw3vmxzx
   type: challenge
   title: Initialize the Project
   assignment: |
@@ -118,7 +118,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step2
-  id: sip5nmxqtrap
+  id: 27aoxekeyzmy
   type: challenge
   title: Update the Watches File
   assignment: |-
@@ -144,7 +144,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step3
-  id: yg6ssxiiwpgs
+  id: wvmcp3j1hjnv
   type: challenge
   title: Apply the CockroachDB Custom Resource Definition
   assignment: |
@@ -185,7 +185,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step4
-  id: axy69m2nzwyq
+  id: nfwexzl0n4v0
   type: challenge
   title: Apply the CockroachDB Custom Resource
   assignment: |
@@ -288,7 +288,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step5
-  id: nb5sjyswkymn
+  id: n92ogckhlsy4
   type: challenge
   title: Access the CockroachDB Web UI
   assignment: |-
@@ -324,7 +324,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step6
-  id: qf3dgkkxa2kj
+  id: wiyg3jsco8hl
   type: challenge
   title: Connect to the CockroachDB Cluster
   assignment: |-
@@ -383,7 +383,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step7
-  id: 8m1phccosdgv
+  id: 3pumzmpo3lgv
   type: challenge
   title: Update the CockroachDB Custom Resource
   assignment: |
@@ -419,7 +419,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step8
-  id: qvn0uvbp3yvt
+  id: xfultwh1hzno
   type: challenge
   title: Test CockroachDB Cluster Failover
   assignment: |
@@ -477,7 +477,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: step9
-  id: gnch27kpbbme
+  id: ysrasl50fxuy
   type: challenge
   title: Clean Up
   assignment: |-
@@ -512,5 +512,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "478162101958009916"
-_: ""
+checksum: "17097812818394519992"

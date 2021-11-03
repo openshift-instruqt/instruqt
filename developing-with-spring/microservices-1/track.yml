@@ -13,11 +13,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: yare1jryol3h
+  id: 9b3fmwh2dszm
   type: challenge
   title: Step 1
   assignment: |-
@@ -67,7 +67,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
-  id: fp5k7wt4pliz
+  id: uloa8y1fsfax
   type: challenge
   title: Step 2
   assignment: |-
@@ -145,7 +145,7 @@ challenges:
   difficulty: basic
   timelimit: 300
 - slug: 03-modify-the-configmap
-  id: nogotcrt6rbw
+  id: tz3ybszllilk
   type: challenge
   title: Step 3
   assignment: |-
@@ -221,5 +221,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "5788800395148300580"
-_: ""
+checksum: "7952276508230502822"

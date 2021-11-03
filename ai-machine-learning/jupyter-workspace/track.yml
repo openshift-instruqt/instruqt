@@ -21,11 +21,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: wbhhkalsuuy0
+  id: ydzer1fveycq
   type: challenge
   title: Topic 1 - Loading the Notebook Images
   assignment: |
@@ -65,7 +65,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 02-loading-the-notebook-templates
-  id: kzyois9lbidh
+  id: bvkwlxb43vnu
   type: challenge
   title: Topic 2 - Loading the Notebook Templates
   assignment: |
@@ -113,7 +113,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 03-accessing-the-web-console
-  id: 6dfonkc7986e
+  id: neiovwj4on8x
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -155,7 +155,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 04-deploying-the-jupyter-workspace
-  id: a9ngk5htxtn0
+  id: kyxzdyxogwih
   type: challenge
   title: Topic 4 - Deploying the Jupyter Workspace
   assignment: |
@@ -216,7 +216,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 05-testing-the-persistent-storage
-  id: hbgxftcmulle
+  id: mgm5klzsbina
   type: challenge
   title: Topic 5 - Testing the Persistent Storage
   assignment: |
@@ -290,7 +290,7 @@ challenges:
   difficulty: basic
   timelimit: 150
 - slug: 06-deleting-the-jupyter-notebook
-  id: igjmjecu08dj
+  id: lcyjr5vahrd9
   type: challenge
   title: Topic 6 - Deleting the Jupyter Notebook
   assignment: |
@@ -323,5 +323,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "17675128037724040089"
-_: ""
+checksum: "17056201008004012281"

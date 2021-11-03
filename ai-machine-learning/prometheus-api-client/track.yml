@@ -27,11 +27,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: ro2exq8dytxo
+  id: cutnuy62kbd3
   type: challenge
   title: More about Prometheus
   assignment: |
@@ -55,7 +55,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: gzukevifbsar
+  id: wyefnvptcmmm
   type: challenge
   title: Accessing the workshop environment
   assignment: |2
@@ -114,7 +114,7 @@ challenges:
   difficulty: basic
   timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: hrslpgudjsb2
+  id: kaivvmuolm8h
   type: challenge
   title: Accessing the workshop environment (Backend)
   assignment: |2
@@ -167,5 +167,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "16017134592663286904"
-_: ""
+checksum: "14754124904701999951"

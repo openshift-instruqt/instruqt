@@ -9,7 +9,7 @@ description: |-
   * Learn what Red Hat OpenShift Service Mesh is.
   * Use the Red Hat OpenShift Service Mesh in a playground type environment.
 
-  ![Red Hat OpenShift Service Mesh](https://katacoda.com/openshift/assets/servicemesh/1-introduction/ossm.png)
+  ![Red Hat OpenShift Service Mesh](../../assets/servicemesh/1-introduction/ossm.png)
 
   ## Why Service Mesh?
 
@@ -31,11 +31,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-what-is-service-mesh
-  id: d8eaxamxkg9b
+  id: myvthwy6o3vf
   type: challenge
   title: What is Service Mesh and why we need it?
   assignment: |
@@ -78,7 +78,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 02-details
-  id: 1uvxolhzxpa8
+  id: t8znbxhlr0ix
   type: challenge
   title: Service Mesh Details
   assignment: |-
@@ -158,7 +158,7 @@ challenges:
   difficulty: basic
   timelimit: 600
 - slug: 03-playground
-  id: ib9bjqcis026
+  id: vvh4szxeafz3
   type: challenge
   title: Service Mesh Playground
   assignment: |+
@@ -224,5 +224,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "7958845925091971737"
-_: ""
+checksum: "12583521389994523415"
