@@ -34,11 +34,11 @@ developers:
 - btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-private: true
-published: false
+private: false
+published: true
 challenges:
 - slug: 01-introduction
-  id: yoxnnc1v4hwl
+  id: s8ckotuxx0n3
   type: challenge
   title: Introduction to Containers
   assignment: |
@@ -78,7 +78,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 02-images
-  id: nk9ymhgeuvm3
+  id: gqv0zm87v73w
   type: challenge
   title: Container Images
   assignment: |
@@ -134,7 +134,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 03-registries
-  id: mksgqnfj7rdf
+  id: pqkufxxmnx7y
   type: challenge
   title: Container Registries
   assignment: |
@@ -202,7 +202,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 04-hosts
-  id: tyh8z60jdu49
+  id: y5qczzzqd7ni
   type: challenge
   title: Container Hosts
   assignment: |+
@@ -258,7 +258,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 05-orchestration
-  id: icahnrizl2zj
+  id: r8id7vmykrvr
   type: challenge
   title: Container Orchestration
   assignment: |+
@@ -334,7 +334,7 @@ challenges:
   difficulty: basic
   timelimit: 200
 - slug: 06-closing
-  id: tzxzfpuertka
+  id: jjfpolnx67rb
   type: challenge
   title: Closing
   assignment: |
@@ -366,5 +366,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "4881482960497678652"
-_: ""
+checksum: "5637018787804930112"
