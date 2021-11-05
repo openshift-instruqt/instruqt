@@ -59,31 +59,23 @@ challenges:
     ```
     oc new-project myproject
     ```
-    `
-    ```
-    <br>
+
     Let's now create a new directory for our project:
 
     ```
     mkdir -p $HOME/projects/podset-operator
     ```
-    `
-    ```
-    <br>
+
     Navigate to the directory:
 
     ```
     cd $HOME/projects/podset-operator
     ```
-    `
-    ```
-    <br>
+
     Initialize a new Go-based Operator SDK project for the PodSet Operator:
 
     ```
     operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
-    ```
-    `
     ```
   tabs:
   - title: CLI
@@ -109,9 +101,6 @@ challenges:
     ```
     operator-sdk create api --group=app --version=v1alpha1 --kind=PodSet --resource --controller
     ```
-    `
-    ```
-    <br>
     We should now see the `/api`, `config`, and `/controllers` directories.
   tabs:
   - title: CLI
@@ -131,7 +120,7 @@ challenges:
   id: m7snt3qifaia
   type: challenge
   title: Defining the Spec and Status
-  assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go` file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n`\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap) includes `spec` and `status`. Kubernetes functions by reconciling desired state (Spec) with the actual cluster state. We then record what is observed (Status).\n\nAlso observe the `+kubebuilder` comment markers found throughout the file. `operator-sdk` makes use of a tool called [controler-gen](https://github.com/kubernetes-sigs/controller-tools) (from the [controller-tools](https://github.com/kubernetes-sigs/controller-tools) project) for generating utility code and Kubernetes YAML. More information on markers for config/code generation can be found [here](https://book.kubebuilder.io/reference/markers.html).\n\nLet's now modify the `PodSetSpec` and `PodSetStatus` of the `PodSet` Custom Resource (CR) at `api/v1alpha1/podset_types.go`\n\n<br>\nIt should look like the file below:\n\n<pre class=\"file\">\npackage v1alpha1\n\nimport (\n        metav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n)\n\n// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!\n// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.\n\n// PodSetSpec defines the desired state of PodSet\ntype PodSetSpec struct {\n        // Replicas is the desired number of pods for the PodSet\n        // +kubebuilder:validation:Minimum=1\n        // +kubebuilder:validation:Maximum=10\n        Replicas int32 `json:\"replicas,omitempty\"`\n}\n\n// PodSetStatus defines the current status of PodSet\ntype PodSetStatus struct {\n        PodNames        []string        `json:\"podNames\"`\n\tAvailableReplicas\tint32\t`json:\"availableReplicas\"`\n}\n\n// +kubebuilder:object:root=true\n// +kubebuilder:subresource:status\n\n// PodSet is the Schema for the podsets API\n// +kubebuilder:printcolumn:JSONPath=\".spec.replicas\",name=Desired,type=string\n// +kubebuilder:printcolumn:JSONPath=\".status.availableReplicas\",name=Available,type=string\ntype PodSet struct {\n        metav1.TypeMeta   `json:\",inline\"`\n        metav1.ObjectMeta `json:\"metadata,omitempty\"`\n\n        Spec   PodSetSpec   `json:\"spec,omitempty\"`\n        Status PodSetStatus `json:\"status,omitempty\"`\n}\n\n// +kubebuilder:object:root=true\n\n// PodSetList contains a list of PodSet\ntype PodSetList struct {\n        metav1.TypeMeta `json:\",inline\"`\n        metav1.ListMeta `json:\"metadata,omitempty\"`\n        Items           []PodSet `json:\"items\"`\n}\n\nfunc init() {\n        SchemeBuilder.Register(&PodSet{}, &PodSetList{})\n}\n</pre>\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/podset_types.go api/v1alpha1/podset_types.go\n```\n`\n```\n<br>\nAfter modifying the `*_types.go` file, always run the following command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n```\n`\n```\n<br>\nNow we can run the `make manifests` command to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n`\n```\n<br>\nThanks to our comment markers, observe that we now have a newly generated CRD yaml that reflects the `spec.replicas` and `status.podNames` OpenAPI v3 schema validation and customized print columns.\n\n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n`\n```\n<br>\nDeploy your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n`\n```\n<br>\nConfirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```\n`\n```\n"
+  assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go` file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap) includes `spec` and `status`. Kubernetes functions by reconciling desired state (Spec) with the actual cluster state. We then record what is observed (Status).\n\nAlso observe the `+kubebuilder` comment markers found throughout the file. `operator-sdk` makes use of a tool called [controler-gen](https://github.com/kubernetes-sigs/controller-tools) (from the [controller-tools](https://github.com/kubernetes-sigs/controller-tools) project) for generating utility code and Kubernetes YAML. More information on markers for config/code generation can be found [here](https://book.kubebuilder.io/reference/markers.html).\n\nLet's now modify the `PodSetSpec` and `PodSetStatus` of the `PodSet` Custom Resource (CR) at `api/v1alpha1/podset_types.go`\n\nIt should look like the file below:\n\n```go\npackage v1alpha1\n\nimport (\n        metav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n)\n\n// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!\n// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.\n\n// PodSetSpec defines the desired state of PodSet\ntype PodSetSpec struct {\n        // Replicas is the desired number of pods for the PodSet\n        // +kubebuilder:validation:Minimum=1\n        // +kubebuilder:validation:Maximum=10\n        Replicas int32 `json:\"replicas,omitempty\"`\n}\n\n// PodSetStatus defines the current status of PodSet\ntype PodSetStatus struct {\n        PodNames        []string        `json:\"podNames\"`\n  AvailableReplicas\tint32\t`json:\"availableReplicas\"`\n}\n\n// +kubebuilder:object:root=true\n// +kubebuilder:subresource:status\n\n// PodSet is the Schema for the podsets API\n// +kubebuilder:printcolumn:JSONPath=\".spec.replicas\",name=Desired,type=string\n// +kubebuilder:printcolumn:JSONPath=\".status.availableReplicas\",name=Available,type=string\ntype PodSet struct {\n        metav1.TypeMeta   `json:\",inline\"`\n        metav1.ObjectMeta `json:\"metadata,omitempty\"`\n\n        Spec   PodSetSpec   `json:\"spec,omitempty\"`\n        Status PodSetStatus `json:\"status,omitempty\"`\n}\n\n// +kubebuilder:object:root=true\n\n// PodSetList contains a list of PodSet\ntype PodSetList struct {\n        metav1.TypeMeta `json:\",inline\"`\n        metav1.ListMeta `json:\"metadata,omitempty\"`\n        Items           []PodSet `json:\"items\"`\n}\n\nfunc init() {\n        SchemeBuilder.Register(&PodSet{}, &PodSetList{})\n}\n```\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/podset_types.go api/v1alpha1/podset_types.go\n```\n\nAfter modifying the `*_types.go` file, always run the following command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n```\n<br>\nNow we can run the `make manifests` command to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n\nThanks to our comment markers, observe that we now have a newly generated CRD yaml that reflects the `spec.replicas` and `status.podNames` OpenAPI v3 schema validation and customized print columns.\n\n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n\nDeploy your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\nConfirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```"
   tabs:
   - title: CLI
     type: terminal
@@ -182,8 +171,6 @@ challenges:
     ```
     WATCH_NAMESPACE=myproject make run
     ```
-    `
-    ```
   tabs:
   - title: CLI
     type: terminal
@@ -209,9 +196,6 @@ challenges:
     cd $HOME/projects/podset-operator
     cat config/samples/app_v1alpha1_podset.yaml
     ```
-    `
-    ```
-    <br>
     Ensure your `kind: PodSet` Custom Resource (CR) is updated with `spec.replicas`
 
     <pre class="file">
@@ -228,63 +212,46 @@ challenges:
     ```
     \cp /tmp/app_v1alpha1_podset.yaml config/samples/app_v1alpha1_podset.yaml
     ```
-    `
-    ```
-    <br>
+
     Ensure you are currently scoped to the `myproject` Namespace:
 
     ```
     oc project myproject
     ```
-    `
-    ```
-    <br>
+
     Deploy your PodSet Custom Resource to the live OpenShift Cluster:
 
     ```
     oc create -f config/samples/app_v1alpha1_podset.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Podset exists:
 
     ```
     oc get podset
     ```
-    `
-    ```
-    <br>
+
     Verify the PodSet operator has created 3 pods:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     Verify that status shows the name of the pods currently owned by the PodSet:
 
     ```
     oc get podset podset-sample -o yaml
     ```
-    `
-    ```
-    <br>
+
     Increase the number of replicas owned by the PodSet:
 
     ```
     oc patch podset podset-sample --type='json' -p '[{"op": "replace", "path": "/spec/replicas", "value":5}]'
     ```
-    `
-    ```
-    <br>
 
     Verify that we now have 5 running pods
     ```
     oc get pods
-    ```
-    `
     ```
   tabs:
   - title: CLI
@@ -312,23 +279,17 @@ challenges:
     ```
     oc get pods -o yaml | grep ownerReferences -A10
     ```
-    `
-    ```
-    <br>
+
     Delete the podset-sample Custom Resource:
 
     ```
     oc delete podset podset-sample
-    ```
-    `
     ```
 
     Thanks to OwnerReferences, all of the pods should be deleted:
 
     ```
     oc get pods
-    ```
-    `
     ```
   tabs:
   - title: CLI
@@ -344,4 +305,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "987016617787876207"
+checksum: "2707731348165387030"
