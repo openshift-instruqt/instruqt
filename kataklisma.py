@@ -3,6 +3,9 @@
 # Katacoda to Instruqt converter
 
 
+# v. 0.0.3
+# Support for notes in first challenge, fix NodePort
+#
 # v. 0.0.2
 # Support for bulk migrate with git submodule
 #
@@ -152,6 +155,8 @@ for course in hcourses['courses']:
         l_size = len(l_steps)
         time = int(int(time) / l_size)
         
+        isFirstStep=True
+        
         for step in l_steps:
             slug = step["text"]
             
@@ -175,14 +180,24 @@ for course in hcourses['courses']:
             md=re.sub(r'\{\{copy\}\}',r'', md)
             md=re.sub(r'\{\{open\}\}',r'', md)
             md=re.sub(r'\(\.\.\/\.\.\/assets',r'(https://katacoda.com/openshift/assets',md)
+            md=re.sub(r'\(\/openshift\/assets',r'(https://katacoda.com/openshift/assets',md)
             
             d_challenges["assignment"] =  md
             
-            l_tabs = [{"title": "CLI", "type": "terminal","hostname":"crc-nonest-1"},
-                      {"title": "OpenShift Web Console", "type" : "service", "hostname" : "crc-nonest-1", "port" : 30443}]
+            if isFirstStep:
+                l_notes = [{"type": "text", "contents": intro_md}]
+                d_challenges["notes"] =  l_notes
+                isFirstStep=False
+            else:
+                if "notes" in d_challenges:
+                    del d_challenges["notes"]
+
+
+            l_tabs = [{"title": "CLI", "type": "terminal","hostname":"crc"},
+                      {"title": "Web Console", "type" : "service", "hostname" : "crc", "path" : "/", "port" : 30001}]
             
             if visualEditor:
-              l_tabs.append({"title": "Visual Editor", "type": "code","hostname":"crc-nonest-1", "path":"/root"})
+              l_tabs.append({"title": "Visual Editor", "type": "code","hostname":"crc", "path":"/root"})
             
             d_challenges["tabs"] = l_tabs
             
