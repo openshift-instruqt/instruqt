@@ -30,23 +30,47 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: w5vkemhve4so
+  id: zlfqmxoxbvni
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |2
+
+      This scenario will introduce [Camel Kafka Connector ](https://camel.apache.org/camel-kafka-connector/latest/index.html).
+
+      ## What is Camel Kafka Connector?
+
+
+      ![Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/Apache_Camel_Logo.svg)
+
+
+      ### Kafka Connector with a Camel twist -- connect to ALMOST anything
+
+      Camel Kafka Connector enables you to use standard Camel components as Kafka Connect connectors. This widens the scope of possible integrations beyond the external systems supported by Kafka Connect connectors alone. Camel Kafka Connector works as an adapter that makes the popular Camel component ecosystem available in Kafka-based AMQ Streams on OpenShift.
+
+      Camel Kafka Connector provides a user-friendly way to configure Camel components directly in the Kafka Connect framework. Using Camel Kafka Connector, you can leverage Camel components for integration with different systems by connecting to or from Camel Kafka sink or source connectors. You do not need to write any code, and can include the appropriate connector JARs in your Kafka Connect image and configure connector options using custom resources.
+
+
+      ### AMQ Streams - Kubernetes-native Apache Kafka
+
+      The Red Hat AMQ streams component is a massively scalable, distributed, and high-performance data streaming platform based on the Apache Kafka project. It offers a distributed backbone that allows microservices and other applications to share data with high throughput and low latency.
+
+      As more applications move to Kubernetes and Red Hat OpenShift , it is increasingly important to be able to run the communication infrastructure on the same platform. Red Hat OpenShift, as a highly scalable platform, is a natural fit for messaging technologies such as Kafka. The AMQ streams component makes running and managing Apache Kafka OpenShift native through the use of powerful operators that simplify the deployment, configuration, management, and use of Apache Kafka on Red Hat OpenShift.
   assignment: |
     In order to run this tutorial, you will need access to an OpenShift environment.
     And we also have access to Kafka cluster in the environment. Let's setup the fundamentals.
 
     This tutorial is an simple *Managed File Transfer* scenario, where a laboratory uploads medical reports to an online object store, and we will need to transfer the file from the cloud object store to our local FTP server in order for the legacy system to consume.
 
-    ![overview](/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
+    ![overview](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
 
     ## Logging in to the Cluster via CLI
 
@@ -110,19 +134,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: step2
-  id: gakysbagxchy
+  id: pgrjldvgi8yu
   type: challenge
   title: Step 2
   assignment: |
@@ -243,19 +268,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: step3
-  id: zgqh0alxcpe8
+  id: mdri2qdwxtlg
   type: challenge
   title: Step 3
   assignment: |2
@@ -389,19 +415,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: step4
-  id: q8veneve8j4q
+  id: e6cjtsujywxd
   type: challenge
   title: Step 4
   assignment: |
@@ -472,7 +499,7 @@ challenges:
        ............
     ```
 
-    ![overview](/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
+    ![overview](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
 
     ## Congratulations
 
@@ -480,15 +507,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "12338134048024296945"
+checksum: "2257998432597175673"

@@ -44,20 +44,58 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: ldys76xjajvj
+  id: dowq7nqofdug
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |-
+      In this scenario, you will get an introduction to [Quarkus](https://quarkus.io).
+
+      ## What is Quarkus?
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+
+      ### Supersonic, Subatomic Java
+
+      For years, the client-server architecture has been the de-facto standard to build applications. But a major shift happened. The _one model rules them all_ age is over. A new range of applications and architecture styles has emerged and impacts how code is written and how applications are deployed and executed. HTTP microservices, reactive applications, message-driven microservices and serverless are now central players in modern systems.
+
+      Quarkus has been designed with this new world in mind, and provides first-class support for these different paradigms. Quarkus development model morphs to adapt itself to the type of application you are developing.
+
+      Quarkus is a Kubernetes Native Java stack tailored for GraalVM & OpenJDK HotSpot, crafted from the best of breed Java libraries and standards. Amazingly fast boot time, incredibly low RSS memory (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms like Kubernetes. Quarkus uses a technique called compile time boot. [Learn more](https://quarkus.io/vision/container-first).
+
+      ### Unifies Imperative and Reactive
+
+      Application requirements have changed drastically over the last few years. For any application to succeed in the era of cloud computing, big data or IoT, going reactive is increasingly becoming the architecture style to follow.
+
+      Quarkus combines both the familiar imperative code and the non-blocking reactive style when developing applications.
+
+      ### Functions as a Service and Serverless
+
+      Thanks to their stellar startup time and low memory usage, you can implement functions using Quarkus to be used in serverless environments like AWS Lambda. You can use any of the Quarkus features in your function and benefit from the fast startup and low memory utilization. With Quarkus, you can embrace this new world without having to change your programming language.
+
+      ### Developer Joy
+      Quarkus provides a cohesive platform for optimized _developer joy_:
+
+      * Unified configuration
+      * Zero config, live reload in the blink of an eye
+      * Streamlined code for the 80% common usages, flexible for the 20%
+      * No hassle native executable generation
+
+      ### Other possibilities
+
+      Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
   assignment: |
     In this step, you will create a straightforward application serving a `hello` endpoint. To demonstrate dependency injection this endpoint uses a `greeting` bean.
 
-    ![Architecture](/openshift/assets/middleware/quarkus/arch.png)
+    ![Architecture](https://katacoda.com/openshift/assets/middleware/quarkus/arch.png)
 
     # Wait for prerequisite downloads
 
@@ -191,7 +229,7 @@ challenges:
 
     To access the Dev UI for your running app, [click this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/q/dev) which should open up the Dev UI in a new browser tab.
 
-    ![Dev UI](/openshift/assets/middleware/quarkus/dev-ui-overview.png)
+    ![Dev UI](https://katacoda.com/openshift/assets/middleware/quarkus/dev-ui-overview.png)
 
     For example, click on the `Config Editor` link within the `Configuration` tile to see and make updates to configuration. This is super useful for developers to confirm code and configuration changes, or experiment with various settings.
 
@@ -225,19 +263,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 02-inject-bean
-  id: um6uuhma0fhr
+  id: xqafjcyorgsc
   type: challenge
   title: Step 2
   assignment: |
@@ -362,19 +401,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 03-package-and-run
-  id: cp4135vvq63y
+  id: npxb5umu42he
   type: challenge
   title: Step 3
   assignment: |+
@@ -434,25 +474,26 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 04-build-native
-  id: locp5rxy5bsn
+  id: liep5vzlwsis
   type: challenge
   title: Step 4
   assignment: |+
     Let’s now produce a native executable for our application. It improves the startup time of the application, and produces a minimal disk footprint. The executable would have everything to run the application including the "JVM" (shrunk to be just enough to run the application), and the application.
 
-    ![Native process](/openshift/assets/middleware/quarkus/native-image-process.png)
+    ![Native process](https://katacoda.com/openshift/assets/middleware/quarkus/native-image-process.png)
 
     We will be using GraalVM, which includes a native compiler for producing native images for a number of languages, including Java. GraalVM is installed in `$GRAALVM_HOME`:
 
@@ -556,19 +597,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 05-deploy-to-openshift
-  id: pspfnlk4vxdi
+  id: qyzpzfyccatz
   type: challenge
   title: Step 5
   assignment: |+
@@ -641,7 +683,7 @@ challenges:
     * Username: `developer`
     * Password: `developer`
 
-    ![topology](/openshift/assets/middleware/quarkus/greetingtopology.png)
+    ![topology](https://katacoda.com/openshift/assets/middleware/quarkus/greetingtopology.png)
 
     So now our app is deployed to OpenShift
 
@@ -667,19 +709,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 06-scaling
-  id: igjx7cx6mjp6
+  id: v9wxrteqt0hi
   type: challenge
   title: Step 6
   assignment: |
@@ -699,7 +742,7 @@ challenges:
 
     Back in the  [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus) you'll see the app scaling dynamically up to 10 pods:
 
-    ![Scaling](/openshift/assets/middleware/quarkus/scaling.png)
+    ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling.png)
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
@@ -723,7 +766,7 @@ challenges:
 
     Back in the [Overview in the OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview) you'll see the app scaling dynamically up to 50 pods:
 
-    ![Scaling to 50](/openshift/assets/middleware/quarkus/50pods.png)
+    ![Scaling to 50](https://katacoda.com/openshift/assets/middleware/quarkus/50pods.png)
 
     Once they are all up and running, try the same load again:
 
@@ -758,15 +801,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "11837571564397061663"
+checksum: "5770780697868036080"

@@ -33,16 +33,43 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: tpwqdw3vmxzx
+  id: 5hpifojphhpf
   type: challenge
   title: Initialize the Project
+  notes:
+  - type: text
+    contents: |-
+      In the previous learning modules, we covered how to easily create the following types of Operators with the Operator SDK:
+
+      * **Go**:
+      Ideal for traditional software development teams that want to get to a fully auto-pilot Operator. It gives you the ability to leverage the same Kubernetes libraries the upstream projects uses under the hood. Check out the [Go Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/golang/).
+
+      * **Ansible**:
+      Useful for infrastructure-focused teams that have investment in Ansible modules but want to use them in a Kubernetes-native way. Also great for using Ansible to configure off-cluster objects like hardware load balancers. Check out the [Ansible Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/ansible/).
+
+      We will now focus on the easiest way to get started developing an Operator:
+
+      * **Helm**:
+      Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+
+      ## Creating a CockroachDB Operator from a Helm Chart
+
+      In this tutorial, we will create a CockroachDB Operator from an existing [CockroachDB Helm Chart](https://github.com/helm/charts/tree/master/stable/cockroachdb).
+
+      [CockroachDB](https://www.cockroachlabs.com) is a distributed SQL database built on a transactional and strongly-consistent key-value store. It can:
+
+      * Scale horizontally.
+      * Survive disk, machine, rack, and even datacenter failures with minimal latency disruption and no manual intervention.
+      * Supports strongly-consistent ACID transactions and provides a familiar SQL API for structuring, manipulating, and querying data.
+
+      Let's begin!
   assignment: |
     Let's begin my creating a new project called `myproject`:
 
@@ -106,19 +133,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step2
-  id: 27aoxekeyzmy
+  id: doczktsdkf4t
   type: challenge
   title: Update the Watches File
   assignment: |-
@@ -132,19 +160,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step3
-  id: wvmcp3j1hjnv
+  id: fy1mpur5hcns
   type: challenge
   title: Apply the CockroachDB Custom Resource Definition
   assignment: |
@@ -173,19 +202,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step4
-  id: nfwexzl0n4v0
+  id: rx4dx5ohrzwj
   type: challenge
   title: Apply the CockroachDB Custom Resource
   assignment: |
@@ -276,19 +306,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step5
-  id: n92ogckhlsy4
+  id: wvfjnrudgycz
   type: challenge
   title: Access the CockroachDB Web UI
   assignment: |-
@@ -312,19 +343,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step6
-  id: wiyg3jsco8hl
+  id: 2ojhbl0unxtr
   type: challenge
   title: Connect to the CockroachDB Cluster
   assignment: |-
@@ -371,19 +403,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step7
-  id: 3pumzmpo3lgv
+  id: s12fzgwuixu7
   type: challenge
   title: Update the CockroachDB Custom Resource
   assignment: |
@@ -407,19 +440,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step8
-  id: xfultwh1hzno
+  id: aawbgwx61nyp
   type: challenge
   title: Test CockroachDB Cluster Failover
   assignment: |
@@ -465,19 +499,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: step9
-  id: ysrasl50fxuy
+  id: gggy0ujzyp3d
   type: challenge
   title: Clean Up
   assignment: |-
@@ -501,15 +536,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "17097812818394519992"
+checksum: "1129949569030980165"

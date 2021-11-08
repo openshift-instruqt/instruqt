@@ -25,16 +25,35 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: lkashdrerggx
+  id: hyux6edvb2zb
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |2
+
+      This scenario will introduce [Camel K ](https://camel.apache.org/camel-k/latest/index.html).
+
+      ## What is Camel K?
+
+
+      ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
+
+
+      ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
+
+      Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
+
+      Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+
+      Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
   assignment: |
     In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
 
@@ -83,19 +102,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step2
-  id: 7wvmywegxpsc
+  id: 0lfqcvenst8b
   type: challenge
   title: Step 2
   assignment: |
@@ -179,19 +199,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step3
-  id: iym7vqfxsady
+  id: pvfkyaueoty3
   type: challenge
   title: Step 3
   assignment: |
@@ -295,19 +316,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step4
-  id: n3sdqyj8rax2
+  id: rc9brkyvdmxi
   type: challenge
   title: Step 4
   assignment: |
@@ -379,15 +401,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "316373757981441046"
+checksum: "16403475858471207271"

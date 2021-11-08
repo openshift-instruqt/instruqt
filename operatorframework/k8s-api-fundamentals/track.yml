@@ -9,16 +9,19 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: hbcwcqxaliof
+  id: xcryhgketlfn
   type: challenge
   title: Kubernetes Manifests
+  notes:
+  - type: text
+    contents: Before diving into the [Operator Framework](https://github.com/operator-framework), this section will give an overview of Kubernetes API fundamentals.  Although the [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating an Operator fun and easy, understanding the structure and features of the Kubernetes API is required.
   assignment: |-
     Let's begin by creating a new project called `myproject`:
 
@@ -114,19 +117,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 360
 - slug: step2
-  id: hx3paykbz5ol
+  id: yfv4cyxcuxod
   type: challenge
   title: Basic Operations with the Kubernetes API
   assignment: |
@@ -263,19 +267,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 360
 - slug: step3
-  id: 0nkozmzaegxk
+  id: 8jt7kdllban0
   type: challenge
   title: Replica Sets
   assignment: |
@@ -382,19 +387,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 360
 - slug: step4
-  id: ri1xezrmnzex
+  id: mvlwrvbrisvj
   type: challenge
   title: Deployments/Finalizers
   assignment: |
@@ -561,19 +567,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 360
 - slug: step5
-  id: 7unye6hcxwun
+  id: dh2okez0uiwl
   type: challenge
   title: Custom Resource Definitions
   assignment: |-
@@ -704,15 +711,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "905426285507369946"
+checksum: "5049303721064648146"

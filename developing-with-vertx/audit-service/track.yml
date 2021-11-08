@@ -33,16 +33,46 @@ challenges:
     \ the start process is completed (or successfully or not), it calls `future.complete()`\
     \ and `future.fail(cause)`."
   difficulty: basic
+  notes:
+  - contents: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley\
+      \ Act requires you to keep a track of every transaction you do on a financial\
+      \ market. The audit service records the shares you buy and sell in a database.\
+      \ It\u2019s going to be a PostGreSQL database, but is would be similar with\
+      \ another database, even no-sql database. The database is going to be deployed\
+      \ in OpenShift.\n \nIn this chapter we are going to cover: \n\n* advanced asynchronous\
+      \ orchestration \n* asynchronous JDBC \n* Vert.x Web to build REST API \n* Managing\
+      \ secrets with OpenShift\n\n**1. Initialize katacoda environment**\n\nYou may\
+      \ have noticed a script running in the terminal. This is getting the lab ready\
+      \ up to this scenario i.e. it is \n1. Cloning the source code\n2. Initialize\
+      \ the OpenShift environment\n3. Build and deploy the quote-generator scenario\n\
+      4. Build and deploy the portfolio-service sceanrio\n5. Build and deploy the\
+      \ compulsive-traders sceanrio\n6. Build and deploy the micro-trader-dashboard\n\
+      \n\n**2. Accessing data asynchronously**\n\nAs said previously, Vert.x is asynchronous\
+      \ and you must never block the event loop. And you know what\u2019s definitely\
+      \ blocking? Database accesses and more particularly JDBC! Fortunately, Vert.x\
+      \ provides a JDBC client that is asynchronous.\n\nThe principle is simple (and\
+      \ is applied to all clients accessing blocking systems):\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
+      \nHowever, interactions with databases are rarely a single operation, but a\
+      \ composition of operations. For example:\n\n1. Get a connection\n2. Drop some\
+      \ tables\n3. Create some tables\n4. Close the connection\n\n**3. The Audit service**\n\
+      \nThe Audit service:\n\n1. Listens for the financial operations on the event\
+      \ bus\n2. Stores the received operations in a database\n3. Exposes a REST API\
+      \ to get the last 10 operations\n\nInteractions with the database use the `vertx-jdbc-client`,\
+      \ an async version of JDBC. So expect to see some SQL code (I know you love\
+      \ it). But, to orchestrate all these asynchronous calls, we need the right weapons.\
+      \ We are going to use RX Java 2 for this."
+    type: text
   slug: 01-audit-verticle
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -95,14 +125,15 @@ challenges:
   difficulty: basic
   slug: 02-vertx-web
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -148,14 +179,15 @@ challenges:
   difficulty: basic
   slug: 03-async-jdbc
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -192,14 +224,15 @@ challenges:
   difficulty: basic
   slug: 04-async-jdbc-with-callback
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -215,7 +248,7 @@ challenges:
     \ is not using a persistent storage.\n\nNow, we can deploy our audit service:\n\
     \n```\nmvn fabric8:deploy\n```\n\n**2. Access the Micro-trader dashboard**\n\n\
     Click on the \"OpenShift Console\" tab next to the \"Local Web Browser\" tab.\n\
-    \n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \n![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
     \nLog in using `developer/developer` for username and password. You should see\
     \ the newly created project called `\u201Cvertx-kubernetes-workshop\"`. Click\
     \ on it. You should see six pods running, one each for the quote-generator, portfolio-service,\
@@ -230,14 +263,15 @@ challenges:
   difficulty: basic
   slug: 05-deploy-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -278,14 +312,15 @@ challenges:
   difficulty: basic
   slug: 06-managing-secrets
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -320,7 +355,7 @@ description: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxle
   \ orchestrate all these asynchronous calls, we need the right weapons. We are going\
   \ to use RX Java 2 for this."
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

@@ -27,14 +27,33 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- btannous@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-deploying-an-application
-  id: cmjpmjfb9evb
+  id: 04qignpxdmmf
   type: challenge
   title: Topic 1 - Deploying an Application
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to enumerate, describe, and update application resource objects on OpenShift.
+
+      ## Concepts
+
+      * OpenShift Projects and Applications
+      * Applications on OpenShift as Builds and Deployments
+      * Application resources like Services, Persistent Volumes, and configuration
+      * OpenShift `oc` command line tool
+
+      ## Use case
+
+      You can find, query, and change the OpenShift resources that make up an application.
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Before you can start this course you need to deploy a sample application to work with.
 
@@ -68,19 +87,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 02-resource-object-types
-  id: lyy31pxndf4d
+  id: tskbfh14zqvg
   type: challenge
   title: Topic 2 - Resource Object Types
   assignment: |
@@ -173,19 +193,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 03-querying-resource-objects
-  id: iy3xcifhhtpg
+  id: lwdxvkmibxcv
   type: challenge
   title: Topic 3 - Querying Resource Objects
   assignment: |
@@ -263,19 +284,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 04-editing-resource-objects
-  id: ar5ztetxcpk1
+  id: ep8j9nhd6kwt
   type: challenge
   title: Topic 4 - Editing Resource Objects
   assignment: |
@@ -305,19 +327,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 05-creating-resource-objects
-  id: ffaiagzgx0se
+  id: 9gwak3cxviah
   type: challenge
   title: Topic 5 - Creating Resource Objects
   assignment: |
@@ -387,19 +410,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 06-replacing-resource-objects
-  id: ag5o3rwrum4o
+  id: bkuwoiungyob
   type: challenge
   title: Topic 6 - Replacing Resource Objects
   assignment: |
@@ -457,19 +481,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 07-labelling-resource-objects
-  id: gxuhadfxyjxn
+  id: rnoshjjidvpp
   type: challenge
   title: Topic 7 - Labelling Resource Objects
   assignment: |
@@ -521,19 +546,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
 - slug: 08-deleting-resource-objects
-  id: dhskd27gvimh
+  id: y83yastkeuup
   type: challenge
   title: Topic 8 - Deleting Resource Objects
   assignment: |
@@ -573,15 +599,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 112
-checksum: "13878086641695919933"
+checksum: "7857516264121187612"

@@ -60,9 +60,9 @@ challenges:
     \n**3. Test the application**\n\nTo begin, click on the **Local Web Browser**\
     \ tab in the console frame of this browser window, which will open another tab\
     \ or window of your browser pointing to port 8080 on your client.\n\n![Local Web\
-    \ Browser Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/web-browser-tab.png)\n\
+    \ Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/web-browser-tab.png)\n\
     \nYou should now see an HTML page that looks like this:\n\n![Local Web Browser\
-    \ Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/web-page.png)\n\
+    \ Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/web-page.png)\n\
     \nor use [this](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
     \ link.\n\n> **NOTE:** The Invoke button doesn't work yet, but we will fix that\
     \ in the next step.\n\n## Congratulations\n\nYou have now successfully executed\
@@ -71,16 +71,89 @@ challenges:
     \ using the Vert.x Toolkit.\n\nIn next step of this scenario, we will add server-side\
     \ business logic to our application.\n"
   difficulty: basic
+  notes:
+  - contents: 'In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io),
+      one of the runtimes included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).
+
+
+
+
+      ## What you will learn
+
+      You will learn how to get started with building a reactive web application that
+      can serve static content as well as server-side business logic using Eclipse
+      Vert.x.
+
+
+      ## What is Eclipse Vert.x?
+
+
+      ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
+
+
+      Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot
+      (e.g., supports multiple programming languages).
+
+      In this session, we will focus on Java, but it would be possible to build the
+      same application in JavaScript, Groovy, Ruby, Ceylon, Scala, and Kotlin.
+
+
+      Eclipse Vert.x is event-driven and non-blocking, which means that applications
+      in Vert.x can handle a lot of concurrent requests using a small number of kernel
+      threads.
+
+      Vert.x lets your app scale with minimal hardware.
+
+
+      Vert.x is incredibly flexible - whether it''s network utilities, sophisticated
+      modern web applications, HTTP/REST microservices, high volume event processing
+      or a full-blown back-end message-bus application, Vert.x is a great fit.
+
+
+      Vert.x is used by many [different companies](http://vertx.io/whos_using/) from
+      real-time gaming to banking and everything in between.
+
+
+      Vert.x is not a restrictive framework or container and we don''t tell you a
+      correct way to write an application. Instead, we give you a lot of useful bricks
+      and let you create your app the way you want to.
+
+
+      Vert.x is fun - Enjoy being a developer again. Unlike restrictive traditional
+      application containers, Vert.x gives you incredible power and agility to create
+      compelling, scalable, 21st-century applications the way you want to, with a
+      minimum of fuss, in the language you want.
+
+
+      * Vert.x is lightweight - Vert.x core is around 650kB in size.
+
+      * Vert.x is fast. Here are some independent [numbers](https://www.techempower.com/benchmarks/#section=data-r8&hw=i7&test=plaintext).
+
+      * Vert.x is not an application server. There''s no monolithic Vert.x instance
+      into which you deploy applications. You just run your apps wherever you want
+      to.
+
+      * Vert.x is modular - when you need more bits just add the bits you need and
+      nothing more.
+
+      * Vert.x is simple but not simplistic. Vert.x allows you to create powerful
+      apps, simply.
+
+      * Vert.x is an ideal choice for creating light-weight, high-performance, microservices.
+
+      '
+    type: text
   slug: 01-local-build
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -131,14 +204,15 @@ challenges:
   difficulty: basic
   slug: 02-local-build2
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -218,7 +292,7 @@ challenges:
     works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
 
 
-    ![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)
+    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)
 
 
     The first screen you will see is the authentication screen. Enter your username
@@ -227,14 +301,14 @@ challenges:
     then login:
 
 
-    ![Web Console Login](/openshift/assets/middleware/rhoar-getting-started-vertx/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/login.png)
 
 
     After you have authenticated to the web console, you will be presented with a
     list of projects that your user has permission to view.
 
 
-    ![Web Console Projects](/openshift/assets/middleware/rhoar-getting-started-vertx/projects.png)
+    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/projects.png)
 
 
     Click on your new project name to be taken to the project overview page which
@@ -242,7 +316,7 @@ challenges:
     as part of your project:
 
 
-    ![Web Console Overview](/openshift/assets/middleware/rhoar-getting-started-vertx/overview.png)
+    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/overview.png)
 
 
     There''s nothing there now, but that''s about to change.
@@ -251,14 +325,15 @@ challenges:
   difficulty: basic
   slug: 03-login-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -286,14 +361,15 @@ challenges:
   difficulty: basic
   slug: 04-deploy-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -307,7 +383,7 @@ challenges:
     \ , but for the moment we will add a simple call to '/', just to check that the\
     \ Vert.x instance is alive and responding.\n\n## Health check warning\n\nOpen\
     \ the [OpenShift webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)\n\
-    \nYou will then see the following warning\n\n![Health Check Warning](/openshift/assets/middleware/rhoar-getting-started-vertx/health-check-warning.png)\n\
+    \nYou will then see the following warning\n\n![Health Check Warning](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/health-check-warning.png)\n\
     \nThis is just a warning, and your container might be working 100% correctly,\
     \ but without a proper health-check configured there is no way for OpenShift to\
     \ tell if the application is responding correctly or not.  \n\n# Monitor if applications\
@@ -337,14 +413,15 @@ challenges:
   difficulty: basic
   slug: 05-add-health-check
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -419,7 +496,7 @@ description: 'In this scenario, you will learn more about [Eclipse Vert.x](https
 
   '
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

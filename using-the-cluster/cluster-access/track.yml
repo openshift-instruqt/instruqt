@@ -25,16 +25,35 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-logging-in-via-the-web-console
-  id: va8f0lp2moar
+  id: xaoohavt5fk3
   type: challenge
   title: Topic 1 - Logging in Via the Web Console
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to log in to OpenShift with the web console and with the `oc` command line tool.
+
+      ## Concepts
+
+      * OpenShift user authentication and authorization basics
+      * OpenShift Web Console
+      * OpenShift `oc` tool
+      * OpenShift Projects and collaboration
+
+      ## Use case
+
+      You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     The easiest way to access and interact with OpenShift is through the web console. The URL for the web console will be dictated by what was specified as the public URL for the OpenShift cluster when it was set up. Once the web console is accessed, how you then login will depend on the configured identity provider.
 
@@ -73,19 +92,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 02-logging-in-via-the-command-line
-  id: 1wikfboywy2d
+  id: btsyo4jaranu
   type: challenge
   title: Topic 2 - Logging in Via the Command Line
   assignment: |
@@ -164,19 +184,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 03-collaborating-with-other-users
-  id: iixkm13wehtw
+  id: mxdmy7j7hldx
   type: challenge
   title: Topic 3 - Collaborating with Other Users
   assignment: |
@@ -251,19 +272,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 04-switching-between-accounts
-  id: r2ydv5jjyywm
+  id: fmxuiuw4trpl
   type: challenge
   title: Topic 4 - Switching Between Accounts
   assignment: |
@@ -315,15 +337,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "3304944470458189021"
+checksum: "12896781078325888686"

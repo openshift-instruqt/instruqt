@@ -12,16 +12,22 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: qzjwbnw8tccv
+  id: fllsmefecexx
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |+
+      In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a RESTful application using Spring Rest.
+
+
   assignment: |
     # Import the code
 
@@ -63,19 +69,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 02-create-rest-services
-  id: jujkgmxpx9gw
+  id: xomky6qhyq5j
   type: challenge
   title: Step 2
   assignment: |-
@@ -231,19 +238,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 03-login-to-openshift
-  id: 4fhiaubpoeos
+  id: z3wwo32proiy
   type: challenge
   title: Step 3
   assignment: |-
@@ -298,7 +306,7 @@ challenges:
 
     After the rollout is complete you can go to the OpenShift web console, login with **admin**/**admin** credentials, select **dev** project and find the route to your application under **Routes**.
 
-    ![Route from Web Console](/openshift/assets/middleware/rhoar-spring-rest-services/route.png)
+    ![Route from Web Console](https://katacoda.com/openshift/assets/middleware/rhoar-spring-rest-services/route.png)
 
     You can also click [here](http://spring-rest-services-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/api/fruits) to directly access the running application.
 
@@ -336,15 +344,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "15462259596196060343"
+checksum: "12625810223864169839"

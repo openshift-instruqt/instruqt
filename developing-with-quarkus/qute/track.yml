@@ -22,16 +22,32 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-basics
-  id: 7u6yhyu16x4i
+  id: fptdziw0xqt1
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      This exercise demonstrates how your Quarkus application can utilize the [Qute Templating Engine](https://quarkus.io/guides/qute) feature to build type-safe, server-side templates which can be rendered at will in Quarkus applications.
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+
+      Qute is a templating engine designed specifically to meet Quarkus' needs. The usage of reflection is minimized to reduce the size of native images. The API combines both the imperative and the non-blocking reactive style of coding. In the development mode, all files located in `src/main/resources/templates` are watched for changes and modifications are immediately visible. Furthermore, we try to detect most of the template problems at build time. In this exercise, you will learn how to easily render templates in your application.
+
+      The **Qute** engine renders templates (ordinary files with things like `Hello {name}!`). The expression `{name}` embedded in the template is replaced with the value of the corresponding value passed in as context (a simple string, or perhaps a `Map` of key/value pairs). Due to its type-safe goals, the engine will attempt to validate expressions during the build, to catch any errors or typos or other mismatched expressions.
+
+      > Qute is currently an experimental feature in Quarkus. There is no guarantee of stability nor long term presence in the platform until the solution matures.
+      >
+      > An [introduction guide](https://quarkus.io/guides/qute) and a more comprehensive [reference guide](https://quarkus.io/guides/qute-reference) are available.
+
+      Let's get going!
   assignment: |-
     # Inspect Java runtime
 
@@ -91,11 +107,11 @@ challenges:
 
     Test that the app is running by accessing the sample page [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page). You should see
 
-    ![Qute sample](/openshift/assets/middleware/quarkus/qute-sample.png)
+    ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample.png)
 
     This page is rendered using the `qute/src/main/resources/templates/page.qute.html` HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page?name=Jerry) (which adds `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template:
 
-    ![Qute sample](/openshift/assets/middleware/quarkus/qute-sample-jerry.png)
+    ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample-jerry.png)
 
     Let's keep the app running and continue using Quarkus' _Live Coding_ feature. Changes you make are immediately available in the running app when developing Quarkus apps.
 
@@ -181,19 +197,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 02-typesafe
-  id: wjp4mfpvrr65
+  id: 4xbqwvrrzkdl
   type: challenge
   title: Step 2
   assignment: |+
@@ -331,19 +348,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 03-parameters
-  id: hubdp4ceyfkq
+  id: rxd2ojyxj450
   type: challenge
   title: Step 3
   assignment: |+
@@ -475,7 +493,7 @@ challenges:
 
     You can also [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to see an actual HTML rendering in your browser:
 
-    ![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)
+    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
     ## Template parameter declaration inside the template
 
@@ -535,13 +553,13 @@ challenges:
 
     Test it out again using the same process: [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to see an actual HTML rendering in your browser:
 
-    ![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)
+    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
     If you did not see errors, congratulations! But let's see what happens if we do. Click here: `qute/src/main/resources/templates/ItemResource/item.html` to open the template. Change `{item.name}` to `{item.nonSense}`. Now click here to [reload](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1). You should get an error:
 
-    ![Err](/openshift/assets/middleware/quarkus/qute-err.png)
+    ![Err](https://katacoda.com/openshift/assets/middleware/quarkus/qute-err.png)
 
     Qute checks the syntax and will fail the build (and result in a prettified HTML error screen) when syntax errors are detected in the template. This makes it very easy to quickly iterate, update code and template, and see the results.
 
@@ -552,19 +570,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 04-extensions
-  id: qk8yrqenhfsr
+  id: 7l1bnmupgpba
   type: challenge
   title: Step 4
   assignment: |+
@@ -622,30 +641,31 @@ challenges:
 
     [Click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to reload the page and see the result for Apples:
 
-    ![Apple](/openshift/assets/middleware/quarkus/qute-apple.png)
+    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
     Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But [try with Mangos](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/4).
 
-    ![Mango](/openshift/assets/middleware/quarkus/qute-mango.png)
+    ![Mango](https://katacoda.com/openshift/assets/middleware/quarkus/qute-mango.png)
 
     What a deal!
 
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 05-periodic
-  id: ioyhoknxry2r
+  id: b73wb6svypqy
   type: challenge
   title: Step 5
   assignment: |
@@ -800,19 +820,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 06-reactive
-  id: j0gixrireojl
+  id: xavnxsw7yfko
   type: challenge
   title: Step 6
   assignment: |+
@@ -908,15 +929,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "6905017516073520799"
+checksum: "16696876846050192853"

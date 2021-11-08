@@ -26,16 +26,36 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 00-application-overview
-  id: xcdoohdyvzza
+  id: ngzqeexpxxjo
   type: challenge
   title: Application Overview
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to use the *OpenShift Do* (`odo`) command line tool to build and deploy applications on OpenShift.
+
+      ## Concepts
+
+      * `odo` developer tool abstracts deployment tasks
+      * OpenShift Projects and Applications
+      * OpenShift Web Console’s Developer Perspective
+      * Multi-tiered applications with a web frontend
+      * Automatic OpenShift Builds for iterative development
+
+      ## Use case
+
+      Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     The application you will be deploying is a wild west shooter style game.
 
@@ -53,15 +73,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 01-creating-initial-project
-  id: uqrvcey7rrjz
+  id: tam8dhs0g0uc
   type: challenge
   title: Creating an Initial Project
   assignment: |
@@ -146,15 +167,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 02-creating-new-binary-component
-  id: sda3u6vktlbz
+  id: z5tera1vq7q3
   type: challenge
   title: Creating new binary component
   assignment: |
@@ -262,15 +284,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 03-deploying-component-from-source-code
-  id: qvmix1vaxee3
+  id: 27d8xxrk1zte
   type: challenge
   title: Deploying component from source-code
   assignment: |
@@ -354,15 +377,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 04-configuring-components
-  id: waiycal8kdtk
+  id: fzr4hdledybp
   type: challenge
   title: Configuring components
   assignment: |
@@ -394,15 +418,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 05-exposing-components-to-public
-  id: p1gpwct77mej
+  id: xkzdusandmgi
   type: challenge
   title: Exposing components to public
   assignment: |
@@ -448,15 +473,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 06-making-changes-to-source-code
-  id: fbutonp4en3w
+  id: yxtyvlpdakbg
   type: challenge
   title: Making changes to source-code
   assignment: |
@@ -503,11 +529,12 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 128
-checksum: "3157586131064139417"
+checksum: "302239931703818846"

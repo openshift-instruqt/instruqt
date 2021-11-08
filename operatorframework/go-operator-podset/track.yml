@@ -43,16 +43,53 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: ir75yeiaszyq
+  id: buadbcwgxmrx
   type: challenge
   title: Creating a New Project
+  notes:
+  - type: text
+    contents: |
+      ## Why an Operator?
+
+      Operators make it easy to manage complex stateful applications on top of Kubernetes. However writing an Operator today can be difficult because of challenges such as using low level APIs, writing boilerplate, and a lack of modularity which leads to duplication.
+
+      ## What is the Operator SDK?
+
+      The Operator SDK is a framework that uses the controller-runtime library to make writing Operators easier by providing:
+
+      * High level APIs and abstractions to write the operational logic more intuitively.
+      * Tools for scaffolding and code generation to bootstrap a new project fast.
+      * Extensions to cover common Operator use cases.
+
+      ## How do I use it?
+
+      The following is the workflow for a new **Go-based** Operator with the Operator SDK:
+
+      1. Create a new Operator project using the SDK CLI.
+      2. Create a new Custom Resource Definition API Type using the SDK CLI.
+      3. Add your Custom Resource Definition (CRD) to your live Kubernetes cluster.
+      4. Define your Custom Resource Spec and Status.
+      5. Create a new Controller for your Custom Resource Definition API.
+      6. Write the reconciling logic for your Controller.
+      7. Run the Operator locally to test your code against your live Kubernetes cluster.
+      8. Add your Custom Resource (CR) to your live Kubernetes cluster and watch your Operator in action!
+      9. After you are satisifed with your work, run some Makefile commands to build and generate the Operator Deployment manifests.
+      10. Optionally add additional APIs and Controllers using the SDK CLI.
+
+      ## PodSet Operator
+
+      In this tutorial, we will create an Operator called a PodSet. A PodSet is a simple Controller/Operator that manages pods.
+
+      A user provides a number of pods specified in `spec.replicas`. The PodSet also conveniently outputs the name of all Pods currently controlled by the PodSet in the `status.PodNames` field.
+
+      Let's begin!
   assignment: |-
     Let's begin by creating a new project called `myproject`:
 
@@ -80,19 +117,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step2
-  id: nawm1pmvcvo7
+  id: f6wr7y00xxoq
   type: challenge
   title: Creating the API and Controller
   assignment: |-
@@ -101,61 +139,269 @@ challenges:
     ```
     operator-sdk create api --group=app --version=v1alpha1 --kind=PodSet --resource --controller
     ```
+
     We should now see the `/api`, `config`, and `/controllers` directories.
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step3
-  id: m7snt3qifaia
+  id: tvanlkh2nule
   type: challenge
   title: Defining the Spec and Status
-  assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go` file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap) includes `spec` and `status`. Kubernetes functions by reconciling desired state (Spec) with the actual cluster state. We then record what is observed (Status).\n\nAlso observe the `+kubebuilder` comment markers found throughout the file. `operator-sdk` makes use of a tool called [controler-gen](https://github.com/kubernetes-sigs/controller-tools) (from the [controller-tools](https://github.com/kubernetes-sigs/controller-tools) project) for generating utility code and Kubernetes YAML. More information on markers for config/code generation can be found [here](https://book.kubebuilder.io/reference/markers.html).\n\nLet's now modify the `PodSetSpec` and `PodSetStatus` of the `PodSet` Custom Resource (CR) at `api/v1alpha1/podset_types.go`\n\nIt should look like the file below:\n\n```go\npackage v1alpha1\n\nimport (\n        metav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n)\n\n// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!\n// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.\n\n// PodSetSpec defines the desired state of PodSet\ntype PodSetSpec struct {\n        // Replicas is the desired number of pods for the PodSet\n        // +kubebuilder:validation:Minimum=1\n        // +kubebuilder:validation:Maximum=10\n        Replicas int32 `json:\"replicas,omitempty\"`\n}\n\n// PodSetStatus defines the current status of PodSet\ntype PodSetStatus struct {\n        PodNames        []string        `json:\"podNames\"`\n  AvailableReplicas\tint32\t`json:\"availableReplicas\"`\n}\n\n// +kubebuilder:object:root=true\n// +kubebuilder:subresource:status\n\n// PodSet is the Schema for the podsets API\n// +kubebuilder:printcolumn:JSONPath=\".spec.replicas\",name=Desired,type=string\n// +kubebuilder:printcolumn:JSONPath=\".status.availableReplicas\",name=Available,type=string\ntype PodSet struct {\n        metav1.TypeMeta   `json:\",inline\"`\n        metav1.ObjectMeta `json:\"metadata,omitempty\"`\n\n        Spec   PodSetSpec   `json:\"spec,omitempty\"`\n        Status PodSetStatus `json:\"status,omitempty\"`\n}\n\n// +kubebuilder:object:root=true\n\n// PodSetList contains a list of PodSet\ntype PodSetList struct {\n        metav1.TypeMeta `json:\",inline\"`\n        metav1.ListMeta `json:\"metadata,omitempty\"`\n        Items           []PodSet `json:\"items\"`\n}\n\nfunc init() {\n        SchemeBuilder.Register(&PodSet{}, &PodSetList{})\n}\n```\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/podset_types.go api/v1alpha1/podset_types.go\n```\n\nAfter modifying the `*_types.go` file, always run the following command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n```\n<br>\nNow we can run the `make manifests` command to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n\nThanks to our comment markers, observe that we now have a newly generated CRD yaml that reflects the `spec.replicas` and `status.podNames` OpenAPI v3 schema validation and customized print columns.\n\n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n\nDeploy your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\nConfirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```"
+  assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go` file for our PodSet API:\n\n```\ncat api/v1alpha1/podset_types.go\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap) includes `spec` and `status`. Kubernetes functions by reconciling desired state (Spec) with the actual cluster state. We then record what is observed (Status).\n\nAlso observe the `+kubebuilder` comment markers found throughout the file. `operator-sdk` makes use of a tool called [controler-gen](https://github.com/kubernetes-sigs/controller-tools) (from the [controller-tools](https://github.com/kubernetes-sigs/controller-tools) project) for generating utility code and Kubernetes YAML. More information on markers for config/code generation can be found [here](https://book.kubebuilder.io/reference/markers.html).\n\nLet's now modify the `PodSetSpec` and `PodSetStatus` of the `PodSet` Custom Resource (CR) at `api/v1alpha1/podset_types.go`\n\n\nIt should look like the file below:\n\n```go\npackage v1alpha1\n\nimport (\n        metav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n)\n\n// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!\n// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.\n\n// PodSetSpec defines the desired state of PodSet\ntype PodSetSpec struct {\n        // Replicas is the desired number of pods for the PodSet\n        // +kubebuilder:validation:Minimum=1\n        // +kubebuilder:validation:Maximum=10\n        Replicas int32 `json:\"replicas,omitempty\"`\n}\n\n// PodSetStatus defines the current status of PodSet\ntype PodSetStatus struct {\n        PodNames        []string        `json:\"podNames\"`\n    AvailableReplicas\tint32\t`json:\"availableReplicas\"`\n}\n\n// +kubebuilder:object:root=true\n// +kubebuilder:subresource:status\n\n// PodSet is the Schema for the podsets API\n// +kubebuilder:printcolumn:JSONPath=\".spec.replicas\",name=Desired,type=string\n// +kubebuilder:printcolumn:JSONPath=\".status.availableReplicas\",name=Available,type=string\ntype PodSet struct {\n        metav1.TypeMeta   `json:\",inline\"`\n        metav1.ObjectMeta `json:\"metadata,omitempty\"`\n\n        Spec   PodSetSpec   `json:\"spec,omitempty\"`\n        Status PodSetStatus `json:\"status,omitempty\"`\n}\n\n// +kubebuilder:object:root=true\n\n// PodSetList contains a list of PodSet\ntype PodSetList struct {\n        metav1.TypeMeta `json:\",inline\"`\n        metav1.ListMeta `json:\"metadata,omitempty\"`\n        Items           []PodSet `json:\"items\"`\n}\n\nfunc init() {\n        SchemeBuilder.Register(&PodSet{}, &PodSetList{})\n}\n```\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/podset_types.go api/v1alpha1/podset_types.go\n```\n\nAfter modifying the `*_types.go` file, always run the following command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n```\n\nNow we can run the `make manifests` command to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n\nThanks to our comment markers, observe that we now have a newly generated CRD yaml that reflects the `spec.replicas` and `status.podNames` OpenAPI v3 schema validation and customized print columns.\n\n```\ncat config/crd/bases/app.example.com_podsets.yaml\n```\n\nDeploy your PodSet Custom Resource Definition to the live OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\nConfirm the CRD was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```"
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step4
-  id: py6krpvyzcy2
+  id: g9wches6jy7y
   type: challenge
   title: Customizing the Operator Logic
-  assignment: "Let's now observe the default `controllers/podset_controller.go` file:\n\n```\ncat controllers/podset_controller.go\n```\n`\n```\n\nThis default controller requires additional logic so we can trigger our reconciler whenever `kind: PodSet` objects are added, updated, or deleted. We also want to trigger the reconciler whenever Pods owned by a given PodSet are added, updated, and deleted as well. To accomplish this. we modify the controller's `SetupWithManager` method.\n\nModify the PodSet controller logic at `controllers/podset_controller.go`:\n\n<pre class=\"file\">\n/*\nCopyright 2021.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n\npackage controllers\n\nimport (\n\t\"context\"\n\t\"reflect\"\n\n\t\"k8s.io/apimachinery/pkg/runtime\"\n\tctrl \"sigs.k8s.io/controller-runtime\"\n\t\"sigs.k8s.io/controller-runtime/pkg/client\"\n\tctrllog \"sigs.k8s.io/controller-runtime/pkg/log\"\n\n\tappv1alpha1 \"github.com/redhat/podset-operator/api/v1alpha1\"\n\tcorev1 \"k8s.io/api/core/v1\"\n\tmetav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n\n\t\"k8s.io/apimachinery/pkg/api/errors\"\n\t\"k8s.io/apimachinery/pkg/labels\"\n\t\"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil\"\n)\n\n// PodSetReconciler reconciles a PodSet object\ntype PodSetReconciler struct {\n\tclient.Client\n\tScheme *runtime.Scheme\n}\n\n//+kubebuilder:rbac:groups=app.example.com,resources=podsets,verbs=get;list;watch;create;update;patch;delete\n//+kubebuilder:rbac:groups=app.example.com,resources=podsets/status,verbs=get;update;patch\n//+kubebuilder:rbac:groups=app.example.com,resources=podsets/finalizers,verbs=update\n\n// Reconcile is part of the main kubernetes reconciliation loop which aims to\n// move the current state of the cluster closer to the desired state.\n// TODO(user): Modify the Reconcile function to compare the state specified by\n// the PodSet object against the actual cluster state, and then\n// perform operations to make the cluster state reflect the state specified by\n// the user.\n//\n// For more details, check Reconcile and its Result here:\n// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile\nfunc (r *PodSetReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {\n\tlog := ctrllog.FromContext(ctx)\n\n\t// Fetch the PodSet instance\n\tinstance := &appv1alpha1.PodSet{}\n\terr := r.Get(context.TODO(), req.NamespacedName, instance)\n\tif err != nil {\n\t\tif errors.IsNotFound(err) {\n\t\t\t// Request object not found, could have been deleted after reconcile request.\n\t\t\t// Owned objects are automatically garbage collected. For additional cleanup logic use finalizers.\n\t\t\t// Return and don't requeue\n\t\t\treturn ctrl.Result{}, nil\n\t\t}\n\t\t// Error reading the object - requeue the request.\n\t\treturn ctrl.Result{}, err\n\n\t}\n\n\t// List all pods owned by this PodSet instance\n\tpodSet := instance\n\tpodList := &corev1.PodList{}\n\tlbs := map[string]string{\n\t\t\"app\":     podSet.Name,\n\t\t\"version\": \"v0.1\",\n\t}\n\tlabelSelector := labels.SelectorFromSet(lbs)\n\tlistOps := &client.ListOptions{Namespace: podSet.Namespace, LabelSelector: labelSelector}\n\tif err = r.List(context.TODO(), podList, listOps); err != nil {\n\t\treturn ctrl.Result{}, err\n\t}\n\n\t// Count the pods that are pending or running as available\n\tvar available []corev1.Pod\n\tfor _, pod := range podList.Items {\n\t\tif pod.ObjectMeta.DeletionTimestamp != nil {\n\t\t\tcontinue\n\t\t}\n\t\tif pod.Status.Phase == corev1.PodRunning || pod.Status.Phase == corev1.PodPending {\n\t\t\tavailable = append(available, pod)\n\t\t}\n\t}\n\tnumAvailable := int32(len(available))\n\tavailableNames := []string{}\n\tfor _, pod := range available {\n\t\tavailableNames = append(availableNames, pod.ObjectMeta.Name)\n\t}\n\n\t// Update the status if necessary\n\tstatus := appv1alpha1.PodSetStatus{\n\t\tPodNames:          availableNames,\n\t\tAvailableReplicas: numAvailable,\n\t}\n\tif !reflect.DeepEqual(podSet.Status, status) {\n\t\tpodSet.Status = status\n\t\terr = r.Status().Update(context.TODO(), podSet)\n\t\tif err != nil {\n\t\t\tlog.Error(err, \"Failed to update PodSet status\")\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t}\n\n\tif numAvailable > podSet.Spec.Replicas {\n\t\tlog.Info(\"Scaling down pods\", \"Currently available\", numAvailable, \"Required replicas\", podSet.Spec.Replicas)\n\t\tdiff := numAvailable - podSet.Spec.Replicas\n\t\tdpods := available[:diff]\n\t\tfor _, dpod := range dpods {\n\t\t\terr = r.Delete(context.TODO(), &dpod)\n\t\t\tif err != nil {\n\t\t\t\tlog.Error(err, \"Failed to delete pod\", \"pod.name\", dpod.Name)\n\t\t\t\treturn ctrl.Result{}, err\n\t\t\t}\n\t\t}\n\t\treturn ctrl.Result{Requeue: true}, nil\n\t}\n\n\tif numAvailable < podSet.Spec.Replicas {\n\t\tlog.Info(\"Scaling up pods\", \"Currently available\", numAvailable, \"Required replicas\", podSet.Spec.Replicas)\n\t\t// Define a new Pod object\n\t\tpod := newPodForCR(podSet)\n\t\t// Set PodSet instance as the owner and controller\n\t\tif err := controllerutil.SetControllerReference(podSet, pod, r.Scheme); err != nil {\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t\terr = r.Create(context.TODO(), pod)\n\t\tif err != nil {\n\t\t\tlog.Error(err, \"Failed to create pod\", \"pod.name\", pod.Name)\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t\treturn ctrl.Result{Requeue: true}, nil\n\t}\n\n\treturn ctrl.Result{}, nil\n}\n\n// newPodForCR returns a busybox pod with the same name/namespace as the cr\nfunc newPodForCR(cr *appv1alpha1.PodSet) *corev1.Pod {\n\tlabels := map[string]string{\n\t\t\"app\":     cr.Name,\n\t\t\"version\": \"v0.1\",\n\t}\n\treturn &corev1.Pod{\n\t\tObjectMeta: metav1.ObjectMeta{\n\t\t\tGenerateName: cr.Name + \"-pod\",\n\t\t\tNamespace:    cr.Namespace,\n\t\t\tLabels:       labels,\n\t\t},\n\t\tSpec: corev1.PodSpec{\n\t\t\tContainers: []corev1.Container{\n\t\t\t\t{\n\t\t\t\t\tName:    \"busybox\",\n\t\t\t\t\tImage:   \"busybox\",\n\t\t\t\t\tCommand: []string{\"sleep\", \"3600\"},\n\t\t\t\t},\n\t\t\t},\n\t\t},\n\t}\n}\n\n// SetupWithManager sets up the controller with the Manager.\nfunc (r *PodSetReconciler) SetupWithManager(mgr ctrl.Manager) error {\n\treturn ctrl.NewControllerManagedBy(mgr).\n\t\tFor(&appv1alpha1.PodSet{}).\n\t\tOwns(&corev1.Pod{}).\n\t\tComplete(r)\n}\n</pre>\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/podset_controller.go controllers/podset_controller.go\n```\n`\n```\n\n`go mod tidy`  ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module's packages and dependencies, and it removes requirements on modules that don't provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.\n\n```\ngo mod tidy\n```\n`\n```\n\n"
+  assignment: |-
+    Let's now observe the default `controllers/podset_controller.go` file:
+
+    ```
+    cat controllers/podset_controller.go
+    ```
+
+    This default controller requires additional logic so we can trigger our reconciler whenever `kind: PodSet` objects are added, updated, or deleted. We also want to trigger the reconciler whenever Pods owned by a given PodSet are added, updated, and deleted as well. To accomplish this. we modify the controller's `SetupWithManager` method.
+
+    Modify the PodSet controller logic at `controllers/podset_controller.go`:
+
+    ```go
+    /*
+    Copyright 2021.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    */
+
+    package controllers
+
+    import (
+        "context"
+        "reflect"
+
+        "k8s.io/apimachinery/pkg/runtime"
+        ctrl "sigs.k8s.io/controller-runtime"
+        "sigs.k8s.io/controller-runtime/pkg/client"
+        ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
+
+        appv1alpha1 "github.com/redhat/podset-operator/api/v1alpha1"
+        corev1 "k8s.io/api/core/v1"
+        metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+        "k8s.io/apimachinery/pkg/api/errors"
+        "k8s.io/apimachinery/pkg/labels"
+        "sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+    )
+
+    // PodSetReconciler reconciles a PodSet object
+    type PodSetReconciler struct {
+        client.Client
+        Scheme *runtime.Scheme
+    }
+
+    //+kubebuilder:rbac:groups=app.example.com,resources=podsets,verbs=get;list;watch;create;update;patch;delete
+    //+kubebuilder:rbac:groups=app.example.com,resources=podsets/status,verbs=get;update;patch
+    //+kubebuilder:rbac:groups=app.example.com,resources=podsets/finalizers,verbs=update
+
+    // Reconcile is part of the main kubernetes reconciliation loop which aims to
+    // move the current state of the cluster closer to the desired state.
+    // TODO(user): Modify the Reconcile function to compare the state specified by
+    // the PodSet object against the actual cluster state, and then
+    // perform operations to make the cluster state reflect the state specified by
+    // the user.
+    //
+    // For more details, check Reconcile and its Result here:
+    // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile
+    func (r *PodSetReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+        log := ctrllog.FromContext(ctx)
+
+        // Fetch the PodSet instance
+        instance := &appv1alpha1.PodSet{}
+        err := r.Get(context.TODO(), req.NamespacedName, instance)
+        if err != nil {
+            if errors.IsNotFound(err) {
+                // Request object not found, could have been deleted after reconcile request.
+                // Owned objects are automatically garbage collected. For additional cleanup logic use finalizers.
+                // Return and don't requeue
+                return ctrl.Result{}, nil
+            }
+            // Error reading the object - requeue the request.
+            return ctrl.Result{}, err
+
+        }
+
+        // List all pods owned by this PodSet instance
+        podSet := instance
+        podList := &corev1.PodList{}
+        lbs := map[string]string{
+            "app":     podSet.Name,
+            "version": "v0.1",
+        }
+        labelSelector := labels.SelectorFromSet(lbs)
+        listOps := &client.ListOptions{Namespace: podSet.Namespace, LabelSelector: labelSelector}
+        if err = r.List(context.TODO(), podList, listOps); err != nil {
+            return ctrl.Result{}, err
+        }
+
+        // Count the pods that are pending or running as available
+        var available []corev1.Pod
+        for _, pod := range podList.Items {
+            if pod.ObjectMeta.DeletionTimestamp != nil {
+                continue
+            }
+            if pod.Status.Phase == corev1.PodRunning || pod.Status.Phase == corev1.PodPending {
+                available = append(available, pod)
+            }
+        }
+        numAvailable := int32(len(available))
+        availableNames := []string{}
+        for _, pod := range available {
+            availableNames = append(availableNames, pod.ObjectMeta.Name)
+        }
+
+        // Update the status if necessary
+        status := appv1alpha1.PodSetStatus{
+            PodNames:          availableNames,
+            AvailableReplicas: numAvailable,
+        }
+        if !reflect.DeepEqual(podSet.Status, status) {
+            podSet.Status = status
+            err = r.Status().Update(context.TODO(), podSet)
+            if err != nil {
+                log.Error(err, "Failed to update PodSet status")
+                return ctrl.Result{}, err
+            }
+        }
+
+        if numAvailable > podSet.Spec.Replicas {
+            log.Info("Scaling down pods", "Currently available", numAvailable, "Required replicas", podSet.Spec.Replicas)
+            diff := numAvailable - podSet.Spec.Replicas
+            dpods := available[:diff]
+            for _, dpod := range dpods {
+                err = r.Delete(context.TODO(), &dpod)
+                if err != nil {
+                    log.Error(err, "Failed to delete pod", "pod.name", dpod.Name)
+                    return ctrl.Result{}, err
+                }
+            }
+            return ctrl.Result{Requeue: true}, nil
+        }
+
+        if numAvailable < podSet.Spec.Replicas {
+            log.Info("Scaling up pods", "Currently available", numAvailable, "Required replicas", podSet.Spec.Replicas)
+            // Define a new Pod object
+            pod := newPodForCR(podSet)
+            // Set PodSet instance as the owner and controller
+            if err := controllerutil.SetControllerReference(podSet, pod, r.Scheme); err != nil {
+                return ctrl.Result{}, err
+            }
+            err = r.Create(context.TODO(), pod)
+            if err != nil {
+                log.Error(err, "Failed to create pod", "pod.name", pod.Name)
+                return ctrl.Result{}, err
+            }
+            return ctrl.Result{Requeue: true}, nil
+        }
+
+        return ctrl.Result{}, nil
+    }
+
+    // newPodForCR returns a busybox pod with the same name/namespace as the cr
+    func newPodForCR(cr *appv1alpha1.PodSet) *corev1.Pod {
+        labels := map[string]string{
+            "app":     cr.Name,
+            "version": "v0.1",
+        }
+        return &corev1.Pod{
+            ObjectMeta: metav1.ObjectMeta{
+                GenerateName: cr.Name + "-pod",
+                Namespace:    cr.Namespace,
+                Labels:       labels,
+            },
+            Spec: corev1.PodSpec{
+                Containers: []corev1.Container{
+                    {
+                        Name:    "busybox",
+                        Image:   "busybox",
+                        Command: []string{"sleep", "3600"},
+                    },
+                },
+            },
+        }
+    }
+
+    // SetupWithManager sets up the controller with the Manager.
+    func (r *PodSetReconciler) SetupWithManager(mgr ctrl.Manager) error {
+        return ctrl.NewControllerManagedBy(mgr).
+            For(&appv1alpha1.PodSet{}).
+            Owns(&corev1.Pod{}).
+            Complete(r)
+    }
+    ```
+
+    You can easily update this file by running the following command:
+
+    ```
+    \cp /tmp/podset_controller.go controllers/podset_controller.go
+    ```
+
+    `go mod tidy`  ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module's packages and dependencies, and it removes requirements on modules that don't provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
+
+    ```
+    go mod tidy
+    ```
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step5
-  id: j4x3lfspchiv
+  id: 64l5mzorwofe
   type: challenge
   title: Running the Operator Locally (Outside the Cluster)
   assignment: |-
@@ -171,22 +417,25 @@ challenges:
     ```
     WATCH_NAMESPACE=myproject make run
     ```
+    `
+    ```
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step6
-  id: mjntxf0xsjdj
+  id: fh3lm98wyh33
   type: challenge
   title: Creating the PodSet Custom Resource
   assignment: |
@@ -196,16 +445,17 @@ challenges:
     cd $HOME/projects/podset-operator
     cat config/samples/app_v1alpha1_podset.yaml
     ```
+
     Ensure your `kind: PodSet` Custom Resource (CR) is updated with `spec.replicas`
 
-    <pre class="file">
+    ```yaml
     apiVersion: app.example.com/v1alpha1
     kind: PodSet
     metadata:
       name: podset-sample
     spec:
       replicas: 3
-    </pre>
+    ```
 
     You can easily update this file by running the following command:
 
@@ -256,19 +506,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step7
-  id: ihzx5jyheytx
+  id: 43hfkltq8bv2
   type: challenge
   title: Deleting the PodSet Custom Resource
   assignment: |-
@@ -294,15 +545,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "2707731348165387030"
+checksum: "10214119703635461369"

@@ -24,16 +24,34 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: sybypy8nexto
+  id: jrkmezdijahm
   type: challenge
   title: Topic 1 - Creating an Initial Project
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to copy files to and from a running container without rebuilding the container image. Augment this with a watch function that automatically applies local changes to a running container so you can immediately see the effects in your application.
+
+      ## Concepts
+
+      * Rapid inner-loop development by modifying a running container
+      * OpenShift Projects and Applications
+      * OpenShift `oc` tool’s `new-app` subcommand
+
+      ## Use case
+
+      You can modify an application in a container to develop and test before building a new version of the container's immutable image. Automatatically synchronizing the container with local changes speeds the "inner loop" of develop and test cycles, especially with interpreted programming languages.
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -84,15 +102,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: intermediate
   timelimit: 240
 - slug: 02-downloading-files-from-a-container
-  id: xt2vkyo9vzv0
+  id: ysvxuszjkesq
   type: challenge
   title: Topic 2 - Downloading Files from a Container
   assignment: |-
@@ -289,15 +308,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: intermediate
   timelimit: 240
 - slug: 03-uploading-files-to-a-container
-  id: xeyyxbwktx8i
+  id: vutiuc5tde95
   type: challenge
   title: Topic 3 - Uploading Files to a Container
   assignment: |
@@ -357,15 +377,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: intermediate
   timelimit: 240
 - slug: 04-synchronizing-files-with-a-container
-  id: 2brflqxlnha6
+  id: tsny4ymdk6fe
   type: challenge
   title: Topic 4 - Synchronizing Files with a Container
   assignment: |
@@ -517,15 +538,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: intermediate
   timelimit: 240
 - slug: 05-copying-files-to-a-persistent-volume
-  id: uhiuanu4ft83
+  id: sj6mbfpet2y5
   type: challenge
   title: Topic 5 - Copying Files to a Persistent Volume
   assignment: |
@@ -651,11 +673,12 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: intermediate
   timelimit: 240
-checksum: "833213311829955265"
+checksum: "14877783965732255422"

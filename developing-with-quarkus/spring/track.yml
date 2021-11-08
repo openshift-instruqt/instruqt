@@ -16,16 +16,26 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: dqmjucblbrsy
+  id: oeox12myh3d6
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |-
+      This exercise demonstrates how Spring and Spring Boot developers can use well-known Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications. Spring developers can quickly become productive with Quarkus using existing knowledge and familiarity of these APIs.
+
+      You'll build a relatively simple application that uses Spring Data to integrate (via JPA) with an underlying database, inject beans using Spring DI and expose them as RESTful endpoints via Spring Rest.
+
+      ### Other possibilities
+
+      Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
   assignment: |-
     # Inspect Java runtime
 
@@ -110,19 +120,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 02-create-data
-  id: iodpyq9gprmk
+  id: ya0aishykw1e
   type: challenge
   title: Step 2
   assignment: |-
@@ -252,19 +263,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 03-create-beans
-  id: ckygqwg2wkym
+  id: ye9oamwagcev
   type: challenge
   title: Step 3
   assignment: |
@@ -422,19 +434,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 04-create-web
-  id: ivfhhtevskhi
+  id: yzucmjhdkgln
   type: challenge
   title: Step 4
   assignment: |+
@@ -775,19 +788,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 05-build-app
-  id: z1e8npxmemxn
+  id: vrdbobcpy3c3
   type: challenge
   title: Step 5
   assignment: |
@@ -833,19 +847,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 06-deploy-and-test
-  id: elsi5ym3urbu
+  id: f1bzosamqoxf
   type: challenge
   title: Step 6
   assignment: |-
@@ -982,7 +997,7 @@ challenges:
 
     Back in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus-spring) you'll see the app scaling dynamically up to 10 pods:
 
-    ![Scaling](/openshift/assets/middleware/quarkus/scaling_spring.png)
+    ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling_spring.png)
 
     We now have 10 instances running providing better performance. Make sure it still works:
 
@@ -1032,15 +1047,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "3279382600858358074"
+checksum: "10407374076433560072"

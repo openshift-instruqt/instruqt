@@ -36,16 +36,46 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-using-syncwaves
-  id: f73sbceiqj44
+  id: jv1yo6nlycw0
   type: challenge
   title: Using Syncwaves
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      This scenario will get you get familiar with syncwaves and hook phases.
+
+
+      ## Concepts
+
+      [Syncwaves](https://argoproj.github.io/argo-cd/user-guide/sync-waves/)
+      are used in Argo CD to order how manifests
+      are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
+      breaks up the delivery of these manifests in different phases.
+
+      ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+
+      [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
+
+      Using a combination of syncwaves and resource hooks, you can control how your application rolls out.
+
+      ## Use case
+
+      This is a simple guide that takes you through the following steps:
+
+      * Using Syncwaves to order deployment
+      * Exploring Resource Hooks
+      * Using Syncwaves and Hooks together
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Welcome! In this section we will be exploring how to use syncwaves with
     Argo CD.
@@ -137,19 +167,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
 - slug: 02-exploring-resource-hooks
-  id: aw7uqgnla7qe
+  id: tgyhn1d9xzob
   type: challenge
   title: Exploring Resource Hooks
   assignment: |-
@@ -258,19 +289,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
 - slug: 03-using-syncwaves-and-hooks
-  id: p0r9ypykfdze
+  id: 6d6icwg4a0oz
   type: challenge
   title: Using Syncwaves and Hooks Together
   assignment: |
@@ -355,15 +387,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "11878472665329527429"
+checksum: "18349337197685920808"

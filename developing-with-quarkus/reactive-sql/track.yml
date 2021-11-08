@@ -43,16 +43,53 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-add-extension
-  id: 4c3ay28vnfi0
+  id: 98nyff6ox8cn
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |-
+      In this scenario, you will get an introduction to the reactive programming model of Quarkus
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+
+      ### Unifies Imperative and Reactive
+
+      Application requirements have changed drastically over the last few years. For any application to succeed in the era of cloud computing, big data or IoT, going reactive is increasingly becoming the architecture style to follow.
+
+      Quarkus combines both the familiar imperative code and the non-blocking reactive style when developing applications.
+
+      Quarkus uses Vert.x and Netty at its core. And uses a bunch of reactive frameworks and extensions on top to enable the developers. Quarkus is not just for HTTP microservices, but also for Event-Driven Architecture. The secret behind this is to use a single reactive engine for both imperative and reactive code.
+
+      ![Reactive](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-quarkus.png)
+
+
+      Quarkus does this quite brilliantly. Between imperative and reactive the obvious choice is to have a reactive core. What that helps with is a fast non-blocking core that handles almost everything going via the event-loop. So if you were creating a typical REST application or a client-side application, Quarkus also gives you the imperative programming model. For example, Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Vert.x and Netty). All the HTTP requests your application receive are handled by event loops (IO Thread) and then are routed towards the code that manages the request. Depending on the destination, it can invoke the code managing the request on a worker thread (Servlet, Jax-RS) or use the IO Thread (reactive route)
+
+      In this scenario you will create a simple `Coffee Resource` endpoint by using JAX-RS with Quarkus backed by the Reactive SQL drivers; In our example we will use PostgreSQL Reactive SQL Driver. We will add methods like list, add and remove items from our list of famous Coffee.
+
+
+      # Reactive SQL
+      In every architecture component data is a key ingredient. With no surprises,relational databases store and crunch major amounts of data for applications to be used. Historically, traditional databases have not been reactive, that also trickles down to the JDBC API since using those databases have to be in conjuction with the underlying architecture, which ensures consistency, transactions, ACID etc. However in recent years, improvements have been made and JDBC access can now be done reactivels.
+
+      Some of the advantages with reactive SQL with Quarkus are:
+      - Simple API focusing on scalability and low overhead.
+      - Reactive and non blocking which able to handle many database connections with a single thread.
+      - Ranked #1 in the [TechEmpower Benchmark Round 15 Single query benchmark](https://www.techempower.com/benchmarks/#section=data-r15&hw=ph&test=db)
+
+
+
+
+      ### Other possibilities
+
+      Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
   assignment: |
     # Inspect Java runtime
 
@@ -123,19 +160,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 120
 - slug: 02-remote-dev
-  id: s3vo7g3ykp2k
+  id: mbzbisqfarfz
   type: challenge
   title: Step 2
   assignment: |+
@@ -179,7 +217,7 @@ challenges:
     * Username: `developer`
     * Password: `developer`
 
-    ![Web Console Login](/openshift/assets/middleware/quarkus/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
 
     Click **Skip Tour** to skip the new user introduction.
 
@@ -199,7 +237,7 @@ challenges:
 
     You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph).
 
-    ![Postgres pod](/openshift/assets/middleware/quarkus/rxpost.png)
+    ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/rxpost.png)
 
     ## Add Quarkus OpenShift extension
 
@@ -280,7 +318,7 @@ challenges:
 
     You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph):
 
-    ![Quarkus pod](/openshift/assets/middleware/quarkus/rx-deploy.png)
+    ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/rx-deploy.png)
 
 
     Do a quick test to ensure the remote app is running by [accessing the sample app](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) (which will display the GUI but otherwise be non-functional).
@@ -289,7 +327,7 @@ challenges:
 
     You should see:
 
-    ![Web Console Login](/openshift/assets/middleware/quarkus/rx-initial.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/rx-initial.png)
 
     It's working! We'll leave it running and use Quarkus' Remote Live Reload feature to automatically update our app as we make changes.
 
@@ -322,19 +360,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 120
 - slug: 03-add-resource
-  id: v1drkoxef9jv
+  id: 1wofu5kpqsbj
   type: challenge
   title: Step 3
   assignment: |-
@@ -423,19 +462,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 120
 - slug: 04-add-model
-  id: 94bxi4cospef
+  id: ho5pkgp6fhnj
   type: challenge
   title: Step 4
   assignment: |-
@@ -489,19 +529,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 120
 - slug: 05-package-and-run
-  id: uov8sm5l1ys9
+  id: yqbltw8kmtp7
   type: challenge
   title: Step 5
   assignment: |
@@ -537,7 +578,7 @@ challenges:
 
     [Open up the web UI](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com). You should see the front web page load with the List of Coffees, to which you can add (or delete).
 
-    ![Reactive SQL app UI](/openshift/assets/middleware/quarkus/reactive-sql-ui.png)
+    ![Reactive SQL app UI](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-sql-ui.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -565,15 +606,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 120
-checksum: "2198868956588556814"
+checksum: "17151215970551883199"

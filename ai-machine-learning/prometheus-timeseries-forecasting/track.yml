@@ -25,16 +25,35 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: wztob6cealp9
+  id: dig6ytxjvnxh
   type: challenge
   title: SARIMA model to forecast timeseries metrics
+  notes:
+  - type: text
+    contents: |
+      # Introduction
+
+      In this tutorial you will learn how to train a machine learning model on [Prometheus](https://github.com/prometheus/prometheus#prometheus) metrics to perform time series forecasting and predict anomalies.
+
+      We will use a [Jupyter](https://jupyter-notebook.readthedocs.io/en/stable/) notebook to train a machine learning model on sample Prometheus time series metric data sets. We will be using the [Prometheus API Client](https://github.com/AICoE/prometheus-api-client-python) to collect and manipulate the time series data. Hence, we highly recommend you complete the [Prometheus API Client Tutorial](https://learn.openshift.com/ai-machine-learning/prometheus-api-client/) before starting this one!
+
+      Once the environment is ready to be used, you will see the links to access it in your workshop terminal.
+
+
+      ### The Environment
+
+      During this tutorial you will be using a hosted OpenShift 4.7 environment that is created just for you. This environment is not shared with other users of the system. <br>
+      Your environment will only be active for a one hour period. Keep this in mind before embarking on getting through the content. <br>
+      Each time you start this tutorial, a new environment will be created on the fly.
+
+      Let's get started!
   assignment: |
     As we saw in the previous scenario, Prometheus metrics are time series data identified by metric name and key/value pairs. With the increased amount of metrics flowing in it is getting harder to see the signals within the noise. The current state of the art is to graph out metrics on dashboards and alert on thresholds. However, we can leverage machine learning algorithms to perform time series forecasting and predict an unusual behavior or pattern in the metrics. The predicted values from the model can be compared with the actual metric values and if they differ from the default threshold values, we can flag it as an anomaly.
 
@@ -83,19 +102,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: sxvofyweceq1
+  id: uxboprifyafn
   type: challenge
   title: Using a Jupyter Notebook to play with the SARIMA model
   assignment: |
@@ -125,19 +145,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: kc6yeougpbym
+  id: xhxwn0marrf9
   type: challenge
   title: Accessing the OpenShift console
   assignment: |
@@ -173,15 +194,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "5841197333967572377"
+checksum: "3622965604419427720"

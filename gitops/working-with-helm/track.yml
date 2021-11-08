@@ -37,16 +37,47 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-helm-integration
-  id: grqhkurevple
+  id: 57dyymuekbzf
   type: challenge
   title: Helm Integration
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      This scenario will get you get familiar with how to use Argo CD to deploy
+      Helm charts.
+
+
+      ## Concepts
+
+      [Helm](https://helm.sh/) is a package manager for Kubernetes
+      applications. You can define, install, and update your pre-packaged
+      applications. This is a way to bundle up, and deliver prebuilt Kubernetes
+      applications.
+
+
+      ![Helm Logo](../../assets/gitops/helm-logo.png)
+
+      [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
+
+      Using Argo CD, you can still use your Helm charts to deploy and manage your Applications.
+
+      ## Use case
+
+      This is a simple guide that takes you through the following steps:
+
+      * Use the native Helm integration in Argo CD
+      * Explore a more GitOps friendly approach to Helm chart deployments
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |-
     Welcome! In this section we will be exploring the native Helm integration
     within Argo CD.
@@ -204,19 +235,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 900
 - slug: 02-helm-gitops
-  id: uvengrnypy8f
+  id: ocwmalrtw1lm
   type: challenge
   title: Helm GitOps Deployment
   assignment: |
@@ -365,15 +397,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "2186478826459963203"
+checksum: "18199660565674562602"

@@ -28,16 +28,64 @@ challenges:
     \ application:\n\n* `vertx.verticle` defines the main verticle - the entry point\n\
     * `vertx.cluster.name` defines the name of the cluster"
   difficulty: basic
+  notes:
+  - contents: "In this scenario, you will learn more about Reactive Microservices\
+      \ using [Eclipse Vert.x](https://vertx.io), one of the runtimes included in\
+      \ [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).\n\
+      \nThis scenario is the first one in a list of scenarios that will walk you through\
+      \ building a Reactive application using Vert.x illustrating what Vert.x is.\
+      \ These scenarios offer an intermediate, hands-on session with Vert.x, from\
+      \ the first line of code, to making services, to consuming them and finally\
+      \ to assembling everything in a consistent reactive system. It illustrates what\
+      \ reactive systems are, what reactive programming is, and how to build applications\
+      \ based on reactive microservices (and the s is important).\n\n## The Micro-Trader\
+      \ Application\n\nThe Vert.x application that is being developed is called the\
+      \ ``Micro-Trader`` and is composed of multiple microservices as seen below.\
+      \ It is a fake financial app, where we will be making (virtual) money. The application\
+      \ is composed of the following microservices:\n\n* The quote generator - this\
+      \ is an absolutely unrealistic simulator that generates the quotes for 3 fictional\
+      \ companies MacroHard, Divinator, and Black Coat. The market data is published\
+      \ on the Vert.x event bus. It also publishes an HTTP endpoint to get the current\
+      \ value of the quote.\n* The traders - these are a set of components that receives\
+      \ quotes from the quote generator and decides whether or not to buy or sell\
+      \ a particular share. To make this decision, they rely on another component\
+      \ called the portfolio service.\n* The portfolio - this service manages the\
+      \ number of shares in our portfolio and their monetary value. It is exposed\
+      \ as a service proxy, i.e. an asynchronous RPC service on top of the Vert.x\
+      \ event bus. For every successful operation, it sends a message on the event\
+      \ bus describing the operation. It uses the quote generator to evaluate the\
+      \ current value of the portfolio.\n* The audit - this is to keep a list of all\
+      \ our operations (yes, that\u2019s the law). The audit component receives operations\
+      \ from the portfolio service via an event bus and address. It then stores theses\
+      \ in a database. It also provides a REST endpoint to retrieve the latest set\
+      \ of operations.\n* The dashboard - some UI to let us know when we become rich.\n\
+      \nLet\u2019s have a look at the architecture:\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/reactive-ms-architecture.png)\n\
+      \nThe application uses several types of services:\n\n* HTTP endpoint (i.e. REST\
+      \ API) - this service is located using an HTTP URL.\n* gRPC - gRPC is a secure\
+      \ and fast RPC framework built on top of HTTP/2\n* Message sources - these are\
+      \ components publishing messages on the event bus, the service is located using\
+      \ an (event bus) address.\n\nAll the components are going to be deployed in\
+      \ the same Kubernetes namespace (project), and will form a cluster.\n\nThe dashboard\
+      \ presents the available services, the value of each company\u2019s quotes,\
+      \ the latest set of operations made by our traders and the current state of\
+      \ our portfolio. It also shows the state of the different circuit breakers.\n\
+      \n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/dashboard.png)\n\
+      \n## The first microservice - the quote generator\n\nIn this scenario, you are\
+      \ going to create the first microservice - the quote generator. In each subsequent\
+      \ scenario, you will create a microservice (from the set above) that will together\
+      \ form the Micro-Trader Application based on Vert.x.\n"
+    type: text
   slug: 01-examine-the-sample-project
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -106,14 +154,15 @@ challenges:
   difficulty: basic
   slug: 02-quote-generator-verticle
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -175,14 +224,15 @@ challenges:
   difficulty: basic
   slug: 03-create-quote-rest-endpoint
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -220,21 +270,22 @@ challenges:
     \ OpenShift Web Console**\n\nOpenShift ships with a web-based console that will\
     \ allow users to perform various tasks via a browser. To get a feel for how the\
     \ web console works, click on the \"OpenShift Console\" tab next to the \"Local\
-    \ Web Browser\" tab.\n\n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \ Web Browser\" tab.\n\n![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
     \nLogin with the following credentials:\n\n* Username: `developer`\n* Password:\
     \ `developer`\n  \nYou should see the newly created project. Click on it. It\u2019\
     s empty, so let\u2019s deploy our first application.\n"
   difficulty: basic
   slug: 04-create-openshift-project
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -303,14 +354,15 @@ challenges:
   difficulty: basic
   slug: 05-deploy-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -361,7 +413,7 @@ description: "In this scenario, you will learn more about Reactive Microservices
   \ you will create a microservice (from the set above) that will together form the\
   \ Micro-Trader Application based on Vert.x.\n"
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

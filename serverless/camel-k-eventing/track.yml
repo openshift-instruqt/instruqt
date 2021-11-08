@@ -34,16 +34,44 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: ufz15rhex4ol
+  id: c0a0qjockpki
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      # Serverless Eventing Camel K
+
+      This example demonstrates the idiomatic way of using [Camel K](https://camel.apache.org/camel-k/latest/index.html) in Knative for building event-driven applications. It leverages the Knative eventing broker as the central point that lets various services communicate via event pub/sub. It also shows how Camel K can be used for connecting the Knative event mesh with external systems, with integrations that can play the roles of "event source" or "event sink".
+
+      ## What is Camel K?
+
+      ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
+
+      ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
+
+      Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
+
+      Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+
+      Camel K integrate seamlessly with Knative making it the best serverless technology for integration.
+
+      ## Why Serverless?
+      Deploying applications as Serverless services is becoming a popular architectural style.
+
+      You will need a  platform that can run serverless workloads, while also enabling you to have complete control of the configuration, building, and deployment. Ideally, the platform also supports deploying the applications as linux containers.
+
+      ##  OpenShift Serverless Eventing
+      Knative Eventing on OpenShift Container Platform enables developers to use an event-driven architecture with serverless applications. An event-driven architecture is based on the concept of decoupled relationships between event producers that create events, and event sinks, or consumers, that receive them.
+
+      Knative Eventing uses standard HTTP POST requests to send and receive events between event producers and consumers. These events conform to the CloudEvents specifications, which enables creating, parsing, sending, and receiving events in any programming language.
   assignment: |
     In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
 
@@ -65,20 +93,20 @@ challenges:
     In the Filter by keyword text box, enter Camel K to find the *Camel K Operator*.
     Read the information about the Operator, and click *Install*. This displays the Create Operator Subscription page.
 
-    ![operatorhub](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-01-operatorhub.png)
+    ![operatorhub](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-01-operatorhub.png)
 
     Select the following subscription settings:
     - Update Channel > *Stable*
     - Installation Mode > *All namespaces on the cluster (default)*
     - Approval Strategy > Automatic
 
-    ![installoperator](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-02-installoperator.png)
+    ![installoperator](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-02-installoperator.png)
 
     Click Subscribe. This displays the Operators > Installed Operators page.
 
     Wait a few moments until the Status for the Camel K Operator displays Succeeded and the subscription is Up to Date.
 
-    ![installed](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-03-installed.png)
+    ![installed](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step1-03-installed.png)
 
     ## Logging in to the Cluster via CLI
 
@@ -138,19 +166,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step2
-  id: qfweagf0upm0
+  id: m1ej3ojsd8ze
   type: challenge
   title: Step 2
   assignment: |
@@ -164,7 +193,7 @@ challenges:
     Assume the market only open for couple of hours, serverless application can optimize resource usage.
     In between these separate serverless services, events are pass through an *event mesh*.
 
-    ![overview](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-00-overview.png)
+    ![overview](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-00-overview.png)
 
 
     #### Enabling the Knative Eventing Broker
@@ -307,25 +336,26 @@ challenges:
     You can view both predictors from the [Developer Console Topology](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph).
     (If Katacoda is slow, you might need to refresh the page to see the correct result.)
 
-    ![predictors](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-01-predictors.png)
+    ![predictors](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step2-01-predictors.png)
 
     It will be running first and shutdown since there are no activities yet.
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step3
-  id: hpvlfrmxkhr0
+  id: 71krkynevet1
   type: challenge
   title: Step 3
   assignment: |
@@ -412,23 +442,24 @@ challenges:
 
     When the Bitcoin data start floating into the data, all predictor services and the investor service will automatically start up.
 
-    ![startsup](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step3-01-startsup.png)
+    ![startsup](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step3-01-startsup.png)
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step4
-  id: s3lpzvpsi0hg
+  id: qdyoxxzbmlwp
   type: challenge
   title: Step 4
   assignment: |
@@ -446,7 +477,7 @@ challenges:
 
     To see the other services going down, go to the [Developer Console Topology view](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-knative/graph) after two minutes, you will see the pod slowly shutdown.
 
-    ![marketclose](/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step4-01-marketclose.png)
+    ![marketclose](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-eventing/Eventing-Step4-01-marketclose.png)
 
     ## Congratulations
 
@@ -454,15 +485,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
-checksum: "17774961732944800187"
+checksum: "1250820783960156210"

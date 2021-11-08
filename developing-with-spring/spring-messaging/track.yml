@@ -11,16 +11,21 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: iyg7xiqpubph
+  id: 4hzzp2umtohl
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |+
+      In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a simple Spring Boot application which produces messages to and consumes messages from a [Red Hat AMQ](https://www.redhat.com/en/technologies/jboss-middleware/amq) resource. AMQ provides fast, lightweight, and secure messaging for Internet-scale applications. AMQ components use industry-standard message protocols and support a wide range of programming languages and operating environments. AMQ gives you the strong foundation you need to build modern distributed applications.
+
   assignment: |
     # Import the code
 
@@ -61,19 +66,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: 02-create-message-listeners
-  id: jcx81nfzstne
+  id: nkgqo43lga7g
   type: challenge
   title: Step 2
   assignment: |
@@ -300,19 +306,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: 03-login-to-openshift
-  id: taolukcg6bvx
+  id: gxfwbpkiqex9
   type: challenge
   title: Step 3
   assignment: |-
@@ -346,19 +353,19 @@ challenges:
     perform various tasks via a browser. To get a feel for how the web console
     works, click on the "OpenShift Console" tab. The login credentials are: admin/admin.
 
-    ![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-spring/openshift-console-tab.png)
+    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/openshift-console-tab.png)
 
     The first screen you will see is the authentication screen. Use `admin/admin` credentials (admin account is required to install the operator):
 
-    ![Web Console Login](/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
 
-    ![Web Console Projects](/openshift/assets/middleware/rhoar-getting-started-spring/projects.png)
+    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/projects.png)
 
     Click on your new project name to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have created as part of your project:
 
-    ![Web Console Overview](/openshift/assets/middleware/rhoar-getting-started-spring/overview.png)
+    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/overview.png)
 
     There's nothing there now, but that's about to change.
 
@@ -366,15 +373,15 @@ challenges:
 
     From OpenShift Web Console administrator perspective, navigate the OperatorHub and search for the **Red Hat Integration - AMQ Broker** operator.
 
-    ![Red Hat Integration - AMQ Broker operator](/openshift/assets/middleware/rhoar-messaging/amq-operator.png)
+    ![Red Hat Integration - AMQ Broker operator](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/amq-operator.png)
 
     Click **Install** and and follow this configuration:
 
-    ![Red Hat Integration - AMQ Broker operator](/openshift/assets/middleware/rhoar-messaging/operator-configuration.png)
+    ![Red Hat Integration - AMQ Broker operator](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/operator-configuration.png)
 
     The installation might take a few minutes. Wait till the operator installation is complete.
 
-    ![Red Hat Integration - AMQ Broker operator installation complete](/openshift/assets/middleware/rhoar-messaging/operator-installation-complete.png)
+    ![Red Hat Integration - AMQ Broker operator installation complete](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/operator-installation-complete.png)
 
     ## Congratulations
 
@@ -384,19 +391,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: 04-deploy-to-openshift
-  id: 8xbyq9kf32wa
+  id: xtoir6qqdacz
   type: challenge
   title: Step 4
   assignment: |-
@@ -445,7 +453,7 @@ challenges:
 
     After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can either go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below) or click [here](http://spring-messaging-training-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
 
-    ![Spring Messaging App Route](/openshift/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
+    ![Spring Messaging App Route](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
 
     You should see the same web application as before. The scheduled Producer will continue to deploy messages every 3 seconds so you should observe a change in the values shown. The number of items in the list will remain 5.
 
@@ -474,15 +482,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "9382679721800287922"
+checksum: "8768866473861875911"

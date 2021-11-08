@@ -1,0 +1,140 @@
+challenges:
+- assignment: "Before you get started we recommend reading the following tips. They\
+    \ explain\na bit about how the playground environment is setup and what access\
+    \ you have.\n\n## Logging in to the Cluster via Dashboard\n\nClick the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)\
+    \ tab to open the dashboard. \n\nYou will then able able to login with admin permissions\
+    \ with:\n\n* **Username:** ``admin``\n* **Password:** ``admin``\n\nOr as a standard\
+    \ user with:\n\n* **Username:** ``developer``\n* **Password:** ``developer``\n\
+    \n## Logging in to the Cluster via CLI\n\nWhen the OpenShift playground is created\
+    \ you will be logged in initially as\na cluster admin (```\noc whoami\n```) on\
+    \ the command line. This will allow you to perform\noperations which would normally\
+    \ be performed by a cluster admin.\n\nBefore creating any applications, it is\
+    \ recommended you login as a distinct\nuser. This will be required if you want\
+    \ to log in to the web console and\nuse it.\n\nTo login to the OpenShift cluster\
+    \ from the _Terminal_ run:\n\n```\noc login -u developer -p developer\n```\n\n\
+    This will log you in using the credentials:\n\n* **Username:** ``developer``\n\
+    * **Password:** ``developer``\n\nUse the same credentials to log into the web\
+    \ console.\n\nIn order that you can still run commands from the command line as\
+    \ a cluster\nadmin, the ``sudoer`` role has been enabled for the ``developer``\
+    \ account.\nTo execute a command as a cluster admin use the ``--as system:admin``\
+    \ option\nto the command. For example:\n\n```\noc get projects --as system:admin\n\
+    ```\n\n## Creating your own Project\n\nTo create a new project called ``myproject``\
+    \ run the command:\n\n```\noc new-project myproject\n```\n\nYou could instead\
+    \ create the project from the web console. If you do this,\nto change to the project\
+    \ from the command line run the command:\n\n```\noc project myproject\n```\n\n\
+    ## Persistent Volume Claims\n\nPersistent volumes have been pre-created in the\
+    \ playground environment.\nThese will be used if you make persistent volume claims\
+    \ for an application.\nThe volume sizes are defined as 100Gi each, however you\
+    \ are limited by how\nmuch disk space the host running the OpenShift environment\
+    \ has, which is\nmuch less.\n\nTo view the list of available persistent volumes\
+    \ you can run:\n\n```\noc get pv --as system:admin\n```\n\n## Builder Images and\
+    \ Templates\n\nThe playground environment is pre-loaded with Source-to-Image (S2I)\
+    \ builders\nfor Java (Wildfly), Javascript (Node.JS), Perl, PHP, Python and Ruby.\n\
+    Templates are also available for MariaDB, MongoDB, MySQL, PostgreSQL and\nRedis.\n\
+    \nYou can see the list of what is available, and what versions, under _Add to\n\
+    Project_ in the web console, or by running from the command line:\n\n```\noc new-app\
+    \ -L\n```\n\n## Running Images as a Defined User\n\nBy default OpenShift prohibits\
+    \ images from running as the ``root`` user\nor as a specified user. Instead, each\
+    \ project is assigned its own unique\nrange of user IDs that application images\
+    \ have to run as.\n\nIf you attempt to run an arbitrary image from an external\
+    \ image registry\nsuch a Docker Hub, which is not built to best practices, or\
+    \ requires that\nit be run as ``root``, it may not work as a result.\n\nIn order\
+    \ to run such an image, you will need to grant additional privileges\nto the project\
+    \ you create to allow it to run an application image as any\nuser ID. This can\
+    \ be done by running the command:\n\n```\noc adm policy add-scc-to-user anyuid\
+    \ -z default -n myproject --as system:admin\n```\n\n"
+  difficulty: basic
+  notes:
+  - contents: '## Goal
+
+
+      Explore OpenShift version 4.7.
+
+
+      ## Concepts
+
+
+      * OpenShift Web Console
+
+      *`oc` command line tool
+
+      * OpenShift Projects and Applications
+
+      * Your applications on OpenShift
+
+
+      ## Use case
+
+
+      You control an OpenShift cluster for one hour. You can deploy your own container
+      image, or set up a pipeline to build your application from source, then monitor
+      it with Prometheus as it runs. Use an Operator to deploy and manage a database
+      backend for your web app.
+
+
+      This OpenShift cluster will self-destruct in one hour.
+
+      '
+    type: text
+  slug: tips
+  tabs:
+  - hostname: crc
+    title: CLI
+    type: terminal
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
+    type: service
+  - hostname: crc
+    path: /root
+    title: Visual Editor
+    type: code
+  timelimit: 3600
+  title: OpenShift Playground
+  type: challenge
+description: '## Goal
+
+
+  Explore OpenShift version 4.7.
+
+
+  ## Concepts
+
+
+  * OpenShift Web Console
+
+  *`oc` command line tool
+
+  * OpenShift Projects and Applications
+
+  * Your applications on OpenShift
+
+
+  ## Use case
+
+
+  You control an OpenShift cluster for one hour. You can deploy your own container
+  image, or set up a pipeline to build your application from source, then monitor
+  it with Prometheus as it runs. Use an Operator to deploy and manage a database backend
+  for your web app.
+
+
+  This OpenShift cluster will self-destruct in one hour.
+
+  '
+developers:
+- dahmed@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+owner: openshift
+private: false
+published: true
+skipping_enabled: false
+slug: playgrounds-openshift47
+tags:
+- openshift
+title: OpenShift 4.7 Playground
+type: track

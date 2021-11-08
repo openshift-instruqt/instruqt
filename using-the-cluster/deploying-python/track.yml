@@ -27,16 +27,37 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: bhi0gfdvkvwl
+  id: jridptxnjlsj
   type: challenge
   title: Topic 1 - Creating an Initial Project
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to deploy an application from its source code using a [Source-to-Image][s2i] build on OpenShift.
+
+      ## Concepts
+
+      * Linux containers and building container images
+      * OpenShift Source-to-Image (S2I)
+      * OpenShift Projects and Applications
+      * OpenShift `oc` command line tool
+
+      ## Use case
+
+      You can have OpenShift build an application from source to deploy it, so you don't have to construct a container by hand with every change. OpenShift can then build and deploy new versions automatically when notified of souce code changes.
+
+      This OpenShift cluster will self-destruct in one hour.
+
+      [s2i]: https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -103,19 +124,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 02-deploying-using-the-web-console
-  id: 8e9foc4rmjft
+  id: g8knyrnlqevs
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
@@ -163,19 +185,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 03-viewing-the-builder-logs
-  id: jcynjpre0qms
+  id: kveewjuddevx
   type: challenge
   title: Topic 3 - Viewing the Builder Logs
   assignment: |
@@ -187,19 +210,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 04-accessing-the-application
-  id: erdnzxquxyty
+  id: llw9mpkjnc41
   type: challenge
   title: Topic 4 - Accessing the Application
   assignment: |
@@ -219,19 +243,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 05-deleting-the-application
-  id: qw2qcgsrr3tk
+  id: unmcnaqundvl
   type: challenge
   title: Topic 5 - Deleting the Application
   assignment: |
@@ -326,19 +351,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 06-deploying-using-the-command-line
-  id: ihnxocf85883
+  id: sk8gnctfaa22
   type: challenge
   title: Topic 6 - Deploying Using the Command Line
   assignment: |
@@ -432,19 +458,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
 - slug: 07-triggering-a-new-build
-  id: 6o78ctxmqd49
+  id: v3ffbo8faxy8
   type: challenge
   title: Topic 7 - Triggering a New Build
   assignment: |
@@ -632,15 +659,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 171
-checksum: "14886123929650846151"
+checksum: "5478944472866481624"

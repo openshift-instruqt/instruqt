@@ -24,16 +24,34 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: naygoiltpnrt
+  id: 1yyrtuumlvxy
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario, you will learn 2 ways to call a RESTful microservice from [Kogito](https://kogito.kie.org) process/workflow.
+
+      ## What is Kogito?
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+
+      ### BPMN2 and Services
+
+      The BPMN2 specification defines the _Service Task_, an activity node used to invoke an automated application (or service) to execute a task. In [Kogito](https://kogito.kie.org), a _Service Task_ can be implemented using a CDI bean (Quarkus) or a Spring bean (Spring Boot).
+
+      A CDI implementation of a _Service Task_ allows us to inject various capabilities and functionality into the implementation to allow us to, for example, define the integration logic to connect to external systems. In this scenario we will look at two options to integrate with RESTful microservice. First, we will use the MicroProfile Rest Client to call an external microservice. After that, we will replace this logic with an [Apache Camel](https://camel.apache.org/) route to call the same service. Note that the integration with Camel is extremely interesting, as Camel provides a vast array of connectors to connect to virtually any type of external system (e.g. SalesForce, Kafka, Twitter, SAP, etc.).
+
+      ### Other possibilities
+
+      Learn more at [kogito.kie.org](https://kogito.kie.org), or just drive on and get hands-on!
   assignment: |
     In this step, we will create a Kogito application skeleton.
 
@@ -83,7 +101,7 @@ challenges:
 
     We see the following Swagger-UI page. Because we have not yet implemented our application, there are no operations defined yet in our API:
 
-    ![New Kogito Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-quarkus-empty-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-quarkus-empty-swagger-ui.png)
 
     It's working!
 
@@ -129,19 +147,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 02-implement-process
-  id: 3cmirac7rrfu
+  id: 6mzquvcsqlpo
   type: challenge
   title: Step 2
   assignment: |
@@ -153,7 +172,7 @@ challenges:
 
     We create a simple process that will look like this:
 
-    ![Process](/openshift/assets/middleware/middleware-kogito/kogito-rest-coffeeshop-process.png)
+    ![Process](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-rest-coffeeshop-process.png)
 
     Click the following path to open a new _coffeeshop process_ BPMN2 file: `coffeeshop/src/main/resources/coffeeshop-process.bpmn`
 
@@ -182,7 +201,7 @@ challenges:
     ** Operation: `getCoffees`
     ** Assignments: See image below
 
-    ![GetCoffees Input Output](/openshift/assets/middleware/middleware-kogito/kogito-coffee-process-getcoffee-data-assignment.png)
+    ![GetCoffees Input Output](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-coffee-process-getcoffee-data-assignment.png)
 
     * Create an EndEvent node and connect it to the Service Task node.
 
@@ -323,19 +342,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 03-implement-jaxrs-client
-  id: u0glnnwqawxc
+  id: cqdu57r7ior8
   type: challenge
   title: Step 3
   assignment: |
@@ -563,19 +583,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 04-implement-camel-client
-  id: qvqjypxccz6z
+  id: fdnm0gynrzy7
   type: challenge
   title: Step 4
   assignment: |
@@ -753,15 +774,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "3201217992569894050"
+checksum: "9065537209358275592"

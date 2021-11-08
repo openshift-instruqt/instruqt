@@ -47,16 +47,57 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-exploring-openshift-operator
-  id: uttxecthuis5
+  id: l7813dczdeik
   type: challenge
   title: Exploring the OpenShift GitOps Operator
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      This guide helps you get started with ArgoCD and GitOps with OpenShift.
+
+
+      ## Concepts
+
+      [GitOps](https://www.openshift.com/learn/topics/gitops/) is a set of practices that leverages Git workflows to manage infrastructure and application configurations.
+      By using Git repositories as the source of truth, it allows the DevOps team to store the entire state of the cluster configuration in Git so that the trail of changes are visible and auditable.
+
+      **GitOps** simplifies the propagation of infrastructure and application
+      configuration changes across multiple clusters by defining your infrastructure and applications definitions as “code”.
+
+      * Ensure that the clusters have similar states for configuration, monitoring, or storage.
+      * Recover or recreate clusters from a known state.
+      * Create clusters with a known state.
+      * Apply or revert configuration changes to multiple clusters.
+      * Associate templated configuration with different environments.
+
+
+      ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+
+      [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
+
+      It follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state.
+
+      It automates the deployment of the desired application states in the specified target environments. Application deployments can track updates to branches, tags, or pinned to a specific version of manifests at a Git commit.
+
+
+      ## Use case
+
+      This is a simple guide that takes you through the following steps:
+
+      * Exploring the OpenShift GitOps Operator
+      * Accessing Argo CD via CLI and Web UI
+      * Deploying A Sample Application
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Welcome! In this section we will be exploring the OpenShift GitOps
     Operator, what it installs, and how all the components fit together.
@@ -121,19 +162,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
 - slug: 02-connecting-to-argocd
-  id: nqhws1rvfyg9
+  id: flg5wffrvkeo
   type: challenge
   title: Connecting to ArgoCD
   assignment: |
@@ -203,19 +245,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
 - slug: 03-deploying-sample-application
-  id: orecim7w7gsl
+  id: gmdtqtlq8dhx
   type: challenge
   title: Deploying a Sample Application
   assignment: |-
@@ -344,15 +387,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "16720578038957718445"
+checksum: "1956453535912806964"

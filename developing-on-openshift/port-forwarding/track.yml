@@ -27,16 +27,37 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-creating-an-initial-project
-  id: vfjd9hziec0z
+  id: lwc3xz8mxn6i
   type: challenge
   title: Topic 1 - Creating an Initial Project
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to run a database with persistent storage on OpenShift. Access the database server in the cluster with a command-line shell, then use port forwarding to temporarily expose the database service outside of OpenShift so you can access it with any database API tool, like a graphical database manager.
+
+      ## Concepts
+
+      * Persistent Volumes storage on OpenShift clusters
+      * Provisional routing of external traffic to cluster services
+      * OpenShift Projects and Applications
+      * OpenShift `oc` command line deployment tool
+
+      ## Use case
+
+      You can deploy your application's underlying database server on an OpenShift cluster, growing through development toward a production database packaged in an automating [Operator][operator].
+
+      This OpenShift cluster will self-destruct in one hour.
+
+      [operator]: https://www.openshift.com/learn/topics/operators
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -83,15 +104,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 02-deploying-a-postgresql-database
-  id: mv8jx9fzlv2f
+  id: 1ockicjymrak
   type: challenge
   title: Topic 2 - Deploying a PostgreSQL Database
   assignment: |-
@@ -117,15 +139,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 03-starting-an-interactive-shell
-  id: uwzgtsnnkfti
+  id: wghs7gihsblx
   type: challenge
   title: Topic 3 - Starting an Interactive Shell
   assignment: |
@@ -213,15 +236,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 04-creating-a-remote-connection
-  id: 2wifzdj26xjx
+  id: iy3tcez3ltci
   type: challenge
   title: Topic 4 - Creating a Remote Connection
   assignment: |-
@@ -305,11 +329,12 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 225
-checksum: "18081799413371543744"
+checksum: "11135150620697772913"

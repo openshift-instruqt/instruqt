@@ -29,16 +29,39 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-basics-trust
-  id: 1myfxgzhbme0
+  id: 6kxocim0cnqx
   type: challenge
   title: Understanding the Basics of Trust - Quality & Provenance
+  notes:
+  - type: text
+    contents: |
+      ## Background
+      This lab is focused on understanding what container registries are for and how they work.
+
+      By the end of this lab you should be able to:
+      - Evaluate the quality of a container registry
+      - Evaluate the quality of a container repository
+      - Share your images using public and private registries
+
+      ## Outline
+      - Understanding the basics of trust - quality & provenance
+      - Evaluating four different public registries
+      - Evaluating container repositories - trusted base images
+      - Sharing your container images
+
+      ## Other Material
+      - [Presentation](//goo.gl/pckoxn)
+      - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+      ## Start Scenario
+      Once you have watched the background video or went throught the presentation, continue to the exercises
   assignment: |+
     The goal of this exercise is to understand the basics of trust when it comes to [Registry Servers](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.4cxnedx7tmvq) and [Repositories](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.20722ydfjdj8). This requires quality and provenance - this is just a fancy way of saying that:
 
@@ -107,19 +130,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
 - slug: 02-evaluating-trust
-  id: oudtaduixm3r
+  id: ier8zmtyczcj
   type: challenge
   title: Evaluating Trust - Images and Registry Servers
   assignment: |
@@ -228,19 +252,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
 - slug: 03-analyzing-storage
-  id: zsdx6plaj3r4
+  id: 1wbdgmlvwwiv
   type: challenge
   title: Analyzing Storage and Graph Drivers
   assignment: |+
@@ -284,15 +309,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
-checksum: "17667742112295246699"
+checksum: "5546849727666904600"
