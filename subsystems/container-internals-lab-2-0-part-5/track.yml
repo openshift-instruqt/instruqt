@@ -30,16 +30,40 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-multi-container-applications
-  id: ylfl2pdykfnd
+  id: u40hazzegra4
   type: challenge
   title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
+  notes:
+  - type: text
+    contents: |
+      ## Background
+      This lab is focused on understanding how container images are built, tagged, organized and leveraged to deliver software in a range of use cases.
+
+      By the end of this lab you should be able to:
+      - Understand the uses of multi-container applications
+      - Internalize the difference between orchestration and application definition
+      - Command basic container scaling principles
+      - Use tools to troubleshoot containers in a clustered environment
+
+      ## Outline
+      - Multi-Container Applications: The classic two-tiered, wordpress application
+      - Cluster Performance: Scaling applications horizontally with containers
+      - Cluster Debugging: Troubleshooting in a distributed systems environment
+
+      ## Other Material
+      This presentation will give you a background to all of the concepts in this lab
+      - [Google Presentation](https://docs.google.com/presentation/d/1S-JqLQ4jatHwEBRUQRiA5WOuCwpTUnxl2d1qRUoTz5g/edit#slide=id.g20639ff941_0_42)
+      - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+      ## Start Scenario
+      Once you have watched the background video or went throught the presentation, continue to the exercises
   assignment: |
     The goal of this exercise is to build a containerized two tier application in an OpenShift cluster. This application will help you learn about clustered containers and distributed systems. It will teach you about Kubernetes and how it operates with the principles of "defined state" and "actual state" - it constantly monitors the environment and attempts to make the actual state match the defined state.
 
@@ -150,19 +174,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 675
 - slug: 02-openshift-web-interface
-  id: zjw5mkvedf3c
+  id: htgfofp089uo
   type: challenge
   title: 'Inspecting & Troubleshooting: Using the OpenShift web interface'
   assignment: |
@@ -192,19 +217,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 675
 - slug: 03-load-testing
-  id: apkjicxlnkko
+  id: odtuyjaghogf
   type: challenge
   title: 'Cluster Performance: Scaling applications horizontally with containers'
   assignment: |
@@ -274,19 +300,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 675
 - slug: 04-troubleshooting-distributed-applications
-  id: rcrwyzxonsjp
+  id: p7vfcxznxx8m
   type: challenge
   title: 'Distributed Debugging: Troubleshooting in a distributed systems environment'
   assignment: |
@@ -401,15 +428,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 675
-checksum: "3367344645924267629"
+checksum: "9617170545335002127"

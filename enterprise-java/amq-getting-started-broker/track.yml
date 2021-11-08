@@ -34,16 +34,34 @@ challenges:
     \ to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\nIn the next step, you will\
     \ deploy a new instance of the AMQ broker.\n"
   difficulty: basic
+  notes:
+  - contents: "##\_Overview\n\nAMQ provides fast, lightweight, and secure messaging\
+      \ for Internet-scale applications. AMQ components use industry-standard message\
+      \ protocols and support a wide range of programming languages and operating\
+      \ environments. AMQ gives you the strong foundation you need to build modern\
+      \ distributed applications.\n\n## What is AMQ Broker?\n\nAMQ Broker is a pure-Java\
+      \ multiprotocol message broker. It\u2019s built on an efficient, asynchronous\
+      \ core, with a fast native journal for message persistence and the option of\
+      \ shared-nothing state replication for high availability.\n\n* **Persistence**\
+      \ - A fast, native-IO journal or a JDBC-based store\n* **High availability**\
+      \ - Shared store or shared-nothing state replication\n* **Advanced queueing**\
+      \ - Last value queues, message groups, topic hierarchies, and large message\
+      \ support\n* **Multiprotocol** - AMQP 1.0, MQTT, STOMP, OpenWire, and HornetQ\
+      \ Core\n\nAMQ Broker is based on the [Apache ActiveMQ Artemis](https://activemq.apache.org/artemis/)\
+      \ project.\n\n## What will you learn\n\nIn this tutorial you will learn how\
+      \ to setup a Red Hat AMQ message broker instance running on OpenShift.\n"
+    type: text
   slug: 01-creating-an-initial-project
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -155,14 +173,15 @@ challenges:
   difficulty: basic
   slug: 02-create-broker-instance
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -210,14 +229,15 @@ challenges:
   difficulty: basic
   slug: 03-simple-client
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -258,14 +278,15 @@ challenges:
   difficulty: basic
   slug: 04-running-application
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -287,7 +308,7 @@ description: "##\_Overview\n\nAMQ provides fast, lightweight, and secure messagi
   \ project.\n\n## What will you learn\n\nIn this tutorial you will learn how to setup\
   \ a Red Hat AMQ message broker instance running on OpenShift.\n"
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

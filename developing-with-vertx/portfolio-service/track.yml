@@ -13,16 +13,45 @@ challenges:
     \ noticed that the package has a package-info.java file. This file is required\
     \ to enable the service proxy generation.\n\n"
   difficulty: basic
+  notes:
+  - contents: "## Event bus services - Porfolio service\n\nIn this scenario, we are\
+      \ going to implement an event bus service. A `Portfolio` stores the owned shares\
+      \ and the available cash.\n\n**1. Initialize katacoda environment**\n\nAll the\
+      \ scenarios in this lab are sequential and build on each other. The portfolio\
+      \ microservice being developed in this scenario is dependant on the quote generator\
+      \ microservice that should have been built and running on the OpenShift Container\
+      \ Platform already. That is what the script running in the terminal is doing.\
+      \ It is: \n1. Cloning the source code\n2. Initialize the OpenShift environment\n\
+      3. Build and deploy the quote-generator scenario\n4. Build and deploy the micro-trader-dashboard\n\
+      \n**2. Introduction - RPC and Async RPC**\n\nMicroservices are not only about\
+      \ REST. They can be exposed using any types of interactions, and Remote Procedure\
+      \ Calls is one of them. With RPC, a component can effectively send a request\
+      \ to another component by doing a local procedure call, which results in the\
+      \ request being packaged in a message and sent to the callee. Likewise, the\
+      \ result is sent back and returned to the caller component as the result of\
+      \ the procedure call:\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/rpc-sequence.png)\n\
+      \nSuch interactions has the advantages to introduce typing, and so is less error-prone\
+      \ than unstructured messages. However, it also introduces a tighter coupling\
+      \ between the caller and the callee. The caller knows how to call the callee:\n\
+      \n1. how the service is called\n2. where the service is living (location)\n\n\
+      ![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/async-rpc-sequence.png)\n\
+      \nThe AsyncResult notifies the Handler whether the invocation succeeded or failed.\
+      \ Upon success, the handler can retrieve the result.\n\nSuch async-RPC has several\
+      \ advantages:\n\n* the caller is not blocked\n* it deals with failures\n* it\
+      \ avoids you to send messages on the event bus and manages object marshalling\
+      \ and unmarshalling for you.\n"
+    type: text
   slug: 01-async-service-interface
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -64,14 +93,15 @@ challenges:
   difficulty: basic
   slug: 02-data-objects
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -106,7 +136,7 @@ challenges:
     \ are created from the `Future` class.\n\n`AsyncResult` describes:\n\n* a success\
     \ as shown before, it encapsulates the result\n* a failure, it encapsulates a\
     \ `Throwable` instance\n\nSo, how does this work with our async RPC service, let\u2019\
-    s look at this sequence diagram:\n\n![Architecture](/openshift/assets/middleware/rhoar-getting-started-vertx/portfolio-sequence.png)\n\
+    s look at this sequence diagram:\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/portfolio-sequence.png)\n\
     \n**2. Sending an event on the event bus**\nIt\u2019s time to see how to send\
     \ messages on the event bus. You access the event bus using vertx.eventBus().\
     \ From this object you can:\n\n* `send` : send a message in point to point mode\n\
@@ -185,14 +215,15 @@ challenges:
   difficulty: basic
   slug: 03-implement-service
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -217,7 +248,7 @@ challenges:
     \n```\noc rollout status -w dc/portfolio-service\n```\n\nThere you go, the portfolio\
     \ service is started. It discovers the ``quotes`` service and is ready to be used.\n\
     \n**2. Access the Micro-trader dashboard**\n\nClick on the \"OpenShift Console\"\
-    \ tab next to the \"Local Web Browser\" tab.\n\n![OpenShift Console Tab](/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
+    \ tab next to the \"Local Web Browser\" tab.\n\n![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
     \nLog in using `developer/developer` for username and password. You should see\
     \ the newly created project called `\u201Cvertx-kubernetes-workshop\"`. Click\
     \ on it. You should see four pods running, one each for the quote-generator and\
@@ -237,14 +268,15 @@ challenges:
   difficulty: basic
   slug: 04-deploy-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -277,7 +309,7 @@ description: "## Event bus services - Porfolio service\n\nIn this scenario, we a
   \ you to send messages on the event bus and manages object marshalling and unmarshalling\
   \ for you.\n"
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

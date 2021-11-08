@@ -22,16 +22,32 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: opwpyemehl9g
+  id: 3yc5cf3abhgq
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario, you will learn how to implement process and workflow logic with CDI beans in [Kogito](https://kogito.kie.org).
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+
+      ### BPMN2 Service Task and CDI
+
+      The BPMN2 specification defines the _Service Task_, an activity node used to invoke an automated application (or service) to execute a task. In [Kogito](https://kogito.kie.org), a _Service Task_ can be implemented using a CDI bean (Quarkus) or a Spring bean (Spring Boot). In this scenario we will demonstrate this functionality using [Quarkus](https://www.quarkus.io).
+
+      Context & Dependency Injection (CDI) support allows developers to easily create process and workflow logic, in a standard Java way for building application logic. Developers can focus on developing business logic, rather than having to learn new frameworks and extensions for building process logic. These CDI beans can in their turn be injected with other logic (e.g. Camel for integration, JPA for persistence, SmallRye Reactive Messaging for messaging, etc.).
+
+      ### Other possibilities
+
+      Learn more at [kogito.kie.org](https://kogito.kie.org), or just drive on and get hands-on!
   assignment: |
     In this step, you will create the Kogito application skeleton.
 
@@ -86,7 +102,7 @@ challenges:
 
     You should see the following page:
 
-    ![New Kogito Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
 
     It's working!
 
@@ -99,19 +115,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 02-implement-cdi-bean
-  id: ehmnqdbaippx
+  id: v0gbxqmcsdsa
   type: challenge
   title: Step 2
   assignment: |
@@ -166,19 +183,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 03-implement-the-process
-  id: boa4e6vozhug
+  id: ezpzug7duuoe
   type: challenge
   title: Step 3
   assignment: |
@@ -194,11 +212,11 @@ challenges:
 
     In the BPMN editor, click on the pencil icon in the upper-right corner to open the properties panel.
 
-    ![BPMN Editor Properties Panel](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-bpmn-editor-open-properties-panel.png)
+    ![BPMN Editor Properties Panel](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-bpmn-editor-open-properties-panel.png)
 
     Change the _Name_ and _ID_ of the process to `text_processor`.
 
-    ![Process Name](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-name.png)
+    ![Process Name](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-name.png)
 
     ## Add Process Variable
 
@@ -206,17 +224,17 @@ challenges:
 
     Scroll down in the properties panel until you see the section _Process Data_. Expand this section and click on the _+_ sign to add a new process variable. Give the variable the name `mytext` and the type `String`. Leave the _KPI_ checkbox unchecked.
 
-    ![Process Variable](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-variable.png)
+    ![Process Variable](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-variable.png)
 
     ## Create Service Task
 
     In the diagram, double-click on the `Hello` _Script Task_ to change the name of the node. Change the name to `Process Text`.
 
-    ![Process Text Node](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-text-node.png)
+    ![Process Text Node](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-text-node.png)
 
     Next, we need to change the node from a _Script Task_ to a _Service Task_. To do this, click on the node, hoover over the gear icon in the lower-left corner of the node, and select _Convert into Service Task_ in the menu.
 
-    ![Convert Into Service Task](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-convert-into-service-task.png)
+    ![Convert Into Service Task](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-convert-into-service-task.png)
 
     ## Configuring the Service Task
 
@@ -226,11 +244,11 @@ challenges:
     * Interface: `org.acme.TextProcessor`
     * Operation: `toUpper`
 
-    ![Service Task Implementation](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-implementation.png)
+    ![Service Task Implementation](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-implementation.png)
 
     With the implementation configuration set, we can now configure the data _Assignments_. In the properties panel, click on the pencil icon in the _Assignments_ section. In the form that opens, add the following _input_ and _output_ data assignments.
 
-    ![Service Task Data Assignment](/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-data-assignment.png)
+    ![Service Task Data Assignment](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-data-assignment.png)
 
     Note that the _Name_ of the input assignment is the name of the `toUpper` method argument in our `TextProcessor` CDI bean.
 
@@ -254,15 +272,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "10096994581527599425"
+checksum: "8260432864032337322"

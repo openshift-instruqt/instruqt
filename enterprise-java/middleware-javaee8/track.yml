@@ -99,16 +99,33 @@ challenges:
 
     '
   difficulty: intermediate
+  notes:
+  - contents: "## What you will learn ##\n\nIn this scenario, you will learn how to\
+      \ get started with developing Jakarta EE 8 application using JBoss Enterprise\
+      \ Application Platform on OpenShift. This scenario is targeted for developers\
+      \ that haven't used Jakarta EE before and covers the most common parts of Jakarta\
+      \ EE 8.\n\n\n## What is Red Hat JBoss EAP?\n\nJBoss Enterprise Application Platform\
+      \ is a leading Jakarta EE platform that includes full Jakarta EE 8 support.\n\
+      \nWhat differs JBoss Enterprise Application Platform compared to for example\
+      \ Oracle\xAE WebLogic Application Server and IBM\xAE WebSphere Application Server\
+      \ ND are that JBoss EAP since version 6 and later has been architectured to\
+      \ be used both in cloud environments as well as more traditional environments\
+      \ like Virtual or Bare metal.\n\nThis scenario exclusively uses JBoss EAP on\
+      \ OpenShift, which is the leading container platform for Kubernetes and containers,\
+      \ but as a developer, you can also apply what you learn here on other environments.\n\
+      \n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
+    type: text
   slug: 01-review-the-weather-app
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -204,7 +221,7 @@ challenges:
     works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
 
 
-    ![OpenShift Console Tab](/openshift/assets/middleware/middleware-javaee8/openshift-console-tab.png)
+    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/openshift-console-tab.png)
 
 
     The first screen you will see is the authentication screen. Enter your username
@@ -213,7 +230,7 @@ challenges:
     then login:
 
 
-    ![Web Console Login](/openshift/assets/middleware/middleware-javaee8/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/middleware-javaee8/login.png)
 
 
     * Username: `developer`
@@ -368,14 +385,15 @@ challenges:
   difficulty: intermediate
   slug: 02-deploy-to-openshift
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -547,14 +565,15 @@ challenges:
   difficulty: intermediate
   slug: 03-jpa
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -628,14 +647,15 @@ challenges:
   difficulty: intermediate
   slug: 04-cdi
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -704,14 +724,15 @@ challenges:
   difficulty: intermediate
   slug: 05-database
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -732,7 +753,7 @@ description: "## What you will learn ##\n\nIn this scenario, you will learn how 
   \ for Kubernetes and containers, but as a developer, you can also apply what you\
   \ learn here on other environments.\n\n![EAP Logo](../../assets/middleware/middleware-javaee8/eap-logo.png)\n"
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

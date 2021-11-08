@@ -10,16 +10,20 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: 9b3fmwh2dszm
+  id: eisemfxau3my
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario you will learn more about developing Spring Boot Microservices using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. You will learn about Externalized Configurations and how we can use Externalized Configurations to change specific values/variables without having to take down the entire application.
   assignment: |-
     # Import the code
     Let's refresh the code we'll be using. Run the following command to clone the sample project:
@@ -55,19 +59,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
-  id: uloa8y1fsfax
+  id: 9v3gfbg3chkt
   type: challenge
   title: Step 2
   assignment: |-
@@ -121,7 +126,7 @@ challenges:
 
     Once the application deployment completes, navigate to our route in the OpenShift Web View or click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/). We should see the following screen, meaning everything was successful:
 
-    ![Greeting Service](/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)
+    ![Greeting Service](https://katacoda.com/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)
 
     **4. Test functionality**
 
@@ -133,19 +138,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 03-modify-the-configmap
-  id: tz3ybszllilk
+  id: 5wvgyxdyb10d
   type: challenge
   title: Step 3
   assignment: |-
@@ -172,7 +178,7 @@ challenges:
 
     Change the `greeting.message` property to: `greeting.message=Bonjour, you picked %s as your favorite fruit!`
 
-    ![Greeting Service](/openshift/assets/middleware/rhoar-microservices/editconfigmap.png)
+    ![Greeting Service](https://katacoda.com/openshift/assets/middleware/rhoar-microservices/editconfigmap.png)
 
     Hit `Save` (at the bottom of the editor) and that's all there is to it!
 
@@ -210,15 +216,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "7952276508230502822"
+checksum: "14972236348508107352"

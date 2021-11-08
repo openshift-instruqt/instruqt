@@ -29,16 +29,39 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-base-multi-layer-images
-  id: ogzdnh71ec6o
+  id: gixybf48fwqy
   type: challenge
   title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers and history'
+  notes:
+  - type: text
+    contents: |
+      ## Background
+      This lab is focused on understanding how container images are built, tagged, organized and leveraged to deliver software in a range of use cases.
+
+      By the end of this lab you should be able to:
+      - Internalize the difference between base images and multi-layered images
+      - Understand the full URL of an image/repository
+      - Command a complete understanding of what's inside of a container image
+
+      ## Outline
+      - Image Layers and Repositories: inspecting base images, layers and history
+      - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag
+      - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image
+
+      ## Other Material
+      This presentation will give you a background to all of the concepts in this lab.
+      - [Presentation](https://goo.gl/wnB7JK)
+      - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+      ## Start Scenario
+      Once you have watched the background video or went throught the presentation, continue to the exercises
   assignment: |
     The goal of this exercise is to understand the difference between base images and multi-layered images (repositories). Also, we'll try to understand the difference between an image layer and a repository.
 
@@ -76,19 +99,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
 - slug: 02-image-urls
-  id: ccly6pcxin9l
+  id: 7m9rsnatudgq
   type: challenge
   title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag'
   assignment: |
@@ -150,19 +174,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
 - slug: 03-image-internals
-  id: lvo0eczplelr
+  id: csrmxlww7utm
   type: challenge
   title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image'
   assignment: |
@@ -235,15 +260,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 900
-checksum: "14947692368428795042"
+checksum: "14519972332756166636"

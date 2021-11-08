@@ -36,16 +36,54 @@ challenges:
     \ use of this operator to do all kinds of cool things that Red Hat Data Grid can\
     \ do. On to the next step!\n"
   difficulty: basic
+  notes:
+  - contents: '## Learning Objectives
+
+
+      This interactive tutorial shows you how to deploy and run a single instance
+      of [RHDG](https://www.redhat.com/en/technologies/jboss-middleware/data-grid)
+      Red Hat Data Grid on OpenShift.
+
+
+      You then learn how to expose the REST endpoint and invoke simple cache operations.
+
+
+      ## Introduction to Red Hat Data Grid
+
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/dg/logo.png)
+
+
+      Red Hat Data Grid (RHDG) is an open source, in-memory data store that:
+
+
+      * Stores data in memory (RAM) to provide fast, low-latency response times and
+      very high throughput.
+
+      * Synchronizes data across multiple nodes for continuous availability, reliability,
+      and elastic scalability.
+
+      * Offers flexibility. You can use it as a distributed cache, NoSQL database,
+      or event broker.
+
+
+      RHDG capabilities improve application performance and scalability while reducing
+      the need to make expensive calls to database management systems and transactional
+      back ends.
+
+      '
+    type: text
   slug: 01-op
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -59,49 +97,49 @@ challenges:
     \ in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/dgdemo/graph)\n\
     \nThe first screen you will see is the authentication screen. Enter your username\
     \ and password and\nthen log in:\n\n* Username: `admin`\n* Password: `admin`\n\
-    \n![Web Console Login](/openshift/assets/middleware/dg/login.png)\n\nYou'll see\
-    \ the operator pod deployed:\n\n![Operator](/openshift/assets/middleware/dg/opover.png)\n\
+    \n![Web Console Login](https://katacoda.com/openshift/assets/middleware/dg/login.png)\n\
+    \nYou'll see the operator pod deployed:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/opover.png)\n\
     \nSelect the _Developer View_ using the selector on the left and click **Skip\
-    \ Tour** to skip the new user introduction:\n\n![Operator](/openshift/assets/middleware/dg/dgdev.png)\n\
+    \ Tour** to skip the new user introduction:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/dgdev.png)\n\
     \n### Create Data Grid Cache service\n\nWith the Operator installed, we can now\
     \ start creating instances of Data Grid.\n\nTo do so, on the [Developer View](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/dgdemo/graph),\
     \ click **Add** on the left, and select **Operator Backed**. This will allow you\
-    \ to create objects that installed Operators are looking for:\n\n![Operator](/openshift/assets/middleware/dg/dgadd.png)\n\
-    \nIn this case, find and click on the **Infinispan Cluster** element:\n\n![Operator](/openshift/assets/middleware/dg/opcatalog.png)\n\
-    \nAnd click **Create**.\n\n![Operator](/openshift/assets/middleware/dg/opcreate.png)\n\
+    \ to create objects that installed Operators are looking for:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/dgadd.png)\n\
+    \nIn this case, find and click on the **Infinispan Cluster** element:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/opcatalog.png)\n\
+    \nAnd click **Create**.\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/opcreate.png)\n\
     \nHere you can configure your new Data Grid cluster (note we have not created\
     \ any Caches yet within the cluster). There are [many options described in the\
     \ docs](https://access.redhat.com/documentation/en-us/red_hat_data_grid/8.2/html/running_data_grid_on_openshift/index)\
     \ for security, users, and others. We'll keep it simple for this demo.\n\nChange\
     \ the name to `datagrid-service` and set the number of _replicas_ to `2`:\n\n\
-    ![Operator](/openshift/assets/middleware/dg/opconfig.png)\n\nFinally, scroll to\
-    \ the bottom and click **Create**. You'll now see your new Data Grid cluster and\
-    \ its 2 replicas spin up. Click the following command to wait for it to finish:\n\
-    \n```\noc rollout status -w statefulset/datagrid-service\n```\n\n> **NOTE**: It\
-    \ may take a minute or so to fully spin up, as the container images must be downloaded\
-    \ the first time.\n\nNow click on the box for `datagrid-service` to see its details:\n\
-    \n![Operator](/openshift/assets/middleware/dg/dgdeploy.png)\n\nHere you can see\
-    \ the two replicas running in 2 separate pods.\n\n## Access Data Grid Web Console\n\
-    \nData Grid has a built in single-port endpoint for all network access, including\
-    \ an administrative console for displaying cache configuration, statistics, and\
-    \ creating/changing data in the grid. The console is accessed over the same networking\
-    \ port as the grid itself. To get to it in this environment, we'll need to create\
-    \ a specialized Route to it. Click the following command to create this Route:\n\
-    \n```\noc apply -f - << EOF\nkind: Route\napiVersion: route.openshift.io/v1\n\
-    metadata:\n  name: my-dg\nspec:\n  to:\n    kind: Service\n    name: datagrid-service\n\
-    \    weight: 100\n  port:\n    targetPort: infinispan\n  tls:\n    termination:\
-    \ reencrypt\n    insecureEdgeTerminationPolicy: Allow\n  wildcardPolicy: None\n\
-    EOF\n```\n`\n```\n\nYou'll also need to get the default username/password to use\
-    \ when logging into the console. Retrieve them by clicking this command:\n\n```\n\
-    oc get secret datagrid-service-generated-secret -o jsonpath=\"{.data.identities\\\
-    .yaml}\" | base64 --decode\n```\n\n> **NOTE**: These are default autogenerated\
-    \ credentials that can be disabled or reconfigured when for production use.\n\n\
-    You should now be able to click here to [connect to the Data Grid Console](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n\
+    ![Operator](https://katacoda.com/openshift/assets/middleware/dg/opconfig.png)\n\
+    \nFinally, scroll to the bottom and click **Create**. You'll now see your new\
+    \ Data Grid cluster and its 2 replicas spin up. Click the following command to\
+    \ wait for it to finish:\n\n```\noc rollout status -w statefulset/datagrid-service\n\
+    ```\n\n> **NOTE**: It may take a minute or so to fully spin up, as the container\
+    \ images must be downloaded the first time.\n\nNow click on the box for `datagrid-service`\
+    \ to see its details:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/dgdeploy.png)\n\
+    \nHere you can see the two replicas running in 2 separate pods.\n\n## Access Data\
+    \ Grid Web Console\n\nData Grid has a built in single-port endpoint for all network\
+    \ access, including an administrative console for displaying cache configuration,\
+    \ statistics, and creating/changing data in the grid. The console is accessed\
+    \ over the same networking port as the grid itself. To get to it in this environment,\
+    \ we'll need to create a specialized Route to it. Click the following command\
+    \ to create this Route:\n\n```\noc apply -f - << EOF\nkind: Route\napiVersion:\
+    \ route.openshift.io/v1\nmetadata:\n  name: my-dg\nspec:\n  to:\n    kind: Service\n\
+    \    name: datagrid-service\n    weight: 100\n  port:\n    targetPort: infinispan\n\
+    \  tls:\n    termination: reencrypt\n    insecureEdgeTerminationPolicy: Allow\n\
+    \  wildcardPolicy: None\nEOF\n```\n`\n```\n\nYou'll also need to get the default\
+    \ username/password to use when logging into the console. Retrieve them by clicking\
+    \ this command:\n\n```\noc get secret datagrid-service-generated-secret -o jsonpath=\"\
+    {.data.identities\\.yaml}\" | base64 --decode\n```\n\n> **NOTE**: These are default\
+    \ autogenerated credentials that can be disabled or reconfigured when for production\
+    \ use.\n\nYou should now be able to click here to [connect to the Data Grid Console](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n\
     \n> **NOTE**: You may need to accept browser warnings about self-signed insecure\
     \ connections. We are not using real security certificates here for this demo!\n\
-    \n![Operator](/openshift/assets/middleware/dg/consolewelcome.png)\n\nClick **Open\
-    \ The Console** and login using the above credentials retrieved with the `oc get\
-    \ secret` command. You'll land on the home screen:\n\n![Operator](/openshift/assets/middleware/dg/consolehome.png)\n\
+    \n![Operator](https://katacoda.com/openshift/assets/middleware/dg/consolewelcome.png)\n\
+    \nClick **Open The Console** and login using the above credentials retrieved with\
+    \ the `oc get secret` command. You'll land on the home screen:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/consolehome.png)\n\
     \nWith the console you can create caches, perform adminstrative operations, and\
     \ monitor your Data Grid clusters. We'll revisit this later to see effects of\
     \ our exercises.\n\nLet's save the password to a shell environment variable that\
@@ -114,14 +152,15 @@ challenges:
   difficulty: basic
   slug: 02-cluster
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -147,7 +186,7 @@ challenges:
     \ _many_ options for configuring caches but we'll just stick with the defaults\
     \ for now.\n\nYou can see it in the [Data Grid Admin console](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console),\
     \ you can see the new cache:\n\n> **NOTE**: You may need to reload the browser\
-    \ page to see it!\n\n![Operator](/openshift/assets/middleware/dg/dgnewcache.png)\n\
+    \ page to see it!\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/dgnewcache.png)\n\
     \n## Adding data\n\nLet's add some data! We'll use the Data Grid REST interface\
     \ to add it. Click this command to add some random data to the `mycache` cache:\n\
     \n```\nfor i in {1..100} ; do\n  curl -H 'Content-Type: text/plain' -k -u developer:$PASSWORD\
@@ -155,7 +194,7 @@ challenges:
     \  echo \"Added mykey$i:myvalue$i\"\ndone\n```\n`\n```\n\nThis will add 100 entries\
     \ under keys `mykey1`, `mykey2`, ... with values `myvalue1`, `myvalue2`...\n\n\
     You can see the entries in the [cache overview in the admin console](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console/cache/mycache):\n\
-    \n> You may need to click on the **Entries** tab.\n\n![Operator](/openshift/assets/middleware/dg/entries.png)\n\
+    \n> You may need to click on the **Entries** tab.\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/entries.png)\n\
     \nYou can view, edit and delete these entries graphically, through REST, or other\
     \ protocols such as HotRod depending on your application and performance needs.\n\
     \n## Access via REST\n\nRed Hat Data Grid supports REST out of the box so you\
@@ -177,7 +216,7 @@ challenges:
     \ https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/rest/v2/caches/mycache/mykey22\n\
     ```\n\nThis demonstrates basic RESTful access to Data Grid.\n\n## Viewing metrics\n\
     \nThe admin console has built in metrics about each cache. Click the _Metrics_\
-    \ tab to see them:\n\n![Operator](/openshift/assets/middleware/dg/adminmetrics.png)\n\
+    \ tab to see them:\n\n![Operator](https://katacoda.com/openshift/assets/middleware/dg/adminmetrics.png)\n\
     \nYou can also visit the [Global Metrics](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console/global-stats)\
     \ screen to see more info about the Data Grid service as a whole, and confirm\
     \ cluster status and the 2 replicas on the [Cluster Membership](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console/cluster-membership)\
@@ -185,14 +224,15 @@ challenges:
   difficulty: basic
   slug: 03-access
   tabs:
-  - hostname: crc-nonest-1
+  - hostname: crc
     title: CLI
     type: terminal
-  - hostname: crc-nonest-1
-    port: 30443
-    title: OpenShift Web Console
+  - hostname: crc
+    path: /
+    port: 30001
+    title: Web Console
     type: service
-  - hostname: crc-nonest-1
+  - hostname: crc
     path: /root
     title: Visual Editor
     type: code
@@ -234,7 +274,7 @@ description: '## Learning Objectives
 
   '
 developers:
-- btannous@redhat.com
+- dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
 icon: https://logodix.com/logo/1910931.png

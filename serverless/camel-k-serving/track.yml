@@ -40,14 +40,46 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- btannous@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: fexheqjuvizg
+  id: o3zvlhfkm7w9
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      # Serverless Camel K
+
+      This scenario demonstrates how to create a simple API based [Camel K](https://camel.apache.org/camel-k/latest/index.html) integration with an OpenAPI definition.
+
+      The simple API application enable users to Create, Read, Update, and Delete to an generic online objects datastore.
+
+      Will also make this RESTFul application Serverless. By allowing this application to scale down to zero. And quickly comes back up and run after being called.
+
+
+      ## What is Camel K?
+
+      ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
+
+      ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
+
+      Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
+
+      Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+
+      Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
+
+      ## Why Serverless?
+      Deploying applications as Serverless services is becoming a popular architectural style.
+
+      You will need a  platform that can run serverless workloads, while also enabling you to have complete control of the configuration, building, and deployment. Ideally, the platform also supports deploying the applications as linux containers.
+
+      ##  OpenShift Serverless
+
+      OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere. This is known as Serving.
   assignment: |
     In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
 
@@ -128,19 +160,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step2
-  id: xn4wayoxyybu
+  id: xtw0lkkpcqzz
   type: challenge
   title: Step 2
   assignment: |
@@ -155,7 +188,7 @@ challenges:
     #### (OPTIONAL)
     The document is written in YAML, this is what it looks like.
     You can take this and view it in https://www.apicur.io, as a web based UI to design and view your OpenAPI based APIs.
-    ![apicurio](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)
+    ![apicurio](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)
 
 
     ```
@@ -392,19 +425,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step3
-  id: y9gakhfbjjis
+  id: gq8vatvuoram
   type: challenge
   title: Step 3
   assignment: |
@@ -455,19 +489,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
 - slug: step4
-  id: dds9nztfuvhu
+  id: p6vtprcraset
   type: challenge
   title: Step 4
   assignment: |
@@ -510,7 +545,7 @@ challenges:
 
     The Camel K API service will automatically scale down to zero if it does not get request for approximately 90 seconds. Try watching the service scaling down from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph).
 
-    ![scalezero](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
+    ![scalezero](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
 
     Invoking the service to see the service scaling up.
     ```
@@ -527,7 +562,7 @@ challenges:
 
     Watch the service scaling up from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph) login with *admin/admin*. If you wait at another 90 seconds without invoking the API, you'll find that the pod will disappear. Calling the API again will make the pod appear to serve the request.
 
-    ![scaleup](/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
+    ![scaleup](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
 
 
     ## Congratulations
@@ -536,15 +571,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 450
-checksum: "12132944472577294603"
+checksum: "9870957871762440868"

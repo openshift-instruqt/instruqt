@@ -37,16 +37,47 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-cli
-  id: v6swvyfw4xyq
+  id: hugpc1zngt29
   type: challenge
   title: Explore Helm CLI
+  notes:
+  - type: text
+    contents: |+
+      ## Goal
+
+      Learn how to use the [Helm](https://helm.sh/), a package manager that helps you managing and deploying applications on OpenShift.
+
+      ![Logo](../../assets/developing-on-openshift/helm/logo.png)
+
+      [Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes which helps users create templated packages called Helm Charts to include all Kubernetes resources that are required to deploy a particular application.  Helm then assists with installing the Helm Chart on Kubernetes, and afterwards it can upgrade or rollback the installed package when new versions are available.
+
+      ## Concepts
+
+      * Helm core concepts
+      * Exploring `helm` command line tool
+      * Deploying and managing `Helm Charts`
+      * Creating your own `Chart`
+      * Managing applications lifecycle with Helm `Upgrade` and `Rollback` of releases.
+      * Helm integrations with OpenShift UI
+
+      ## Use case
+
+      Be able to provide a great experience for both Developers and System Administrators to manage and deploy applications using Helm Charts on top of OpenShift.
+
+      Helm Charts are particularly useful for installation and upgrade of stateless applications given that the Kubernetes resources and the application image can simply be updated to newer versions. The follow-up for this Day 1 experience, is to convert Helm Charts into an Operator, using [Operator Framework](https://github.com/operator-framework) for a complete Day 2 experience for your apps.
+
+      This OpenShift cluster will self-destruct in one hour.
+
+      Let's get started!
+
+
   assignment: |+
     At the end of this chapter you will be able to:
     - Use `helm` CLI
@@ -227,19 +258,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 02-first-chart
-  id: mvfb1xqiy2xl
+  id: phnktxgopn6g
   type: challenge
   title: Create your first Helm Chart
   assignment: |
@@ -334,19 +366,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 03-revision
-  id: xksykxp8yigy
+  id: vvmdo6mdop5c
   type: challenge
   title: Manage Revisions
   assignment: |
@@ -463,15 +496,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "12322300437226716553"
+checksum: "812749121532896983"

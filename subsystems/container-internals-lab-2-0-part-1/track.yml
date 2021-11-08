@@ -31,16 +31,41 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-introduction
-  id: s8ckotuxx0n3
+  id: nvrx0x4gjxqf
   type: challenge
   title: Introduction to Containers
+  notes:
+  - type: text
+    contents: |
+      ## Background
+      In this self-paced tutorial, you will gain a basic understanding of the moving parts that make up the typical container architecture.  This will cover container images, registries, hosts, and orchestration.
+
+      By the end of this lab you should be able to:
+      - Draw a diagram showing how the Linux kernel, services and daemons work together to create and deploy containers
+      - Internalize how the architecture of the kernel and supporting services affect security and performance
+      - Explain the API interactions of daemons and the host kernel to create isolated processes
+      - Understand the basics of why people move on to container orchestration
+      - Command the nomenclature necessary to technically discuss the basics of the single and multi-host toolchain
+
+      ## Outline
+      - Container Images: made up of underlying operating system components like libraries and programming languages
+      - Container Registries: Fancy file servers that help users share container images
+      - Container Hosts: Includes Podman (or Docker) runtime, Systemd, runc, and Libcontainer
+      - Container Orchestration: Includes Kubernetes/OpenShift
+
+      ## Other Material
+      - [Presentation](http://bit.ly/2V18QCg)
+      - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+      ## Start Scenario
+      Once you have watched the background video or went throught the presentation, continue to the exercises
   assignment: |
     If you understand Linux, you probably already have 85% of the knowledge you need to understand containers. If you understand how processes, mounts, networks , shells and daemons work - commands like ps, mount, ip addr, bash, httpd and mysqld - then you just need to understand a few extra primitives to become an expert with containers. Remember that all of the things that you already know today still apply: from security and performance to storage and networking, containers are just a different way of packaging and delivering Linux applications. There are four basic primitives to learn to get you from Linux administrator to feeling comfortable with containers:
 
@@ -66,19 +91,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 02-images
-  id: gqv0zm87v73w
+  id: xprdnkkg3f4n
   type: challenge
   title: Container Images
   assignment: |
@@ -122,19 +148,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 03-registries
-  id: pqkufxxmnx7y
+  id: ox2tmj5g60mi
   type: challenge
   title: Container Registries
   assignment: |
@@ -190,19 +217,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 04-hosts
-  id: y5qczzzqd7ni
+  id: gte82b8eqk9k
   type: challenge
   title: Container Hosts
   assignment: |+
@@ -246,19 +274,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 05-orchestration
-  id: r8id7vmykrvr
+  id: u0bt0faqe52g
   type: challenge
   title: Container Orchestration
   assignment: |+
@@ -322,19 +351,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
 - slug: 06-closing
-  id: jjfpolnx67rb
+  id: 5wivn4yihpmz
   type: challenge
   title: Closing
   assignment: |
@@ -355,15 +385,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "5637018787804930112"
+checksum: "1350707667863446625"

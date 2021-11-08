@@ -26,16 +26,36 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 1explore-cli
-  id: 2hxp02cl7kax
+  id: avgcyksod4wf
   type: challenge
   title: Step 1 - Exploring The Command Line
+  notes:
+  - type: text
+    contents: |
+      ## Goal
+
+      Learn how to use the OpenShift Container Platform to build and deploy an application with a data backend and a web frontend.
+
+      ## Concepts
+
+      * OpenShift Web Console and Perspectives
+      * OpenShift `oc` command line tool
+      * Building applications from source on OpenShift
+      * OpenShift REST API
+      * Public URLs and OpenShift Routes
+
+      ## Use case
+
+      Be able to provide a great experience for both Developers and System Administrators to develop, deploy, and run containerized applications using OpenShift. Developers should love using OpenShift because it enables them to take advantage of both containerized applications and orchestration without having to know the details. Developers are free to focus on their code instead of spending time writing Dockerfiles and running docker builds.
+
+      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     ## Command Line Interface (CLI)
 
@@ -80,15 +100,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 2explore-console
-  id: 3aucs93wxuyw
+  id: igqwroy9zatm
   type: challenge
   title: Step 2 - Exploring The Web Console
   assignment: |+
@@ -144,15 +165,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 3deploy-docker
-  id: fz5kubmhynhn
+  id: 65tlr1c4seao
   type: challenge
   title: Step 3 - Deploying a Docker Image
   assignment: |
@@ -194,15 +216,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 4scaling
-  id: h3hlkobegnme
+  id: yimq9ypncpqi
   type: challenge
   title: Step 4 - Scaling Your Application
   assignment: |
@@ -251,15 +274,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 5routes
-  id: rkkxbgw6ojdv
+  id: srigstx2dsky
   type: challenge
   title: Step 5 - Routing HTTP Requests
   assignment: |
@@ -303,15 +327,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 6s2i
-  id: 19v1rtfcafv3
+  id: uetksk6zpzrj
   type: challenge
   title: Step 6 - Building From Source Code
   assignment: |
@@ -384,11 +409,12 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   difficulty: basic
   timelimit: 150
-checksum: "5775256658815902318"
+checksum: "2630702627776550237"

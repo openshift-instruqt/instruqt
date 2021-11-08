@@ -24,16 +24,34 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-loading-the-notebook-images
-  id: cutnuy62kbd3
+  id: 9yypznvashyh
   type: challenge
   title: More about Prometheus
+  notes:
+  - type: text
+    contents: |
+      # Introduction
+
+      In this tutorial you will learn how to use the [Prometheus API Client](https://github.com/AICoE/prometheus-api-client-python) for Python to collect and manipulate [Prometheus](https://github.com/prometheus/prometheus#prometheus) time-series metric data. <br>
+      We will use a [Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/stable/) to interact with a Prometheus instance which is currently being deployed. <br>
+      Please give the environment a couple of minutes to set up. <br>
+      Once the environment is ready to be used, you will see the links to access it in your workshop terminal.
+
+
+      ### The Environment
+
+      During this tutorial you will be using a hosted OpenShift 4.7 environment that is created just for you. This environment is not shared with other users of the system. <br>
+      Your environment will only be active for a one hour period. Keep this in mind before embarking on getting through the content. <br>
+      Each time you start this tutorial, a new environment will be created on the fly.
+
+      Let's get started!
   assignment: |
     ### What is Prometheus?
     [Prometheus](https://prometheus.io/docs/introduction/overview/#what-is-prometheus) is an open-source systems monitoring and alerting toolkit originally built at SoundCloud.
@@ -43,19 +61,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 02-loading-the-notebook-templates
-  id: wyefnvptcmmm
+  id: ru2rurlmzd0c
   type: challenge
   title: Accessing the workshop environment
   assignment: |2
@@ -102,19 +121,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
 - slug: 03-accessing-the-web-console
-  id: kaivvmuolm8h
+  id: cbj8tmozqcrt
   type: challenge
   title: Accessing the workshop environment (Backend)
   assignment: |2
@@ -156,15 +176,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "14754124904701999951"
+checksum: "10360677959938829240"

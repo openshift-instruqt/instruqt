@@ -33,16 +33,43 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-overview-container-tools
-  id: hsy5o0vrvwwp
+  id: g5dgkjdlk4js
   type: challenge
   title: An Overview of Container Tools
+  notes:
+  - type: text
+    contents: |
+      ## Background
+      This lab will help give you a basic understanding of how to use some other OCI compliant tools such as Podman, Buildah, and Skopeo.
+
+      By the end of this lab you should be able to:
+      - FIND, RUN, BUILD, and SHARE containers using OCI compliant tools
+      - Solve real technical problems by using a small set of daemonless tools
+      - Be comfortable using with the basics of an alternative set of tools to Docker
+
+      ## Outline
+      - Understanding the difference between RHEL Server and CoreOS, as well as the difference between the fast and stable streams provided in RHEL Server
+      - Understanding how to install the fast and stable streams
+      - Podman: Familiar Territory: Learning the basics of how to use podman
+      - Buildah: Granularity & Control: Understanding how a container image is really built
+      - Skopeo: Moving & Sharing: Simplicity in inspecting, and moving container images around
+      - CRIU: Checkpoint and restore the memory contents of containers
+      - Udica: Build and deploy custom SELinux policies for containers
+      - OSCAP-Podman: verify patched or unpatched vulnerabilities in container images produced by Red Hat
+
+      ## Other Material
+      - [Presentation](https://goo.gl/h4VK7j)
+      - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+
+      ## Start Scenario
+      Once you have watched the background video or went throught the presentation, continue to the exercises
   assignment: |
     In this lab we're going to cover a plethora of container tools available in Red Hat Enterprise Linux (RHEL), including Podman, Buildah, Skopeo, CRIU and Udica. Before we get into the specific tools, it's important to understand how these are tools are provided to the end user in the Red Hat ecosystem.
 
@@ -66,19 +93,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 02-different-streams
-  id: vb8igcwusmby
+  id: ecpztuba19lq
   type: challenge
   title: Using the Fast and Stable Streams
   assignment: |
@@ -158,19 +186,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 03-podman
-  id: ocdnqzapmjlu
+  id: poot9tf6vot4
   type: challenge
   title: 'Podman: Familiar Territory'
   assignment: |
@@ -299,19 +328,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 04-buildah
-  id: 68i8e43grops
+  id: vy82fhzjetuc
   type: challenge
   title: 'Buildah: Granularity & Control'
   assignment: |
@@ -510,19 +540,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 05-skopeo
-  id: 3obaaxbbjudy
+  id: vjt0t3ehkqhj
   type: challenge
   title: 'Skopeo: Moving & Sharing'
   assignment: |
@@ -612,19 +643,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 06-criu
-  id: vzf75isbo0sc
+  id: vnu7xh5qowix
   type: challenge
   title: 'CRIU: Checkpointing and Restoring'
   assignment: |
@@ -712,19 +744,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 07-udica
-  id: kt35hrauti2q
+  id: uxajxur8lokb
   type: challenge
   title: 'Udica: Custom SELinux Policies'
   assignment: |
@@ -790,19 +823,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 08-oscap-podman
-  id: e6mgil6pv2jo
+  id: am4rxarcybyr
   type: challenge
   title: 'OSCAP Podman: Trust but Verify'
   assignment: |
@@ -848,15 +882,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 300
-checksum: "11897900969465637729"
+checksum: "15641251207431227788"

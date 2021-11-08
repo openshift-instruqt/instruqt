@@ -86,7 +86,7 @@ for course in hcourses['courses']:
         
         track_d["tags"] = ["openshift"]
         track_d["owner"] = "openshift"
-        track_d["developers"] = [ "btannous@redhat.com", "nvinto@redhat.com","rjarvine@redhat.com"]
+        track_d["developers"] = [ "dahmed@redhat.com", "nvinto@redhat.com","rjarvine@redhat.com"]
         track_d["private"] =  False
         track_d["published"] = True
         track_d["skipping_enabled"] = False
@@ -128,6 +128,13 @@ for course in hcourses['courses']:
           shutil.rmtree(pathway + '/' + trackDir + '/track_scripts')
         shutil.copytree('track_scripts', pathway + '/' + trackDir + '/track_scripts')
         
+        if not os.path.exists(pathway + '/' + trackDir + '/assets'):
+          os.mkdir(pathway + '/' + trackDir + '/assets')
+          
+        if not os.path.exists(pathway + '/' + trackDir + '/scripts'):
+          os.mkdir(pathway + '/' + trackDir + '/scripts')
+
+        
         introText=course_json["details"]["intro"]["text"]
         with open('learn-katacoda/' + pathway_id + '/' + course_id + '/' + introText, 'r') as myintro:
           intro_data=myintro.read()
@@ -143,8 +150,8 @@ for course in hcourses['courses']:
         try:
           assets = course_json["details"]["assets"]["client"]
           #shutil.copyfile('learn-katacoda/' + pathway_id + '/' + course_id + '/assets/*' , pathway + '/' + trackDir + '/track_scripts/')
-          os.system('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/track_scripts/.scripts/' )
-          print('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/track_scripts/.scripts/')
+          os.system('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/scripts/' )
+          print('cp -fr ' + 'learn-katacoda/' + pathway_id + '/' + course_id + '/assets/* ' + pathway + '/' + trackDir + '/scripts/')
         except KeyError:
           pass
         

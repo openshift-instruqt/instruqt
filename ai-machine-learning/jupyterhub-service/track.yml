@@ -18,16 +18,28 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-loading-the-required-images
-  id: h3hwoztvyg7l
+  id: n0ovtikqxmh6
   type: challenge
   title: Topic 1 - Loading the Required Images
+  notes:
+  - type: text
+    contents: |
+      The [Project Jupyter](https://jupyter.org/) web site describes Jupyter notebooks as:
+
+      > an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, and much more.
+
+      Jupyter notebooks can be deployed direct to Linux, macOS or Windows environments, or in containerized environments such as Docker, Kubernetes and OpenShift.
+
+      In this workshop you will learn how you can deploy JupyterHub, to create a service for providing Jupyter notebooks to multiple users at the same time.
+
+      The examples shown will make use of sample Jupyter notebook images, JupyterHub images, and templates, from the [Jupyter on OpenShift](https://github.com/jupyter-on-openshift) project, a community project for demonstrating how Jupyter notebooks and JupyterHub can be deployed to OpenShift.
   assignment: |
     The Jupyter on OpenShift project provides Jupyter notebook and JupyterHub images which have been purpose built to work best with OpenShift.
 
@@ -56,19 +68,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 02-loading-the-required-templates
-  id: hxtugmer77iu
+  id: deskoyegiqcx
   type: challenge
   title: Topic 2 - Loading the Required Templates
   assignment: |
@@ -116,19 +129,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 03-accessing-the-web-console
-  id: mvjbbaa8ec5y
+  id: asytky6g5qtr
   type: challenge
   title: Topic 3 - Accessing the Web Console
   assignment: |
@@ -158,19 +172,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 04-deploying-jupyterhub-service
-  id: tjxl12vrzytw
+  id: rrukjxmxzzoo
   type: challenge
   title: Topic 4 - Deploying JupyterHub Service
   assignment: |
@@ -229,19 +244,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 05-deleting-the-jupyterhub-service
-  id: szzs9xhqu0nj
+  id: 1nilxhlysoxx
   type: challenge
   title: Topic 5 - Deleting the JupyterHub Service
   assignment: |
@@ -263,19 +279,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 06-customizing-the-configuration
-  id: seezivnyycov
+  id: gpja68hctfds
   type: challenge
   title: Topic 6 - Customizing the Configuration
   assignment: |
@@ -314,19 +331,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 07-source-to-image-builder
-  id: ynm9fs2uxjbe
+  id: 63yven4g1qpo
   type: challenge
   title: Topic 7 - Source to Image Builder
   assignment: |
@@ -404,19 +422,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
 - slug: 08-building-the-notebook-image
-  id: sjdgf0ntmytu
+  id: slvorez7j7zh
   type: challenge
   title: Topic 8 - Building the Notebook Image
   assignment: |
@@ -461,15 +480,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 150
-checksum: "17383204933088648617"
+checksum: "17675835701903090370"

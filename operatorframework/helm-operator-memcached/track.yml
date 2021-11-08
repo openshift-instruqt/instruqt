@@ -29,16 +29,39 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: idvbmvn1hrzj
+  id: hhtpowzpwyt4
   type: challenge
   title: Initialize the Project
+  notes:
+  - type: text
+    contents: |-
+      In the previous learning modules, we covered how to easily create the following types of Operators with the Operator SDK:
+
+      * **Go**:
+      Ideal for traditional software development teams that want to get to a fully auto-pilot Operator. It gives you the ability to leverage the same Kubernetes libraries the upstream projects uses under the hood. Check out the [Go Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/golang/).
+
+      * **Ansible**:
+      Useful for infrastructure-focused teams that have investment in Ansible modules but want to use them in a Kubernetes-native way. Also great for using Ansible to configure off-cluster objects like hardware load balancers. Check out the [Ansible Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/ansible/).
+
+      We will now focus on the easiest way to get started developing an Operator:
+
+      * **Helm**:
+      Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+
+      ## Creating a Memcached Operator from a Helm Chart
+
+      In this tutorial, we will create a Memcached Operator from an existing [Memcached Helm Chart](https://github.com/helm/charts/blob/master/stable/memcached/Chart.yaml).
+
+      [Memcached](https://memcached.org/) is a Free & open source, high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+
+      Let's begin!
   assignment: |
     Let's begin my creating a new project called `myproject`:
 
@@ -107,19 +130,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step2
-  id: qtsmxwrurf1i
+  id: 9giskahf0mgq
   type: challenge
   title: Update the Watches File
   assignment: |-
@@ -133,19 +157,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step3
-  id: cwetqptwxyhx
+  id: josxkksaivv6
   type: challenge
   title: Apply the Memcached Custom Resource Definition
   assignment: |
@@ -174,19 +199,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step4
-  id: rpwb7g9ysszn
+  id: p3hjr41xhwys
   type: challenge
   title: Apply the Memcached Custom Resource
   assignment: |
@@ -304,19 +330,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step5
-  id: ww8r4vce0bun
+  id: qv58lovycvja
   type: challenge
   title: Update the Memcached Custom Resource
   assignment: |
@@ -339,19 +366,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step6
-  id: cayuzxn546px
+  id: txcyl8f0ro8j
   type: challenge
   title: Test Memcached Cluster Failover
   assignment: |
@@ -373,19 +401,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
 - slug: step7
-  id: gke4jgdpcp3z
+  id: bve6ooyc7v9x
   type: challenge
   title: Clean Up
   assignment: |-
@@ -409,15 +438,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "5529564524693298375"
+checksum: "10695206339272868355"

@@ -30,16 +30,40 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-define-entity
-  id: kxb7mc4priif
+  id: xtogugtshdy5
   type: challenge
   title: Define Entity
+  notes:
+  - type: text
+    contents: |-
+      In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
+
+      ## What is Panache?
+
+      Hibernate ORM is the de facto JPA implementation and offers you the full breadth of an Object Relational Mapper. It makes complex mappings possible, but many simple and common mappings can also be complex. Hibernate ORM with **Panache** focuses on making your entities trivial and fun to write and use with Quarkus.
+
+      With Panache, we took an opinionated approach to make hibernate as easy as possible. Hibernate ORM with Panache offers the following:
+
+      * By extending `PanacheEntity` in your entities, you will get an ID field that is auto-generated. If you require a custom ID strategy, you can extend `PanacheEntityBase` instead and handle the ID yourself.
+
+      * By using Use public fields, there is no need for functionless getters and setters (those that simply get or set the field). You simply refer to fields like `Person.name` without the need to write a `Person.getName()` implementation. Panache will auto-generate any getters and setters you do not write, or you can develop your own getters/setters that do more than get/set, which will be called when the field is accessed directly.
+
+      * The `PanacheEntity` superclass comes with lots of super useful static methods and you can add your own in your derived entity class, and much like traditional object-oriented programming it's natural and recommended to place custom queries as close to the entity as possible, ideally within the entity definition itself. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.
+
+      * You don't need to write parts of the query that you don’t need: write `Person.find("order by name")` or `Person.find("name = ?1 and status = ?2", "stef", Status.Alive)` or even better `Person.find("name", "stef")`.
+
+      That’s all there is to it: with Panache, Hibernate ORM has never looked so trim and neat.
+
+      ### Other possibilities
+
+      Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
   assignment: |+
     In this step, you will start with a simple RESTful application generated from the Quarkus tooling, and then define a new entity to work on, which will be persisted in a typical database through JDBC.
 
@@ -220,19 +244,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 02-remote-dev
-  id: yintayezf3ts
+  id: mjqxevryv5x0
   type: challenge
   title: Setup Remove Development
   assignment: |+
@@ -276,7 +301,7 @@ challenges:
     * Username: `developer`
     * Password: `developer`
 
-    ![Web Console Login](/openshift/assets/middleware/quarkus/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
 
     Click **Skip Tour** to skip the new user introduction.
 
@@ -296,7 +321,7 @@ challenges:
 
     You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).
 
-    ![Postgres pod](/openshift/assets/middleware/quarkus/people-postgres.png)
+    ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-postgres.png)
 
     ## Add Quarkus OpenShift extension
 
@@ -377,7 +402,7 @@ challenges:
 
     You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph):
 
-    ![Quarkus pod](/openshift/assets/middleware/quarkus/people-quarkus.png)
+    ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-quarkus.png)
 
 
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
@@ -452,38 +477,40 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 03-add-query-endpoints
-  id: 5yxvgbh2f4yx
+  id: nehh6n9bynzo
   type: challenge
   title: Add Queries
   assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static List&lt;Person&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static List&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n        .filter(p -&gt; p.birth.getYear() &lt;= year)\n        .collect(Collectors.toList());\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; findByColor(@PathParam(value = \"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public List&lt;Person&gt; getBeforeYear(@PathParam(value = \"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`{{execute T2}}\n\n> This will open a new Terminal to execute the command. If the command fails to run just click the above command again!\n\nYou should only see **one** person with BLUE eyes:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  }\n]\n```\nThis also confirms that our remote live coding is working as expected.\n\nNext, let's find people born in 1990 or earlier:\n\n`curl -s $PEOPLE_URL/person/birth/before/1990 | jq`{{execute T2}}\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful static methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 04-add-paging-filtering
-  id: h1pvk5sl2bvu
+  id: xasxnvxdymkl
   type: challenge
   title: Add Paging/Filtering
   assignment: |+
@@ -599,19 +626,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 05-add-lifecycle-task
-  id: 3z8naxolska4
+  id: cg5cuj6vclb5
   type: challenge
   title: Add Startup Task
   assignment: |
@@ -683,19 +711,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: 06-exercise-table
-  id: tmarzhtnznbv
+  id: brgo3c9xkxaz
   type: challenge
   title: Exercise Table
   assignment: |
@@ -705,7 +734,7 @@ challenges:
 
     It should look like:
 
-    ![Web Console Overview](/openshift/assets/middleware/quarkus/panache-datatable.png)
+    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/quarkus/panache-datatable.png)
 
     Notice the total number of records reported at the bottom. Type in a single letter, e.g. `F` in the search box and see how responsive the app is. Type additional letters to narrow the search. Rather than having all 10k records loaded in the browser, DataTable makes a call back to our `/person/datatable` REST endpoint to fetch only those records that should be shown, based on page size, current page you're looking at, and any search filters. With a page size of `10` each REST call will only return up to 10 records, no matter how many there are in the database.
 
@@ -744,15 +773,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "1090577188706810727"
+checksum: "16120105969235982869"

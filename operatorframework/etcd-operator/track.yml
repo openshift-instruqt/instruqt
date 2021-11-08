@@ -26,16 +26,36 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: qaiujqmqazgv
+  id: d9s2gxxn9mc3
   type: challenge
   title: Creating the Custom Resource Definition (CRD)
+  notes:
+  - type: text
+    contents: |
+      The etcd operator manages etcd clusters deployed to Kubernetes and automates tasks related to operating an etcd cluster.
+
+      - [Create and Destroy](https://github.com/coreos/etcd-operator#create-and-destroy-an-etcd-cluster)
+      - [Resize](https://github.com/coreos/etcd-operator#resize-an-etcd-cluster)
+      - [Failover](https://github.com/coreos/etcd-operator#failover)
+      - [Rolling upgrade](https://github.com/coreos/etcd-operator#upgrade-an-etcd-cluster)
+      - [Backup and Restore](https://github.com/coreos/etcd-operator#backup-and-restore-an-etcd-cluster)
+
+      There are [more spec examples](https://github.com/coreos/etcd-operator/blob/master/doc/user/spec_examples.md) on setting up clusters with different configurations
+
+      Read [Best Practices](https://github.com/coreos/etcd-operator/blob/master/doc/best_practices.md) for more information on how to better use etcd operator.
+
+      Read [RBAC docs](https://github.com/coreos/etcd-operator/blob/master/doc/user/rbac.md) for how to setup RBAC rules for etcd operator if RBAC is in place.
+
+      Read [Developer Guide](https://github.com/coreos/etcd-operator/blob/master/doc/dev/developer_guide.md) for setting up a development environment if you want to contribute.
+
+      See the [Resources and Labels](https://github.com/coreos/etcd-operator/blob/master/doc/user/resource_labels.md) doc for an overview of the resources created by the etcd-operator.
   assignment: |
     Let's begin by creating a new project called `myproject`:
 
@@ -94,19 +114,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step2
-  id: vtaopxq86vfp
+  id: zcxgpe6gyrqx
   type: challenge
   title: Creating the Service Account, Role, and RoleBinding
   assignment: |-
@@ -232,19 +253,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step3
-  id: y1wkyohveyxq
+  id: qyykecaxyt2g
   type: challenge
   title: Creating the Etcd Operator Deployment
   assignment: |
@@ -334,19 +356,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step4
-  id: grsitz6mmktz
+  id: y8vkazhypisq
   type: challenge
   title: Creating the EtcdCluster Custom Resource (CR)
   assignment: |
@@ -407,19 +430,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step5
-  id: rusxkhffafoh
+  id: jakpxnovlnui
   type: challenge
   title: Interacting with a Live Etcd Cluster
   assignment: |
@@ -479,19 +503,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step6
-  id: tjftobfeapxn
+  id: ujwnpiy5yoxe
   type: challenge
   title: Scaling and Modifying the Etcd Version
   assignment: |
@@ -515,19 +540,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step7
-  id: xjoyaalaitow
+  id: kvs8dfokc5zh
   type: challenge
   title: Disaster Recovery in Action
   assignment: |
@@ -543,19 +569,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
 - slug: step8
-  id: qybarytiodcj
+  id: ain1vmrvjr6s
   type: challenge
   title: Clean Up
   assignment: |
@@ -586,15 +613,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "13573315034500665975"
+checksum: "10714513038401832232"

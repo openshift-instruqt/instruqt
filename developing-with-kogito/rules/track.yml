@@ -21,16 +21,31 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - rjarvine@redhat.com
 - nvinto@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: ymg6fm3c6cdn
+  id: uhfndjs8bqdt
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario, you will learn how to implement (business) rules in [Kogito](https://kogito.kie.org) using _rule units_.
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+
+      ### Rule Units
+
+      _Rule Units_ is an approach in which a rule base is partitioned in smaller _units_. These units are bound to (different) _data sources_ and their execution can be orchestrated. A _rule unit_ is an aggregate of data sources, global variables and rules.
+
+
+      ### Other possibilities
+
+      Learn more at [kogito.kie.org](https://kogito.kie.org), or just drive on and get hands-on!
   assignment: |
     In this step, you will create the Kogito application skeleton.
 
@@ -83,7 +98,7 @@ challenges:
 
     You should see the following page:
 
-    ![New Kogito Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-empty-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-empty-swagger-ui.png)
 
     It's working!
 
@@ -97,19 +112,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 240
 - slug: 02-implement-domain-model
-  id: vjk5yjyl24ju
+  id: j54vxlbkdun7
   type: challenge
   title: Step 2
   assignment: |
@@ -184,19 +200,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 240
 - slug: 03-implement-the-ruleunit
-  id: emrj5qfnibd7
+  id: j1ygwy5vitlo
   type: challenge
   title: Step 3
   assignment: |
@@ -265,19 +282,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 240
 - slug: 04-ruleunit-rules
-  id: tnykcbwivost
+  id: kmmizeql1rs7
   type: challenge
   title: Step 4
   assignment: |
@@ -373,19 +391,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 240
 - slug: 05-ruleunit-variables
-  id: cainerzor525
+  id: cyg0tub29xij
   type: challenge
   title: Step 5
   assignment: |
@@ -445,7 +464,7 @@ challenges:
 
     Open the **POST /adult** RESTful endpoint. Note that a fully typed API is generated for you, based on your business assets like your rule units and rules.
 
-    ![API](/openshift/assets/middleware/middleware-kogito/kogito-adult-post-api.png)
+    ![API](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-adult-post-api.png)
 
     ## Congratulations!
 
@@ -453,15 +472,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 240
-checksum: "5614412730508772185"
+checksum: "17602673423729102891"

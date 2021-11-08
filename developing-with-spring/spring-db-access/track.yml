@@ -11,16 +11,21 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: iszmnjewco7q
+  id: iztanwh3f8dh
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |+
+      In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a simple Spring Boot application with a Database Persistence layer backed by Spring Data JPA and Hibernate.
+
   assignment: |-
     # Import the code
 
@@ -58,19 +63,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 02-read-content-from-a-database
-  id: ywbq0eavl8bf
+  id: zkopvns4m2xa
   type: challenge
   title: Step 2
   assignment: |
@@ -277,19 +283,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 03-deploy-to-openshift
-  id: gt8ftxiqaqxw
+  id: jn8qqtqv8xel
   type: challenge
   title: Step 3
   assignment: |
@@ -400,15 +407,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "1497644997203899336"
+checksum: "18436900697229290482"

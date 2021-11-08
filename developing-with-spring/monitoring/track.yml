@@ -9,16 +9,19 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-review-the-initial-project
-  id: mizpsrawhnhc
+  id: bxbrzrrsyipp
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. You will learn about how OpenShift uses monitoring tools to keep your application running / notify you when something unrecoverable happens through the use of *probes* .
   assignment: |
     # Import the code
 
@@ -48,7 +51,7 @@ challenges:
 
     You should now see an HTML page with a `Success` welcome message that looks like this:
 
-    ![Success](/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
+    ![Success](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
 
     If you see this then you've successfully set up the application! If not check the logs in the terminal. Spring Boot adds a couple helper layers to catch common errors and print helpful messages to the console so check for those first.
 
@@ -62,19 +65,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
-  id: twqabqtrkaos
+  id: 9cwxogkbpbsk
   type: challenge
   title: Step 2
   assignment: |-
@@ -108,13 +112,13 @@ challenges:
     **2. Using a Route to reach the application from the internet**
 
     Now that our application is deployed to OpenShift, how do external users access it? The answer is with a **Route**. By using a route, we are able to expose our services and allow for external connections at a given hostname. Open the OpenShift Console, log in using _admin_/_admin_ credetial and you can view the route that was created for our application under the project _dev_.
-    ![Routes](/openshift/assets/middleware/rhoar-monitoring/routes.png)
+    ![Routes](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/routes.png)
 
     Either click on the route link through the _Location_ column from the above screen and navigate to the `/fruits` endpoint, or click this link [here](http://spring-monitoring-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/fruits).
 
     We should now see the same `Success` page that we saw when we first tested our app locally:
 
-    ![Success](/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
+    ![Success](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
 
     ## Congratulations
 
@@ -122,19 +126,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
 - slug: 03-add-health-checks
-  id: 1ucnpijvwq4f
+  id: qcqjksliao7y
   type: challenge
   title: Step 3
   assignment: |
@@ -154,7 +159,7 @@ challenges:
 
     Switch to the 'developer' perspective and from the _Topology_ tab of your project _dev_, select your deployment. You should see something like this:
 
-    ![Missing Health Checks](/openshift/assets/middleware/rhoar-monitoring/healthChecks.png)
+    ![Missing Health Checks](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/healthChecks.png)
 
 
     Since we have a Spring Boot application we have an easy option for implementation of health checks. We're able to pull in the `Spring Actuator` library.
@@ -244,15 +249,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "894111700866612983"
+checksum: "15305765753193091144"

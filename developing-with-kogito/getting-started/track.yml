@@ -44,16 +44,54 @@ tags:
 - openshift
 owner: openshift
 developers:
-- btannous@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- dahmed@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-create-project
-  id: nxbq889xzrwj
+  id: ydolnb5a9183
   type: challenge
   title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario, you will get an introduction to [Kogito](https://kogito.kie.org).
+
+      ## What is Kogito?
+
+      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+
+      ### Cloud Native Business Automation
+
+      Business Automation covers the application area of business processes, workflows, decisions, rules and optimization. Kogito brings these capabilities to the Cloud Native world by utilizing the latest innovations in the Java landscape, like [Quarkus](https://quarkus.io) and [GraalVM](https://graalvm.org), while building on battle-tested components.
+
+      The introduction of the microservices architectural style, and the rapid move to containers and cloud, has introduced new requirements for business applications. Decision and process logic form a large part of an enterprises IT landscape. The move to these new, highly distributed, application environments requires a new form of process automation and decision management. A form of business automation that utilizes concepts like microservices, reactive and event-driven applications, and serverless deployments and execution.
+
+      Kogito has been designed with this new world in mind, and provides first-class support for these different paradigms. The Kogito development model morphs to adapt itself to the type of application you are developing.
+
+      Kogito is a a Cloud Native Business Automation stack targetted at modern runtimes like [Quarkus](https://quarkus.io) and [Spring Boot](https://spring.io/projects/spring-boot). It's built on battle-tested capabilities like [Drools](https://www.drools.org), [jBPM](https://www.jbpm.org) and [OptaPlanner](https://www.optaplanner.org). Amazingly fast boot time, incredibly low RSS memory (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms like Kubernetes.
+
+      ### Kogito ergo Cloud
+
+      Kogito is designed from ground up to run at scale on cloud infrastructure. If you think about business automation think about the cloud, as this is where your business logic lives these days. By taking advantage of the latest technologies (Quarkus, knative, etc.), you get amazingly fast boot times and instant scaling on orchestration platforms like Kubernetes.
+
+      ### Kogito ergo Domain
+
+      Kogito adapts to your business domain rather than the other way around. No more leaking abstraction of the tool into your client applications. Stay focused on what the business is about, instead of being concerned with technology behind it.
+
+      ### Kogito ergo Power
+      Kogito offers a powerful developer experience based on battle-tested components. Achieve instant developer efficiency by having:
+
+      * Tooling embeddable wherever you need it
+      * Code generation taking care of 80% of the work
+      * Flexibility to customize, only use what you need
+      * Simplified local development with live reload
+
+      ### Other possibilities
+
+      Learn more at [kogito.kie.org](https://kogito.kie.org), or just drive on and get hands-on!
   assignment: |
     In this step, you will create a Kogito application skeleton.
 
@@ -146,7 +184,7 @@ challenges:
 
     You should see the following page, which shows the API of the sample Kogito _Greetings_ service provided by the archetype:
 
-    ![New Kogito Quarkus Web Page](/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
 
     It's working!
 
@@ -158,19 +196,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 02-implement-process
-  id: 5bbtpijwwsam
+  id: pl12jxq3uab3
   type: challenge
   title: Step 2
   assignment: |
@@ -182,7 +221,7 @@ challenges:
 
     We will create a simple process that will look like this:
 
-    ![Process](/openshift/assets/middleware/middleware-kogito/kogito-getting-started-process.png)
+    ![Process](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-getting-started-process.png)
 
     Open a new BPMN2 file by clicking: `getting-started/src/main/resources/getting-started.bpmn`
 
@@ -341,7 +380,7 @@ challenges:
 
     In the Swagger UI, expand the **POST /getting_started** resource. Click on the **Try it out** button on the right-hand-side of the screen. Click on the blue **Execute** button to fire the request. The response will be the instance-id/process-id of the created **getting_started** resource.
 
-    ![Swagger](/openshift/assets/middleware/middleware-kogito/kogito-getting-started-swagger.png)
+    ![Swagger](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-getting-started-swagger.png)
 
     Apart from the Swagger-UI, we can also call our RESTful resources from any REST client, for example via **cURL** in a terminal.
 
@@ -350,7 +389,7 @@ challenges:
     `curl -X GET "http://localhost:8080/getting_started" -H "accept: application/json"`{{execute T2}}
 
     > You can also open additional terminals with the "+" button on the tab bar to the right.
-    > ![Open Terminal](/openshift/assets/middleware/middleware-kogito/katacoda-open-new-terminal.png)
+    > ![Open Terminal](https://katacoda.com/openshift/assets/middleware/middleware-kogito/katacoda-open-new-terminal.png)
 
     Our process defintion contains a *UserTask*. To retrieve the tasks of an instance, we need to execute another REST operation.
 
@@ -358,13 +397,13 @@ challenges:
 
     This will return a list of **Tasks**.
 
-    ![Tasks](/openshift/assets/middleware/middleware-kogito/kogito-getting-started-get-tasks.png)
+    ![Tasks](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-getting-started-get-tasks.png)
 
     Since we haven't defined any Task input and output data yet, we can simply complete the task without providing any data. We will again do this from the [Swagger-UI](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui). Expand the **POST ​/getting_started​/{id}​/Task/{workitemId}** operation, and click on the **Try it out** button. In the `id` field, fill in the value of the process instance id, and fill in the task-id that we retrieved with our previous REST call in the `workItemId` field. Now, click on the **Execute** button.
 
     This will complete the task, and the process will continue and reach the *End* node and complete.
 
-    ![Complete Tasks](/openshift/assets/middleware/middleware-kogito/kogito-getting-started-complete-task.png)
+    ![Complete Tasks](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-getting-started-complete-task.png)
 
     With the task completed, the process instance will now be completed. Execute the following command again in the Terminal by clicking on it. Notice that there are no process instances returned:
 
@@ -376,19 +415,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 03-package-and-run
-  id: o9moyexj8i7u
+  id: 8szxiosknccj
   type: challenge
   title: Step 3
   assignment: |
@@ -451,25 +491,26 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 04-build-native
-  id: tqmh249ygirx
+  id: ohx94yxgtx7a
   type: challenge
   title: Step 4
   assignment: |
     Let’s now produce a native executable for our application. It improves the startup time of the application, and produces a minimal disk footprint. The executable would have everything to run the application including the "JVM" (shrunk to be just enough to run the application), and the application.
 
-    ![Native process](/openshift/assets/middleware/quarkus/native-image-process.png)
+    ![Native process](https://katacoda.com/openshift/assets/middleware/quarkus/native-image-process.png)
 
     We will be using GraalVM, which includes a native compiler for producing native images for a number of languages, including Java. It's been installed for you:
 
@@ -584,19 +625,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 05-deploy-to-openshift
-  id: vkjsxb5iaic4
+  id: bunphx9sbwlq
   type: challenge
   title: Step 5
   assignment: |
@@ -635,21 +677,21 @@ challenges:
 
     OpenShift ships with a web-based console that will allow users to perform various tasks via a browser. To get a feel for how the web console works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
 
-    ![OpenShift Console Tab](/openshift/assets/middleware/quarkus/openshift-console-tab.png)
+    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/quarkus/openshift-console-tab.png)
 
     > Note you will get a security certificate error due to the use of self-signed security certificates. You will need to accept the exception in your browser to continue to the OpenShift console.
 
     The first screen you will see is the authentication screen. Enter your username and password (u: developer, p: developer) and then log in:
 
-    ![Web Console Login](/openshift/assets/middleware/middleware-kogito/login.png)
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/middleware-kogito/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to work with.
 
-    ![Web Console Projects](/openshift/assets/middleware/middleware-kogito/projects.png)
+    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/middleware-kogito/projects.png)
 
     Click on your new project name to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have running as part of your project:
 
-    ![Web Console Overview](/openshift/assets/middleware/middleware-kogito/overview.png)
+    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/middleware-kogito/overview.png)
 
     There's nothing there now, but that's about to change.
 
@@ -700,19 +742,20 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
 - slug: 06-scaling
-  id: uuoaywmyiuxc
+  id: yvif2b9fomfb
   type: challenge
   title: Step 6
   assignment: |
@@ -732,7 +775,7 @@ challenges:
 
     Back in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart) you'll see the app scaling dynamically up to 10 pods:
 
-    ![Scaling](/openshift/assets/middleware/middleware-kogito/scaling.png)
+    ![Scaling](https://katacoda.com/openshift/assets/middleware/middleware-kogito/scaling.png)
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
@@ -756,7 +799,7 @@ challenges:
 
     Back in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart) you'll see the app scaling dynamically up to 50 pods:
 
-    ![Scaling to 50](/openshift/assets/middleware/middleware-kogito/50pods.png)
+    ![Scaling to 50](https://katacoda.com/openshift/assets/middleware/middleware-kogito/50pods.png)
 
     Once they are all up and running, try the same load again:
 
@@ -772,15 +815,16 @@ challenges:
   tabs:
   - title: CLI
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
+    hostname: crc
+  - title: Web Console
     type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
+    path: /
+    port: 30001
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "16326182897387686312"
+checksum: "5675669598351681786"
