@@ -105,11 +105,13 @@ challenges:
 
     The easiest way to create a new Quarkus project is to click to run the following command:
 
-    `mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+    ```
+    mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=getting-started \
         -DclassName="org.acme.quickstart.GreetingResource" \
-        -Dpath="/hello"`
+        -Dpath="/hello"
+    ```
 
     This will use the Quarkus Maven Plugin and generate a basic Maven project for you in the `getting-started` subdirectory, generating:
 
@@ -274,7 +276,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 100
+  timelimit: 600
 - slug: 02-inject-bean
   id: xqafjcyorgsc
   type: challenge
@@ -288,7 +290,7 @@ challenges:
 
     Next, click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="./getting-started/src/main/java/org/acme/quickstart/GreetingService.java" data-target="replace">
+    ```java
     package org.acme.quickstart;
 
     import javax.enterprise.context.ApplicationScoped;
@@ -303,11 +305,11 @@ challenges:
         }
 
     }
-    </pre>
+    ```
 
     Next, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java` class and then click **Copy To Editor** once again to inject the new bean and create a new endpoint using it:
 
-    <pre class="file" data-filename="./getting-started/src/main/java/org/acme/quickstart/GreetingResource.java" data-target="replace">
+    ```java
     package org.acme.quickstart;
 
     import javax.inject.Inject;
@@ -336,7 +338,7 @@ challenges:
             return "Hello RESTEasy";
         }
     }
-    </pre>
+    ```
 
     ## Inspect the results
 
@@ -358,7 +360,7 @@ challenges:
 
     Next, click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="./getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java" data-target="replace">
+    ```java
     package org.acme.quickstart;
 
     import io.quarkus.test.junit.QuarkusTest;
@@ -384,7 +386,7 @@ challenges:
         }
 
     }
-    </pre>
+    ```
 
     This test generates a random string (a UUID), and uses that to call into our new service, looking for the same random name in the returned value.
 
@@ -813,4 +815,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "5770780697868036080"
+checksum: "17182772333985284341"
