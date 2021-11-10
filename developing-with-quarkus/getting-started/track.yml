@@ -109,7 +109,7 @@ challenges:
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=getting-started \
         -DclassName="org.acme.quickstart.GreetingResource" \
-        -Dpath="/hello"`{{execute}}
+        -Dpath="/hello"`
 
     This will use the Quarkus Maven Plugin and generate a basic Maven project for you in the `getting-started` subdirectory, generating:
 
@@ -560,7 +560,7 @@ challenges:
 
     And extremely low memory usage as reported by the Linux `ps` utility. Click here to run this in your other Terminal tab:
 
-    `ps -o pid,rss,command -p $(pgrep -f runner)`{{execute T2}}
+    `ps -o pid,rss,command -p $(pgrep -f runner)`
 
     You should see something like:
 
@@ -575,7 +575,7 @@ challenges:
 
     Make sure the app is still working as expected (we'll use `curl` this time to access it directly):
 
-    `curl http://localhost:8080/hello/greeting/quarkus`{{execute T2}}
+    `curl http://localhost:8080/hello/greeting/quarkus`
 
     > This will automatically open and run `curl` in a separate terminal. You can also open additional terminals with the "+" button on the tab bar to the right.
 
@@ -622,13 +622,13 @@ challenges:
 
     Run the following command to add it to our project:
 
-    `mvn quarkus:add-extension -Dextensions="openshift"`{{execute T1}}
+    `mvn quarkus:add-extension -Dextensions="openshift"`
 
     ## Login to OpenShift
 
     We'll deploy our app as the `developer` user. Run the following command to login with the OpenShift CLI:
 
-    `oc login -u developer -p developer`{{execute T1}}
+    `oc login -u developer -p developer`
 
     You should see
 
@@ -644,7 +644,7 @@ challenges:
 
     For this scenario, let's create a project that you will use to house your applications. Click:
 
-    `oc new-project quarkus --display-name="Sample Quarkus App"`{{execute T1}}
+    `oc new-project quarkus --display-name="Sample Quarkus App"`
 
     ## Deploy application to OpenShift
 
@@ -656,7 +656,7 @@ challenges:
     -Dquarkus.kubernetes.deploy=true \
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.expose=true \
-    -Dquarkus.openshift.labels.app.openshift.io/runtime=quarkus`{{execute T1}}`
+    -Dquarkus.openshift.labels.app.openshift.io/runtime=quarkus``
 
     The output should end with `BUILD SUCCESS`.
 
@@ -671,7 +671,7 @@ challenges:
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/getting-started`{{execute T1}}
+    `oc rollout status -w dc/getting-started`
 
     Wait for that command to report following before continuing.
     `replication controller "getting-started-1" successfully rolled out`
@@ -689,7 +689,7 @@ challenges:
 
     And now we can access using `curl` once again:
 
-    `curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift`{{execute T1}}
+    `curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift`
 
     You should see:
 
@@ -732,13 +732,13 @@ challenges:
 
     Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. Click here to set this limit:
 
-    `oc set resources dc/getting-started --limits=memory=50Mi`{{execute T1}}
+    `oc set resources dc/getting-started --limits=memory=50Mi`
 
     ## Scale the app
 
     With that set, let's see how fast our app can scale up to 10 instances:
 
-    `oc scale --replicas=10 dc/getting-started`{{execute T1}}
+    `oc scale --replicas=10 dc/getting-started`
 
     Back in the  [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus) you'll see the app scaling dynamically up to 10 pods:
 
@@ -746,7 +746,7 @@ challenges:
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
-    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`{{execute T1}}
+    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`
 
     You can see the 10 instances of our Quarkus app being load-balanced and responding evenly:
 
@@ -762,7 +762,7 @@ challenges:
 
     10 not enough? Let's try 50:
 
-    `oc scale --replicas=50 dc/getting-started`{{execute T1}}
+    `oc scale --replicas=50 dc/getting-started`
 
     Back in the [Overview in the OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview) you'll see the app scaling dynamically up to 50 pods:
 
@@ -770,11 +770,11 @@ challenges:
 
     Once they are all up and running, try the same load again:
 
-    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`{{execute T1}}
+    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`
 
     And witness all 50 pods responding evenly to requests. Try doing that with your average Java app running in a container! This tutorial uses a single node OpenShift cluster, but in practice you'll have many more nodes, and can scale to hundreds or thousands of replicas if and when load goes way up.
 
-    > 50 still not enough? Are you feeling lucky? Try **100**: `oc scale --replicas=100 dc/getting-started`{{execute T1}} and watch the magic on the [OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview). It may take a bit of time for all 100 to spin up given this limited resource environment, but they will eventually!
+    > 50 still not enough? Are you feeling lucky? Try **100**: `oc scale --replicas=100 dc/getting-started` and watch the magic on the [OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview). It may take a bit of time for all 100 to spin up given this limited resource environment, but they will eventually!
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -784,7 +784,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
