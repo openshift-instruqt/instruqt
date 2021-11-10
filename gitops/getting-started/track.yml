@@ -198,7 +198,12 @@ challenges:
     CLI and UI. Let's find the URL for the ArgoCD API Server:
 
     ```
-    oc get routes -n openshift-gitops | grep openshift-gitops-server
+    oc get routes -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'
+    ```
+    Find the default password for the `admin` account as follows:
+
+    ```
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
     ```
 
     To login from the terminal, execute the following (replace $ARGOCD_SERVER_URL with the above URL):
@@ -209,11 +214,6 @@ challenges:
 
     You'll have to accept the self-signed certificate.
 
-    Find the default password for the `admin` account as follows:
-
-    ```
-    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
-    ```
 
     You can login with the following:
     * **Username:** ``admin``
@@ -228,12 +228,13 @@ challenges:
 
     ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
 
-
+    You can use the same credentials to login from the UI.
 
     > **NOTE** The Password is stored in a secret on the platform.
 
 
-    Verify this by running the following:
+    Let's come back to the terminal. Verify that you're connected to the Argo CD API server
+    by running the following:
 
     ```
     argocd cluster list
@@ -301,16 +302,16 @@ challenges:
     example manifesets taken from our [sample GitOps repo](https://github.com/redhat-developer-demos/openshift-gitops-examples).
     We'll be uisng this repo to test. These manifests include:
 
-    * A **Namespace**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-ns.yaml`
-    * A **Deployment**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-deployment.yaml`
-    * A **Service**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-svc.yaml`
-    * A **Route**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-route.yaml`
+    * A **Namespace**: [bgd-ns.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-ns.yaml)
+    * A **Deployment**: [bgd-deployment.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-deployment.yaml)
+    * A **Service**: [bgd-svc.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-svc.yaml)
+    * A **Route**: [bgd-route.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-route.yaml)
 
     Collectively, this is known as an `Application` within ArgoCD. Therefore,
     you must define it as such in order to apply these manifest in your
     cluster.
 
-    Open up the Argo CD `Application` manifest: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/bgd-app.yaml`
+    Open up the Argo CD `Application` manifest: [bgd-app.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/bgd-app.yaml)
 
     Let's break this down a bit.
 
@@ -445,4 +446,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "8512618330567342265"
+checksum: "11862043285992058350"
