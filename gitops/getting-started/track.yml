@@ -13,8 +13,7 @@ description: |
   [GitOps](https://www.openshift.com/learn/topics/gitops/) is a set of practices that leverages Git workflows to manage infrastructure and application configurations.
   By using Git repositories as the source of truth, it allows the DevOps team to store the entire state of the cluster configuration in Git so that the trail of changes are visible and auditable.
 
-  **GitOps** simplifies the propagation of infrastructure and application
-  configuration changes across multiple clusters by defining your infrastructure and applications definitions as “code”.
+  **GitOps** simplifies the propagation of infrastructure and application configuration changes across multiple clusters by defining your infrastructure and applications definitions as “code”.
 
   * Ensure that the clusters have similar states for configuration, monitoring, or storage.
   * Recover or recreate clusters from a known state.
@@ -23,7 +22,7 @@ description: |
   * Associate templated configuration with different environments.
 
 
-  ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -39,8 +38,6 @@ description: |
   * Exploring the OpenShift GitOps Operator
   * Accessing Argo CD via CLI and Web UI
   * Deploying A Sample Application
-
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -80,7 +77,7 @@ challenges:
       * Associate templated configuration with different environments.
 
 
-      ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+      ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
 
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -96,15 +93,27 @@ challenges:
       * Exploring the OpenShift GitOps Operator
       * Accessing Argo CD via CLI and Web UI
       * Deploying A Sample Application
-
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Welcome! In this section we will be exploring the OpenShift GitOps
     Operator, what it installs, and how all the components fit together.
 
     ## Logging in to the Cluster via Dashboard
 
-    Click the [OpenShift Web Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the OpenShift Web UI.
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
 
     You will then be able to login with admin permissions with:
 
@@ -113,8 +122,11 @@ challenges:
 
     ## Exploring the GitOps Operator Installation
 
-    The OpenShift GitOps Operator was installed via the Operator Hub. You
-    can view this installation via the UI in the Administrator Perspective:
+    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+
+    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+
+    This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
     * Click on `Operators` drop down on the leftside navigation.
     * Click on `Installed Operators`
@@ -137,11 +149,9 @@ challenges:
     openshift-gitops-operator.openshift-operators         25m
     ```
 
-    This Operator is a "meta" Operator that installs both Argo CD and the
-    Tekton Operator. This is why you see both the GitOps Operator and the
-    Tekton Operator listed.
+    Finally, you can verify the installation by running
 
-    Finally, you can verify the installation by running ```
+    ```
     oc get pods -n openshift-gitops
     ```
 
@@ -182,10 +192,48 @@ challenges:
     Now that you've verified that Argo CD is up and running, let's explore
     how to access and manage Argo CD.
 
-    ## The Argo CD CLI
+    ## Connecting to the Argo CD Server
 
     Part of the setup of this lab connects you to the Argo CD instance via
-    CLI. Verify this by running the following:
+    CLI and UI. Let's find the URL for the ArgoCD API Server:
+
+    ```
+    oc get routes -n openshift-gitops | grep openshift-gitops-server
+    ```
+
+    To login from the terminal, execute the following (replace $ARGOCD_SERVER_URL with the above URL):
+
+    ```
+    argocd login $ARGOCD_SERVER_URL
+    ```
+
+    You'll have to accept the self-signed certificate.
+
+    Find the default password for the `admin` account as follows:
+
+    ```
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+    ```
+
+    You can login with the following:
+    * **Username:** ``admin``
+    * **Password:** <from previous command>
+
+    You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
+
+    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
+
+    Once you have accepted the self signed certificate, you should be
+    presented with the Argo CD login screen.
+
+    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+
+
+
+    > **NOTE** The Password is stored in a secret on the platform.
+
+
+    Verify this by running the following:
 
     ```
     argocd cluster list
@@ -222,20 +270,7 @@ challenges:
 
     ## The Argo CD Web Console
 
-    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) tab.
 
-    Once you have accepted the self signed certificate, you should be
-    presented with the Argo CD login screen.
-
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
-
-    You can login with the following
-    * **Username:** ``admin``
-    * **Password:** ```
-    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
-    ```
-
-    > **NOTE** The Password is stored in a secret on the platform.
 
     Once you've logged in, you should see the following page.
 
@@ -266,16 +301,16 @@ challenges:
     example manifesets taken from our [sample GitOps repo](https://github.com/redhat-developer-demos/openshift-gitops-examples).
     We'll be uisng this repo to test. These manifests include:
 
-    * A **Namespace**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-ns.yaml`
-    * A **Deployment**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-deployment.yaml`
-    * A **Service**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-svc.yaml`
-    * A **Route**: `openshift-gitops-examples/apps/bgd/overlays/bgd/bgd-route.yaml`
+    * A **Namespace**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-ns.yaml`
+    * A **Deployment**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-deployment.yaml`
+    * A **Service**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-svc.yaml`
+    * A **Route**: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgd/bgd-route.yaml`
 
     Collectively, this is known as an `Application` within ArgoCD. Therefore,
     you must define it as such in order to apply these manifest in your
     cluster.
 
-    Open up the Argo CD `Application` manifest: `openshift-gitops-examples/components/applications/bgd-app.yaml`
+    Open up the Argo CD `Application` manifest: `https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/bgd-app.yaml`
 
     Let's break this down a bit.
 
@@ -288,7 +323,7 @@ challenges:
     The `Application` CR (`CustomResource`) can be applied by running the following:
 
     ```
-    oc apply -f ~/resources/openshift-gitops-examples/components/applications/bgd-app.yaml
+    oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/bgd-app.yaml
     ```
 
     This should create the `bgd-app` in the ArgoCD UI.
@@ -302,10 +337,13 @@ challenges:
     > **NOTE**: You may have to click on `show hidden resources` on this page to see it all
 
     At this point the application should be up and running. You can see
-    all the resources created with the ```
+    all the resources created with the command:
+
+    ```
     oc get pods,svc,route -n bgd
     ```
-    command. The output should look like this:
+
+    The output should look like this:
 
     ```shell
     NAME                       READY   STATUS    RESTARTS   AGE
@@ -318,11 +356,17 @@ challenges:
     route.route.openshift.io/bgd   bgd-bgd.apps.example.com          bgd        8080                 None
     ```
 
-    First wait for the rollout to complete ```
+    First wait for the rollout to complete
+
+    ```
     oc rollout status deploy/bgd -n bgd
     ```
 
-    Then visit your application using the route by clicking [HERE](http://bgd-bgd.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+    Then visit your application using the route by navigating to the `EXTERNAL-IP` once available.
+
+    ```
+    oc get svc -n bgd
+    ```
 
     Your application should look like this.
 
@@ -355,7 +399,9 @@ challenges:
     * First clicking `SYNC`
     * Then clicking `SYNCHRONIZE`
 
-    Conversely, you can run ```
+    Conversely, you can run
+
+    ```
     argocd app sync bgd-app
     ```
 
@@ -399,4 +445,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "1956453535912806964"
+checksum: "8512618330567342265"
