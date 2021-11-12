@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p /opt/java
 curl -sL https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java11-linux-amd64-19.3.6.tar.gz -o /tmp/graalvm-ce-java11-linux-amd64-19.3.6.tar.gz
 tar -xvf /tmp/graalvm-ce-java11-linux-amd64-19.3.6.tar.gz-C /opt/java/
 rm -fr /tmp/graalvm-ce-java11-linux-amd64-19.3.6.tar.gz
