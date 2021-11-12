@@ -59,14 +59,9 @@ challenges:
     ### What is Prometheus API Client?
     [Prometheus-api-client](https://prometheus-api-client-python.readthedocs.io/en/master/source/prometheus_api_client.html) is a python client we built to collect metric data from Prometheus and change it in a more  data science suitable format of a [Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas-dataframe).
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -119,14 +114,9 @@ challenges:
     That's it, once you are done with the notebooks you have finished this scenario. <br>
     The next step will just show you how to access the backend for this scenario, you can safely skip it.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -174,14 +164,9 @@ challenges:
     While playing around the backend keep in mind that this environment will only be active for 1 hour. <br>
     The source for this scenario is available [here](https://github.com/openshift-labs/learn-katacoda/tree/master/ai-machine-learning/prometheus-api-client).
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

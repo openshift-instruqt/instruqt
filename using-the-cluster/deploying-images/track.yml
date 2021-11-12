@@ -117,14 +117,9 @@ challenges:
 
     ![Add to Project](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-add-to-project.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -164,14 +159,9 @@ challenges:
 
     You may see the color of the ring in the visualization change from white, to light blue and then blue. This represents the phases of deployment as the container for the application starts up.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -199,14 +189,9 @@ challenges:
 
     ![URL Shortcut Icon](https://katacoda.com/openshift/assets/introduction/deploying-images-44/03-url-shortcut-icon.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -302,14 +287,9 @@ challenges:
 
     Although label selectors can be used to qualify what resources are to be queried, or deleted, do be aware that it may not always be the ``app`` label that you need to use. When an application is created from a template, the labels applied and their names are dictated by the template. As a result, a template may use a different labelling convention. Always use ``oc describe`` to verify what labels have been applied and use ``oc get all --selector`` to verify what resources are matched before deleting any resources.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -395,14 +375,9 @@ challenges:
     oc get route/blog-django-py
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

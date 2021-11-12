@@ -256,14 +256,9 @@ challenges:
 
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -364,14 +359,9 @@ challenges:
 
     In next chapter we will add an OpenShift Route as a Helm Template, like for `Service`, to be published in a new revision.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -494,14 +484,9 @@ challenges:
     helm uninstall my-chart
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

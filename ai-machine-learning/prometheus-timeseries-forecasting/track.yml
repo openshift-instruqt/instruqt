@@ -100,14 +100,9 @@ challenges:
 
     Let us now proceed to the notebook and understand all the necessary steps involved while solving a machine learning problem!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -143,14 +138,9 @@ challenges:
 
     Now, spend some time going through the notebook(s) and try out the exercises for yourself to understand time series analysis better!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -192,14 +182,9 @@ challenges:
 
     Go back to Step 2 if you want to continue playing with the notebooks, else you can proceed to exit this scenario.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

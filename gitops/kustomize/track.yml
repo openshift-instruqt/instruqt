@@ -204,14 +204,9 @@ challenges:
 
     As you can see `kustomize` can be a powerful tool.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -317,14 +312,9 @@ challenges:
     * The Application `bgdk` was deployed in it's own namespace, with deployment customizations.
     * ALL without having to duplicate YAML!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

@@ -102,14 +102,9 @@ challenges:
 
     We are not going to use the web console for this course, but if you want to check anything from the web console, switch to the _Console_ and  use the same credentials to login as you used above to login from the command line.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 02-deploying-a-postgresql-database
@@ -137,14 +132,9 @@ challenges:
 
     When using a database with your front end web application, you will need to configure the web application to know about the database. We are going to skip that in this course.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 03-starting-an-interactive-shell
@@ -234,14 +224,9 @@ challenges:
 
     If you need to run database script files to perform operations on the database, you would also need to first copy those files into the database container using the ``oc rsync`` command.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 225
 - slug: 04-creating-a-remote-connection
@@ -327,14 +312,9 @@ challenges:
 
     In this exercise we used ``psql``, however you could also use a GUI based database administration tool running on your local machine as well.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 225
 checksum: "11135150620697772913"

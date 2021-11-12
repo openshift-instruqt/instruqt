@@ -89,14 +89,9 @@ challenges:
 
     ![New Primitives](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/01-new-primitives.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -146,14 +141,9 @@ challenges:
 
     Alright, now that we have sorted out the basics of container images, let's move on to registries...
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -215,14 +205,9 @@ challenges:
 
     Now, let's move on to container hosts...
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -272,14 +257,9 @@ challenges:
     We will explore this deeper in later labs but, for now, commit this to memory, containers are simply Linux ...
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -349,14 +329,9 @@ challenges:
 
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -383,14 +358,9 @@ challenges:
     * William Henry (Core Engineer): [@ipbabble](https://twitter.com/ipbabble)
     * Vincent Batts: (OCI Contributor): [@vbatts](https://twitter.com/vbatts)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

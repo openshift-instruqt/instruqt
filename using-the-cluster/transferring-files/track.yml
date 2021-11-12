@@ -100,14 +100,9 @@ challenges:
 
     We are not going to use the web console for this course, but if you want to check anything from the web console, switch to the _Console_ and  use the same credentials to login as you used above to login from the command line.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -310,14 +305,9 @@ challenges:
 
     If there is more than one container running within a pod, you will need to specify which container you want to work with by using the ``--container`` option.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -383,14 +373,9 @@ challenges:
 
     Just be aware that this will be everything, including notionally hidden files or directories starting with ".". You should therefore be careful, and if necessary be more specific by using ``--include`` or ``--exclude`` options to limit the set of files or directories copied.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -548,14 +533,9 @@ challenges:
 
     Do note that even for the case of Python, this can only be used where modifying code files. If you need to install additional Python packages, you would need to re-build the application from the original source code. This is because changes to packages required, which for Python is given in the ``requirements.txt`` file, isn't going to trigger the installation of that package when using this mechanism.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -687,14 +667,9 @@ challenges:
     oc get pvc
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

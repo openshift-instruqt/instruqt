@@ -155,7 +155,7 @@ challenges:
   slug: rwo
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -253,7 +253,7 @@ challenges:
   slug: rwx
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

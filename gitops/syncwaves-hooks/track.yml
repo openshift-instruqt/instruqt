@@ -165,14 +165,9 @@ challenges:
 
     Keep the Argo CD WebUI tab open for the next exercise.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -287,14 +282,9 @@ challenges:
     Keep this tab open, in the next exercise. We will see how to use Syncwaves
     and Hooks in tandem!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -385,14 +375,9 @@ challenges:
     job.batch/welcome-presyncjob   1/1           18s        5m24s
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

@@ -63,14 +63,9 @@ challenges:
 
     You should see that the image stream includes tags for `3.5` and `3.6`. These correspond to versions of the image for Python 3.5 and Python 3.6.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -124,14 +119,9 @@ challenges:
 
     Check out the other workshops available here for more information on these and the other templates.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -167,14 +157,9 @@ challenges:
 
     Once you have deployed a workload, you can return to this view to deploy additional applications by selecting the _+Add_ option in the left hand side menu.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -242,14 +227,9 @@ challenges:
 
     You will see there are now two image streams, the `s2i-minimal-notebook` which was used as the builder image, and the the `custom-notebook` image, which was created by the build.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -309,14 +289,9 @@ challenges:
 
     In this configuration nothing is persistent. If the notebook instance were restarted, you would loose any work. For a persistent workspace, the ``notebook-workspace`` template can be used. Details of how to use this template are described in a separate workshop.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -360,14 +335,9 @@ challenges:
 
     The custom Jupyter notebook image has now also been deleted.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -431,14 +401,9 @@ challenges:
 
     Accept the certificate for the secure connection and enter ``secret`` for the notebook password. You should then be able to access the Jupyter notebook web interface.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

@@ -107,7 +107,7 @@ challenges:
     Like other exercises, we’ll need another extension to integrate Quarkus with Kafka. Install it by clicking on the following command:
 
     `cd /root/projects/rhoar-getting-started/quarkus/kafka &&
-      mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka"`{{execute}}
+      mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka"`
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
@@ -120,14 +120,9 @@ challenges:
     </dependency>
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -145,7 +140,7 @@ challenges:
 
     Next, click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/people/stream/NameGenerator.java" data-target="replace">
+    ```java
     package org.acme.people.stream;
 
     import io.smallrye.mutiny.Multi;
@@ -167,7 +162,7 @@ challenges:
         }
 
     }
-    </pre>
+    ```
 
     This simple method:
 
@@ -177,14 +172,9 @@ challenges:
     The method returns a Reactive Stream. The generated items are sent to the stream named `generated-name`. This stream is
     mapped to Kafka using the `application.properties` file that we will soon create.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -204,7 +194,7 @@ challenges:
 
     Next, click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/people/stream/NameConverter.java" data-target="replace">
+    ```java
     package org.acme.people.stream;
 
     import javax.enterprise.context.ApplicationScoped;
@@ -225,7 +215,7 @@ challenges:
             return honorific + " " + name;
         }
     }
-    </pre>
+    ```
 
     This simple method:
 
@@ -236,14 +226,9 @@ challenges:
     The `process()` method is called for every Kafka record from the `names` topic (configured in the application
     configuration which we'll do later). Every result is sent to the my-data-stream in-memory stream.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -263,7 +248,7 @@ challenges:
 
     Next, click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/people/stream/NameResource.java" data-target="replace">
+    ```
     package org.acme.people.stream;
 
     import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -291,7 +276,7 @@ challenges:
             return names;
         }
     }
-    </pre>
+    ```
 
     This method:
 
@@ -328,14 +313,9 @@ challenges:
     >
     >   - Refresh the display using the D3.js library
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -361,7 +341,7 @@ challenges:
 
     Click **Copy to Editor** to add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Configure the Kafka sink (we write to it)
     mp.messaging.outgoing.generated-name.bootstrap.servers=names-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
     mp.messaging.outgoing.generated-name.connector=smallrye-kafka
@@ -372,7 +352,7 @@ challenges:
     mp.messaging.incoming.names.bootstrap.servers=names-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
     mp.messaging.incoming.names.connector=smallrye-kafka
     mp.messaging.incoming.names.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
-    </pre>
+    ```
 
     The hostnames used above refer to the in-cluster hostnames that resolve to our running Kafka cluster on OpenShift.
 
@@ -392,14 +372,9 @@ challenges:
     mvn clean package
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -417,7 +392,9 @@ challenges:
 
     You should already be logged in as an admin user. Click this command to verify:
 
-    `oc whoami`{{execute T2}}
+    ```
+    oc whoami
+    ```
 
     It should respond with `admin`.
 
@@ -430,7 +407,9 @@ challenges:
 
     For this scenario, let's create a project that you will use to house Kafka. Click:
 
-    `oc new-project kafka --display-name="Apache Kafka"`{{execute T2}}
+    ```
+    oc new-project kafka --display-name="Apache Kafka"
+    ```
 
     ## Deploy Kafka Operator
 
@@ -438,17 +417,21 @@ challenges:
 
     First, click this command to deploy the Operator to our new `kafka` namespace:
 
-    `oc create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka`{{execute T2}}
+    ```
+    oc create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+    ```
 
     Wait for the Operator to be deployed by running this command:
 
-    `oc rollout status -w deployment/strimzi-cluster-operator`{{execute T2}}
+    ```
+    oc rollout status -w deployment/strimzi-cluster-operator
+    ```
 
     > If this command seems to be taking a long time, just CTRL-C it and run it again. It make take time to install Kafka depending on system load.
 
     You should eventually see:
 
-    ```console
+    ```bash
     deployment "strimzi-cluster-operator" successfully rolled out
     ```
 
@@ -456,11 +439,15 @@ challenges:
 
     Before deploying the Kafka cluster, make sure you are on the project folder _projects/rhoar-getting-started/quarkus/kafka/_ by executing this command:
 
-    `cd /root/projects/rhoar-getting-started/quarkus/kafka`{{execute T2}}
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/kafka
+    ```
 
     Next, create a new `Kafka` object within Kubernetes that the operator is waiting for. Click this command to create it:
 
-    `oc apply -f src/main/kubernetes/kafka-names-cluster.yaml`{{execute T2}}
+    ```
+    oc apply -f src/main/kubernetes/kafka-names-cluster.yaml
+    ```
 
     This command creates a simple Kafka object:
 
@@ -486,7 +473,9 @@ challenges:
 
     We’ll need to create a _topic_ for our application to stream to and from. To do so, click the following command to create the _topic_ object:
 
-    `oc apply -f src/main/kubernetes/kafka-names-topic.yaml`{{execute T2}}
+    ```
+    oc apply -f src/main/kubernetes/kafka-names-topic.yaml
+    ```
 
     This creates our `names` topic that our code and Quarkus configuration references.
 
@@ -494,11 +483,13 @@ challenges:
 
     Look at the list of pods being spun up and look for the Kafka pods for our cluster:
 
-    `oc get pods|grep names-cluster`{{execute T2}}
+    ```
+    oc get pods|grep names-cluster
+    ```
 
     You should see something like:
 
-    ``` none
+    ```bash
     names-cluster-entity-operator-6cbfffc465-jthb7   3/3     Running   0          45s
     names-cluster-kafka-0                            1/1     Running   0          99s
     names-cluster-kafka-1                            1/1     Running   0          99s
@@ -512,14 +503,9 @@ challenges:
     It will take around 2 minutes to get all the Kafka pods up and running.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -537,11 +523,13 @@ challenges:
 
     Run the following command to add it to our project:
 
-    `mvn quarkus:add-extension -Dextensions="openshift"`{{execute T2}}
+    ```
+    mvn quarkus:add-extension -Dextensions="openshift"
+    ```
 
     Click **Copy to Editor** to add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="append">
+    ```text
     # Configure the OpenShift extension options
     quarkus.kubernetes-client.trust-certs=true
     quarkus.container-image.build=true
@@ -549,7 +537,7 @@ challenges:
     quarkus.kubernetes.deployment-target=openshift
     quarkus.openshift.expose=true
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
-    </pre>
+    ```
 
     For more details of the above options:
 
@@ -564,7 +552,9 @@ challenges:
 
     We'll deploy our app as the `developer` user. Run the following command to login with the OpenShift CLI:
 
-    `oc login -u developer -p developer`{{execute T2}}
+    ```
+    oc login -u developer -p developer
+    ```
 
     You should see
 
@@ -573,20 +563,25 @@ challenges:
 
     You don't have any projects. You can try to create a new project, by running
 
-        oc new-project <projectname>
+    ```
+    oc new-project <projectname>
     ```
 
     ## Create project
 
     Create a new project into which we'll deploy the app:
 
-    `oc new-project quarkus-kafka --display-name="Quarkus on Kafka"`{{execute T2}}
+    ```
+    oc new-project quarkus-kafka --display-name="Quarkus on Kafka"
+    ```
 
     ## Deploy application to OpenShift
 
     Now let's deploy the application itself. Run the following command which will build and deploy using the OpenShift extension:
 
-    `mvn clean package`{{execute T2}}
+    ```
+    mvn clean package
+    ```
 
     > **NOTE**: This command will take a minute or two, as it builds the app, pushes a container image, and finally deploys the container to OpenShift.
 
@@ -594,7 +589,9 @@ challenges:
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/people`{{execute T2}}
+    ```
+    oc rollout status -w dc/people
+    ```
 
     Wait for that command to report `replication controller "people-1" successfully rolled out` before continuing.
 
@@ -609,7 +606,7 @@ challenges:
 
     And now we can access using `curl` once again to confirm the app is up:
 
-    `curl http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello`{{execute T2}}
+    `curl http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello`
 
     So now our app is deployed to OpenShift. Finally, let's confirm our streaming Kafka app is working.
 
@@ -627,7 +624,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
@@ -646,18 +643,13 @@ challenges:
     If you want to go further check the documentation of [SmallRye Reactive
     Messaging](https://smallrye.io/smallrye-reactive-messaging), the implementation used in Quarkus.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "5418263697046907489"
+checksum: "5681743254445590737"

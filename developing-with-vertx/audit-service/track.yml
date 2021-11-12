@@ -65,7 +65,7 @@ challenges:
   slug: 01-audit-verticle
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -126,7 +126,7 @@ challenges:
   slug: 02-vertx-web
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -180,7 +180,7 @@ challenges:
   slug: 03-async-jdbc
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -225,7 +225,7 @@ challenges:
   slug: 04-async-jdbc-with-callback
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -264,7 +264,7 @@ challenges:
   slug: 05-deploy-to-openshift
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -313,7 +313,7 @@ challenges:
   slug: 06-managing-secrets
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

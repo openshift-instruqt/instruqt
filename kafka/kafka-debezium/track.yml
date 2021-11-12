@@ -191,14 +191,9 @@ challenges:
 
     In the next step of this scenario, we will deploy a single instance of Debezium.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -302,14 +297,9 @@ challenges:
 
     In the next step of this scenario, we will finish the deployment by creating a connection between the MySQL database source and Kafka Connect.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -877,14 +867,9 @@ challenges:
 
     See the Red Hat Integration [Debezium documentation](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q1/html/debezium_user_guide/index) for more tips and details.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

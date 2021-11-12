@@ -54,7 +54,7 @@ challenges:
   slug: 01-creating-an-initial-project
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -174,7 +174,7 @@ challenges:
   slug: 02-create-broker-instance
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -230,7 +230,7 @@ challenges:
   slug: 03-simple-client
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -279,7 +279,7 @@ challenges:
   slug: 04-running-application
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

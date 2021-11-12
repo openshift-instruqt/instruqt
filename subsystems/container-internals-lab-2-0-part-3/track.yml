@@ -128,14 +128,9 @@ challenges:
     Now, lets move on to evaluate some trickier repositories and registry servers...
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -250,14 +245,9 @@ challenges:
 
     These questions seem easy, but their really not. It really makes you revisit what it means to "trust" a container registry and repository...
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -307,14 +297,9 @@ challenges:
     For now, you understand enough about registry servers, repositories, and how images are cached locally. Let's move on.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

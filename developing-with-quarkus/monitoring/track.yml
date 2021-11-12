@@ -138,14 +138,9 @@ challenges:
 
     > If this command appears to hang, just press `CTRL-C` and click it again.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -252,14 +247,9 @@ challenges:
 
     It is possible to use other systems to consume metrics other than Prometheus, for example StackDriver (part of the [Quarkiverse](https://github.com/quarkiverse/quarkiverse-micrometer-registry)). You can also use other pre-packaged registries for other APM systems. Consult the [Quarkus Micrometer Guide](https://quarkus.io/guides/micrometer) for more detail.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -532,14 +522,9 @@ challenges:
     We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear`{{execute T1 interrupt}} command to do it for you).
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -624,14 +609,9 @@ challenges:
 
     With our app rolled out, Prometheus should start collecting metrics. Let's take a look in the next exercise.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -690,14 +670,9 @@ challenges:
 
     Keep the `curl` loop running and we'll move on to build a full dashboard for our app in the next step.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -756,14 +731,9 @@ challenges:
     With our data source working, let’s make a dashboard.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -878,14 +848,9 @@ challenges:
     There are many more possibilities for application metrics, and it’s a useful way to not only gather metrics, but act on
     them through alerting and other features of the monitoring stack you may be using.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

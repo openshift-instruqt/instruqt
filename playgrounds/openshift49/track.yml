@@ -149,7 +149,7 @@ challenges:
     ```
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc-nonest-1
   - title: OpenShift Web Console

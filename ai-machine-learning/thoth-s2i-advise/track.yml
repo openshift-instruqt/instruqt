@@ -125,14 +125,9 @@ challenges:
     Now that you have created your own project, me move to the next
     step.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -185,14 +180,9 @@ challenges:
     Now that we have successfully explored the repo, and are using a Thoth powered s2i image, let's explore some configuration options, that
     thoth image provides out of box.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -235,14 +225,9 @@ challenges:
 
     You can see them being used in the sample `openshift.yaml` in your repo, feel free to try tinkering with them according to your need.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -309,14 +294,9 @@ challenges:
     oc delete all --selector 'app=s2i-example-log'
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

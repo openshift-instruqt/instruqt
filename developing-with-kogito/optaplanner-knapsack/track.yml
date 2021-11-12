@@ -119,14 +119,9 @@ challenges:
 
     In the next step we'll add the domain model of our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -256,14 +251,9 @@ challenges:
 
     We've implemented the domain model of our OptaPlanner Quarkus application. In the next step, we will implement the _PlanningSolution_ of our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -409,14 +399,9 @@ challenges:
 
     In this step you've implemented the `PlanningSolution` of your application. Well done! In the next step we will implement the constraints of our problem using `ConstraintStreams`.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -521,14 +506,9 @@ challenges:
 
     In this step we've implemented our first OptaPlanner constraints using the `ConstraintStreams` API. In the next step we will implement our RESTful resource and test our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -541,14 +521,9 @@ challenges:
   title: Step 5
   assignment: "In the previous step we've implemented the constraints of the application using the `ConstraintStreams` API. We will now create the RESTful resource of our application and take the application for a test-drive.\n\n# KnapsackResource\n\nWhen we created the initial OptaPlanner Quarkus application using the Quarkus Maven plugin, we defined the resource class of our RESTful endpoint (being `KnapsackResource`).\n\nWe will now implement the skeleton of our `KnapsackSolution` class. To do this, we first have to open the `KnapsackResource.java` file by clicking the following path: `knapsack-optaplanner-quarkus/src/main/java/com/redhat/knapsackoptaplanner/solver/KnapsackResource.java`\n\nThe `KnapsackResource` class is implemented as a Quarkus JAX-RS service. Click _Copy to Editor_ to inject an OptaPlanner `SolverManager` instance to manage the `Solver` instances that will solve our problem.\n\n<pre class=\"file\" data-filename=\"./knapsack-optaplanner-quarkus/src/main/java/com/redhat/knapsackoptaplanner/solver/KnapsackResource.java\" data-target=\"replace\">\npackage com.redhat.knapsackoptaplanner.solver;\n\nimport java.util.UUID;\nimport java.util.concurrent.ExecutionException;\n\nimport javax.inject.Inject;\nimport javax.ws.rs.Consumes;\nimport javax.ws.rs.POST;\nimport javax.ws.rs.Path;\nimport javax.ws.rs.Produces;\nimport javax.ws.rs.core.MediaType;\n\nimport com.redhat.knapsackoptaplanner.domain.KnapsackSolution;\n\nimport org.optaplanner.core.api.solver.SolverJob;\nimport org.optaplanner.core.api.solver.SolverManager;\n\n\n@Path(\"/knapsack\")\n@Consumes(MediaType.APPLICATION_JSON)\n@Produces(MediaType.APPLICATION_JSON)\npublic class KnapsackResource {\n\n    @Inject\n    private SolverManager&lt;KnapsackSolution, UUID&gt; solverManager;\n\n    @POST\n    @Path(\"/solve\")\n    public KnapsackSolution solve(KnapsackSolution problem) {\n        UUID problemId = UUID.randomUUID();\n        // Submit the problem to start solving\n        SolverJob&lt;KnapsackSolution, UUID&gt; solverJob = solverManager.solve(problemId, problem);\n        KnapsackSolution solution;\n        try {\n            // Wait until the solving ends\n            solution = solverJob.getFinalBestSolution();\n        } catch (InterruptedException | ExecutionException e) {\n            throw new IllegalStateException(\"Solving failed.\", e);\n        }\n        return solution;\n    }\n}\n</pre>\n\nSolverManager accepts (uninitialized) PlanningSolutions the problem), and passes this problem to a managed Solver that runs on a separate thread to solve it. The SolverJob runs until solving ends, after which we can retrieve the final best solution.\n\n# Configuring the Solver\n\nOptaPlanner will keep solving the problem indefinitely if we don't configure a _termination strategy_. A _termnination strategy_ tells OptaPlanner when to stop solving, for example based on the number of seconds spent, or if a score has not improved in a specified amount of time.\n\nIn an OptaPlanner Quarkus application, we can set this _termination strategy_ by simply adding a configuration property in the Quarkus `application.properties` configuration file. Let's first open this file by clicking the following path: `knapsack-optaplanner-quarkus/src/main/resources/application.properties`\n\nClick _Copy to Editor_ to add our _termination strategy_ configuration property:\n\n<pre class=\"file\" data-filename=\"./knapsack-optaplanner-quarkus/src/main/resources/application.properties\" data-target=\"replace\">\n# Configuration file\n# key = value\nquarkus.optaplanner.solver.termination.spent-limit=10s\n</pre>\n\nThe `quarkus.optaplanner.solver.termination.spent-limit` property is set to 10 seconds, which means that the solver will stop solving after 10 seconds and return the best result found so far.\n\n## Running the Application\nBecause we still have our application running in Quarkus development mode, we can simply access the Swagger-UI of our application by clicking [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui). Hitting this endpoint will force the OptaPlanner Quarkus application to do a hot-reload and recompile and deploy the changes we made in our application \"on-the-fly\".\n\nYou will see our `/knapsack/solve` RESTful API listed. We can now fire a RESTful request with a knapsack problem to this endpoint. We will do this from the terminal using cURL. Note that it will take 10 seconds for the response to return because we've set the OptaPlanner termination strategy to 10 seconds:\n\n`curl --location --request POST 'http://localhost:8080/knapsack/solve' \\\n--header 'Accept: application/json' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n\t\"knapsack\": {\n\t\t\"maxWeight\": 10\n\t},\n\t\"ingots\" : [\n\t\t{\n\t\t\t\"weight\": 4,\n\t\t\t\"value\": 15\n\t\t},\n\t\t{\n\t\t\t\"weight\": 4,\n\t\t\t\"value\": 15\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t}\n\t]\n}'`{{execute T2}}\n\nThe response shows which ingots have been selected. These ingots will have their `selected` attribute set to `true`.\n\n## Congratulations!\nYou've implemented the RESTful endpoint of the application, hot-reloaded the app using the Quarkus dev-mode and solved a knapsack problem. Well done! In the next step we will deploy this application to OpenShift to run our OptaPlanner solution as a true cloud-native application.\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -561,14 +536,9 @@ challenges:
   title: Step 6
   assignment: "In the previous step we've implemented the RESTful resource of our OptaPlanner Quarkus application and solved a knapsack problem. In this step of the scenario, we will deploy our service to OpenShift and scale it up to be able to handle production load.\n\nBefore getting started with this step, stop the running application in terminal 1 using `CTRL-C`.\n\n## Login to OpenShift\n\nClick the following command.\n\n`oc login --server=https://[[HOST_SUBDOMAIN]]-6443-[[KATACODA_HOST]].environments.katacoda.com --insecure-skip-tls-verify=true`{{execute T1}}\n\nEnter our test username and password:\n* Username: **developer**\n* Password: **developer**\n\n## Create a new project\n\nClick the following command.\n\n`oc new-project knapsack-optaplanner --display-name=\"Knapsack OptaPlanner Solver\"`{{execute T1}}\n\n## Open the OpenShift Web Console**\n\nOpenShift ships with a web-based console that will allow users to perform various tasks via a browser. To get a feel for how the web console works, click the \"OpenShift Console\" tab next to the \"Local Web Browser\" tab.\n\n![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/quarkus/openshift-console-tab.png)\n\n> Note that we get a security certificate error due to the use of self-signed security certificates. Accept the exception in the browser to continue to the OpenShift console.\n\nThe first screen we see is the authentication screen. Enter the username (developer) and password (developer) and click _Log In_.\n\n![Web Console Login](https://katacoda.com/openshift/assets/middleware/middleware-kogito/login.png)\n\nAfter we authenticate to the web console, we see a list of projects that we have permission to work with.\n\n![Web Console Projects](https://katacoda.com/openshift/assets/middleware/middleware-kogito/openshift-knapsack-optaplanner-project.png)\n\nClick on `knapsack-optaplanner` to go to the project overview page which lists all of the routes, services, deployments, and pods that are running as part of this project:\n\n![Web Console Overview](https://katacoda.com/openshift/assets/middleware/middleware-kogito/openshift-knapsack-optaplanner-overview.png)\n\nThere's nothing there now, but that's about to change.\n\n## Deploy to OpenShift\n\nFirst, we need to compile and package our application. Click this command to compile our application as an OptaPlanner Quarkus image to run in JVM mode.\n\n`mvn clean package`{{execute T1}}\n\nNote that our application also supports being compiled into a native image using GraalVM.\n\nNext, click this command to create a new _binary_ build within OpenShift.\n\n`oc new-build registry.access.redhat.com/openjdk/openjdk-11-rhel7:latest --binary --name=knapsack-optaplanner -l app=knapsack-optaplanner`{{execute T1}}\n\nOur build needs both the _runner_ JAR file as well as the _lib_ directory. Click this command to create a temporary directory in which we will copy those assets, and use that directory to upload to our S2I image.\n\n`rm -rf /tmp/knapsack-optaplanner-build && mkdir -p /tmp/knapsack-optaplanner-build && cp target/knapsack-optaplanner-quarkus-1.0-SNAPSHOT-runner.jar /tmp/knapsack-optaplanner-build/knapsack-optaplanner-quarkus-1.0-SNAPSHOT-runner.jar && cp -R target/lib /tmp/knapsack-optaplanner-build/lib`{{execute T1}}\n\n\nAnd then click this command to start the build, which will take about a minute or two to complete.\n\n`oc start-build knapsack-optaplanner --from-dir=/tmp/knapsack-optaplanner-build --follow`{{execute T1}}\n\nAfter that's done, click here to deploy it as an OpenShift application:\n\n`oc new-app knapsack-optaplanner`{{execute T1}}\n\nAnd click here to expose it to the world:\n\n`oc expose service knapsack-optaplanner`{{execute T1}}\n\nFinally, click here to make sure it's actually finished rolling out:\n\n`oc rollout status -w dc/knapsack-optaplanner`{{execute T1}}\n\nWait for that command to report `replication controller \"knapsack-optaplanner-1\" successfully rolled out` before continuing.\n\nAnd now we can access our application using `cURL` once again. Click the following command. Note that we again need to wait 10 seconds for the response to return:\n\n`curl --location --request POST 'http://knapsack-optaplanner-knapsack-optaplanner.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/knapsack/solve' \\\n--header 'Accept: application/json' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n\t\"knapsack\": {\n\t\t\"maxWeight\": 10\n\t},\n\t\"ingots\" : [\n\t\t{\n\t\t\t\"weight\": 4,\n\t\t\t\"value\": 15\n\t\t},\n\t\t{\n\t\t\t\"weight\": 4,\n\t\t\t\"value\": 15\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 3,\n\t\t\t\"value\": 12\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t},\n\t\t{\n\t\t\t\"weight\": 2,\n\t\t\t\"value\": 7\n\t\t}\n\t]\n}'`{{execute T1}}\n\n\nSo now our app is deployed to OpenShift. We can also see it in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/knapsack-optaplanner/deploymentconfigs/knapsack-optaplanner) with its single replica running in 1 pod (the blue circle).\n\n## Scale the application\n\nIn order to be able to handle production load and have high availability semantics, we need to scale the application and add a number of extra running pods.\n\nClick this command to scale the number of PODs via the OpenShift _oc_ client:\n\n`oc scale --replicas=10 dc/knapsack-optaplanner`{{execute T1}}\n\nBack in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/knapsack-optaplanner/deploymentconfigs/knapsack-optaplanner) we can see the app scaling dynamically up to 10 pods.\n\nThis should only take a few seconds to complete the scaling. The application is now ready to take production load.\n\n## Congratulations!\n\nIn this scenario we got a glimpse of the power of OptaPlanner apps on a Quarkus runtime on OpenShift. We've packaged our Knapsack OptaPlanner solver in a container image, deployed it on OpenShift, and solved a knapsack problem. Finally, we've scaled the environment to 10 pods to be able to serve production load. Well done!\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

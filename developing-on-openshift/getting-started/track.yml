@@ -98,14 +98,9 @@ challenges:
 
     In the next step, we'll get started with creating your first project using the **web console**.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 2explore-console
@@ -163,14 +158,9 @@ challenges:
     Now, toggle to the *Developer Perspective*. We will spend most of our time in this tutorial in the *Developer Perspective*. The first thing you'll see is the *Topology* view. Right now it is empty, and lists several different ways to add content to your project. Once you have an application deployed, it will be visualized here in *Topology* view.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 3deploy-docker
@@ -214,14 +204,9 @@ challenges:
 
     These are the only steps you need to run to get a "vanilla" container image deployed on OpenShift. This should work with any container image that follows best practices, such as defining the port any service is exposed on, not needing to run specifically as the *root user* or other dedicated user, and which embeds a default command for running the application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 4scaling
@@ -272,14 +257,9 @@ challenges:
     Before we continue, go ahead and scale your application down to a single
     instance. Click *Topology* to return to the *Topology* view, then click `parksmap-katacoda` and on the *Overview* tab, click the down arrow to scale back down to one instance.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 5routes
@@ -325,14 +305,9 @@ challenges:
 
     ![Application](https://katacoda.com/openshift/assets/introduction/getting-started-44/5parksmap-empty.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 - slug: 6s2i
@@ -407,14 +382,9 @@ challenges:
 
     Now that you've completed this tutorial, click *Continue* for more resources and tools to help you learn more about OpenShift.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 150
 checksum: "2630702627776550237"

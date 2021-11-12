@@ -135,14 +135,9 @@ challenges:
 
     When the route is created, the Kafka Bridge is reachable through the `https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com` host. You can now use any HTTP client to interact with the REST API exposed by the bridge to send and receive messages without needing to use the native Kafka protocol.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -215,14 +210,9 @@ challenges:
 
     Excellent! You have sent your first messages to your Kafka topic through the Kafka Bridge. Now you are ready to start consuming those messages.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -277,14 +267,9 @@ challenges:
 
     After subscribing a Kafka Bridge consumer to topics, you can retrieve messages from the consumer.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -352,14 +337,9 @@ challenges:
 
     Congratulations! You were able to deploy the AMQ Streams Kafka Bridge and connect to a Kafka cluster using HTTP. You sent some message to an example topic and then created a consumer to retrieve messages. Finally you committed the offsets the messages.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

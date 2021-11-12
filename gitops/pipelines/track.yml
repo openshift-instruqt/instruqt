@@ -189,14 +189,9 @@ challenges:
 
     Great! The OpenShift Pipelines Operator is now installed. Now, let's start the workshop.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -228,14 +223,9 @@ challenges:
 
     Next, we'll work on creating a sample `Task` that outputs to the console!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -283,14 +273,9 @@ challenges:
 
     In the next section, you will examine the task definitions that will be needed for our pipeline.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -364,14 +349,9 @@ challenges:
 
     In the next section, you will create a pipeline that takes the source code of an application from GitHub and then builds and deploys it on OpenShift.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -492,14 +472,9 @@ challenges:
 
     In the next section, you will focus on creating a trigger to execute the tasks specified in the pipeline.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -555,14 +530,9 @@ challenges:
 
     Congrats! Your `Pipeline` has successfully ran, and the final step will provide instructions on how to access the deployed image.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -596,14 +566,9 @@ challenges:
 
     Congratulations! You have successfully deployed your first application using OpenShift Pipelines.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

@@ -57,14 +57,9 @@ challenges:
 
     You have now successfully executed the first step in this scenario. in the next step we're going to be deploying the project and testing it our for ourselves, as well as modifying this greeting through External Configuration.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -136,14 +131,9 @@ challenges:
 
     We've now deployed our application to OpenShift and we're ready to see how we can modify certain aspects of our application without downtime through the use of External Configuration via our ConfigMap.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -214,14 +204,9 @@ challenges:
 
     You have now learned how to handle Externalized Configuration with ConfigMaps through OpenShift. By creating a `ConfigMap`, we're able to modify application properties on the fly and simply rollout the new changes to our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

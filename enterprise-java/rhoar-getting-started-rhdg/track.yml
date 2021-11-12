@@ -76,7 +76,7 @@ challenges:
   slug: 01-op
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -153,7 +153,7 @@ challenges:
   slug: 02-cluster
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -225,7 +225,7 @@ challenges:
   slug: 03-access
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

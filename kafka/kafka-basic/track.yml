@@ -152,14 +152,9 @@ challenges:
 
     `^C`{{execute ctrl-seq}}
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -250,14 +245,9 @@ challenges:
 
     This creates a Kafka topic in the cluster for sending and receiving events. Now we are ready to interact with the cluster.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -307,14 +297,9 @@ challenges:
 
     Time to send and receive events!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -371,14 +356,9 @@ challenges:
 
     You successfully completed this scenario! You now know how to deploy a simple Apache Kafka cluster on top of OpenShift using AMQ Streams.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

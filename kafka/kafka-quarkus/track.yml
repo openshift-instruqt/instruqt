@@ -149,14 +149,9 @@ challenges:
 
     >You don’t need to set the Kafka topic. By default, it uses the channel name (`uber`). You can, however, configure the topic attribute to override it.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -198,14 +193,9 @@ challenges:
     - Instructs Reactive Messaging to dispatch the items from returned stream to the `uber`channel.
     - Returns an [RX Java 2 stream](https://github.com/ReactiveX/RxJava) (`Flowable`) emitting random vehicle information every 5 seconds
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -295,14 +285,9 @@ challenges:
 
     We are now ready to check the Kafka records.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -400,14 +385,9 @@ challenges:
 
     Congratulations! You are now sending events to Kafka using the Quarkus Reactive Messaging extension for Kafka.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

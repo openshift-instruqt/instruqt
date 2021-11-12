@@ -63,14 +63,9 @@ challenges:
 
     You have now successfully executed the first step in this scenario. In the next step we will login to OpenShift and create a new project.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -124,14 +119,9 @@ challenges:
 
     You have now learned how to access the application via an external route. In our next step, we will navigate through OpenShift's web console in order to view our application and learn about health checks.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -247,14 +237,9 @@ challenges:
 
     You have now included a health check in your Spring Boot application that's living in the OpenShift Container Platform.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

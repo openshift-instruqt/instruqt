@@ -122,14 +122,9 @@ challenges:
 
     As the project is currently empty, no workloads should be found and you will be presented with various options for how you can deploy an application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 02-deploying-using-the-web-console
@@ -179,14 +174,9 @@ challenges:
 
     ![Deployment Details](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-deployment-details.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 03-viewing-the-builder-logs
@@ -200,14 +190,9 @@ challenges:
 
     This will allow you to monitor the progress of the build as it runs. The build will have completely successfully when you see a final message of "Push successful". This indicates that the container image for the application was pushed to the OpenShift internal image registry.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 04-accessing-the-application
@@ -229,14 +214,9 @@ challenges:
 
     ![Blog Web Site](https://katacoda.com/openshift/assets/introduction/deploying-python-44/04-blog-web-site.png)
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 05-deleting-the-application
@@ -333,14 +313,9 @@ challenges:
 
     Although label selectors can be used to qualify what resources are to be queried, or deleted, do be aware that it may not always be the ``app`` label that you need to use. When an application is created from a template, the labels applied and their names are dictated by the template. As a result, a template may use a different labelling convention. Always use ``oc describe`` to verify what labels have been applied and use ``oc get all --selector`` to verify what resources are matched before deleting any resources.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 06-deploying-using-the-command-line
@@ -436,14 +411,9 @@ challenges:
     oc get route/blog-django-py
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 - slug: 07-triggering-a-new-build
@@ -633,14 +603,9 @@ challenges:
 
     Note that starting a build using source code from a local directory on your own machine can only be done from the command line. There is no way to trigger such a build from the web console.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 171
 checksum: "9402017722176335769"

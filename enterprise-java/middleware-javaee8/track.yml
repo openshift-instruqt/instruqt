@@ -118,7 +118,7 @@ challenges:
   slug: 01-review-the-weather-app
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -386,7 +386,7 @@ challenges:
   slug: 02-deploy-to-openshift
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -566,7 +566,7 @@ challenges:
   slug: 03-jpa
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -648,7 +648,7 @@ challenges:
   slug: 04-cdi
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -725,7 +725,7 @@ challenges:
   slug: 05-database
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

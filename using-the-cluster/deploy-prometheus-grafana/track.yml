@@ -79,14 +79,9 @@ challenges:
 
     * If you don't see similar metrics (pictured above) in your environment, try to make an order with the ecommerce application to generate a few metrics.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -207,14 +202,9 @@ challenges:
 
     * To learn more about the Prometheus query language or PromQL you can visit [this page](https://prometheus.io/docs/prometheus/latest/querying/basics/#querying-prometheus).
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -294,14 +284,9 @@ challenges:
 
     That's it, the connection between Grafana and Prometheus has been configured!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -366,14 +351,9 @@ challenges:
     **You can do a lot more with dashboards like saving them, exporting as jsons, using variables, etc. <br>
     You can learn more about dashboards [here](https://grafana.com/docs/grafana/latest/features/dashboard/dashboards/)**
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

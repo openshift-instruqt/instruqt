@@ -145,14 +145,9 @@ challenges:
 
     In the next step we'll create a BPMN2 process definition to demonstrate Kogito's code generation, hot-reload and workflow capabilities.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -340,14 +335,9 @@ challenges:
 
     We've created the coffeeshop business process in our Kogito application using BPMN2. In the next step, we will implement the CDI bean that our Service Task is referencing.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -581,14 +571,9 @@ challenges:
 
     We've implemented the MicroProfile JAXRS Rest Client to integrate our Kogito application with another microservice over REST. Well done! In the next step we will change the implementation to use Apache Camel.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -772,14 +757,9 @@ challenges:
 
     We've implemented the integration with our CoffeeService using Apache Camel's `netty-http` component. Well done!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

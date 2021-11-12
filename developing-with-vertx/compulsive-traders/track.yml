@@ -53,7 +53,7 @@ challenges:
   slug: 01-callback-based-trader
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -91,7 +91,7 @@ challenges:
   slug: 02-rx-java2-trader
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -125,7 +125,7 @@ challenges:
   slug: 03-deploy-to-openshift
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

@@ -113,14 +113,9 @@ challenges:
 
     In the next step we'll add a CDI bean that implements our text processing logic.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -181,14 +176,9 @@ challenges:
 
     You've implemented a CDI bean in your Kogito application that can be used as the implementation of a BPMN2 _Service Task_.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -270,14 +260,9 @@ challenges:
 
     In this scenario you've implemented the logic of a BPMN _Service Task_ node using CDI. There is much more to Kogito than CDI and hot-reload, so keep on exploring additional scenarios to learn more, and be sure to visit [kogito.kie.org](https://kogito.kie.org) to learn even more about the architecture and capabilities of this exciting new framework for Cloud Native Business Automation.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

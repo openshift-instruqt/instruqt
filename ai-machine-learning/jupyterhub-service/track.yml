@@ -66,14 +66,9 @@ challenges:
 
     When deploying JupyterHub, either of these images for the Jupyter notebook can be used, or a custom Jupyter notebook image you built could instead be used.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -127,14 +122,9 @@ challenges:
 
     Check out the other workshops available here for more information on the other templates.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -170,14 +160,9 @@ challenges:
 
     Once you have deployed a workload, you can return to this view to deploy additional applications by selecting the _+Add_ option in the left hand side menu.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -242,14 +227,9 @@ challenges:
 
     Because JupyterHub is used to handle spawning of JupyterHub notebook instances on demand, a separate user visiting the same URL, will be given access to their own notebook session.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -277,14 +257,9 @@ challenges:
     oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -329,14 +304,9 @@ challenges:
     oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -420,14 +390,9 @@ challenges:
 
     * https://github.com/jupyter-on-openshift/poc-hub-keycloak-auth
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -478,14 +443,9 @@ challenges:
 
     This time after you get past the authentication and the Jupyter notebook file browser web interface is displayed, you will see that a sample notebook file already exists for the session.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

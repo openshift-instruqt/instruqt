@@ -71,14 +71,9 @@ challenges:
 
     The frontend is the user interface for a wild west style game written in Node.js. It displays popup images which you can shoot, corresponding to the resource objects returned by the backend.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 01-creating-initial-project
@@ -165,14 +160,9 @@ challenges:
 
     The default service account provided to the backend container will now have **view** access, allowing it can retrieve objects via the API. Note that you could choose to grant access to the **edit** role instead. Providing **edit** access would allow the backend to view, modify, or delete objects. Enabling this level of access allows the backend to destroy non-recoverable resources that are used to host the game (breaking the user-experience for app users) - which is why we are using **view** access for this scenario.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 02-creating-new-binary-component
@@ -282,14 +272,9 @@ challenges:
 
     When you've completed your review of the logs, send a break signal `CTRL-C` to return to the command prompt.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 03-deploying-component-from-source-code
@@ -375,14 +360,9 @@ challenges:
 
     When you are done viewing the logs, click on the **Topology** tab on the left side of the web console to head back to `myproject`.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 04-configuring-components
@@ -416,14 +396,9 @@ challenges:
 
     Now that the `frontend` component has successfully connected to the `backend` component, let's add a `Route` to make the `frontend` publicly accessible.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 05-exposing-components-to-public
@@ -471,14 +446,9 @@ challenges:
 
     Visit the URL in your browser to view the application once the `odo push` command finishes.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 - slug: 06-making-changes-to-source-code
@@ -527,14 +497,9 @@ challenges:
 
     `odo url list`{{execute interrupt}}
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   difficulty: basic
   timelimit: 128
 checksum: "302239931703818846"

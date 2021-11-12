@@ -44,7 +44,7 @@ challenges:
   slug: 01-async-service-interface
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -94,7 +94,7 @@ challenges:
   slug: 02-data-objects
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -216,7 +216,7 @@ challenges:
   slug: 03-implement-service
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -269,7 +269,7 @@ challenges:
   slug: 04-deploy-to-openshift
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

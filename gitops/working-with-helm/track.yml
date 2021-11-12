@@ -233,14 +233,9 @@ challenges:
     Keep the Argo CD WebUI tab open for the next exercise, where we'll
     explore a more GitOps friendly way of deploying Helm charts.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -395,14 +390,9 @@ challenges:
     piping that into `kubectl apply -f`. Which means that Argo CD converts
     Helm templates (with the values provided) into "raw", Kubernetes YAML.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

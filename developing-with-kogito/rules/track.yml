@@ -110,14 +110,9 @@ challenges:
 
     In the next step we'll add the domain model of our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -198,14 +193,9 @@ challenges:
 
     You've implemented the domain model of your Kogito business rules project. In the next step, we will implement the _RuleUnit_ of our application.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -280,14 +270,9 @@ challenges:
 
     In this step you've implemented your first _Rule Unit_. Well done! In the next step we will implement the rules and queries of our rule unit.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -389,14 +374,9 @@ challenges:
 
     In this step you've implemented your first Kogito rules and queries. You've seen how Kogito automatically generates the RESTful microservice for you using your business assets, like your rule unit and rules definitions. Finally, we've started our application in Quarkus dev-mode, and fired a request.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -470,14 +450,9 @@ challenges:
 
     You have added a variable to your rule unit and used it in your rules. You've also experienced the power of live/hot reload of Kogito, providing extremely fast roundtrip times.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

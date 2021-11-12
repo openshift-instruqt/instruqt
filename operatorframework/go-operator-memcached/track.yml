@@ -127,14 +127,9 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -159,14 +154,9 @@ challenges:
 
     **Note:** This guide will cover the default case of a single group API. If you would like to support Multi-Group APIs see the [Single Group to Multi-Group](https://book.kubebuilder.io/migration/multi-group.html) doc.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -179,14 +169,9 @@ challenges:
   title: Defining the Spec and Status
   assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/memcached_types.go` file for our Memcached API:\n\n```\ncat api/v1alpha1/memcached_types.go\n```\n`\n```\n\nIn Kubernetes, every functional object (with some exceptions, i.e. ConfigMap) includes `spec` and `status`. Kubernetes functions by reconciling desired state (Spec) with the actual cluster state. We then record what is observed (Status).\n\nAlso observe the `+kubebuilder` comment markers found throughout the file. `operator-sdk` makes use of a tool called [controler-gen](https://github.com/kubernetes-sigs/controller-tools) (from the [controller-tools](https://github.com/kubernetes-sigs/controller-tools) project) for generating utility code and Kubernetes YAML. More information on markers for config/code generation can be found [here](https://book.kubebuilder.io/reference/markers.html).\n\nLet's now modify the `MemcachedSpec` and `MemcachedStatus` of the `Memcached` Custom Resource (CR) at `api/v1alpha1/memcached_types.go`\n\n<br>\nIt should look like the file below:\n\n<pre class=\"file\">\npackage v1alpha1\n\nimport (\n        metav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n)\n\n// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!\n// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.\n\n// MemcachedSpec defines the desired state of Memcached\ntype MemcachedSpec struct {\n\t// +kubebuilder:validation:Minimum=0\n\t// Size is the size of the memcached deployment\n\tSize int32 `json:\"size\"`\n}\n\n// MemcachedStatus defines the observed state of Memcached\ntype MemcachedStatus struct {\n\t// Nodes are the names of the memcached pods\n\tNodes []string `json:\"nodes\"`\n}\n</pre>\n\nAdd the `+kubebuilder:subresource:status` [marker](https://book.kubebuilder.io/reference/generating-crd.html#status) to add a [status subresource](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#status-subresource) to the CRD manifest so that the controller can update the CR status without changing the rest of the CR object:\n\n<pre class=\"file\">\n// Memcached is the Schema for the memcacheds API\n// +kubebuilder:printcolumn:JSONPath=\".spec.size\",name=Desired,type=string\n// +kubebuilder:printcolumn:JSONPath=\".status.nodes\",name=Nodes,type=string\n// +kubebuilder:subresource:status\ntype Memcached struct {\n\tmetav1.TypeMeta   `json:\",inline\"`\n\tmetav1.ObjectMeta `json:\"metadata,omitempty\"`\n\n\tSpec   MemcachedSpec   `json:\"spec,omitempty\"`\n\tStatus MemcachedStatus `json:\"status,omitempty\"`\n}\n\nfunc init() {\n\tSchemeBuilder.Register(&Memcached{}, &MemcachedList{})\n}\n\n</pre>\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/memcached_types.go api/v1alpha1/memcached_types.go\n```\n`\n```\n<br>\nAfter modifying the `*_types.go` file, always run the following command to update the `zz_generated.deepcopy.go` file:\n\n```\nmake generate\n```\n`\n```\n<br>\n\nThe above makefile target will invoke the controller-gen utility to update the api/v1alpha1/zz_generated.deepcopy.go file to ensure our API’s Go type definitons implement the runtime.Object interface that all Kind types must implement.\n\n\nNow we can run the `make manifests` command to generate our customized CRD and additional object YAMLs.\n\n```\nmake manifests\n```\n`\n```\n<br>\n\nThis makefile target will invoke controller-gen to generate the CRD manifests at config/crd/bases/cache.example.com_memcacheds.yaml.\n\n\n\nThanks to our comment markers, observe that we now have a newly generated CRD yaml that reflects the `spec.size` and `status.nodes` OpenAPI v3 schema validation and customized print columns.\n\n```\ncat config/crd/bases/cache.example.com_memcacheds.yaml\n```\n`\n```\n<br>\nDeploy your Memcached Custom Resource Definition to the live OpenShift Cluster:\n\n```\noc apply -f config/crd/bases/cache.example.com_memcacheds.yaml\n```\n`\n```\n<br>\nConfirm the CRD was successfully created:\n\n```\noc get crd memcacheds.cache.example.com -o yaml\n```\n`\n```\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -199,14 +184,9 @@ challenges:
   title: Customizing the Operator Logic
   assignment: "\n**Note:** The next two subsections explain how the controller watches resources and how the reconcile loop is triggered.\n\nLet's now observe the default `controllers/memcached_controller.go` file:\n\n```\ncat controllers/memcached_controller.go\n```\n`\n```\n\nThis default controller requires additional logic so we can trigger our reconciler whenever `kind: Memcached` objects are added, updated, or deleted. We also want to trigger the reconciler whenever Deployment owned by a given Memcached are added, updated, and deleted as well. To accomplish this. we modify the controller's `SetupWithManager` method.\n\nFor this example replace the generated controller at `controllers/memcached_controller.go` with the following code.\n\n<pre class=\"file\">\n\npackage controllers\n\nimport (\n\tappsv1 \"k8s.io/api/apps/v1\"\n\tcorev1 \"k8s.io/api/core/v1\"\n\t\"k8s.io/apimachinery/pkg/api/errors\"\n\tmetav1 \"k8s.io/apimachinery/pkg/apis/meta/v1\"\n\t\"k8s.io/apimachinery/pkg/types\"\n\t\"reflect\"\n\t\"time\"\n\n\t\"context\"\n\n\t\"k8s.io/apimachinery/pkg/runtime\"\n\tctrl \"sigs.k8s.io/controller-runtime\"\n\t\"sigs.k8s.io/controller-runtime/pkg/client\"\n\tctrllog \"sigs.k8s.io/controller-runtime/pkg/log\"\n\n\tcachev1alpha1 \"github.com/example/memcached-operator/api/v1alpha1\"\n)\n\n// MemcachedReconciler reconciles a Memcached object\ntype MemcachedReconciler struct {\n\tclient.Client\n\tScheme *runtime.Scheme\n}\n\n//+kubebuilder:rbac:groups=cache.example.com,resources=memcacheds,verbs=get;list;watch;create;update;patch;delete\n//+kubebuilder:rbac:groups=cache.example.com,resources=memcacheds/status,verbs=get;update;patch\n//+kubebuilder:rbac:groups=cache.example.com,resources=memcacheds/finalizers,verbs=update\n//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete\n//+kubebuilder:rbac:groups=core,resources=pods,verbs=get;list;watch\n\n// Reconcile is part of the main kubernetes reconciliation loop which aims to\n// move the current state of the cluster closer to the desired state.\n// TODO(user): Modify the Reconcile function to compare the state specified by\n// the Memcached object against the actual cluster state, and then\n// perform operations to make the cluster state reflect the state specified by\n// the user.\n//\n// For more details, check Reconcile and its Result here:\n// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile\nfunc (r *MemcachedReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {\n\tlog := ctrllog.FromContext(ctx)\n\n\t// Fetch the Memcached instance\n\tmemcached := &cachev1alpha1.Memcached{}\n\terr := r.Get(ctx, req.NamespacedName, memcached)\n\tif err != nil {\n\t\tif errors.IsNotFound(err) {\n\t\t\t// Request object not found, could have been deleted after reconcile request.\n\t\t\t// Owned objects are automatically garbage collected. For additional cleanup logic use finalizers.\n\t\t\t// Return and don't requeue\n\t\t\tlog.Info(\"Memcached resource not found. Ignoring since object must be deleted\")\n\t\t\treturn ctrl.Result{}, nil\n\t\t}\n\t\t// Error reading the object - requeue the request.\n\t\tlog.Error(err, \"Failed to get Memcached\")\n\t\treturn ctrl.Result{}, err\n\t}\n\n\t// Check if the deployment already exists, if not create a new one\n\tfound := &appsv1.Deployment{}\n\terr = r.Get(ctx, types.NamespacedName{Name: memcached.Name, Namespace: memcached.Namespace}, found)\n\tif err != nil && errors.IsNotFound(err) {\n\t\t// Define a new deployment\n\t\tdep := r.deploymentForMemcached(memcached)\n\t\tlog.Info(\"Creating a new Deployment\", \"Deployment.Namespace\", dep.Namespace, \"Deployment.Name\", dep.Name)\n\t\terr = r.Create(ctx, dep)\n\t\tif err != nil {\n\t\t\tlog.Error(err, \"Failed to create new Deployment\", \"Deployment.Namespace\", dep.Namespace, \"Deployment.Name\", dep.Name)\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t\t// Deployment created successfully - return and requeue\n\t\treturn ctrl.Result{Requeue: true}, nil\n\t} else if err != nil {\n\t\tlog.Error(err, \"Failed to get Deployment\")\n\t\treturn ctrl.Result{}, err\n\t}\n\n\t// Ensure the deployment size is the same as the spec\n\tsize := memcached.Spec.Size\n\tif *found.Spec.Replicas != size {\n\t\tfound.Spec.Replicas = &size\n\t\terr = r.Update(ctx, found)\n\t\tif err != nil {\n\t\t\tlog.Error(err, \"Failed to update Deployment\", \"Deployment.Namespace\", found.Namespace, \"Deployment.Name\", found.Name)\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t\t// Ask to requeue after 1 minute in order to give enough time for the\n\t\t// pods be created on the cluster side and the operand be able\n\t\t// to do the next update step accurately.\n\t\treturn ctrl.Result{RequeueAfter: time.Minute}, nil\n\t}\n\n\t// Update the Memcached status with the pod names\n\t// List the pods for this memcached's deployment\n\tpodList := &corev1.PodList{}\n\tlistOpts := []client.ListOption{\n\t\tclient.InNamespace(memcached.Namespace),\n\t\tclient.MatchingLabels(labelsForMemcached(memcached.Name)),\n\t}\n\tif err = r.List(ctx, podList, listOpts...); err != nil {\n\t\tlog.Error(err, \"Failed to list pods\", \"Memcached.Namespace\", memcached.Namespace, \"Memcached.Name\", memcached.Name)\n\t\treturn ctrl.Result{}, err\n\t}\n\tpodNames := getPodNames(podList.Items)\n\n\t// Update status.Nodes if needed\n\tif !reflect.DeepEqual(podNames, memcached.Status.Nodes) {\n\t\tmemcached.Status.Nodes = podNames\n\t\terr := r.Status().Update(ctx, memcached)\n\t\tif err != nil {\n\t\t\tlog.Error(err, \"Failed to update Memcached status\")\n\t\t\treturn ctrl.Result{}, err\n\t\t}\n\t}\n\n\treturn ctrl.Result{}, nil\n}\n\n// deploymentForMemcached returns a memcached Deployment object\nfunc (r *MemcachedReconciler) deploymentForMemcached(m *cachev1alpha1.Memcached) *appsv1.Deployment {\n\tls := labelsForMemcached(m.Name)\n\treplicas := m.Spec.Size\n\n\tdep := &appsv1.Deployment{\n\t\tObjectMeta: metav1.ObjectMeta{\n\t\t\tName:      m.Name,\n\t\t\tNamespace: m.Namespace,\n\t\t},\n\t\tSpec: appsv1.DeploymentSpec{\n\t\t\tReplicas: &replicas,\n\t\t\tSelector: &metav1.LabelSelector{\n\t\t\t\tMatchLabels: ls,\n\t\t\t},\n\t\t\tTemplate: corev1.PodTemplateSpec{\n\t\t\t\tObjectMeta: metav1.ObjectMeta{\n\t\t\t\t\tLabels: ls,\n\t\t\t\t},\n\t\t\t\tSpec: corev1.PodSpec{\n\t\t\t\t\tContainers: []corev1.Container{{\n\t\t\t\t\t\tImage:   \"memcached:1.4.36-alpine\",\n\t\t\t\t\t\tName:    \"memcached\",\n\t\t\t\t\t\tCommand: []string{\"memcached\", \"-m=64\", \"-o\", \"modern\", \"-v\"},\n\t\t\t\t\t\tPorts: []corev1.ContainerPort{{\n\t\t\t\t\t\t\tContainerPort: 11211,\n\t\t\t\t\t\t\tName:          \"memcached\",\n\t\t\t\t\t\t}},\n\t\t\t\t\t}},\n\t\t\t\t},\n\t\t\t},\n\t\t},\n\t}\n\t// Set Memcached instance as the owner and controller\n\tctrl.SetControllerReference(m, dep, r.Scheme)\n\treturn dep\n}\n\n// labelsForMemcached returns the labels for selecting the resources\n// belonging to the given memcached CR name.\nfunc labelsForMemcached(name string) map[string]string {\n\treturn map[string]string{\"app\": \"memcached\", \"memcached_cr\": name}\n}\n\n// getPodNames returns the pod names of the array of pods passed in\nfunc getPodNames(pods []corev1.Pod) []string {\n\tvar podNames []string\n\tfor _, pod := range pods {\n\t\tpodNames = append(podNames, pod.Name)\n\t}\n\treturn podNames\n}\n\n// SetupWithManager sets up the controller with the Manager.\nfunc (r *MemcachedReconciler) SetupWithManager(mgr ctrl.Manager) error {\n\treturn ctrl.NewControllerManagedBy(mgr).\n\t\tFor(&cachev1alpha1.Memcached{}).\n\t\tOwns(&appsv1.Deployment{}).\n\t\tComplete(r)\n}\n</pre>\n\nYou can easily update this file by running the following command:\n\n```\n\\cp /tmp/memcached_controller.go controllers/memcached_controller.go\n```\n`\n```\n\n`go mod tidy`  ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module's packages and dependencies, and it removes requirements on modules that don't provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.\n\n```\ngo mod tidy\n```\n`\n```\n\n\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -219,14 +199,9 @@ challenges:
   title: Resources watched by the Controller
   assignment: "**Note:** The next two subsections explain how the controller watches resources and how the reconcile loop is triggered. If you’d like to skip this section, head to the deploy section to see how to run the operator.\n\n```\ncat controllers/memcached_controller.go\n```\n`\n```\n\nThe `SetupWithManager()` function in `controllers/memcached_controller.go` specifies how the controller is built to watch a CR and other resources that are owned and managed by that controller.\n\n<pre class=\"file\">\nimport (\n\t...\n\tappsv1 \"k8s.io/api/apps/v1\"\n\t...\n)\n\nfunc (r *MemcachedReconciler) SetupWithManager(mgr ctrl.Manager) error {\n\treturn ctrl.NewControllerManagedBy(mgr).\n\t\tFor(&cachev1alpha1.Memcached{}).\n\t\tOwns(&appsv1.Deployment{}).\n\t\tComplete(r)\n}\n</pre>\n\nThe `NewControllerManagedBy()` provides a controller builder that allows various controller configurations.\n\n`For(&cachev1alpha1.Memcached{})` specifies the Memcached type as the primary resource to watch. For each Memcached type Add/Update/Delete event the reconcile loop will be sent a reconcile `Request` (a namespace/name key) for that Memcached object.\n\n`Owns(&appsv1.Deployment{})` specifies the Deployments type as the secondary resource to watch. For each Deployment type Add/Update/Delete event, the event handler will map each event to a reconcile Request for the owner of the Deployment. Which in this case is the Memcached object for which the Deployment was created.\n\n\n\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -256,14 +231,9 @@ challenges:
 
     * Choose the type of [EventHandler](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/handler#hdr-EventHandlers) to change how a watch event will translate to reconcile requests for the reconcile loop. For operator relationships that are more complex than primary and secondary resources, the [EnqueueRequestsFromMapFunc](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/handler#EnqueueRequestsFromMapFunc) handler can be used to transform a watch event into an arbitrary set of reconcile requests.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -276,14 +246,9 @@ challenges:
   title: Reconcile loop
   assignment: "The reconcile function is responsible for enforcing the desired CR state on the actual state of the system. It runs each time an event occurs on a watched CR or resource, and will return some value depending on whether those states match or not.\n\nIn this way, every Controller has a Reconciler object with a Reconcile() method that implements the reconcile loop. The reconcile loop is passed the [Request](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Request) argument which is a Namespace/Name key used to lookup the primary resource object, Memcached, from the cache:\n\n<pre class=\"file\">\nimport (\n\tctrl \"sigs.k8s.io/controller-runtime\"\n\n\tcachev1alpha1 \"github.com/example/memcached-operator/api/v1alpha1\"\n\t...\n)\n\nfunc (r *MemcachedReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {\n  _ = context.Background()\n  ...\n\n  // Lookup the Memcached instance for this reconcile request\n  memcached := &cachev1alpha1.Memcached{}\n  err := r.Get(ctx, req.NamespacedName, memcached)\n  ...\n}\n</pre>\n\nFor a guide on Reconcilers, Clients, and interacting with resource Events, see the [Client API doc](https://sdk.operatorframework.io/docs/building-operators/golang/references/client/).\n\n\n\n"
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -316,14 +281,9 @@ challenges:
     For more details, check the Reconcile and its [Reconcile godoc](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile).
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -357,14 +317,9 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -391,14 +346,9 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -494,14 +444,9 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -539,14 +484,9 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

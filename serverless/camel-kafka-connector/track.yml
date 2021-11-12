@@ -132,14 +132,9 @@ challenges:
     ```
     Ctrl+C to exit the mode.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -266,14 +261,9 @@ challenges:
     oc annotate kafkaconnects2is my-connect-cluster strimzi.io/use-connector-resources=true
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -413,14 +403,9 @@ challenges:
        ............
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -505,14 +490,9 @@ challenges:
 
     In this scenario you got to play with Camel Kafka Connector. You have initiated an AMQ Streams (Kafka) cluster on openshift, created an object store, sftp server. Then started a Kafka Connect with your own build of image including the libraries needed. Then you created a source Camel Kafka connector that loads files from the _AWS2 S3_ like storage, place the file in the kafka topic, and created another Camel Kafka connector that listens to the input from the kafka topic and place the file in the SFTP server.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

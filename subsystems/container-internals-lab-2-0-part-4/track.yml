@@ -135,7 +135,7 @@ challenges:
   slug: 01-engines-kernel
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -390,7 +390,7 @@ challenges:
   slug: 02-create-container
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -497,7 +497,7 @@ challenges:
   slug: 03-selinux-svirt
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -528,7 +528,7 @@ challenges:
   slug: 04-cgroups
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /
@@ -554,7 +554,7 @@ challenges:
   slug: 05-seccomp
   tabs:
   - hostname: crc
-    title: CLI
+    title: Terminal 1
     type: terminal
   - hostname: crc
     path: /

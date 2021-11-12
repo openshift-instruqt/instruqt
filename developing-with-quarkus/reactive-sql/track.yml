@@ -158,14 +158,9 @@ challenges:
 
     With the app initialized, lets start coding!
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -358,14 +353,9 @@ challenges:
     In the next step we'll add more functionality to the app using the Reactive SQL clients for Quarkus.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -460,14 +450,9 @@ challenges:
 
     Lets continue further to add reactive accessor methods for our Coffee resource.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -527,14 +512,9 @@ challenges:
 
     Now Cancel the running dev session by clicking the `clear`{{execute T1 interrupt}} before moving ahead.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc
@@ -604,14 +584,9 @@ challenges:
 
     To read more about Quarkus and Reactive SQL head off to [QuarkusIO](http://www.quarkus.io) for more details.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Web Console
-    type: service
-    hostname: crc
-    path: /
-    port: 30001
   - title: Visual Editor
     type: code
     hostname: crc

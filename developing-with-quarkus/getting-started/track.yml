@@ -264,7 +264,7 @@ challenges:
 
     In the next step we'll inject a custom bean to showcase Quarkus' CDI capabilities.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -414,7 +414,7 @@ challenges:
 
     It's a familiar CDI-based environment for you Enterprise Java developers out there, with powerful mechanisms to reload your code _as you type_ (or very close to realtime). In the next step, we'll package and run it as a standalone executable JAR, which should also be familiar to microservice developers.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -490,7 +490,7 @@ challenges:
     You've packaged up the app as an executable JAR and learned a bit more about the mechanics of packaging. In the next step, we'll continue our journey and build a _native image_ and then we'll learn about the native executable creation and the packaging in a Linux container.
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -764,7 +764,7 @@ challenges:
 
 
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -851,7 +851,7 @@ challenges:
 
     In this scenario you got a glimpse of the power of Quarkus apps, both traditional JVM-based as well as native builds. There is much more to Quarkus than fast startup times and low resource usage, so keep on exploring additional scenarios to learn more, and be sure to visit [quarkus.io](https://quarkus.io) to learn even more about the architecture and capabilities of this exciting new framework for Java developers.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -860,4 +860,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "13444072865027286022"
+checksum: "4960886088628372010"
