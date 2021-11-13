@@ -189,7 +189,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

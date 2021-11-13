@@ -335,7 +335,7 @@ challenges:
     ``cat > robots.txt << !
     User-agent: *
     Disallow: /
-    !``{{execute}}
+    !``
 
     For the web application being used, it hosts static files out of the ``htdocs`` sub directory of the application source code. To upload the ``robots.txt`` file run:
 

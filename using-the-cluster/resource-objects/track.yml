@@ -356,7 +356,7 @@ challenges:
             }
         }
     }
-    !``{{execute}}
+    !``
 
     To create the route from the ``parksmap-fqdn.json`` file you would run the command:
 
@@ -432,7 +432,7 @@ challenges:
             }
         }
     }
-    !``{{execute}}
+    !``
 
     and then run:
 

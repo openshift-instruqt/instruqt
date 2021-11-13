@@ -326,7 +326,7 @@ challenges:
         -e POSTGRESQL_DATABASE=person \
         --name=postgres-database \
         -l app.openshift.io/runtime=postgresql \
-        openshift/postgresql`{{execute}}
+        openshift/postgresql`
 
     You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).
 
@@ -384,7 +384,7 @@ challenges:
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.route.expose=true \
     -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=postgres-database \
-    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`{{execute}}
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`
 
     The output should end with `BUILD SUCCESS`.
 
@@ -496,7 +496,7 @@ challenges:
   id: ltgnczcfymx2
   type: challenge
   title: Add Queries
-  assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static Uni&lt;List&lt;Person&gt;&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static Multi&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n          .filter(p -&gt; p.birth.getYear() &lt;= year);\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Uni&lt;List&lt;Person&gt;&gt; findByColor(@PathParam(\"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Multi&lt;Person&gt; getBeforeYear(@PathParam(\"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`{{execute T2}}\n\n> This will open a new Terminal to execute the command. If the command fails to run just click the above command again!\n\nYou should only see **one** person with BLUE eyes:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  }\n]\n```\nThis also confirms that our remote live coding is working as expected.\n\nNext, let's find people born in 1990 or earlier:\n\n`curl -s $PEOPLE_URL/person/birth/before/1990 | jq`{{execute T2}}\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful `static` methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person.`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache Reactive can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
+  assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static Uni&lt;List&lt;Person&gt;&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static Multi&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n          .filter(p -&gt; p.birth.getYear() &lt;= year);\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Uni&lt;List&lt;Person&gt;&gt; findByColor(@PathParam(\"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Multi&lt;Person&gt; getBeforeYear(@PathParam(\"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful `static` methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person.`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache Reactive can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
   tabs:
   - title: Terminal 1
     type: terminal
@@ -597,7 +597,7 @@ challenges:
 
     Let's test out our new endpoint using `curl` to search for names with `yan` in their name:
 
-    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq`{{execute T2}}
+    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq`
 
     This should return a single entity (since in our 3-person sample data, only one has `yan` in their name), embedded in the return object that DataTable is expecting (with the `draw`, `recordsFiltered`, `recordsTotal` etc):
 
@@ -675,7 +675,7 @@ challenges:
 
     > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
 
-    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq`{{execute T2}}
+    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq`
 
     You should get up to 2 records returned, but the total number available should show many more indicating our search found many more, and the total number of records should now be `10003` (the 10k we added plus the 3 original values):
 
@@ -735,7 +735,7 @@ challenges:
 
     Skip around a few pages, try some different searches, and notice that the data is only loaded when needed. The overall performance is very good even for low-bandwidth connections or huge data sets.
 
-    When you are done, return to the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear`{{execute T1 interrupt}} command to do it for you).
+    When you are done, return to the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
 
     # Extra Credit
     There are [many other features of DataTables](https://datatables.net/manual/server-side) that could be supported on the server side with Quarkus and Panache. For example, when our endpoint is accessed, the set of columns to order on is also passed using the `order` and `columns` arrays, which we do not cover in this scenario. If you have time, try to add additional code to support these incoming parameters and order the resulting records accordingly!
@@ -748,7 +748,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

@@ -383,7 +383,7 @@ challenges:
 
     `podman kill -a
 
-    podman rm -a`{{execute}}
+    podman rm -a`
 
     '
   difficulty: expert
@@ -414,7 +414,7 @@ challenges:
 
     sleep 3
 
-    ps -efZ | grep container_t | grep sleep`{{execute}}
+    ps -efZ | grep container_t | grep sleep`
 
 
 
@@ -521,7 +521,7 @@ challenges:
     \ two separate containerized sleep processes: \n\n`podman run -dt registry.access.redhat.com/ubi7/ubi\
     \ sleep 10\npodman run -dt registry.access.redhat.com/ubi7/ubi sleep 10\nsleep\
     \ 3\nfor i in $(podman ps | grep sleep | awk '{print $1}' | grep [0-9]); do find\
-    \ /sys/fs/cgroup/ | grep $i; done`{{execute}}\n\nNotice how each containerized\
+    \ /sys/fs/cgroup/ | grep $i; done`\n\nNotice how each containerized\
     \ process is put into its own cgroup by the container engine. This is quite convenient,\
     \ similar to sVirt.\n\n"
   difficulty: expert

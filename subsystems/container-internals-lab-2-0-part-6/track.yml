@@ -93,11 +93,11 @@ challenges:
 
     ``mkdir fedora
     cd fedora
-    podman pull fedora``{{execute}}
+    podman pull fedora``
 
     Now, export the image to a tar, file and extract it:
     ``podman save -o fedora.tar fedora
-    tar xvf fedora.tar``{{execute}}
+    tar xvf fedora.tar``
 
     Finally, let's take a look at three important parts of the container repository - these are the three major pieces that can be found in a container repository when inspected:
 
@@ -154,12 +154,12 @@ challenges:
     Now, let's start with some experiments. Being the reference implementation for the runtime specifiction, runc has the ability to create a very simple spec file. Let's create one and take a quick look at the fairly simple set of directives:
 
     ``runc spec
-    cat config.json | jq``{{execute}}
+    cat config.json | jq``
 
     The simple file created by runc is a good introduction, but to truly understand the breadth of what a container engine does, we need to look at a more complex example. Podman has the ability to create a container and generate a spec file without actually starting the container:
 
     ``podman create --name fedora -t fedora bash
-    podman init fedora``{{execute}}
+    podman init fedora``
 
     The "podman init" command generates a config.json and we can take a look at it in /var/lib/containers:
 
@@ -209,7 +209,7 @@ challenges:
 
     ``rm -rf /root/fedora/config.json
     runc spec -b /root/fedora/
-    sed -i 's/"terminal": true/"terminal": false/' /root/fedora/config.json``{{execute}}
+    sed -i 's/"terminal": true/"terminal": false/' /root/fedora/config.json``
 
     Now, we have ourselves a full "bundle" which is a collequial way of referring to the RootFS and Config together in one directory:
 
@@ -252,7 +252,7 @@ challenges:
     Delete it and verify that things are cleaned up. You may notice other containers running, that may be because other containers on the system are running in CRI-O, Podman, or Docker:
 
     ``runc delete fedora
-    runc list``{{execute}}
+    runc list``
 
     In summary, we have learned how to create containers with a terse little program called runc. This is the exact same program used by every major container engine on the planet. In production, you would never create containers like this, but it's useful to understand what is going on under the hood in CRI-O, Podman and Docker. When you run into new projects like Kata, gVisor, and others, you will now understand exactly how and where they fit in into the software stack.
   tabs:

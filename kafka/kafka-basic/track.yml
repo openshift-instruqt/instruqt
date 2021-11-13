@@ -150,7 +150,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
   tabs:
   - title: Terminal 1
     type: terminal
@@ -176,7 +176,7 @@ challenges:
 
     Check the configuration for the `Kafka` custom resource:
 
-    `cat /opt/kafka-cluster.yaml`{{execute interrupt}}
+    `cat /opt/kafka-cluster.yaml`
 
     Then create the Kafka cluster by applying the configuration:
 
@@ -225,7 +225,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     ### Create a Kafka Topic to store your events
 
@@ -235,7 +235,7 @@ challenges:
 
     Check the configuration for the `KafkaTopic` custom resource:
 
-    `cat /opt/kafka-topic.yaml`{{execute interrupt}}
+    `cat /opt/kafka-topic.yaml`
 
     Then apply the custom resource for the Topic Operator to pick up:
 
@@ -331,7 +331,7 @@ challenges:
 
     Enter some more messages, then press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     ### Consuming events
 
@@ -339,7 +339,7 @@ challenges:
 
     Run the console consumer shell script:
 
-    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning`{{execute interrupt}}
+    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning`
 
     You should see the messages you wrote:
 
@@ -350,7 +350,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     ### Congratulations
 

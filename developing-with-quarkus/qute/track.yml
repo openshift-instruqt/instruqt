@@ -74,7 +74,7 @@ challenges:
      mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=qute \
-        -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"`{{execute T1}}
+        -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"`
 
     > The first time you create an app, new dependencies may be downloaded via maven and take a minute or so. This should only happen once, after that things will go even faster.
 
@@ -87,7 +87,7 @@ challenges:
     Let's begin Live Coding. Click on the following command to start the example app in _Live Coding_ mode:
 
     `cd /root/projects/quarkus/qute && \
-      mvn quarkus:dev -Dquarkus.http.host=0.0.0.0`{{execute T1}}
+      mvn quarkus:dev -Dquarkus.http.host=0.0.0.0`
 
     You should see:
 
@@ -176,7 +176,7 @@ challenges:
 
     With our application already running in _Live Coding_ mode, we can render the template by calling the endpoint. Click the command below to test it:
 
-    `curl http://localhost:8080/hello?name=James`{{execute T2}}
+    `curl http://localhost:8080/hello?name=James`
 
     You should see:
 
@@ -225,7 +225,7 @@ challenges:
 
     Create a directory to hold templates for our HelloResource class:
 
-    `cd /root/projects/quarkus/qute && mkdir -p src/main/resources/templates/HelloResource`{{execute T2}}
+    `cd /root/projects/quarkus/qute && mkdir -p src/main/resources/templates/HelloResource`
 
     Next, click to open `qute/src/main/resources/templates/HelloResource/hello.txt`. Click **Copy to Editor** to add the code:
 
@@ -311,7 +311,7 @@ challenges:
 
     Let's test our new endpoints against the running Quarkus application:
 
-    `curl http://localhost:8080/hello?name=James`{{execute T2}}
+    `curl http://localhost:8080/hello?name=James`
 
     You should see:
 
@@ -321,7 +321,7 @@ challenges:
 
     And goodbye:
 
-    `curl http://localhost:8080/goodbye?name=James`{{execute T2}}
+    `curl http://localhost:8080/goodbye?name=James`
 
     You should see the same:
 
@@ -383,7 +383,7 @@ challenges:
 
     Now, suppose we want to render a simple HTML page that contains the item name and price. First, create a directory by clicking:
 
-    `mkdir -p src/main/resources/templates/ItemResource`{{execute T2}}
+    `mkdir -p src/main/resources/templates/ItemResource`
 
     Create a Qute template at by clicking `qute/src/main/resources/templates/ItemResource/item.html` then click the **Copy to Editor** button:
 
@@ -470,7 +470,7 @@ challenges:
 
     We then pass the value of `id` to be used to render the template when the REST endpoint is called. Let's try it:
 
-    `curl http://localhost:8080/item/1`{{execute T2}}
+    `curl http://localhost:8080/item/1`
 
     You should see an HTML result that shows Apple (`id=1`) and its price:
 
@@ -706,7 +706,7 @@ challenges:
 
     Let's make a directory to house our new template with this command:
 
-    `mkdir -p src/main/resources/templates/reports/v1`{{execute T2}}
+    `mkdir -p src/main/resources/templates/reports/v1`
 
     Click `qute/src/main/resources/templates/reports/v1/report_01.json.template` to open the new file.
 
@@ -790,11 +790,11 @@ challenges:
 
     To trigger report to start generating (by triggering Quarkus Live Reload), click to run this command and access the `hello` endpoint:
 
-    `curl http://localhost:8080/hello?name=James`{{execute T2}}
+    `curl http://localhost:8080/hello?name=James`
 
     Assuming no errors, our reports should generate every second. Let's `tail` the file:
 
-    `tail -f /tmp/report.json`{{execute T2}}
+    `tail -f /tmp/report.json`
 
     You should see new reports every second. When done, don't forget to type `CTRL-C` to stop the `tail -f`!
   tabs:
@@ -871,7 +871,7 @@ challenges:
 
     Make sure the endpoint generates a report. Click the following command to try it:
 
-    `curl http://localhost:8080/reactive`{{execute T2}}
+    `curl http://localhost:8080/reactive`
 
     You should see a random report of the samples from earlier, but done so with a _Reactive Route_.
 
@@ -885,7 +885,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

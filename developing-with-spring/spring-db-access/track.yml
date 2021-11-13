@@ -201,7 +201,7 @@ challenges:
     We can now test that our `FruitRepository` can connect to the data source, retrieve data and
     Run the application by executing the below command:
 
-    ``mvn verify``{{execute interrupt}}
+    ``mvn verify``
 
     In the console you should now see the following (if the output is too noisy the first time around because of downloads simply run the command again):
 
@@ -312,7 +312,7 @@ challenges:
                  -e POSTGRESQL_PASSWORD=secret \
                  -e POSTGRESQL_DATABASE=my_data \
                  openshift/postgresql:12-el8 \
-                 --name=my-database``{{execute}}
+                 --name=my-database``
 
     This command creates a new deployable Postgres instance using the OpenShift Postgresql image named `my-database`. This step may take a minute or two. We can wait for it to complete by running the following command:
 
@@ -380,7 +380,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

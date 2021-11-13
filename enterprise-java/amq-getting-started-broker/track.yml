@@ -31,7 +31,7 @@ challenges:
     \   0/1     ContainerCreating   0          2s\namq-broker-operator-6c76986f9-bsrcv\
     \   0/1     ContainerCreating   0          7s\namq-broker-operator-6c76986f9-bsrcv\
     \   1/1     Running             0          23s\n```\n\nHit <kbd>Ctrl</kbd>+<kbd>C</kbd>\
-    \ to stop the process.\n\n`^C`{{execute ctrl-seq}}\n\nIn the next step, you will\
+    \ to stop the process.\n\n`^C`\n\nIn the next step, you will\
     \ deploy a new instance of the AMQ broker.\n"
   difficulty: basic
   notes:
@@ -95,7 +95,7 @@ challenges:
     command:
 
 
-    ```cd /root/projects/amq-examples/amq-js-demo```{{execute interrupt}}
+    ```cd /root/projects/amq-examples/amq-js-demo```
 
 
     Create a new broker using the OpenShift command:
@@ -163,7 +163,7 @@ challenges:
     Hit <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
 
     When the provisioning of the broker finishes, you will be set to start using the
@@ -205,7 +205,7 @@ challenges:
     * `app.js` - Main logic of the sample application.\n\n### Install Dependencies\n\
     \nDependencies are listed in the `package.json` file and declare which external\
     \ projects this sample app requires.\nTo download and install them, run the following\
-    \ command:\n\n``npm install``{{execute interrupt}}\n\nIt will take a few seconds\
+    \ command:\n\n``npm install``\n\nIt will take a few seconds\
     \ to download, and you should see a final report such as \n\n```bash\nadded 140\
     \ packages in 2.937s\n```\n\n### Deploy\n\nBuild and deploy the project using\
     \ the following command:\n\n```\nnpm run openshift\n```\n\n> This uses NPM and\
@@ -224,7 +224,7 @@ challenges:
     \     Running     0          26s\namq-js-demo-s2i-1-build               0/1  \
     \   Completed   0          90s\nbroker-ss-0                           1/1    \
     \ Running     0          4m46s\n```\n\nHit <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop\
-    \ the process.\n\n`^C`{{execute ctrl-seq}}\n\nIn the next step you will check\
+    \ the process.\n\n`^C`\n\nIn the next step you will check\
     \ your application is running.\n"
   difficulty: basic
   slug: 03-simple-client
@@ -262,7 +262,7 @@ challenges:
     Use the following command to retrieve the logs:
 
 
-    `oc -n messaging logs -f dc/amq-js-demo`{{execute interrupt}}
+    `oc -n messaging logs -f dc/amq-js-demo`
 
 
     You will see a message every 10 seconds with the following text:

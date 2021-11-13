@@ -95,7 +95,7 @@ challenges:
 
     Deploy the Kafka Bridge with the custom image:
 
-    ``oc -n kafka apply -f /root/projects/http-bridge/kafka-bridge.yaml``{{execute interrupt}}
+    ``oc -n kafka apply -f /root/projects/http-bridge/kafka-bridge.yaml``
 
     The Kafka Bridge node should be deployed after a few moments. To watch the pods status run the following command:
 
@@ -117,7 +117,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     ### Creating an OpenShift route
 
@@ -131,7 +131,7 @@ challenges:
 
     Run the following command to expose the bridge service as an OpenShift route:
 
-    ``oc expose svc my-bridge-bridge-service``{{execute interrupt}}
+    ``oc expose svc my-bridge-bridge-service``
 
     When the route is created, the Kafka Bridge is reachable through the `https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com` host. You can now use any HTTP client to interact with the REST API exposed by the bridge to send and receive messages without needing to use the native Kafka protocol.
   tabs:
@@ -151,7 +151,7 @@ challenges:
   assignment: |
     To verify that the Ingress is working properly, try to access the ``/healthy` endpoint of the bridge with the following curl command:
 
-    ``curl -ik https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/healthy``{{execute interrupt}}
+    ``curl -ik https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/healthy``
 
     If the bridge is reachable through the OpenShift route, it will return an HTTP response with `200 OK` HTTP code, but an empty body.
 

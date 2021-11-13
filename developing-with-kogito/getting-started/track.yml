@@ -107,7 +107,7 @@ challenges:
       -DarchetypeVersion=0.9.0 \
       -DgroupId=org.acme \
       -DartifactId=getting-started \
-      -Dversion=1.0-SNAPSHOT`{{execute}}
+      -Dversion=1.0-SNAPSHOT`
 
     This will use the Kogito Quarkus Archetype and generate a basic Maven project for you in the `getting-started` subdirectory, generating:
 
@@ -381,7 +381,7 @@ challenges:
 
     Because the original Terminal tab already has our application running, we need to run this command in a second Terminal tab. Click on the following command to run it in your other Terminal tab. This will return the list of **getting_started** resource instances, which currently contains the single instance we created earlier:
 
-    `curl -X GET "http://localhost:8080/getting_started" -H "accept: application/json"`{{execute T2}}
+    `curl -X GET "http://localhost:8080/getting_started" -H "accept: application/json"`
 
     > You can also open additional terminals with the "+" button on the tab bar to the right.
     > ![Open Terminal](https://katacoda.com/openshift/assets/middleware/middleware-kogito/katacoda-open-new-terminal.png)
@@ -402,7 +402,7 @@ challenges:
 
     With the task completed, the process instance will now be completed. Execute the following command again in the Terminal by clicking on it. Notice that there are no process instances returned:
 
-    `curl -X GET "http://localhost:8080/getting_started" -H "accept: application/json"`{{execute T2}}
+    `curl -X GET "http://localhost:8080/getting_started" -H "accept: application/json"`
 
     ## Congratulations!
 
@@ -456,7 +456,7 @@ challenges:
 
     We can test our application again using the second Terminal tab to create a new process instance by clicking on the following command:
 
-    `curl -X POST "http://localhost:8080/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`{{execute T2}}
+    `curl -X POST "http://localhost:8080/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`
 
     The output shows the id of the new instance (note that your id will be different from the one shown here)
 
@@ -576,7 +576,7 @@ challenges:
 
     And extremely low memory usage as reported by the Linux `ps` utility. Click here to run this in your other Terminal tab:
 
-    `ps -o pid,rss,command -p $(pgrep -f runner)`{{execute T2}}
+    `ps -o pid,rss,command -p $(pgrep -f runner)`
 
     You should see something like:
 
@@ -591,7 +591,7 @@ challenges:
 
     Make sure the app is still working as expected by creating a new process instance:
 
-    `curl -X POST "http://localhost:8080/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`{{execute T2}}
+    `curl -X POST "http://localhost:8080/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`
 
     ```console
     $ curl -X POST "http://localhost:8080/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"
@@ -634,7 +634,7 @@ challenges:
 
     In order to login, we will use the **oc** command and then specify the server that we want to authenticate to:
 
-    `oc login --server=https://[[HOST_SUBDOMAIN]]-6443-[[KATACODA_HOST]].environments.katacoda.com --insecure-skip-tls-verify=true`{{execute T1}}
+    `oc login --server=https://[[HOST_SUBDOMAIN]]-6443-[[KATACODA_HOST]].environments.katacoda.com --insecure-skip-tls-verify=true`
 
     Enter your username and password:
     * Username: **developer**
@@ -651,7 +651,7 @@ challenges:
 
     For this scenario, let's create a project that you will use to house your applications. Click:
 
-    `oc new-project kogito --display-name="Sample Kogito App"`{{execute T1}}
+    `oc new-project kogito --display-name="Sample Kogito App"`
 
     **3. Open the OpenShift Web Console**
 
@@ -679,31 +679,31 @@ challenges:
 
     First, create a new _binary_ build within OpenShift:
 
-    `oc new-build quay.io/quarkus/ubi-quarkus-native-binary-s2i:19.3.1 --binary --name=kogito-quickstart -l app=kogito-quickstart`{{execute T1}}
+    `oc new-build quay.io/quarkus/ubi-quarkus-native-binary-s2i:19.3.1 --binary --name=kogito-quickstart -l app=kogito-quickstart`
 
     > This build uses the new [Red Hat Universal Base Image](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/using_red_hat_universal_base_images_standard_minimal_and_runtimes), providing foundational software needed to run most applications, while staying at a reasonable size.
 
     And then start and watch the build, which will take about a minute or two to complete:
 
-    `oc start-build kogito-quickstart --from-file=target/getting-started-1.0-SNAPSHOT-runner --follow`{{execute T1}}
+    `oc start-build kogito-quickstart --from-file=target/getting-started-1.0-SNAPSHOT-runner --follow`
 
     Once that's done, we'll deploy it as an OpenShift application:
 
-    `oc new-app kogito-quickstart`{{execute T1}}
+    `oc new-app kogito-quickstart`
 
     and expose it to the world:
 
-    `oc expose service kogito-quickstart`{{execute T1}}
+    `oc expose service kogito-quickstart`
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/kogito-quickstart`{{execute T1}}
+    `oc rollout status -w dc/kogito-quickstart`
 
     Wait for that command to report `replication controller "kogito-quickstart-1" successfully rolled out` before continuing.
 
     And now we can access our application using `cURL` once again:
 
-    `curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`{{execute T1}}
+    `curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`
 
 
     You should again see the id of the process instance we've just started:
@@ -740,13 +740,13 @@ challenges:
 
     Let's make _sure_ our Kogito app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. Click here to set this limit:
 
-    `oc set resources dc/kogito-quickstart --limits=memory=50Mi`{{execute T1}}
+    `oc set resources dc/kogito-quickstart --limits=memory=50Mi`
 
     ## Scale the app
 
     With that set, let's see how fast our app can scale up to 10 instances:
 
-    `oc scale --replicas=10 dc/kogito-quickstart`{{execute T1}}
+    `oc scale --replicas=10 dc/kogito-quickstart`
 
     Back in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart) you'll see the app scaling dynamically up to 10 pods:
 
@@ -754,7 +754,7 @@ challenges:
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
-    `for i in {1..50} ; do curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}" ; sleep .05 ; done`{{execute T1}}
+    `for i in {1..50} ; do curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}" ; sleep .05 ; done`
 
     You can see the 10 instances of our Kogito app being load-balanced and process instances being created:
 
@@ -770,7 +770,7 @@ challenges:
 
     10 not enough? Let's try 50:
 
-    `oc scale --replicas=50 dc/kogito-quickstart`{{execute T1}}
+    `oc scale --replicas=50 dc/kogito-quickstart`
 
     Back in the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart) you'll see the app scaling dynamically up to 50 pods:
 
@@ -778,11 +778,11 @@ challenges:
 
     Once they are all up and running, try the same load again:
 
-    `for i in {1..50} ; do curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}" ; sleep .05 ; done`{{execute T1}}
+    `for i in {1..50} ; do curl -X POST "http://kogito-quickstart-kogito.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/getting_started" -H "accept: application/json" -H "Content-Type: application/json" -d "{}" ; sleep .05 ; done`
 
     And witness all 50 pods responding evenly to requests. Try doing that with your average Java app running in a container! This tutorial uses a single node OpenShift cluster, but in practice you'll have many more nodes, and can scale to hundreds or thousands of replicas if and when load goes way up.
 
-    > 50 still not enough? Are you feeling lucky? Try **100**: `oc scale --replicas=100 dc/kogito-quickstart`{{execute T1}} and watch the magic on the [OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart)
+    > 50 still not enough? Are you feeling lucky? Try **100**: `oc scale --replicas=100 dc/kogito-quickstart` and watch the magic on the [OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/kogito/deploymentconfigs/kogito-quickstart)
 
     ## Congratulations
 

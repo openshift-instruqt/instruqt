@@ -286,7 +286,7 @@ challenges:
 
     Change directories to the `frontend` directory:
 
-    `cd ~/frontend`{{execute interrupt}}
+    `cd ~/frontend`
 
     Listing the contents of this directory shows that `frontend` is a Node.js application.
 
@@ -495,7 +495,7 @@ challenges:
 
     __NOTE__: If you no longer have the application page opened in a browser, you can recall the url by executing:
 
-    `odo url list`{{execute interrupt}}
+    `odo url list`
   tabs:
   - title: Terminal 1
     type: terminal

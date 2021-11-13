@@ -251,7 +251,7 @@ challenges:
     \ to the platform.\n\n**1. Login to OpenShift Container Platform**\n\nDo this\
     \ in the 1st terminal. To login, we will use the oc command and then specify username\
     \ and password like this:\n\n`oc login https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com\
-    \ -u developer -p developer --insecure-skip-tls-verify=true`{{execute interrupt}}\n\
+    \ -u developer -p developer --insecure-skip-tls-verify=true`\n\
     \nCongratulations, you are now authenticated to the OpenShift server.\n\n**IMPORTANT**:\
     \ If the above oc login command doesn't seem to do anything, you may have forgotten\
     \ to stop the application from the previous step. Click on the terminal and press\

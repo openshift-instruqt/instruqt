@@ -156,7 +156,7 @@ challenges:
 
     An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
 
-    `$JAVA_HOME/bin/java --version`{{execute T1}}
+    `$JAVA_HOME/bin/java --version`
 
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
@@ -178,7 +178,7 @@ challenges:
         -DprojectArtifactId=primes \
         -DclassName="org.acme.quickstart.GreetingResource" \
         -Dextensions="micrometer-registry-prometheus" \
-        -Dpath="/hello"`{{execute T1}}
+        -Dpath="/hello"`
 
     This will use the Quarkus Maven Plugin and generate a basic Maven project for you in the `primes` subdirectory and include the `micrometer-registry-prometheus` extension which causes the app to generate metrics at the `/q/metrics` endpoint.
 
@@ -186,11 +186,11 @@ challenges:
 
     Change to the directory in which the app was created:
 
-    `cd /root/projects/quarkus/primes`{{execute T1}}
+    `cd /root/projects/quarkus/primes`
 
     Let's begin Live Coding. Click on the following command to start the app in _Live Coding_ mode:
 
-    `mvn quarkus:dev`{{execute T1}}
+    `mvn quarkus:dev`
 
     You should see:
 
@@ -214,7 +214,7 @@ challenges:
     Test that the app is running by accessing the simple `hello` endpoint:
 
     `cd /root/projects/quarkus/primes && \
-      curl http://localhost:8080/hello`{{execute T2}}
+      curl http://localhost:8080/hello`
 
     > You may need to click this command again in case it doesn't execute properly on first click
 
@@ -228,7 +228,7 @@ challenges:
 
     You will be able to immediately see the raw metrics generated from Quarkus apps. Run this in the Terminal:
 
-    `curl http://localhost:8080/q/metrics`{{execute T2}}
+    `curl http://localhost:8080/q/metrics`
 
     You will see a bunch of raw metrics in the OpenMetrics format (as we are using a Prometheus registry):
 
@@ -350,19 +350,19 @@ challenges:
 
     Click the following commands to test whether the number is a prime number:
 
-    `curl http://localhost:8080/is-prime/1`{{execute T2}}
+    `curl http://localhost:8080/is-prime/1`
 
     You should see `1 is not prime.`.
 
-    `curl http://localhost:8080/is-prime/350`{{execute T2}}
+    `curl http://localhost:8080/is-prime/350`
 
     You should see `350 is not prime, it is divisible by 2.`.
 
-    `curl http://localhost:8080/is-prime/629521085409773`{{execute T2}}
+    `curl http://localhost:8080/is-prime/629521085409773`
 
     You should see `629521085409773 is prime.`.
 
-    `curl http://localhost:8080/is-prime/1111111111111111111`{{execute T2}}
+    `curl http://localhost:8080/is-prime/1111111111111111111`
 
     You should see `1111111111111111111 is prime.`.
 
@@ -370,7 +370,7 @@ challenges:
 
     Review the metrics generated so far to see them in action:
 
-    `curl http://localhost:8080/q/metrics`{{execute T2}}
+    `curl http://localhost:8080/q/metrics`
 
     You'll see many metrics, for example:
 
@@ -385,7 +385,7 @@ challenges:
 
     You can also display only our "prime"-related metrics:
 
-    `curl -s http://localhost:8080/q/metrics | grep -i prime`{{execute T2}}
+    `curl -s http://localhost:8080/q/metrics | grep -i prime`
 
     > **NOTE**: Metrics are generated lazily, so you often won’t see any data for your endpoint until something tries to access it!
 
@@ -495,13 +495,13 @@ challenges:
 
     Let's do a quick test and make sure they're working. Access the endpoint a couple more times by clicking on the below commands:
 
-    `curl http://localhost:8080/is-prime/350`{{execute T2}}
+    `curl http://localhost:8080/is-prime/350`
 
-    `curl http://localhost:8080/is-prime/629521085409773`{{execute T2}}
+    `curl http://localhost:8080/is-prime/629521085409773`
 
     Now let's see if it worked. Let's look for our `prime` metrics with this command:
 
-    `curl -s http://localhost:8080/q/metrics | grep prime`{{execute T2}}
+    `curl -s http://localhost:8080/q/metrics | grep prime`
 
     You should see new types of quantile metrics along with our new `env` and `registry` tags:
 
@@ -519,7 +519,7 @@ challenges:
 
     ## Cleanup
 
-    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear`{{execute T1 interrupt}} command to do it for you).
+    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
 
   tabs:
   - title: Terminal 1
@@ -544,7 +544,7 @@ challenges:
 
     Run the following command to add it to our project:
 
-    `mvn quarkus:add-extension -Dextensions="openshift"`{{execute T1}}
+    `mvn quarkus:add-extension -Dextensions="openshift"`
 
     Open here to add OpenShift properties: `primes/src/main/resources/application.properties`.
 
@@ -574,7 +574,7 @@ challenges:
 
     Now let's deploy the application itself. Run the following command which will build and deploy using the OpenShift extension (it will take a minute or two):
 
-    `mvn clean package -DskipTests`{{execute T1}}
+    `mvn clean package -DskipTests`
 
     > **NOTE**: This command will take a minute or two, as it builds the app, pushes a container image, and finally deploys the container to OpenShift.
 
@@ -582,7 +582,7 @@ challenges:
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/primes`{{execute T1}}
+    `oc rollout status -w dc/primes`
 
     Wait for that command to report `replication controller "primes-1" successfully rolled out` before continuing.
 
@@ -605,7 +605,7 @@ challenges:
     curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/350
     ```
 
-    `curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/629521085409773`{{execute T1}}
+    `curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/629521085409773`
 
     With our app rolled out, Prometheus should start collecting metrics. Let's take a look in the next exercise.
   tabs:
@@ -627,7 +627,7 @@ challenges:
 
     We will use the open source [OpenSSL](https://www.openssl.org/) project to generate some test primes to exercise our app. Click the following command to verify openssl is installed. If it is not, you may need to wait a few seconds and click the command again until it reports a proper version
 
-    `openssl version`{{execute T1}}
+    `openssl version`
 
     Then you should see
 
@@ -642,7 +642,7 @@ challenges:
             NUM=$(openssl prime -generate -bits $BITS)
             curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/${NUM}
             sleep 2
-    done`{{execute T1}}
+    done`
 
     With that running, click on this link to [open up the Prometheus dashboard](http://prometheus-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/). You'll see the Prometheus UI:
 
@@ -688,7 +688,7 @@ challenges:
 
     We'll keep our prime number checker running. Click to run the following command in the other Terminal to deploy Grafana to our cluster:
 
-    `oc new-app quay.io/bitnami/grafana && oc expose svc/grafana`{{execute T2}}
+    `oc new-app quay.io/bitnami/grafana && oc expose svc/grafana`
 
     > It may take up to a minute to finish deploying
 
@@ -828,7 +828,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

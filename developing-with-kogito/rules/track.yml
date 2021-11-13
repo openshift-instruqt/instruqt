@@ -72,7 +72,7 @@ challenges:
       -DarchetypeVersion=0.9.0 \
       -DgroupId=org.acme \
       -DartifactId=adult-service \
-      -Dversion=1.0-SNAPSHOT`{{execute}}
+      -Dversion=1.0-SNAPSHOT`
 
     This will use the Kogito Maven Archetype and generate a basic Maven project for you in the `adult-service` subdirectory.
 
@@ -141,7 +141,7 @@ challenges:
 
     We will first implement the `Person` class. To do this, we first need to create a new package in our project:
 
-    `mkdir -p /root/projects/kogito/adult-service/src/main/java/org/acme/domain`{{execute T2}}
+    `mkdir -p /root/projects/kogito/adult-service/src/main/java/org/acme/domain`
 
     We can now open a new `Person.java` file in this package by clicking: `adult-service/src/main/java/org/acme/domain/Person.java`
 
@@ -294,7 +294,7 @@ challenges:
 
     We will first implement the skeleton of our `PersonUnit.drl` file in the `src/main/resources` directory of our project.
 
-    First we create the proper package in our `src/main/resources` folder: `mkdir -p /root/projects/kogito/adult-service/src/main/resources/org/acme`{{execute T2}}
+    First we create the proper package in our `src/main/resources` folder: `mkdir -p /root/projects/kogito/adult-service/src/main/resources/org/acme`
 
     Next, we create the DRL file by clicking: `adult-service/src/main/resources/org/acme/PersonUnit.drl`
 
@@ -354,13 +354,13 @@ challenges:
 
     With our domain model, rule unit and rules implemented, we can now start our application.
 
-    `mvn clean compile quarkus:dev`{{execute T1}}
+    `mvn clean compile quarkus:dev`
 
     We can inspect the generated RESTful endpoint in the Swagger-UI [Swagger UI](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui) of the application.
 
     We can now send a request to our generated RESTful endpoint using cURL:
 
-    `curl -X POST "http://localhost:8080/adult" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"persons\":[{\"age\":18,\"name\":\"Jason\"}]}"`{{execute T2}}
+    `curl -X POST "http://localhost:8080/adult" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"persons\":[{\"age\":18,\"name\":\"Jason\"}]}"`
 
     You should see the following result, showing that Jason is an adult:
 
@@ -424,11 +424,11 @@ challenges:
 
     We've now added the functionality we want, so we can start our application again:
 
-    `mvn clean compile quarkus:dev`{{execute T1}}
+    `mvn clean compile quarkus:dev`
 
     We can now hit the application with a request that contains our new `adultAge` variable:
 
-    `curl -X POST "http://localhost:8080/adult" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"adultAge\": 21, \"persons\":[{\"age\":18,\"name\":\"Jason\"}]}"`{{execute T2}}
+    `curl -X POST "http://localhost:8080/adult" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"adultAge\": 21, \"persons\":[{\"age\":18,\"name\":\"Jason\"}]}"`
 
     This will give you the following result:
 

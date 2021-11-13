@@ -63,7 +63,7 @@ challenges:
     `mvn io.quarkus:quarkus-maven-plugin:1.7.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=coffeeshop \
-        -Dextensions="org.kie.kogito:kogito-quarkus,io.quarkus:quarkus-smallrye-openapi"`{{execute}}
+        -Dextensions="org.kie.kogito:kogito-quarkus,io.quarkus:quarkus-smallrye-openapi"`
 
 
     This uses the Quarkus Maven plugin and generates a basic Maven project for us in the `coffeeshop` subdirectory which contains:
@@ -117,21 +117,21 @@ challenges:
 
     Click the following command to change directory to the correct directory:
 
-    `cd /root/projects/kogito/coffeeservice-quarkus`{{execute T2}}
+    `cd /root/projects/kogito/coffeeservice-quarkus`
 
     To package the project, click on the following command:
 
-    `mvn clean package`{{execute T2}}
+    `mvn clean package`
 
     This creates a new runnable Quarkus JAR file. Click on the following command to run the application:
 
-    `java -jar target/coffeeservice-quarkus-1.0-SNAPSHOT-runner.jar`{{execute T2}}
+    `java -jar target/coffeeservice-quarkus-1.0-SNAPSHOT-runner.jar`
 
     With the microservice running, we can access its [Swagger-UI here](https://[[CLIENT_SUBDOMAIN]]-8090-[[KATACODA_HOST]].environments.katacoda.com/swagger-ui).
 
     We can also retrieve the list of coffees using curl.
 
-    `curl -X GET "http://localhost:8090/coffee" -H "accept: application/json" -d "{}"`{{execute T3}}
+    `curl -X GET "http://localhost:8090/coffee" -H "accept: application/json" -d "{}"`
 
     You should see the following output:
 
@@ -357,7 +357,7 @@ challenges:
 
     Click the following command to add the dependencies to our project.
 
-    `mvn quarkus:add-extension -Dextensions=io.quarkus:quarkus-rest-client`{{execute T1}}
+    `mvn quarkus:add-extension -Dextensions=io.quarkus:quarkus-rest-client`
 
     Open the `pom.xml` file and observe that the required dependencies have been added: `coffeeshop/pom.xml`
 
@@ -367,7 +367,7 @@ challenges:
 
     Click the following command to create the package of the `CoffeeService` bean.
 
-    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/service`{{execute T3}}
+    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/service`
 
     Click the following path to open a new `CoffeeService.java` file: `coffeeshop/src/main/java/org/acme/service/CoffeeService.java`
 
@@ -403,7 +403,7 @@ challenges:
 
     Our domain model is simply the `Coffee` class that's also used by the CoffeeService we started in the first step. Click the following command to create a new package for our domain class.
 
-    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/model`{{execute T3}}
+    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/model`
 
     Click the following path to create the `Coffee.java` file: `coffeeshop/src/main/java/org/acme/model/Coffee.java`
 
@@ -453,7 +453,7 @@ challenges:
 
     Click the following command to create the package force our Rest client.
 
-    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/coffeeservice/client`{{execute T3}}
+    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/coffeeservice/client`
 
     Click the following path to create the `CoffeeResource.java` interface: `coffeeshop/src/main/java/org/acme/coffeeservice/client/CoffeeResource.java`
 
@@ -551,7 +551,7 @@ challenges:
 
     With our code implemented, click the following command to start the application.
 
-    `mvn clean compile quarkus:dev`{{execute T1}}
+    `mvn clean compile quarkus:dev`
 
     This downloads the new dependencies and starts our application in Quarkus development mode.
 
@@ -559,7 +559,7 @@ challenges:
 
     Click the following command to send a request to our application.
 
-    `curl -X POST "http://localhost:8080/coffeeshop" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`{{execute T3}}
+    `curl -X POST "http://localhost:8080/coffeeshop" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`
 
     We see the following output in the console:
 
@@ -601,7 +601,7 @@ challenges:
 
     Click the following command to add the dependencies to our project:
 
-    `mvn quarkus:add-extension -Dextensions=org.apache.camel.quarkus:camel-quarkus-netty-http,org.apache.camel.quarkus:camel-quarkus-jackson,org.apache.camel.quarkus:camel-quarkus-direct`{{execute T1}}
+    `mvn quarkus:add-extension -Dextensions=org.apache.camel.quarkus:camel-quarkus-netty-http,org.apache.camel.quarkus:camel-quarkus-jackson,org.apache.camel.quarkus:camel-quarkus-direct`
 
     Click the following path to open the `pom.xml` file and observe that the required dependencies have been added: `coffeeshop/pom.xml`
 
@@ -611,7 +611,7 @@ challenges:
 
     Click the following command to create a new package in which we create our RouteBuilder:
 
-    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/camel`{{execute T3}}
+    `mkdir -p /root/projects/kogito/coffeeshop/src/main/java/org/acme/camel`
 
     Click on the following path to create the `CoffeeRouteBuilder.java` file: `coffeeshop/src/main/java/org/acme/camel/CoffeeRouteBuilder.java`
 
@@ -737,7 +737,7 @@ challenges:
 
     Click on the following command to start the application again:
 
-    `mvn clean compile quarkus:dev`{{execute T1}}
+    `mvn clean compile quarkus:dev`
 
     This downloads the new dependencies and starts our application in Quarkus development mode.
 
@@ -745,7 +745,7 @@ challenges:
 
     Click on the following command to send a request to test our application.
 
-    `curl -X POST "http://localhost:8080/coffeeshop" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`{{execute T3}}
+    `curl -X POST "http://localhost:8080/coffeeshop" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"`
 
     We should see the following output in the console:
 

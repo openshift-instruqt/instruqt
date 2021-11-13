@@ -141,7 +141,7 @@ challenges:
     Like other exercises, we’ll need another extension to start using the PosgtreSQL. Lets install it by clicking on the following command:
 
     `cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
-      mvn quarkus:add-extension -Dextensions="reactive-pg-client"`{{execute}}
+      mvn quarkus:add-extension -Dextensions="reactive-pg-client"`
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
@@ -228,7 +228,7 @@ challenges:
         -e POSTGRESQL_DATABASE=sampledb \
         --name=database \
         -l app.openshift.io/runtime=postgresql \
-        openshift/postgresql`{{execute}}
+        openshift/postgresql`
 
     You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph).
 
@@ -286,7 +286,7 @@ challenges:
     -Dquarkus.openshift.route.expose=true \
     -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database \
     -Dquarkus.openshift.env.vars.QUARKUS_DATASOURCE_DEVSERVICES=false \
-    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`{{execute}}
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`
 
     The output should end with `BUILD SUCCESS`.
 
@@ -510,7 +510,7 @@ challenges:
     Now you have a running app, with a reactive database extension.
     In the next step, we'll redeploy it to OpenShift.
 
-    Now Cancel the running dev session by clicking the `clear`{{execute T1 interrupt}} before moving ahead.
+    Now Cancel the running dev session by clicking the `clear` before moving ahead.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -542,7 +542,7 @@ challenges:
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.route.expose=true \
-    -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database`{{execute}}
+    -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database`
 
     Finally, make sure it's actually done rolling out:
 
@@ -568,7 +568,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.

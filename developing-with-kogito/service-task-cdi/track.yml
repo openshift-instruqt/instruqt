@@ -74,7 +74,7 @@ challenges:
       -DarchetypeVersion=0.9.0 \
       -DgroupId=org.acme \
       -DartifactId=service-task-cdi \
-      -Dversion=1.0-SNAPSHOT`{{execute}}
+      -Dversion=1.0-SNAPSHOT`
 
     This will use the Kogito Maven Archetype and generate a basic Maven project for you in the `service-task-cdi` subdirectory.
 
@@ -252,7 +252,7 @@ challenges:
 
     Because we're using the hot-reload functionality of Kogito and Quarkus, we don't need to recompile and restart our application after we've implemented our functionality. We can simply send a new request, and the application will hot/live reload and serve the request. With the following request, we send the text `hello` to our process:
 
-    `curl -X POST "http://localhost:8080/text_processor" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"mytext\": \"hello\"}"`{{execute T2}}
+    `curl -X POST "http://localhost:8080/text_processor" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"mytext\": \"hello\"}"`
 
     As we can see from the response, the text is converted to uppercase.
 

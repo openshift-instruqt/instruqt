@@ -323,13 +323,13 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     # Check the application log
 
     To verify there was no problem with the application, we can check the logs with the following command:
 
-    ``oc logs dc/kafka-quarkus -f``{{execute interrupt}}
+    ``oc logs dc/kafka-quarkus -f``
 
     You should see the information of the Quarkus application connecting to Kafka as well as the output of the sent events:
 
@@ -349,7 +349,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     ### Check the Kafka records
 
@@ -357,7 +357,7 @@ challenges:
 
     Check the messages with this command:
 
-    ``oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic uber --from-beginning | jq``{{execute interrupt}}
+    ``oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic uber --from-beginning | jq``
 
     The output presents like this:
 
@@ -381,7 +381,7 @@ challenges:
 
     Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
 
-    `^C`{{execute ctrl-seq}}
+    `^C`
 
     Congratulations! You are now sending events to Kafka using the Quarkus Reactive Messaging extension for Kafka.
   tabs:
