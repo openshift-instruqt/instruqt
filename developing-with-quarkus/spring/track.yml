@@ -59,11 +59,13 @@ challenges:
 
     Let's create the basic Quarkus _Hello World_ application and include the necessary spring extensions. Click this command to create the project:
 
-    `cd /root/projects/quarkus &&
+    ```
+    cd /root/projects/quarkus &&
      mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=fruit-taster \
-        -Dextensions="spring-data-jpa,spring-web,spring-di,jdbc-postgres, jdbc-h2"`{{execute T1}}
+        -Dextensions="spring-data-jpa,spring-web,spring-di,jdbc-postgres, jdbc-h2"
+    ```
 
     This will use the Quarkus Maven Plugin and generate a basic Maven project for you in the `fruit-taster` subdirectory and include the following extensions to enable Spring annotations and APIs:
 
@@ -103,16 +105,11 @@ challenges:
     ```
     > The first time you build the app, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    Test that the app is running by accessing the simple `hello` endpoint:
+    Test that the app is running by accessing the accessin the **Fruit Taste App** Tab.
 
-    `cd /root/projects/quarkus/fruit-taster && \
-      curl http://localhost:8080/greeting`{{execute T2}}
+    You should see
 
-    > You may need to click this command again in case it doesn't execute properly on first click
-
-    you should see
-
-    ```console
+    ```bash
     Hello Spring
     ```
 
@@ -124,7 +121,12 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/
+  - title: Fruit Taster App
+    type: service
+    hostname: crc
+    path: /greeting
+    port: 8080
   difficulty: basic
   timelimit: 150
 - slug: 02-create-data
@@ -140,11 +142,11 @@ challenges:
 
     ## Create Model
 
-    Click here to create and open a new file for our Remodelpository: `fruit-taster/src/main/java/org/acme/Fruit.java`.
+    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
 
-    Click **Copy to Editor** to add the code:
+    Then add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/Fruit.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.persistence.Entity;
@@ -195,59 +197,63 @@ challenges:
             this.color = color;
         }
     }
-    </pre>
+    ```
 
     This is a simple POJO representing a Fruit, with a name and color.
 
     ## Create Spring Data Repository
 
-    Next, click here to create and open a new file for our Repository: `fruit-taster/src/main/java/org/acme/FruitRepository.java`.
+    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/FruitRepository.java`.
 
-    Click **Copy to Editor** to create the code for the repository:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/FruitRepository.java" data-target="replace">
+    ```java
     package org.acme;
 
     import org.springframework.data.repository.CrudRepository;
 
     import java.util.List;
 
-    public interface FruitRepository extends CrudRepository&lt;Fruit, Long&gt; {
+    public interface FruitRepository extends CrudRepository<Fruit, Long> {
 
-        List&lt;Fruit&gt; findByColor(String color);
+        List<Fruit> findByColor(String color);
 
     }
-    </pre>
+    ```
 
     Note that by extending Spring's `CrudRepository` interface you'll automatically get a complete set of methods to manipulate the entity (e.g. `count()`, `findAll()`, `delete()` and others).
 
     ## Create sample data
 
-    Finally, we need some sample data to work with. Click here to create and open a new file to hold our sample data: `fruit-taster/src/main/resources/import.sql`.
+    Finally, we need some sample data to work with.
 
-    Click **Copy to Editor** to create add the sample data which will be used to populate our database when the app runs:
+    From the **Visual Editor** Tab, create a new file to hold our sample data: `fruit-taster/src/main/resources/import.sql`.
 
-    <pre class="file" data-filename="./fruit-taster/src/main/resources/import.sql" data-target="replace">
+    Copy this sample data which will be used to populate our database when the app runs:
+
+    ```text
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'cherry', 'red');
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'orange', 'orange');
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'banana', 'yellow');
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'avocado', 'green');
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'strawberry', 'red');
-    </pre>
+    ```
 
     ## Configure Quarkus
 
-    We need to configure our app to define database connection settings. Click: `fruit-taster/src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
+    We need to configure our app to define database connection settings.
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    From the **Visual Editor** Tab, create a new file in this path :`fruit-taster/src/main/resources/application.properties`. This file contains Quarkus configuration.
 
-    <pre class="file" data-filename="./fruit-taster/src/main/resources/application.properties" data-target="replace">
+    Copy the following values to the `application.properties` file:
+
+    ```text
     quarkus.datasource.db-kind=h2
     quarkus.datasource.jdbc.url=jdbc:h2:mem:rest-crud
     quarkus.hibernate-orm.database.generation=drop-and-create
     quarkus.hibernate-orm.log.sql=true
     quarkus.hibernate-orm.sql-load-script=import.sql
-    </pre>
+    ```
 
     That’s it! Now you have a database, domain model (`Fruit`) and a repository (`FruitRepository`) to retrieve the domain model, and some sample data.
 
@@ -262,7 +268,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/fruit-taster
   difficulty: basic
   timelimit: 150
 - slug: 03-create-beans
@@ -284,27 +290,27 @@ challenges:
 
     > Functional Interfaces are part of the base Java platform, and are not Spring-specific.
 
-    Click here to create and open a new file for our interface: `fruit-taster/src/main/java/org/acme/StringFunction.java`.
+    From the **Visual Editor** Tab, create a new Java interface in this path: `fruit-taster/src/main/java/org/acme/StringFunction.java`.
 
-    Click **Copy to Editor** to create the code for the interface:
+    Add this code for the interface:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/StringFunction.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.util.function.Function;
 
-    public interface StringFunction extends Function&lt;String, String&gt; {
+    public interface StringFunction extends Function<String, String> {
 
     }
-    </pre>
+    ```
 
     With the interface in place, we will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean. It will be used to create a `StringFunction` bean that will capitalize the text passed as parameter.
 
-    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
+    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
 
-    Click **Copy to Editor** to create the code for the interface:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/AppConfiguration.java" data-target="replace">
+    ```java
     package org.acme;
 
     import org.springframework.context.annotation.Bean;
@@ -318,17 +324,17 @@ challenges:
             return String::toUpperCase;
         }
     }
-    </pre>
+    ```
 
     ## Create Functions
 
     Now we define another bean that will implement `StringFunction` using Spring’s _stereotype annotation_ style. This bean will effectively be a no-op bean that simply returns the input as is.
 
-    Click here to create and open a new file for our bean: `fruit-taster/src/main/java/org/acme/NoOpSingleStringFunction.java`.
+    From the **Visual Editor** Tab, create a new bean in this path:: `fruit-taster/src/main/java/org/acme/NoOpSingleStringFunction.java`.
 
-    Click **Copy to Editor** to create the code for the interface:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/NoOpSingleStringFunction.java" data-target="replace">
+    ```java
     package org.acme;
 
     import org.springframework.stereotype.Component;
@@ -341,21 +347,23 @@ challenges:
             return s;
         }
     }
-    </pre>
+    ```
 
     ## Add injectable configuration
 
-    Quarkus also provides support for injecting configuration values using Spring’s `@Value` annotation. To see that in action, click **Copy to Editor** to add a new configuration parameter to our application which we'll use to add a little flavor to our app:
+    Quarkus also provides support for injecting configuration values using Spring’s `@Value` annotation. To see that in action, from **Visual Editor** Tab, append this code in this file `fruit-taster/src/main/resources/application.properties`:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/resources/application.properties" data-target="append">
+    ```text
     taste.message = tastes great
-    </pre>
+    ```
 
-    We'll also need a new Spring Bean to use this configuration! Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/MessageProducer.java`.
+    We'll also need a new Spring Bean to use this configuration!
 
-    Click **Copy to Editor** to create the code for the interface:
+    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/MessageProducer.java`.
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/MessageProducer.java" data-target="replace">
+    Add this code:
+
+    ```java
     package org.acme;
 
     import org.springframework.beans.factory.annotation.Value;
@@ -371,17 +379,17 @@ challenges:
             return message;
         }
     }
-    </pre>
+    ```
 
     ## Tie them all together
 
     The final bean we will create ties together all the previous beans.
 
-    Click here to create and open a new file for our configuration: `fruit-taster/src/main/java/org/acme/TasterBean.java`.
+    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/TasterBean.java`.
 
-    Click **Copy to Editor** to create the code for the bean:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/TasterBean.java" data-target="replace">
+    ```java
     package org.acme;
 
     import org.springframework.beans.factory.annotation.Autowired;
@@ -414,7 +422,7 @@ challenges:
             return noopStringFunction.andThen(capitalizerStringFunction).apply(initialValue);
         }
     }
-    </pre>
+    ```
 
     In the code above, we see that both field injection and constructor injection are being used (note that constructor injection does not need the `@Autowired` annotation since there is a single constructor). Furthermore, the `@Value` annotation on `suffix` has also a default value defined, which in this case will be used since we have not defined `taste.suffix` in `application.properties`.
 
@@ -428,7 +436,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/fruit-taster
   difficulty: basic
   timelimit: 150
 - slug: 04-create-web
@@ -444,11 +452,11 @@ challenges:
 
     ## Create Controllers
 
-    Click here to create and open a new file for our basic controller for accessing Fruits: `fruit-taster/src/main/java/org/acme/FruitController.java`.
+    From the **Visual Editor** Tab, create a new Java class for our basic controller for accessing Fruits in this path: `fruit-taster/src/main/java/org/acme/FruitController.java`.
 
-    Click **Copy to Editor** to create the code for the controller:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/FruitController.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.util.List;
@@ -473,7 +481,7 @@ challenges:
         }
 
         @GetMapping(produces = "application/json")
-        public Iterable&lt;Fruit&gt; findAll() {
+        public Iterable<Fruit> findAll() {
             return fruitRepository.findAll();
         }
 
@@ -490,7 +498,7 @@ challenges:
 
         @PutMapping(path = "/id/{id}/color/{color}", produces = "application/json")
         public Fruit changeColor(@PathVariable(name = "id") Long id, @PathVariable(name = "color") String color) {
-            Optional&lt;Fruit&gt; optional = fruitRepository.findById(id);
+            Optional<Fruit> optional = fruitRepository.findById(id);
             if (optional.isPresent()) {
                 Fruit fruit = optional.get();
                 fruit.setColor(color);
@@ -501,11 +509,11 @@ challenges:
         }
 
         @GetMapping(path = "/color/{color}", produces = "application/json")
-        public List&lt;Fruit&gt; findByColor(@PathVariable(name = "color") String color) {
+        public List<Fruit> findByColor(@PathVariable(name = "color") String color) {
             return fruitRepository.findByColor(color);
         }
     }
-    </pre>
+    ```
 
     Notice the use of familiar Spring annotations like `@GetMapping` and `@PathVariable`. This exposes a set of RESTful APIs:
 
@@ -517,11 +525,17 @@ challenges:
 
     # Test app
 
-    With this in place, we can now test our fruits access. The app is still running, so simply click the following commands to do a few operations:
+    With this in place, we can now test our fruits access.
 
-    Get all fruits:
+    Start the app:
 
-    `curl -s http://localhost:8080/fruits | jq`{{execute T2}}
+    ```
+    cd /root/projects/quarkus/fruit-taster
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    ```
+
+    Open the **Fruit Taster App** Tab to access the `/fruits` endpoint.
+
 
     > Note you may need to click the command again, if it didn't execute in the new Terminal window.
     > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Click on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
@@ -561,23 +575,31 @@ challenges:
     ]
     ```
 
-    Add a fruit:
+    From **Terminal 2**, add a fruit:
 
-    `curl -X POST -s http://localhost:8080/fruits/name/apple/color/red | jq`{{execute T2}}
+    ```
+    curl -X POST -s http://localhost:8080/fruits/name/apple/color/red | jq
+    ```
 
     Get all `red` fruits:
 
-    `curl -s http://localhost:8080/fruits/color/red | jq`{{execute T2}}
+    ```
+    curl -s http://localhost:8080/fruits/color/red | jq
+    ```
 
     Notice the presence of `apple` which we just added earlier.
 
     Change the color of the `apple` to `green`:
 
-    `curl -X PUT -s http://localhost:8080/fruits/id/6/color/green | jq`{{execute T2}}
+    ```
+    curl -X PUT -s http://localhost:8080/fruits/id/6/color/green | jq
+    ```
 
     And retrieve all green fruits:
 
-    `curl -s curl -s http://localhost:8080/fruits/color/green | jq`{{execute T2}}
+    ```
+    curl -s http://localhost:8080/fruits/color/green | jq
+    ```
 
     You should see:
 
@@ -602,11 +624,11 @@ challenges:
 
     As a final test let's create another bean to use our injected beans and configuration using Spring DI annotations.
 
-    Click here to create and open a new file for our taster controller for tasting Fruits: `fruit-taster/src/main/java/org/acme/TasterController.java`.
+    From the **Visual Editor** Tab, create a new Java class for our taster controller for tasting Fruits in this path: `fruit-taster/src/main/java/org/acme/TasterController.java`.
 
-    Click **Copy to Editor** to create the code for the controller:
+    Add this code:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/java/org/acme/TasterController.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.util.ArrayList;
@@ -632,8 +654,8 @@ challenges:
         }
 
         @GetMapping(produces = "application/json")
-        public List&lt;TasteResult&gt; tasteAll() {
-            List&lt;TasteResult&gt; result = new ArrayList<>();
+        public List<TasteResult> tasteAll() {
+            List<TasteResult> result = new ArrayList<>();
 
             fruitRepository.findAll().forEach(fruit -> {
                 result.add(new TasteResult(fruit, tasterBean.taste(fruit.getName())));
@@ -642,8 +664,8 @@ challenges:
         }
 
         @GetMapping(path = "/{color}", produces = "application/json")
-        public List&lt;TasteResult&gt; tasteByColor(@PathVariable(name = "color") String color) {
-            List&lt;TasteResult&gt; result = new ArrayList<>();
+        public List<TasteResult> tasteByColor(@PathVariable(name = "color") String color) {
+            List<TasteResult> result = new ArrayList<>();
             fruitRepository.findByColor(color).forEach(fruit -> {
                 result.add(new TasteResult(fruit, tasterBean.taste(fruit.getName())));
             });
@@ -661,7 +683,7 @@ challenges:
 
         }
     }
-    </pre>
+    ```
 
     Again, we're using Spring Rest annotations like `@GetMapping` but we're also injecting our repository and taster bean in the constructor. This controller exposes 2 RESTful APIs:
 
@@ -670,9 +692,11 @@ challenges:
 
     App still running? Check. Let's test our new API:
 
-    Taste all the fruits:
+    From **Terminal 2**, taste all the fruits:
 
-    `curl -s http://localhost:8080/taster | jq`{{execute T2}}
+    ```
+    curl -s http://localhost:8080/taster | jq
+    ```
 
     You should see:
 
@@ -720,11 +744,17 @@ challenges:
       }
     ]
     ```
+
     Taste only the `green` fruits:
 
-    `curl -s http://localhost:8080/taster/green | jq`{{execute T2}}
+    ```
+    curl -s http://localhost:8080/taster/green | jq
 
     ```
+
+    You should get this output:
+
+    ```json
     [
       {
         "fruit": {
@@ -739,15 +769,17 @@ challenges:
 
     ## Add a suffix
 
-    Click **Copy to Editor** to add a new suffix for our taster:
+    From the **Visual Editor** Tab, append a new suffix for our taster in this file `fruit-taster/src/main/resources/application.properties`:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/resources/application.properties" data-target="append">
+    ```text
     taste.suffix = (if you like fruit!)
-    </pre>
+    ```
 
-    And taste yellow fruits:
+    From **Terminal 2**, taste yellow fruits:
 
-    `curl -s http://localhost:8080/taster/yellow | jq`{{execute T2}}
+    ```
+    curl -s http://localhost:8080/taster/yellow | jq
+    ```
 
     You should see:
 
@@ -768,16 +800,24 @@ challenges:
 
     ## Cleanup
 
-    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear`{{execute T1 interrupt}} command to do it for you).
+    We're done coding, so let's stop the app. In **Terminal 1**, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
 
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/fruit-taster
+  - title: Fruit Taster App
+    type: service
+    hostname: crc
+    path: /fruits
+    port: 8080
   difficulty: basic
   timelimit: 150
 - slug: 05-build-app
@@ -790,8 +830,11 @@ challenges:
     Quarkus applications can be built as executable JARs, or native binary images. Here we'll use an executable JAR to deploy our app. Build the application:
 
     ```
+    cd /root/projects/quarkus/fruit-taster
     mvn clean package -DskipTests
-    ```. It produces 2 jar files:
+    ```
+
+    It produces 2 jar files:
 
     * `target/fruit-taster-1.0.0-SNAPSHOT.jar` - containing just the classes and resources of the projects, it’s the regular artifact produced by the Maven build
 
@@ -813,13 +856,11 @@ challenges:
     java -jar target/quarkus-app/quarkus-run.jar
     ```
 
-    Make sure the app is still working as expected (we'll use `curl` this time to access it directly):
-
-    `curl -s http://localhost:8080/fruits | jq`{{execute T2}}
+    Access the app from the **Fruit Taster App** Tab.
 
     ## Cleanup
 
-    In the first Terminal, press `CTRL-C` to stop the running Quarkus native app (or click the `clear`{{execute T1 interrupt}} command to do it for you).
+    In the first Terminal, press `CTRL-C` to stop the running Quarkus native app (or click the `clear` command to do it for you).
 
     ## Congratulations!
 
@@ -828,10 +869,18 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/fruit-taster
+  - title: Fruit Taster App
+    type: service
+    hostname: crc
+    path: /fruits
+    port: 8080
   difficulty: basic
   timelimit: 150
 - slug: 06-deploy-and-test
@@ -847,17 +896,21 @@ challenges:
 
     Run the following command to add it to our project:
 
-    `mvn quarkus:add-extension -Dextensions="openshift"`{{execute T1}}
+    ```
+    mvn quarkus:add-extension -Dextensions="openshift"
+    ```
 
     ## Login to OpenShift
 
     We'll deploy our app as the `developer` user. Run the following command to login with the OpenShift CLI:
 
-    `oc login -u developer -p developer`{{execute T1}}
+    ```
+    oc login -u developer -p developer
+    ```
 
     You should see
 
-    ```
+    ```bash
     Login successful.
 
     You don't have any projects. You can try to create a new project, by running
@@ -869,7 +922,9 @@ challenges:
 
     For this scenario, let's create a project that you will use to house your applications. Click:
 
-    `oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"`{{execute T1}}
+    ```
+    oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"`
+    ```
 
     Before we deploy the application we need to deploy the Postgres database.
 
@@ -877,23 +932,25 @@ challenges:
 
     When running in production, we'll need a Postgres database on OpenShift. Click the next command to deploy Postgres to your new project:
 
-    `oc new-app \
+    ```
+    oc new-app \
         -e POSTGRESQL_USER=sa \
         -e POSTGRESQL_PASSWORD=sa \
         -e POSTGRESQL_DATABASE=fruits \
         -e POSTGRESQL_MAX_CONNECTIONS=200 \
         --name=postgres-database \
-        openshift/postgresql`{{execute T1}}`
+        openshift/postgresql
+    ```
 
     ## Configure Quarkus
 
     Since we are now deploying this to Openshift our database will no longer be on localhost. And our production is running Postgres. How do we handle these multiple configurations? Quarkus has a neat feature where we can create different profiles. So we will use the %dev profile for our local environment.
 
-    Click: `fruit-taster/src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
+    From the **Visual Editor** Tab, open this file `fruit-taster/src/main/resources/application.properties`. This file contains Quarkus configuration.
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    Add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./fruit-taster/src/main/resources/application.properties" data-target="replace">
+    ```text
     %dev.quarkus.datasource.db-kind=h2
     %dev.quarkus.datasource.jdbc.url=jdbc:h2:mem:rest-crud
     %dev.quarkus.hibernate-orm.database.generation=drop-and-create
@@ -909,19 +966,21 @@ challenges:
 
     taste.message = tastes great
     taste.suffix = (if you like fruit!)
-    </pre>
+    ```
 
     ## Deploy application to OpenShift
 
     Now let's deploy the application itself. Run the following command which will build and deploy the Quarkus app in Openshift:
 
-    `mvn clean package \
+    ````
+    mvn clean package \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes.deploy=true \
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.route.expose=true \
-    -DskipTests`{{execute T1}}`
+    -DskipTests
+    ```
 
     The output should end with `BUILD SUCCESS`.
 
@@ -935,15 +994,16 @@ challenges:
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/fruit-taster`{{execute T1}}
+    ```
+    oc rollout status -w dc/fruit-taster
+    ```
 
     Wait (about 30 seconds) for that command to report `replication controller "fruit-taster-1" successfully rolled out` before continuing.
 
     > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
 
-    And now we can access using `curl` once again:
+    And now we can access the app from the **Fruit Taster App** Tab once again:
 
-    `curl -s http://fruit-taster-quarkus-spring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/taster | jq`{{execute T1}}
 
     You should see the same fruits being tasted:
 
@@ -960,42 +1020,75 @@ challenges:
       ...
     ```
 
+    You can see the app deployed from the OpenShift Web Console.
 
-    You can also see the app deployed in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus-spring)
+    Access the OpenShift Web Console to also login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    You'll need to login with the same credentials as before:
+
+    * Username:
+    ```
+    developer
+    ```
+    * Password:
+    ```
+    developer
+    ```
+
+    Enter the `quarkus-spring` project to see your app.
 
 
     ## Scale the app
 
     With that set, let's see how fast our app can scale up to 10 instances:
 
-    `oc scale --replicas=10 dc/fruit-taster`{{execute T1}}
+    ```
+    oc scale --replicas=10 dc/fruit-taster
+    ```
 
-    Back in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus-spring) you'll see the app scaling dynamically up to 10 pods:
+    Back in the OpenShift Developer Topology view in the Web Console, you'll see the app scaling dynamically up to 10 pods:
 
     ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling_spring.png)
 
-    We now have 10 instances running providing better performance. Make sure it still works:
+    We now have 10 instances running providing better performance. Make sure it still works.
 
-    `curl -s http://fruit-taster-quarkus-spring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/taster | jq`{{execute T1}}
+    Get your app route:
+
+    ```
+    oc get route fruit-taster -n quarkus-spring -o jsonpath='{.spec.host}{"/taster"}'
+
+    ```
+
+    Copy the URL and open it in your browser.
 
     **10 not enough? Try 50!** Click the command to scale this app to 50 instances:
 
-    `oc scale --replicas=50 dc/fruit-taster`{{execute T1}}
+    ```
+    oc scale --replicas=50 dc/fruit-taster
+    ```
 
 
-    It will take a bit longer to scale that much. In the meantime the app continues to respond:
-
-    `curl -s http://fruit-taster-quarkus-spring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/taster | jq`{{execute T1}}
+    Access the app again from the browser.
 
     You can watch the 50 pods spinning up:
 
-    `oc get pods -w -l app.kubernetes.io/name=fruit-taster`{{execute T1}}
+    ```
+    oc get pods -w -l app.kubernetes.io/name=fruit-taster
+    ```
 
     Watch as long as you like, then `CTRL-C` the pod watcher.
 
     Finally, scale it back down:
 
-    `oc scale --replicas=1 dc/fruit-taster`{{execute T1}}
+    ```
+    oc scale --replicas=1 dc/fruit-taster
+    ```
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -1005,7 +1098,7 @@ challenges:
     # Fork the source code to your own GitHub!
     Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
 
-    `/root/projects/forkrepo.sh`{{execute T1}}
+    `/root/projects/forkrepo.sh`
     - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
     - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
     - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
@@ -1023,10 +1116,13 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/fruit-taster
   difficulty: basic
   timelimit: 150
-checksum: "10407374076433560072"
+checksum: "15407572194700850922"
