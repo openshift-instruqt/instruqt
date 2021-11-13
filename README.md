@@ -19,3 +19,36 @@ For each generated directory representing the pathway->topic, inside subfolders 
 instruqt track validate && instruqt track push
 ```
 
+Bulk validate
+
+```
+for d in `ls -d */ | grep -v learn-katacoda`; do 
+  echo $d;
+  cd $d;
+  for dd in `ls -d */`; do 
+    echo $dd;
+    cd $dd; 
+    instruqt track validate; 
+    cd ..; 
+  done;
+  cd ..; 
+done 
+```
+
+Bulk validate and push
+
+```
+for d in `ls -d */ | grep -v learn-katacoda`; do 
+  cd $d;
+  echo $d;
+  for dd in `ls -d */`; do 
+    echo $dd;
+    cd $dd; 
+    instruqt track validate && istruqt track push --force;
+    cd ..;
+  done;
+  cd ..; 
+done
+
+```
+
