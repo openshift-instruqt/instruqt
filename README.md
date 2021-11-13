@@ -44,7 +44,7 @@ for d in `ls -d */ | grep -v learn-katacoda`; do
   for dd in `ls -d */`; do 
     echo $dd;
     cd $dd; 
-    instruqt track validate && istruqt track push --force;
+    instruqt track validate && instruqt track push --force;
     cd ..;
   done;
   cd ..; 
