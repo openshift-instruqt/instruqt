@@ -106,8 +106,10 @@ challenges:
 
     Like other exercises, we’ll need another extension to integrate Quarkus with Kafka. Install it by clicking on the following command:
 
-    `cd /root/projects/rhoar-getting-started/quarkus/kafka &&
-      mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka"`
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/kafka &&
+      mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka"
+    ```
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
@@ -126,7 +128,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/
   difficulty: basic
   timelimit: 128
 - slug: 02-create-generator
@@ -136,9 +138,9 @@ challenges:
   assignment: |
     # Create name generator
 
-    To start building the app, create a new Java class by clicking: `src/main/java/org/acme/people/stream/NameGenerator.java`.
+    To start building the app, create a new Java class from the Visual Editor Tab, in this path `src/main/java/org/acme/people/stream/NameGenerator.java`.
 
-    Next, click **Copy to Editor** to add the following code to this file:
+    Next, add the following code to this file:
 
     ```java
     package org.acme.people.stream;
@@ -155,7 +157,7 @@ challenges:
     public class NameGenerator {
 
         @Outgoing("generated-name")
-        public Multi&lt;String&gt; generate() {
+        public Multi<String> generate() {
             return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
                 .onOverflow().drop()
                 .map(tick -> CuteNameGenerator.generate());
@@ -178,7 +180,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 128
 - slug: 03-create-converter
@@ -190,9 +192,9 @@ challenges:
 
     The name converter reads the names from Kafka, and transforms them, adding a random (English) honorific to the beginning of the name.
 
-    Create a new Java class by clicking: `src/main/java/org/acme/people/stream/NameConverter.java`.
+    Create a new Java class in this path `src/main/java/org/acme/people/stream/NameConverter.java`.
 
-    Next, click **Copy to Editor** to add the following code to this file:
+    Next, click **Visual Editor**  Tab to add the following code to this file:
 
     ```java
     package org.acme.people.stream;
@@ -232,7 +234,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 128
 - slug: 04-create-resource
@@ -244,9 +246,9 @@ challenges:
 
     Finally, let’s bind our stream to a JAX-RS resource.
 
-    Create a final Java class by clicking: `src/main/java/org/acme/people/stream/NameResource.java`.
+    From **Visual Editor**, create a final Java class in this path `src/main/java/org/acme/people/stream/NameResource.java`.
 
-    Next, click **Copy to Editor** to add the following code to this file:
+    Add the following code to this file:
 
     ```
     package org.acme.people.stream;
@@ -267,12 +269,12 @@ challenges:
     public class NameResource {
 
         @Inject
-        @Channel("my-data-stream") Publisher&lt;String&gt; names;
+        @Channel("my-data-stream") Publisher<String> names;
 
         @GET
         @Path("/stream")
         @Produces(MediaType.SERVER_SENT_EVENTS)
-        public Publisher&lt;String&gt; stream() {
+        public Publisher<String> stream() {
             return names;
         }
     }
@@ -319,7 +321,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 128
 - slug: 05-configure-app
@@ -339,7 +341,7 @@ challenges:
 
       - `prices` → source in which we read the prices
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    From **Visual Editor**  Tab, add the following values to the `application.properties` file:
 
     ```text
     # Configure the Kafka sink (we write to it)
@@ -369,6 +371,7 @@ challenges:
     To make sure you've got a compilable app and code is in its proper place, let's test the build. Run this command to compile and package the app:
 
     ```
+    cd /root/projects/rhoar-getting-started/quarkus/kafka
     mvn clean package
     ```
   tabs:
@@ -378,7 +381,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 128
 - slug: 06-deploy-kafka
@@ -390,17 +393,15 @@ challenges:
 
     To deploy Kafka to OpenShift, you'll need to login.
 
-    You should already be logged in as an admin user. Click this command to verify:
-
+    Login as an admin user. 
+    
     ```
-    oc whoami
+    oc login -u admin -p admin
     ```
-
-    It should respond with `admin`.
 
     ## Access OpenShift Project
 
-    [Projects](https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/projects_and_users.html#projects)
+    [Projects](https://docs.openshift.com/container-platform/4.9/rest_api/project_apis/project-project-openshift-io-v1.html)
     are a top level concept to help you organize your deployments. An
     OpenShift project allows a community of users (or a user) to organize and manage
     their content in isolation from other communities.
@@ -509,7 +510,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 128
 - slug: 07-deploy-and-test
@@ -524,10 +525,11 @@ challenges:
     Run the following command to add it to our project:
 
     ```
+    cd /root/projects/rhoar-getting-started/quarkus/kafka
     mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    From **Visual Editor** Tab, add the following values to the `application.properties` file:
 
     ```text
     # Configure the OpenShift extension options
@@ -595,12 +597,26 @@ challenges:
 
     Wait for that command to report `replication controller "people-1" successfully rolled out` before continuing.
 
-    You can see the app deployed in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus-kafka):
+    You can see the app deployed from the OpenShift Web Console.
+
+    Access the OpenShift Web Console to also login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
 
     You'll need to login with the same credentials as before:
 
-    * Username: `developer`
-    * Password: `developer`
+    * Username:
+    ```
+    developer
+    ```
+    * Password:
+    ```
+    developer
+    ```
 
     ![topology](https://katacoda.com/openshift/assets/middleware/quarkus/peopletopology.png)
 
@@ -649,7 +665,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
-checksum: "5681743254445590737"
+  timelimit: 300
+checksum: "9050060957381340795"
