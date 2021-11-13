@@ -105,7 +105,7 @@ challenges:
     ```
     > The first time you build the app, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    Test that the app is running by accessing the accessin the **Fruit Taste App** Tab.
+    Test that the app is running by accessing the **Fruit Taste App** Tab.
 
     You should see
 
@@ -527,7 +527,7 @@ challenges:
 
     With this in place, we can now test our fruits access.
 
-    Start the app:
+    From **Terminal 1** Tab, start the app:
 
     ```
     cd /root/projects/quarkus/fruit-taster
@@ -798,10 +798,6 @@ challenges:
 
     Notice the presence of our new suffix! Quarkus apps make it super easy to code, test, and re-code on the fly.
 
-    ## Cleanup
-
-    We're done coding, so let's stop the app. In **Terminal 1**, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -858,10 +854,6 @@ challenges:
 
     Access the app from the **Fruit Taster App** Tab.
 
-    ## Cleanup
-
-    In the first Terminal, press `CTRL-C` to stop the running Quarkus native app (or click the `clear` command to do it for you).
-
     ## Congratulations!
 
     You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory effeciency. Now let's give our app native powers by creating a Quarkus native app.
@@ -882,7 +874,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 06-deploy-and-test
   id: f1bzosamqoxf
   type: challenge
@@ -897,6 +889,7 @@ challenges:
     Run the following command to add it to our project:
 
     ```
+    cd /root/projects/quarkus/fruit-taster
     mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
@@ -923,7 +916,7 @@ challenges:
     For this scenario, let's create a project that you will use to house your applications. Click:
 
     ```
-    oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"`
+    oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"
     ```
 
     Before we deploy the application we need to deploy the Postgres database.
@@ -948,7 +941,7 @@ challenges:
 
     From the **Visual Editor** Tab, open this file `fruit-taster/src/main/resources/application.properties`. This file contains Quarkus configuration.
 
-    Add the following values to the `application.properties` file:
+    Replace the existing content with the following values to the `application.properties` file:
 
     ```text
     %dev.quarkus.datasource.db-kind=h2
@@ -972,7 +965,7 @@ challenges:
 
     Now let's deploy the application itself. Run the following command which will build and deploy the Quarkus app in Openshift:
 
-    ````
+    ```
     mvn clean package \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.container-image.build=true \
@@ -1124,5 +1117,5 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 150
-checksum: "15407572194700850922"
+  timelimit: 300
+checksum: "1748252089420229749"
