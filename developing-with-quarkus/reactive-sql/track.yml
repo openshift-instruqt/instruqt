@@ -140,8 +140,10 @@ challenges:
 
     Like other exercises, we’ll need another extension to start using the PosgtreSQL. Lets install it by clicking on the following command:
 
-    `cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
-      mvn quarkus:add-extension -Dextensions="reactive-pg-client"`
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
+      mvn quarkus:add-extension -Dextensions="reactive-pg-client"
+    ```
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
@@ -164,9 +166,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects
   difficulty: basic
-  timelimit: 120
+  timelimit: 300
 - slug: 02-remote-dev
   id: mbzbisqfarfz
   type: challenge
@@ -180,17 +182,43 @@ challenges:
 
     ## Login to OpenShift
 
-    In order to login, we will use the **oc** command and then specify the server that we
-    want to authenticate to:
+    Access the OpenShift Web Console to login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    Click **Skip Tour** to skip the new user introduction.
+
+    Run the following command to login with the OpenShift CLI:
 
     ```
     oc login -u developer -p developer
     ```
 
-    This will automatically log you in as the user `developer` whose password is `developer`.
+    You should see
 
-    > If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
-    step. Click in the first terminal and press CTRL-C to stop the application and try to `oc login` again!
+    ```bash
+    Login successful.
+
+    You don't have any projects. You can try to create a new project, by running
+
+        oc new-project <projectname>
+    ```
 
     ## Access OpenShift Project
 
@@ -202,19 +230,9 @@ challenges:
 
     **3. Open the OpenShift Web Console**
 
-    OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser. To get a feel for how the web console
-    works, click this link to open the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph)
-
-    The first screen you will see is the authentication screen. Enter your username and password and
-    then log in:
-
-    * Username: `developer`
-    * Password: `developer`
+    Open the *reactive-sql* project from OpenShift Web Console.
 
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
-
-    Click **Skip Tour** to skip the new user introduction.
 
     There's nothing there now ("No workloads found"), but that's about to change.
 
@@ -222,15 +240,17 @@ challenges:
 
     Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
 
-    `oc new-app \
+    ```
+    oc new-app \
         -e POSTGRESQL_USER=username \
         -e POSTGRESQL_PASSWORD=password \
         -e POSTGRESQL_DATABASE=sampledb \
         --name=database \
         -l app.openshift.io/runtime=postgresql \
-        openshift/postgresql`
+        openshift/postgresql
+    ```
 
-    You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph).
+    You'll see the Postgres pod spinning up from the Topology View in the Web Console.
 
     ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/rxpost.png)
 
@@ -241,7 +261,8 @@ challenges:
     Click the following command to add it to our project:
 
     ```
-    mvn quarkus:add-extension -Dextensions="openshift"
+    cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
+      mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
     You will see:
@@ -252,11 +273,11 @@ challenges:
 
     ## Configure Quarkus for remote live coding
 
-    Click: `./src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
+    From the **Visual Editor** Tab, open `src/main/resources/application.properties`. This file contains Quarkus configuration.
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    Add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Remote Live Coding setup
     quarkus.package.type=mutable-jar
     quarkus.live-reload.password=changeit
@@ -266,7 +287,7 @@ challenges:
     quarkus.datasource.reactive.url=postgresql://database:5432/sampledb
     quarkus.datasource.username=username
     quarkus.datasource.password=password
-    </pre>
+    ```
 
     The `quarkus.package.type=mutable-jar` instructs Quarkus to package the app as a _mutable_ app. Mutable applications also include the deployment time parts of Quarkus (need for dev mode), so they take up a bit more disk space. If run normally they start just as fast and use the same memory as an immutable application, however they can also be started in dev mode.
 
@@ -278,7 +299,8 @@ challenges:
 
     Run the following command which will build and deploy the Quarkus app in Openshift. There's a number of arguments (which could optionally be put in `application.properties`) that are explained below.
 
-    `mvn clean package -DskipTests \
+    ```
+    mvn clean package -DskipTests \
     -Dquarkus.kubernetes.deploy=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes-client.trust-certs=true \
@@ -286,7 +308,8 @@ challenges:
     -Dquarkus.openshift.route.expose=true \
     -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database \
     -Dquarkus.openshift.env.vars.QUARKUS_DATASOURCE_DEVSERVICES=false \
-    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true
+    ```
 
     The output should end with `BUILD SUCCESS`.
 
@@ -311,12 +334,20 @@ challenges:
 
     > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
 
-    You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/reactive-sql/graph):
+    You can see it running in the OpenShift Console.
 
     ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/rx-deploy.png)
 
 
-    Do a quick test to ensure the remote app is running by [accessing the sample app](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) (which will display the GUI but otherwise be non-functional).
+    Do a quick test to ensure the remote app is running by clicking to the app's Route from the Topology view.
+
+    To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+    ```
+    export APP_ROUTE=`oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    echo $APP_ROUTE
+    ```
+
 
     > It may take a few seconds for the app to work and the networking to get glued together, so if it doesn't show up, just reload the browser until it does.
 
@@ -331,7 +362,7 @@ challenges:
     Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
 
     ```
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_ROUTE
     ```
 
     You should see a bunch of log output including:
@@ -359,9 +390,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 120
+  timelimit: 300
 - slug: 03-add-resource
   id: 1wofu5kpqsbj
   type: challenge
@@ -397,13 +428,13 @@ challenges:
     <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO GET">
 
         @GET
-        public Multi&lt;Coffee&gt; get() {
+        public Multi<Coffee> get() {
             return Coffee.findAll(client);
         }
 
         @GET
         @Path("{id}")
-        public Uni&lt;Response&gt; getSingle(@PathParam("id") Long id) {
+        public Uni<Response> getSingle(@PathParam("id") Long id) {
             return Coffee.findById(client, id)
                 .onItem().transform(fruit -> fruit != null ? Response.ok(fruit) : Response.status(Status.NOT_FOUND))
                 .onItem().transform(ResponseBuilder::build);
@@ -419,7 +450,7 @@ challenges:
     <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO POST">
 
         @POST
-        public Uni&lt;Response&gt; create(Coffee coffee) {
+        public Uni<Response> create(Coffee coffee) {
             return coffee.save(client)
                     .onItem().transform(id -> URI.create("/coffee/" + id))
                     .onItem().transform(uri -> Response.created(uri).build());
@@ -427,7 +458,7 @@ challenges:
 
         @PUT
         @Path("{id}")
-        public Uni&lt;Response&gt; update(@PathParam("id") Long id, Coffee coffee) {
+        public Uni<Response> update(@PathParam("id") Long id, Coffee coffee) {
             return coffee.update(client)
                 .onItem().transform(updated -> updated ? Status.OK : Status.NOT_FOUND)
                 .onItem().transform(status -> Response.status(status).build());
@@ -441,7 +472,7 @@ challenges:
     <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO DELETE">
         @DELETE
         @Path("{id}")
-        public Uni&lt;Response&gt; delete(@PathParam("id") Long id) {
+        public Uni<Response> delete(@PathParam("id") Long id) {
             return Coffee.delete(client, id)
                     .onItem().transform(deleted -> deleted ? Status.NO_CONTENT : Status.NOT_FOUND)
                     .onItem().transform(status -> Response.status(status).build());
@@ -458,7 +489,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 120
+  timelimit: 300
 - slug: 04-add-model
   id: ho5pkgp6fhnj
   type: challenge
@@ -487,7 +518,7 @@ challenges:
 
     <pre class="file" data-filename="src/main/java/org/acme/reactive/Coffee.java" data-target="insert" data-marker=" // TODO FindById">
 
-        public static Uni&lt;Coffee&gt; findById(PgPool client, Long id) {
+        public static Uni<Coffee> findById(PgPool client, Long id) {
             return client.preparedQuery("SELECT id, name FROM coffee WHERE id = $1").execute(Tuple.of(id))
                     .onItem().transform(RowSet::iterator)
                     .onItem().transform(iterator -> iterator.hasNext() ? from(iterator.next()) : null);
@@ -520,7 +551,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 120
+  timelimit: 300
 - slug: 05-package-and-run
   id: yqbltw8kmtp7
   type: challenge
@@ -592,5 +623,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 120
-checksum: "17151215970551883199"
+  timelimit: 300
+checksum: "6543107359654729091"

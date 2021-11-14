@@ -11,7 +11,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- joshix@redhat.com
 - dahmed@redhat.com
 private: false
 published: true
@@ -212,8 +211,6 @@ challenges:
 
     ```
     curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -603,4 +600,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "7609697464219490169"
+checksum: "4394853535890191205"

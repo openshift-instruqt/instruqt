@@ -262,7 +262,7 @@ challenges:
 
     ## Test Metrics endpoint
 
-    You will be able to immediately see the raw metrics generated from Quarkus apps. Run this in the Terminal:
+    You will be able to immediately see the raw metrics generated from Quarkus apps. Run this in the *Terminal 2*:
 
     ```
     curl http://localhost:8080/q/metrics
@@ -288,10 +288,23 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root/projects/quarkus/primes
+  - title: Hello Endpoint
+    type: service
+    hostname: crc
+    path: /hello
+    port: 8080
+  - title: Metrics Endpoint
+    type: service
+    hostname: crc
+    path: /q/metrics
+    port: 8080
   difficulty: basic
   timelimit: 300
 - slug: 03-add-additional-metrics
@@ -304,7 +317,7 @@ challenges:
     Out of the box, you get a lot of basic JVM metrics which are useful, but what if you wanted to provide metrics for your
     app? Let’s add a few using the Quarkus metrics APIs.
 
-    Click here to open a new file `./primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`.
 
     This new class will implement an algorithm for checking whether a number is a prime number. This algorithm is exposed over a REST interface. With the Micrometer extension enabled, metrics for all http server requests are also collected automatically.
 
@@ -314,9 +327,9 @@ challenges:
     * A gauge will store the highest prime number discovered
     * A timer will record the time spent testing if a number is prime.
 
-    Click **Copy To Editor** to create the code for our new class:
+    Add this code:
 
-    <pre class="file" data-filename="./primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java" data-target="replace">
+    ```java
     package org.acme.quickstart;
 
     import io.micrometer.core.instrument.MeterRegistry;
@@ -329,7 +342,7 @@ challenges:
     import java.util.concurrent.atomic.LongAccumulator;
     import java.util.function.Supplier;
 
-    @Path(&quot;/is-prime&quot;)
+    @Path("/is-prime")
     public class PrimeNumberResource {
 
         private final LongAccumulator highestPrime = new LongAccumulator(Long::max, 0);
@@ -340,38 +353,38 @@ challenges:
 
             // Create a gauge that uses the highestPrimeNumberSoFar method
             // to obtain the highest observed prime number
-            registry.gauge(&quot;prime.number.max&quot;, this,
+            registry.gauge("prime.number.max", this,
                     PrimeNumberResource::highestObservedPrimeNumber);
         }
 
         @GET
-        @Path(&quot;/{number}&quot;)
+        @Path("/{number}")
         @Produces(MediaType.TEXT_PLAIN)
-        public String checkIfPrime(@PathParam(&quot;number&quot;) long number) {
-            if (number &lt; 1) {
-                return &quot;Only natural numbers can be prime numbers.&quot;;
+        public String checkIfPrime(@PathParam("number") long number) {
+            if (number < 1) {
+                return "Only natural numbers can be prime numbers.";
             }
             if (number == 1) {
-                return &quot;1 is not prime.&quot;;
+                return "1 is not prime.";
             }
             if (number == 2) {
-                return &quot;2 is prime.&quot;;
+                return "2 is prime.";
             }
             if (number % 2 == 0) {
-                return number + &quot; is not prime, it is divisible by 2.&quot;;
+                return number + " is not prime, it is divisible by 2.";
             }
 
-            Supplier&lt;String&gt; supplier = () -&gt; {
-                for (int i = 3; i &lt; Math.floor(Math.sqrt(number)) + 1; i = i + 2) {
+            Supplier<String> supplier = () -> {
+                for (int i = 3; i < Math.floor(Math.sqrt(number)) + 1; i = i + 2) {
                     if (number % i == 0) {
-                        return number + &quot; is not prime, is divisible by &quot; + i + &quot;.&quot;;
+                        return number + " is not prime, is divisible by " + i + ".";
                     }
                 }
                 highestPrime.accumulate(number);
-                return number + &quot; is prime.&quot;;
+                return number + " is prime.";
             };
 
-            return registry.timer(&quot;prime.number.test&quot;).wrap(supplier).get();
+            return registry.timer("prime.number.test").wrap(supplier).get();
         }
 
         /**
@@ -382,25 +395,40 @@ challenges:
             return highestPrime.get();
         }
     }
-    </pre>
+    ```
 
-    Let's test it out by accessing the new endpoint with a few prime and non-prime numbers:
+    Let's test it out by accessing the new endpoint with a few prime and non-prime numbers.
 
-    Click the following commands to test whether the number is a prime number:
+    Let's start Live Coding. Click on the following command to start the app in _Live Coding_ mode:
 
-    `curl http://localhost:8080/is-prime/1`
+    ```
+    cd /root/projects/quarkus/primes && \
+      mvn quarkus:dev
+    ```
+
+    Click the following commands to test whether the number is a prime number in *Terminal 2*:
+
+    ```
+    curl http://localhost:8080/is-prime/1
+    ```
 
     You should see `1 is not prime.`.
 
-    `curl http://localhost:8080/is-prime/350`
+    ```
+    curl http://localhost:8080/is-prime/350
+    ```
 
     You should see `350 is not prime, it is divisible by 2.`.
 
-    `curl http://localhost:8080/is-prime/629521085409773`
+    ```
+    curl http://localhost:8080/is-prime/629521085409773
+    ```
 
     You should see `629521085409773 is prime.`.
 
-    `curl http://localhost:8080/is-prime/1111111111111111111`
+    ```
+    curl http://localhost:8080/is-prime/1111111111111111111
+    ```
 
     You should see `1111111111111111111 is prime.`.
 
@@ -408,7 +436,9 @@ challenges:
 
     Review the metrics generated so far to see them in action:
 
-    `curl http://localhost:8080/q/metrics`
+    ```
+    curl http://localhost:8080/q/metrics
+    ```
 
     You'll see many metrics, for example:
 
@@ -423,7 +453,9 @@ challenges:
 
     You can also display only our "prime"-related metrics:
 
-    `curl -s http://localhost:8080/q/metrics | grep -i prime`
+    ```
+    curl -s http://localhost:8080/q/metrics | grep -i prime
+    ```
 
     > **NOTE**: Metrics are generated lazily, so you often won’t see any data for your endpoint until something tries to access it!
 
@@ -439,11 +471,11 @@ challenges:
 
     To create MeterFilters, you can simply declare them using annotations in your code. Quarkus will identify and inject them into `MeterRegistry`s as they are created, based on criteria specified in the annotations.
 
-    Click here to open a new file `primes/src/main/java/org/acme/quickstart/CustomConfiguration.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `primes/src/main/java/org/acme/quickstart/CustomConfiguration.java`.
 
-    Click **Copy To Editor** to create the code for our new class:
+    Add this code to create the code for our new class:
 
-    <pre class="file" data-filename="./primes/src/main/java/org/acme/quickstart/CustomConfiguration.java" data-target="replace">
+    ```java
     package org.acme.quickstart;
 
     import java.util.Arrays;
@@ -468,7 +500,7 @@ challenges:
     @Singleton
     public class CustomConfiguration {
 
-        @ConfigProperty(name = &quot;deployment.env&quot;)
+        @ConfigProperty(name = "deployment.env")
         String deploymentEnv;
 
         @Produces
@@ -476,14 +508,14 @@ challenges:
         @MeterFilterConstraint(applyTo = PrometheusMeterRegistry.class)
         public MeterFilter configurePrometheusRegistries() {
             return MeterFilter.commonTags(Arrays.asList(
-                    Tag.of(&quot;registry&quot;, &quot;prometheus&quot;)));
+                    Tag.of("registry", "prometheus")));
         }
 
         @Produces
         @Singleton
         public MeterFilter configureAllRegistries() {
             return MeterFilter.commonTags(Arrays.asList(
-                    Tag.of(&quot;env&quot;, deploymentEnv)));
+                    Tag.of("env", deploymentEnv)));
         }
 
         /** Enable histogram buckets for a specific timer */
@@ -493,7 +525,7 @@ challenges:
             return new MeterFilter() {
                 @Override
                 public DistributionStatisticConfig configure(Meter.Id id, DistributionStatisticConfig config) {
-                    if(id.getName().startsWith(&quot;prime&quot;)) {
+                    if(id.getName().startsWith("prime")) {
                         return DistributionStatisticConfig.builder()
                             .percentiles(0.5, 0.95)     // median and 95th percentile, not aggregable
                             .percentilesHistogram(true) // histogram buckets (e.g. prometheus histogram_quantile)
@@ -505,7 +537,7 @@ challenges:
             };
         }
     }
-    </pre>
+    ```
 
     These do the following:
 
@@ -517,29 +549,34 @@ challenges:
 
     Finally, you need to add the configuration value referenced in the `configureAllRegistries` filter to your `application.properties`.
 
-    Click here to open the file (it will be empty): `primes/src/main/resources/application.properties`.
+    Open the `application.properties` file from: `primes/src/main/resources/application.properties`.
 
-    Then click **Copy to Editor** to add the following values to the `application.properties` file:
+    Add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Configure value for the tag we add to metrics
     deployment.env=prod
-
-    </pre>
+    ```
 
     This will cause a tag `env: prod` to be added to each metric based on our above filter.
 
     ## Test new metrics
 
-    Let's do a quick test and make sure they're working. Access the endpoint a couple more times by clicking on the below commands:
+    Let's do a quick test and make sure they're working. Access the endpoint a couple more times by clicking on the below commands from *Terminal 2*:
 
-    `curl http://localhost:8080/is-prime/350`
+    ```
+    curl http://localhost:8080/is-prime/350
+    ```
 
-    `curl http://localhost:8080/is-prime/629521085409773`
+    ```
+    curl http://localhost:8080/is-prime/629521085409773
+    ```
 
     Now let's see if it worked. Let's look for our `prime` metrics with this command:
 
-    `curl -s http://localhost:8080/q/metrics | grep prime`
+    ```
+    curl -s http://localhost:8080/q/metrics | grep prime
+    ```
 
     You should see new types of quantile metrics along with our new `env` and `registry` tags:
 
@@ -557,16 +594,19 @@ challenges:
 
     ## Cleanup
 
-    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
+    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `Next` command to do it for you).
 
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/primes
   difficulty: basic
   timelimit: 300
 - slug: 04-deploy-to-openshift
@@ -580,15 +620,18 @@ challenges:
 
     Quarkus offers the ability to automatically generate OpenShift resources based on sane default and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
 
-    Run the following command to add it to our project:
+    Run the following command in *Terminal 1* to add it to our project:
 
-    `mvn quarkus:add-extension -Dextensions="openshift"`
+    ```
+    cd /root/projects/quarkus/primes && \
+      mvn quarkus:add-extension -Dextensions="openshift"
+    ```
 
-    Open here to add OpenShift properties: `primes/src/main/resources/application.properties`.
+    From the **Visual Editor** Tab, open the `application.properties` file from `primes/src/main/resources/application.properties`.
 
-    Then click **Copy to Editor** to add the following values to the `application.properties` file:
+    Append the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="append">
+    ```text
     # Configure the OpenShift extension options
     quarkus.kubernetes-client.trust-certs=true
     quarkus.container-image.build=true
@@ -596,8 +639,7 @@ challenges:
     quarkus.kubernetes.deployment-target=openshift
     quarkus.openshift.expose=true
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
-
-    </pre>
+    ```
 
     For more details of the above options:
 
@@ -612,7 +654,9 @@ challenges:
 
     Now let's deploy the application itself. Run the following command which will build and deploy using the OpenShift extension (it will take a minute or two):
 
-    `mvn clean package -DskipTests`
+    ```
+    mvn clean package -DskipTests
+    ```
 
     > **NOTE**: This command will take a minute or two, as it builds the app, pushes a container image, and finally deploys the container to OpenShift.
 
@@ -620,11 +664,13 @@ challenges:
 
     Finally, make sure it's actually done rolling out:
 
-    `oc rollout status -w dc/primes`
+    ```
+    oc rollout status -w dc/primes
+    ```
 
     Wait for that command to report `replication controller "primes-1" successfully rolled out` before continuing.
 
-    You can also see the app deployed in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus):
+    You can also see the app deployed in the OpenShift Developer Topology from the Web Console.
 
     You'll need to login with the same credentials as before:
 
@@ -633,17 +679,21 @@ challenges:
 
     ![Deployed App](https://katacoda.com/openshift/assets/middleware/quarkus/primedep.png)
 
-    And now we can access using `curl` once again to test our prime service running on OpenShift. Click the commands to access the app on OpenShift:
+    And now we can access using `curl` once again to test our prime service running on OpenShift.
+
+    To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
     ```
-    curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/1
+    curl `oc get route primes -n quarkus -o jsonpath='{"http://"}{.spec.host}{"/is-prime/1"}'`
     ```
 
     ```
-    curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/350
+    curl `oc get route primes -n quarkus -o jsonpath='{"http://"}{.spec.host}{"/is-prime/350"}'`
     ```
 
-    `curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/629521085409773`
+    ```
+    curl `oc get route primes -n quarkus -o jsonpath='{"http://"}{.spec.host}{"/is-prime/629521085409773"}'`
+    ```
 
     With our app rolled out, Prometheus should start collecting metrics. Let's take a look in the next exercise.
   tabs:
@@ -653,7 +703,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/primes
   difficulty: basic
   timelimit: 300
 - slug: 05-query-with-prometheus
@@ -665,7 +715,10 @@ challenges:
 
     We will use the open source [OpenSSL](https://www.openssl.org/) project to generate some test primes to exercise our app. Click the following command to verify openssl is installed. If it is not, you may need to wait a few seconds and click the command again until it reports a proper version
 
-    `openssl version`
+    ```
+    cd /root/projects/quarkus/primes && \
+      openssl version
+    ```
 
     Then you should see
 
@@ -675,14 +728,25 @@ challenges:
 
     With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Click the following command to endlessly run `curl` every 2 seconds with a random prime number:
 
-    `while [ true ] ; do
+    ```
+    while [ true ] ; do
             BITS=$(( ( RANDOM % 60 )  + 1 ))
             NUM=$(openssl prime -generate -bits $BITS)
-            curl http://primes-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/is-prime/${NUM}
+            ROUTE=$(oc get route primes -n quarkus-o jsonpath='{.spec.host}')
+            curl http://$ROUTE/is-prime/${NUM}
             sleep 2
-    done`
+    done
+    ```
 
-    With that running, click on this link to [open up the Prometheus dashboard](http://prometheus-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/). You'll see the Prometheus UI:
+    With that running, open up the Prometheus dashboard.
+
+    Get the URL from command line, run this command to get the app's Route:
+
+    ```
+    oc get route prometheus -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+    ```
+
+    Copy the URL and open it in your browser to access the Prometheus UI.
 
     ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/prom.png)
 
@@ -714,7 +778,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/primes
   difficulty: basic
   timelimit: 300
 - slug: 06-install-grafana
@@ -724,9 +788,25 @@ challenges:
   assignment: |+
     # Install Grafana
 
-    We'll keep our prime number checker running. Click to run the following command in the other Terminal to deploy Grafana to our cluster:
 
-    `oc new-app quay.io/bitnami/grafana && oc expose svc/grafana`
+    From *Terminal 1*, run again the prime number checker:
+
+    ```
+    while [ true ] ; do
+            BITS=$(( ( RANDOM % 60 )  + 1 ))
+            NUM=$(openssl prime -generate -bits $BITS)
+            ROUTE=$(oc get route primes -n quarkus-o jsonpath='{.spec.host}')
+            curl http://$ROUTE/is-prime/${NUM}
+            sleep 2
+    done
+    ```
+
+    We'll keep our prime number checker running. Click to run the following command in *Terminal 2* to deploy Grafana to our cluster:
+
+    ```
+    cd /root && \
+      oc new-app quay.io/bitnami/grafana && oc expose svc/grafana
+    ```
 
     > It may take up to a minute to finish deploying
 
@@ -740,7 +820,16 @@ challenges:
 
     # Open Grafana Dashboard
 
-    Click on this link to [open the Grafana Dashboard in your browser](http://grafana-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/), and login using the default credentails:
+    Get Grafana URL from command line, run this command to get the app's Route:
+
+    ```
+    oc get route grafana -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+    ```
+
+    Copy the URL and open it in your browser to access Grafana.
+
+
+    Login using the default credentails:
 
       - Username: `admin`
       - Password: `admin`
@@ -753,8 +842,12 @@ challenges:
 
     You’ll land on the Data Source screen. Click **Add your first data source**, and click **Select** next to **Prometheus** as the *Data Source Type*.
 
-    In the URL box, type ``http://prometheus:9090`` (this is the hostname and port of our running Prometheus in our
-    namespace):
+    In the URL box, type:
+    ```
+    http://prometheus:9090
+    ```
+
+    This is the hostname and port of our running Prometheus in our namespace.
 
     > **WARNING**
     >
@@ -895,4 +988,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "2376140067658485556"
+checksum: "10227384988407810196"
