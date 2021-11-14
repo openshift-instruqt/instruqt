@@ -46,18 +46,45 @@ challenges:
     **Red Hat OpenShift Container Platform** is the preferred container orchestration platform for Quarkus. OpenShift is based on **Kubernetes** which is the most used Orchestration
     for containers running in production.
 
-    In order to login, we will use the **oc** command and then specify the server that we
-    want to authenticate to:
+    Access the OpenShift Web Console to login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    From *Terminal 1*, run the following command to login with the OpenShift CLI:
+
 
     ```
     oc login -u developer -p developer
+    ```
+
+    You should see:
+
+    ```bash
+    Login successful.
+    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
     ```
 
     Congratulations, you are now authenticated to the OpenShift server.
 
     ## Access OpenShift Project
 
-    [Projects](https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/projects_and_users.html#projects)
+    [Projects](https://docs.openshift.com/container-platform/4.9/rest_api/project_apis/project-project-openshift-io-v1.html)
     are a top level concept to help you organize your deployments. An
     OpenShift project allows a community of users (or a user) to organize and manage
     their content in isolation from other communities.
@@ -65,7 +92,8 @@ challenges:
     For this scenario, let's create a project that you will use to house your applications. Click:
 
     ```
-    oc new-project quarkus --display-name="Sample Monitored Quarkus App"
+    cd /root/projects/quarkus/ &&
+      oc new-project quarkus --display-name="Sample Monitored Quarkus App"
     ```
 
     ## Create Prometheus Configuration
@@ -98,8 +126,6 @@ challenges:
         static_configs:
         - targets: ['primes']
     EOF
-    ```
-    `
     ```
 
     This file contains basic Prometheus configuration, plus a specific `scrape_config` which instructs Prometheus to
@@ -144,9 +170,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 02-create-and-instrument-app
   id: aubfyrpykdvo
   type: challenge
@@ -156,7 +182,9 @@ challenges:
 
     An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
 
-    `$JAVA_HOME/bin/java --version`
+    ```
+    $JAVA_HOME/bin/java --version
+    ```
 
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
@@ -172,13 +200,15 @@ challenges:
 
     Let's create the basic Quarkus _Hello World_ application and include the necessary monitoring extensions. Click this command to create the project:
 
-    `cd /root/projects/quarkus && \
+    ```
+    cd /root/projects/quarkus && \
     mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=primes \
         -DclassName="org.acme.quickstart.GreetingResource" \
         -Dextensions="micrometer-registry-prometheus" \
-        -Dpath="/hello"`
+        -Dpath="/hello"
+    ```
 
     This will use the Quarkus Maven Plugin and generate a basic Maven project for you in the `primes` subdirectory and include the `micrometer-registry-prometheus` extension which causes the app to generate metrics at the `/q/metrics` endpoint.
 
@@ -186,11 +216,15 @@ challenges:
 
     Change to the directory in which the app was created:
 
-    `cd /root/projects/quarkus/primes`
+    ```
+    cd /root/projects/quarkus/primes
+    ```
 
     Let's begin Live Coding. Click on the following command to start the app in _Live Coding_ mode:
 
-    `mvn quarkus:dev`
+    ```
+    mvn quarkus:dev
+    ```
 
     You should see:
 
@@ -213,8 +247,10 @@ challenges:
 
     Test that the app is running by accessing the simple `hello` endpoint:
 
-    `cd /root/projects/quarkus/primes && \
-      curl http://localhost:8080/hello`
+    ```
+    cd /root/projects/quarkus/primes && \
+      curl http://localhost:8080/hello
+    ```
 
     > You may need to click this command again in case it doesn't execute properly on first click
 
@@ -228,7 +264,9 @@ challenges:
 
     You will be able to immediately see the raw metrics generated from Quarkus apps. Run this in the Terminal:
 
-    `curl http://localhost:8080/q/metrics`
+    ```
+    curl http://localhost:8080/q/metrics
+    ```
 
     You will see a bunch of raw metrics in the OpenMetrics format (as we are using a Prometheus registry):
 
@@ -253,9 +291,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 03-add-additional-metrics
   id: u0ytapvpuryv
   type: challenge
@@ -530,7 +568,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 04-deploy-to-openshift
   id: vfhphkjktax8
   type: challenge
@@ -617,7 +655,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 05-query-with-prometheus
   id: cugwydy3ypzm
   type: challenge
@@ -678,7 +716,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 06-install-grafana
   id: yfzcxdtqt3q3
   type: challenge
@@ -739,7 +777,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 07-create-dashboard
   id: odadkvtv2v16
   type: challenge
@@ -856,5 +894,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 128
-checksum: "9911318548149725388"
+  timelimit: 300
+checksum: "14469323502427634159"

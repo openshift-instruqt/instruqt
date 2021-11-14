@@ -216,12 +216,12 @@ challenges:
   - title: Qute Sample Page
     type: service
     hostname: crc
-    path: /same-page
+    path: /some-page
     port: 8080
   - title: Qute Sample Page Jerry
     type: service
     hostname: crc
-    path: /same-page?name=Jerry
+    path: /some-page?name=Jerry
     port: 8080
   difficulty: basic
   timelimit: 300
@@ -984,4 +984,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 300
-checksum: "2462893510609923482"
+checksum: "15235132459565049556"
