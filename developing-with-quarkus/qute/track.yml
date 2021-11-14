@@ -70,11 +70,13 @@ challenges:
 
     Let's create the basic Quarkus _Hello World_ application and include the necessary qute extensions. Click this command to create the project:
 
-    `cd /root/projects/quarkus &&
+    ```
+    cd /root/projects/quarkus &&
      mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=qute \
-        -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"`
+        -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"
+    ```
 
     > The first time you create an app, new dependencies may be downloaded via maven and take a minute or so. This should only happen once, after that things will go even faster.
 
@@ -86,8 +88,10 @@ challenges:
 
     Let's begin Live Coding. Click on the following command to start the example app in _Live Coding_ mode:
 
-    `cd /root/projects/quarkus/qute && \
-      mvn quarkus:dev -Dquarkus.http.host=0.0.0.0`
+    ```
+    cd /root/projects/quarkus/qute && \
+      mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    ```
 
     You should see:
 
@@ -105,11 +109,13 @@ challenges:
 
     Note the amazingly fast startup time! The app is now running "locally" (within the Linux container in which this exercise runs).
 
-    Test that the app is running by accessing the sample page [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page). You should see
+    Test that the app is running by accessing the sample page from the **Qute Sample Page** Tab. You should see
 
     ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample.png)
 
-    This page is rendered using the `qute/src/main/resources/templates/page.qute.html` HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/some-page?name=Jerry) (which adds `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template:
+    This page is rendered using the `qute/src/main/resources/templates/page.qute.html` HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` adding `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template.
+
+    Access the **Qute Sample Page Jerry** Tab to see it.
 
     ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample-jerry.png)
 
@@ -119,13 +125,13 @@ challenges:
 
     We’ll start by creating a new and very simple text-based template.
 
-    Click `qute/src/main/resources/templates/hello.txt` to create an empty template file.
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/hello.txt` to create an empty template file.
 
-    Finally, click the **Copy to Editor** to add the template code:
+    Add this template code:
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/hello.txt" data-target="replace">
+    ```text
     Hello {name}!
-    </pre>
+    ```
 
     * `{name}` is a _value expression_ that is evaluated when the template is rendered.
 
@@ -137,11 +143,11 @@ challenges:
 
     Now let’s inject the "compiled" template in the resource class.
 
-    Click here to open `qute/src/main/java/org/acme/HelloResource.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/java/org/acme/HelloResource.java`.
 
-    Click the **Copy to Editor** to update our `HelloResource` class:
+    Replace the existing `HelloResource` class code with this:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/HelloResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.inject.Inject;
@@ -166,7 +172,7 @@ challenges:
             return hello.data("name", name);
         }
     }
-    </pre>
+    ```
 
     * If there is no `@ResourcePath` qualifier provided when `@Inject`ing, the field name is used to locate the template. In this particular case, we’re injecting a template with path `templates/hello.txt`.
     * `Template.data()` returns a new template instance that can be customized before the actual rendering is triggered. In this case, we put the name value under the key `name`. The data map is accessible during rendering.
@@ -174,15 +180,20 @@ challenges:
 
     ## Test endpoint
 
-    With our application already running in _Live Coding_ mode, we can render the template by calling the endpoint. Click the command below to test it:
+    With our application already running in _Live Coding_ mode, we can render the template by calling the endpoint.
 
-    `curl http://localhost:8080/hello?name=James`
+    Let's test itm from *Terminal 1* run this command:
+
+    ```
+    curl http://localhost:8080/hello?name=James
+    ```
 
     You should see:
 
     ```
     Hello James!
     ```
+
     The template was _rendered_, replacing the `{name}` expression with the value passed in with `hello.data("name", name);`
 
     This is the basic syntax and idea, which originated with other popular and well-known technologies:
@@ -202,8 +213,18 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: Qute Sample Page
+    type: service
+    hostname: crc
+    path: /same-page
+    port: 8080
+  - title: Qute Sample Page Jerry
+    type: service
+    hostname: crc
+    path: /same-page?name=Jerry
+    port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 02-typesafe
   id: 4xbqwvrrzkdl
   type: challenge
@@ -225,23 +246,30 @@ challenges:
 
     Create a directory to hold templates for our HelloResource class:
 
-    `cd /root/projects/quarkus/qute && mkdir -p src/main/resources/templates/HelloResource`
+    ```
+    cd /root/projects/quarkus/qute &&
+      mkdir -p src/main/resources/templates/HelloResource
+    ```
 
-    Next, click to open `qute/src/main/resources/templates/HelloResource/hello.txt`. Click **Copy to Editor** to add the code:
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/HelloResource/hello.txt`.
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/HelloResource/hello.txt" data-target="replace">
+    Add this code:
+
+    ```text
     Hello {name} from HelloResource!
-    </pre>
+    ```
 
-    For Goodbye, click to open `qute/src/main/resources/templates/HelloResource/goodbye.txt`. Click **Copy to Editor** to add the code:
+    For Goodbye, create a new file in this path: `qute/src/main/resources/templates/HelloResource/goodbye.txt`.
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/HelloResource/goodbye.txt" data-target="replace">
+    Add this code:
+
+    ```text
     Goodbye {name} from GoodbyeResource!
-    </pre>
+    ```
 
-    Now let’s declare and use those templates in the resource class. Click **Copy to Editor** to update our `HelloResource` class:
+    Now let’s declare and use those templates in the resource class. Update the `HelloResource` class with this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/HelloResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.ws.rs.GET;
@@ -268,7 +296,7 @@ challenges:
             return Templates.hello().data("name", name);
         }
     }
-    </pre>
+    ```
 
     * This declares a template with path `templates/HelloResource/hello.txt`, since the `@CheckedTemplate` static class is declared inside the `HelloWorld` class. The name of the method `hello` is used to match files in the directory with common extensions like `.txt`, `.html` etc. You can specify an exact name and path using `@Location`.
     * `Templates.hello()` returns a new template instance that can be customized before the actual rendering is triggered. In this case, we put the name value under the key `name`. The data map is accessible during rendering.
@@ -283,9 +311,9 @@ challenges:
 
     Let's create another resource and reference our `HelloResource.Templates` static class.
 
-    Click to open `qute/src/main/java/org/acme/GoodbyeResource.java` then click **Copy to Editor** to create a new resource:
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/java/org/acme/GoodbyeResource.java` and add this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/GoodbyeResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.ws.rs.GET;
@@ -305,13 +333,15 @@ challenges:
             return HelloResource.Templates.goodbye().data("name", name);
         }
     }
-    </pre>
+    ```
 
     ## Hello and Goodbye test
 
-    Let's test our new endpoints against the running Quarkus application:
+    Let's test our new endpoints against the running Quarkus application, from *Terminal 1*:
 
-    `curl http://localhost:8080/hello?name=James`
+    ```
+    curl http://localhost:8080/hello?name=James
+    ```
 
     You should see:
 
@@ -321,7 +351,9 @@ challenges:
 
     And goodbye:
 
-    `curl http://localhost:8080/goodbye?name=James`
+    ```
+    curl http://localhost:8080/goodbye?name=James
+    ```
 
     You should see the same:
 
@@ -347,9 +379,19 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/qute
+  - title: Qute Hello Jerry
+    type: service
+    hostname: crc
+    path: /hello?name=Jerry
+    port: 8080
+  - title: Qute Goodbye Jerry
+    type: service
+    hostname: crc
+    path: /goodbye?name=Jerry
+    port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 03-parameters
   id: rxd2ojyxj450
   type: challenge
@@ -359,9 +401,9 @@ challenges:
 
     If you declare a parameter declaration in a template, Qute will attempt to validate all expressions that reference this parameter. If an incorrect expression is found the build wil fail. This can greatly reduce developer errors up front. Let's exercise this.
 
-    Create a simple class with two fields by clicking `qute/src/main/java/org/acme/Item.java` to open the file then click **Copy to Editor**:
+    Create a simple class with two fields. From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/java/org/acme/Item.java` and add this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/Item.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.math.BigDecimal;
@@ -375,37 +417,39 @@ challenges:
             this.name = name;
         }
     }
-    </pre>
+    ```
 
     This is a simple `Item` object with two fields (`name` and `price`).
 
     ## Create Template
 
-    Now, suppose we want to render a simple HTML page that contains the item name and price. First, create a directory by clicking:
+    Now, suppose we want to render a simple HTML page that contains the item name and price. First, from *Terminal 1* create a directory:
 
-    `mkdir -p src/main/resources/templates/ItemResource`
+    ```
+    mkdir -p src/main/resources/templates/ItemResource
+    ```
 
-    Create a Qute template at by clicking `qute/src/main/resources/templates/ItemResource/item.html` then click the **Copy to Editor** button:
+    Create a Qute template, from the **Visual Editor** Tab create a new file in this path: `qute/src/main/resources/templates/ItemResource/item.html` and add this code:
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/ItemResource/item.html" data-target="replace">
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-    &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;{item.name}&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;{item.name}&lt;/h1&gt;
-        &lt;div&gt;Price: {item.price}&lt;/div&gt;
-    &lt;/body&gt;
-    &lt;/html&gt;
-    </pre>
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>{item.name}</title>
+    </head>
+    <body>
+        <h1>{item.name}</h1>
+        <div>Price: {item.price}</div>
+    </body>
+    </html>
+    ```
 
     ## Create Service
 
-    And create a simple `ItemService` to mock up a database of items. Click `qute/src/main/java/org/acme/ItemService.java` to open the file, then click **Copy To Editor**:
+    And create a simple `ItemService` to mock up a database of items. From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/java/org/acme/ItemService.java` and add this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/ItemService.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.math.BigDecimal;
@@ -416,24 +460,24 @@ challenges:
     @ApplicationScoped
     public class ItemService {
 
-        private Map&lt;Integer, Item&gt; items = Map.of(
-            1, new Item(new BigDecimal(1.99), &quot;Apple&quot;),
-            2, new Item(new BigDecimal(2.99), &quot;Pear&quot;),
-            3, new Item(new BigDecimal(3.99), &quot;Grape&quot;),
-            4, new Item(new BigDecimal(129.99), &quot;Mango&quot;)
+        private Map<Integer, Item> items = Map.of(
+            1, new Item(new BigDecimal(1.99), "Apple"),
+            2, new Item(new BigDecimal(2.99), "Pear"),
+            3, new Item(new BigDecimal(3.99), "Grape"),
+            4, new Item(new BigDecimal(129.99), "Mango")
         );
 
         public Item findItem(int id) {
             return items.get(id);
         }
     }
-    </pre>
+    ```
 
     ## Create REST endpoint
 
-    Now create a resource class that uses this type-safe template. Click `qute/src/main/java/org/acme/ItemResource.java` to open the file, then click **Copy To Editor**:
+    Now create a resource class that uses this type-safe template. From the **Visual Editor** Tab, create a new file in this path:  `qute/src/main/java/org/acme/ItemResource.java` and add this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/ItemResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.inject.Inject;
@@ -464,13 +508,15 @@ challenges:
             return Templates.item(service.findItem(id));
         }
     }
-    </pre>
+    ```
 
     Here we Declare a static `Templates` inner class with a method called `item()` that gives us a `TemplateInstance` for `templates/ItemResource/item.html` and declare its `Item item` parameter so we can validate the template.
 
-    We then pass the value of `id` to be used to render the template when the REST endpoint is called. Let's try it:
+    We then pass the value of `id` to be used to render the template when the REST endpoint is called. Let's try it in *Terminal 1* with this command:
 
-    `curl http://localhost:8080/item/1`
+    ```
+    curl http://localhost:8080/item/1
+    ```
 
     You should see an HTML result that shows Apple (`id=1`) and its price:
 
@@ -481,34 +527,34 @@ challenges:
     </body>
     ```
 
-    You can also [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to see an actual HTML rendering in your browser:
+    You can also click to the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
 
     ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
     ## Template parameter declaration inside the template
 
-    Alternatively, to declare that a template is expecting an `Item` type, you can declare it in the template file itself to add additional type and parameter checking and simplify the code while still maintaining type checking. Let's update our HTML template a bit. Click **Copy to Editor** to update the template:
+    Alternatively, to declare that a template is expecting an `Item` type, you can declare it in the template file itself to add additional type and parameter checking and simplify the code while still maintaining type checking. Let's update our HTML template a bit. From the **Visual Editor** Tab, update the `item.html` file from here `qute/src/main/resources/templates/ItemResource/item.html` with this content:
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/ItemResource/item.html" data-target="replace">
+    ```html
     {@org.acme.Item item}
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-    &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;{item.name}&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;{item.name}&lt;/h1&gt;
-        &lt;div&gt;Price: {item.price}&lt;/div&gt;
-    &lt;/body&gt;
-    &lt;/html&gt;
-    </pre>
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>{item.name}</title>
+    </head>
+    <body>
+        <h1>{item.name}</h1>
+        <div>Price: {item.price}</div>
+    </body>
+    </html>
+    ```
 
     Notice the first line - this ia an _optional_ parameter declaration. If declared, Qute attempts to validate all expressions that reference the parameter `item`.
 
-    Now update the resource class to use the simpler way to inject templates:
+    Now update the resource class to use the simpler way to inject templates by updating the `ItemResource` class from here `qute/src/main/java/org/acme/ItemResource.java` with this content:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/ItemResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import javax.inject.Inject;
@@ -539,15 +585,15 @@ challenges:
             return item.data("item", service.findItem(id));
         }
     }
-    </pre>
+    ```
 
-    Test it out again using the same process: [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to see an actual HTML rendering in your browser:
+    Test it out again using by accessing or refreshing the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
 
     ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
-    If you did not see errors, congratulations! But let's see what happens if we do. Click here: `qute/src/main/resources/templates/ItemResource/item.html` to open the template. Change `{item.name}` to `{item.nonSense}`. Now click here to [reload](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1). You should get an error:
+    If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}`. Now click again to the *Qute Item 1* Tab or reload it. You should get an error:
 
     ![Err](https://katacoda.com/openshift/assets/middleware/quarkus/qute-err.png)
 
@@ -564,9 +610,14 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/qute
+  - title: Qute Item 1
+    type: service
+    hostname: crc
+    path: /item/1
+    port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 04-extensions
   id: 7l1bnmupgpba
   type: challenge
@@ -578,34 +629,32 @@ challenges:
 
     Sometimes, you’re not in control of the classes that you want to use in your template, and you cannot add methods to them. Template extension methods allows you to declare new method for those classes that will be available from your templates just as if they belonged to the target class.
 
-    Let’s keep extending on our simple HTML page that contains the item name, price and add a discounted price. The discounted price is sometimes called a "computed property". We will implement a template extension method to render this property easily. Let’s update our template. Click **Copy to Editor** to update the template with computed properties:
+    Let’s keep extending on our simple HTML page that contains the item name, price and add a discounted price. The discounted price is sometimes called a "computed property". We will implement a template extension method to render this property easily. Let’s update our template. From the **Visual Editor** Tab, update the `item.html` file from here `qute/src/main/resources/templates/ItemResource/item.html` with computed properties using this content:
 
-    <pre class="file" data-filename="./qute/src/main/resources/templates/ItemResource/item.html" data-target="replace">
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-    &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;{item.name}&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;{item.name}&lt;/h1&gt;
-        &lt;div&gt;Price: {item.price}&lt;/div&gt;
-        {#if item.price &gt; 100}
-        &lt;div&gt;Discounted Price: {item.discountedPrice}&lt;/div&gt;
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>{item.name}</title>
+    </head>
+    <body>
+        <h1>{item.name}</h1>
+        <div>Price: {item.price}</div>
+        {#if item.price > 100}
+        <div>Discounted Price: {item.discountedPrice}</div>
         {/if}
-    &lt;/body&gt;
-    &lt;/html&gt;
-    </pre>
+    </body>
+    </html>
+    ```
 
     Notice the use of Handlebar-esque `{#if ...}`. It's part of Qute's basic control flow features.
 
     Also notice the use of `{item.discountedPrice}`. This field does not exist in our `Item` class (which only has `name` and `price`). We'll add an _extension_ to our java code to make this property be available to the template, and write the code that computes its value in Java.
 
-    Click `qute/src/main/java/org/acme/TemplateExtensions.java` to open the new file.
+    From the **Visual Editor** Tab, create a new file with this path: `qute/src/main/java/org/acme/TemplateExtensions.java` and add this content to create the extensions class where we'll declare our `discountedPrice`:
 
-    Click **Copy to Editor** to create the extensions class where we'll declare our `discountedPrice`:
-
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/TemplateExtensions.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.math.BigDecimal;
@@ -618,17 +667,17 @@ challenges:
             return item.price.multiply(new BigDecimal("0.9"));
         }
     }
-    </pre>
+    ```
 
     Here we declare a static template extension method that can be used to add "computed properties" to a data class. The class of the first parameter (in this case `Item`) is used to match the base object and the method name is used to match the property name (in this case `discountedPrice`). When we declare `{item.discountedPrice}`, the contextual value of `item` is passed to this `discountedPrice` method to compute its value (where we use the `item.price.multiply()` method to apply a 10% discount by multiplying by `0.9`).
 
     > You can place template extension methods in every class if you annotate them with `@TemplateExtension` but we advise to keep them either grouped by target type, or in a single `TemplateExtensions` class by convention.
 
-    [Click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/1) to reload the page and see the result for Apples:
+    Test it out by accessing the *Qute Item 1* Tab to see the result for Apples:
 
     ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
-    Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But [try with Mangos](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/item/4).
+    Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But try with Mangos, open the *Qute Item Mangos* Tab to see it.
 
     ![Mango](https://katacoda.com/openshift/assets/middleware/quarkus/qute-mango.png)
 
@@ -641,9 +690,19 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/qute
+  - title: Qute Item Apples
+    type: service
+    hostname: crc
+    path: /item/1
+    port: 8080
+  - title: Qute Item Mangos
+    type: service
+    hostname: crc
+    path: /item/4
+    port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 05-periodic
   id: b73wb6svypqy
   type: challenge
@@ -657,9 +716,9 @@ challenges:
 
     Now let's create a simple `Sample` object that represents a point-in-time of a value (maybe ambient temperature or blood pressure of a patient):
 
-    Click `qute/src/main/java/org/acme/Sample.java` to open the file. Click **Copy to Editor** to paste in the code:
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/java/org/acme/Sample.java` and add this content:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/Sample.java" data-target="replace">
+    ```java
     package org.acme;
 
     public class Sample {
@@ -674,11 +733,11 @@ challenges:
         }
 
     }
-    </pre>
+    ```
 
-    Now let's ceate a service whose `get()` method returns a random list of samples. Open the file with `qute/src/main/java/org/acme/SampleService.java` and click **Copy to Editor** to create the code:
+    Now let's ceate a service whose `get()` method returns a random list of samples. Create the file in this path: `qute/src/main/java/org/acme/SampleService.java` and add this content:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/SampleService.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.util.List;
@@ -690,29 +749,29 @@ challenges:
 
     @ApplicationScoped
     public class SampleService {
-        private static final String[] names = {&quot;James&quot;, &quot;Deepak&quot;, &quot;Daniel&quot;, &quot;Shaaf&quot;, &quot;Jeff&quot;, &quot;Sally&quot;};
+        private static final String[] names = {"James", "Deepak", "Daniel", "Shaaf", "Jeff", "Sally"};
 
-        public List&lt;Sample&gt; get() {
+        public List<Sample> get() {
             int count = new Random().nextInt(10);
             return IntStream.range(0, count)
-                .mapToObj(idx -&gt; Math.random() &gt; 0.5)
-                .map(valid -&gt; new Sample(valid, names[(int)(Math.random() * names.length)], Math.random() + &quot;&quot;))
+                .mapToObj(idx -> Math.random() > 0.5)
+                .map(valid -> new Sample(valid, names[(int)(Math.random() * names.length)], Math.random() + ""))
                 .collect(Collectors.toList());
         }
     }
-    </pre>
+    ```
 
     ## Create Template
 
-    Let's make a directory to house our new template with this command:
+    Let's make a directory to house our new template with this command from Terminal 1:
 
-    `mkdir -p src/main/resources/templates/reports/v1`
+    ```
+    mkdir -p src/main/resources/templates/reports/v1
+    ```
 
-    Click `qute/src/main/resources/templates/reports/v1/report_01.json.template` to open the new file.
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/reports/v1/report_01.json.template` to simulate some sort of organization of different reports, and add this content:
 
-    Click **Copy to Editor** to create the template. We'll place it in the `src/main/resources/templates/reports/v1` path to simulate some sort of organization of different reports:
-
-    <pre class="file" data-filename="./qute/src/main/resources/templates/reports/v1/report_01.json.template" data-target="replace">
+    ```json
     \{
         "time": "{now}",
         "samples": [
@@ -721,7 +780,7 @@ challenges:
           {/for}
         ]
       }
-    </pre>
+    ```
 
     Here we are looping over the passed-in `samples`. You can iterate over `Iterable`s, `Map`s and `Stream`s. Since we are rendering JSON, we also need to escape the first of any pair of JSON-related `}` or `{` using `\}` or `\{`.
 
@@ -729,11 +788,11 @@ challenges:
 
     ## Create periodic reports
 
-    Create the ReportGenerator file by clicking `qute/src/main/java/org/acme/ReportGenerator.java`.
+    Create this file `qute/src/main/java/org/acme/ReportGenerator.java`. This will use all of the above and generates reports periodically to a file in `/tmp`.
 
-    And finally click **Copy to Editor** to add code that uses all of the above and generates reports periodically to a file in `/tmp`:
+    Add this code:
 
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/ReportGenerator.java" data-target="replace">
+    ```java
     package org.acme;
 
     import java.io.FileWriter;
@@ -781,20 +840,24 @@ challenges:
             fout = null;
         }
     }
-    </pre>
+    ```
 
     * In this case, we use the `@ResourcePath` qualifier to specify the template path: `templates/reports/v1/report_01.json`.
     * Use the `@Scheduled` annotation to instruct Quarkus to execute this method every second. For more information see the [Scheduler](https://quarkus.io/guides/scheduler) guide.
     * The `TemplateInstance.render()` method triggers rendering. Note that this method blocks the current thread.
     * We use Quarkus' `StartupEvent` and `ShutdownEvent` to manage the File I/O on startup and shutdown
 
-    To trigger report to start generating (by triggering Quarkus Live Reload), click to run this command and access the `hello` endpoint:
+    To trigger report to start generating (by triggering Quarkus Live Reload), from *Terminal 1* run this command and access the `hello` endpoint:
 
-    `curl http://localhost:8080/hello?name=James`
+    ```
+    curl http://localhost:8080/hello?name=James
+    ```
 
     Assuming no errors, our reports should generate every second. Let's `tail` the file:
 
-    `tail -f /tmp/report.json`
+    ```
+    tail -f /tmp/report.json
+    ```
 
     You should see new reports every second. When done, don't forget to type `CTRL-C` to stop the `tail -f`!
   tabs:
@@ -804,9 +867,14 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/qute
+  - title: Qute Hello App
+    type: service
+    hostname: crc
+    path: /hello?name=James
+    port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 06-reactive
   id: xavnxsw7yfko
   type: challenge
@@ -826,11 +894,9 @@ challenges:
 
     You've already added the `quarkus-vertx-web` extension which gives us the ability to declare Reactive Routes.
 
-    Click `qute/src/main/java/org/acme/ReactiveResource.java` to open a new file.
+    From the **Visual Editor** Tab,  create a new file in this path: `qute/src/main/java/org/acme/ReactiveResource.java` and add this content to create create a reactive route that will process our Qute template:
 
-    Click **Copy to Editor** to create create a reactive route that will process our Qute template:
-
-    <pre class="file" data-filename="./qute/src/main/java/org/acme/ReactiveResource.java" data-target="replace">
+    ```java
     package org.acme;
 
     import io.quarkus.qute.Template;
@@ -847,31 +913,33 @@ challenges:
         @Inject
         SampleService service;
 
-        @Location(&quot;reports/v1/report_01.json.template&quot;)
+        @Location("reports/v1/report_01.json.template")
         Template report;
 
-        @Route(path = &quot;/reactive&quot;, methods = Route.HttpMethod.GET, produces = MediaType.APPLICATION_JSON)
+        @Route(path = "/reactive", methods = Route.HttpMethod.GET, produces = MediaType.APPLICATION_JSON)
         void reactive(RoutingExchange ex) throws Exception {
             report
-              .data(&quot;samples&quot;,service.get())
-              .data(&quot;now&quot;, java.time.LocalDateTime.now())
+              .data("samples",service.get())
+              .data("now", java.time.LocalDateTime.now())
               .renderAsync()
-              .thenAccept((val) -&gt; ex.ok(val));
+              .thenAccept((val) -> ex.ok(val));
         }
     }
-    </pre>
+    ```
 
     * The `@Route` annotation indicates that the method is a reactive route. Again, by default, the code contained in the method must not block.
     * Note the use of the Qute `.renderAsync()` method - this method will be completed with the rendered template asynchronously.
-    * The method gets a `RoutingExchange` as a parameter. `RoutingExchange` is a convenient wrapper of `RoutingContext` which provides some useful methods. With `RoutingContext` you can retrieve the HTTP request (using `request()`) and write the response using `response().end(…​)`.
+    * The method gets a `RoutingExchange` as a parameter. `RoutingExchange` is a convenient wrapper of `RoutingContext` which provides some useful methods. With `RoutingContext` you can retrieve the HTTP request (using `request()`) and write the response using `response().end(...​)`.
 
     More details about using the RoutingContext is available in the [Vert.x Web documentation](https://vertx.io/docs/vertx-web/java/).
 
     ## Test endpoint
 
-    Make sure the endpoint generates a report. Click the following command to try it:
+    Make sure the endpoint generates a report. From *Terminal 1*, run this command to try it:
 
-    `curl http://localhost:8080/reactive`
+    ```
+    curl http://localhost:8080/reactive
+    ```
 
     You should see a random report of the samples from earlier, but done so with a _Reactive Route_.
 
@@ -908,7 +976,12 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/quarkus/qute
+  - title: Qute Reactive
+    type: service
+    hostname: crc
+    path: /reactive
+    port: 8080
   difficulty: basic
-  timelimit: 150
-checksum: "16696876846050192853"
+  timelimit: 300
+checksum: "2462893510609923482"
