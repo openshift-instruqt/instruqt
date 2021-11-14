@@ -11,6 +11,7 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
+- joshix@redhat.com
 - dahmed@redhat.com
 private: false
 published: true
@@ -28,12 +29,11 @@ challenges:
     ```
     oc new-project myproject
     ```
-    `
-    ```
-    <br>
+
     Create a new pod manifest that specifies two containers:
 
     ```
+    cd /root && \
     cat > pod-multi-container.yaml <<EOF
     apiVersion: v1
     kind: Pod
@@ -55,34 +55,26 @@ challenges:
       restartPolicy: Never
     EOF
     ```
-    `
-    ```
-    <br>
+
     Create the pod by specifying the manifest:
 
     ```
     oc create -f pod-multi-container.yaml
     ```
-    `
-    ```
-    <br>
+
     View the detail for the pod and look at the events:
 
     ```
     oc describe pod my-two-container-pod
     ```
-    `
-    ```
-    <br>
+
     Let's first execute a shell session inside the server container by using the
     `-c` flag:
 
     ```
     oc exec -it my-two-container-pod -c server -- /bin/sh
     ```
-    `
-    ```
-    <br>
+
     Run some commands inside the server container:
 
     ```
@@ -92,17 +84,13 @@ challenges:
     ps
     exit
     ```
-    `
-    ```
-    <br>
+
     Let's now execute a shell session inside the side-car container:
 
     ```
     oc exec -it my-two-container-pod -c side-car -- /bin/sh
     ```
-    `
-    ```
-    <br>
+
     Run the same commands in side-car container. Each container within a pod runs
     it's own cgroup, but shares IPC, Network, and UTC (hostname) namespaces:
 
@@ -111,8 +99,6 @@ challenges:
     netstat -ntlp
     hostname
     exit
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -134,124 +120,94 @@ challenges:
     ```
     oc api-versions
     ```
-    `
-    ```
-    <br>
+
     Use the `--v` flag to set a verbosity level. This will allow you to see the request/responses against the Kubernetes API:
 
     ```
     oc get pods --v=8
     ```
-    `
-    ```
-    <br>
+
     Use the `oc proxy` command to proxy local requests on port 8001 to the Kubernetes API:
 
     ```
     oc proxy --port=8001
     ```
-    `
-    ```
-    <br>
+
     Open up another terminal by clicking the **+** button and select `Open New Terminal`.
-    <br>
-    <br>
+
+
     Send a `GET` request to the Kubernetes API using `curl`:
 
     ```
     curl -X GET http://localhost:8001
     ```
-    `
-    ```
-    <br>
+
     We can explore the OpenAPI definition file to see complete API details.
 
     ```
     curl localhost:8001/openapi/v2
     ```
-    `
-    ```
-    <br>
+
     Send a `GET` request to list all pods in the environment:
 
     ```
     curl -X GET http://localhost:8001/api/v1/pods
     ```
-    `
-    ```
-    <br>
+
     Use `jq` to parse the json response:
 
     ```
     curl -X GET http://localhost:8001/api/v1/pods | jq .items[].metadata.name
     ```
-    `
-    ```
-    <br>
+
     We can scope the response by only viewing all pods in a particular namespace:
 
     ```
     curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods
     ```
-    `
-    ```
-    <br>
+
     Get more details on a particular pod within the `myproject` namespace:
 
     ```
     curl -X GET http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
     ```
-    `
-    ```
-    <br>
+
     Export the manifest associated with `my-two-container-pod` in json format:
 
     ```
     oc get pods my-two-container-pod --export -o json > podmanifest.json
     ```
-    `
-    ```
-    <br>
+
     Within the manifest, replace the `1.13` version of alpine with `1.14`:
 
     ```
     sed -i 's|nginx:1.13-alpine|nginx:1.14-alpine|g' podmanifest.json
     ```
-    `
-    ```
-    <br>
+
     Update/Replace the current pod manifest with the newly updated manifest:
 
     ```
     curl -X PUT http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod -H "Content-type: application/json" -d @podmanifest.json
     ```
-    `
-    ```
-    <br>
+
     Patch the current pod with a newer container image (`1.15`):
 
     ```
     curl -X PATCH http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod -H "Content-type: application/strategic-merge-patch+json" -d '{"spec":{"containers":[{"name": "server","image":"nginx:1.15-alpine"}]}}'
     ```
-    `
-    ```
-    <br>
+
     Delete the current pod by sending the `DELETE` request method:
 
     ```
     curl -X DELETE http://localhost:8001/api/v1/namespaces/myproject/pods/my-two-container-pod
     ```
-    `
-    ```
-    <br>
+
     Verify the pod is in `Terminating` status:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     Verify the pod no longer exists:
 
     ```
@@ -261,6 +217,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -279,12 +238,11 @@ challenges:
     ```
     oc get pods -n myproject
     ```
-    `
-    ```
-    <br>
+
     Create a ReplicaSet object manifest file:
 
     ```
+    cd /root && \
     cat > replica-set.yaml <<EOF
     apiVersion: apps/v1
     kind: ReplicaSet
@@ -306,76 +264,61 @@ challenges:
               image: openshiftkatacoda/blog-django-py
     EOF
     ```
-    `
-    ```
-    <br>
+
     Create the ReplicaSet:
 
     ```
     oc apply -f replica-set.yaml
     ```
-    `
-    ```
-    <br>
+
     In a new terminal window, select all pods that match `app=myfirstapp`:
 
     ```
     oc get pods -l app=myfirstapp --show-labels -w
     ```
-    `
-    ```
-    <br>
+
     Delete the pods and watch new ones spawn:
 
     ```
     oc delete pod -l app=myfirstapp
     ```
-    `
-    ```
-    <br>
+
     Imperatively scale the ReplicaSet to 6 replicas:
 
     ```
     oc scale replicaset myfirstreplicaset --replicas=6
     ```
-    `
-    ```
-    <br>
+
     Imperatively scale down the ReplicaSet to 3 replicas:
 
     ```
     oc scale replicaset myfirstreplicaset --replicas=3
     ```
-    `
-    ```
-    <br>
+
     The `oc scale` command interacts with the `/scale` endpoint:
 
     ```
     curl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale
     ```
-    `
-    ```
-    <br>
+
     Use the `PUT` method against the `/scale` endpoint to change the number of replicas to 5:
 
     ```
     curl  -X PUT localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/scale -H "Content-type: application/json" -d '{"kind":"Scale","apiVersion":"autoscaling/v1","metadata":{"name":"myfirstreplicaset","namespace":"myproject"},"spec":{"replicas":5}}'
     ```
-    `
-    ```
-    <br>
+
     You can also get information regarding the pod by using the `GET` method against the `/status` endpoint
 
     ```
     curl -X GET http://localhost:8001/apis/apps/v1/namespaces/myproject/replicasets/myfirstreplicaset/status
     ```
-    `
-    ```
-    <br>
+
     The status endpoint's primary purpose is to allow a controller (with proper RBAC permissions) to send a `PUT` method along with the desired status.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -392,6 +335,7 @@ challenges:
     Create a manifest for a Deployment with a Finalizer:
 
     ```
+    cd /root && \
     cat > finalizer-test.yaml<<EOF
     apiVersion: apps/v1
     kind: Deployment
@@ -421,77 +365,59 @@ challenges:
                   containerPort: 8080
     EOF
     ```
-    `
-    ```
-    <br>
+
     Create the Deployment.
 
     ```
     oc create -f finalizer-test.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Deployment has been created.
 
     ```
     oc get deploy
     ```
-    `
-    ```
-    <br>
+
     Verify the ReplicaSet has been created:
 
     ```
     oc get replicaset
     ```
-    `
-    ```
-    <br>
+
     Verify the pods are running:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     Attempt to delete the Deployment.
 
     ```
     oc delete deployment finalizer-test
     ```
-    `
-    ```
-    <br>
+
     Open up another terminal by clicking the **+** button and select `Open New Terminal`.
-    <br>
-    <br>
+
+
     Observe the Deployment still exits and has been updated with the `deletionGracePeriodSeconds` and `deletionTimestamp` fields.
 
     ```
     oc get deployment finalizer-test -o yaml | grep 'deletionGracePeriodSeconds\|deletionTimestamp'
     ```
-    `
-    ```
-    <br>
+
     Attempt to scale the Deployment up and down. Although status is updated, pods will not be created/deleted:
 
     ```
     oc scale deploy finalizer-test --replicas=5
     oc scale deploy finalizer-test --replicas=1
     ```
-    `
-    ```
-    <br>
+
 
     ```
     oc get deploy
     oc get pods
     ```
-    `
-    ```
-    <br>
+
 
     Update the Deployment with the Finalizer value unset.
 
@@ -524,26 +450,20 @@ challenges:
                   containerPort: 8080
     EOF
     ```
-    `
-    ```
-    <br>
+
     Replace the Deployment.
 
     ```
     oc replace -f finalizer-test-remove.yaml
     ```
-    `
-    ```
-    <br>
+
     The Deployment will now be deleted.
 
     ```
     oc get deploy
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     See the following:
 
     [Deployment Controller (DeletionTimestamp != nil)](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/deployment_controller.go#L613-L615)
@@ -551,6 +471,9 @@ challenges:
     [SyncStatusOnly Method](https://github.com/kubernetes/kubernetes/blob/release-1.18/pkg/controller/deployment/sync.go#L36-L45)
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -569,16 +492,15 @@ challenges:
     ```
     oc proxy --port=8001
     ```
-    `
-    ```
-    <br>
+
     Open up another terminal by clicking the **+** button and select `Open New Terminal`.
-    <br>
-    <br>
+
+
 
     Let's create a new Custom Resource Definition (CRD) object manifest for Postgres:
 
     ```
+    cd /root && \
     cat >> postgres-crd.yaml <<EOF
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
@@ -604,49 +526,37 @@ challenges:
         storage: true
     EOF
     ```
-    `
-    ```
-    <br>
+
     Create the ***CRD*** resource object:
 
     ```
     oc create -f postgres-crd.yaml
     ```
-    `
-    ```
-    <br>
+
     You should now see the Kubernetes API reflect a brand new *api group* called **rd.example.com**:
 
     ```
     curl http://localhost:8001/apis | jq .groups[].name
     ```
-    `
-    ```
-    <br>
+
     This will also be reflected in the `oc api-versions` command:
 
     ```
     oc api-versions
     ```
-    `
-    ```
-    <br>
+
     Within the `rd.example.com` group there will be an *api version* **v1alpha1** (per our CRD resource object). The database resource resides here.
 
     ```
     curl http://localhost:8001/apis/rd.example.com/v1alpha1 | jq
     ```
-    `
-    ```
-    <br>
+
     Notice how `oc` now recognize postgres as a present resource (although there will be no current resource objects at this time).
 
     ```
     oc get postgres
     ```
-    `
-    ```
-    <br>
+
     Let's create a new Custom Resource (CR) object manifest for the database:
 
     ```
@@ -662,34 +572,29 @@ challenges:
       nodes: 3
     EOF
     ```
-    `
-    ```
-    <br>
+
     Create the new object:
 
     ```
     oc create -f wordpress-database.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the resource was created:
 
     ```
     oc get postgres
     ```
-    `
-    ```
-    <br>
+
     View the details about the wordpressdb object:
 
     ```
     oc get postgres wordpressdb -o yaml
     ```
-    `
-    ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -698,4 +603,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "5049303721064648146"
+checksum: "7609697464219490169"
