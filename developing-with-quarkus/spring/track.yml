@@ -128,7 +128,7 @@ challenges:
     path: /greeting
     port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 02-create-data
   id: ya0aishykw1e
   type: challenge
@@ -142,7 +142,7 @@ challenges:
 
     ## Create Model
 
-    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
 
     Then add this code:
 
@@ -203,7 +203,7 @@ challenges:
 
     ## Create Spring Data Repository
 
-    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/FruitRepository.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/FruitRepository.java`.
 
     Add this code:
 
@@ -270,7 +270,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 03-create-beans
   id: ye9oamwagcev
   type: challenge
@@ -306,7 +306,7 @@ challenges:
 
     With the interface in place, we will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean. It will be used to create a `StringFunction` bean that will capitalize the text passed as parameter.
 
-    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
 
     Add this code:
 
@@ -359,7 +359,7 @@ challenges:
 
     We'll also need a new Spring Bean to use this configuration!
 
-    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/MessageProducer.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/MessageProducer.java`.
 
     Add this code:
 
@@ -385,7 +385,7 @@ challenges:
 
     The final bean we will create ties together all the previous beans.
 
-    From the **Visual Editor** Tab, create a new Java class in this path: `fruit-taster/src/main/java/org/acme/TasterBean.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/TasterBean.java`.
 
     Add this code:
 
@@ -438,7 +438,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 04-create-web
   id: yzucmjhdkgln
   type: challenge
@@ -452,7 +452,7 @@ challenges:
 
     ## Create Controllers
 
-    From the **Visual Editor** Tab, create a new Java class for our basic controller for accessing Fruits in this path: `fruit-taster/src/main/java/org/acme/FruitController.java`.
+    From the **Visual Editor** Tab, create a new file for our basic controller for accessing Fruits in this path: `fruit-taster/src/main/java/org/acme/FruitController.java`.
 
     Add this code:
 
@@ -624,7 +624,7 @@ challenges:
 
     As a final test let's create another bean to use our injected beans and configuration using Spring DI annotations.
 
-    From the **Visual Editor** Tab, create a new Java class for our taster controller for tasting Fruits in this path: `fruit-taster/src/main/java/org/acme/TasterController.java`.
+    From the **Visual Editor** Tab, create a new file for our taster controller for tasting Fruits in this path: `fruit-taster/src/main/java/org/acme/TasterController.java`.
 
     Add this code:
 
@@ -815,7 +815,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 05-build-app
   id: vrdbobcpy3c3
   type: challenge
@@ -895,7 +895,27 @@ challenges:
 
     ## Login to OpenShift
 
-    We'll deploy our app as the `developer` user. Run the following command to login with the OpenShift CLI:
+    Access the OpenShift Web Console to also login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    Run the following command to login with the OpenShift CLI:
 
     ```
     oc login -u developer -p developer
@@ -995,12 +1015,23 @@ challenges:
 
     > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
 
-    And now we can access the app from the **Fruit Taster App** Tab once again:
+    You can see the app deployed from the OpenShift Web Console.
+
+    Enter the *quarkus-spring* project to see your app and click to the Route's URL.
+
+    To the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+    ```
+    oc get route fruit-taster -n quarkus-spring -o jsonpath='{.spec.host}{"/taster"}{"\n"}'
+
+    ```
+
+    Copy the URL and open it in your browser.
 
 
     You should see the same fruits being tasted:
 
-    ```console
+    ```bash
     [
       {
         "fruit": {
@@ -1012,30 +1043,6 @@ challenges:
       },
       ...
     ```
-
-    You can see the app deployed from the OpenShift Web Console.
-
-    Access the OpenShift Web Console to also login from the Web UI:
-
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-    You'll need to login with the same credentials as before:
-
-    * Username:
-    ```
-    developer
-    ```
-    * Password:
-    ```
-    developer
-    ```
-
-    Enter the `quarkus-spring` project to see your app.
-
 
     ## Scale the app
 
@@ -1051,14 +1058,6 @@ challenges:
 
     We now have 10 instances running providing better performance. Make sure it still works.
 
-    Get your app route:
-
-    ```
-    oc get route fruit-taster -n quarkus-spring -o jsonpath='{.spec.host}{"/taster"}'
-
-    ```
-
-    Copy the URL and open it in your browser.
 
     **10 not enough? Try 50!** Click the command to scale this app to 50 instances:
 
@@ -1109,13 +1108,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Terminal 2
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 300
-checksum: "1748252089420229749"
+  timelimit: 600
+checksum: "15709778362843763338"
