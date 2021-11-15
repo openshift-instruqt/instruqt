@@ -43,7 +43,8 @@ description: |-
   * `TaskRun`: the execution and result of running an instance of a task
   * `PipelineRun`: the execution and result of running an instance of a pipeline, which includes a number of `TaskRuns`
 
-  For further details on pipeline concepts, refer to the [Tekton documentation](https://github.com/tektoncd/pipeline/tree/master/docs#learn-more) that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
+  For further details on pipeline concepts, refer to the [Tekton documentation](https://github.com/tektoncd/pipeline/tree/master/docs#learn-more) that provides
+  an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
   In the following sections, you will go through each of the above steps to define and invoke a pipeline. Let's get started!
 icon: https://logodix.com/logo/1910931.png
@@ -111,13 +112,25 @@ challenges:
   assignment: |
     OpenShift Pipelines are an OpenShift add-on that can be installed via an operator that is available in the OpenShift OperatorHub.
 
-    You can either install the operator using the OpenShift Pipelines Operator in the web console or by using the CLI tool `oc`. Let's log in to our cluster to make changes and install the operator. You can do so by running:
+    You can either install the operator using the OpenShift Pipelines Operator in the web console or by using the CLI tool `oc`. Let's log in to our cluster to make changes and install the operator.
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
 
     ```
-    oc login -u admin -p admin
+    oc get pods -n openshift-console | grep console
     ```
 
-    This will log you in using the credentials:
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
 
     * **Username:** ``admin``
     * **Password:** ``admin``
@@ -163,12 +176,14 @@ challenges:
       sourceNamespace: openshift-marketplace
     ```
 
-    This YAML file defines various components, such as the `channel` specifying the channel name where we want to subscribe, `name` being the name of our Operator, and `source` being the CatalogSource that provides the operator. For your convenience, we've placed this exact file in your `/operator` local folder.
+    This YAML file defines various components, such as the `channel` specifying the channel name where we want to subscribe, `name` being the name of our Operator, and `source` being the CatalogSource that provides the operator. 
+    
+    Create and save this file under `opt/operator` local folder as `subscription.yaml`.
 
     You can now create the Subscription object similar to any OpenShift object.
 
     ```
-    oc apply -f operator/subscription.yaml
+    oc apply -f /opt/operator/subscription.yaml
     ```
 
     ## Verify installation
@@ -183,8 +198,6 @@ challenges:
     done
 
     echo "Operator ready"
-    ```
-    `
     ```
 
     Great! The OpenShift Pipelines Operator is now installed. Now, let's start the workshop.
@@ -247,7 +260,7 @@ challenges:
   type: challenge
   title: Step 3 - Create Sample Task
   assignment: |-
-    A [`Task`](tasks.md) defines a series of `steps` that run in a desired order and complete a set amount of build work. Every `Task` runs as a Pod on your Kubernetes cluster with each `step` as its own container. For example, the following `Task` outputs "Hello World":
+    A [`Task`](https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml) defines a series of `steps` that run in a desired order and complete a set amount of build work. Every `Task` runs as a Pod on your Kubernetes cluster with each `step` as its own container. For example, the following `Task` outputs "Hello World":
 
     ```
     apiVersion: tekton.dev/v1beta1
@@ -266,7 +279,7 @@ challenges:
     Apply this Task to your cluster just like any other Kubernetes object. Then run it using `tkn`, the CLI tool for Tekton.
 
     ```
-    oc apply -f tasks/hello.yaml
+    oc apply -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml
     ```
 
     ```
@@ -332,19 +345,19 @@ challenges:
     Create the `apply-manifests` task:
 
     ```
-    oc create -f tasks/apply_manifest_task.yaml
+    oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/apply_manifest_task.yaml
     ```
 
     We'll also create a `update-deployment` task, which can be seen with a `cat` command:
 
     ```
-    oc create -f tasks/update_deployment_task.yaml
+    oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/update_deployment_task.yaml
     ```
 
     Finally, we can create a PersistentVolumeClaim to provide the filesystem for our pipeline execution, explained more in the next step:
 
     ```
-    oc create -f resources/persistent_volume_claim.yaml
+    oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/resources/persistent_volume_claim.yaml
     ```
 
     You can take a look at the tasks you created using the [Tekton CLI](https://github.com/tektoncd/cli/releases):
@@ -487,7 +500,7 @@ challenges:
     Create the pipeline by running the following:
 
     ```
-    oc create -f pipeline/pipeline.yaml
+    oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/pipeline/pipeline.yaml
     ```
 
     In the next section, you will focus on creating a trigger to execute the tasks specified in the pipeline.
