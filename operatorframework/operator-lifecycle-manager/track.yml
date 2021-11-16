@@ -101,8 +101,7 @@ challenges:
     ```
     oc get crd | grep -E 'catalogsource|subscription|clusterserviceversion|packagemanifest|installplan|operatorgroup'
     ```
-    `
-    ```
+
 
 
     OLM is powered by controllers that reside within the `openshift-operator-lifecycle-manager` namespace as three Deployments (catalog-operator, olm-operator, and packageserver):
@@ -110,8 +109,7 @@ challenges:
     ```
     oc -n openshift-operator-lifecycle-manager get deploy
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -132,8 +130,7 @@ challenges:
     ```
     oc get catalogsources -n openshift-marketplace
     ```
-    `
-    ```
+
 
 
     Here is a brief summary of each CatalogSource:
@@ -146,8 +143,7 @@ challenges:
     ```
     oc get packagemanifests -l catalog=certified-operators
     ```
-    `
-    ```
+
 
     * **Community Operators**:
         * With access to community Operators, customers can try out Operators at a variety of maturity levels. Delivering the OperatorHub community, Operators on OpenShift fosters iterative software development and deployment as Developers get self-service access to popular components like databases, message queues or tracing in a managed-service fashion on the platform. These Operators are maintained by relevant representatives in the [operator-framework/community-operators GitHub repository](https://github.com/operator-framework/community-operators).
@@ -157,8 +153,7 @@ challenges:
     ```
     oc get packagemanifests -l catalog=community-operators
     ```
-    `
-    ```
+
 
     * **Red Hat Operators**:
         * These Operators are packaged, shipped, and supported by Red Hat.
@@ -168,8 +163,7 @@ challenges:
     ```
     oc get packagemanifests -l catalog=redhat-operators
     ```
-    `
-    ```
+
 
     * **Red Hat Marketplace**:
         * Built in partnership by Red Hat and IBM, the Red Hat Marketplace helps organizations deliver enterprise software and improve workload portability. Learn more at [marketplace.redhat.com](https://marketplace.redhat.com).
@@ -179,8 +173,7 @@ challenges:
     ```
     oc get packagemanifests -l catalog=redhat-marketplace
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -226,8 +219,7 @@ challenges:
     ```
     oc new-project myproject
     ```
-    `
-    ```
+
 
 
     We should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html) to ensure Operators installed to this namespace will be capable of watching for Custom Resources within the `myproject` namespace:
@@ -244,8 +236,7 @@ challenges:
         - myproject
     EOF
     ```
-    `
-    ```
+
 
 
     Create the OperatorGroup:
@@ -253,8 +244,7 @@ challenges:
     ```
     oc create -f argocd-operatorgroup.yaml
     ```
-    `
-    ```
+
 
 
     Verify the OperatorGroup has been successfully created:
@@ -262,8 +252,7 @@ challenges:
     ```
     oc get operatorgroup argocd-operatorgroup
     ```
-    `
-    ```
+
     Create a Subscription manifest for the [ArgoCD Operator](https://github.com/argoproj-labs/argocd-operator). Ensure the `installPlanApproval` is set to `Manual`. This will allow us to review the InstallPlan before choosing to install the Operator:
 
     ```
@@ -281,8 +270,7 @@ challenges:
       sourceNamespace: openshift-marketplace
     EOF
     ```
-    `
-    ```
+
 
 
     Create the Subscription:
@@ -290,8 +278,7 @@ challenges:
     ```
     oc create -f argocd-subscription.yaml
     ```
-    `
-    ```
+
 
 
     Verify the Subscription was created:
@@ -299,8 +286,7 @@ challenges:
     ```
     oc get subscription
     ```
-    `
-    ```
+
 
 
     The creation of the subscription will also trigger OLM to automatically generate an InstallPlan:
@@ -308,8 +294,7 @@ challenges:
     ```
     oc get installplan
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -331,8 +316,7 @@ challenges:
     ARGOCD_INSTALLPLAN=`oc get installplan -o jsonpath={$.items[0].metadata.name}`
     oc get installplan $ARGOCD_INSTALLPLAN -o yaml
     ```
-    `
-    ```
+
 
     You can get a better view of the InstallPlan by navigating to the ArgoCD Operator in the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/).
 
@@ -345,8 +329,7 @@ challenges:
     ```
     oc patch installplan $ARGOCD_INSTALLPLAN --type='json' -p '[{"op": "replace", "path": "/spec/approved", "value":true}]'
     ```
-    `
-    ```
+
 
 
     Once the InstallPlan is approved, you will see the newly provisioned ClusterServiceVersion, ClusterResourceDefinition, Role and RoleBindings, Service Accounts, and Argo-CD Operator Deployment.
@@ -354,38 +337,32 @@ challenges:
     ```
     oc get clusterserviceversion
     ```
-    `
-    ```
+
 
     ```
     oc get crd | grep argoproj.io
     ```
-    `
-    ```
+
 
     ```
     oc get sa | grep argocd
     ```
-    `
-    ```
+
 
     ```
     oc get roles | grep argocd
     ```
-    `
-    ```
+
 
     ```
     oc get rolebindings | grep argocd
     ```
-    `
-    ```
+
 
     ```
     oc get deployments
     ```
-    `
-    ```
+
 
 
     When the ArgoCD Operator is running, we can observe its logs by running the following:
@@ -394,8 +371,7 @@ challenges:
     ARGOCD_OPERATOR=`oc get pods -o jsonpath={$.items[0].metadata.name}`
     oc logs $ARGOCD_OPERATOR
     ```
-    `
-    ```
+
 
     The ArgoCD Operator is now waiting for the creation of an ArgoCD Custom Resource within the `myproject` namespace.
   tabs:
@@ -435,8 +411,7 @@ challenges:
           enabled: true
     EOF
     ```
-    `
-    ```
+
 
 
     Create the ArgoCD Custom Resource:
@@ -444,8 +419,7 @@ challenges:
     ```
     oc create -f argocd-cr.yaml
     ```
-    `
-    ```
+
 
 
     The ArgoCD Operator should now begin to generate the ArgoCD Operand artifacts. This can take up to one minute:
@@ -456,8 +430,7 @@ challenges:
     oc get services
     oc get routes
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -479,8 +452,7 @@ challenges:
     ARGOCD_ROUTE=`oc get routes example-argocd-server -o jsonpath={$.spec.host}`
     echo $ARGOCD_ROUTE
     ```
-    `
-    ```
+
 
     Select **Login via OpenShift** to use OpenShift as our identity provider.
 
@@ -505,16 +477,14 @@ challenges:
     ```
     oc delete argocd example-argocd
     ```
-    `
-    ```
+
 
     Removing the ArgoCD Custom Resource, should remove all of the Operator's Operands:
 
     ```
     oc get deployments
     ```
-    `
-    ```
+
 
     And then uninstalling the Operator:
 
@@ -523,8 +493,7 @@ challenges:
     ARGOCD_CSV=`oc get csv -o jsonpath={$.items[0].metadata.name}`
     oc delete csv $ARGOCD_CSV
     ```
-    `
-    ```
+
 
 
     Once the Subscription and ClusterServiceVersion have been removed, the Operator and associated artifacts will be removed from the cluster:
@@ -533,8 +502,7 @@ challenges:
     oc get pods
     oc get roles
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal

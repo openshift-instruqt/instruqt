@@ -100,32 +100,25 @@ challenges:
     ```
     oc new-project myproject
     ```
-    `
-    ```
-    <br>
+
     Let's now create a new directory for our project:
 
     ```
     mkdir -p $HOME/projects/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Navigate to the directory:
 
     ```
     cd $HOME/projects/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Initialize a new Go-based Operator SDK project for the Memcached Operator:
 
     ```
     operator-sdk init --domain example.com --repo github.com/example/memcached-operator
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -146,9 +139,7 @@ challenges:
     ```
     operator-sdk create api --group cache --version v1alpha1 --kind Memcached --resource --controller
     ```
-    `
-    ```
-    <br>
+
 
     We should now see the /api, config, and /controllers directories.
 
@@ -314,8 +305,7 @@ challenges:
     ```
     make manifests
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -343,8 +333,7 @@ challenges:
     ```
     WATCH_NAMESPACE=myproject make run
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -366,9 +355,7 @@ challenges:
     cd $HOME/projects/memcached-operator
     cat config/samples/cache_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
     Ensure your `kind: Memcached` Custom Resource (CR) is updated with `spec.size`
 
     <pre class="file">
@@ -385,64 +372,49 @@ challenges:
     ```
     \cp /tmp/cache_v1alpha1_memcached.yaml config/samples/cache_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
     Ensure you are currently scoped to the `myproject` Namespace:
 
     ```
     oc project myproject
     ```
-    `
-    ```
-    <br>
+
     Deploy your PodSet Custom Resource to the live OpenShift Cluster:
 
     ```
     oc create -f config/samples/cache_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the memcached exists:
 
     ```
     oc get memcached
     ```
-    `
-    ```
-    <br>
+
     Verify the Memcached operator has created 3 pods:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     Verify that status shows the name of the pods currently owned by the Memcached:
 
     ```
     oc get memcached memcached-sample -o yaml
     ```
-    `
-    ```
-    <br>
+
     Increase the number of replicas owned by the Memcached:
 
     ```
     oc patch memcached memcached-sample --type='json' -p '[{"op": "replace", "path": "/spec/size", "value":5}]'
     ```
-    `
-    ```
-    <br>
+
 
     Verify that we now have 5 running pods
     ```
     oc get pods
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -465,24 +437,20 @@ challenges:
     ```
     oc get pods -o yaml | grep ownerReferences -A10
     ```
-    `
-    ```
-    <br>
+
     Delete the memcached-sample Custom Resource:
 
     ```
     oc delete memcached memcached-sample
     ```
-    `
-    ```
+
 
     Thanks to OwnerReferences, all of the pods should be deleted:
 
     ```
     oc get pods
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
