@@ -34,7 +34,8 @@ description: |-
   ## Tekton CRDs
 
   Tekton defines some [Kubernetes custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-  as building blocks to standardize pipeline concepts and provide terminology that is consistent across CI/CD solutions. These custom resources are an extension of the Kubernetes API that lets users create and interact with these objects using the OpenShift CLI (`oc`), `kubectl`, and other Kubernetes tools.
+  as building blocks to standardize pipeline concepts and provide terminology that is consistent across CI/CD solutions. These custom resources
+  are an extension of the Kubernetes API that lets users create and interact with these objects using the OpenShift CLI (`oc`), `kubectl`, and other Kubernetes tools.
 
   The custom resources needed to define a pipeline are listed below:
 
@@ -176,8 +177,8 @@ challenges:
       sourceNamespace: openshift-marketplace
     ```
 
-    This YAML file defines various components, such as the `channel` specifying the channel name where we want to subscribe, `name` being the name of our Operator, and `source` being the CatalogSource that provides the operator. 
-    
+    This YAML file defines various components, such as the `channel` specifying the channel name where we want to subscribe, `name` being the name of our Operator, and `source` being the CatalogSource that provides the operator.
+
     Create and save this file under `opt/operator` local folder as `subscription.yaml`.
 
     You can now create the Subscription object similar to any OpenShift object.
@@ -623,4 +624,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "10809536833571083413"
+checksum: "14073143526730809243"
