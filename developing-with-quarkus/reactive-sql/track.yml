@@ -404,29 +404,29 @@ challenges:
     ## Add CoffeeResource endpoints
 
     Let’s modify the application and add relevant methods. The CoffeeResource has alredy been created we will add the functionality to it.
-    Open a new file by clicking: `src/main/java/org/acme/reactive/CoffeeResource.java`.
+    From the **Visual Editor** Tab, open this file : `src/main/java/org/acme/reactive/CoffeeResource.java`.
 
     **1. Add db initialization**
     Lets add a few queries to initialize our database. We could have also choosen to omit this step, in that case the database should have had these tables. But since we have a new barebones instance, we can also use this way of initializing.
 
-    Click **Copy to Editor** to add the following code to this file:
+    Add this content after the `// TODO initdb` comment:
 
-    <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO initdb">
+    ```java
             client.query("DROP TABLE IF EXISTS coffee").execute()
                     .flatMap(r -> client.query("CREATE TABLE coffee (id SERIAL PRIMARY KEY, name TEXT NOT NULL)").execute())
                     .flatMap(r -> client.query("INSERT INTO coffee (name) VALUES ('Americano')").execute())
                     .flatMap(r -> client.query("INSERT INTO coffee (name) VALUES ('Latte')").execute())
                     .flatMap(r -> client.query("INSERT INTO coffee (name) VALUES ('Mocha')").execute()).await()
                     .indefinitely();
-    </pre>
+    ```
 
     **2. Add REST methods**
 
     First lets add our GET method so we can get the list of all the Coffee, and also if we want to look up with id where we add the `PathParam` to our method and with `@Path` annotation to enable the request to our `getSingle` method.
 
-    Click **Copy to Editor** to add the following code to this file:
-    <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO GET">
+    Add this content after the `// TODO GET` comment:
 
+    ```java
         @GET
         public Multi<Coffee> get() {
             return Coffee.findAll(client);
@@ -440,14 +440,15 @@ challenges:
                 .onItem().transform(ResponseBuilder::build);
         }
 
-    </pre>
+    ```
 
 
 
     Next lets add the POST and PUT request methods.
 
-    Click **Copy to Editor** to add the following code to this file:
-    <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO POST">
+    Add this content after the `// TODO POST` comment:
+
+    ```java
 
         @POST
         public Uni<Response> create(Coffee coffee) {
@@ -464,12 +465,13 @@ challenges:
                 .onItem().transform(status -> Response.status(status).build());
         }
 
-    </pre>
+    ```
 
     Finally lets add the DELETE method, so we can also delete Coffee from our quarkus app.
 
-    Click **Copy to Editor** to add the following code to this file:
-    <pre class="file" data-filename="src/main/java/org/acme/reactive/CoffeeResource.java" data-target="insert" data-marker="// TODO DELETE">
+    Add this content after the `// TODO DELETE` comment:
+
+    ```java
         @DELETE
         @Path("{id}")
         public Uni<Response> delete(@PathParam("id") Long id) {
@@ -477,7 +479,7 @@ challenges:
                     .onItem().transform(deleted -> deleted ? Status.NO_CONTENT : Status.NOT_FOUND)
                     .onItem().transform(status -> Response.status(status).build());
         }
-    </pre>
+    ```
 
     Lets continue further to add reactive accessor methods for our Coffee resource.
   tabs:
@@ -487,7 +489,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 300
 - slug: 04-add-model
@@ -498,33 +500,32 @@ challenges:
     Lets continue in this section and define are model Class
 
     Let’s modify the application and add relevant methods. The `Coffee` model class has alredy been created we will add the functionality to it.
-    Open a new file by clicking: `src/main/java/org/acme/reactive/Coffee.java`.
+    From the **Visual Editor** Tab, open this file: `src/main/java/org/acme/reactive/Coffee.java`.
 
     We only have two fields, one for the ID of the Coffe and one for its name.
-    <pre>
+    ```java
 
         public Long id;
 
         public String name;
 
-    </pre>
+    ```
 
     With this simple model we implement some of the accessor methods. e.g save, from, update etc. All of them use a `PgPool` object, since we are going to use a PostgreSQL database and are using the PostgreSQL reactive driver.
 
     Lets add the `findById` method.
 
     **1. Add FindById method**
-    Click **Copy to Editor** to add the following code to this file:
 
-    <pre class="file" data-filename="src/main/java/org/acme/reactive/Coffee.java" data-target="insert" data-marker=" // TODO FindById">
+    Add this content after the `// TODO FindById` comment:
 
+    ```java
         public static Uni<Coffee> findById(PgPool client, Long id) {
             return client.preparedQuery("SELECT id, name FROM coffee WHERE id = $1").execute(Tuple.of(id))
                     .onItem().transform(RowSet::iterator)
                     .onItem().transform(iterator -> iterator.hasNext() ? from(iterator.next()) : null);
         }
-
-    </pre>
+    ```
 
     In the above you can see we use a `PgPool` object and once the query is prepared we then apply successive `onItem` reactive methods to transform the result and finally passing that back as a `Uni<Coffee>`, part of the Mutiny reactive API.
 
@@ -532,7 +533,14 @@ challenges:
 
     Since we still have our app running and connected remotely using Quarkus' remote development, when you make these changes and reload the endpoint, Quarkus will notice all of these changes and live reload them on the remote side.
 
-    Check that it works as expected by revisiting the page by [clicking here](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).
+    To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+    ```
+    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
 
     Try to add and remove Coffee elements to the list.
 
@@ -549,7 +557,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 300
 - slug: 05-package-and-run
@@ -567,13 +575,15 @@ challenges:
 
     To deploy the application "in production", we can simply re-deploy the application using the OpenShift extension, omitting the `quarkus-launch-devmode` environment variable. Click the following command to do this:
 
-    `mvn clean package -DskipTests \
-    -Dquarkus.kubernetes.deploy=true \
-    -Dquarkus.container-image.build=true \
-    -Dquarkus.kubernetes-client.trust-certs=true \
-    -Dquarkus.kubernetes.deployment-target=openshift \
-    -Dquarkus.openshift.route.expose=true \
-    -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database`
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/reactive-sql && \
+      mvn clean package -DskipTests \
+      -Dquarkus.kubernetes.deploy=true \
+      -Dquarkus.container-image.build=true \
+      -Dquarkus.kubernetes-client.trust-certs=true \
+      -Dquarkus.kubernetes.deployment-target=openshift \
+      -Dquarkus.openshift.route.expose=true \
+      -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database`
 
     Finally, make sure it's actually done rolling out:
 
@@ -587,8 +597,13 @@ challenges:
 
     The output should end with `BUILD SUCCESS`.
 
-    [Open up the web UI](http://reactive-sql-reactive-sql.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com). You should see the front web page load with the List of Coffees, to which you can add (or delete).
+    To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
+    ```
+    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
     ![Reactive SQL app UI](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-sql-ui.png)
 
     # Open the solution in an IDE in the Cloud!
@@ -621,7 +636,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 300
-checksum: "6543107359654729091"
+checksum: "4390489885301164485"

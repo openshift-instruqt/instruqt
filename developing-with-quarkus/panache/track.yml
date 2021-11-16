@@ -101,9 +101,13 @@ challenges:
     cd /root/projects/rhoar-getting-started/quarkus/panache
     ```
 
-    Initially, the project is almost empty and doesn't do anything. Start by reviewing the content by executing a ```
+    Initially, the project is almost empty and doesn't do anything. Start by reviewing the content by executing a
+
+    ```
     tree
-    ``` in your terminal.
+    ```
+
+    in your terminal.
 
     As you can see, there are some files that we have prepared for you in the project. Under `src/main/resources/META-INF/resources` we have for example prepared an html file for you, and some skeletal model files and utilities. This matches what you might get when generating sample projects [using the Quarkus Project Generator](https://code.quarkus.io).
 
@@ -130,9 +134,9 @@ challenges:
 
     # Define the entity
 
-    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, so open up the `src/main/java/org/acme/person/model/Person.java` file, and add the following entity definition:
+    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** Tab, open this file `src/main/java/org/acme/person/model/Person.java` and add the following entity definition:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/model/Person.java" data-target="replace">
+    ```java
     package org.acme.person.model;
 
     import java.time.LocalDate;
@@ -175,13 +179,13 @@ challenges:
     public enum EyeColor {
         BLUE, GREEN, HAZEL, BROWN
     }
-    </pre>
+    ```
 
     # Define the RESTful endpoint
 
-    Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. Open up that file by clicking: `src/main/java/org/acme/person/PersonResource.java` and click **Copy To Editor** to add its code:
+    Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. From the **Visual Editor** Tab, create a new file in this path : `src/main/java/org/acme/person/PersonResource.java` and add its code:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="replace">
+    ```java
     package org.acme.person;
 
     import java.time.LocalDate;
@@ -223,7 +227,7 @@ challenges:
         // TODO: Add lifecycle hook
 
     }
-    </pre>
+    ```
 
     > You'll see a lot of `// TODO` lines - **do not delete them!** We will use these later on.
 
@@ -231,13 +235,13 @@ challenges:
 
     # Add sample data
 
-    Let's add some sample data to the database so we can test things out. Open up the `src/main/resources/import.sql` file and click to add some SQL statements to run on startup:
+    Let's add some sample data to the database so we can test things out. From the **Visual Editor** Tab, open this file : `src/main/resources/import.sql` and add some SQL statements to run on startup:
 
-    <pre class="file" data-filename="./src/main/resources/import.sql" data-target="replace">
+    ```text
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Salvador L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Huỳnh Kim Huê', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
-    </pre>
+    ```
 
     These statements will add some fake people to our database.
 
@@ -248,9 +252,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 02-remote-dev
   id: mjqxevryv5x0
   type: challenge
@@ -287,14 +291,28 @@ challenges:
     **3. Open the OpenShift Web Console**
 
     OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser. To get a feel for how the web console
-    works, click this link to open the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph)
+    perform various tasks via a browser.
 
-    The first screen you will see is the authentication screen. Enter your username and password and
-    then log in:
+    Access the OpenShift Web Console to also login from the Web UI:
 
-    * Username: `developer`
-    * Password: `developer`
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
 
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
 
@@ -306,15 +324,17 @@ challenges:
 
     Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
 
-    `oc new-app \
+    ```
+    oc new-app \
         -e POSTGRESQL_USER=sa \
         -e POSTGRESQL_PASSWORD=sa \
         -e POSTGRESQL_DATABASE=person \
         --name=postgres-database \
         -l app.openshift.io/runtime=postgresql \
-        openshift/postgresql`
+        openshift/postgresql
+    ```
 
-    You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).
+    You'll see the Postgres pod spinning up in the Web Console.
 
     ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-postgres.png)
 
@@ -325,7 +345,8 @@ challenges:
     Click the following command to add it to our project:
 
     ```
-    mvn quarkus:add-extension -Dextensions="openshift"
+    cd /root/projects/rhoar-getting-started/quarkus/panache && \
+      mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
     You will see:
@@ -336,11 +357,11 @@ challenges:
 
     ## Configure Quarkus for remote live coding
 
-    Click: `./src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
+    From the **Visual Editor** Tab, open this file : `src/main/resources/application.properties`. This file contains Quarkus configuration.
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    Add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Remote Live Coding setup
     quarkus.package.type=mutable-jar
     quarkus.live-reload.password=changeit
@@ -352,7 +373,7 @@ challenges:
     quarkus.datasource.password=sa
     quarkus.hibernate-orm.database.generation=drop-and-create
     quarkus.hibernate-orm.sql-load-script = import.sql
-    </pre>
+    ```
 
     The `quarkus.package.type=mutable-jar` instructs Quarkus to package the app as a _mutable_ app. Mutable applications also include the deployment time parts of Quarkus (need for dev mode), so they take up a bit more disk space. If run normally they start just as fast and use the same memory as an immutable application, however they can also be started in dev mode.
 
@@ -364,14 +385,16 @@ challenges:
 
     Run the following command which will build and deploy the Quarkus app in Openshift. There's a number of arguments (which could optionally be put in `application.properties`) that are explained below.
 
-    `mvn clean package -DskipTests \
+    ```
+    mvn clean package -DskipTests \
     -Dquarkus.kubernetes.deploy=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.route.expose=true \
     -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=postgres-database \
-    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true
+    ```
 
     The output should end with `BUILD SUCCESS`.
 
@@ -395,15 +418,25 @@ challenges:
 
     > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
 
-    You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph):
+    You can see it on the OpenShift Web Console.
 
     ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-quarkus.png)
 
 
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
 
+        To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
     ```
-    curl -s http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/person | jq
+    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    ```
+    export APP_ROUTE=`oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+    echo $APP_ROUTE
+    curl -s $APP_ROUTE/person | jq
     ```
 
     > You may need to click this again if the initial click opens a Terminal but doesn't run the command for you.
@@ -437,18 +470,13 @@ challenges:
 
     # Save Environment variable
 
-    We'll refer to this URL often, so click this command to save it in an environment variable called `PEOPLE_URL` (and put it in the Bash shell startup in case we open new terminals later):
-
-    ```
-    export PEOPLE_URL=http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com; echo "export PEOPLE_URL='$PEOPLE_URL'" >> ~/.bashrc
-    ```
 
     # Remote Dev Connection
 
     Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
 
     ```
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL
     ```
 
     You should see a bunch of log output including:
@@ -476,9 +504,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 03-add-query-endpoints
   id: nehh6n9bynzo
   type: challenge
@@ -493,7 +521,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 04-add-paging-filtering
   id: xasxnvxdymkl
   type: challenge
@@ -617,7 +645,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 05-add-lifecycle-task
   id: cg5cuj6vclb5
   type: challenge
@@ -697,7 +725,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 06-exercise-table
   id: brgo3c9xkxaz
   type: challenge
@@ -754,5 +782,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
-checksum: "16120105969235982869"
+  timelimit: 300
+checksum: "3016248459531239413"
