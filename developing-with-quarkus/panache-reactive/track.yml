@@ -103,9 +103,7 @@ challenges:
     cd /root/projects/rhoar-getting-started/quarkus/panache-reactive
     ```
 
-    Initially, the project is almost empty and doesn't do anything. Start by reviewing the content by executing a ```
-    tree
-    ``` in your terminal.
+    Initially, the project is almost empty and doesn't do anything. Start by reviewing the content by switching to the *Visual Editor* Tab.
 
     As you can see, there are some files that we have prepared for you in the project. Under `src/main/resources/META-INF/resources` we have for example prepared an html file for you, and some skeletal model files and utilities. This matches what you might get when generating sample projects [using the Quarkus Project Generator](https://code.quarkus.io).
 
@@ -132,11 +130,10 @@ challenges:
 
     # Define the entity
 
-    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, so open up the `src/main/java/org/acme/person/model/Person.java` file, and add the following entity definition:
+    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** Tab, open this file: `src/main/java/org/acme/person/model/Person.java"` and add the following entity definition:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/model/Person.java" data-target="replace">
+    ```java
     package org.acme.person.model;
-
     import java.time.LocalDate;
     import java.util.List;
 
@@ -173,27 +170,27 @@ challenges:
 
         // TODO: Add more queries
     }
-    </pre>
+    ```
 
     > You'll see a `// TODO` line - **do not delete it!** We will use this later on.
 
     As you can see we've defined the three fields `name`, `birth`, and `eyes`. We're using the Java Persistence API's `@Enumerated` field type for our eye color.
 
-    We'll also need the definition of eye colors, so let's create an `enum`. Open up the `src/main/java/org/acme/person/model/EyeColor.java` file, and add the following enum definition:
+    We'll also need the definition of eye colors, so let's create an `enum`. Create a new file here: `src/main/java/org/acme/person/model/EyeColor.java`, and add the following enum definition:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/model/EyeColor.java" data-target="replace">
+    ```java
     package org.acme.person.model;
 
     public enum EyeColor {
         BLUE, GREEN, HAZEL, BROWN
     }
-    </pre>
+    ```
 
     # Define the RESTful endpoint
 
-    Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. Open up that file by clicking: `src/main/java/org/acme/person/PersonResource.java` and click **Copy To Editor** to add its code:
+    Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. Create a new file in this path: `src/main/java/org/acme/person/PersonResource.java` and add this code:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="replace">
+    ```java
     package org.acme.person;
 
     import java.time.LocalDate;
@@ -226,7 +223,7 @@ challenges:
 
         @GET
         @Produces(MediaType.APPLICATION_JSON)
-        public Uni&lt;List&lt;Person&gt;&gt; getAll() {
+        public Uni<List<Person>> getAll() {
             return Person.listAll();
         }
 
@@ -237,7 +234,7 @@ challenges:
         // TODO: Add lifecycle hook
 
     }
-    </pre>
+    ```
 
     > You'll see a lot of `// TODO` lines - **do not delete them!** We will use these later on.
 
@@ -245,13 +242,13 @@ challenges:
 
     # Add sample data
 
-    Let's add some sample data to the database so we can test things out. Open up the `src/main/resources/import.sql` file and click to add some SQL statements to run on startup:
+    Let's add some sample data to the database so we can test things out. Create a new file in this path: `src/main/resources/import.sql` to add SQL statements to run on startup:
 
-    <pre class="file" data-filename="./src/main/resources/import.sql" data-target="replace">
+    ```text
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Salvador L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Huỳnh Kim Huê', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
-    </pre>
+    ```
 
     These statements will add some fake people to our database.
 
@@ -262,9 +259,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 02-remote-dev
   id: 4eyaxnbckvmf
   type: challenge
@@ -278,17 +275,47 @@ challenges:
 
     ## Login to OpenShift
 
-    In order to login, we will use the **oc** command and then specify the server that we
-    want to authenticate to:
+    Access the OpenShift Web Console to also login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
+
+    Click **Skip Tour** to skip the new user introduction.
+
+    There's nothing there now ("No workloads found"), but that's about to change.
+
+    Run the following command to login with the OpenShift CLI:
 
     ```
     oc login -u developer -p developer
     ```
 
-    This will automatically log you in as the user `developer` whose password is `developer`.
+    You should see
 
-    > If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
-    step. Click in the first terminal and press CTRL-C to stop the application and try to `oc login` again!
+    ```bash
+    Login successful.
+
+    You don't have any projects. You can try to create a new project, by running
+
+        oc new-project <projectname>
+    ```
 
     ## Access OpenShift Project
 
@@ -298,37 +325,21 @@ challenges:
     oc new-project quarkus --display-name="Sample Quarkus Datatable App"
     ```
 
-    **3. Open the OpenShift Web Console**
-
-    OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser. To get a feel for how the web console
-    works, click this link to open the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph)
-
-    The first screen you will see is the authentication screen. Enter your username and password and
-    then log in:
-
-    * Username: `developer`
-    * Password: `developer`
-
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
-
-    Click **Skip Tour** to skip the new user introduction.
-
-    There's nothing there now ("No workloads found"), but that's about to change.
-
     ## Deploy Postgres
 
     Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
 
-    `oc new-app \
+    ```
+    oc new-app \
         -e POSTGRESQL_USER=sa \
         -e POSTGRESQL_PASSWORD=sa \
         -e POSTGRESQL_DATABASE=person \
         --name=postgres-database \
         -l app.openshift.io/runtime=postgresql \
-        openshift/postgresql`
+        openshift/postgresql
+    ```
 
-    You'll see the Postgres pod spinning up in the [console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph).
+    You'll see the Postgres pod spinning up in the Web Console, select `quarkus` project and click on **Topology** from the left-side menu using the *Developer Perspective*.
 
     ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-postgres.png)
 
@@ -339,7 +350,8 @@ challenges:
     Click the following command to add it to our project:
 
     ```
-    mvn quarkus:add-extension -Dextensions="openshift"
+    cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
+      mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
     You will see:
@@ -350,11 +362,11 @@ challenges:
 
     ## Configure Quarkus for remote live coding
 
-    Click: `./src/main/resources/application.properties` to open this file. This file contains Quarkus configuration.
+    From the **Visual Editor** Tab, open this file:  `src/main/resources/application.properties` . This file contains Quarkus configuration.
 
-    Click **Copy to Editor** to add the following values to the `application.properties` file:
+    Add the following values to the `application.properties` file:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Remote Live Coding setup
     quarkus.package.type=mutable-jar
     quarkus.live-reload.password=changeit
@@ -365,7 +377,7 @@ challenges:
     quarkus.datasource.password=sa
     quarkus.hibernate-orm.database.generation=drop-and-create
     quarkus.hibernate-orm.sql-load-script=import.sql
-    </pre>
+    ```
 
     The `quarkus.package.type=mutable-jar` instructs Quarkus to package the app as a _mutable_ app. Mutable applications also include the deployment time parts of Quarkus (need for dev mode), so they take up a bit more disk space. If run normally they start just as fast and use the same memory as an immutable application, however they can also be started in dev mode.
 
@@ -377,14 +389,16 @@ challenges:
 
     Run the following command which will build and deploy the Quarkus app in Openshift. There's a number of arguments (which could optionally be put in `application.properties`) that are explained below.
 
-    `mvn clean package -DskipTests \
+    ```
+    mvn clean package -DskipTests \
     -Dquarkus.kubernetes.deploy=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.kubernetes.deployment-target=openshift \
     -Dquarkus.openshift.route.expose=true \
     -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=postgres-database \
-    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true`
+    -Dquarkus.openshift.env.vars.quarkus-launch-devmode=true
+    ```
 
     The output should end with `BUILD SUCCESS`.
 
@@ -408,15 +422,19 @@ challenges:
 
     > If the `oc rollout` command appears to not finish, just `CTRL-C` it and run it again.
 
-    You can see it on the [Overview in the OpenShift Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus/graph):
+    You can see it also on the Overview in the OpenShift Console.
 
     ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-quarkus.png)
 
 
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
 
+    To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+
     ```
-    curl -s http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/person | jq
+    export APP_URL=`oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+    curl -s $APP_URL/person | jq
     ```
 
     > You may need to click this again if the initial click opens a Terminal but doesn't run the command for you.
@@ -450,18 +468,14 @@ challenges:
 
     # Save Environment variable
 
-    We'll refer to this URL often, so click this command to save it in an environment variable called `PEOPLE_URL` (and put it in the Bash shell startup in case we open new terminals later):
-
-    ```
-    export PEOPLE_URL=http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com; echo "export PEOPLE_URL='$PEOPLE_URL'" >> ~/.bashrc
-    ```
+    We'll refer to this URL often, so click this command to save it in an environment variable called `APP_URL` (and put it in the Bash shell startup in case we open new terminals later):
 
     # Remote Dev Connection
 
     Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
 
     ```
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$PEOPLE_URL
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL
     ```
 
     You should see a bunch of log output including:
@@ -489,14 +503,116 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
+  timelimit: 600
 - slug: 03-add-query-endpoints
   id: ltgnczcfymx2
   type: challenge
   title: Add Queries
-  assignment: "In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.\n\n## Add Queries\n\nLet’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself. Open the `Person` entity by clicking: `src/main/java/org/acme/person/model/Person.java`.\n\nNext, click **Copy to Editor** to add the following two new queries to this file:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/model/Person.java\" data-target=\"insert\" data-marker=\"// TODO: Add more queries\">\npublic static Uni&lt;List&lt;Person&gt;&gt; findByColor(EyeColor color) {\n        return list(\"eyes\", color);\n\t}\n\n\tpublic static Multi&lt;Person&gt; getBeforeYear(int year) {\n        return Person.&lt;Person&gt;streamAll()\n          .filter(p -&gt; p.birth.getYear() &lt;= year);\n\t}\n</pre>\n\nThese two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.\n\n> All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.\n\nWith our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.\n\nOpen the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoints which will access our new queries:\n\n<pre class=\"file\" data-filename=\"./src/main/java/org/acme/person/PersonResource.java\" data-target=\"insert\" data-marker=\"// TODO: add basic queries\">\n@GET\n    @Path(\"/eyes/{color}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Uni&lt;List&lt;Person&gt;&gt; findByColor(@PathParam(\"color\") EyeColor color) {\n        return Person.findByColor(color);\n    }\n\n    @GET\n    @Path(\"/birth/before/{year}\")\n    @Produces(MediaType.APPLICATION_JSON)\n    public Multi&lt;Person&gt; getBeforeYear(@PathParam(\"year\") int year) {\n        return Person.getBeforeYear(year);\n    }\n</pre>\n\n## Inspect the results\n\nWhen you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.\n\nCheck that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:\n\n`curl -s $PEOPLE_URL/person/eyes/BLUE | jq`\n\nYou should see **two** people born in 1990 or earlier:\n\n```console\n[\n  {\n    \"id\": 1,\n    \"birth\": \"1974-08-15\",\n    \"eyes\": \"BLUE\",\n    \"name\": \"Farid Ulyanov\"\n  },\n  {\n    \"id\": 2,\n    \"birth\": \"1984-05-24\",\n    \"eyes\": \"BROWN\",\n    \"name\": \"Salvador L. Witcher\"\n  }\n]\n```\n\n## Congratulations!\n\nThe `Person` entity's superclass comes with lots of super useful `static` methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person.`, and getting completion for all the operations in a single place.\n\nIn the next step we'll show you how Panache Reactive can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!\n"
+  assignment: |
+    In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.
+
+    ## Add Queries
+
+    Let’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself.
+
+    From the **Visual Editor** Tab, open the `Person` entity from this path: `src/main/java/org/acme/person/model/Person.java`.
+
+    Add the following two new queries after `// TODO: Add more queries` comment:
+
+    ```java
+    public static Uni<List<Person>> findByColor(EyeColor color) {
+            return list("eyes", color);
+      }
+
+      public static Multi<Person> getBeforeYear(int year) {
+            return Person.<Person>streamAll()
+              .filter(p -> p.birth.getYear() <= year);
+      }
+    ```
+
+    These two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.
+
+    > All list methods in Panache-based entities (those that extend from `PanacheEntity`) have equivalent stream versions. So `list` has a `stream` variant, `listAll`-->`streamAll` and so on.
+
+    With our custom entity queries implemented in our `Person` entity class, let's add RESTful endpoints to `PersonResource` to access them.
+
+    Open the `src/main/java/org/acme/person/PersonResource.java` resource class once again to inject the new endpoints which will access our new queries after `// TODO: add basic queries` comment:
+
+    ```java
+    @GET
+        @Path("/eyes/{color}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Uni<List<Person> findByColor(@PathParam("color") EyeColor color) {
+            return Person.findByColor(color);
+        }
+
+        @GET
+        @Path("/birth/before/{year}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Multi<Person> getBeforeYear(@PathParam("year") int year) {
+            return Person.getBeforeYear(year);
+        }
+    ```
+
+    ## Inspect the results
+
+    When you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.
+
+    Check that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:
+
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
+      curl -s $APP_URL/person/eyes/BLUE | jq
+    ```
+
+    > This will open a new Terminal to execute the command. If the command fails to run just click the above command again!
+
+    You should only see **one** person with BLUE eyes:
+
+    ```console
+    [
+      {
+        "id": 1,
+        "birth": "1974-08-15",
+        "eyes": "BLUE",
+        "name": "Farid Ulyanov"
+      }
+    ]
+    ```
+    This also confirms that our remote live coding is working as expected.
+
+    Next, let's find people born in 1990 or earlier:
+
+    ```
+    curl -s $APP_URL/person/birth/before/1990 | jq
+    ```
+
+    You should see **two** people born in 1990 or earlier:
+
+    ```console
+    [
+      {
+        "id": 1,
+        "birth": "1974-08-15",
+        "eyes": "BLUE",
+        "name": "Farid Ulyanov"
+      },
+      {
+        "id": 2,
+        "birth": "1984-05-24",
+        "eyes": "BROWN",
+        "name": "Salvador L. Witcher"
+      }
+    ]
+    ```
+
+    ## Congratulations!
+
+    The `Person` entity's superclass comes with lots of super useful `static` methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person.`, and getting completion for all the operations in a single place.
+
+    In the next step we'll show you how Panache Reactive can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!
   tabs:
   - title: Terminal 1
     type: terminal
@@ -504,9 +620,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 04-add-paging-filtering
   id: fbcryoi5bsrh
   type: challenge
@@ -529,19 +645,19 @@ challenges:
     * `search[value]` - The value of the search box
     * `draw` - DataTables does asnychronous processing, so this value is sent with each request, expecting it to be returned as-is, so DataTables can piece things back together on the frontend if a user clicks things quickly.
 
-    Open the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the new endpoint:
+    From the **Visual Editor** Tab, open the file in this path: `src/main/java/org/acme/person/PersonResource.java` resource class add this code after the `// TODO: add datatable query` comment:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: add datatable query">
+    ```java
     @GET
         @Path("/datatable")
         @Produces(MediaType.APPLICATION_JSON)
-        public Uni&lt;DataTable&gt; datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
+        public Uni<DataTable> datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
           // TODO: Construct query
 
           // TODO: Execute pipeline
 
         }
-    </pre>
+    ```
 
     Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters and be able to use them when the frontend calls the `GET /person/datatable` endpoint.
 
@@ -562,42 +678,48 @@ challenges:
     3. Convert the `List` of `Person`s into a `DataTable` instance
     4. Fill in the `DataTable.recordsTotal` field from the `Person.count()` result
 
-    Click **Copy To Editor** to add this code, which performs step 1 in the above sequence:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Construct query">
+    Add this code after the `// TODO: Construct query` comment:
+
+    ```java
     int pageNumber = start / length;
 
-            PanacheQuery&lt;Person&gt; filteredPeople = Optional.ofNullable(searchVal)
-                .filter(val -&gt; !val.isEmpty())
-                .map(val -&gt; Person.&lt;Person&gt;find("name like :search", Parameters.with("search", "%" + val + "%")))
-                .orElseGet(() -&gt; Person.findAll())
+            PanacheQuery<Person> filteredPeople = Optional.ofNullable(searchVal)
+                .filter(val -> !val.isEmpty())
+                .map(val -> Person.<Person>find("name like :search", Parameters.with("search", "%" + val + "%")))
+                .orElseGet(() -> Person.findAll())
                 .page(pageNumber, length);
-    </pre>
+    ```
 
     Next, execute the pipeline and convert the results into a `DataTable` instance.
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Execute pipeline">
+    Add this code after the `// TODO: Execute pipeline` comment:
+
+    ```java
     return filteredPeople.list()
-            .map(people -&gt; {   // Convert List&lt;Person&gt; to DataTable
+            .map(people -> {   // Convert List<Person> to DataTable
                 DataTable result = new DataTable();
                 result.setDraw(draw);
                 result.setData(people);
 
                 return result;
             })
-            .flatMap(datatable -&gt; Person.count().map(recordsTotal -&gt; {   // Get the total records count
+            .flatMap(datatable -> Person.count().map(recordsTotal -> {   // Get the total records count
                 datatable.setRecordsTotal(recordsTotal);
                 return datatable;
             }))
-            .flatMap(datatable -&gt; filteredPeople.count().map(recordsFilteredCount -&gt; {   // Get the number of records filtered
+            .flatMap(datatable -> filteredPeople.count().map(recordsFilteredCount -> {   // Get the number of records filtered
                 datatable.setRecordsFiltered(recordsFilteredCount);
                 return datatable;
             }));
-    </pre>
+    ```
 
     Let's test out our new endpoint using `curl` to search for names with `yan` in their name:
 
-    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq`
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
+      curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq
+    ```
 
     This should return a single entity (since in our 3-person sample data, only one has `yan` in their name), embedded in the return object that DataTable is expecting (with the `draw`, `recordsFiltered`, `recordsTotal` etc):
 
@@ -627,9 +749,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 05-add-lifecycle-task
   id: au8fe6bvgbvp
   type: challenge
@@ -643,31 +765,31 @@ challenges:
 
     Managed beans (like our `PersonResource`) can listen for lifecycle events by using the `@Observes` annotation on method signatures, which will be called when the associated event occurs.
 
-    Open the `src/main/java/org/acme/person/PersonResource.java` resource class and then click **Copy To Editor** once again to inject the lifecycle listener:
+    From the **Visual Editor** Tab, open the resource class from this path: `src/main/java/org/acme/person/PersonResource.java` and add this code after the `// TODO: Add lifecycle hook` to inject the lifecycle listener:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/PersonResource.java" data-target="insert" data-marker="// TODO: Add lifecycle hook">
+    ```java
     void onStart(@Observes StartupEvent ev) {
             // Create a reactive pipeline that will create 10,000 people
-            List&lt;Uni&lt;Person&gt;&gt; people = IntStream.range(0, 10000)
-                .mapToObj(i -&gt; CuteNameGenerator.generate())
-                .map(name -&gt; {
+            List<Uni<Person>> people = IntStream.range(0, 10000)
+                .mapToObj(i -> CuteNameGenerator.generate())
+                .map(name -> {
                     LocalDate birth = LocalDate.now().plusWeeks(Math.round(Math.floor(Math.random() * 20 * 52 * -1)));
                     EyeColor color = EyeColor.values()[(int)(Math.floor(Math.random() * EyeColor.values().length))];
 
                     return new Person(name, birth, color);
                 })
-                .map(person -&gt; person.&lt;Person&gt;persist())
+                .map(person -> person.<Person>persist())
                 .collect(Collectors.toList());
 
             // Execute the pipeline inside a single transaction, waiting for it to complete
-            Panache.withTransaction(() -&gt;
+            Panache.withTransaction(() ->
                 Uni.combine()
                     .all()
                     .unis(people)
-                    .combinedWith(l -&gt; null)
+                    .combinedWith(l -> null)
             ).await().indefinitely();
         }
-    </pre>
+    ```
 
     This code will insert 10,000 fake people with random birthdates, eye colors, and names at startup.
 
@@ -675,7 +797,10 @@ challenges:
 
     > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
 
-    `curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq`
+    ```
+    cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
+      curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq
+    ```
 
     You should get up to 2 records returned, but the total number available should show many more indicating our search found many more, and the total number of records should now be `10003` (the 10k we added plus the 3 original values):
 
@@ -715,9 +840,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: 06-exercise-table
   id: xvcqqow0cuyt
   type: challenge
@@ -725,7 +850,7 @@ challenges:
   assignment: |-
     Now that we have our app running on OpenShift, let's see what we can do.
 
-    Click to [access the graphical frontend which includes our DataTable](http://people-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+    Access the Web Console, and go to the `quarkus` project.
 
     It should look like:
 
@@ -772,7 +897,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 150
-checksum: "7951177671365825002"
+  timelimit: 300
+checksum: "3550047611423900741"
