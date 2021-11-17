@@ -76,7 +76,6 @@ challenges:
 
       * Use the native Helm integration in Argo CD
       * Explore a more GitOps friendly approach to Helm chart deployments
-
   assignment: |-
     Welcome! In this section we will be exploring the native Helm integration
     within Argo CD.
@@ -207,8 +206,8 @@ challenges:
 
     ![quarkus-app-tree](https://katacoda.com/openshift/assets/gitops/quarkus-app-tree.png)
 
-    Grab the URL by running the following command: 
-    
+    Grab the URL by running the following command:
+
     ```
     oc get route/quarkus-app -n demo  -o jsonpath='{.spec.host}{"\n"}'
     ```
@@ -220,8 +219,8 @@ challenges:
 
     You can now interact with this `Application` using the `argocd` CLI. For instance; if I want to change the scale of my application to 2 replicas, I just modify that value using the `argocd` CLI.
 
-    First, check to see how many pods you have running: 
-    
+    First, check to see how many pods you have running:
+
     ```
     oc get pods -n demo
     ```
@@ -233,14 +232,14 @@ challenges:
     quarkus-app-58f475cb86-rddz2   1/1     Running             0          14m
     ```
 
-    Now, modfy the Helm values: 
-    
+    Now, modfy the Helm values:
+
     ```
     argocd app set quarkus-app -p deploy.replicas=2
     ```
 
     You should now have 2 pods for this Application:
-    
+
     ```
     oc get pods -n demo
     ```
@@ -311,7 +310,7 @@ challenges:
     git clone https://github.com/redhat-developer-demos/openshift-gitops-examples
     cd openshift-gitops-examples
     ```
-    
+
     Let's examine the subchart:
 
     ```
@@ -456,4 +455,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "18199660565674562602"
+checksum: "15549198750880843928"

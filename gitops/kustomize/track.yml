@@ -100,10 +100,13 @@ challenges:
 
     The `build` command takes the YAML source (via a path or URL) and creates
     a new YAML that can be piped into `kubectl create`. To get started, download
-    the git respository for this exercise:
+    the git respository for this exercise (it's important do perform the following
+    operations under the `/opt` directory):
 
     ```
-    git clone https://github.com/redhat-developer-demos/openshift-gitops-examples.git && cd openshift-gitops-examples
+    cd /opt
+    git clone https://github.com/redhat-developer-demos/openshift-gitops-examples.git
+    cd openshift-gitops-examples
     ```
 
     We will work with an example in the `components/kustomize-build/` directory.
@@ -172,7 +175,7 @@ challenges:
     ```
 
     This runs the `kustomize build` command. You can see this by running: `kubectl kustomize`
-    ```
+  
 
     Although you can use this to pipe it into the apply command, you
     don't have to. The `kubectl apply` command has the `-k` option that
@@ -247,12 +250,55 @@ challenges:
     So now that you've explored `kustomize`, let's see how it fits into Argo
     CD and how it can be used in a GitOps workflow.
 
-    Before preceeding, move back into the project root directory:
+    Before preceeding, move into the project root directory:
 
     ```
-    cd ../..
+    cd /opt/openshift-gitops-examples/
     ```
     At this point, you should be on `openshift-gitops-examples` directory.
+
+    ## In this section we will be exploring the OpenShift GitOps
+    Operator, what it installs, and how all the components fit together.
+
+    ## Logging in to the Cluster via Dashboard
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    ## Exploring the GitOps Operator Installation
+
+    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+
+    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+
+    This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
+
+    * Click on `Operators` drop down on the leftside navigation.
+    * Click on `Installed Operators`
+    * In the `Project` dropdown, make sure `openshift-gitops` is selected.
+
+    You should see that the OpenShift GitOps Operator is installed.
+
+    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+
 
     ## The Argo CD Web Console
 

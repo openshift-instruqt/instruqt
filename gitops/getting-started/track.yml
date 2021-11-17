@@ -363,10 +363,10 @@ challenges:
     oc rollout status deploy/bgd -n bgd
     ```
 
-    Then visit your application using the route by navigating to the `EXTERNAL-IP` once available.
+    Then visit your application using the route by navigating to the URL under the "HOST/PORT" column
 
     ```
-    oc get svc -n bgd
+    oc get route -n bgd
     ```
 
     Your application should look like this.
