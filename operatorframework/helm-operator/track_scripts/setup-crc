@@ -184,3 +184,28 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     done
 #     echo "AVAILABLE"
 # done
+
+
+# Download Go with global assets script
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_go.sh | bash
+
+# Download dep
+curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+# Download Operator SDK
+export ARCH=$(case $(uname -m) in x86_64) echo -n amd64 ;; aarch64) echo -n arm64 ;; *) echo -n $(uname -m) ;; esac)
+export OS=$(uname | awk '{print tolower($0)}')
+export OPERATOR_SDK_DL_URL=https://github.com/operator-framework/operator-sdk/releases/download/v1.8.0
+
+
+curl -sL ${OPERATOR_SDK_DL_URL}/operator-sdk_${OS}_${ARCH} -o /usr/local/bin/operator-sdk
+chmod +x /usr/local/bin/operator-sdk
+
+# Install Helm
+
+curl -sL https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz -o /tmp/helm-v3.7.1-linux-amd64.tar.gz 
+tar -xvf /tmp/helm-v3.7.1-linux-amd64.tar.gz -C /tmp
+chmod +x /tmp/linux-amd64/helm
+mv /tmp/linux-amd64/helm /usr/local/bin
+rm -fr /tmp/helm-v3.7.1-linux-amd64.tar.gz /tmp/linux-amd64
+
