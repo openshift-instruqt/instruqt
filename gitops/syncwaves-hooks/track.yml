@@ -109,6 +109,24 @@ challenges:
 
     Read more about syncwaves on the [official documentation site](https://argoproj.github.io/argo-cd/user-guide/sync-waves/#how-do-i-configure-waves)
 
+    ## Installing OpenShift GitOps operator
+
+    OpenShift GitOps operator includes Argo CD and provides an Argo CD instance out-of-the-box.
+    
+    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+
+    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+
+    This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
+
+    * Click on `Operators` drop down on the leftside navigation.
+    * Click on `Installed Operators`
+    * In the `Project` dropdown, make sure `openshift-gitops` is selected.
+
+    You should see that the OpenShift GitOps Operator is installed.
+
+    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+    
     ## Exploring Manifests
 
     The manifests that will be deployed have been annotated with the following values:
@@ -275,7 +293,9 @@ challenges:
     will show that this will deploy the application in the `welcome-hooks`
     namespace.
 
-    Create this application ```
+    Create this application 
+    
+    ```
     oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-hooks.yaml
     ```
 
