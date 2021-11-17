@@ -60,11 +60,10 @@ challenges:
     Let's begin by creating a new project called `myproject`:
 
     ```
+    cd /root && \
     oc new-project myproject
     ```
-    `
-    ```
-    <br>
+
     Create the Custom Resource Definition (CRD) for the Etcd Operator:
 
     ```
@@ -95,21 +94,15 @@ challenges:
         storage: true
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-crd.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the CRD was successfully created.
 
     ```
     oc get crd etcdclusters.etcd.database.coreos.com
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -120,7 +113,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step2
   id: zcxgpe6gyrqx
   type: challenge
@@ -129,6 +122,7 @@ challenges:
     Create a dedicated Service Account responsible for running the Etcd Operator:
 
     ```
+    cd /root && \
     cat > etcd-operator-sa.yaml<<EOF
     apiVersion: v1
     kind: ServiceAccount
@@ -136,23 +130,17 @@ challenges:
       name: etcd-operator-sa
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-sa.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Service Account was successfully created:
 
     ```
     oc get sa
     ```
-    `
-    ```
-    <br>
+
     Create the Role that the `etcd-operator-sa` Service Account will need for authorization to perform actions against the Kubernetes API:
 
     ```
@@ -194,23 +182,17 @@ challenges:
       - get
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-role.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Role was successfully created:
 
     ```
     oc get roles
     ```
-    `
-    ```
-    <br>
+
     Create the RoleBinding to bind the `etcd-operator-role` Role to the `etcd-operator-sa` Service Account:
 
     ```
@@ -229,21 +211,15 @@ challenges:
       namespace: myproject
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-rolebinding.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the RoleBinding was successfully created:
 
     ```
     oc get rolebindings
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -254,7 +230,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step3
   id: qyykecaxyt2g
   type: challenge
@@ -263,6 +239,7 @@ challenges:
     Create the Deployment containing the Etcd Operator container image:
 
     ```
+    cd /root && \
     cat > etcd-operator-deployment.yaml<<EOF
     apiVersion: apps/v1
     kind: Deployment
@@ -301,50 +278,40 @@ challenges:
           serviceAccountName: etcd-operator-sa
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-deployment.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Etcd Operator Deployment was successfully created:
 
     ```
     oc get deploy
     ```
-    `
-    ```
-    <br>
+
     Verify the Etcd Operator Deployment pods are running:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
-    Open a new terminal window to follow Etcd Operator logs in real-time:
+
+    From *Terminal 2* follow Etcd Operator logs in real-time:
 
     ```
     export ETCD_OPERATOR_POD=$(oc get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}')
     oc logs $ETCD_OPERATOR_POD -f
     ```
-    `
-    ```
-    <br>
+
     Observe the leader-election lease on the Etcd Operator Endpoint:
 
     ```
     oc get endpoints etcd-operator -o yaml
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -352,7 +319,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step4
   id: y8vkazhypisq
   type: challenge
@@ -361,9 +328,8 @@ challenges:
     Ensure you are currently scoped to the `myproject` Namespace:
 
     ```
-    oc project myproject
-    ```
-    `
+    cd /root && \
+      oc project myproject
     ```
 
     Create an Etcd cluster by referring to the new Custom Resource, `EtcdCluster`, defined in the Custom Resource Definition on Step 1:
@@ -379,39 +345,28 @@ challenges:
       version: 3.1.10
     EOF
     ```
-    `
-    ```
-    <br>
+
     ```
     oc create -f etcd-operator-cr.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the cluster object was created:
 
     ```
     oc get etcdclusters
     ```
-    `
-    ```
-    <br>
+
     Watch the pods in the Etcd cluster get created:
 
     ```
     oc get pods -l etcd_cluster=example-etcd-cluster -w
     ```
-    `
-    ```
-    <br>
+
     Verify the cluster has been exposed via a ClusterIP service:
 
     ```
     oc get services -l etcd_cluster=example-etcd-cluster
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
     type: terminal
@@ -421,7 +376,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step5
   id: jakpxnovlnui
   type: challenge
@@ -432,17 +387,13 @@ challenges:
     ```
     oc run etcdclient --image=busybox busybox --restart=Never -- /usr/bin/tail -f /dev/null
     ```
-    `
-    ```
-    <br>
+
     Access the pod:
 
     ```
     oc rsh etcdclient
     ```
-    `
-    ```
-    <br>
+
 
     Install the Etcd Client:
 
@@ -451,35 +402,26 @@ challenges:
     tar -xvf etcd-v3.1.4-linux-amd64.tar.gz
     cp etcd-v3.1.4-linux-amd64/etcdctl .
     ```
-    `
-    ```
-    <br>
+
     Set the etcd version and endpoint variables:
 
     ```
     export ETCDCTL_API=3
     export ETCDCTL_ENDPOINTS=example-etcd-cluster-client:2379
     ```
-    `
-    ```
-    <br>
+
     Attempt to write a key/value into the Etcd cluster:
 
     ```
     ./etcdctl put operator sdk
     ./etcdctl get operator
     ```
-    `
-    ```
-    <br>
+
     Exit out of the client pod:
 
     ```
     exit
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
     type: terminal
@@ -489,7 +431,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step6
   id: ujwnpiy5yoxe
   type: challenge
@@ -500,18 +442,13 @@ challenges:
     ```
     oc patch etcdcluster example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/size", "value":5}]'
     ```
-    `
-    ```
-    <br>
+
 
     Let's change the version of our `example-etcd-cluster` CR. The etcd-operator pod will detect the CR `spec.version` change and create a new cluster with the newly specified image:
 
     ```
     oc patch etcdcluster example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/version", "value":3.2.13}]'
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
     type: terminal
@@ -521,21 +458,18 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step7
   id: kvs8dfokc5zh
   type: challenge
   title: Disaster Recovery in Action
   assignment: |
-    In another session delete a pod from the cluster and watch recovery in real-time.
+    Delete a pod from the cluster and watch recovery in real-time.
 
     ```
     export EXAMPLE_ETCD_CLUSTER_POD=$(oc get pods -l app=etcd -o jsonpath='{.items[0].metadata.name}')
     oc delete pod $EXAMPLE_ETCD_CLUSTER_POD
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
     type: terminal
@@ -545,7 +479,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 300
 - slug: step8
   id: ain1vmrvjr6s
   type: challenge
@@ -556,25 +490,18 @@ challenges:
     ```
     oc delete etcdcluster example-etcd-cluster
     ```
-    `
-    ```
-    <br>
+
     Delete the Etcd Operator:
 
     ```
     oc delete deployment etcd-operator
     ```
-    `
-    ```
-    <br>
+
     Delete the Etcd CRD:
 
     ```
     oc delete crd etcdclusters.etcd.database.coreos.com
     ```
-    `
-    ```
-    <br>
   tabs:
   - title: Terminal 1
     type: terminal
@@ -584,5 +511,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 225
-checksum: "10714513038401832232"
+  timelimit: 300
+checksum: "14142202361520398135"

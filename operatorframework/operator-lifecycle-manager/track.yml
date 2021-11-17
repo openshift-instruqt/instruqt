@@ -3,7 +3,7 @@ id: gs6uksswufnj
 type: track
 title: Operator Lifecycle Manager
 description: |-
-  ![Operator Lifecycle Manager](../../assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+  ![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
 
   The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) project is a component of the Operator Framework, an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
 
@@ -49,7 +49,7 @@ challenges:
   notes:
   - type: text
     contents: |-
-      ![Operator Lifecycle Manager](../../assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+      ![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
 
       The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) project is a component of the Operator Framework, an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
 
@@ -109,7 +109,6 @@ challenges:
     ```
     oc -n openshift-operator-lifecycle-manager get deploy
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -173,7 +172,6 @@ challenges:
     ```
     oc get packagemanifests -l catalog=redhat-marketplace
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -189,12 +187,25 @@ challenges:
   type: challenge
   title: Accessing OLM on the OpenShift Console
   assignment: |
-    You can access OLM via the OpenShift console by clicking the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+    Access the OpenShift Web Console to also login from the Web UI:
 
-    You will then able able to login with admin permissions:
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
 
-    * **Username:** ``admin``
-    * **Password:** ``admin``
+    Copy the URL from the output of the above command and open it in your browser.
+
+    We'll deploy our app as the `admin` user. Use the following credentials:
+
+    * Username:
+    ```
+    admin
+    ```
+
+    * Password:
+    ```
+    admin
+    ```
 
     The OLM panel appears in the **Operators** pane:
 
@@ -225,6 +236,7 @@ challenges:
     We should first create an [OperatorGroup](https://operator-framework.github.io/olm-book/docs/operator-scoping.html) to ensure Operators installed to this namespace will be capable of watching for Custom Resources within the `myproject` namespace:
 
     ```
+    cd /root && \
     cat > argocd-operatorgroup.yaml <<EOF
     apiVersion: operators.coreos.com/v1
     kind: OperatorGroup
@@ -294,7 +306,6 @@ challenges:
     ```
     oc get installplan
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -392,6 +403,7 @@ challenges:
     Let's deploy our ArgoCD Server "operand" by creating the ArgoCD manifest via the CLI. You can also do this on the OpenShift console.
 
     ```
+    cd /root/ && \
     cat > argocd-cr.yaml <<EOF
     apiVersion: argoproj.io/v1alpha1
     kind: ArgoCD
@@ -430,7 +442,6 @@ challenges:
     oc get services
     oc get routes
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -502,7 +513,6 @@ challenges:
     oc get pods
     oc get roles
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -513,4 +523,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "3429868659905424352"
+checksum: "6046104165381504995"
