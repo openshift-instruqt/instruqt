@@ -175,7 +175,7 @@ challenges:
     ```
 
     This runs the `kustomize build` command. You can see this by running: `kubectl kustomize`
-  
+
 
     Although you can use this to pipe it into the apply command, you
     don't have to. The `kubectl apply` command has the `-k` option that
@@ -424,4 +424,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "11054925712065571203"
+checksum: "18313114484201793342"

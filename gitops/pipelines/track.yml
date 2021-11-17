@@ -136,13 +136,11 @@ challenges:
     * **Username:** ``admin``
     * **Password:** ``admin``
 
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+
     ## Installing the OpenShift Pipelines Operator in Web Console
 
     You can install OpenShift Pipelines using the Operator listed in the OpenShift Container Platform OperatorHub. When you install the OpenShift Pipelines Operator, the Custom Resources (CRs) required for the Pipelines configuration are automatically installed along with the Operator.
-
-    Firstly, switch to the _Console_ and login to the OpenShift web console using the same credentials you used above.
-
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     In the _Administrator_ perspective of the web console, navigate to Operators → OperatorHub. You can see the list of available operators for OpenShift provided by Red Hat as well as a community of partners and open-source projects.
 
@@ -534,13 +532,13 @@ challenges:
     We'll first build and deploy our backend application using the following command, with the params already included for our specific demo:
 
     ```
-    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc -p deployment-name=pipelines-vote-api -p git-url=https://github.com/openshift/pipelines-vote-api.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-api --showlog
+    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc -p deployment-name=pipelines-vote-api -p git-url=https://github.com/openshift/pipelines-vote-api.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-api -p git-revision=master --showlog
     ```
 
     Similarly, start a pipeline to build and deploy the frontend application:
 
     ```
-    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc -p deployment-name=pipelines-vote-ui -p git-url=https://github.com/openshift/pipelines-vote-ui.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-ui --showlog
+    tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=source-pvc -p deployment-name=pipelines-vote-ui -p git-url=https://github.com/openshift/pipelines-vote-ui.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-ui -p git-revision=master --showlog
     ```
 
     As soon as you start the `build-and-deploy` pipeline, a `PipelineRun` will be instantiated and pods will be created to execute the tasks that are defined in the pipeline. To display a list of Pipelines, use the following command:
@@ -565,6 +563,7 @@ challenges:
 
     To view the `PipelineRun` visually, visit the Pipelines section of the developer perspective. From here, you can see the details of our `Pipeline`, including the YAML file we've applied, the `PipelineRun`, input custom `params`, and more:
 
+    // TODO : Update the following image to show the actual pipelineruns
     ![Web Console Pipelines](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
 
     Congrats! Your `Pipeline` has successfully ran, and the final step will provide instructions on how to access the deployed image.
