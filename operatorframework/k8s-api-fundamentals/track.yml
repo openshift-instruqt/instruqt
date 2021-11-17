@@ -132,10 +132,7 @@ challenges:
     oc proxy --port=8001
     ```
 
-    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
-
-
-    Send a `GET` request to the Kubernetes API using `curl`:
+    From *Terminal 2*, send a `GET` request to the Kubernetes API using `curl`:
 
     ```
     curl -X GET http://localhost:8001
@@ -174,7 +171,8 @@ challenges:
     Export the manifest associated with `my-two-container-pod` in json format:
 
     ```
-    oc get pods my-two-container-pod --export -o json > podmanifest.json
+    cd /root && \
+      oc get pods my-two-container-pod -o json > podmanifest.json
     ```
 
     Within the manifest, replace the `1.13` version of alpine with `1.14`:
@@ -267,8 +265,13 @@ challenges:
     ```
     oc apply -f replica-set.yaml
     ```
+    Once sgain use the `oc proxy` command to proxy local requests on port 8001 to the Kubernetes API:
 
-    In a new terminal window, select all pods that match `app=myfirstapp`:
+    ```
+    oc proxy --port=8001
+    ```
+
+    From *Terminal 2*, launch this command to select all pods that match `app=myfirstapp`:
 
     ```
     oc get pods -l app=myfirstapp --show-labels -w
@@ -393,13 +396,14 @@ challenges:
     oc delete deployment finalizer-test
     ```
 
-    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
 
 
-    Observe the Deployment still exits and has been updated with the `deletionGracePeriodSeconds` and `deletionTimestamp` fields.
+
+    From *Terminal 2*, observe the Deployment still exits and has been updated with the `deletionGracePeriodSeconds` and `deletionTimestamp` fields.
 
     ```
-    oc get deployment finalizer-test -o yaml | grep 'deletionGracePeriodSeconds\|deletionTimestamp'
+    cd /root && \
+      oc get deployment finalizer-test -o yaml | grep 'deletionGracePeriodSeconds\|deletionTimestamp'
     ```
 
     Attempt to scale the Deployment up and down. Although status is updated, pods will not be created/deleted:
@@ -490,11 +494,8 @@ challenges:
     oc proxy --port=8001
     ```
 
-    Open up another terminal by clicking the **+** button and select `Open New Terminal`.
 
-
-
-    Let's create a new Custom Resource Definition (CRD) object manifest for Postgres:
+    From *Terminal 2*, let's create a new Custom Resource Definition (CRD) object manifest for Postgres:
 
     ```
     cd /root && \
@@ -600,4 +601,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "4394853535890191205"
+checksum: "14940042738647802480"
