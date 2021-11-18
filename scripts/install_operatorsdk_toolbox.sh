@@ -1,6 +1,8 @@
 #!/bin/bash
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_go.sh | bash
 
+source /root/.bashrc
+
 # Download dep
 curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
