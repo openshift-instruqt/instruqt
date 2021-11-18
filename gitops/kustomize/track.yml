@@ -5,7 +5,7 @@ title: Working with Kustomize
 description: |
   ## Goal
 
-  This guide helps you get familiar with how to use Kustomize on Argo CD on OpenShift.
+  This guide helps you get familiar with how to use Kustomize with Argo CD on OpenShift.
 
 
   ## Concepts
@@ -19,7 +19,7 @@ description: |
   * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
   * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
-  ![Kustomize Logo](../../assets/gitops/kustomize_logo.png)
+  ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
 
   ## Use case
 
@@ -27,8 +27,6 @@ description: |
 
   * Exploring the Kustomize syntax
   * Deploying a Kustomized application
-
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -64,7 +62,7 @@ challenges:
       * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
       * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
-      ![Kustomize Logo](../../assets/gitops/kustomize_logo.png)
+      ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
 
       ## Use case
 
@@ -101,11 +99,20 @@ challenges:
     `edit` command.
 
     The `build` command takes the YAML source (via a path or URL) and creates
-    a new YAML that can be piped into `kubectl create`. We will work with
-    an example in the `~/resources/openshift-gitops-examples/components/kustomize-build/` directory.
+    a new YAML that can be piped into `kubectl create`. To get started, download
+    the git respository for this exercise (it's important do perform the following
+    operations under the `/opt` directory):
 
     ```
-    cd ~/resources/openshift-gitops-examples/components/kustomize-build/
+    cd /opt
+    git clone https://github.com/redhat-developer-demos/openshift-gitops-examples.git
+    cd openshift-gitops-examples
+    ```
+
+    We will work with an example in the `components/kustomize-build/` directory.
+
+    ```
+    cd components/kustomize-build/
     ```
 
     Here you should see two files, a `kustomization.yaml` file and a `welcome.yaml` file
@@ -114,10 +121,10 @@ challenges:
     ls -l
     ```
 
-    Taking a look at the `openshift-gitops-examples/components/kustomize-build/welcome.yaml`
+    Taking a look at the [welcome.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/kustomize-build/welcome.yaml)
     file shows nothing special. Just a standard Kubernetes manifest.
 
-    What if, for example, we wanted to add a `label` to this manifest without editing it? This is where the `openshift-gitops-examples/components/kustomize-build/kustomization.yaml` file comes in.
+    What if, for example, we wanted to add a `label` to this manifest without editing it? This is where the [kustomization.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/kustomize-build/kustomization.yaml) file comes in.
 
     As you can see in the output there isn't much. The two sections for this
     example are the `resources` and the `patchesJson6902` sections.
@@ -126,10 +133,12 @@ challenges:
 
     > **NOTE** You can read about what options are available for patching in the [official documentaion site](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
 
-    Build this manifest by running: ```
+    Build this manifest by running:
+
+    ```
     kustomize build .
-    ``` , and
-    you can see that the new label got added to the manifest!
+    ```
+    and you can see that the new label got added to the manifest!
 
     You can use the `kustomize edit` command instead of writing YAML. For
     example, you can change the image tag this `Deployment` uses from `latest`
@@ -139,12 +148,9 @@ challenges:
     kustomize edit set image quay.io/redhatworkshops/welcome-php:ffcd15
     ```
 
-    This will update the
-    `openshift-gitops-examples/components/kustomize-build/kustomization.yaml` file with a
-    ```
-    images` section. Now when you run `kustomize build .
-    ``` -
-    you should see not only the new label but also the new `ffcd15` image tag.
+    This will update the `components/kustomize-build/kustomization.yaml` file with an
+    images` section. Now when you run `kustomize build . ` you should see not only the new label
+    but also the new `ffcd15` image tag.
 
     > **NOTE** You may have to close the `kustomization.yaml` tab and re-open it to see the changes.
 
@@ -162,27 +168,34 @@ challenges:
 
     Since Kubernetes 1.14, The `kubectl` command (and by extention the
     `oc` cli) has support for Kustomize built in.  You can see this by
-    running the ```
-    kubectl kustomize --help
-    ``` command.
+    running the following command:
 
-    This runs the ```
-    kustomize build` command. You can see this by running: `kubectl kustomize
     ```
+    kubectl kustomize --help
+    ```
+
+    This runs the `kustomize build` command. You can see this by running: `kubectl kustomize`
+
 
     Although you can use this to pipe it into the apply command, you
     don't have to. The `kubectl apply` command has the `-k` option that
     will run the build before it applies the manifest.
 
-    To test this out, first create a project: ```
+    To test this out, first create a project:
+
+    ```
     oc new-project kustomize-test
     ```
 
-    Next make sure you are on the project: ```
+    Next make sure you are on the project:
+
+    ```
     oc project kustomize-test
     ```
 
-    Finally run the command to build and apply the manifests: ```
+    Finally run the command to build and apply the manifests:
+
+    ```
     kubectl apply -k ./
     ```
 
@@ -190,15 +203,21 @@ challenges:
     > only requirement is that you have a `kustomization.yaml` file in
     > the path.
 
-    This should create the deployment and you should see the pods running in the namespace: ```
+    This should create the deployment and you should see the pods running in the namespace:
+
+    ```
     kubectl get pods -n kustomize-test
     ```
 
-    You can see the deployment was created with the additional labels: ```
+    You can see the deployment was created with the additional labels:
+
+    ```
     kubectl get deployment welcome-php -o jsonpath='{.metadata.labels}' | jq -r
     ```
 
-    Also, the image was updated based on the customization that was made: ```
+    Also, the image was updated based on the customization that was made:
+
+    ```
     kubectl get deploy welcome-php  -o jsonpath='{.spec.template.spec.containers[].image}{"\n"}'
     ```
 
@@ -226,24 +245,94 @@ challenges:
     So now that you've explored `kustomize`, let's see how it fits into Argo
     CD and how it can be used in a GitOps workflow.
 
-    Before preceeding, move back into the home directory: ```
-    cd ~
+    Before preceeding, move into the project root directory:
+
     ```
+    cd /opt/openshift-gitops-examples/
+    ```
+    At this point, you should be on `openshift-gitops-examples` directory.
+
+    ## In this section we will be exploring the OpenShift GitOps
+    Operator, what it installs, and how all the components fit together.
+
+    ## Logging in to the Cluster via Dashboard
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    ## Exploring the GitOps Operator Installation
+
+    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+
+    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+
+    This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
+
+    * Click on `Operators` drop down on the leftside navigation.
+    * Click on `Installed Operators`
+    * In the `Project` dropdown, make sure `openshift-gitops` is selected.
+
+    You should see that the OpenShift GitOps Operator is installed.
+
+    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+
 
     ## The Argo CD Web Console
 
-    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) tab.
+    Let's find the URL for the ArgoCD API Server:
+
+    ```
+    oc get routes -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'
+    ```
+    Find the default password for the `admin` account as follows:
+
+    ```
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+    ```
+
+    To login from the terminal, execute the following (replace $ARGOCD_SERVER_URL with the above URL):
+
+    ```
+    argocd login $ARGOCD_SERVER_URL
+    ```
+
+    You'll have to accept the self-signed certificate.
+
+
+    You can login with the following:
+    * **Username:** ``admin``
+    * **Password:** <from previous command>
+
+    You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
+
+    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
     ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
 
-    You can login with the following
-    * **Username:** ``admin``
-    * **Password:** ```
-    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
-    ```
+    You can use the same credentials to login from the UI.
+
+    > **NOTE** The Password is stored in a secret on the platform.
 
     ## Base Application
 
@@ -252,14 +341,16 @@ challenges:
     command:
 
     ```
-    oc apply -f resources/openshift-gitops-examples/components/applications/bgd-app.yaml
+    oc apply -f components/applications/bgd-app.yaml
     ```
 
     This should create an `Application` in the Argo CD UI.
 
     ![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgdk-app.png)
 
-    You can wait for the rollout of the application by running ```
+    You can wait for the rollout of the application by running
+
+    ```
     oc rollout status deploy/bgd -n bgd
     ```
 
@@ -279,13 +370,13 @@ challenges:
     use if you have different environements or clusters you're deploying
     to.
 
-    Take a look at the `Application` definition:  `openshift-gitops-examples/components/applications/bgdk-app.yaml`
+    Take a look at the `Application` definition:  [bgdk-app.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/bgdk-app.yaml)
 
     This application is pointed to the [same repo](https://github.com/redhat-developer-demos/openshift-gitops-examples) but [different directory](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgdk).
 
     This is using a concept of an "overlay", where you have a "base"
     set of manifests and you overlay your customizations. Take a look
-    at the `openshift-gitops-examples/apps/bgd/overlays/bgdk/kustomization.yaml` example
+    at the [apps/bgd/overlays/bgdk/kustomization.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/bgd/overlays/bgdk/kustomization.yaml) example
     file.
 
     This `kustomization.yaml` takes the base application and patches the
@@ -293,8 +384,10 @@ challenges:
     also deploys the application to the `bgdk` namespace (denoted by
     the `namespace:` section of the file).
 
-    Deploy this application:  ```
-    oc apply -f resources/openshift-gitops-examples/components/applications/bgdk-app.yaml
+    Deploy this application:
+
+    ```
+    oc apply -f components/applications/bgdk-app.yaml
     ```
 
     This should show you two apps on the Argo CD UI.
@@ -321,4 +414,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "10639944222851997623"
+checksum: "18313114484201793342"

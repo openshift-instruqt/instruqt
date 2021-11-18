@@ -184,3 +184,31 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     done
 #     echo "AVAILABLE"
 # done
+
+# Appending script here for testing phase
+# Next phase: curl <absolute path of the script> | bash 
+
+## Installs the argocd CLI tool.
+curl -kL https://github.com/argoproj/argo-cd/releases/download/v2.0.1/argocd-linux-amd64 -o /usr/local/bin/argocd
+chmod +x /usr/local/bin/argocd
+
+## Installs the kustomize cli
+curl -kL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.4.0/kustomize_v4.4.0_linux_amd64.tar.gz -o /usr/local/bin/kustomize.tar.gz
+tar -xvf /usr/local/bin/kustomize.tar.gz -C /usr/local/bin
+rm -rf /usr/local/bin/kustomize.tar.gz
+chmod +x /usr/local/bin/kustomize
+
+## Installs the Helm cli
+
+curl -kL https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz -o /usr/local/bin/helm.tar.gz
+tar -xvf /usr/local/bin/helm.tar.gz -C /usr/local/bin
+mv /usr/local/bin/linux-amd64/helm /usr/local/bin/helm
+rm -rf /usr/local/bin/linux-amd64
+chmod +x /usr/local/bin/helm
+
+## echo "export PATH=/usr/local/bin:$PATH" >> /root/.bash_profile
+## Remember to reload the bash profile after the last export commands
+## source /root/.bash_profile
+
+echo "export HOME=/root" >> /root/.bash_profile
+echo "cd /root" >> /root/.bash_profile
