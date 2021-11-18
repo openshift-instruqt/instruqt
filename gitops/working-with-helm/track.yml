@@ -146,10 +146,33 @@ challenges:
     > runs a `helm template ... | kubectl apply -f -`. We'll go over that
     > a little later
 
+    ## Logging in to the Cluster via Dashboard
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+    
     ## Installing OpenShift GitOps operator
 
     OpenShift GitOps operator includes Argo CD and provides an Argo CD instance out-of-the-box.
-    
+
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
     ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
@@ -472,4 +495,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "15549198750880843928"
+checksum: "2119577259551310847"
