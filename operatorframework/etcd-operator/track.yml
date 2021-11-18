@@ -350,6 +350,12 @@ challenges:
     oc create -f etcd-operator-cr.yaml
     ```
 
+    Patch the just created resource:
+
+    ```
+    oc patch service example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/publishNotReadyAddresses", "value":true}]'
+    ```
+
     Verify the cluster object was created:
 
     ```
@@ -512,4 +518,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "14142202361520398135"
+checksum: "18074853379496034420"
