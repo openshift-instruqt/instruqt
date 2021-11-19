@@ -91,18 +91,17 @@ challenges:
 
       Let's begin!
   assignment: |-
-    Let's begin by creating a new project called `myproject`:
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -i admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+    Now let's create a new project where to work with:
 
     ```
     oc new-project myproject
     ```
-
-    Change context:
-
-    ```
-    su - root
-    ```
-
 
     Let's now create a new directory for our project:
 
@@ -582,4 +581,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "5904984959207090977"
+checksum: "9932554682160184272"
