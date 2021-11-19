@@ -94,7 +94,7 @@ challenges:
     Let's begin by connecting to OpenShift:
 
     ```
-    oc login -i admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     Now let's create a new project where to work with:
@@ -155,7 +155,7 @@ challenges:
     hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root/projects/podset-operator
   difficulty: basic
   timelimit: 257
@@ -225,7 +225,8 @@ challenges:
     Let's now observe the default `controllers/podset_controller.go` file:
 
     ```
-    cat controllers/podset_controller.go
+    cd /root/projects/podset-operator && \
+      cat controllers/podset_controller.go
     ```
 
     This default controller requires additional logic so we can trigger our reconciler whenever `kind: PodSet` objects are added, updated, or deleted. We also want to trigger the reconciler whenever Pods owned by a given PodSet are added, updated, and deleted as well. To accomplish this. we modify the controller's `SetupWithManager` method.
@@ -456,9 +457,10 @@ challenges:
     ```
     WATCH_NAMESPACE=myproject make run
     ```
-    `
-    ```
   tabs:
+  - title: Terminal Container
+    type: terminal
+    hostname: container
   - title: Terminal VM
     type: terminal
     hostname: crc
@@ -538,6 +540,9 @@ challenges:
     oc get pods
     ```
   tabs:
+  - title: Terminal Container
+    type: terminal
+    hostname: container
   - title: Terminal VM
     type: terminal
     hostname: crc
@@ -572,6 +577,9 @@ challenges:
     oc get pods
     ```
   tabs:
+  - title: Terminal Container
+    type: terminal
+    hostname: container
   - title: Terminal VM
     type: terminal
     hostname: crc
@@ -581,4 +589,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "9932554682160184272"
+checksum: "12225193197509664585"
