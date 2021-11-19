@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+dnf install -y make automake gcc gcc-c++ golang
