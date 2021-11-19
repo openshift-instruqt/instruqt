@@ -207,29 +207,6 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 # curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_controller.go -o /tmp/podset_types.go
 # curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/app_v1alpha1_podset.yaml -o /tmp/app_v1alpha1_podset.yaml
 
-sudo --preserve-env podman pull --authfile /var/lib/kubelet/config.json "registry.redhat.io/rhel8/support-tools:latest"
-
- 
-sudo podman run \
-    --hostname toolbox \
-    --name toolbox-root \
-    --privileged \
-    --net=host \
-    --pid=host \
-    --ipc=host \
-    --tty \
-    --interactive \
-    -e HOST=/host \
-    -e NAME=toolbox-root \
-    -e IMAGE="rhel8/support-tools" \
-    --security-opt label=disable \
-    --volume /run:/run \
-    --volume /var/log:/var/log \
-    --volume /etc/machine-id:/etc/machine-id \
-    --volume /etc/localtime:/etc/localtime \
-    --volume /:/host \
-    "registry.redhat.io/rhel8/support-tools:latest" \
-    dnf install -y make automake gcc gcc-c++ &&  curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh && curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go  && curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go && curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/app_v1alpha1_podset.yaml -o /tmp/app_v1alpha1_podset.yaml
 
 #echo "toolbox" >> /root/.bashrc
 

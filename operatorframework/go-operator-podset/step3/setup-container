@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go

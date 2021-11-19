@@ -50,7 +50,7 @@ private: false
 published: true
 challenges:
 - slug: step1
-  id: buadbcwgxmrx
+  id: jg5dplj5k0ev
   type: challenge
   title: Creating a New Project
   notes:
@@ -91,18 +91,17 @@ challenges:
 
       Let's begin!
   assignment: |-
-    Let's begin by creating a new project called `myproject`:
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+    Now let's create a new project where to work with:
 
     ```
     oc new-project myproject
     ```
-
-    Change context:
-
-    ```
-    su - root
-    ```
-
 
     Let's now create a new directory for our project:
 
@@ -122,7 +121,10 @@ challenges:
     operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
     ```
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -132,7 +134,7 @@ challenges:
   difficulty: basic
   timelimit: 3600
 - slug: step2
-  id: f6wr7y00xxoq
+  id: dzsv1ngmnmyg
   type: challenge
   title: Creating the API and Controller
   assignment: |-
@@ -145,17 +147,20 @@ challenges:
 
     We should now see the `/api`, `config`, and `/controllers` directories.
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root/projects/podset-operator
   difficulty: basic
   timelimit: 257
 - slug: step3
-  id: tvanlkh2nule
+  id: a6v99demqc33
   type: challenge
   title: Defining the Spec and Status
   assignment: "Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go`
@@ -200,7 +205,10 @@ challenges:
     apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\nConfirm the CRD
     was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```\n"
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -210,14 +218,15 @@ challenges:
   difficulty: basic
   timelimit: 257
 - slug: step4
-  id: g9wches6jy7y
+  id: pgps0la5tvck
   type: challenge
   title: Customizing the Operator Logic
   assignment: |-
     Let's now observe the default `controllers/podset_controller.go` file:
 
     ```
-    cat controllers/podset_controller.go
+    cd /root/projects/podset-operator && \
+      cat controllers/podset_controller.go
     ```
 
     This default controller requires additional logic so we can trigger our reconciler whenever `kind: PodSet` objects are added, updated, or deleted. We also want to trigger the reconciler whenever Pods owned by a given PodSet are added, updated, and deleted as well. To accomplish this. we modify the controller's `SetupWithManager` method.
@@ -419,7 +428,10 @@ challenges:
     go mod tidy
     ```
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -429,7 +441,7 @@ challenges:
   difficulty: basic
   timelimit: 257
 - slug: step5
-  id: 64l5mzorwofe
+  id: pf2cvqrvgq2q
   type: challenge
   title: Running the Operator Locally (Outside the Cluster)
   assignment: |-
@@ -443,12 +455,14 @@ challenges:
     Once running, the command will block the current session. You can continue interacting with the OpenShift cluster by opening a new terminal window. You can quit the session by pressing `CTRL + C`.
 
     ```
-    WATCH_NAMESPACE=myproject make run
-    ```
-    `
+    cd /root/projects/podset-operator && \
+      WATCH_NAMESPACE=myproject make run
     ```
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -458,7 +472,7 @@ challenges:
   difficulty: basic
   timelimit: 257
 - slug: step6
-  id: fh3lm98wyh33
+  id: r3cdgpmcxnv4
   type: challenge
   title: Creating the PodSet Custom Resource
   assignment: |
@@ -527,7 +541,10 @@ challenges:
     oc get pods
     ```
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -537,7 +554,7 @@ challenges:
   difficulty: basic
   timelimit: 257
 - slug: step7
-  id: 43hfkltq8bv2
+  id: rmjs0f69wgdf
   type: challenge
   title: Deleting the PodSet Custom Resource
   assignment: |-
@@ -561,7 +578,10 @@ challenges:
     oc get pods
     ```
   tabs:
-  - title: Terminal 1
+  - title: Terminal Container
+    type: terminal
+    hostname: container
+  - title: Terminal VM
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -570,4 +590,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "13933539994039966888"
+checksum: "6794797803162983521"
