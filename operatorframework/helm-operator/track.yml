@@ -76,8 +76,6 @@ challenges:
     ```
     oc new-project myproject
     ```
-    `
-    ```
 
     CockroachDB is a database so let's ensure we have accessible persistent storage by adding some current `PersistentVolumes` to a `StorageClass` called `local-storage`:
 
@@ -108,7 +106,7 @@ challenges:
     ```
     operator-sdk create api --helm-chart=cockroachdb --helm-chart-repo=https://charts.helm.sh/stable --helm-chart-version=3.0.7
     ```
-    <br>
+    
     ### Project Scaffolding Layout
 
     After creating a new operator project the directory has numerous generated folders and files. The following
@@ -141,8 +139,6 @@ challenges:
 
     ```
     cat watches.yaml
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -177,8 +173,7 @@ challenges:
     ```
     WATCH_NAMESPACE=myproject make run
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -199,8 +194,7 @@ challenges:
     ```
     cd projects/cockroachdb-operator
     ```
-    `
-    ```
+
     Before applying the CockroachDB Custom Resource, observe the CockroachDB Helm Chart `values.yaml`:
 
     [CockroachDB Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/cockroachdb/values.yaml)
@@ -236,8 +230,7 @@ challenges:
     ```
     oc project myproject
     ```
-    `
-    ```
+
 
     ```
     oc apply -f config/samples/charts_v1alpha1_cockroachdb.yaml
@@ -266,8 +259,7 @@ challenges:
     ```
     oc get services
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -296,8 +288,7 @@ challenges:
     COCKROACHDB_UI_URL=`oc get route -o jsonpath={$.items[0].spec.host}`
     echo $COCKROACHDB_UI_URL
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -343,8 +334,7 @@ challenges:
     ```
     \q
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -417,8 +407,7 @@ challenges:
     ```
     \q
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -447,8 +436,7 @@ challenges:
     oc get pods
     oc get services
     ```
-    `
-    ```
+
   tabs:
   - title: Terminal 1
     type: terminal
