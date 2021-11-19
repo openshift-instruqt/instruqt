@@ -15,7 +15,7 @@ description: |
   are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
   breaks up the delivery of these manifests in different phases.
 
-  ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -61,7 +61,7 @@ challenges:
       are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
       breaks up the delivery of these manifests in different phases.
 
-      ![ArgoCD Logo](../../assets/gitops/argocd-logo.png)
+      ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
 
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -109,14 +109,32 @@ challenges:
 
     Read more about syncwaves on the [official documentation site](https://argoproj.github.io/argo-cd/user-guide/sync-waves/#how-do-i-configure-waves)
 
+    ## Installing OpenShift GitOps operator
+
+    OpenShift GitOps operator includes Argo CD and provides an Argo CD instance out-of-the-box.
+    
+    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+
+    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+
+    This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
+
+    * Click on `Operators` drop down on the leftside navigation.
+    * Click on `Installed Operators`
+    * In the `Project` dropdown, make sure `openshift-gitops` is selected.
+
+    You should see that the OpenShift GitOps Operator is installed.
+
+    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+    
     ## Exploring Manifests
 
     The manifests that will be deployed have been annotated with the following values:
 
-    * The Namspace with `0` `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves/welcome-php-ns.yaml`
-    * The Deployment with `1` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-deployment.yaml`
-    * The Service with `2` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-svc.yaml`
-    * Finally the Route with `3` `openshift-gitops-examples/apps/welcome-php/base/welcome-php-route.yaml`
+    * The Namspace with `0` [welcome-php-ns.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/overlays/syncwaves/welcome-php-ns.yaml)
+    * The Deployment with `1` [welcome-php-deployment.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/base/welcome-php-deployment.yaml)
+    * The Service with `2` [welcome-php-svc.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/base/welcome-php-svc.yaml)
+    * Finally the Route with `3` [welcome-php-route.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/base/welcome-php-route.yaml)
 
     Argo CD will apply the Namespace first (since it's the lowest value),
     and make sure it returns a "healthy" status before moving on.
@@ -131,23 +149,47 @@ challenges:
     Before we deploy this application, make sure you've opened the Argo CD
     Web Console.
 
-    To get to the Argo CD Web UI; click the [Argo CD Web Console](https://openshift-gitops-server-openshift-gitops.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com) tab.
+    Let's find the URL for the ArgoCD API Server:
+
+    ```
+    oc get routes -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'
+    ```
+    Find the default password for the `admin` account as follows:
+
+    ```
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+    ```
+
+    To login from the terminal, execute the following (replace $ARGOCD_SERVER_URL with the above URL):
+
+    ```
+    argocd login $ARGOCD_SERVER_URL
+    ```
+
+    You'll have to accept the self-signed certificate.
+
+
+    You can login with the following:
+    * **Username:** ``admin``
+    * **Password:** <from previous command>
+
+    You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
+
+    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
     ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
 
-    You can login with the following
-    * **Username:** ``admin``
-    * **Password:** ```
-    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
-    ```
+    You can use the same credentials to login from the UI.
+
+    > **NOTE** The Password is stored in a secret on the platform.
 
     Apply the Argo CD `Application` manifest to get this application deployed.
 
     ```
-    oc apply -f ~/resources/openshift-gitops-examples/components/applications/welcome-syncwaves.yaml
+    oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-syncwaves.yaml
     ```
 
     This should create the `welcome-syncwaves` application.
@@ -227,9 +269,8 @@ challenges:
 
     ## Exploring Manifests
 
-    I will be adding the following manifest to the first
-    application deployed. Take a look at the manfiest
-    `openshift-gitops-examples/apps/welcome-php/overlays/hooks/welcome-php-presync-job.yaml`
+    I will be adding the following manifest to the first application deployed. Take a look at the manfiest
+    [welcome-php-presync-job.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/overlays/hooks/welcome-php-presync-job.yaml)
 
     You'll see that I have the annotation `argocd.argoproj.io/hook: PreSync`
     set. This means that this Job will run in the `PreSync` phase, before
@@ -247,8 +288,10 @@ challenges:
     will show that this will deploy the application in the `welcome-hooks`
     namespace.
 
-    Create this application ```
-    oc apply -f ~/resources/openshift-gitops-examples/components/applications/welcome-hooks.yaml
+    Create this application 
+    
+    ```
+    oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-hooks.yaml
     ```
 
     On the Argo CD WebUI, you should see another application appear.
@@ -264,7 +307,9 @@ challenges:
     start applying until the `PreSync` Job is done.
 
     Once the application is fully synced. Take a look at the pods and jobs in
-    the namespace: ```
+    the namespace:
+
+    ```
     oc get pods,jobs -n welcome-hooks
     ```
 
@@ -324,9 +369,9 @@ challenges:
 
     Using Kustomize, we will be adding 3 addition manifests.
 
-    * A `PreSync` Job with a syncwave of 0 `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-job.yaml`
-    * A `PreSync` Pod with a syncwave of 1 and a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-pod.yaml`
-    * A `PostSync` Pod with a hook deletion policy `openshift-gitops-examples/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-postsync-pod.yaml`
+    * A `PreSync` Job with a syncwave of 0 [welcome-php-presync-job.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-presync-job.yaml)
+    * A `PreSync` Pod with a syncwave of 1 and a hook deletion policy [welcome-php-presync-pod.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-postsync-pod.yaml)
+    * A `PostSync` Pod with a hook deletion policy [welcome-php-postsync-pod.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/apps/welcome-php/overlays/syncwaves-and-hooks/welcome-php-postsync-pod.yaml)
 
     The manifest will apply in the following order.
 
@@ -337,14 +382,16 @@ challenges:
 
     ## Deploying the Application
 
-    Take a look at the manifest file `openshift-gitops-examples/components/applications/welcome-syncwaves-and-hooks.yaml`
+    Take a look at the manifest file [welcome-syncwaves-and-hooks.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-syncwaves-and-hooks.yaml)
 
     As before, we are using Kustomize to deploy the same application,
     but in a different namespace and we are loading in the 3 additional
     manifests. You can see the specific implementation in the [git repo](https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/welcome-php/overlays/syncwaves-and-hooks)
 
-    Create this application ```
-    oc apply -f ~/resources/openshift-gitops-examples/components/applications/welcome-syncwaves-and-hooks.yaml
+    Create this application
+
+    ```
+    oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-syncwaves-and-hooks.yaml
     ```
 
     This should create the 3rd application on Argo CD.
@@ -360,7 +407,9 @@ challenges:
     pod were deleted after the sync process because of the deletion policy
     annotation.
 
-    Take a look to verify: ```
+    Take a look to verify:
+
+    ```
     oc get pods,jobs -n welcome-waves-and-hooks
     ```
 
@@ -384,4 +433,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "18349337197685920808"
+checksum: "11827957391873803613"
