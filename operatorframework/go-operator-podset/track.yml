@@ -132,7 +132,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 3600
+  timelimit: 300
 - slug: step2
   id: dzsv1ngmnmyg
   type: challenge
@@ -590,4 +590,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "6794797803162983521"
+checksum: "17389114732599730232"
