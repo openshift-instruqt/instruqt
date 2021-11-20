@@ -39,7 +39,7 @@ Use commands below to create a new track starting from a template OpenShift trac
 This creates an example track using CRC 4.9 VM with `root` user and authenticated by default with `system:admin`:
 
 ```
-instruqt track create --from openshift/openshift-example-track-with-fedora-sidecar --title "My First OpenShift Track"
+instruqt track create --from openshift/openshift-example-track --title "My First OpenShift Track"
 ```
 
 #### OpenShift track with Fedora sidecar example
