@@ -1,7 +1,7 @@
-slug: openshift-example-track-with-fedora-sidecar
-id: qrccsqkyv3fz
+slug: openshift-example-track
+id: mdqdws7j7qmd
 type: track
-title: OpenShift example track with Fedora sidecar
+title: OpenShift example track
 description: |
   ## OpenShift example track
 
@@ -26,7 +26,7 @@ private: true
 published: false
 challenges:
 - slug: step1
-  id: ltdc1jsqvqpg
+  id: ansgrpbdnsvw
   type: challenge
   title: Login to OpenShift
   notes:
@@ -66,15 +66,15 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: container
+    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: container
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 150
 - slug: step2
-  id: miyngs8adzvj
+  id: ihzitshniij8
   type: challenge
   title: Create a new Project
   notes:
@@ -88,15 +88,15 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: container
+    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: container
+    hostname: crc
     path: /root/
   difficulty: basic
   timelimit: 150
 - slug: step3
-  id: nlt5rwgl3vov
+  id: owpqm1xt7lpb
   type: challenge
   title: Create a Pod
   notes:
@@ -114,16 +114,16 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: container
+    hostname: crc
     path: /root
   - title: Visual Editor
     type: code
-    hostname: container
+    hostname: crc
     path: /root/
   difficulty: basic
   timelimit: 150
 - slug: step4
-  id: zfqirxvlv54t
+  id: px6mpjyg1lyw
   type: challenge
   title: Create a Service
   notes:
@@ -140,12 +140,12 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: container
+    hostname: crc
     path: /root
   - title: Visual Editor
     type: code
-    hostname: container
+    hostname: crc
     path: /root/
   difficulty: basic
   timelimit: 150
-checksum: "13456888759502007449"
+checksum: "11289267482360716970"
