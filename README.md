@@ -146,7 +146,7 @@ s/`\n\s+```\n\s+<br>//g
 
 #### Assets
 
-There's no relative path concept from assets like in Katacoda's index.json, so you need to download them from internet and store in the expected path.
+There's no relative path concept from assets like in Katacoda's index.json, so you need to download them from internet from the `setup-crc` or `setup-container` script and store in the expected path.
 
 As a convention, we store files into track's `script` dir and images into track's `assets` dir:
 
@@ -173,6 +173,14 @@ As a convention, we store files into track's `script` dir and images into track'
 │   ├── setup-container
 │   └── setup-crc
 └── track.yml
+```
+
+E.g. from `setup-crc`:
+
+```
+#!/bin/bash
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go
 ```
 
 
