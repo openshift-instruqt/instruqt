@@ -1,0 +1,145 @@
+slug: openshift-example-track-with-fedora-sidecar
+id: qrccsqkyv3fz
+type: track
+title: OpenShift example track with Fedora sidecar
+description: |
+  ## OpenShift example track
+
+  OpenShift is a family of containerization software products developed by Red Hat.
+
+  Its flagship product is the OpenShift Container Platform — an on-premises platform as a service built around Linux containers orchestrated and managed by Kubernetes on a foundation of Red Hat Enterprise Linux.
+
+  The family's other products provide this platform through different environments:
+
+  * OKD serves as the community-driven upstream (akin to the way that Fedora is upstream of Red Hat Enterprise Linux)
+  * OpenShift Online is the platform offered as software as a service, and OpenShift Dedicated is the platform offered as a managed service.
+
+  ![Logo](https://logodix.com/logo/1910931.png)
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+- nvinto@redhat.com
+private: true
+published: false
+challenges:
+- slug: step1
+  id: ltdc1jsqvqpg
+  type: challenge
+  title: Login to OpenShift
+  notes:
+  - type: text
+    contents: In this step you will learn how to connect to OpenShift
+  assignment: |-
+    Access the OpenShift Web Console to login from the Web UI:
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+    Copy the URL from the output of the above command and open it in your browser.
+    We'll deploy our app as the `admin` user. Use the following credentials:
+    * Username:
+    ```
+    admin
+    ```
+    * Password:
+    ```
+    admin
+    ```
+    From *Terminal 1*, run the following command to login with the OpenShift CLI:
+    ```
+    oc login -u admin -p admin
+    ```
+    You should see:
+    ```bash
+    Login successful.
+    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
+    ```
+    Congratulations, you are now authenticated to the OpenShift server.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: step2
+  id: miyngs8adzvj
+  type: challenge
+  title: Create a new Project
+  notes:
+  - type: text
+    contents: In this step you will learn how create a new project
+  assignment: |-
+    Now let's create a new project where to work with:
+    ```
+    oc new-project myproject
+    ```
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/
+  difficulty: basic
+  timelimit: 150
+- slug: step3
+  id: nlt5rwgl3vov
+  type: challenge
+  title: Create a Pod
+  notes:
+  - type: text
+    contents: In this step you will learn how create a new Pod
+  assignment: |2-
+
+    Review from *Visual Editor* Tab the YAML of `/root/simple-pod.yaml`.
+
+    Now let's create a new Pod:
+
+    ```
+    oc create -f /root/simple-pod.yaml
+    ```
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: container
+    path: /root
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/
+  difficulty: basic
+  timelimit: 150
+- slug: step4
+  id: zfqirxvlv54t
+  type: challenge
+  title: Create a Service
+  notes:
+  - type: text
+    contents: In this step you will learn how create a new Service
+  assignment: |-
+    Review from *Visual Editor* Tab the YAML of `/root/nginx-svc.yaml`.
+
+    Now let's create a new Service:
+
+    ```
+    oc create -f /root/nginx-svc.yaml
+    ```
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: container
+    path: /root
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/
+  difficulty: basic
+  timelimit: 150
+checksum: "12896456170703865208"
