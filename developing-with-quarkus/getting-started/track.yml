@@ -208,7 +208,7 @@ challenges:
     Tests paused, press [r] to resume, [h] for more options>
     ```
 
-    Note the amazingly fast startup time! Once started, you can request the provided endpoint in the browser [using this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello).
+    Note the amazingly fast startup time! Once started, you can request the provided endpoint in *Hello App* Tab.
 
     You should see:
 
@@ -217,7 +217,7 @@ challenges:
     ```
     It's working!
 
-    Now, let's exercise the **live reload** capabilities of Quarkus. Click here to open the endpoint:  `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Don't save. Don't recompile or restart anything. Just try to reload the brower (or [click here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello) again.)
+    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Don't save. Don't recompile or restart anything. Just try to reload the *Hello App* tab again.)
 
     You should see the updated `hola` message.
 
@@ -230,7 +230,7 @@ challenges:
 
     When running in Developer mode, Quarkus apps expose a useful UI for inspecting and making on-the-fly changes to the app (much like live coding mode). It allows you to quickly visualize all the extensions currently loaded, see and edit their configuration values, see their status and go directly to their documentation.
 
-    To access the Dev UI for your running app, [click this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/q/dev) which should open up the Dev UI in a new browser tab.
+    To access the Dev UI for your running app, open the *Dev UI* Tab.
 
     ![Dev UI](https://katacoda.com/openshift/assets/middleware/quarkus/dev-ui-overview.png)
 
@@ -292,9 +292,9 @@ challenges:
 
     ## Add Custom Bean
 
-    Let’s modify the application and add a companion bean. Open a new file by clicking: `getting-started/src/main/java/org/acme/quickstart/GreetingService.java`.
+    Let’s modify the application and add a companion bean. From the *Visual Editor* Tab, create a new file in this path: `getting-started/src/main/java/org/acme/quickstart/GreetingService.java`.
 
-    Next, click **Copy to Editor** to add the following code to this file:
+    Add the following code to this file:
 
     ```java
     package org.acme.quickstart;
@@ -313,7 +313,7 @@ challenges:
     }
     ```
 
-    Next, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java` class and then click **Copy To Editor** once again to inject the new bean and create a new endpoint using it:
+    Next, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java` class and then add this code to inject the new bean and create a new endpoint using it:
 
     ```java
     package org.acme.quickstart;
@@ -357,7 +357,7 @@ challenges:
 
     ```
 
-    Check that it works as expected by loading the new endpoint by [clicking here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus).
+    Check that it works as expected by opening the *Greeting Endpoint* Tab.
 
     Note we are exercising our new bean using the `/hello/greeting` endpoint, and you should see
 
@@ -369,9 +369,9 @@ challenges:
 
     ## Add another test
 
-    Let's add another test for Quarkus to run continously for our new endpoint. Open a new file by clicking: `getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java`.
+    Let's add another test for Quarkus to run continously for our new endpoint. Create a new file in this path: `getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java`.
 
-    Next, click **Copy to Editor** to add the following code to this file:
+    Add the following code to this file:
 
     ```java
     package org.acme.quickstart;
@@ -444,8 +444,8 @@ challenges:
     Package the application:
 
     ```
-    cd /root/projects/quarkus/getting-started
-    mvn package
+    cd /root/projects/quarkus/getting-started && \
+      mvn package
     ```
 
     It produces 2 jar files:
@@ -470,7 +470,7 @@ challenges:
     java -jar target/quarkus-app/quarkus-run.jar
     ```
 
-    And then test it again using the browser to access the `/hello/greeting` endpoint, passing `quarkus` in the URL using [this link](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus).
+    And then test it again using the *Greeting Endpoint* Tab.
 
     You should see:
 
@@ -651,8 +651,8 @@ challenges:
     Run the following command to add it to our project:
 
     ```
-    cd /root/projects/quarkus/getting-started
-    mvn quarkus:add-extension -Dextensions="openshift"
+    cd /root/projects/quarkus/getting-started &&
+      mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
     ## Login to OpenShift
@@ -660,7 +660,7 @@ challenges:
     Access the OpenShift Web Console to also login from the Web UI:
 
     ```
-    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    oc get routes console -n openshift-console -o jsonpath='https://{.spec.host}{"\n"}'
     ```
     Copy the URL from the output of the above command and open it in your browser.
 
@@ -733,7 +733,7 @@ challenges:
     Wait for that command to report following before continuing.
     `replication controller "getting-started-1" successfully rolled out`
 
-    You can also see the app deployed in the [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus):
+    You can also see the app deployed in the OpenShift Web Console, from Developer Perspective select `quarkus` project and go to Topology view.
 
     You'll need to login with the same credentials as before:
 
@@ -744,9 +744,16 @@ challenges:
 
     So now our app is deployed to OpenShift
 
-    And now we can access using `curl` once again:
+    And now we can access using `curl` once again.
 
-    `curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift`
+    Get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+    ```
+    APP_ROUTE=`oc get route getting-started -n quarkus-o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
+
+    ```
+
+    curl $APP_ROUTE
 
     You should see:
 
@@ -784,21 +791,29 @@ challenges:
 
     Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. Click here to set this limit:
 
-    `oc set resources dc/getting-started --limits=memory=50Mi`
+    ```
+    oc set resources dc/getting-started --limits=memory=50Mi
+    ```
 
     ## Scale the app
 
     With that set, let's see how fast our app can scale up to 10 instances:
 
-    `oc scale --replicas=10 dc/getting-started`
+    ```
+    oc scale --replicas=10 dc/getting-started
+    ```
 
-    Back in the  [OpenShift Developer Toplogy](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/quarkus) you'll see the app scaling dynamically up to 10 pods:
+    Back in the OpenShift Developer Topology, you'll see the app scaling dynamically up to 10 pods:
 
     ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling.png)
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
-    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`
+    ```
+    export APP_ROUTE=`oc get route getting-started -n quarkus-o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
+
+    for i in {1..50} ; do curl $APP_ROUTE; sleep .05 ; done
+    ```
 
     You can see the 10 instances of our Quarkus app being load-balanced and responding evenly:
 
@@ -814,19 +829,29 @@ challenges:
 
     10 not enough? Let's try 50:
 
-    `oc scale --replicas=50 dc/getting-started`
+    ```
+    oc scale --replicas=50 dc/getting-started
+    ```
 
-    Back in the [Overview in the OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview) you'll see the app scaling dynamically up to 50 pods:
+    Back in the Overview in the OpenShift Console, you'll see the app scaling dynamically up to 50 pods:
 
     ![Scaling to 50](https://katacoda.com/openshift/assets/middleware/quarkus/50pods.png)
 
     Once they are all up and running, try the same load again:
 
-    `for i in {1..50} ; do curl http://getting-started-quarkus.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello/greeting/quarkus-on-openshift ; sleep .05 ; done`
+    ```
+    for i in {1..50} ; do curl $APP_ROUTE; sleep .05 ; done
+    ```
 
     And witness all 50 pods responding evenly to requests. Try doing that with your average Java app running in a container! This tutorial uses a single node OpenShift cluster, but in practice you'll have many more nodes, and can scale to hundreds or thousands of replicas if and when load goes way up.
 
-    > 50 still not enough? Are you feeling lucky? Try **100**: `oc scale --replicas=100 dc/getting-started` and watch the magic on the [OpenShift Console](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/quarkus/overview). It may take a bit of time for all 100 to spin up given this limited resource environment, but they will eventually!
+    > 50 still not enough? Are you feeling lucky? Try **100**:
+
+    ```
+    oc scale --replicas=100 dc/getting-started
+    ```
+
+    and watch the magic on the OpenShift Web Console. It may take a bit of time for all 100 to spin up given this limited resource environment, but they will eventually!
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -860,4 +885,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "4960886088628372010"
+checksum: "18427624599769634974"
