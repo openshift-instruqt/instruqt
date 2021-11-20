@@ -38,7 +38,8 @@ challenges:
 - slug: 01-base-multi-layer-images
   id: gixybf48fwqy
   type: challenge
-  title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers and history'
+  title: 'Topic 1 - Image Layers and Repositories: inspecting base images, layers
+    and history'
   notes:
   - type: text
     contents: |
@@ -109,7 +110,8 @@ challenges:
 - slug: 02-image-urls
   id: 7m9rsnatudgq
   type: challenge
-  title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace, Repository and Tag'
+  title: 'Topic 2 - Image URLs: Mapping business requirements to the URL, Namespace,
+    Repository and Tag'
   assignment: |
     Now we are going to inspect the different parts of the URL that you pull. The most common command is something like this, where only the repository name is specified:
 
@@ -179,7 +181,8 @@ challenges:
 - slug: 03-image-internals
   id: csrmxlww7utm
   type: challenge
-  title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating system components in a container image'
+  title: 'Topic 3 - Image Internals: Inspecting the libraries, interpreters, and operating
+    system components in a container image'
   assignment: |
     In this exercise, we will take a look at what's inside the container image. Java is particularly interesting because it uses glibc, even though most people don't realize it. We will use the ldd command to prove it, which shows you all of the libraries that a binary is linked against. When a binary is dynamically linked (libraries loaded when the binary starts), these libraries must be installed on the system, or the binary will not run. In this example, in particular, you can see that getting a JVM to run with the exact same behavior requires compiling and linking in the same way. Stated another way, all Java images are not created equal:
 
@@ -257,4 +260,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 900
-checksum: "14519972332756166636"
+checksum: "13643849364933843332"
