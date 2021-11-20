@@ -26,15 +26,31 @@ You can create a new track in general with this command:
 
 ### Track Create
 
+Create an empty track:
 ```
 instruqt track create --title "First track"
 ```
 
-Start from an existing track:
+Use commands below to create a new track starting from a template OpenShift track
+
+
+#### OpenShift track example
+
+This creates an example track using CRC 4.9 VM with `root` user and authenticated by default with `system:admin`:
 
 ```
-instruqt track create --from openshift/operatorframework-k8s-api-fundamentals --title "My new track based on k8s-api-fundamentals"
+instruqt track create --from openshift/openshift-example-track-with-fedora-sidecar --title "My First OpenShift Track"
 ```
+
+#### OpenShift track with Fedora sidecar example
+
+This creates an example track using CRC 4.9 VM and a sidecar Fedora container using `root` user where to install packages/dependencies.
+The container can be connected to the CRC VM with the oc CLI as in th example:
+
+```
+instruqt track create --from openshift/openshift-example-track-with-fedora-sidecar --title "My First OpenShift Track with Fedora Sidecar"
+```
+
 
 ### Track Pull
 
