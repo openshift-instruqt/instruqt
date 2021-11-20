@@ -60,6 +60,130 @@ You can check the logs from your track in this way:
 instruqt track logs
 ```
 
+### Tips for katacoda's automatically converted context
+
+#### Web Console
+
+If Web Console access is required, replace Katacoda dynamic URLs with this snippet that will let user access to OpenShift from the web console by printing the HTTPS URL. The hypertext is highlighted so it's easy to access then by just clicking on it: 
+
+```
+    Access the OpenShift Web Console to login from the Web UI:
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+    Copy the URL from the output of the above command and open it in your browser.
+    We'll deploy our app as the `developer` user. Use the following credentials:
+    * Username:
+    ```
+    developer
+    ```
+    * Password:
+    ```
+    developer
+    ```
+```
+
+#### Routes
+
+Replace Katacoda's dynamic URLs for routes with this snippet:
+
+```
+    Get the URL from command line, from *Terminal 1* run this command to get the app's Route:
+
+    ```
+    oc get route <route-name> -n <namespace> -o jsonpath='{"http://"}{.spec.host}{"/taster"}{"\n"}'
+
+    ```
+
+    Copy the URL and open it in your browser, or click it from here.
+```
+
+#### Editor
+
+Replace all text mentioning to "Click to open a file" with this snippet, just point the users to the Visual Editor tab containing a VSCode web editor:
+
+```
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
+    Then add this code:
+    ```java
+    ...
+    ```
+    
+    ```go
+    ```
+```
+
+#### Code blocks
+
+Instruqt doesn't have the click and execute feature, any code block is copy and paste.
+
+Convert any block like this:
+
+`oc get pods`
+
+In this way:
+
+```
+oc get pods
+```
+
+#### Clean text
+
+sometimes in the code you can find `&lt; &gt;` for `<>` or `&quote;` for `"`, please substitute it if you find it.
+
+If you find this sequence
+```
+`
+``
+<br>
+```
+
+Replace with this regexp:
+
+```
+s/`\n\s+```\n\s+<br>//g
+```
+
+#### Assets
+
+There's no relative path concept from assets like in Katacoda's index.json, so you need to download them from internet from the `setup-crc` or `setup-container` script and store in the expected path.
+
+As a convention, we store files into track's `script` dir and images into track's `assets` dir:
+
+```
+├── assets
+├── config.yml
+├── scripts
+│   ├── app_v1alpha1_podset.yaml
+│   ├── images
+│   │   └── ansible-op-flow.png
+│   ├── podset_controller.go
+│   └── podset_types.go
+├── step1
+├── step2
+├── step3
+│   └── setup-container
+├── step4
+│   └── setup-container
+├── step5
+├── step6
+│   └── setup-container
+├── step7
+├── track_scripts
+│   ├── setup-container
+│   └── setup-crc
+└── track.yml
+```
+
+E.g. from `setup-crc`:
+
+```
+#!/bin/bash
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go
+```
+
+
 
 ## CRC Image
 
