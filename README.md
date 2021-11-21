@@ -36,7 +36,7 @@ Use commands below to create a new track starting from a template OpenShift trac
 
 #### OpenShift track example
 
-This creates an example track using CRC 4.9 VM with `root` user and authenticated by default with `system:admin`:
+This creates an example track using CRC 4.9 VM with `root` user and authenticated by default with `system:admin` as in [this example](https://github.com/openshift-instruqt/instruqt/tree/master/examples/openshift-example-track):
 
 ```
 instruqt track create --from openshift/openshift-example-track --title "My First OpenShift Track"
@@ -45,7 +45,7 @@ instruqt track create --from openshift/openshift-example-track --title "My First
 #### OpenShift track with Fedora sidecar example
 
 This creates an example track using CRC 4.9 VM and a sidecar Fedora container using `root` user where to install packages/dependencies.
-The container can be connected to the CRC VM with the oc CLI as in th example:
+The container can be connected to the CRC VM with the oc CLI as in [this example](https://github.com/openshift-instruqt/instruqt/tree/master/examples/openshift-example-track-with-fedora-sidecar):
 
 ```
 instruqt track create --from openshift/openshift-example-track-with-fedora-sidecar --title "My First OpenShift Track with Fedora Sidecar"
