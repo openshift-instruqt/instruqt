@@ -98,12 +98,12 @@ challenges:
 
     Now, let's dig into the specifics and walk through an example.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -196,12 +196,12 @@ challenges:
     operator-sdk create api --group cache --version v1alpha1 --kind Memcached --generate-playbook
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -254,12 +254,12 @@ challenges:
       ansible.operator-sdk/reconcile-period: "30s"
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -348,12 +348,12 @@ challenges:
 
     In the next step, we'll use `operator-sdk` to generate our Operator project scaffolding.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -534,12 +534,12 @@ challenges:
     | roles | Contains an Ansible Role initialized using [Ansible Galaxy](https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html)
     | watches.yaml | Contains Group, Version, Kind, and Ansible invocation method. |
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -655,12 +655,12 @@ challenges:
 
     In the next step, we'll build and run our Ansible Operator.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -689,12 +689,12 @@ challenges:
 
     For the sake of this tutorial, we will run the Operator as a Go program outside the cluster using Operator-SDK.
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -847,13 +847,13 @@ challenges:
     oc get deployment
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "9345063707121031984"
+checksum: "10600821972554241049"

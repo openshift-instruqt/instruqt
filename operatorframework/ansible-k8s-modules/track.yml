@@ -55,8 +55,9 @@ challenges:
 
     ---
 
-    ###### **a. Modify tasks file `example-role/tasks/main.yml` to contain the Ansible shown below.**
-    <pre class="file">
+    ###### **a. From *Visual Editor* Tab, open `example-role/tasks/main.yml` to contain the Ansible shown below.**
+
+    ```yaml
     ---
     - name: set test namespace to {{ state }}
       k8s:
@@ -65,44 +66,42 @@ challenges:
         name: test
         state: "{{ state }}"
       ignore_errors: true
+    ```
 
-    </pre>
-
-    You can easily update this file by running the following command:
+    Or can easily update this file by running the following command:
 
     ```
-    wget -q https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/tasksmain1.yml -O /root/tutorial/example-role/tasks/main.yml
+    curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/tasksmain1.yml -o /root/tutorial/example-role/tasks/main.yml
     ```
-    <br>
     ---
 
     ###### **b. Modify vars file `example-role/defaults/main.yml`, setting `state: present` by default.**
 
-    <pre class="file">
+    ```yaml
     ---
     state: present
 
-    </pre>
+    ```
 
     You can easily update this file by running the following command:
 
     ```
-    wget -q https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/defaultsmain1.yml -O /root/tutorial/example-role/defaults/main.yml
+    curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/defaultsmain1.yml -o /root/tutorial/example-role/defaults/main.yml
     ```
-    <br>
     ---
 
     ###### **c. Run playbook.yml, which will execute 'example-role'.**
 
     ```
-    ansible-playbook -i myhosts playbook.yml
+    cd /root/tutorial && \
+        ansible-playbook -i myhosts playbook.yml
     ```
 
     ---
 
     ###### **d. Check that the namespace `test` was created.**
 
-    $ ```
+    ```
     oc get projects | grep test
     ```
 
@@ -111,13 +110,13 @@ challenges:
     test                             Active
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
-    path: /root
+    hostname: container
+    path: /root/tutorial
   difficulty: basic
   timelimit: 300
 - slug: step2
@@ -135,13 +134,16 @@ challenges:
 
      ###### **a. Copy the nginx deployment definition `nginx-deployment.yml` into `example-role/templates`, adding a .j2 extension**
 
-     ```
-    cp nginx-deployment.yml ./example-role/templates/nginx-deployment.yml.j2
+    ```
+    cp /root/tutorial/nginx-deployment.yml /root/tutorial/example-role/templates/nginx-deployment.yml.j2
     ```
 
-     ```
-    $ cat ./example-role/templates/nginx-deployment.yml.j2
+    ```
+    cat /root/tutorial/example-role/templates/nginx-deployment.yml.j2
+    ```
 
+
+    ```yaml
     kind: Deployment
     apiVersion: apps/v1
     metadata:
@@ -160,13 +162,12 @@ challenges:
       replicas: 3
       selector:
         name: nginx
-     ```
-    ---
+    ```
 
 
-     ###### **b. Update tasks file `example-role/tasks/main.yml` to create the nginx deployment using the k8s module**
+     ###### **b. From *Visual Editor* Tab, update tasks file `example-role/tasks/main.yml` to create the nginx deployment using the k8s module**
 
-     <pre class="file">
+    ```yaml
     ---
     - name: set test namespace to {{ state }}
       k8s:
@@ -180,12 +181,12 @@ challenges:
        state: "{{ state }}"
        definition: "{{ lookup('template', 'nginx-deployment.yml.j2') }}"
        namespace: test
-     </pre>
+    ```
 
     You can easily update this file by running the following command:
 
     ```
-    wget -q https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/tasksmain2.yml -O /root/tutorial/example-role/tasks/main.yml
+    curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/tasksmain2.yml -o /root/tutorial/example-role/tasks/main.yml
     ```
 
     ---
@@ -194,8 +195,9 @@ challenges:
 
     Running the Playbook with the command below will read the `state` variable defined in `example-role/defaults/main.yml`
 
-     ```
-    ansible-playbook -i myhosts playbook.yml
+    ```
+    cd /root/tutorial/ && \
+        ansible-playbook -i myhosts playbook.yml
     ```
 
     ---
@@ -207,13 +209,13 @@ challenges:
     oc get all -n test
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
-    path: /root
+    hostname: container
+    path: /root/tutorial
   difficulty: basic
   timelimit: 300
 - slug: step3
@@ -225,29 +227,24 @@ challenges:
 
     ---
 
-    ###### **a. Modify vars file `example-role/defaults/main.yml`, setting `nginx_replicas: 2`**
+    ###### **a. From *Visual Editor* Tab, modify the vars file `example-role/defaults/main.yml`, setting `nginx_replicas: 2`**
 
-    <pre class="file">
+    ```yaml
     ---
     state: present
     nginx_replicas: 2
-
-    </pre>
+    ```
 
     You can easily update this file by running the following command:
 
     ```
-    wget -q https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/defaultsmain2.yml -O /root/tutorial/example-role/defaults/main.yml
+    curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/defaultsmain2.yml -o /root/tutorial/example-role/defaults/main.yml
     ```
-    `
-    ```
-    <br>
-
     ---
 
     ###### **b. Modify nginx deployment definition `nginx-deployment.yml.j2` to read `replicas` from the `nginx_replicas` variable**
 
-     <pre class="file">
+    ```yaml
     kind: Deployment
     apiVersion: apps/v1
     metadata:
@@ -266,16 +263,13 @@ challenges:
       replicas: {{ nginx_replicas }}
       selector:
         name: nginx
-     </pre>
+    ```
 
     You can easily update this file by running the following command:
 
     ```
-    wget -q https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/nginx-deployment-updated.yml.j2 -O /root/tutorial/example-role/templates/nginx-deployment.yml.j2
+    curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-k8s-modules/assets/nginx-deployment-updated.yml.j2 -o /root/tutorial/example-role/templates/nginx-deployment.yml.j2
     ```
-    `
-    ```
-    <br>
     ---
 
     ###### **c. Run the Playbook to change the nginx replica count**
@@ -301,16 +295,17 @@ challenges:
     To remove the nginx deployment, we'll override the `state` variable to contain `state=absent` using the [`-e / --extra-vars`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#passing-variables-on-the-command-line) flag.
 
     ```
-    ansible-playbook -i myhosts playbook.yml --extra-vars state=absent
+    cd /root/tutorial && \
+      ansible-playbook -i myhosts playbook.yml --extra-vars state=absent
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
-    path: /root
+    hostname: container
+    path: /root/tutorial
   difficulty: basic
   timelimit: 300
-checksum: "17725126366264847946"
+checksum: "11840369154700251020"

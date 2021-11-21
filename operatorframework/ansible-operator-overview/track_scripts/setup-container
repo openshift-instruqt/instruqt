@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+dnf install -y procps-ng iputils bind-utils make automake gcc gcc-c++ ansible python-pip
+
+crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
+
+echo "$crc api.crc.testing" >> /etc/hosts
+
+
+curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.9.0/openshift-client-linux-4.9.0.tar.gz -o /tmp/openshift-client-linux-4.9.0.tar.gz
+tar -xvf /tmp/openshift-client-linux-4.9.0.tar.gz -C /usr/bin/
+chmod +x /usr/bin/oc
+chmod +x /usr/bin/kubectl
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+
+mkdir -p /root/tutorial
+mkdir -p /opt/ansible/roles
+ 
