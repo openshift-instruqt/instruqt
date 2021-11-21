@@ -13,7 +13,7 @@ description: |
   - Use tools to troubleshoot containers in a clustered environment
 
   ## Outline
-  - Multi-Container Applications: The classic two-tiered, wordpress application
+  - Multi-Container Workloads: The classic two-tiered, wordpress application
   - Cluster Performance: Scaling applications horizontally with containers
   - Cluster Debugging: Troubleshooting in a distributed systems environment
 
@@ -39,7 +39,7 @@ challenges:
 - slug: 01-multi-container-applications
   id: u40hazzegra4
   type: challenge
-  title: 'Multi-Container Applications: The classic two-tiered, wordpress application'
+  title: 'Multi-Container Workloads: The classic two-tiered, wordpress application'
   notes:
   - type: text
     contents: |
@@ -53,7 +53,7 @@ challenges:
       - Use tools to troubleshoot containers in a clustered environment
 
       ## Outline
-      - Multi-Container Applications: The classic two-tiered, wordpress application
+      - Multi-Container Workloads: The classic two-tiered, wordpress application
       - Cluster Performance: Scaling applications horizontally with containers
       - Cluster Debugging: Troubleshooting in a distributed systems environment
 
@@ -80,7 +80,14 @@ challenges:
 
     Developers and architects can group these objects/resources in a single file to make sharing and deployment of the entire application easier. These definitions can be stored in version control systems just like code. Let's inspect some of the Kubernetes resource definitions we will use for this lab.
 
-    First, look at the objects/resources that define the application:
+    First, create a new OpenShift project:
+
+    ```
+    oc new-project myproject
+
+    ```
+
+    Now look at the objects/resources that define the application:
 
     ```
     cat ~/labs/wordpress-demo/wordpress-objects.yaml
@@ -94,17 +101,14 @@ challenges:
     cat ~/labs/wordpress-demo/persistent-volumes.yaml
     ```
 
-    Now, let's instantiate some Persistent Volumes:
-
-    ```
-    oc create -f ~/labs/wordpress-demo/persistent-volumes.yaml
-    ```
-
-    Notice that the persistent volumes are unbound. They are available and waiting, but will not be utilized until you define an application which consumes storage. This is inline with the way Kubernetes constantly tries to drive the actual state toward the defined state. Currently, there is no definition to consume this storage:
+    This host has been initialized with some already available PVs:
 
     ```
     oc get pv
     ```
+
+    Notice that the persistent volumes are unbound. They are available and waiting, but will not be utilized until you define an application which consumes storage. This is inline with the way Kubernetes constantly tries to drive the actual state toward the defined state. Currently, there is no definition to consume this storage.
+
 
     Now, let's instantiate our two tier web application with a single command. This single command can be thought of as an API call which tells Kubernetes the desired state or defined state which it will use as a guide:
 
@@ -178,7 +182,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 675
 - slug: 02-openshift-web-interface
@@ -188,25 +192,38 @@ challenges:
   assignment: |
     In the last step, you created a multi-tier web application. Now, log into the OpenShift web interface which is a convenient place to monitor the state, and troubleshoot things when they go wrong. You can even get a debug terminal into a Pod to troubleshoot if it crashes. This can help you figure out why it crashed. This shouldn't happen in this lab, but as you build applications it surely will. Also, feel free to delete a pod and see what happens. Kubernetes will see that the defined state and actual state no longer match and will recreate it. This is useful when things are taking too long :-)
 
-    * Username: `admin`
-    * Password: `admin`
-    * Console: [here](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/default/overview)
+    Access the OpenShift Web Console to login from the Web UI:
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+    Copy the URL from the output of the above command and open it in your browser.
 
-    Here are some useful locations to investigate what is happening. The "Events" section is useful early in the Pod creation process, when its being scheduled in the cluster and then when the container image is being pulled. Later in the process when a Pod is crashing because of something in the container image itself, its useful to watch the terminal output in the "Logs" section. It can also be useful to run commands live in a Terminal. Sometimes a Pod won't start, so it's useful poke around with using the "Debug in Terminal" section. Get a feel in the following areas of the interface.
+    We'll deploy our app as the `admin` user. Use the following credentials:
+    * Username:
+
+    ```
+    admin
+    ```
+    * Password:
+    ```
+    admin
+    ```
+
+    Here are some useful locations to investigate what is happening. From `myproject` project, go to the "Events" section. It is useful early in the Pod creation process, when its being scheduled in the cluster and then when the container image is being pulled. Later in the process when a Pod is crashing because of something in the container image itself, its useful to watch the terminal output in the "Logs" section. It can also be useful to run commands live in a Terminal. Sometimes a Pod won't start, so it's useful poke around with using the "Debug in Terminal" section. Get a feel in the following areas of the interface.
 
     First check out the MySQL Pod:
 
-    - Applications -> Pods -> mysql-<id> -> Details
-    - Applications -> Pods -> mysql-<id> -> Events
-    - Applications -> Pods -> mysql-<id> -> Logs
-    - Applications -> Pods -> mysql-<id> -> Terminal
+    - Workloads -> Pods -> mysql-<id> -> Details
+    - Workloads -> Pods -> mysql-<id> -> Events
+    - Workloads -> Pods -> mysql-<id> -> Logs
+    - Workloads -> Pods -> mysql-<id> -> Terminal
 
     Do the same for Wordpress:
 
-    - Applicaitons -> Pods -> wordpress-<id> -> Details
-    - Applicaitons -> Pods -> wordpress-<id> -> Events
-    - Applicaitons -> Pods -> wordpress-<id> -> Logs
-    - Applicaitons -> Pods -> wordpress-<id> -> Terminal
+    - Workloads -> Pods -> wordpress-<id> -> Details
+    - Workloads -> Pods -> wordpress-<id> -> Events
+    - Workloads -> Pods -> wordpress-<id> -> Logs
+    - Workloads -> Pods -> wordpress-<id> -> Terminal
 
     Once you've spent some time in the web interface, move on to the next lab.
   tabs:
@@ -216,7 +233,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 675
 - slug: 03-load-testing
@@ -226,10 +243,28 @@ challenges:
   assignment: |
     In this exercise, you will scale and load test a distributed application using a tool called Apache Bench. Apache Bench (ab command) is a tool for benchmarking HTTP servers. It is designed to give you an impression of how your current Apache installation perform. In particular ab shows you how many requests per second your Apache installation is capable of serving. The ab tool is especially useful with a Kubernetes cluster, where you can scale up web servers with a single command and provide more capacity to handle more requests per second.
 
-    Before we test, lets set up an environment variable so that we have the ip address to connect to for several tests:
+    Before we test, copy the URL address to connect to for several tests:
 
     ```
-    export SITE="http://$(oc get svc | grep wpfrontend | awk '{print $3}')/wp-admin/install.php"
+    echo "http://$(oc get svc | grep wpfrontend | awk '{print $3}')/wp-admin/install.php"
+    ```
+
+    From *Terminal 2*, start toolbox to install AB benchmarking tool from Apache Tools inside a container:
+
+    ```
+    toolbox
+    ```
+
+    Install AB:
+
+    ```
+    dnf install -y httpd-tools
+    ```
+
+    Copy the URL from the Terminal 1 into an environment variable so we can use it multiple times:
+
+    ```
+    export SITE=<URL_COPIED>
     ```
 
     Test with ab before we scale the application to get a base line. Take note of the "Time taken for tests" section:
@@ -248,7 +283,7 @@ challenges:
 
     Go to the web interface. Scale the Wordpress Deployment up to three containers. Click the up arrow:
 
-    - Applications -> Deployments -> wordpress -> Up Arrow
+    - Workloads -> Deployments -> wordpress -> Up Arrow
 
 
     Test with ab again. How did this affect our benchmarking and why?
@@ -257,28 +292,27 @@ challenges:
     ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
     ```
 
-
-    Now lets scale up more with command line instead of the web interface:
+    Come back in *Terminal 1*, now lets scale up more with command line instead of the web interface:
 
     ```
     oc scale --replicas=5 rc/wordpress
     ```
 
 
-    Test with ab. How did this affect our benchmarking and why?
+    Come back to *Terminal 2* to test with ab. How did this affect our benchmarking and why?
 
     ```
     ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
     ```
 
 
-    Scale the application back down to one pod:
+    In *Terminal 1*, scale the application back down to one pod:
 
     ```
     oc scale --replicas=1 rc/wordpress
     ```
 
-    Test with ab. How did this affect our benchmarking and why?
+    From *Terminal 2*, test with ab. How did this affect our benchmarking and why?
 
     ```
     ab -n10 -c 3 -k -H "Accept-Encoding: gzip, deflate" $SITE
@@ -291,10 +325,13 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 675
 - slug: 04-troubleshooting-distributed-applications
@@ -354,16 +391,20 @@ challenges:
 
     Now test the cluster IP with curl. Use the cluster IP address so that the traffic is balanced among the active pods. You will notice some errors in your responses. You may also test with a browser. Some of the pods are different - how could this be? They should be identical because they were built from code right?
 
-    ``SVC_IP=$(oc get svc | grep goodbad | awk '{print $3}')
-    for i in {1..20}; do curl $SVC_IP; done``
+    ```
+    SVC_IP=$(oc get svc | grep goodbad | awk '{print $3}')
+    for i in {1..20}; do curl $SVC_IP; done
+    ```
 
 
     Example output:
 
-    ``ERROR
+    ```
+    ERROR
     ERROR
     Hello World
-    ERROR``
+    ERROR
+    ```
 
 
     Take a look at the code. A random number is generated in the entry point and written to a file in /var/www/html/goodbad.txt:
@@ -417,7 +458,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 675
-checksum: "6714621793225338611"
+checksum: "1977807970676568492"

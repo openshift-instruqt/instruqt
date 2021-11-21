@@ -184,3 +184,6 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     done
 #     echo "AVAILABLE"
 # done
+
+git clone --quiet --depth 1 https://github.com/fatherlinux/container-internals-lab.git ~/labs
+podman pull registry.fedoraproject.org/fedora

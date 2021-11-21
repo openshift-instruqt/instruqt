@@ -91,13 +91,18 @@ challenges:
 
     First, lets take a quick look at the contents of a container repository once it's uncompressed. We will use a utility you may have seen before called Podman. The syntax is nearly identical to Docker. Create a working directory for our experiment, then make sure the fedora image is cached locally:
 
-    ``mkdir fedora
+    ```
+    cd /root && mkdir fedora
     cd fedora
-    podman pull fedora``
+    podman pull fedora
+    ```
 
     Now, export the image to a tar, file and extract it:
-    ``podman save -o fedora.tar fedora
-    tar xvf fedora.tar``
+
+    ```
+    podman save -o fedora.tar fedora
+    tar xvf fedora.tar
+    ```
 
     Finally, let's take a look at three important parts of the container repository - these are the three major pieces that can be found in a container repository when inspected:
 
@@ -153,17 +158,23 @@ challenges:
 
     Now, let's start with some experiments. Being the reference implementation for the runtime specifiction, runc has the ability to create a very simple spec file. Let's create one and take a quick look at the fairly simple set of directives:
 
-    ``runc spec
-    cat config.json | jq``
+    ```
+    cd /root/fedora && runc spec
+    cat config.json | jq
+    ```
 
     The simple file created by runc is a good introduction, but to truly understand the breadth of what a container engine does, we need to look at a more complex example. Podman has the ability to create a container and generate a spec file without actually starting the container:
 
-    ``podman create --name fedora -t fedora bash
-    podman init fedora``
+    ```
+    podman create --name fedora -t fedora bash
+    podman init fedora
+    ```
 
     The "podman init" command generates a config.json and we can take a look at it in /var/lib/containers:
 
-    ``cat $(find /var/lib/containers/ | grep  $(podman ps --no-trunc -q | tail -n 1)/userdata/config.json) | jq``{{Execute}}
+    ```
+    cat $(find /var/lib/containers/ | grep  $(podman ps --no-trunc -q | tail -n 1)/userdata/config.json) | jq
+    ```
 
     Take a minute to browse through the json output. See if you can spot directives which come from the container image, the container engine, and the user.
 
@@ -207,9 +218,11 @@ challenges:
 
     Now that we have a RootFS, lets create a spec file and modify it:
 
-    ``rm -rf /root/fedora/config.json
+    ```
+    rm -rf /root/fedora/config.json
     runc spec -b /root/fedora/
-    sed -i 's/"terminal": true/"terminal": false/' /root/fedora/config.json``
+    sed -i 's/"terminal": true/"terminal": false/' /root/fedora/config.json
+    ```
 
     Now, we have ourselves a full "bundle" which is a collequial way of referring to the RootFS and Config together in one directory:
 
@@ -251,8 +264,10 @@ challenges:
 
     Delete it and verify that things are cleaned up. You may notice other containers running, that may be because other containers on the system are running in CRI-O, Podman, or Docker:
 
-    ``runc delete fedora
-    runc list``
+    ```
+    runc delete fedora
+    runc list
+    ```
 
     In summary, we have learned how to create containers with a terse little program called runc. This is the exact same program used by every major container engine on the planet. In production, you would never create containers like this, but it's useful to understand what is going on under the hood in CRI-O, Podman and Docker. When you run into new projects like Kata, gVisor, and others, you will now understand exactly how and where they fit in into the software stack.
   tabs:
@@ -265,4 +280,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 375
-checksum: "3382862901254265682"
+checksum: "15982112001642802322"
