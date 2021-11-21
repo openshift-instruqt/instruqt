@@ -184,3 +184,13 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     done
 #     echo "AVAILABLE"
 # done
+git clone --depth 1 https://github.com/fatherlinux/container-internals-lab.git /root/labs
+podman pull registry.access.redhat.com/ubi7/ubi
+podman pull registry.access.redhat.com/ubi7/ubi:7.6-73
+podman pull registry.fedoraproject.org/fedora
+podman pull docker.io/centos:7.0.1406
+podman pull docker.io/ubuntu:trusty-20170330
+
+curl -sL https://github.com/openshift-instruqt/instruqt/blob/master/scripts/tree?raw=true -o /usr/local/bin/tree
+chmod +x /usr/local/bin/tree
+

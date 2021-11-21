@@ -104,7 +104,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
 - slug: 02-image-urls
@@ -175,7 +175,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
 - slug: 03-image-internals
@@ -257,7 +257,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
-checksum: "13643849364933843332"
+checksum: "14213844546676636771"

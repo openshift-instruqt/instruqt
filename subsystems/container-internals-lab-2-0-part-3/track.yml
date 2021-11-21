@@ -96,7 +96,8 @@ challenges:
 
     Notice that the SSL certificate fails to pass muster. That's because the DigiCert root CA certificate is not in /etc/pki on this CentOS lab box. On RHEL and Fedora this certficate is distributed by default and the SSL certificate for registry.fedoraproject.org passes muster. So, for this lab, you have to trust me, I tested it :-) If you were on a Fedora or Red Hat Enterprise Linux box with the right keys, the output would have looked like this:
 
-    `HTTP/2 200
+    ```shell
+    HTTP/2 200
     date: Thu, 25 Apr 2019 17:50:25 GMT
     server: Apache/2.4.39 (Fedora)
     strict-transport-security: max-age=31536000; includeSubDomains; preload
@@ -111,7 +112,8 @@ challenges:
     apptime: D=280
     x-fedora-proxyserver: proxy10.phx2.fedoraproject.org
     x-fedora-requestid: XMHzYeZ1J0RNEOvnRANX3QAAAAE
-    content-type: text/html`
+    content-type: text/html
+    ```
 
     Even without the root CA certificate installed, we can discern that the certicate is valid and managed by Red Hat, which helps a bit:
 
@@ -134,7 +136,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
 - slug: 02-evaluating-trust
@@ -251,7 +253,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
 - slug: 03-analyzing-storage
@@ -261,22 +263,10 @@ challenges:
   assignment: |+
     In this lab, we are going to focus on how [Container Enginers](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo3l) cache [Repositories](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.20722ydfjdj8) on the container host. There is a little known or understood fact - whenever you pull a container image, each layer is cached locally, mapped into a shared filesystem - typically overlay2 or devicemapper. This has a few implications. First, this means that caching a container image locally has historically been a root operation. Second, if you pull an image, or commit a new layer with a password in it, anybody on the system can see it, even if you never push it to a registry server.
 
-    Let's start with a quick look at Docker and Podman, to show the difference in storage:
+    Now, let's take a look at Podman container engine. It pulls OCI compliant, docker compatible images:
 
     ```
-    docker info 2>&1 | grep -E 'Storage | Root'
-    ```
-
-    Notice what driver it's using and that it's storing container images in /var/lib/docker:
-
-    ```
-    tree /var/lib/docker/
-    ```
-
-    Now, let's take a look at a different container engine called podman. It pulls the same OCI compliant, docker compatible images, but uses a different drivers and storage on the system:
-
-    ```
-    podman info | grep -A3 Graph
+    podman info  | grep -A4 graphRoot
     ```
 
     First, you might be asking yourself, [what the heck is d_type?](https://linuxer.pro/2017/03/what-is-d_type-and-why-docker-overlayfs-need-it/). Long story short, it's filesystem option that must be supported for overlay2 to work properly as a backing store for container images and running containers. Now, take a look at the actuall storage being used by Podman:
@@ -287,10 +277,12 @@ challenges:
 
     Now, pull an image and verify that the files are just mapped right into the filesystem:
 
-    ``podman pull registry.access.redhat.com/ubi7/ubi
-    cat $(find /var/lib/containers/storage | grep redhat-release | tail -n 1)``
+    ```
+    podman pull registry.access.redhat.com/ubi7/ubi
+    cat $(find /var/lib/containers/storage | grep /etc/redhat-release | tail -n 1)
+    ```
 
-    With both Docker and Podman, as well as most other container engines on the planet, image layers are mapped one for one to some kind of storage, be it thinp snapshots with devicemapper, or directories with overlay2.
+    With Podman, as well as most other container engines on the planet such as Docker, image layers are mapped one for one to some kind of storage, be it thinp snapshots with devicemapper, or directories with overlay2.
 
     This has implications on how you move container images from one registry to another. First, you have to pull it and cache it locally. Then you have to tag it with the URL, Namespace, Repository and Tag that you want in the new regsitry. Finally, you have to push it. This is a convoluted mess, and in a later lab, we will investigate a tool called Skopeo that makes this much easier.
 
@@ -303,7 +295,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/labs
   difficulty: intermediate
   timelimit: 900
-checksum: "9562758126604569190"
+checksum: "4473445389316698255"
