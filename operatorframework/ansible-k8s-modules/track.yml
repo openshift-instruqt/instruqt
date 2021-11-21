@@ -53,6 +53,11 @@ challenges:
   assignment: |
     For this example we will *create and delete a namespace* with the switch of an Ansible variable.
 
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
     ---
 
     ###### **a. From *Visual Editor* Tab, open `example-role/tasks/main.yml` to contain the Ansible shown below.**
@@ -129,6 +134,12 @@ challenges:
 
      **Note**: *We've modified the resource file slightly as we will be deploying
       on OpenShift.*
+
+    Let's begin by using the context of the previously created project:
+
+    ```
+    oc project test
+    ```
 
     ---
 
@@ -276,8 +287,9 @@ challenges:
 
     Running the Playbook again will read the variable `nginx_replicas` and use the provided value to customize the nginx Deployment.
 
-     ```
-    ansible-playbook -i myhosts playbook.yml
+    ```
+    cd /root/tutorial && \
+      ansible-playbook -i myhosts playbook.yml
     ```
 
     ---
@@ -308,4 +320,4 @@ challenges:
     path: /root/tutorial
   difficulty: basic
   timelimit: 300
-checksum: "11840369154700251020"
+checksum: "11945771863381103934"
