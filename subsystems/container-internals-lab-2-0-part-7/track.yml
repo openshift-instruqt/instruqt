@@ -227,8 +227,10 @@ challenges:
 
     The container host we are working with already has a user called RHEL, so let's switch over to it. Note, we set a couple of environment variables manually because we're using the switch user command. These would normally be set at login:
 
-    ``su - rhel
-    export XDG_RUNTIME_DIR=/home/rhel``
+    ```
+    su - rhel
+    export XDG_RUNTIME_DIR=/home/rhel
+    ```
 
     Now, fire up a simple container in the background:
 
@@ -246,22 +248,24 @@ challenges:
 
     You should see something similar to:
 
-    ``└─conmon─┬─{conmon}
-             └─bash(ipc,mnt,net,pid,uts)``
+    ```
+    └─conmon─┬─{conmon}
+             └─bash(ipc,mnt,net,pid,uts)
+    ```
 
     There's no Podman process, which might be confusing. Lets explain this a bit. What many people don't know is that containers disconnect from Podman after they are started. Podman keeps track of meta-data in ~/.local/share/containers (/var/lib/containers is only used for containers started by root) which tracks which containers are created, running, and stopped (killed). The meta-data that Podman tracks is what enables a "podman ps" command to work.
 
     In the case of Podman, containers disconnect from their parent processes so that they don't die when Podman exit exits. In the case of Docker and CRI-O which are daemons, containers disconnect from the parent process so that they don't die when the daemon is restarted. For Podman and CRI-O, there is utility which runs before runc called conmon (Container Monitor). The conmon utility disconnects the container from the engine by doing forking twice (called a double fork). That means, the execution chain looks something like this with Podman:
 
-    ``bash -> podman -> conmon -> conmon -> runc -> bash``
+    `bash -> podman -> conmon -> conmon -> runc -> bash`
 
     Or like this with CRI-O:
 
-    ``systemd -> crio -> conmon -> conmon -> runc -> bash``
+    `systemd -> crio -> conmon -> conmon -> runc -> bash`
 
     Or like this with Docker engine:
 
-    ``systemd -> dockerd -> containerd -> docker-shim -> runc -> bash``
+    `systemd -> dockerd -> containerd -> docker-shim -> runc -> bash`
 
     Conmon is a very small C program that monitors the standard in, standard error, and standard out of the containerized process. The conmon utility and docker-shim both serve the same purpose. When the first conmon finishes calling the second, it exits. This disconnects the second conmon and all of its child processes from the container engine. The second conmon then inherits init system (systemd) as its new parent process. This daemonless and simplified model which Podman uses can be quite useful when wiring it into other larger systems, like CI/CD, scripts, etc.
 
@@ -290,7 +294,9 @@ challenges:
 
     You will see something similar to this:
 
-    ``rhel:165536:65536``
+    ```
+    rhel:165536:65536
+    ```
 
     The first number represents the starting user ID, and the second number represents the number of user IDs which can be used from the starting number. So, in this example, our RHEL user can use 65,535 user IDs starting with user ID 165536. The Podman bash command should show you that nginx is running in this range of UIDs.
 
@@ -435,8 +441,10 @@ challenges:
 
     Create a new working container, mount the image, and get a working copy-on-write layer:
 
-    ``WORKING_MOUNT=$(buildah mount $(buildah from scratch))
-    echo $WORKING_MOUNT``
+    ```
+    WORKING_MOUNT=$(buildah mount $(buildah from scratch))
+    echo $WORKING_MOUNT
+    ```
 
     Verify that there is nothing in the directory:
 
@@ -446,8 +454,10 @@ challenges:
 
     Now, lets install some basic tools:
 
-    ``yum install --installroot $WORKING_MOUNT bash coreutils --releasever 8 --setopt install_weak_deps=false -y
-    yum clean all -y --installroot $WORKING_MOUNT --releasever 8``
+    ```
+    yum install --installroot $WORKING_MOUNT bash coreutils --releasever 8 --setopt install_weak_deps=false -y
+    yum clean all -y --installroot $WORKING_MOUNT --releasever 8
+    ```
 
     Verify that some files have been added:
 
@@ -483,14 +493,18 @@ challenges:
 
     As a final example, lets use a build time mount to show how we can pull data in. This will represent some sort of cached data that we are using outside of the container. This could be a repository of Ansible Playbooks, or even Database test data:
 
-    ``mkdir ~/data
+    ```
+    mkdir ~/data
     dd if=/dev/zero of=~/data/test.bin bs=1MB count=100
-    ls -alh ~/data/test.bin``
+    ls -alh ~/data/test.bin
+    ```
 
     Now, lets fire up a working container:
 
-    ``buildah from ubi8
-    buildah mount ubi8-working-container``
+    ```
+    buildah from ubi8
+    buildah mount ubi8-working-container
+    ```
 
     To consume the data within the container, we use the buildah-run subcommand. Notice that it takes the -v option just like "run" in Podman. We also use the Z option to relabel the data for SELinux. The dd command simply represents consuming some smaller portion of the data during the build process:
 
@@ -578,8 +592,10 @@ challenges:
 
     First, let's do a little hack to install Docker CE side by side with Podman on RHEL 8. Don't do this on a production system as this will overwrite the version of runc provided by Red Hat:
 
-    ``yes|sudo rpm -ivh --nodeps --force https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.3.7-3.1.el8.x86_64.rpm
-    sudo yum install -y docker-ce``
+    ```
+    yes|sudo rpm -ivh --nodeps --force https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.3.7-3.1.el8.x86_64.rpm
+    sudo yum install -y docker-ce
+    ```
 
     Now, enable the Docker CE service:
 
@@ -668,8 +684,10 @@ challenges:
 
     So, in a nutshell, CRIU gives you more flexibility with containerized processes. Let's see it in action. First, start a simple container which generates incrementing numbers so that we can verify memory contents are really restored:
 
-    ``podman run -d --name looper ubi8 /bin/sh -c \
-             'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'``
+    ```
+    podman run -d --name looper ubi8 /bin/sh -c \
+             'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
+    ```
 
     Now, verify that numbers are being generated. Run this a few times to see the numbers incrementing:
 
@@ -854,4 +872,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 300
-checksum: "18055738369365354690"
+checksum: "8031170791540022819"
