@@ -799,14 +799,14 @@ challenges:
 
     Change the `spec.size` field in `config/samples/cache_v1alpha1_memcached.yaml` from 3 to 4.
 
-    <pre class="file">
+    ```yaml
     apiVersion: cache.example.com/v1alpha1
     kind: Memcached
     metadata:
       name: memcached-sample
     spec:
       size: 4
-    </pre>
+    ```
 
     ```
     oc --namespace tutorial apply -f config/samples/cache_v1alpha1_memcached.yaml

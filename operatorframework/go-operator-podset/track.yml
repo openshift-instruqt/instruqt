@@ -121,15 +121,12 @@ challenges:
     operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
     ```
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 300
@@ -147,12 +144,9 @@ challenges:
 
     We should now see the `/api`, `config`, and `/controllers` directories.
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
     hostname: container
@@ -205,15 +199,12 @@ challenges:
     apply -f config/crd/bases/app.example.com_podsets.yaml\n```\n\nConfirm the CRD
     was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```\n"
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root/projects/podset-operator
   difficulty: basic
   timelimit: 257
@@ -428,15 +419,12 @@ challenges:
     go mod tidy
     ```
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -459,15 +447,12 @@ challenges:
       WATCH_NAMESPACE=myproject make run
     ```
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -541,15 +526,12 @@ challenges:
     oc get pods
     ```
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -578,16 +560,13 @@ challenges:
     oc get pods
     ```
   tabs:
-  - title: Terminal Container
+  - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal VM
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "17389114732599730232"
+checksum: "2625221211480640847"
