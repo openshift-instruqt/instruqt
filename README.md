@@ -65,7 +65,7 @@ instruqt track pull openshift/operatorframework-k8s-api-fundamentals
 You can push the change to your track in this way:
 
 ```
-instruqt track pull
+instruqt track push
 ```
 
 ### Logs
