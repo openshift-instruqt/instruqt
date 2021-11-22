@@ -394,6 +394,12 @@ challenges:
     oc run etcdclient --image=busybox busybox --restart=Never -- /usr/bin/tail -f /dev/null
     ```
 
+    Checking if etcdclient is running: 
+
+    ```
+    oc get pods
+    ```
+
     Access the pod:
 
     ```
@@ -420,6 +426,8 @@ challenges:
 
     ```
     ./etcdctl put operator sdk
+    ```
+    ```
     ./etcdctl get operator
     ```
 
@@ -470,7 +478,14 @@ challenges:
   type: challenge
   title: Disaster Recovery in Action
   assignment: |
-    Delete a pod from the cluster and watch recovery in real-time.
+
+    Go to Terminal Container tab and run the following command.
+    
+    ```
+    oc get pods -l app=etcd -w
+    ```
+    
+    Once the command is running, delete a pod from the cluster on Terminal 1 and watch recovery in real-time on Terminal Container.
 
     ```
     export EXAMPLE_ETCD_CLUSTER_POD=$(oc get pods -l app=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -480,6 +495,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal Container
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: crc
