@@ -67,92 +67,79 @@ challenges:
        - Ansible Operator is an Operator which is _powered by Ansible_.
        - Custom Resource events trigger Ansible tasks as opposed to the traditional approach of handling these events with Go code.
   assignment: |-
-    Let's begin my creating a new project called `mcrouter`:
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+
+    Create a new project called `mcrouter`:
 
     ```
     oc new-project mcrouter
     ```
-    `
-    ```
-    <br>
+
     Let's use one command to deploy the Mcrouter CRD, Service Account, Role, RoleBinding, and Operator Deployment into the cluster:
 
     ```
-    oc apply -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-mcrouter-operator/assets/mcrouter-operator.yaml
+    oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/ansible-mcrouter-operator/assets/mcrouter-operator.yaml
     ```
-    `
-    ```
-    <br>
+
     Let's now verify that all the objects were successfully deployed. Begin by verifying the `kind: Mcrouter` CRD:
 
     ```
     oc get crd mcrouters.mcrouter.example.com
     ```
-    `
-    ```
-    <br>
+
     Verify the `mcrouter-operator` Service Account. This Service Account is responsible for the identity of the Mcrouter Operator Deployment.
 
     ```
     oc get sa
     ```
-    `
-    ```
-    <br>
+
     Verify the `mcrouter-operator` Role. This Role defines the Role-Based Access Control for the `mcrouter-operator` Service Account.
 
     ```
     oc get role
     ```
-    `
-    ```
-    <br>
+
     Verify the `mcrouter-operator` RoleBinding. This RoleBinding applies our Role to the `mcrouter-operator` Service Account.
 
     ```
     oc get rolebinding
     ```
-    `
-    ```
-    <br>
+
     Finally, we will verify that the Mcrouter Deployment and its associated pod are successfully running:
 
     ```
     oc get deploy,pod
     ```
-    `
-    ```
-    <br>
+
     This Deployment consists of two containers: `operator` and `ansible`. The `ansible` container exists only to expose the standard Ansible stdout logs. The `operator` container contains our Ansible Operator Mcrouter roles/playbooks. Observe the log files for both containers:
 
     ```
     oc logs deploy/mcrouter-operator -c operator
     ```
-    `
-    ```
-    <br>
+
     Observe the log files for the Ansible container (it should currently be empty because we have yet to create a Custom Resource).
 
     ```
     oc logs deploy/mcrouter-operator -c ansible
     ```
-    `
-    ```
-    <br>
+
     Observe the Service exposing the Operator's [Prometheus metrics endpoint](https://prometheus.io/docs/guides/go-application/#how-go-exposition-works). Ansible-Operator automatically registers this endpoint for you.
 
     ```
     oc get svc -l name=mcrouter-operator
     ```
-    `
-    ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 360
@@ -212,55 +199,43 @@ challenges:
     ```
     oc logs deploy/mcrouter-operator -c ansible -f
     ```
-    `
-    ```
-    <br>
+
     Run the following to apply the CR:
 
     ```
-    oc apply -f  https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ansibleop/ansible-mcrouter-operator/assets/mcrouter_v1alpha3_mcrouter_cr.yaml
+    oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/ansible-mcrouter-operator/assets/mcrouter_v1alpha3_mcrouter_cr.yaml
     ```
-    `
-    ```
-    <br>
+
     Verify the Mcrouter CR now exists:
 
     ```
     oc get mcrouter
     ```
-    `
-    ```
-    <br>
+
     Verify the `mcrouter` deployment pod:
 
     ```
     oc get pod -l name=mcrouter-operator
     ```
-    `
-    ```
-    <br>
+
     The `mcrouter` Deployment Pod is exposed via a Service listening on the default memcached port, `11211`. Mcrouter will connect to the pool via the backend memcached instances residing in the pool via this Service.
 
     ```
     oc get svc mcrouter-memcached
     ```
-    `
-    ```
-    <br>
+
     Verify the two `mcrouter` memcache instances are running:
 
     ```
     oc get pods -l app=mcrouter-cache
     ```
-    `
-    ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 360
@@ -276,17 +251,13 @@ challenges:
     ```
     oc expose deploy/mcrouter --name mcrouter --type=ClusterIP --target-port=5000
     ```
-    `
-    ```
-    <br>
+
     Create a temporary telnet Pod and connect to Mrouter:
 
     ```
     oc run -it --rm telnet --image=registry.redhat.io/rhel8/support-tools --restart=Never -- telnet mcrouter 5000
     ```
-    `
-    ```
-    <br>
+
     After a few seconds you will see a message `If you don't see a command prompt, try pressing enter.` ***But do not press enter***. Run the following commands to insert the key `ansible` with an 8 byte value of `operator` for 900 seconds and exit:
 
     ```
@@ -295,9 +266,7 @@ challenges:
     get ansible
     quit
     ```
-    `
-    ```
-    <br>
+
     We can also utilize the `mcperf` tool for measuring Memcached server performance.
 
     This command will create ***1000*** connections to Mcrouter. The connections are created at the rate of ***1000*** conns/sec and on every connection it sends ***10*** `set` requests at the rate of ***1000*** reqs/sec with the item sizes derived from a uniform distribution in the interval of 1 to 16 bytes:
@@ -305,9 +274,7 @@ challenges:
     ```
     oc run -it --rm mcperf --image=quay.io/madorn/mcperf --restart=Never -- mcperf -s mcrouter -p 5000 --linger=0 --timeout=5 --conn-rate=1000 --call-rate=1000 --num-calls=10 --num-conns=1000 --sizes=u1,16
     ```
-    `
-    ```
-    <br>
+
     We should be able to see a significant spike in CPU/Memory usage from running the above command. You can check it out by selecting the ***Console*** tab which will open the OpenShift dashboard. Log in with username: `admin`, password: `admin`, and then select ***Monitoring*** --> ***Dashboards***. Also be sure to run the following command:
 
     ```
@@ -316,12 +283,12 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 360
@@ -335,17 +302,13 @@ challenges:
     ```
     oc patch mcrouter mcrouter  --type='json' -p '[{"op": "replace", "path": "/spec/memcached_pool_size", "value":3}]'
     ```
-    `
-    ```
-    <br>
+
     After a few seconds, a new Memcached Pod should be added to the pool:
 
     ```
     oc get pods -l app=mcrouter-cache
     ```
-    `
-    ```
-    <br>
+
     You should now see the additional Memcached instances reflected in Mcrouter's configuration string.
 
     ```
@@ -354,12 +317,12 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 360
@@ -376,18 +339,14 @@ challenges:
     MCROUTER_CACHE_0=`oc get pods -l app=mcrouter-cache -o jsonpath={$.items[0].metadata.name}`
     echo $MCROUTER_CACHE_0
     ```
-    `
-    ```
-    <br>
+
 
     Delete the Pod:
 
     ```
     oc delete pod $MCROUTER_CACHE_0
     ```
-    `
-    ```
-    <br>
+
     The Pod should respawn:
 
     ```
@@ -396,13 +355,13 @@ challenges:
     `
     ```
   tabs:
-  - title: CLI
+  - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "15725504036880830936"
+checksum: "5790706604758789035"
