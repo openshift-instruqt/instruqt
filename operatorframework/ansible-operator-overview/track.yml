@@ -385,7 +385,7 @@ challenges:
     After initilizating our Ansible Operator project, we run the `operator-sdk create api` command and provide the group, version, and kind of the CRD we'd like to create.
 
     ```bash
-    operator-sdk create api --group app --version v1alpha1 --kind App --generate-role
+    operator-sdk create api --group app --version v1alpha1 --kind App
     ```
 
     We should now see the following file structure:
@@ -504,7 +504,7 @@ challenges:
     Memcached resource with APIVersion 'cache.example.com/v1alpha1' and Kind 'Memcached'.
 
     ```
-    operator-sdk create api --group cache --version v1alpha1 --kind Memcached --generate-role
+    operator-sdk create api --group cache --version v1alpha1 --kind Memcached
     ```
 
     ## Inspecting the results
