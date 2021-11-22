@@ -298,7 +298,7 @@ challenges:
     From *Terminal 2* follow Etcd Operator logs in real-time:
 
     ```
-    export ETCD_OPERATOR_POD=$(oc get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}')
+    export ETCD_OPERATOR_POD=$(oc get pods -l name=etcd-operator -o jsonpath='{.items[0].metadata.name}') && \
     oc logs $ETCD_OPERATOR_POD -f
     ```
 
@@ -484,7 +484,7 @@ challenges:
     ```
     oc get pods -l app=etcd -w
     ```
-    
+
     Once the command is running, delete a pod from the cluster on Terminal 1 and watch recovery in real-time on Terminal Container.
 
     ```
