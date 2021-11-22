@@ -65,7 +65,7 @@ instruqt track pull openshift/operatorframework-k8s-api-fundamentals
 You can push the change to your track in this way:
 
 ```
-instruqt track pull
+instruqt track push
 ```
 
 ### Logs
@@ -170,11 +170,11 @@ As a convention, we store files into track's `script` dir and images into track'
 ├── assets
 │   ├── images
 │   │   └── ansible-op-flow.png
+│   ├── podset_controller.go
+│   └── podset_types.go
 ├── config.yml
 ├── scripts
 │   ├── my_script.sh
-│   ├── podset_controller.go
-│   └── podset_types.go
 ├── step1
 ├── step2
 ├── step3
@@ -196,7 +196,7 @@ E.g. from `setup-crc`:
 ```
 #!/bin/bash
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/podset_types.go -o /tmp/podset_types.go
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/assets/podset_types.go -o /tmp/podset_types.go
 ```
 
 
