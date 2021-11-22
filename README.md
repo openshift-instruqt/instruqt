@@ -168,11 +168,11 @@ As a convention, we store files into track's `script` dir and images into track'
 
 ```
 ├── assets
-├── config.yml
-├── scripts
-│   ├── app_v1alpha1_podset.yaml
 │   ├── images
 │   │   └── ansible-op-flow.png
+├── config.yml
+├── scripts
+│   ├── my_script.sh
 │   ├── podset_controller.go
 │   └── podset_types.go
 ├── step1
