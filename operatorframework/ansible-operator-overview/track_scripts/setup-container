@@ -22,9 +22,6 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/ope
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/ansible-operator-overview/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
 
-curl -sL https://github.com/openshift-instruqt/instruqt/blob/master/scripts/bin/tree?raw=true -o /usr/local/bin/tree
-chmod +x /usr/local/bin/tree
-
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"
     sleep 1
