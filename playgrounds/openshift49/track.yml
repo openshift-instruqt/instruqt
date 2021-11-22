@@ -31,7 +31,7 @@ developers:
 private: false
 published: true
 challenges:
-- slug: tips
+- slug: playground
   id: p0njlj5seogi
   type: challenge
   title: OpenShift Playground
@@ -41,24 +41,45 @@ challenges:
 
     ## Logging in to the Cluster via Dashboard
 
-    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+    Access the OpenShift Web Console to login from the Web UI:
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
 
-    You will then able able to login with admin permissions with:
+    Copy the URL from the output of the above command and open it in your browser.
 
-    * **Username:** ``admin``
-    * **Password:** ``admin``
+    You can login as `admin` user. Use the following credentials:
 
-    Or as a standard user with:
+    * Username:
+    ```
+    admin
+    ```
+    * Password:
+    ```
+    admin
+    ```
 
-    * **Username:** ``developer``
-    * **Password:** ``developer``
+    You can login also with as `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+    * Password:
+    ```
+    developer
+    ```
 
     ## Logging in to the Cluster via CLI
 
     When the OpenShift playground is created you will be logged in initially as
-    a cluster admin (```
+    a cluster admin:
+
+    ```
     oc whoami
-    ```) on the command line. This will allow you to perform
+    ```
+
+    This will allow you to perform
     operations which would normally be performed by a cluster admin.
 
     Before creating any applications, it is recommended you login as a distinct
@@ -151,15 +172,11 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc-nonest-1
-  - title: OpenShift Web Console
-    type: service
-    hostname: crc-nonest-1
-    port: 30443
+    hostname: crc
   - title: Visual Editor
     type: code
-    hostname: crc-nonest-1
+    hostname: crc
     path: /root
   difficulty: basic
   timelimit: 3600
-checksum: "1046004192980534443"
+checksum: "6279533410521539406"

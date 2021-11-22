@@ -14,7 +14,7 @@ description: |-
   We will now focus on the easiest way to get started developing an Operator:
 
   * **Helm**:
-  Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+  It doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
 
   ## Creating a CockroachDB Operator from a Helm Chart
 
@@ -57,7 +57,7 @@ challenges:
       We will now focus on the easiest way to get started developing an Operator:
 
       * **Helm**:
-      Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+      It doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
 
       ## Creating a CockroachDB Operator from a Helm Chart
 
@@ -71,16 +71,16 @@ challenges:
 
       Let's begin!
   assignment: |
-    Let's begin my creating a new project called `myproject`:
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+    Create a new project called `myproject`:
 
     ```
     oc new-project myproject
-    ```
-
-    CockroachDB is a database so let's ensure we have accessible persistent storage by adding some current `PersistentVolumes` to a `StorageClass` called `local-storage`:
-
-    ```
-    for num in {02..06}; do oc patch pv pv00$num --type='json' -p '[{"op": "replace", "path": "/spec/storageClassName", "value":local-storage}]'; done;
     ```
 
     Let's now create a new directory for our project:
@@ -106,7 +106,7 @@ challenges:
     ```
     operator-sdk create api --helm-chart=cockroachdb --helm-chart-repo=https://charts.helm.sh/stable --helm-chart-version=3.0.7
     ```
-    
+
     ### Project Scaffolding Layout
 
     After creating a new operator project the directory has numerous generated folders and files. The following
@@ -123,10 +123,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -143,10 +143,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -168,19 +168,18 @@ challenges:
 
     For the sake of this tutorial, we will run the Operator as a Go program outside the cluster using Operator-SDK and our `kubeconfig` credentials
 
-    Once running, the command will block the current session. You can continue interacting with the OpenShift cluster by opening a new terminal window. You can quit the session by pressing `CTRL + C`.
+    Once running, the command will block the current session. You can continue interacting with the OpenShift cluster by using another terminal tab. You can quit the session by pressing `CTRL + C`.
 
     ```
     WATCH_NAMESPACE=myproject make run
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -189,7 +188,7 @@ challenges:
   type: challenge
   title: Apply the CockroachDB Custom Resource
   assignment: |
-    Open a new terminal window and navigate to the `cockroachdb-operator` top-level directory:
+    From navigate to the `cockroachdb-operator` top-level directory:
 
     ```
     cd projects/cockroachdb-operator
@@ -205,7 +204,7 @@ challenges:
     * `spec.storage.persistentVolume.size: 1Gi`
     * `spec.storage.persistentVolume.storageClass: local-storage`
 
-    <pre class="file">
+    ```yaml
     apiVersion: charts.example.com/v1alpha1
     kind: Cockroachdb
     metadata:
@@ -217,7 +216,7 @@ challenges:
         persistentVolume:
           size: 1Gi
           storageClass: local-storage
-    </pre>
+    ```
 
     You can easily update this file by running the following command:
 
@@ -259,14 +258,13 @@ challenges:
     ```
     oc get services
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -288,14 +286,13 @@ challenges:
     COCKROACHDB_UI_URL=`oc get route -o jsonpath={$.items[0].spec.host}`
     echo $COCKROACHDB_UI_URL
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -334,14 +331,13 @@ challenges:
     ```
     \q
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -366,10 +362,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -407,14 +403,13 @@ challenges:
     ```
     \q
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
@@ -436,15 +431,14 @@ challenges:
     oc get pods
     oc get services
     ```
-
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "1180023143912827370"
+checksum: "9285291758417668789"

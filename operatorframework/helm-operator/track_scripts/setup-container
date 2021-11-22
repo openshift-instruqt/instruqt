@@ -1,0 +1,29 @@
+ #!/bin/bash
+
+
+dnf install -y procps-ng iputils bind-utils tree make automake gcc gcc-c++
+
+crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
+
+echo "$crc api.crc.testing" >> /etc/hosts
+
+
+curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.9.0/openshift-client-linux-4.9.0.tar.gz -o /tmp/openshift-client-linux-4.9.0.tar.gz
+tar -xvf /tmp/openshift-client-linux-4.9.0.tar.gz -C /usr/bin/
+chmod +x /usr/bin/oc
+chmod +x /usr/bin/kubectl
+
+curl -sL -o /usr/local/bin/helm https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64
+chmod +x /usr/local/bin/helm
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+
+mkdir -p /root/tutorial
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/helm-operator/assets/charts_v1alpha1_cockroachdb.yaml -o /tmp/charts_v1alpha1_cockroachdb.yaml
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
+ 

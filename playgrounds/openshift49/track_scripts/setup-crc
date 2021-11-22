@@ -134,7 +134,7 @@ rm /tmp/oauth-admin.yaml /tmp/pass.htpasswd
 # INGRESS
 
 # check if ingresses.config.openshift.io cluster is present
-oc patch -p '{"spec": {"domain": "'$HOSTNAME'.crc-nonest-1.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' ingresses.config.openshift.io cluster --type=merge
+oc patch -p '{"spec": {"domain": "'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' ingresses.config.openshift.io cluster --type=merge
 
 oc delete -n openshift-ingress-operator ingresscontroller/default
 
@@ -146,7 +146,7 @@ metadata:
   namespace: openshift-ingress-operator
 spec:
   replicas: 1
-  domain: $HOSTNAME.crc-nonest-1.$INSTRUQT_PARTICIPANT_ID.instruqt.io
+  domain: $HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io
 EOF
 
 oc rollout status deploy/oauth-openshift -n openshift-authentication
@@ -157,11 +157,11 @@ oc rollout status deploy/apiserver -n openshift-apiserver
 until oc get routes -A 2>/dev/null 1>&2; do echo "Changing routes, waiting for cluster operators..."; sleep 5; done
 
 
-oc patch -p '{"spec": {"host": "console-openshift-console.'$HOSTNAME'.crc-nonest-1.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route console -n openshift-console --type=merge
+oc patch -p '{"spec": {"host": "console-openshift-console.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route console -n openshift-console --type=merge
 
-oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc-nonest-1.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route downloads -n openshift-console --type=merge
+oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route downloads -n openshift-console --type=merge
 
-oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc-nonest-1.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
+oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
 
 # wait until cluster operators are "available"
