@@ -364,6 +364,12 @@ challenges:
   assignment: |
     Next, we'll learn how to use the operator-sdk CLI to create an Ansible Operator project with the 'init' and `create` commands.
 
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
     A basic 'init' command looks like this:
     ```bash
     operator-sdk init --plugins=ansible --domain example.com
@@ -481,34 +487,26 @@ challenges:
     ```
     mkdir -p $HOME/tutorial/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Navigate to the directory:
 
     ```
     cd $HOME/tutorial/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Initialize a new Ansible-based Operator SDK project for the Memcached Operator:
 
     ```
     operator-sdk init --plugins=ansible --domain example.com
     ```
-    `
-    ```
-    <br>
+
     Create the Memcached API and generate an Ansible role skeleton.  This will ensure our controller is setup to watch the
     Memcached resource with APIVersion 'cache.example.com/v1alpha1' and Kind 'Memcached'.
 
     ```
     operator-sdk create api --group cache --version v1alpha1 --kind Memcached --generate-role
     ```
-    `
-    ```
-    <br>
+
     ## Inspecting the results
 
     Inspect the memcached-operator directory structure for yourself with 'tree', and then 'cd' into it.
@@ -540,7 +538,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: container
-    path: /root
+    path: /root/tutorial
   difficulty: basic
   timelimit: 225
 - slug: step6
@@ -636,22 +634,19 @@ challenges:
 
     Since we have swapped out the original Role for one from Ansible Galaxy, lets change the Watches file to reflect this:
 
-    <pre class="file">
+    ```yaml
     ---
     - version: v1alpha1
       group: cache.example.com
       kind: Memcached
       role: /opt/ansible/roles/dymurray.memcached_operator_role
-    </pre>
+    ```
 
     Update this file by running the following command:
 
     ```
     \cp /tmp/watches.yaml watches.yaml
     ```
-    `
-    ```
-    <br>
 
     In the next step, we'll build and run our Ansible Operator.
   tabs:
@@ -661,7 +656,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: container
-    path: /root
+    path: /root/tutorial
   difficulty: basic
   timelimit: 225
 - slug: step7
@@ -675,7 +670,8 @@ challenges:
     ### Deploy the Memcached Custom Resource Definition (CRD):
 
     ```
-    oc create -f config/crd/bases/cache.example.com_memcacheds.yaml
+    cd /root/tutorial/memcached-operator && \
+      oc create -f config/crd/bases/cache.example.com_memcacheds.yaml
     ```
 
     By running this command, we are creating a new resource type, `memcached`, on the cluster. __We will give our Operator work to do by creating and modifying resources of this type.__
@@ -695,7 +691,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: container
-    path: /root
+    path: /root/tutorial/memcached-operator
   difficulty: basic
   timelimit: 225
 - slug: step8
@@ -712,8 +708,8 @@ challenges:
 
     ```
     mkdir -p /opt/ansible/roles
-    cp -r ~/tutorial/memcached-operator/roles/dymurray.memcached_operator_role /opt/ansible/roles/```
-    `
+    cp -r ~/tutorial/memcached-operator/roles/dymurray.memcached_operator_role /opt/ansible/roles/
+    cd  ~/tutorial/memcached-operator/
     ```
 
     ## Running with 'operator-sdk run --local'
@@ -723,7 +719,7 @@ challenges:
 
     Automatically sets KUBECONFIG=$HOME/.kube/config
     ```sh
-    $ make run
+    make run
     ```
 
     For this scenario, we will create a new namespace/project called `tutorial`. We will then start up our Operator and ensure our operator only watches for Custom Resources within this namespace.
@@ -739,7 +735,7 @@ challenges:
     WATCH_NAMESPACE=tutorial make run
     ```
 
-    Next open a 2nd terminal window, using the "+" tab and navigate to our Operator.
+    Next go to *Terminal 2* and navigate to our Operator.
 
     ```
     cd ~/tutorial/memcached-operator
@@ -778,9 +774,7 @@ challenges:
     ```
     \cp /tmp/cache_v1alpha1_memcached.yaml config/samples/cache_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
 
     ```
     oc --namespace tutorial create -f config/samples/cache_v1alpha1_memcached.yaml
@@ -850,10 +844,13 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
-    path: /root
+    path: /root/tutorial/memcached-operator
   difficulty: basic
   timelimit: 225
-checksum: "10600821972554241049"
+checksum: "13463798399607350411"
