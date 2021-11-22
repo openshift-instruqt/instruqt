@@ -275,10 +275,10 @@ challenges:
       name: argocd-operator
       namespace: myproject
     spec:
-      channel: alpha
+      channel: stable
       installPlanApproval: Manual
-      name: argocd-operator
-      source: community-operators
+      name: openshift-gitops-operator
+      source: redhat-operators
       sourceNamespace: openshift-marketplace
     EOF
     ```
