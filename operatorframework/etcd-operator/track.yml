@@ -350,7 +350,7 @@ challenges:
     oc create -f etcd-operator-cr.yaml
     ```
 
-    Patch the just created resource:
+    Patch the just created resource due to CoreDNS features: 
 
     ```
     oc patch service example-etcd-cluster --type='json' -p '[{"op": "replace", "path": "/spec/publishNotReadyAddresses", "value":true}]'
@@ -410,15 +410,15 @@ challenges:
     Install the Etcd Client:
 
     ```
-    wget https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz
-    tar -xvf etcd-v3.1.4-linux-amd64.tar.gz
+    wget https://github.com/coreos/etcd/releases/download/v3.1.4/etcd-v3.1.4-linux-amd64.tar.gz && \
+    tar -xvf etcd-v3.1.4-linux-amd64.tar.gz && \
     cp etcd-v3.1.4-linux-amd64/etcdctl .
     ```
 
     Set the etcd version and endpoint variables:
 
     ```
-    export ETCDCTL_API=3
+    export ETCDCTL_API=3 && \
     export ETCDCTL_ENDPOINTS=example-etcd-cluster-client:2379
     ```
 
