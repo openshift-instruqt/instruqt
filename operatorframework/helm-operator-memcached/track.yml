@@ -14,7 +14,7 @@ description: |-
   We will now focus on the easiest way to get started developing an Operator:
 
   * **Helm**:
-  Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+  It doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
 
   ## Creating a Memcached Operator from a Helm Chart
 
@@ -53,7 +53,7 @@ challenges:
       We will now focus on the easiest way to get started developing an Operator:
 
       * **Helm**:
-      Useful for securely running Helm charts without [Tiller](https://helm.sh/docs/glossary/#tiller) and  it doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
+      It doesn’t rely on manual invocation of Helm to reconfigure your apps. Check out the [Helm Operator Getting Started guide](https://sdk.operatorframework.io/docs/building-operators/helm/) for more information.
 
       ## Creating a Memcached Operator from a Helm Chart
 
@@ -62,13 +62,18 @@ challenges:
       [Memcached](https://memcached.org/) is a Free & open source, high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
 
       Let's begin!
-  assignment: |
+  assignment: |2
+
+    Let's begin by connecting to OpenShift:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
     Let's begin my creating a new project called `myproject`:
 
     ```
     oc new-project myproject
-    ```
-    `
     ```
 
     Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) from results of database calls, API calls, or page rendering.
@@ -79,26 +84,19 @@ challenges:
     ```
     mkdir -p $HOME/projects/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Navigate to the directory:
 
     ```
     cd $HOME/projects/memcached-operator
     ```
-    `
-    ```
-    <br>
+
     Create a new Helm-based Operator SDK project for the Memcached Operator:
 
     ```
     operator-sdk init --plugins helm --domain example.com
     ```
-    `
-    ```
 
-    <br>
     For Helm-based projects, `operator-sdk` init also generates the RBAC rules in `config/rbac/role.yaml` based on the resources that would be deployed by the chart’s default manifest. Be sure to double check that the rules generated in `config/rbac/role.yaml` meet the operator’s permission requirements.
 
     To learn more about the project directory structure, see the [project layout](https://sdk.operatorframework.io/docs/overview/project-layout) doc.
@@ -107,13 +105,12 @@ challenges:
 
     Instead of creating your project with a boilerplate Helm chart, you can also use `--helm-chart`, `--helm-chart-repo`, and `--helm-chart-version` to use an existing chart, either from your local filesystem or a remote chart repository.
 
-    <br>
     Automatically fetch the Memcached Helm Chart and generate the CRD/API:
 
     ```
     operator-sdk create api --helm-chart memcached --helm-chart-repo=https://charts.helm.sh/stable
     ```
-    <br>
+
     ### Project Scaffolding Layout
 
     After creating a new operator project the directory has numerous generated folders and files. The following
@@ -130,7 +127,7 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: crc
@@ -145,9 +142,8 @@ challenges:
     The `watches.yaml` file maps a Group, Version, and Kind to a specific Helm Chart. Observe the contents of the `watches.yaml`:
 
     ```
+    cd /root/projects/cockroachdb-operator/
     cat watches.yaml
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -167,11 +163,10 @@ challenges:
     Apply the Memcached Custom Resource Definition to the cluster:
 
     ```
-    oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
+    cd /root/projects/cockroachdb-operator/ && \
+      oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
     ```
-    `
-    ```
-    <br>
+
     Once the CRD is registered, there are two ways to run the Operator:
 
     * As a Pod inside a Kubernetes cluster
@@ -183,8 +178,6 @@ challenges:
 
     ```
     WATCH_NAMESPACE=myproject make run
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -206,8 +199,7 @@ challenges:
     ```
     cd projects/memcached-operator
     ```
-    `
-    ```
+
     Before applying the Memcached Custom Resource, observe the Memcached Helm Chart `values.yaml`:
 
     [Memcached Helm Chart Values.yaml file](https://github.com/helm/charts/blob/master/stable/memcached/values.yaml)
@@ -216,7 +208,7 @@ challenges:
 
     * `spec.replicaCount: 3`
 
-    <pre class="file">
+    ```yaml
     apiVersion: charts.example.com/v1alpha1
     kind: Memcached
     metadata:
@@ -257,60 +249,46 @@ challenges:
       tolerations: {}
       updateStrategy:
         type: RollingUpdate
-    </pre>
+    ```
 
     You can easily update this file by running the following command:
 
     ```
     \cp /tmp/charts_v1alpha1_memcached.yaml config/samples/charts_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
     After updating the Memcached Custom Resource with our desired spec, apply it to the cluster. Ensure you are currently scoped to the `myproject` Namespace:
 
     ```
     oc project myproject
     ```
-    `
-    ```
 
     ```
     oc apply -f config/samples/charts_v1alpha1_memcached.yaml
     ```
-    `
-    ```
-    <br>
+
     Confirm that the Custom Resource was created:
 
     ```
     oc get memcached
     ```
-    `
-    ```
-    <br>
+
     It may take some time for the environment to pull down the Memcached container image. Confirm that the Stateful Set was created:
 
     ```
     oc get statefulset
     ```
-    `
-    ```
-    <br>
+
     Confirm that the Stateful Set's pod is currently running:
 
     ```
     oc get pods
     ```
-    `
-    ```
-    <br>
+
     Confirm that the Memcached "internal" and "public" ClusterIP Service were created:
 
     ```
     oc get services
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -332,16 +310,11 @@ challenges:
     ```
     oc patch memcached memcached-sample -p '{"spec":{"replicaCount": 5}}' --type=merge
     ```
-    `
-    ```
 
-    <br>
     Verify that the Memcached Stateful Set is creating two additional pods:
 
     ```
     oc get pods
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -363,15 +336,11 @@ challenges:
     ```
     oc delete pods -l app.kubernetes.io/name=memcached
     ```
-    `
-    ```
-    <br>
+
     Watch the pods respawn:
 
     ```
     oc get pods -l app.kubernetes.io/name=memcached
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -393,17 +362,13 @@ challenges:
     ```
     oc delete memcached memcached-sample
     ```
-    `
-    ```
-    <br>
+
     Verify that the Stateful Set, pods, and services are removed:
 
     ```
     oc get statefulset
     oc get pods
     oc get services
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -415,4 +380,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "10695206339272868355"
+checksum: "12373041207557040660"
