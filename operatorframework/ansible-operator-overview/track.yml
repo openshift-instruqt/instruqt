@@ -372,6 +372,7 @@ challenges:
 
     A basic 'init' command looks like this:
     ```bash
+    cd /root/tutorial && \
     operator-sdk init --plugins=ansible --domain example.com
     ```
     This command tells operator-sdk to initialize a new Ansible Operator project scaffolding with the domain of your choosing.
