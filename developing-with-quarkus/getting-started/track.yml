@@ -7,7 +7,7 @@ description: |-
 
   ## What is Quarkus?
 
-  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus-logo.png)
 
   ### Supersonic, Subatomic Java
 
@@ -871,4 +871,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "11877802417780921972"
+checksum: "7954333695729506972"
