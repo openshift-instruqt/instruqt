@@ -45,7 +45,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- jfalkner@redhat.com
 private: false
 published: true
 challenges:
@@ -210,11 +209,11 @@ challenges:
     ```
     It's working!
 
-    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. 
+    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`.
     Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `disk`` icon to save the files or press `Ctrl + s:
-    
+
     ![Visual Editor](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/save-file.png)
-    
+
     Don't recompile or restart anything. Just try to reload the *Hello App* tab again:
 
     ![Hello App](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/reload-app.png)
@@ -659,7 +658,7 @@ challenges:
     ```
     oc get routes console -n openshift-console -o jsonpath='https://{.spec.host}{"\n"}'
     ```
-    
+
     Copy the URL from the output of the above command and open it in your browser.
 
 
@@ -784,7 +783,7 @@ challenges:
 
     ## Restrict resources
 
-    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. 
+    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit.
     Run the following command to set this limit in Terminal 1:
 
     ```
@@ -881,4 +880,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 100
-checksum: "18427624599769634974"
+checksum: "5034844623016961835"
