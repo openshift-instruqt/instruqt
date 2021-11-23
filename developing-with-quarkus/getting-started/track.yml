@@ -44,9 +44,8 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
+- jfalkner@redhat.com
 private: false
 published: true
 challenges:
@@ -103,11 +102,11 @@ challenges:
 
     # Create basic project
 
-    The easiest way to create a new Quarkus project is to click to run the following command:
+    The easiest way to create a new Quarkus project is to copy the following command and paste it to `Terminal 1`:
 
     ```
     cd /root/projects/quarkus/
-    mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+    mvn io.quarkus:quarkus-maven-plugin:2.4.2.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=getting-started \
         -DclassName="org.acme.quickstart.GreetingResource" \
@@ -123,7 +122,7 @@ challenges:
     * Example `Dockerfile`s for a variety of build targets (native, jvm, etc)
     * The application configuration file
 
-    Once generated, look at the `getting-started/pom.xml`. You will find the import of the Quarkus BOM, allowing to omit the version on the different Quarkus dependencies. In addition, you can see the `quarkus-maven-plugin` responsible of the packaging of the application and also providing the development mode.
+    Once generated, navigate to the `getting-started/pom.xml` in `Visual Editor`. You will find the import of the Quarkus BOM, allowing to omit the version on the different Quarkus dependencies. In addition, you can see the `quarkus-maven-plugin` responsible of the packaging of the application and also providing the development mode.
 
     ```xml
       <dependencyManagement>
@@ -182,16 +181,10 @@ challenges:
 
     # Running the Application
 
-    First, change to the directory in which the project was created:
+    Now we are ready to run our application. Copy the following Maven command in Terminal 1:
 
     ```
-    cd /root/projects/quarkus/getting-started
-    ```
-
-    Now we are ready to run our application. Click here to run:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started
     ```
 
     You should see:
@@ -217,7 +210,14 @@ challenges:
     ```
     It's working!
 
-    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Don't save. Don't recompile or restart anything. Just try to reload the *Hello App* tab again.)
+    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. 
+    Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `disk`` icon to save the files or press `Ctrl + s:
+    
+    ![Visual Editor](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/save-file.png)
+    
+    Don't recompile or restart anything. Just try to reload the *Hello App* tab again:
+
+    ![Hello App](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/reload-app.png)
 
     You should see the updated `hola` message.
 
@@ -232,7 +232,7 @@ challenges:
 
     To access the Dev UI for your running app, open the *Dev UI* Tab.
 
-    ![Dev UI](https://katacoda.com/openshift/assets/middleware/quarkus/dev-ui-overview.png)
+    ![Dev UI](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/dev-ui-overview.png)
 
     For example, click on the `Config Editor` link within the `Configuration` tile to see and make updates to configuration. This is super useful for developers to confirm code and configuration changes, or experiment with various settings.
 
@@ -242,7 +242,7 @@ challenges:
 
     When in developer mode (via `mvn quarkus:dev`), Quarkus can automatically and continuously run your unit tests. You may have noticed in the console `Tests paused, press [r] to resume, [h] for more options>`. This is an indication that you can enter continuous test mode. Type `r` to turn continuous testing mode on in the console.
 
-    Earlier, you changed `Hello` to `Hola` which broke the default unit test, and you can now see this in the console:
+    Earlier, you changed `Hello` to `Hola` which broke the default unit test, and you can now see this in Terminal 1:
 
     ```
     Response body doesn't match expectation.
