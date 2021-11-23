@@ -320,10 +320,7 @@ challenges:
 
     To illustrate the process for copying a single file, consider the case where you had deployed a web site and had not included a ``robots.txt`` file, but needed to quickly stop a web robot which was crawling your site.
 
-    A request to fetch the current ``robots.txt`` file for the web site fails with a HTTP ``404 Not Found`` response.
-
     To find the URL for such a current ``robots.txt`` file for the web site that fails with a HTTP ``404 Not Found`` response, we can export and curl the following app route:
-    
     
     ```
     export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}{"/robots.txt"}'`
