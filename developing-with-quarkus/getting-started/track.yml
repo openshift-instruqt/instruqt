@@ -106,7 +106,7 @@ challenges:
 
     ```
     cd /root/projects/quarkus/
-    mvn io.quarkus:quarkus-maven-plugin:2.4.2.Final:create \
+    mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
         -DprojectGroupId=org.acme \
         -DprojectArtifactId=getting-started \
         -DclassName="org.acme.quickstart.GreetingResource" \
@@ -263,6 +263,8 @@ challenges:
     You've seen how to build a basic app, package it as an executable JAR and start it up very quickly. You also saw how Quarkus can run tests continuously to turbocharge your development tasks and facilitate test-driven development. We'll leave the app running and rely on hot reload for the next steps.
 
     In the next step we'll inject a custom bean to showcase Quarkus' CDI capabilities.
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -313,7 +315,7 @@ challenges:
     }
     ```
 
-    Next, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java` class and then add this code to inject the new bean and create a new endpoint using it:
+    Next, open the `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java` class and then replace this code to inject the new bean and create a new endpoint using it:
 
     ```java
     package org.acme.quickstart;
@@ -352,8 +354,7 @@ challenges:
 
 
     ```
-    cd /root/projects/quarkus/getting-started
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started
 
     ```
 
@@ -369,7 +370,7 @@ challenges:
 
     ## Add another test
 
-    Let's add another test for Quarkus to run continously for our new endpoint. Create a new file in this path: `getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java`.
+    Let's add another test for Quarkus to run continuously for our new endpoint. Create a new file in this path: `getting-started/src/test/java/org/acme/quickstart/GreetingServiceTest.java`.
 
     Add the following code to this file:
 
@@ -403,7 +404,9 @@ challenges:
 
     This test generates a random string (a UUID), and uses that to call into our new service, looking for the same random name in the returned value.
 
-    You should now see that both tests pass:
+    Go to Terminal 1 then you should now see that both tests pass:
+
+    Note: If you haven't start the continuous testing yet, press `r` in Terminal 1.
 
     ```
     All 2 tests are passing (0 skipped), 1 tests were run in 429ms. Tests completed at 12:35:33 due to changes to GreetingServiceTest.class.
@@ -413,6 +416,8 @@ challenges:
     ## Congratulations!
 
     It's a familiar CDI-based environment for you Enterprise Java developers out there, with powerful mechanisms to reload your code _as you type_ (or very close to realtime). In the next step, we'll package and run it as a standalone executable JAR, which should also be familiar to microservice developers.
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -435,17 +440,12 @@ challenges:
   assignment: |+
     In the previous step you added a custom CDI bean to the app. Now it's time to package and run it as a self-contained JAR file.
 
-    ### Stop the previous application
-
-    Let's stop the original application so we can package and re-run it as an executable JAR. In the terminal, press `CTRL-C` to stop the application.
-
     ### Package the app
 
-    Package the application:
+    Package the application in Terminal 1:
 
     ```
-    cd /root/projects/quarkus/getting-started && \
-      mvn package
+    mvn package -f /root/projects/quarkus/getting-started
     ```
 
     It produces 2 jar files:
@@ -454,7 +454,7 @@ challenges:
 
     * `target/quarkus-app/quarkus-run.jar` - being an executable jar. Be aware that it’s not an über-jar as the dependencies are copied into several subdirectories (and would need to be included in any layered container image).
 
-    See the files with this command:
+    See the files with this command in Terminal 1:
 
     ```
     ls -l target/*.jar target/quarkus-app/*.jar
@@ -464,7 +464,7 @@ challenges:
 
     ## Run the executable JAR
 
-    You can run the packaged application by clicking:
+    You can run the packaged application by running the following command in Terminal 1:
 
     ```
     java -jar target/quarkus-app/quarkus-run.jar
@@ -542,11 +542,10 @@ challenges:
     ```
     We use a profile because, you will see very soon, packaging the native image takes a few seconds. However, this compilation time is only incurred _once_, as opposed to _every_ time the application starts, which is the case with other approaches for building and executing JARs.
 
-    Create a native executable by clicking:
+    Create a native executable by running the following command in Terminal 1:
 
     ```
-    cd /root/projects/quarkus/getting-started
-    mvn clean package -Pnative -DskipTests
+    mvn clean package -Pnative -DskipTests -f /root/projects/quarkus/getting-started
     ```
 
     > Since we are on Linux in this environment, and the OS that will eventually run our application is also Linux, we can use our local OS to build the native Quarkus app. If you need to build native Linux binaries when on other OS's like Windows or Mac OS X, you can use `-Dquarkus.native.container-runtime=[podman | docker]`. You'll need either Docker or [Podman](https://podman.io) installed depending on which container runtime you want to use!
@@ -579,7 +578,7 @@ challenges:
     ```
     That's 11 milliseconds!
 
-    And extremely low memory usage as reported by the Linux `ps` utility. Click here to run this in your other Terminal tab:
+    And extremely low memory usage as reported by the Linux `ps` utility. Run the following command in Terminal 2:
 
     ```
     ps -o pid,rss,command -p $(pgrep -f runner)
@@ -596,16 +595,15 @@ challenges:
 
     > Note that the RSS and memory usage of any app, including Quarkus, will vary depending your specific environment, and will rise as the application experiences load.
 
-    Make sure the app is still working as expected (we'll use `curl` this time to access it directly):
-
-    ```
-    curl http://localhost:8080/hello/greeting/quarkus
-    ```
-
-    > This will automatically open and run `curl` in a separate terminal. You can also open additional terminals with the "+" button on the tab bar to the right.
+    Make sure the app is still working as expected. Run the following command in Terminal 2:
 
     ```bash
     curl http://localhost:8080/hello/greeting/quarkus
+    ```
+
+    Then, the output should look like:
+
+    ```bash
     hello quarkus from 4090f59d1a69
     ```
 
@@ -613,7 +611,7 @@ challenges:
 
     ## Cleanup
 
-    Go to the first Terminal tab and press `CTRL-C` to stop our native app.
+    Press `CTRL-C` to stop our native app in Terminal 1.
 
     ## Congratulations!
 
@@ -648,11 +646,10 @@ challenges:
 
     Quarkus offers the ability to automatically generate OpenShift resources based on sane default and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
 
-    Run the following command to add it to our project:
+    Run the following command to add it to our project in Terminal 1:
 
-    ```
-    cd /root/projects/quarkus/getting-started &&
-      mvn quarkus:add-extension -Dextensions="openshift"
+    ```bash
+      mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/getting-started
     ```
 
     ## Login to OpenShift
@@ -662,6 +659,7 @@ challenges:
     ```
     oc get routes console -n openshift-console -o jsonpath='https://{.spec.host}{"\n"}'
     ```
+    
     Copy the URL from the output of the above command and open it in your browser.
 
 
@@ -677,7 +675,7 @@ challenges:
     developer
     ```
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command to login with the OpenShift CLI in Terminal 1:
 
     ```
     oc login -u developer -p developer
@@ -748,12 +746,10 @@ challenges:
 
     Get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
-    ```
+    ```bash
     APP_ROUTE=`oc get route getting-started -n quarkus-o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
-
-    ```
-
     curl $APP_ROUTE
+    ```
 
     You should see:
 
@@ -768,7 +764,6 @@ challenges:
     This step covered the deployment of a Quarkus application on OpenShift. However, there is much more, and the integration with these environments has been tailored to make Quarkus applications execution very smooth. For instance, the health extension can be used for [health check](https://docs.openshift.com/container-platform/4.6/applications/application-health.html); the configuration support allows mounting the application configuration using [config maps](https://docs.openshift.com/container-platform/4.6/authentication/configmaps.html), the metric extension produces data _scrape-able_ by [Prometheus](https://prometheus.io/) and so on.
 
     But we'll move to the final chapter around scaling and try a few things.
-
 
   tabs:
   - title: Terminal 1
@@ -789,7 +784,8 @@ challenges:
 
     ## Restrict resources
 
-    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. Click here to set this limit:
+    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. 
+    Run the following command to set this limit in Terminal 1:
 
     ```
     oc set resources dc/getting-started --limits=memory=50Mi
