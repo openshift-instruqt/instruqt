@@ -14,5 +14,5 @@ rm -fr /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 
 echo 'export GRAALVM_HOME=/opt/java/graalvm-ce-java11-${GRAALVM_VERSION}/' >> /root/.bashrc
 echo 'export JAVA_HOME=$GRAALVM_HOME' >> /root/.bashrc
-echo 'export MAVEN_HOME=/opt/java/apache-maven-${MVN_VERSION}/' >> /root/.bashrc
+echo "export MAVEN_HOME=/opt/java/apache-maven-${MVN_VERSION}/" >> /root/.bashrc
 echo 'export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"'  >> /root/.bashrc
