@@ -7,7 +7,7 @@ description: |-
 
   ## What is Quarkus?
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
   ### Supersonic, Subatomic Java
 
@@ -59,7 +59,7 @@ challenges:
 
       ## What is Quarkus?
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
       ### Supersonic, Subatomic Java
 
