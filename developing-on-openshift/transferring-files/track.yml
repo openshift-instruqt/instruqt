@@ -16,8 +16,6 @@ description: |
   ## Use case
 
   You can modify an application in a container to develop and test before building a new version of the container's immutable image. Automatatically synchronizing the container with local changes speeds the "inner loop" of develop and test cycles, especially with interpreted programming languages.
-
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
@@ -27,6 +25,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -50,8 +49,6 @@ challenges:
       ## Use case
 
       You can modify an application in a container to develop and test before building a new version of the container's immutable image. Automatatically synchronizing the container with local changes speeds the "inner loop" of develop and test cycles, especially with interpreted programming languages.
-
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -60,13 +57,13 @@ challenges:
     run:
 
     ```
-    oc login -u developer -p developer
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     This will log you in using the credentials:
 
-    * **Username:** ``developer``
-    * **Password:** ``developer``
+    * **Username:** ``admin``
+    * **Password:** ``admin``
 
     You should see the output:
 
@@ -314,7 +311,6 @@ challenges:
     To copy files from the local machine to the container, the ``oc rsync`` command is again used.
 
     The form of the command when copying files from the local machine to the container is:
-
 
     ```
     oc rsync ./local/dir <pod-name>:/remote/dir

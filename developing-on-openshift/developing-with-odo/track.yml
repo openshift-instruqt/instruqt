@@ -18,8 +18,6 @@ description: |
   ## Use case
 
   Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
-
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -29,6 +27,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -54,8 +53,6 @@ challenges:
       ## Use case
 
       Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
-
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     The application you will be deploying is a wild west shooter style game.
 
@@ -63,11 +60,11 @@ challenges:
 
     The application deployed in this tutorial consists of two such components.
 
-    ## Backend
+    # Backend
 
     The backend is a Java Spring Boot application. It performs queries against the Kubernetes and OpenShift REST APIs to retrieve a list of the resource objects that were created when you deployed the application. Then, it returns details about these resource objects to the frontend.
 
-    ## Frontend
+    # Frontend
 
     The frontend is the user interface for a wild west style game written in Node.js. It displays popup images which you can shoot, corresponding to the resource objects returned by the backend.
   tabs:
@@ -87,13 +84,13 @@ challenges:
     run:
 
     ```
-    odo login -u developer -p developer
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     This will log you in using the credentials:
 
-    * **Username:** ``developer``
-    * **Password:** ``developer``
+    * **Username:** ``admin``
+    * **Password:** ``admin``
 
     You should see the output below:
 
@@ -119,20 +116,23 @@ challenges:
      ✓  New project created and now using project : myproject
     ```
 
-    ## Creating a Service Account
+    # Creating a Service Account
     The backend of our application uses the OpenShift REST API. In order for the backend to access the API, we need to grant access to the service account that the backend is using. We will do this in the web console.
 
-    Click the **Console** tab next to the **Terminal** tab near the center top of your browser. This opens the OpenShift web console.
-
-    You should see an OpenShift window with **Username** and **Password** fields, which is similar to this one:
-
-    ![OCP Web Console](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/ocp-login.png)
-
-    For this scenario, start by entering the following:
-
-    **Username:** ``developer``
-
-    **Password:** ``developer``
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+    You might have to wait a minute for the pod to be ready.
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+    ```
+    oc get routes console -n openshift-console
+    ```
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    You will then be able to login with admin permissions with:
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     After logging in to the web console, you'll be in the **Administrator** perspective of the web console, which is a view of the console for handling operations and administrative tasks associated with your OpenShift cluster.
 

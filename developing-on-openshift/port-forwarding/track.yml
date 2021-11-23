@@ -18,8 +18,6 @@ description: |
 
   You can deploy your application's underlying database server on an OpenShift cluster, growing through development toward a production database packaged in an automating [Operator][operator].
 
-  This OpenShift cluster will self-destruct in one hour.
-
   [operator]: https://www.openshift.com/learn/topics/operators
 icon: https://logodix.com/logo/1910931.png
 level: beginner
@@ -30,6 +28,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -55,8 +54,6 @@ challenges:
 
       You can deploy your application's underlying database server on an OpenShift cluster, growing through development toward a production database packaged in an automating [Operator][operator].
 
-      This OpenShift cluster will self-destruct in one hour.
-
       [operator]: https://www.openshift.com/learn/topics/operators
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
@@ -65,12 +62,14 @@ challenges:
     To login to the OpenShift cluster used for this course from the _Terminal_,
     run:
 
-    ``oc login -u developer -p developer``
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
 
     This will log you in using the credentials:
 
-    * **Username:** ``developer``
-    * **Password:** ``developer``
+    * **Username:** ``admin``
+    * **Password:** ``admin``
 
     You should see the output:
 
@@ -99,8 +98,6 @@ challenges:
 
         kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
     ```
-
-    We are not going to use the web console for this course, but if you want to check anything from the web console, switch to the _Console_ and  use the same credentials to login as you used above to login from the command line.
   tabs:
   - title: Terminal 1
     type: terminal

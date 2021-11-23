@@ -71,9 +71,7 @@ challenges:
     * **Username:** ``admin``
     * **Password:** ``admin``
 
-    You should see the output:
-
-    You don't have any projects. To create a new project called `myproject` run the command:
+    To create a new project called `myproject` run the command:
 
     ```
     oc new-project myproject
