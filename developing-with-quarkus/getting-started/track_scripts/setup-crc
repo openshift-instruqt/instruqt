@@ -186,7 +186,6 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 # done
 
 # TRACK SCRIPT
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
 curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java_graalvm.sh | bash
 
 mkdir -p /root/projects/quarkus
