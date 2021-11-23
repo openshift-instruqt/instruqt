@@ -130,7 +130,7 @@ challenges:
     hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -142,16 +142,16 @@ challenges:
     The `watches.yaml` file maps a Group, Version, and Kind to a specific Helm Chart. Observe the contents of the `watches.yaml`:
 
     ```
-    cd /root/projects/cockroachdb-operator/
-    cat watches.yaml
+    cd /root/projects/memcached-operator && \
+      cat watches.yaml
     ```
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -163,7 +163,7 @@ challenges:
     Apply the Memcached Custom Resource Definition to the cluster:
 
     ```
-    cd /root/projects/cockroachdb-operator/ && \
+    cd /root/projects/memcached-operator && \
       oc apply -f config/crd/bases/charts.example.com_memcacheds.yaml
     ```
 
@@ -174,18 +174,17 @@ challenges:
 
     For the sake of this tutorial, we will run the Operator as a Go program outside the cluster using Operator-SDK and our `kubeconfig` credentials
 
-    Once running, the command will block the current session. You can continue interacting with the OpenShift cluster by opening a new terminal window. You can quit the session by pressing `CTRL + C`.
 
     ```
-    WATCH_NAMESPACE=myproject make run
+    WATCH_NAMESPACE=myproject make run & disown
     ```
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -193,8 +192,9 @@ challenges:
   id: p3hjr41xhwys
   type: challenge
   title: Apply the Memcached Custom Resource
-  assignment: |
-    Open a new terminal window and navigate to the `memcached-operator` top-level directory:
+  assignment: |2
+
+    Open a *Terminal 1* Tab, and navigate to the `memcached-operator` top-level directory:
 
     ```
     cd projects/memcached-operator
@@ -293,10 +293,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -319,10 +319,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -345,10 +345,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
@@ -373,11 +373,11 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "12373041207557040660"
+checksum: "10284534667742941352"
