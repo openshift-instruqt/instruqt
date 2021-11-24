@@ -22,9 +22,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -224,7 +222,7 @@ challenges:
     path: /some-page?name=Jerry
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 02-typesafe
   id: 4xbqwvrrzkdl
   type: challenge
@@ -391,7 +389,7 @@ challenges:
     path: /goodbye?name=Jerry
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 03-parameters
   id: rxd2ojyxj450
   type: challenge
@@ -617,7 +615,7 @@ challenges:
     path: /item/1
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 04-extensions
   id: 7l1bnmupgpba
   type: challenge
@@ -702,7 +700,7 @@ challenges:
     path: /item/4
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 05-periodic
   id: b73wb6svypqy
   type: challenge
@@ -874,7 +872,7 @@ challenges:
     path: /hello?name=James
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 06-reactive
   id: xavnxsw7yfko
   type: challenge
@@ -983,5 +981,5 @@ challenges:
     path: /reactive
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 checksum: "15235132459565049556"

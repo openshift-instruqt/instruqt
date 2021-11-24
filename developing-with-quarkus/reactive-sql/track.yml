@@ -43,9 +43,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -168,7 +166,7 @@ challenges:
     hostname: crc
     path: /root/projects
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 02-remote-dev
   id: mbzbisqfarfz
   type: challenge
@@ -392,7 +390,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 03-add-resource
   id: 1wofu5kpqsbj
   type: challenge
@@ -491,7 +489,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 04-add-model
   id: ho5pkgp6fhnj
   type: challenge
@@ -559,7 +557,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 05-package-and-run
   id: yqbltw8kmtp7
   type: challenge
@@ -638,5 +636,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 checksum: "4390489885301164485"

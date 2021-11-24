@@ -31,9 +31,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -261,7 +259,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 02-remote-dev
   id: 4eyaxnbckvmf
   type: challenge
@@ -622,7 +620,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 04-add-paging-filtering
   id: fbcryoi5bsrh
   type: challenge
@@ -751,7 +749,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 05-add-lifecycle-task
   id: au8fe6bvgbvp
   type: challenge
@@ -842,7 +840,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: 06-exercise-table
   id: xvcqqow0cuyt
   type: challenge
@@ -899,5 +897,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 checksum: "3550047611423900741"

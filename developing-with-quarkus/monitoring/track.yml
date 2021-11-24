@@ -18,9 +18,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -172,7 +170,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 02-create-and-instrument-app
   id: aubfyrpykdvo
   type: challenge
@@ -306,7 +304,7 @@ challenges:
     path: /q/metrics
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 03-add-additional-metrics
   id: u0ytapvpuryv
   type: challenge
@@ -608,7 +606,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 04-deploy-to-openshift
   id: vfhphkjktax8
   type: challenge
@@ -705,7 +703,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 05-query-with-prometheus
   id: cugwydy3ypzm
   type: challenge
@@ -780,7 +778,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 06-install-grafana
   id: yfzcxdtqt3q3
   type: challenge
@@ -870,7 +868,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 400
 - slug: 07-create-dashboard
   id: odadkvtv2v16
   type: challenge
@@ -987,5 +985,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "10227384988407810196"
+  timelimit: 400
+checksum: "12690017759979678095"
