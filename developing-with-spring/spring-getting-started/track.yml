@@ -21,6 +21,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -760,4 +761,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
   timelimit: 180
-checksum: "3483474748437599313"
+checksum: "13370241490406351958"
