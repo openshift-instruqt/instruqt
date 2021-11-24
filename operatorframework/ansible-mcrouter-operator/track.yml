@@ -280,8 +280,6 @@ challenges:
     ```
     oc adm policy add-cluster-role-to-user cluster-admin admin
     ```
-    `
-    ```
   tabs:
   - title: Terminal 1
     type: terminal
@@ -313,8 +311,6 @@ challenges:
 
     ```
     oc describe pod -l app=mcrouter | grep Command -A2
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -351,8 +347,6 @@ challenges:
 
     ```
     oc get pods -l app=mcrouter-cache
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1

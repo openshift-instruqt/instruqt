@@ -40,9 +40,7 @@ description: |
 
   ## The Environment
 
-  During this scenario, you will be using a hosted OpenShift environment that is created just for you. This environment is not shared with other users of the system. Because each user completing this scenario has their own environment, we had to make some concessions to ensure the overall platform is stable and used only for this training. For that reason, your environment will only be active for a one hour period. Keep this in mind before you get started on the content. Each time you start this training, a new environment will be created on the fly.
-
-  The OpenShift environment created for you is running version 4.7 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
+  The OpenShift environment created for you is running version 4.9 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
 
   > **Note:** *It is possible to skip around in this tutorial.  The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
   >
@@ -58,6 +56,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -105,9 +104,7 @@ challenges:
 
       ## The Environment
 
-      During this scenario, you will be using a hosted OpenShift environment that is created just for you. This environment is not shared with other users of the system. Because each user completing this scenario has their own environment, we had to make some concessions to ensure the overall platform is stable and used only for this training. For that reason, your environment will only be active for a one hour period. Keep this in mind before you get started on the content. Each time you start this training, a new environment will be created on the fly.
-
-      The OpenShift environment created for you is running version 4.7 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
+      The OpenShift environment created for you is running version 4.9 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
 
       > **Note:** *It is possible to skip around in this tutorial.  The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
       >
@@ -211,15 +208,16 @@ challenges:
     ## Explore Serving
     Let's take a moment to explore the new API resources available in the cluster since installing `Serving`.
 
-    Like before, we can see what ```
-    api-resources` are available now by running: `oc api-resources --api-group serving.knative.dev
+    Like before, we can see what `api-resources` are available now by running: 
+    ```
+    oc api-resources --api-group serving.knative.dev
     ```
 
     > **Note:** *Before we searched for any `api-resource` which had `KnativeServing` in any of the output using `grep`.  In this section we are filtering the `APIGROUP` which equals `serving.knative.dev`.*
 
     The Serving module consists of a few different pieces.  These pieces are listed in the output of the previous command: `configurations`, `revisions`, `routes`, and `services`.  The `knativeservings` api-resource was existing, and we already created an instance of it to install KnativeServing.
 
-    ```bash
+    ```
     NAME              SHORTNAMES      APIGROUP              NAMESPACED   KIND
     configurations    config,cfg      serving.knative.dev   true         Configuration
     knativeservings   ks              serving.knative.dev   true         KnativeServing
@@ -239,7 +237,7 @@ challenges:
 
     Before deploying your first Serverless Service, let us take a moment to understand it's structure:
 
-    ```yaml
+    ```
     # ./assets/02-serving/service.yaml
 
     apiVersion: serving.knative.dev/v1
@@ -267,20 +265,19 @@ challenges:
     To deploy the service we could deploy the yaml above by executing `oc apply -n serverless-tutorial -f 02-serving/service.yaml`, but one of the best features of serverless is the ability to deploy and work with serverless resources without ever working with yaml.  In this tutorial we will use the `kn` CLI tool to work with serverless.
 
     To deploy the service execute:
-    ```bash
+    ```
     kn service create greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
        --namespace serverless-tutorial
     ```
-    `
+
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    ```
+    cat 02-serving/service.yaml
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 02-serving/service.yaml
-    ```*.
-
     Watch the status using the commands:
-    ```bash
+    ```
     # ./assets/02-serving/watch-service.bash
 
     #!/usr/bin/env bash
@@ -291,14 +288,11 @@ challenges:
       if [ -z "${output##*'Running'*}" ] ; then echo "Service is ready."; break; fi;
       sleep 5
     done
-
-    ```
-    `
     ```
 
     A successful service deployment will show the following `greeter` pods:
 
-    ```shell
+    ```
     NAME                                        READY   STATUS    RESTARTS   AGE
     greeter-6vzt6-deployment-5dc8bd556c-42lqh   2/2     Running   0          11s
     ```
@@ -309,33 +303,30 @@ challenges:
     As discussed in the [OpenShift Serverless Documentation][ocp-serving-components], Serverless Service deployments will create a few required serverless resources.  We will dive into each of them below.
 
     ### Service
-    We can see the Serverless Service that we just created by executing: ```
+    We can see the Serverless Service that we just created by executing: 
+    ```
     kn service list
     ```
 
     The output should be similar to:
 
-    ```bash
-    NAME      URL                                                     LATEST            AGE     CONDITIONS   READY   REASON
-    greeter   http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com  greeter-fyrxn-1   6m28s   3 OK / 3     True
+    ```
+    NAME      URL  LATEST            AGE     CONDITIONS   READY   REASON
+    greeter   url  greeter-fyrxn-1   6m28s   3 OK / 3     True
     ```
 
-    > **Note:** *It also is possible to use the ```
-    oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
-    ```*
+    > **Note:** *It also is possible to use the `oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
 
     The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
-    It also is possible to ```
-    describe` a specific service to gather detailed information about that service by executing: `kn service describe greeter
-    ```
+    It also is possible to `describe` a specific service to gather detailed information about that service by executing: `kn service describe greeter
 
     The output should be similar to:
-    ```bash
+    ```
     Name:       greeter
     Namespace:  serverless-tutorial
     Age:        15m
-    URL:        http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    URL:        url
 
     Revisions:
       100%  @latest (greeter-fyrxn-1) [1] (15m)
@@ -354,38 +345,36 @@ challenges:
 
     > *How is it possible to have a service deployed and `Ready` but no pods are running for that service?*
     >
-    > See a hint by inspecting the ```
-    READY` column from `oc get deployment
-    ```
+    > See a hint by inspecting the `READY` column from `oc get deployment
 
     ### Route
     As the [OpenShift Serverless Documentation][ocp-serving-components] explains, a `Route` resource maps a network endpoint to one or more Knative revisions. It is possible to manage the traffic in several ways, including fractional traffic and named routes.  Currently, since our service is new, we have only one revision to direct our users to -- in later sections we will show how to manage multiple revisions at once using a `Canary Deployment Pattern`.
 
-    We can see the route by executing: ```
+    We can see the route by executing: 
+    ```
     kn route list
     ```
 
     See the `NAME` of the route, the `URL`, as well as if it is `READY`:
     ```bash
-    NAME      URL                                                     READY
-    greeter   http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com  True
+    NAME      URL  READY
+    greeter   url  True
     ```
 
     ### Revision
     Lastly, we can inspect the `Revisions`.  As per the [OpenShift Serverless Documentation][ocp-serving-components], a `Revision` is a point-in-time snapshot of the code and configuration for each modification made to the workload. Revisions are immutable objects and can be retained for as long as needed. Cluster administrators can modify the `revision.serving.knative.dev` resource to enable automatic scaling of Pods in an OpenShift Container Platform cluster.
 
     Before inspecting revisions, update the image of the service by executing:
-    ```bash
+    ```
     kn service update greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:latest \
        --namespace serverless-tutorial
     ```
-    `
-    ```.
 
     > **Note:** *Updating the image of the service will create a new revision, or point-in-time snapshot of the workload.*
 
-    We can see the revision by executing: ```
+    We can see the revision by executing: 
+    ```
     kn revision list
     ```
 
@@ -399,8 +388,11 @@ challenges:
     Here we can see each revision and details including the percantage of `TRAFFIC` it is receiving.  We can also see the generational number of this revision, **which is incremented on each update of the service**.
 
     ### Invoke the Service
-    Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command ```
-    curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command:
+
+    ```
+    export APP_ROUTE=`oc get route greeter -n serverless-tutorial -o jsonpath='{"http://"}{.spec.host}'`
+    curl $APP_ROUTE
     ```
 
     The service will return a response like **Hi  greeter => '6fee83923a9f' : 1**
@@ -408,8 +400,9 @@ challenges:
     > **NOTE:** *You can also open this in your own local browser to test the service!*
 
     ### Scale to Zero
-    The ```
-    greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing `oc get pods -n serverless-tutorial -w
+    The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing 
+    ```
+    oc get pods -n serverless-tutorial -w
     ```
 
     Try invoking the service again using the `curl` from earlier to see the service scaling back up from zero.
@@ -417,7 +410,8 @@ challenges:
     > **Question:** *Do you see now why the pod might not have been running earlier? The service scaled to zero before you checked!*
 
     ## Delete the Service
-    We can easily delete our service by executing: ```
+    We can easily delete our service by executing: 
+    ```
     kn service delete greeter
     ```
 
@@ -445,33 +439,31 @@ challenges:
     The following service deployment uses the same greeter service as the last section in the tutorial except it is configured with an arbitrary revision name.
 
     Let's deploy the greeter service again, but this time set its **revision name** to `greeter-v1` by executing:
-    ```bash
+    ```
     kn service create greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
        --namespace serverless-tutorial \
        --revision-name greeter-v1
     ```
-    `
+
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    ```
+    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 03-traffic-distribution/greeter-v1-service.yaml
-    ```*.
-
     Next, we are going to update the greeter service to add a message prefix environment variable and change the revision name to `greeter-v2`.  Do so by executing:
-    ```bash
+    ```
     kn service update greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
        --namespace serverless-tutorial \
        --revision-name greeter-v2 \
        --env MESSAGE_PREFIX=GreeterV2
     ```
-    `
-    ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 03-traffic-distribution/greeter-v2-service.yaml
-    ```*.
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    ```
+    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml
+    ```
 
     See that the two greeter services have deployed successfully by executing ```
     kn revision list
@@ -493,14 +485,12 @@ challenges:
     With the deployment of `greeter-v2` serverless automatically started to direct 100% of the traffic to `greeter-v2`. Now let us assume that we need to roll back `greeter-v2` to `greeter-v1` for some reason.
 
     Update the greeter service by executing:
-    ```bash
+    ```
     kn service update greeter \
        --traffic greeter-v1=100 \
        --tag greeter-v1=current \
        --tag greeter-v2=prev \
        --tag @latest=latest
-    ```
-    `
     ```
 
     The above service definition creates three sub-routes(named after traffic tags) to the existing `greeter` route.
@@ -512,26 +502,27 @@ challenges:
     >
     > *Using the latest tag allows changing the default behavior of services to route 100% of the traffic to the latest revision.*
 
-    We can validate the service traffic tags by executing: ```
+    We can validate the service traffic tags by executing: 
+    ```
     kn route describe greeter
     ```
 
     The output should be similar to:
 
-    ```bash
+    ```
     Name:       greeter
     Namespace:  serverless-tutorial
     Age:        1m
-    URL:        http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    URL:        url
     Service:    greeter
 
     Traffic Targets:
         0%  @latest (greeter-v2) #latest
-            URL:  http://latest-greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+            URL:  url
       100%  greeter-v1 #current
-            URL:  http://current-greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+            URL:  url
         0%  greeter-v2 #prev
-            URL:  http://prev-greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+            URL:  url
 
     Conditions:
       OK TYPE                  AGE REASON
@@ -540,9 +531,10 @@ challenges:
       ++ IngressReady          23s
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 03-traffic-distribution/service-pinned.yaml
-    ```*.
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    ```
+    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml
+    ```
 
     The configuration change we issued above does not create any new `configuration`, `revision`, or `deployment` as there was no application update (e.g. image tag, env var, etc).  When calling the service without the sub-route, Serverless scales up the `greeter-v1`, as our configuration specifies and the service responds with the text `Hi greeter ⇒ '9861675f8845' : 1`.
 
@@ -569,7 +561,7 @@ challenges:
 
     > **Note:** *If you did not complete the previous Traffic Distribution section please execute both of the following commands:*
 
-    ```bash
+    ```
     kn service create greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v1
     kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v2 --env MESSAGE_PREFIX=GreeterV2
     ```
@@ -585,8 +577,6 @@ challenges:
        --traffic greeter-v1=80 \
        --traffic greeter-v2=20 \
        --traffic @latest=0
-    ```
-    `
     ```
 
     In the service configuration above see the 80/20 split between v1 and v2 of the greeter service.  Also see that the current service is set to receive 0% of the traffic using the `latest` tag.

@@ -16,8 +16,6 @@ description: |
   ## Use case
 
   You can modify an application in a container to develop and test before building a new version of the container's immutable image. Automatatically synchronizing the container with local changes speeds the "inner loop" of develop and test cycles, especially with interpreted programming languages.
-
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
@@ -27,6 +25,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -50,8 +49,6 @@ challenges:
       ## Use case
 
       You can modify an application in a container to develop and test before building a new version of the container's immutable image. Automatatically synchronizing the container with local changes speeds the "inner loop" of develop and test cycles, especially with interpreted programming languages.
-
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -60,13 +57,13 @@ challenges:
     run:
 
     ```
-    oc login -u developer -p developer
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     This will log you in using the credentials:
 
-    * **Username:** ``developer``
-    * **Password:** ``developer``
+    * **Username:** ``admin``
+    * **Password:** ``admin``
 
     You should see the output:
 
@@ -315,7 +312,6 @@ challenges:
 
     The form of the command when copying files from the local machine to the container is:
 
-
     ```
     oc rsync ./local/dir <pod-name>:/remote/dir
     ```
@@ -324,10 +320,11 @@ challenges:
 
     To illustrate the process for copying a single file, consider the case where you had deployed a web site and had not included a ``robots.txt`` file, but needed to quickly stop a web robot which was crawling your site.
 
-    A request to fetch the current ``robots.txt`` file for the web site fails with a HTTP ``404 Not Found`` response.
-
+    To find the URL for such a current ``robots.txt`` file for the web site that fails with a HTTP ``404 Not Found`` response, we can export and curl the following app route:
+    
     ```
-    curl --head http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt
+    export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}{"/robots.txt"}'`
+    curl $APP_ROUTE
     ```
 
     Create a ``robots.txt`` file to upload.
@@ -352,7 +349,8 @@ challenges:
     Having uploaded the ``robots.txt`` file, fetching the ``robots.txt`` file again now succeeds.
 
     ```
-    curl http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/robots.txt
+    export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}{"/robots.txt"}'`
+    curl $APP_ROUTE
     ```
 
     This worked without needing to take any further actions as the Apache HTTPD server being used to host static files, would automatically detect the presence of a new file in the directory.
@@ -419,9 +417,12 @@ challenges:
 
     When you initially ran this ``oc rsync`` command, you will see that it copied up the files so the local and remote directory are synchronized. Any changes made to the local files will now be automatically copied up to the remote directory.
 
-    Before we make a change, bring up the web application we have deployed in a separate browser window by using the URL:
+    Before we make a change, bring up the web application we have deployed in a separate browser window by using the URL found here:
 
-    http://blog-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
+    ```
+    export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}'`
+    curl $APP_ROUTE
+    ```
 
     You should see that the color of the title banner for the web site is red.
 
