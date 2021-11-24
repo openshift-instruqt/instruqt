@@ -283,7 +283,7 @@ challenges:
     path: /q/dev
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 300
 - slug: 02-inject-bean
   id: xqafjcyorgsc
   type: challenge
@@ -433,7 +433,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 300
 - slug: 03-package-and-run
   id: npxb5umu42he
   type: challenge
@@ -505,7 +505,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 300
 - slug: 04-build-native
   id: liep5vzlwsis
   type: challenge
@@ -636,7 +636,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 300
 - slug: 05-deploy-to-openshift
   id: qyzpzfyccatz
   type: challenge
@@ -776,7 +776,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 500
+  timelimit: 300
 - slug: 06-scaling
   id: v9wxrteqt0hi
   type: challenge
@@ -870,5 +870,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 500
-checksum: "5924118017160014368"
+  timelimit: 300
+checksum: "4222516712398952015"
