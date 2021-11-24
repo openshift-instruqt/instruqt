@@ -398,6 +398,9 @@ challenges:
         }
     }
     ```
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-prime-file.png)
 
     Let's test it out by accessing the new endpoint with a few prime and non-prime numbers.
 
@@ -540,6 +543,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     These do the following:
 
     * **`configurePrometheusRegistries`** - Adds custom tag of `registry: prometheus` to Prometheus registry metrics
@@ -559,7 +564,7 @@ challenges:
     deployment.env=prod
     ```
 
-    This will cause a tag `env: prod` to be added to each metric based on our above filter.
+    Save the file. This will cause a tag `env: prod` to be added to each metric based on our above filter.
 
     ## Test new metrics
 
@@ -640,6 +645,8 @@ challenges:
     quarkus.openshift.expose=true
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
     ```
+    
+    Save the file.
 
     For more details of the above options:
 
@@ -677,7 +684,7 @@ challenges:
     * Username: `developer`
     * Password: `developer`
 
-    ![Deployed App](https://katacoda.com/openshift/assets/middleware/quarkus/primedep.png)
+    ![Deployed App](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/primedep.png)
 
     And now we can access using `curl` once again to test our prime service running on OpenShift.
 
@@ -698,6 +705,9 @@ challenges:
     With our app rolled out, Prometheus should start collecting metrics. Let's take a look in the next exercise.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -736,7 +746,7 @@ challenges:
 
     ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/prom.png)
 
-    With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Run the following command to endlessly run `curl` every 2 seconds with a random prime number:
+    With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Run the following command in Terminal 1 to endlessly run `curl` every 2 seconds with a random prime number:
 
     ```
     while [ true ] ; do
@@ -748,7 +758,7 @@ challenges:
     done
     ```
 
-    With that running, go back to the Prometheus dashboard.  
+    With that running, go back to the Prometheus dashboard.
 
     Within about 15-30 seconds, Prometheus should start scraping the metrics. Start typing in the query box to look for `prime`:
 
@@ -853,7 +863,7 @@ challenges:
 
     > **WARNING**
     >
-    > If you skip this step, you'll get errors and things won't work! Make sure to change it to ``http://prometheus:9090``!
+    > If you skip this step, you'll get errors and things won't work! Make sure to change it to `http://prometheus:9090`!
 
     ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafds.png)
 
@@ -903,9 +913,9 @@ challenges:
 
     Next run on the *Visualization* section on the right:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafvis.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafvis.png)
 
-    This lets you fine tune the display, along with the type of graph (bar, line, gauge, etc). Leave them for now, and look up in the _Settings_ section above, and change the name of the panel to `Prime Time`.
+    This lets you fine tune the display, along with the type of graph (bar, line, gauge, etc). Leave them for now, and look up in the _Panel options_ section above, and change the name of the panel to `Prime Time`.
 
     ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/graftitle.png)
 
@@ -914,7 +924,7 @@ challenges:
 
     Run *Save* at the top right to save our new dashboard and give it a name such as _My Prime Dashboard_.
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafsave.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafsave.png)
 
     # Add more Panels
 
@@ -976,4 +986,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 428
-checksum: "7643578780942756279"
+checksum: "16459738811792377179"
