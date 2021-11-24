@@ -67,7 +67,7 @@ challenges:
 
     # Inspect Java runtime
 
-    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
+    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command in Terminal 1:
 
     > If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
 
@@ -78,9 +78,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     ## Import the code
@@ -126,7 +126,9 @@ challenges:
 
     # Define the entity
 
-    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** Tab, open this file `src/main/java/org/acme/person/model/Person.java` and add the following entity definition:
+    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** tabs:
+    
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png) open this file `src/main/java/org/acme/person/model/Person.java` and add the following entity definition:
 
     ```java
     package org.acme.person.model;
@@ -157,7 +159,10 @@ challenges:
 
         // TODO: Add more queries
     }
-    </pre>
+    
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-person-file.png)
 
     > You'll see a `// TODO` line - **do not delete it!** We will use this later on.
 
@@ -176,6 +181,10 @@ challenges:
     # Define the RESTful endpoint
 
     Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. From the **Visual Editor** Tab, create a new file in this path : `src/main/java/org/acme/person/PersonResource.java` and add its code:
+
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-person.png)
+
+    open the `PersonResource.java` file then add this code:
 
     ```java
     package org.acme.person;
@@ -221,6 +230,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     > You'll see a lot of `// TODO` lines - **do not delete them!** We will use these later on.
 
     As you can see we've implemented our first Panache-based query, the `getAll` method, which will return our list of people as a JSON object when we access the `GET /person` endpoint. This is defined using standard JAX-RS `@Path` and `@GET` and `@Produces` annotations.
@@ -235,7 +246,7 @@ challenges:
     INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Huỳnh Kim Huê', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
     ```
 
-    These statements will add some fake people to our database.
+    These statements will add some fake people to our database. Save the file.
 
   tabs:
   - title: Terminal 1
@@ -897,4 +908,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "14475636334820291586"
+checksum: "11677677913132762570"
