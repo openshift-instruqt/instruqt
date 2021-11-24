@@ -18,7 +18,6 @@ description: |
 
   You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
 
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -53,28 +52,23 @@ challenges:
 
       You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
 
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     The easiest way to access and interact with OpenShift is through the web console. The URL for the web console will be dictated by what was specified as the public URL for the OpenShift cluster when it was set up. Once the web console is accessed, how you then login will depend on the configured identity provider.
 
-    For this course the public URL for the web console is:
-
-    ``https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com``
-
-    To view the web console at the same time as these instructions, you can also select the _Console_ tab to the right of the tab for the embedded _Terminal_.
-
-    In the case of the OpenShift cluster managing user authentication, the web console login page will prompt you for your _Username_ and _Password_.
-
-    ![Web Console Login](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-web-console-login.png)
-
-    In the case of an external authentication service being used as the identity provider, it will be necessary to login first to the external service. As an example, if you were accessing [OpenShift Online](https://www.openshift.com/get-started/) you would see:
-
-    ![External Login](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-external-identity-provider.png)
-
-    For the OpenShift cluster used in this course, as the OpenShift cluster is managing user authentication, you will be presented with a login page that prompts you for your user account credentials. You can login using the credentials:
-
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+    You might have to wait a minute for the pod to be ready.
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+    ```
+    oc get routes console -n openshift-console
+    ```
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    You will then be able to login with developer permissions with:
     * **Username:** ``developer``
     * **Password:** ``developer``
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     As this is the first time you have logged in as this user in this OpenShift cluster, you will be presented with a "Welcome to OpenShift" message and the option of creating a new project.
 

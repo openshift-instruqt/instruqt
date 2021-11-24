@@ -18,8 +18,6 @@ description: |
 
   You can deploy your application's underlying database server on an OpenShift cluster, growing through development toward a production database packaged in an automating [Operator][operator].
 
-  This OpenShift cluster will self-destruct in one hour.
-
   [operator]: https://www.openshift.com/learn/topics/operators
 icon: https://logodix.com/logo/1910931.png
 level: beginner
@@ -55,8 +53,6 @@ challenges:
 
       You can deploy your application's underlying database server on an OpenShift cluster, growing through development toward a production database packaged in an automating [Operator][operator].
 
-      This OpenShift cluster will self-destruct in one hour.
-
       [operator]: https://www.openshift.com/learn/topics/operators
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
@@ -65,7 +61,7 @@ challenges:
     To login to the OpenShift cluster used for this course from the _Terminal_,
     run:
 
-    ``oc login -u developer -p developer``
+    ``oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true`
 
     This will log you in using the credentials:
 
@@ -104,10 +100,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -138,10 +134,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -234,10 +230,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
@@ -326,10 +322,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
   timelimit: 225
