@@ -246,7 +246,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 - slug: 02-remote-dev
   id: mjqxevryv5x0
   type: challenge
@@ -497,7 +497,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 - slug: 03-add-query-endpoints
   id: nehh6n9bynzo
   type: challenge
@@ -615,7 +615,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 - slug: 04-add-paging-filtering
   id: xasxnvxdymkl
   type: challenge
@@ -750,7 +750,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 - slug: 05-add-lifecycle-task
   id: cg5cuj6vclb5
   type: challenge
@@ -835,7 +835,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 - slug: 06-exercise-table
   id: brgo3c9xkxaz
   type: challenge
@@ -896,5 +896,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
-  timelimit: 200
+  timelimit: 500
 checksum: "14475636334820291586"

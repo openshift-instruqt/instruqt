@@ -104,7 +104,7 @@ challenges:
 
       - time series collection happens via a pull model over HTTP
 
-    To install it, first create a Kubernetes ConfigMap that will hold the Prometheus configuration. Run on the following command to create this file:
+    To install it, first create a Kubernetes ConfigMap that will hold the Prometheus configuration. Run on the following command to create this file in Terminal 1:
 
     ```
     cat <<EOF > /tmp/prometheus.yml
@@ -170,7 +170,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 02-create-and-instrument-app
   id: aubfyrpykdvo
   type: challenge
@@ -187,9 +187,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
@@ -282,6 +282,8 @@ challenges:
     ### Using other Registry Implementations
 
     It is possible to use other systems to consume metrics other than Prometheus, for example StackDriver (part of the [Quarkiverse](https://github.com/quarkiverse/quarkiverse-micrometer-registry)). You can also use other pre-packaged registries for other APM systems. Consult the [Quarkus Micrometer Guide](https://quarkus.io/guides/micrometer) for more detail.
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -304,7 +306,7 @@ challenges:
     path: /q/metrics
     port: 8080
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 03-add-additional-metrics
   id: u0ytapvpuryv
   type: challenge
@@ -317,7 +319,7 @@ challenges:
 
     From the **Visual Editor** Tab, create a new file in this path: `primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`.
 
-    [File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png)
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png)
 
     This new class will implement an algorithm for checking whether a number is a prime number. This algorithm is exposed over a REST interface. With the Micrometer extension enabled, metrics for all http server requests are also collected automatically.
 
@@ -399,14 +401,13 @@ challenges:
 
     Let's test it out by accessing the new endpoint with a few prime and non-prime numbers.
 
-    Let's start Live Coding. Run on the following command to start the app in _Live Coding_ mode:
+    Let's start Live Coding again. Run on the following command to start the app in _Live Coding_ mode in Terminal 1:
 
     ```
-    cd /root/projects/quarkus/primes && \
-      mvn quarkus:dev
+    mvn quarkus:dev -f /root/projects/quarkus/primes
     ```
 
-    Run the following commands to test whether the number is a prime number in *Terminal 2*:
+    One the application gets started, run the following commands to test whether the number is a prime number in *Terminal 2*:
 
     ```
     curl http://localhost:8080/is-prime/1
@@ -608,7 +609,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 04-deploy-to-openshift
   id: vfhphkjktax8
   type: challenge
@@ -620,11 +621,10 @@ challenges:
 
     Quarkus offers the ability to automatically generate OpenShift resources based on sane default and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
 
-    Run the following command in *Terminal 1* to add it to our project:
+    Run the following command in Terminal 1 to add it to our project:
 
     ```
-    cd /root/projects/quarkus/primes && \
-      mvn quarkus:add-extension -Dextensions="openshift"
+    mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/primes
     ```
 
     From the **Visual Editor** Tab, open the `application.properties` file from `primes/src/main/resources/application.properties`.
@@ -655,7 +655,7 @@ challenges:
     Now let's deploy the application itself. Run the following command which will build and deploy using the OpenShift extension (it will take a minute or two):
 
     ```
-    mvn clean package -DskipTests
+    mvn clean package -DskipTests -f /root/projects/quarkus/primes
     ```
 
     > **NOTE**: This command will take a minute or two, as it builds the app, pushes a container image, and finally deploys the container to OpenShift.
@@ -705,7 +705,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 05-query-with-prometheus
   id: cugwydy3ypzm
   type: challenge
@@ -726,29 +726,29 @@ challenges:
     OpenSSL 1.1.1g FIPS  21 Apr 2020
     ```
 
+    Open up the Prometheus dashboard. Get the URL from command line, run this command to get the app's Route:
+
+    ```
+    oc get route prometheus -n quarkus -o jsonpath='{"http://"}{.spec.host}'
+    ```
+
+    Copy the URL and open it in your browser to access the Prometheus UI.
+
+    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/prom.png)
+
     With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Run the following command to endlessly run `curl` every 2 seconds with a random prime number:
 
     ```
     while [ true ] ; do
             BITS=$(( ( RANDOM % 60 )  + 1 ))
             NUM=$(openssl prime -generate -bits $BITS)
-            ROUTE=$(oc get route primes -n quarkus-o jsonpath='{.spec.host}')
+            ROUTE=$(oc get route primes -n quarkus -o jsonpath='{.spec.host}')
             curl http://$ROUTE/is-prime/${NUM}
             sleep 2
     done
     ```
 
-    With that running, open up the Prometheus dashboard.
-
-    Get the URL from command line, run this command to get the app's Route:
-
-    ```
-    oc get route prometheus -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
-    ```
-
-    Copy the URL and open it in your browser to access the Prometheus UI.
-
-    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/prom.png)
+    With that running, go back to the Prometheus dashboard.  
 
     Within about 15-30 seconds, Prometheus should start scraping the metrics. Start typing in the query box to look for `prime`:
 
@@ -769,10 +769,12 @@ challenges:
 
     ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promgraph.png)
 
-
     Keep the `curl` loop running and we'll move on to build a full dashboard for our app in the next step.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -780,7 +782,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 06-install-grafana
   id: yfzcxdtqt3q3
   type: challenge
@@ -789,13 +791,13 @@ challenges:
     # Install Grafana
 
 
-    From *Terminal 1*, run again the prime number checker:
+    From Terminal 1, run again the prime number checker:
 
     ```
     while [ true ] ; do
             BITS=$(( ( RANDOM % 60 )  + 1 ))
             NUM=$(openssl prime -generate -bits $BITS)
-            ROUTE=$(oc get route primes -n quarkus-o jsonpath='{.spec.host}')
+            ROUTE=$(oc get route primes -n quarkus -o jsonpath='{.spec.host}')
             curl http://$ROUTE/is-prime/${NUM}
             sleep 2
     done
@@ -823,7 +825,7 @@ challenges:
     Get Grafana URL from command line, run this command to get the app's Route:
 
     ```
-    oc get route grafana -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+    oc get route grafana -n quarkus -o jsonpath='{"http://"}{.spec.host}'
     ```
 
     Copy the URL and open it in your browser to access Grafana.
@@ -853,7 +855,7 @@ challenges:
     >
     > If you skip this step, you'll get errors and things won't work! Make sure to change it to ``http://prometheus:9090``!
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafds.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafds.png)
 
     Run **Save and Test**. You should see:
 
@@ -870,7 +872,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 07-create-dashboard
   id: odadkvtv2v16
   type: challenge
@@ -905,7 +907,7 @@ challenges:
 
     This lets you fine tune the display, along with the type of graph (bar, line, gauge, etc). Leave them for now, and look up in the _Settings_ section above, and change the name of the panel to `Prime Time`.
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/graftitle.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/graftitle.png)
 
     There is an *Alerts* tab you can configure to send alerts (email, etc) when conditions are met for this and other
     queries. We’ll skip this for now.
@@ -973,5 +975,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
-checksum: "14194459186521222843"
+  timelimit: 428
+checksum: "7643578780942756279"

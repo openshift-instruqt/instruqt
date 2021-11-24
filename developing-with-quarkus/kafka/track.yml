@@ -80,9 +80,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
@@ -127,7 +127,7 @@ challenges:
     hostname: crc
     path: /root/projects/
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 02-create-generator
   id: 7dmuf3kfv5im
   type: challenge
@@ -185,7 +185,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 03-create-converter
   id: 6dqrjcvrgvri
   type: challenge
@@ -241,7 +241,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 04-create-resource
   id: ylqcgloevdna
   type: challenge
@@ -330,7 +330,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 05-configure-app
   id: g0sxepira4ir
   type: challenge
@@ -391,7 +391,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 06-deploy-kafka
   id: hrm8ifu679pm
   type: challenge
@@ -522,7 +522,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
+  timelimit: 428
 - slug: 07-deploy-and-test
   id: joral7dw0ew3
   type: challenge
@@ -665,5 +665,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 200
-checksum: "6313905049965102724"
+  timelimit: 428
+checksum: "6862312991782476776"
