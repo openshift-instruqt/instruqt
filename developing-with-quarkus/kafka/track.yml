@@ -618,7 +618,7 @@ challenges:
     Get the  OpenShift Web Console URL by running the following command in Terminal 1:
 
     ```bash
-    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
     Copy the URL from the output of the above command and open it in your browser.

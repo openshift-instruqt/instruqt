@@ -44,13 +44,13 @@ challenges:
     **Red Hat OpenShift Container Platform** is the preferred container orchestration platform for Quarkus. OpenShift is based on **Kubernetes** which is the most used Orchestration
     for containers running in production.
 
-    Access the OpenShift Web Console to login from the Web UI:
+    Run the following command in Terminal 1 to retrieve the OpenShift Web Console URL:
 
     ```
     oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
-    Copy the URL from the output of the above command and open it in your browser.
+    Copy the URL from the output of the above command and open it in your browser to access the OpenShift Web Console to login from the Web UI.
 
     We'll deploy our app as the `developer` user. Use the following credentials:
 
@@ -64,7 +64,7 @@ challenges:
     developer
     ```
 
-    From *Terminal 1*, run the following command to login with the OpenShift CLI:
+    From *Terminal 1*, run the following command in Terminal 1 to login with the OpenShift CLI:
 
 
     ```
@@ -87,7 +87,7 @@ challenges:
     OpenShift project allows a community of users (or a user) to organize and manage
     their content in isolation from other communities.
 
-    For this scenario, let's create a project that you will use to house your applications. Run:
+    For this scenario, let's create a project that you will use to house your applications. Run the following command in Terminal 1:
 
     ```
     cd /root/projects/quarkus/ &&
@@ -178,7 +178,7 @@ challenges:
   assignment: |-
     # Inspect Java runtime and create basic project
 
-    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
+    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command in Terminal 1:
 
     ```
     $JAVA_HOME/bin/java --version
@@ -243,7 +243,7 @@ challenges:
 
     Note the amazingly fast startup time! The app is now running "locally" (within the Linux container in which this exercise runs).
 
-    Test that the app is running by accessing the simple `hello` endpoint:
+    Test that the app is running by accessing the simple `hello` endpoint. Run the following command in Terminal 2:
 
     ```
     cd /root/projects/quarkus/primes && \
@@ -317,6 +317,8 @@ challenges:
 
     From the **Visual Editor** Tab, create a new file in this path: `primes/src/main/java/org/acme/quickstart/PrimeNumberResource.java`.
 
+    [File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png)
+
     This new class will implement an algorithm for checking whether a number is a prime number. This algorithm is exposed over a REST interface. With the Micrometer extension enabled, metrics for all http server requests are also collected automatically.
 
     We do want to add a few other metrics to demonstrate how to add and filter metrics:
@@ -325,7 +327,7 @@ challenges:
     * A gauge will store the highest prime number discovered
     * A timer will record the time spent testing if a number is prime.
 
-    Add this code:
+    Next, open the `PrimeNumberResource.java` file then add this code:
 
     ```java
     package org.acme.quickstart;
@@ -972,4 +974,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "12690017759979678095"
+checksum: "14194459186521222843"
