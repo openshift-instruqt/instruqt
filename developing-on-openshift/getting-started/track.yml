@@ -19,7 +19,6 @@ description: |
 
   Be able to provide a great experience for both Developers and System Administrators to develop, deploy, and run containerized applications using OpenShift. Developers should love using OpenShift because it enables them to take advantage of both containerized applications and orchestration without having to know the details. Developers are free to focus on their code instead of spending time writing Dockerfiles and running docker builds.
 
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -29,6 +28,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -55,9 +55,8 @@ challenges:
 
       Be able to provide a great experience for both Developers and System Administrators to develop, deploy, and run containerized applications using OpenShift. Developers should love using OpenShift because it enables them to take advantage of both containerized applications and orchestration without having to know the details. Developers are free to focus on their code instead of spending time writing Dockerfiles and running docker builds.
 
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
-    ## Command Line Interface (CLI)
+    # Command Line Interface (CLI)
 
     The OpenShift CLI is accessed using the command _oc_. From here, you can administrate the entire OpenShift cluster and deploy new applications.
 
@@ -71,17 +70,11 @@ challenges:
 
     In this tutorial, we're not focusing on the OpenShift CLI, but we want you to be aware of it in case you prefer using the command line. You can check out our other courses that go into the use of the CLI in more depth. Now, we're just going to practice logging in so you can get some experience with how the CLI works.
 
-    ## Exercise: Logging in with the CLI
+    # Exercise: Logging in with the CLI
     Let's get started by logging in. Your task is to enter the following into the console:
 
     ```
-    oc login -u developer
-    ```
-
-    When prompted, enter the following password:
-
-    **Password:** ```
-    developer
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     Next, you can check if it was successful:
@@ -92,7 +85,7 @@ challenges:
 
     `oc whoami` should return a response of:
 
-    `developer`
+    `admin`
 
     That's it!
 
@@ -110,22 +103,27 @@ challenges:
   assignment: |+
     This section focuses on using the web console.
 
-    ## Exercise: Logging in with the Web Console
-    To begin, click on the **Console** tab on your screen. This will open the web console on your browser.
+    # Exercise: Logging in with the Web Console
+    Let's log in to our cluster to start working. 
 
-    You should see a **Red Hat OpenShift Container Platform** window with **Username** and **Password** forms as shown below:
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+    You might have to wait a minute for the pod to be ready.
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+    ```
+    oc get routes console -n openshift-console
+    ```
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    You will then be able to login with admin permissions with:
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
-    ![OpenShift Web Console](https://katacoda.com/openshift/assets/introduction/getting-started-44/2ocp-login.png)
+    After logging in to the web console, you'll be on a *Administrator* page. Next, navigate to the developer perspective of the web console.
 
-    For this scenario, log in by entering the following:
-
-    **Username:** `developer`
-
-    **Password:** `developer`
-
-    After logging in to the web console, you'll be on a *Projects* page.
-
-    ## What is a project? Why does it matter?
+    # What is a project? Why does it matter?
 
     OpenShift is often referred to as a container application platform in that it is a platform designed for the development and deployment of applications in containers.
 
@@ -133,7 +131,7 @@ challenges:
 
     More technically, it's a visualization of the Kubernetes namespace based on the developer access controls.
 
-    ## Exercise: Creating a Project
+    # Exercise: Creating a Project
 
     Click the blue **Create Project** button.
 
@@ -145,7 +143,7 @@ challenges:
 
     After your project is created, you will see some basic information about your project.
 
-    ## Exercise: Explore the Administrator and Developer Perspectives
+    # Exercise: Explore the Administrator and Developer Perspectives
 
     Notice the navigation menu on the left. When you first log in, you'll typically be in the *Administrator Perspective*. If you are not in the *Administrator Perspective*, click the perspective toggle and switch from **Developer** to **Administrator**.
 
@@ -230,7 +228,7 @@ challenges:
     is just launching new instances of an existing image, especially if that image
     is already cached on the node.
 
-    ### Application "Self Healing"
+    # Application "Self Healing"
 
     OpenShift's *Deployments* are constantly monitoring to see that the desired number
     of *Pods* is actually running. Therefore, if the actual state ever deviates from the desired state (i.e., 2 pods running), OpenShift will work to fix the situation.
@@ -252,7 +250,7 @@ challenges:
     OpenShift will always make sure that, if one pod dies, there is going to be new pod created to
     fill its place.
 
-    ### Exercise: Scale Down
+    # Exercise: Scale Down
 
     Before we continue, go ahead and scale your application down to a single
     instance. Click *Topology* to return to the *Topology* view, then click `parksmap-katacoda` and on the *Overview* tab, click the down arrow to scale back down to one instance.
@@ -267,21 +265,14 @@ challenges:
   type: challenge
   title: Step 5 - Routing HTTP Requests
   assignment: |
-    _Services_ provide internal abstraction and load balancing within an OpenShift
-    environment, but sometimes clients (users, systems, devices, etc.) **outside**
-    of OpenShift need to access an application. The way that external clients are able
-    to access applications running in OpenShift is through the OpenShift routing layer.
+    _Services_ provide internal abstraction and load balancing within an OpenShift environment, but sometimes clients (users, systems, devices, etc.) **outside** of OpenShift need to access an application. The way that external clients are able to access applications running in OpenShift is through the OpenShift routing layer.
     The resource object which controls this is a _Route_.
 
-    The default OpenShift router (HAProxy) uses the HTTP header of the incoming
-    request to determine where to proxy the connection. You can optionally define
-    security, such as TLS, for the _Route_. If you want your _Services_, and, by
-    extension, your _Pods_,  to be accessible to the outside world, you need to
-    create a _Route_.
+    The default OpenShift router (HAProxy) uses the HTTP header of the incoming request to determine where to proxy the connection. You can optionally define security, such as TLS, for the _Route_. If you want your _Services_, and, by extension, your _Pods_,  to be accessible to the outside world, you need to create a _Route_.
 
     As we mentioned earlier in the tutorial, the *Container Image* method of deploying an application will create a _Route_ for you by default. Since we un-checked that option, we will manually create a _Route_ now.
 
-    ## Exercise: Creating a Route
+    # Exercise: Creating a Route
 
     Fortunately, creating a _Route_ is a pretty straight-forward process.  First, go to the *Administrator Perspective* by switching to *Administrator* in the *Developer* drop down menu. Ensure that your `myproject` project is selected from the projects list. Next, click *Networking* and then *Routes* in the left navigation menu.
 

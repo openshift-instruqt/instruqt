@@ -163,6 +163,17 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
+ODO_INSTALL="latest"
+ODO_RESPONSE=$(odo version 2> /dev/null)
+ODO_VERSION=${ODO_RESPONSE:0:10}
+
+curl -o odo.tar.gz -L https://mirror.openshift.com/pub/openshift-v4/clients/odo/$ODO_INSTALL/odo-linux-amd64.tar.gz && \
+tar -xvf odo.tar.gz && \
+rm -f odo.tar.gz && \
+mv -f odo /usr/bin/odo && \
+chmod +x /usr/bin/odo && \
+odo preference set -f ConsentTelemetry false > /dev/null 2>&1
+odo preference set UpdateNotification false > /dev/null 2>&1
 
 # wait until cluster operators are "available"
 # for co in $(oc get co -oname)

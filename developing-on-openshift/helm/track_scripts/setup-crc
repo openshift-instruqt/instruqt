@@ -163,6 +163,8 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
+export HELM_VERSION=3.3.4
+curl -o /usr/local/bin/helm https://mirror.openshift.com/pub/openshift-v4/clients/helm/$HELM_VERSION/helm-linux-amd64 && chmod a+x /usr/local/bin/helm
 
 # wait until cluster operators are "available"
 # for co in $(oc get co -oname)
