@@ -61,7 +61,7 @@ challenges:
     mvn spring-boot:run
     ```
 
-    You should eventually see a log line like `Started Application in 4.497 seconds (JVM running for 9.785)`. Open the application by clicking on the **Local Web Browser** tab or clicking [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/). Then stop the application by pressing **<kbd>CTRL</kbd>+<kbd>C</kbd>**.
+    You should eventually see a log line like `Started Application in 4.497 seconds (JVM running for 9.785)`. Open the application by clicking on the *Fruit App* Tab. Then stop the application by pressing **<kbd>CTRL</kbd>+<kbd>C</kbd>**.
 
     ## Congratulations
 
@@ -73,7 +73,12 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rest-services
+  - title: Fruit App
+    type: service
+    hostname: crc
+    path: /
+    port: 8080
   difficulty: basic
   timelimit: 300
 - slug: 02-create-rest-services
@@ -403,7 +408,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rest-services
   difficulty: basic
   timelimit: 300
-checksum: "12547459086868026266"
+checksum: "2892796743790911886"
