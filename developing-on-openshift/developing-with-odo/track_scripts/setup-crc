@@ -175,7 +175,6 @@ chmod +x /usr/bin/odo && \
 odo preference set -f ConsentTelemetry false > /dev/null 2>&1
 odo preference set UpdateNotification false > /dev/null 2>&1
 
-echo "Cloning app repos"
 git clone https://github.com/openshift-evangelists/Wild-West-Backend.git ~/backend > /dev/null 2>&1
 git clone https://github.com/openshift-evangelists/Wild-West-Frontend.git ~/frontend > /dev/null 2>&1
 

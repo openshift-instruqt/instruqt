@@ -101,7 +101,7 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
   timelimit: 225
 - slug: 02-deploying-a-postgresql-database
@@ -131,7 +131,7 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
   timelimit: 225
 - slug: 03-starting-an-interactive-shell
@@ -223,7 +223,7 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
   timelimit: 225
 - slug: 04-creating-a-remote-connection
@@ -311,7 +311,7 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
   timelimit: 225
 checksum: "11135150620697772913"
