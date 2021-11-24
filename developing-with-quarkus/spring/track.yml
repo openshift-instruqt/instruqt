@@ -55,7 +55,7 @@ challenges:
 
     ## Create basic project
 
-    Let's create the basic Quarkus _Hello World_ application and include the necessary spring extensions. Click this command to create the project:
+    Let's create the basic Quarkus _Hello World_ application and include the necessary spring extensions. Run this command to create the project:
 
     ```
     cd /root/projects/quarkus &&
@@ -81,7 +81,7 @@ challenges:
     cd /root/projects/quarkus/fruit-taster
     ```
 
-    Let's begin Live Coding. Click on the following command to start the app in _Live Coding_ mode:
+    Let's begin Live Coding. Run on the following command to start the app in _Live Coding_ mode:
 
     ```
     mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
@@ -126,7 +126,7 @@ challenges:
     path: /greeting
     port: 8080
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 02-create-data
   id: ya0aishykw1e
   type: challenge
@@ -268,7 +268,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 03-create-beans
   id: ye9oamwagcev
   type: challenge
@@ -436,7 +436,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 04-create-web
   id: yzucmjhdkgln
   type: challenge
@@ -535,8 +535,8 @@ challenges:
     Open the **Fruit Taster App** Tab to access the `/fruits` endpoint.
 
 
-    > Note you may need to click the command again, if it didn't execute in the new Terminal window.
-    > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Click on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
+    > Note you may need to run the command again, if it didn't execute in the new Terminal window.
+    > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Run on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
     > to see details and clues about what may be wrong, and re-visit any prior steps to re-add the missing code.
 
     > Note that we pass the output to the `jq` utility which prints nicely-formatted JSON.
@@ -813,7 +813,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 05-build-app
   id: vrdbobcpy3c3
   type: challenge
@@ -844,7 +844,7 @@ challenges:
 
     ## Run the executable JAR
 
-    You can run the packaged application by clicking:
+    You can run the packaged application by runing:
 
     ```
     java -jar target/quarkus-app/quarkus-run.jar
@@ -872,7 +872,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 06-deploy-and-test
   id: f1bzosamqoxf
   type: challenge
@@ -931,7 +931,7 @@ challenges:
 
     ## Create project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run:
 
     ```
     oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"
@@ -941,7 +941,7 @@ challenges:
 
     ## Deploy Postgres
 
-    When running in production, we'll need a Postgres database on OpenShift. Click the next command to deploy Postgres to your new project:
+    When running in production, we'll need a Postgres database on OpenShift. Run the next command to deploy Postgres to your new project:
 
     ```
     oc new-app \
@@ -1015,7 +1015,7 @@ challenges:
 
     You can see the app deployed from the OpenShift Web Console.
 
-    Enter the *quarkus-spring* project to see your app and click to the Route's URL.
+    Enter the *quarkus-spring* project to see your app and run to the Route's URL.
 
     To the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
@@ -1057,7 +1057,7 @@ challenges:
     We now have 10 instances running providing better performance. Make sure it still works.
 
 
-    **10 not enough? Try 50!** Click the command to scale this app to 50 instances:
+    **10 not enough? Try 50!** Run the command to scale this app to 50 instances:
 
     ```
     oc scale --replicas=50 dc/fruit-taster
@@ -1081,23 +1081,9 @@ challenges:
     ```
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/spring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring` project inside the `quarkus` folder contains the completed solution for this scenario.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/spring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     ## Congratulations!
 
@@ -1111,5 +1097,5 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 checksum: "15709778362843763338"

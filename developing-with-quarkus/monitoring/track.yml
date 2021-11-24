@@ -87,7 +87,7 @@ challenges:
     OpenShift project allows a community of users (or a user) to organize and manage
     their content in isolation from other communities.
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run:
 
     ```
     cd /root/projects/quarkus/ &&
@@ -104,7 +104,7 @@ challenges:
 
       - time series collection happens via a pull model over HTTP
 
-    To install it, first create a Kubernetes ConfigMap that will hold the Prometheus configuration. Click on the following command to create this file:
+    To install it, first create a Kubernetes ConfigMap that will hold the Prometheus configuration. Run on the following command to create this file:
 
     ```
     cat <<EOF > /tmp/prometheus.yml
@@ -129,7 +129,7 @@ challenges:
     This file contains basic Prometheus configuration, plus a specific `scrape_config` which instructs Prometheus to
     look for application metrics from both Prometheus itself, and a Quarkus app called `primes` (which we'll create later) at the `/q/metrics` endpoint.
 
-    Next, click this command to create a ConfigMap with the above file:
+    Next, run this command to create a ConfigMap with the above file:
 
     ```
     oc create configmap prom --from-file=prometheus.yml=/tmp/prometheus.yml
@@ -160,7 +160,7 @@ challenges:
 
     You should see `deployment "prometheus" successfully rolled out`.
 
-    > If this command appears to hang, just press `CTRL-C` and click it again.
+    > If this command appears to hang, just press `CTRL-C` and run it again.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -170,7 +170,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 02-create-and-instrument-app
   id: aubfyrpykdvo
   type: challenge
@@ -196,7 +196,7 @@ challenges:
 
     ## Create basic project
 
-    Let's create the basic Quarkus _Hello World_ application and include the necessary monitoring extensions. Click this command to create the project:
+    Let's create the basic Quarkus _Hello World_ application and include the necessary monitoring extensions. Run this command to create the project:
 
     ```
     cd /root/projects/quarkus && \
@@ -218,7 +218,7 @@ challenges:
     cd /root/projects/quarkus/primes
     ```
 
-    Let's begin Live Coding. Click on the following command to start the app in _Live Coding_ mode:
+    Let's begin Live Coding. Run on the following command to start the app in _Live Coding_ mode:
 
     ```
     mvn quarkus:dev
@@ -250,7 +250,7 @@ challenges:
       curl http://localhost:8080/hello
     ```
 
-    > You may need to click this command again in case it doesn't execute properly on first click
+    > You may need to run this command again in case it doesn't execute properly on first run
 
     you should see
 
@@ -304,7 +304,7 @@ challenges:
     path: /q/metrics
     port: 8080
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 03-add-additional-metrics
   id: u0ytapvpuryv
   type: challenge
@@ -397,14 +397,14 @@ challenges:
 
     Let's test it out by accessing the new endpoint with a few prime and non-prime numbers.
 
-    Let's start Live Coding. Click on the following command to start the app in _Live Coding_ mode:
+    Let's start Live Coding. Run on the following command to start the app in _Live Coding_ mode:
 
     ```
     cd /root/projects/quarkus/primes && \
       mvn quarkus:dev
     ```
 
-    Click the following commands to test whether the number is a prime number in *Terminal 2*:
+    Run the following commands to test whether the number is a prime number in *Terminal 2*:
 
     ```
     curl http://localhost:8080/is-prime/1
@@ -560,7 +560,7 @@ challenges:
 
     ## Test new metrics
 
-    Let's do a quick test and make sure they're working. Access the endpoint a couple more times by clicking on the below commands from *Terminal 2*:
+    Let's do a quick test and make sure they're working. Access the endpoint a couple more times by runing on the below commands from *Terminal 2*:
 
     ```
     curl http://localhost:8080/is-prime/350
@@ -592,7 +592,7 @@ challenges:
 
     ## Cleanup
 
-    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `Next` command to do it for you).
+    We're done coding, so let's stop the app. In the first Terminal, press `CTRL-C` to stop the running Quarkus app (or run the `Next` command to do it for you).
 
   tabs:
   - title: Terminal 1
@@ -606,7 +606,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 04-deploy-to-openshift
   id: vfhphkjktax8
   type: challenge
@@ -703,7 +703,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 05-query-with-prometheus
   id: cugwydy3ypzm
   type: challenge
@@ -711,7 +711,7 @@ challenges:
   assignment: |-
     ## Generate Load
 
-    We will use the open source [OpenSSL](https://www.openssl.org/) project to generate some test primes to exercise our app. Click the following command to verify openssl is installed. If it is not, you may need to wait a few seconds and click the command again until it reports a proper version
+    We will use the open source [OpenSSL](https://www.openssl.org/) project to generate some test primes to exercise our app. Run the following command to verify openssl is installed. If it is not, you may need to wait a few seconds and run the command again until it reports a proper version
 
     ```
     cd /root/projects/quarkus/primes && \
@@ -724,7 +724,7 @@ challenges:
     OpenSSL 1.1.1g FIPS  21 Apr 2020
     ```
 
-    With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Click the following command to endlessly run `curl` every 2 seconds with a random prime number:
+    With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Run the following command to endlessly run `curl` every 2 seconds with a random prime number:
 
     ```
     while [ true ] ; do
@@ -757,7 +757,7 @@ challenges:
 
     ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promnames.png)
 
-    Type `prime` in the query, and select `prime_number_max` in the box, and click **Execute**. This will
+    Type `prime` in the query, and select `prime_number_max` in the box, and run **Execute**. This will
     fetch the values from our metric showing the largest prime number found so far:
 
     ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promchecks.png)
@@ -778,7 +778,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/primes
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 06-install-grafana
   id: yfzcxdtqt3q3
   type: challenge
@@ -799,7 +799,7 @@ challenges:
     done
     ```
 
-    We'll keep our prime number checker running. Click to run the following command in *Terminal 2* to deploy Grafana to our cluster:
+    We'll keep our prime number checker running. Run to run the following command in *Terminal 2* to deploy Grafana to our cluster:
 
     ```
     cd /root && \
@@ -838,7 +838,7 @@ challenges:
 
     # Add Prometheus as a data source
 
-    You’ll land on the Data Source screen. Click **Add your first data source**, and click **Select** next to **Prometheus** as the *Data Source Type*.
+    You’ll land on the Data Source screen. Run **Add your first data source**, and run **Select** next to **Prometheus** as the *Data Source Type*.
 
     In the URL box, type:
     ```
@@ -853,7 +853,7 @@ challenges:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafds.png)
 
-    Click **Save and Test**. You should see:
+    Run **Save and Test**. You should see:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafworking.png)
 
@@ -868,7 +868,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 - slug: 07-create-dashboard
   id: odadkvtv2v16
   type: challenge
@@ -880,7 +880,7 @@ challenges:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafcreate.png)
 
-    Next, click **Add an Empty Panel**.
+    Next, run **Add an Empty Panel**.
 
     This will create a new dashboard with a single Panel. Each Panel can visualize a computed metric (either a single
     metric, or a more complex query) and display the results in the Panel.
@@ -889,7 +889,7 @@ challenges:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafquery.png)
 
-    Choose from the drop-down `prime_number_test_seconds_max`. Then click on the **Refresh** button to begin to show in the graph above:
+    Choose from the drop-down `prime_number_test_seconds_max`. Then run on the **Refresh** button to begin to show in the graph above:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafgraf.png)
 
@@ -897,7 +897,7 @@ challenges:
 
     > **Note**: Statistics like max, percentiles, and histogram counts decay over time to give greater weight to recent samples, so you'll see even the `max` value going up and down as older values drop out of the rolling window of samples.
 
-    Next click on the *Visualization* section on the right:
+    Next run on the *Visualization* section on the right:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafvis.png)
 
@@ -908,7 +908,7 @@ challenges:
     There is an *Alerts* tab you can configure to send alerts (email, etc) when conditions are met for this and other
     queries. We’ll skip this for now.
 
-    Click *Save* at the top right to save our new dashboard and give it a name such as _My Prime Dashboard_.
+    Run *Save* at the top right to save our new dashboard and give it a name such as _My Prime Dashboard_.
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafsave.png)
 
@@ -926,7 +926,7 @@ challenges:
       - The HTTP endpoint timers `http_server_requests_seconds_count` (name it "Primes HTTP Timer" on the *General* tab).
       - The RSS Memory used by the app `process_resident_memory_bytes` (set the title to `RSS Memory` on the *General* tab.
 
-    To see the quantile metrics, create another panel for the `prime_number_test_seconds_bucket` metric. When you select that metric in Grafana, it will notice you'll want a histogram panel, so click the helpful tip to show the 95% quantile:
+    To see the quantile metrics, create another panel for the `prime_number_test_seconds_bucket` metric. When you select that metric in Grafana, it will notice you'll want a histogram panel, so run the helpful tip to show the 95% quantile:
 
     ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafhist.png)
 
@@ -936,39 +936,25 @@ challenges:
 
     # Fix layout
 
-    After saving, go back to the main dashboard (click on **Quar** at the top and then select it under *Recent
+    After saving, go back to the main dashboard (run on **Quar** at the top and then select it under *Recent
     Dashboards*). Change the time value to *Last 15 Minutes* at the top-right:
 
     ![time](https://katacoda.com/openshift/assets/middleware/quarkus/graftime.png)
 
     Finally, drag and resize the different panels to look nice and fit on a single page.
 
-    Click **Save Dashboad** again to save it. Your final Dashboard should look like:
+    Run **Save Dashboad** again to save it. Your final Dashboard should look like:
 
     ![final](https://katacoda.com/openshift/assets/middleware/quarkus/graffinal.png)
 
     You can add many more metrics to monitor and alert for Quarkus apps using these tools.
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/monitoring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/monitoring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `monitoring` project inside the `quarkus` folder contains the completed solution for this scenario.
-
-    # Congratulations\!
+    # Congratulations!
 
     This exercise demonstrates how your Quarkus application can utilize the [Micrometer
     Metrics extension](https://quarkus.io/guides/micrometer) to visualize metrics for Quarkus applications. You also
@@ -985,5 +971,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 400
+  timelimit: 200
 checksum: "12690017759979678095"

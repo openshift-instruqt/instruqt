@@ -210,7 +210,7 @@ challenges:
     It's working!
 
     Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`.
-    Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `Disk`` icon to save the files or press `Ctrl + s`:
+    Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `Disk` icon to save the files or press `Ctrl + s`:
 
     ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-file.png)
 
@@ -283,7 +283,7 @@ challenges:
     path: /q/dev
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: 02-inject-bean
   id: xqafjcyorgsc
   type: challenge
@@ -433,7 +433,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: 03-package-and-run
   id: npxb5umu42he
   type: challenge
@@ -505,7 +505,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: 04-build-native
   id: liep5vzlwsis
   type: challenge
@@ -636,7 +636,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: 05-deploy-to-openshift
   id: qyzpzfyccatz
   type: challenge
@@ -693,7 +693,7 @@ challenges:
 
     ## Create project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run the following command:
 
     ```
     oc new-project quarkus --display-name="Sample Quarkus App"
@@ -776,7 +776,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 200
 - slug: 06-scaling
   id: v9wxrteqt0hi
   type: challenge
@@ -870,5 +870,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
-checksum: "4222516712398952015"
+  timelimit: 200
+checksum: "2247887981397432949"

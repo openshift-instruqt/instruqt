@@ -95,7 +95,7 @@ challenges:
 
     # Inspect project
 
-    Make sure you're in the right project directory by clicking:
+    Make sure you're in the right project directory by runing:
 
     ```
     cd /root/projects/rhoar-getting-started/quarkus/panache-reactive
@@ -107,7 +107,7 @@ challenges:
 
     We need to add a few extensions to the app for Panache Reactive and the reactive Postgres driver. We'll use the Quarkus Maven Plugin.
 
-    Click this command to add the Hibernate ORM with Panache and PostgreSQL JDBC extensions:
+    Run this command to add the Hibernate ORM with Panache and PostgreSQL JDBC extensions:
 
     ```
     mvn quarkus:add-extension -Dextensions="hibernate-reactive-panache, reactive-pg-client"
@@ -259,7 +259,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 02-remote-dev
   id: 4eyaxnbckvmf
   type: challenge
@@ -295,7 +295,7 @@ challenges:
 
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/quarkus/login.png)
 
-    Click **Skip Tour** to skip the new user introduction.
+    Run **Skip Tour** to skip the new user introduction.
 
     There's nothing there now ("No workloads found"), but that's about to change.
 
@@ -317,7 +317,7 @@ challenges:
 
     ## Access OpenShift Project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run:
 
     ```
     oc new-project quarkus --display-name="Sample Quarkus Datatable App"
@@ -325,7 +325,7 @@ challenges:
 
     ## Deploy Postgres
 
-    Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
+    Our app will need a Postgres database. Run the next command to quickly deploy a Postgres instance to your new project:
 
     ```
     oc new-app \
@@ -337,7 +337,7 @@ challenges:
         openshift/postgresql
     ```
 
-    You'll see the Postgres pod spinning up in the Web Console, select `quarkus` project and click on **Topology** from the left-side menu using the *Developer Perspective*.
+    You'll see the Postgres pod spinning up in the Web Console, select `quarkus` project and run on **Topology** from the left-side menu using the *Developer Perspective*.
 
     ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-postgres.png)
 
@@ -345,7 +345,7 @@ challenges:
 
     Quarkus offers the ability to automatically generate OpenShift resources based on sane defaults and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
 
-    Click the following command to add it to our project:
+    Run the following command to add it to our project:
 
     ```
     cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
@@ -435,7 +435,7 @@ challenges:
     curl -s $APP_URL/person | jq
     ```
 
-    > You may need to click this again if the initial click opens a Terminal but doesn't run the command for you.
+    > You may need to run this again if the initial run opens a Terminal but doesn't run the command for you.
 
     You should see:
 
@@ -466,11 +466,11 @@ challenges:
 
     # Save Environment variable
 
-    We'll refer to this URL often, so click this command to save it in an environment variable called `APP_URL` (and put it in the Bash shell startup in case we open new terminals later):
+    We'll refer to this URL often, so run this command to save it in an environment variable called `APP_URL` (and put it in the Bash shell startup in case we open new terminals later):
 
     # Remote Dev Connection
 
-    Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
+    Now we are ready to run our in dev mode and connect it to the remote application. Run here to run:
 
     ```
     mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL
@@ -503,7 +503,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 03-add-query-endpoints
   id: ltgnczcfymx2
   type: challenge
@@ -565,7 +565,7 @@ challenges:
       curl -s $APP_URL/person/eyes/BLUE | jq
     ```
 
-    > This will open a new Terminal to execute the command. If the command fails to run just click the above command again!
+    > This will open a new Terminal to execute the command. If the command fails to run just run the above command again!
 
     You should only see **one** person with BLUE eyes:
 
@@ -620,7 +620,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 04-add-paging-filtering
   id: fbcryoi5bsrh
   type: challenge
@@ -641,7 +641,7 @@ challenges:
     * `start` - The index of the first element needed
     * `length` - Total number records to return (or less, if there are less records that meet criteria)
     * `search[value]` - The value of the search box
-    * `draw` - DataTables does asnychronous processing, so this value is sent with each request, expecting it to be returned as-is, so DataTables can piece things back together on the frontend if a user clicks things quickly.
+    * `draw` - DataTables does asnychronous processing, so this value is sent with each request, expecting it to be returned as-is, so DataTables can piece things back together on the frontend if a user runs things quickly.
 
     From the **Visual Editor** Tab, open the file in this path: `src/main/java/org/acme/person/PersonResource.java` resource class add this code after the `// TODO: add datatable query` comment:
 
@@ -749,7 +749,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 05-add-lifecycle-task
   id: au8fe6bvgbvp
   type: challenge
@@ -840,7 +840,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 06-exercise-table
   id: xvcqqow0cuyt
   type: challenge
@@ -858,29 +858,15 @@ challenges:
 
     Skip around a few pages, try some different searches, and notice that the data is only loaded when needed. The overall performance is very good even for low-bandwidth connections or huge data sets.
 
-    When you are done, return to the first Terminal, press `CTRL-C` to stop the running Quarkus app (or click the `clear` command to do it for you).
+    When you are done, return to the first Terminal, press `CTRL-C` to stop the running Quarkus app (or run the `clear` command to do it for you).
 
     # Extra Credit
     There are [many other features of DataTables](https://datatables.net/manual/server-side) that could be supported on the server side with Quarkus and Panache. For example, when our endpoint is accessed, the set of columns to order on is also passed using the `order` and `columns` arrays, which we do not cover in this scenario. If you have time, try to add additional code to support these incoming parameters and order the resulting records accordingly!
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/panache-reactive/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `panache-reactive` project inside the `quarkus` folder contains the completed solution for this scenario.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/panache-reactive/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     ## Congratulations
     In this scenario you got a glimpse of the power of Quarkus apps when dealing with large amounts of data.
@@ -897,5 +883,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 checksum: "3550047611423900741"

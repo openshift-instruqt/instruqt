@@ -66,7 +66,7 @@ challenges:
     ```
     ## Create sample project
 
-    Let's create the basic Quarkus _Hello World_ application and include the necessary qute extensions. Click this command to create the project:
+    Let's create the basic Quarkus _Hello World_ application and include the necessary qute extensions. Run this command to create the project:
 
     ```
     cd /root/projects/quarkus &&
@@ -84,7 +84,7 @@ challenges:
 
     ## Start the app
 
-    Let's begin Live Coding. Click on the following command to start the example app in _Live Coding_ mode:
+    Let's begin Live Coding. Run on the following command to start the example app in _Live Coding_ mode:
 
     ```
     cd /root/projects/quarkus/qute && \
@@ -222,7 +222,7 @@ challenges:
     path: /some-page?name=Jerry
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 - slug: 02-typesafe
   id: 4xbqwvrrzkdl
   type: challenge
@@ -389,7 +389,7 @@ challenges:
     path: /goodbye?name=Jerry
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 - slug: 03-parameters
   id: rxd2ojyxj450
   type: challenge
@@ -525,7 +525,7 @@ challenges:
     </body>
     ```
 
-    You can also click to the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
+    You can also run to the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
 
     ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
@@ -591,7 +591,7 @@ challenges:
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
-    If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}`. Now click again to the *Qute Item 1* Tab or reload it. You should get an error:
+    If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}`. Now run again to the *Qute Item 1* Tab or reload it. You should get an error:
 
     ![Err](https://katacoda.com/openshift/assets/middleware/quarkus/qute-err.png)
 
@@ -615,7 +615,7 @@ challenges:
     path: /item/1
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 - slug: 04-extensions
   id: 7l1bnmupgpba
   type: challenge
@@ -700,7 +700,7 @@ challenges:
     path: /item/4
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 - slug: 05-periodic
   id: b73wb6svypqy
   type: challenge
@@ -872,7 +872,7 @@ challenges:
     path: /hello?name=James
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 - slug: 06-reactive
   id: xavnxsw7yfko
   type: challenge
@@ -944,28 +944,13 @@ challenges:
     To learn more about Quarkus and reactive programming, check out the [Reactive Programming with Quarkus Reactive SQL exercise](https://learn.openshift.com/middleware/courses/middleware-quarkus/reactive-sql).
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/qute/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `qute` project inside the `quarkus` folder contains the completed solution for this scenario.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/qute/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     # Wrap-up
 
     Congratulations! Qute provides a powerful, flexible, type-safe and reactive way to render templates using ideas and mechanisms familiar to Java developers. To learn more about Qute, please refer to the [Qute reference guide](https://quarkus.io/guides/qute-reference).
-
 
   tabs:
   - title: Terminal 1
@@ -981,5 +966,5 @@ challenges:
     path: /reactive
     port: 8080
   difficulty: basic
-  timelimit: 500
+  timelimit: 200
 checksum: "15235132459565049556"

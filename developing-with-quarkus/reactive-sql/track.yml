@@ -136,7 +136,7 @@ challenges:
 
     ## Add Extension
 
-    Like other exercises, we’ll need another extension to start using the PosgtreSQL. Lets install it by clicking on the following command:
+    Like other exercises, we’ll need another extension to start using the PosgtreSQL. Lets install it by runing on the following command:
 
     ```
     cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
@@ -166,7 +166,7 @@ challenges:
     hostname: crc
     path: /root/projects
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 02-remote-dev
   id: mbzbisqfarfz
   type: challenge
@@ -200,7 +200,7 @@ challenges:
     developer
     ```
 
-    Click **Skip Tour** to skip the new user introduction.
+    Run **Skip Tour** to skip the new user introduction.
 
     Run the following command to login with the OpenShift CLI:
 
@@ -220,7 +220,7 @@ challenges:
 
     ## Access OpenShift Project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run:
 
     ```
     oc new-project reactive-sql --display-name="ReactiveSQL with Quarkus"
@@ -236,7 +236,7 @@ challenges:
 
     ## Deploy Postgres
 
-    Our app will need a Postgres database. Click the next command to quickly deploy a Postgres instance to your new project:
+    Our app will need a Postgres database. Run the next command to quickly deploy a Postgres instance to your new project:
 
     ```
     oc new-app \
@@ -256,7 +256,7 @@ challenges:
 
     Quarkus offers the ability to automatically generate OpenShift resources based on sane defaults and user supplied configuration. The OpenShift extension is actually a wrapper extension that brings together the [kubernetes](https://quarkus.io/guides/deploying-to-kubernetes) and [container-image-s2i](https://quarkus.io/guides/container-image#s2i) extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift.
 
-    Click the following command to add it to our project:
+    Run the following command to add it to our project:
 
     ```
     cd /root/projects/rhoar-getting-started/quarkus/reactive-sql &&
@@ -337,7 +337,7 @@ challenges:
     ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/rx-deploy.png)
 
 
-    Do a quick test to ensure the remote app is running by clicking to the app's Route from the Topology view.
+    Do a quick test to ensure the remote app is running by runing to the app's Route from the Topology view.
 
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
@@ -357,7 +357,7 @@ challenges:
 
     # Remote Dev Connection
 
-    Now we are ready to run our in dev mode and connect it to the remote application. Click here to run:
+    Now we are ready to run our in dev mode and connect it to the remote application. Run here to run:
 
     ```
     mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_ROUTE
@@ -390,7 +390,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 03-add-resource
   id: 1wofu5kpqsbj
   type: challenge
@@ -489,7 +489,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 04-add-model
   id: ho5pkgp6fhnj
   type: challenge
@@ -547,7 +547,7 @@ challenges:
     Now you have a running app, with a reactive database extension.
     In the next step, we'll redeploy it to OpenShift.
 
-    Now Cancel the running dev session by clicking the `clear` before moving ahead.
+    Now Cancel the running dev session by runing the `clear` before moving ahead.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -557,7 +557,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 - slug: 05-package-and-run
   id: yqbltw8kmtp7
   type: challenge
@@ -571,7 +571,7 @@ challenges:
 
     ## Deploy production application to OpenShift
 
-    To deploy the application "in production", we can simply re-deploy the application using the OpenShift extension, omitting the `quarkus-launch-devmode` environment variable. Click the following command to do this:
+    To deploy the application "in production", we can simply re-deploy the application using the OpenShift extension, omitting the `quarkus-launch-devmode` environment variable. Run the following command to do this:
 
     ```
     cd /root/projects/rhoar-getting-started/quarkus/reactive-sql && \
@@ -605,23 +605,10 @@ challenges:
     ![Reactive SQL app UI](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-sql-ui.png)
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/reactive-sql/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/reactive-sql/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `reactive-sql` project inside the `quarkus` folder contains the completed solution for this scenario.
     ## Congratulations!
 
     You've packaged up the app as a production app and learned a bit more about the mechanics of packaging. In this tutorial we also used JAX-RS and deployed our application to the Openshift Container platform.
@@ -636,5 +623,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
-  timelimit: 600
+  timelimit: 200
 checksum: "4390489885301164485"
