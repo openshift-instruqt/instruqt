@@ -645,7 +645,7 @@ challenges:
     quarkus.openshift.expose=true
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
     ```
-    
+
     Save the file.
 
     For more details of the above options:
@@ -707,9 +707,6 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Terminal 2
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
@@ -719,7 +716,7 @@ challenges:
 - slug: 05-query-with-prometheus
   id: cugwydy3ypzm
   type: challenge
-  title: Step 4
+  title: Step 5
   assignment: |-
     ## Generate Load
 
@@ -784,9 +781,6 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Terminal 2
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
@@ -796,7 +790,7 @@ challenges:
 - slug: 06-install-grafana
   id: yfzcxdtqt3q3
   type: challenge
-  title: Step 5
+  title: Step 6
   assignment: |+
     # Install Grafana
 
@@ -877,6 +871,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
@@ -886,7 +883,7 @@ challenges:
 - slug: 07-create-dashboard
   id: odadkvtv2v16
   type: challenge
-  title: Step 6
+  title: Step 7
   assignment: |
     # Create Dashboard
 
@@ -986,4 +983,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 428
-checksum: "16459738811792377179"
+checksum: "13037656176441184795"
