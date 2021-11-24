@@ -127,7 +127,7 @@ challenges:
     # Define the entity
 
     This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** tabs:
-    
+
     ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png) open this file `src/main/java/org/acme/person/model/Person.java` and add the following entity definition:
 
     ```java
@@ -159,7 +159,7 @@ challenges:
 
         // TODO: Add more queries
     }
-    
+
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
     ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-person-file.png)
@@ -908,4 +908,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "11677677913132762570"
+checksum: "15346206381919498162"
