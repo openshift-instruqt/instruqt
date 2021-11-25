@@ -45,12 +45,12 @@ challenges:
     $JAVA_HOME/bin/java --version
     ```
 
-    The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
+    The command should report the version in use, for example (the versions and dates may be slightly different than the below example). Run the following command in Terminal 1:
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     ## Create basic project
@@ -77,14 +77,10 @@ challenges:
 
     First, switch to the directory in which the app was built:
 
-    ```
-    cd /root/projects/quarkus/fruit-taster
-    ```
-
     Let's begin Live Coding. Run on the following command to start the app in _Live Coding_ mode:
 
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    ```bash
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
     ```
 
     You should see:
@@ -103,7 +99,7 @@ challenges:
     ```
     > The first time you build the app, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    Test that the app is running by accessing the **Fruit Taste App** Tab.
+    Test that the app is running by accessing the **Fruit Taster App** Tab.
 
     You should see
 
@@ -111,7 +107,7 @@ challenges:
     Hello Spring
     ```
 
-    This app doesn't use any Spring annotations yet. You'll _live code_ those in the next few steps while the app continues to run.
+    This app doesn't use any Spring annotations yet. Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -140,9 +136,11 @@ challenges:
 
     ## Create Model
 
-    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.html
 
-    Then add this code:
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-fruit.png)
+
+    Open the `Fruit.java` file then add this code:
 
     ```java
     package org.acme;
@@ -197,6 +195,10 @@ challenges:
     }
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-fruit-file.png)
+
     This is a simple POJO representing a Fruit, with a name and color.
 
     ## Create Spring Data Repository
@@ -218,6 +220,8 @@ challenges:
 
     }
     ```
+
+    Save the file.
 
     Note that by extending Spring's `CrudRepository` interface you'll automatically get a complete set of methods to manipulate the entity (e.g. `count()`, `findAll()`, `delete()` and others).
 
@@ -528,12 +532,10 @@ challenges:
     From **Terminal 1** Tab, start the app:
 
     ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
     ```
 
     Open the **Fruit Taster App** Tab to access the `/fruits` endpoint.
-
 
     > Note you may need to run the command again, if it didn't execute in the new Terminal window.
     > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Run on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
@@ -796,6 +798,8 @@ challenges:
 
     Notice the presence of our new suffix! Quarkus apps make it super easy to code, test, and re-code on the fly.
 
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -821,11 +825,10 @@ challenges:
   assignment: |
     ## Build executable JAR
 
-    Quarkus applications can be built as executable JARs, or native binary images. Here we'll use an executable JAR to deploy our app. Build the application:
+    Quarkus applications can be built as executable JARs, or native binary images. Here we'll use an executable JAR to deploy our app. Build the application in Terminal 1:
 
-    ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn clean package -DskipTests
+    ```bash
+    mvn clean package -DskipTests -f /root/projects/quarkus/fruit-taster
     ```
 
     It produces 2 jar files:
@@ -854,12 +857,11 @@ challenges:
 
     ## Congratulations!
 
-    You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory effeciency. Now let's give our app native powers by creating a Quarkus native app.
+    You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory efficiency. Now let's give our app native powers by creating a Quarkus native app.
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -887,8 +889,7 @@ challenges:
     Run the following command to add it to our project:
 
     ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn quarkus:add-extension -Dextensions="openshift"
+    mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/fruit-taster
     ```
 
     ## Login to OpenShift
@@ -979,12 +980,14 @@ challenges:
     taste.suffix = (if you like fruit!)
     ```
 
+    Save the file.
+
     ## Deploy application to OpenShift
 
     Now let's deploy the application itself. Run the following command which will build and deploy the Quarkus app in Openshift:
 
     ```
-    mvn clean package \
+    mvn clean package -f /root/projects/quarkus/fruit-taster \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes.deploy=true \
