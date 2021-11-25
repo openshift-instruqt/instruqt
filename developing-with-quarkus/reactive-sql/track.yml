@@ -607,7 +607,7 @@ challenges:
     ```
 
     Copy the URL from the output of the above command and open it in your browser.
-    
+
     ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/new-index.png)
 
     # Open the solution in an IDE in the Cloud!
@@ -630,4 +630,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 600
-checksum: "11601123344773681211"
+checksum: "15017496347330221803"
