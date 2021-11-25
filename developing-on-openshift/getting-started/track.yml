@@ -182,7 +182,7 @@ challenges:
 
     Within the *Deploy Image* page, enter the following for *Image name from external registry*:
 
-    `docker.io/openshiftroadshow/parksmap-katacoda:1.2.0`
+    ```docker.io/openshiftroadshow/parksmap-katacoda:1.2.0```
 
     Press tab or click outside of the text box to validate the image:
 
@@ -315,11 +315,11 @@ challenges:
     The documentation for S2I describes itself in the following way:
 
     > Source-to-image (S2I) is a tool for building reproducible container images. S2I
-    produces ready-to-run images by injecting source code into a container image and
-    assembling a new container image which incorporates the builder image and built
-    source. The result is then ready to use with docker run. S2I supports
-    incremental builds which re-use previously downloaded dependencies, previously
-    built artifacts, etc.
+    > produces ready-to-run images by injecting source code into a container image and
+    > assembling a new container image which incorporates the builder image and built
+    > source. The result is then ready to use with docker run. S2I supports
+    > incremental builds which re-use previously downloaded dependencies, previously
+    > built artifacts, etc.
 
     OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in addition to building container images from Dockerfiles and "custom" builds).
 
