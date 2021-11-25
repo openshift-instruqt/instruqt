@@ -209,8 +209,8 @@ challenges:
     * [Extension methods](https://quarkus.io/guides/qute-reference#template_extension_methods) that can be used to extend the data classes with new functionality are also inspired by modern languages.
     * If you come from the world of JSP/JSF/Facelets you’ll appreciate that `@Named` CDI beans can be referenced directly in any template through the `inject` namespace, e.g. `{inject:foo.price}`. See [Injecting Beans Directly In Templates](https://quarkus.io/guides/qute-reference#injecting-beans-directly-in-templates) for more information.
 
-    Let's now explore some new features based on Quarkus principles. 
-    
+    Let's now explore some new features based on Quarkus principles.
+
     Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
@@ -531,8 +531,8 @@ challenges:
 
     Here we Declare a static `Templates` inner class with a method called `item()` that gives us a `TemplateInstance` for `templates/ItemResource/item.html` and declare its `Item item` parameter so we can validate the template.
 
-    We then pass the value of `id` to be used to render the template when the REST endpoint is called. 
-    
+    We then pass the value of `id` to be used to render the template when the REST endpoint is called.
+
     Start the Quarkus Dev Mode in Terminal 1:
 
     ```
@@ -1025,4 +1025,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "5124752676775982723"
+checksum: "13220534477284372061"
