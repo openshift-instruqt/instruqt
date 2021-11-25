@@ -306,6 +306,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     With the interface in place, we will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean. It will be used to create a `StringFunction` bean that will capitalize the text passed as parameter.
 
     From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
@@ -327,6 +329,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     ## Create Functions
 
@@ -850,7 +854,7 @@ challenges:
     You can run the packaged application by runing:
 
     ```
-    java -jar target/quarkus-app/quarkus-run.jar
+    java -jar /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
     ```
 
     Access the app from the **Fruit Taster App** Tab.
@@ -1101,4 +1105,4 @@ challenges:
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
   timelimit: 500
-checksum: "17711021434193780967"
+checksum: "15760425836117608175"
