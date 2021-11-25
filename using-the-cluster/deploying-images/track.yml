@@ -18,7 +18,6 @@ description: |
 
   You can deploy a container image on an OpenShift cluster to make the application easier to manage, scale, connect and monitor.
 
-  This OpenShift cluster will self-destruct in one hour.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -53,7 +52,6 @@ challenges:
 
       You can deploy a container image on an OpenShift cluster to make the application easier to manage, scale, connect and monitor.
 
-      This OpenShift cluster will self-destruct in one hour.
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -62,7 +60,7 @@ challenges:
     run:
 
     ```
-    oc login -u developer -p developer
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     This will log you in using the credentials:
@@ -101,12 +99,27 @@ challenges:
     ```
 
     Switch to the _Console_ and login to the OpenShift web console using the
-    same credentials you used above.
+    same credentials you used above. At first, check that the pod responsible for OpenShift Web Console to be ready:
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-web-console-login.png)
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    You will then be able to login with admin permissions with:
+    * **Username:** ``developer``
+    * **Password:** ``developer``
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     This should leave you at the list of projects you have access to. As we only
-    created the one project, all you should see is ``myproject``.
+    created the one project, you should see ``myproject``.
 
     ![List of Projects](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-list-of-projects.png)
 
