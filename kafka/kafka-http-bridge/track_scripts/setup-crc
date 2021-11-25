@@ -185,8 +185,10 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     echo "AVAILABLE"
 # done
 
+mkdir -p /root/projects/http-bridge/
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/kafka-bridge.yaml -o /opt/kafka-bridge.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/kafka-bridge.yaml -o /root/projects/http-bridge/kafka-bridge.yaml
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
 

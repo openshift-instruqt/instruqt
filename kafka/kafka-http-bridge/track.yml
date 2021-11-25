@@ -54,22 +54,7 @@ challenges:
 
     Deploying the bridge on OpenShift is really easy using the new `KafkaBridge` custom resource provided by the Red Hat AMQ Streams Cluster Operator.
 
-    ### Logging in to the Cluster using the OpenShift CLI
-
-    Before creating any applications, log in as admin. This is required if you want to log in to the web console and use it.
-
-    To log in to the OpenShift cluster from the _Terminal_ run:
-
-    ```
-    oc login -u developer -p developer
-    ```
-
-    This will log you in using the credentials:
-
-    * **Username:** ``developer``
-    * **Password:** ``developer``
-
-    Use the same credentials to log in to the web console.
+    ### Logging in to the Cluster
 
     Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
 
@@ -90,6 +75,20 @@ challenges:
     ```
     developer
     ```
+
+    To log in to the OpenShift cluster from the _Terminal_ run:
+
+    ```
+    oc login -u developer -p developer
+    ```
+
+    This will log you in using the credentials:
+
+    * **Username:** ``developer``
+    * **Password:** ``developer``
+
+    Use the same credentials to log in to the web console.
+
 
     ### Switch your own namespace
 
@@ -155,7 +154,7 @@ challenges:
     oc expose svc my-bridge-bridge-service
     ```
 
-    When the route is created, the Kafka Bridge is reachable through the `https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com` host. You can now use any HTTP client to interact with the REST API exposed by the bridge to send and receive messages without needing to use the native Kafka protocol.
+    When the route is created, the Kafka Bridge is reachable from outside the cluster. You can now use any HTTP client to interact with the REST API exposed by the bridge to send and receive messages without needing to use the native Kafka protocol.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -165,7 +164,7 @@ challenges:
     hostname: crc
     path: /root/projects/http-bridge
   difficulty: intermediate
-  timelimit: 225
+  timelimit: 360
 - slug: step2
   id: clyajpizcjq7
   type: challenge
@@ -181,7 +180,7 @@ challenges:
     To verify that the Ingress is working properly, try to access the `/healthy` endpoint of the bridge with the following curl command:
 
     ```
-    curl -ik https://$KAFKA_BRIDGE_SERVICE/healthy
+    curl -ik http://$KAFKA_BRIDGE_SERVICE/healthy
     ```
 
     If the bridge is reachable through the OpenShift route, it will return an HTTP response with `200 OK` HTTP code, but an empty body.
@@ -217,7 +216,7 @@ challenges:
     Let's send a couple of messages to the `my-topic` topic:
 
     ```
-    curl -s -k -X POST https://$KAFKA_BRIDGE_SERVICE/topics/my-topic -H 'content-type: application/vnd.kafka.json.v2+json' -d '{ "records": [ {"key": "key-1","value": "sales-lead-0001"}, {"key": "key-2","value": "sales-lead-0002"} ] }' | jq
+    curl -s -X POST http://$KAFKA_BRIDGE_SERVICE/topics/my-topic -H 'content-type: application/vnd.kafka.json.v2+json' -d '{ "records": [ {"key": "key-1","value": "sales-lead-0001"}, {"key": "key-2","value": "sales-lead-0002"} ] }' | jq
     ```
 
     If the request is successful, the Kafka Bridge returns a `200 OK` HTTP code, with a JSON payload describing the `offsets` array, and the partition and offsets in which the messages are written.
@@ -249,7 +248,7 @@ challenges:
     hostname: crc
     path: /root/projects/http-bridge
   difficulty: intermediate
-  timelimit: 225
+  timelimit: 360
 - slug: step3
   id: 62txlwqb7avl
   type: challenge
@@ -267,7 +266,7 @@ challenges:
 
     ```
     export KAFKA_BRIDGE_SERVICE=`oc get route my-bridge-bridge-service -n kafka -o jsonpath='{.spec.host}'`
-    curl -s -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group -H 'content-type: application/vnd.kafka.v2+json' -d '{"name": "my-consumer","format": "json","auto.offset.reset": "earliest","fetch.min.bytes": 512,"enable.auto.commit": false}' | jq
+    curl -s -X POST http://$KAFKA_BRIDGE_SERVICE/consumers/my-group -H 'content-type: application/vnd.kafka.v2+json' -d '{"name": "my-consumer","format": "json","auto.offset.reset": "earliest","fetch.min.bytes": 512,"enable.auto.commit": false}' | jq
     ```
 
     This will create a Kafka consumer connected to the Kafka cluster. If the request is successful, the bridge will reply back with a `200 OK` HTTP code, and a JSON payload with the consumer ID (`instance_id`) and base URL (`base_uri`).
@@ -290,7 +289,7 @@ challenges:
     Subscribe your `my-consumer` consumer to the `my-topic` topic with the following command:
 
     ```
-    curl -i -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/subscription -H 'content-type: application/vnd.kafka.v2+json' -d '{"topics": ["my-topic"]}'
+    curl -i -X POST http://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/subscription -H 'content-type: application/vnd.kafka.v2+json' -d '{"topics": ["my-topic"]}'
     ```
 
     >This will return a `204 OK` HTTP code with an empty body.
@@ -307,7 +306,7 @@ challenges:
     hostname: crc
     path: /root/projects/http-bridge
   difficulty: intermediate
-  timelimit: 225
+  timelimit: 360
 - slug: step4
   id: rdkuij0su51v
   type: challenge
@@ -323,13 +322,13 @@ challenges:
 
     ```
     export KAFKA_BRIDGE_SERVICE=`oc get route my-bridge-bridge-service -n kafka -o jsonpath='{.spec.host}'`
-    curl -s -k -X GET https://KAFKA_BRIDGE_SERVICE/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
+    curl -s -X GET http://KAFKA_BRIDGE_SERVICE/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
     ```
 
     Repeat step a couple more times until you retrieve all messages from the Kafka Bridge consumer.
 
     ```
-    curl -s -k -X GET https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
+    curl -s -X GET http://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
     ```
 
     The Kafka Bridge returns an array of messages — describing the topic name, key, value, partition, and offset — in the response body, along with a `200` code. Messages are retrieved from the latest offset by default.
@@ -361,7 +360,7 @@ challenges:
     Commit offsets to the log for `my-consumer`:
 
     ```
-    curl -i -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/offsets
+    curl -i -X POST http://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/offsets
     ```
 
     >Because no request body is submitted, offsets are committed for all the records that have been received by the consumer. Alternatively, the request body can contain an array (OffsetCommitSeekList) that specifies the topics and partitions that you want to commit offsets for.
@@ -378,5 +377,5 @@ challenges:
     hostname: crc
     path: /root/projects/http-bridge
   difficulty: intermediate
-  timelimit: 225
-checksum: "6216190687182870812"
+  timelimit: 360
+checksum: "6498106234079684719"
