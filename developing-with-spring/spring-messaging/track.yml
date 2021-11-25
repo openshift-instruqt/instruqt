@@ -330,6 +330,7 @@ challenges:
     ```bash
     Login successful.
     You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
+    ```
 
     **2. Create project**
 
@@ -497,4 +498,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
-checksum: "10803828655919833354"
+checksum: "11906349005654559517"

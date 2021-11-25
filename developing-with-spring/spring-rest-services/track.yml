@@ -92,13 +92,13 @@ challenges:
 
     **1. Review the Model**
 
-    We have already created the model for our Fruit objects due to it being necessary for the Repository. Click on the following link which will open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``. As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific annotations. Don't worry about the annotations. They are not important for this module.
+    We have already created the model for our Fruit objects due to it being necessary for the Repository. Click on the following link which will open the empty file in the editor: `src/main/java/com/example/service/Fruit.java`. As you can see it is just a Plain-Old-Java-Object (POJO) with some JPA-specific annotations. Don't worry about the annotations. They are not important for this module.
 
     **2. Add a Controller**
 
     Next we need to create a Spring Controller to handle HTTP requests to our application. The `@RestController` annotation on a Java class marks the class as a Controller (intended to be of the REST variety) which Spring will register automatically for you on application start.
 
-    First, we need to create the java class file. From the *Visual Editor* Tab, create this file: ``src/main/java/com/example/service/FruitController.java`.
+    First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/FruitController.java`.
 
     Copy the below content into the file:
 
@@ -298,6 +298,7 @@ challenges:
     ```bash
     Login successful.
     You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
+    ```
 
 
     Then you'll create the project:
@@ -411,4 +412,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rest-services
   difficulty: basic
   timelimit: 300
-checksum: "2892796743790911886"
+checksum: "17834806837846258924"

@@ -11,6 +11,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -33,13 +34,13 @@ challenges:
     # Review the base structure of the application
     **1. Understanding the Application**
 
-    The project is a simple Greeting application, where a user inputs a fruit name and is greeted by our service. Opening up our ``src/main/java/com/example/service/FruitController.java`` file we can see the logic used to respond to our user. The interesting part of this logic is right here, where we retrieve the message:
+    The project is a simple Greeting application, where a user inputs a fruit name and is greeted by our service. From the *Visual Editor* Tab, open the file in this path: `src/main/java/com/example/service/FruitController.java`. You can see the logic used to respond to our user. The interesting part of this logic is right here, where we retrieve the message:
 
     ```java
     String message = String.format(properties.getMessage(), name);
     ```
 
-    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java`` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our ``src/main/resources/application-local.properties`` file.
+    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our `src/main/resources/application-local.properties`` file.
 
     Our `application-local.properties` file contains only one property, `greeting.message`. This is the message that we return and display to the user. In order to get an understanding of the flow, let's run the application locally. On the terminal build the project:
 
@@ -47,7 +48,7 @@ challenges:
     mvn spring-boot:run
     ```
 
-    When the application finishes building, click the **local web browser** or click [here](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com). You should see the same message that is in the `application-local.properties` file.
+    When the application finishes building, open the *Fruit App* Tab. You should see the same message that is in the `application-local.properties` file.
 
     Be sure to stop the application with `ctrl-c`.
 
@@ -61,7 +62,12 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
+  - title: Fruit App
+    type: service
+    hostname: crc
+    path: /
+    port: 8080
   difficulty: basic
   timelimit: 300
 - slug: 02-deploy-to-openshift
@@ -72,6 +78,19 @@ challenges:
     # Deploy to OpenShift Application Platform
 
     **1. Create a project**
+
+    Run the following command to login with the OpenShift CLI:
+
+    ```
+    oc login -u admin -p admin
+    ```
+
+    You should see:
+
+    ```bash
+    Login successful.
+    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
+    ```
 
     Let's first create a new project:
 
@@ -92,7 +111,8 @@ challenges:
     We should see `clusterrole.rbac.authorization.k8s.io/view added: "default"` as output. The next step is to create our `ConfigMap` configuration and deploy it to OpenShift using:
 
     ```
-    oc create configmap spring-boot-configmap-greeting --from-file=src/main/etc/application.properties
+    cd /root/projects/rhoar-getting-started/spring/microservices-externalized-config && \
+      oc create configmap spring-boot-configmap-greeting --from-file=src/main/etc/application.properties
     ```
 
     We will talk about `ConfigMap`s in greater detail in the next section.
@@ -113,11 +133,44 @@ challenges:
 
     For the deployment to OpenShift we are using the [JKube](https://www.eclipse.org/jkube/) tool through the [`openshift-maven-plugin`](https://www.eclipse.org/jkube/docs/openshift-maven-plugin), which is configured in our ``pom.xml`` (found in the `<profiles/>` section). The deployment may take a few minutes to complete.
 
-    You can run the command ```
-    oc rollout status -w dc/spring-boot-configmap-greeting
-    ``` to watch and wait for the deployment to complete.
+    You can run the command
 
-    Once the application deployment completes, navigate to our route in the OpenShift Web View or click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/). We should see the following screen, meaning everything was successful:
+    ```
+    oc rollout status -w dc/spring-boot-configmap-greeting
+    ```
+
+    to watch and wait for the deployment to complete.
+
+    Once the application deployment completes, navigate to our route in the OpenShift Web Console.
+
+    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    admin
+    ```
+
+    * Password:
+    ```
+    admin
+
+
+    or run this command to get the app's Route:
+
+    ```
+    oc get route spring-boot-configmap-greeting -n dev -o jsonpath='{"http://"}{.spec.host}{"\n"}'
+    ```
+
+
+    We should see the following screen, meaning everything was successful:
 
     ![Greeting Service](https://katacoda.com/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)
 
@@ -135,7 +188,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 300
 - slug: 03-modify-the-configmap
@@ -151,7 +204,7 @@ challenges:
 
     Notice the following dependency that was added to our `pom.xml`. This allows us to integrate with OpenShift's ConfigMaps.
 
-    ```
+    ```xml
          <dependency>
            <groupId>org.springframework.cloud</groupId>
            <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
@@ -160,9 +213,7 @@ challenges:
 
     **2. Modify the ConfigMap**
 
-    Let's modify the greeting that our service is returning to the user. Since we set up the greeting in a properties file, we will not need to make any code change to change the functionality. This means that we won't need to have any downtime for this change, we're able to modify the response through our newly created `ConfigMap` from the previous step. We can edit our config map in the OpenShift Console. [Click here](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/dev/configmaps/spring-boot-configmap-greeting/yaml) to open our `ConfigMap` in a YAML editor.
-
-       > **NOTE:** The username/password for the OpenShift console is `admin`.
+    Let's modify the greeting that our service is returning to the user. Since we set up the greeting in a properties file, we will not need to make any code change to change the functionality. This means that we won't need to have any downtime for this change, we're able to modify the response through our newly created `ConfigMap` from the previous step. We can edit our config map in the OpenShift Console. Navigate to ConfigMaps section in the `dev` project and open our `ConfigMap` in a YAML editor.
 
     Change the `greeting.message` property to: `greeting.message=Bonjour, you picked %s as your favorite fruit!`
 
@@ -173,7 +224,7 @@ challenges:
     **3. Test changes**
 
     Now that we've modified the `ConfigMap` and deployed our changes, let's test the greeting service and see if it's returning our new value.
-    Click [here](http://spring-boot-configmap-greeting-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/) and put in a test value and click the button. Now instead of seeing `Greetings ...`, we should be seeing:
+    Click the app from the Web Console and put in a test value and click the button. Now instead of seeing `Greetings ...`, we should be seeing:
 
     `Bonjour, you picked %s as your favorite fruit!`
 
@@ -208,7 +259,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 300
-checksum: "14972236348508107352"
+checksum: "7336073796765460781"
