@@ -898,7 +898,7 @@ challenges:
 
     Access the Web Console, and go to the `quarkus` project. Click on `Open URL` in Topology view:
 
-    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/quarkus/panache-reactive-datatable-topology.png)
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/panache-reactive-datatable-topology.png)
 
     It should look like:
 
@@ -932,4 +932,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
   difficulty: basic
   timelimit: 500
-checksum: "9415351732903702689"
+checksum: "3971254952275774744"
