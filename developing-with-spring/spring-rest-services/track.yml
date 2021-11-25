@@ -193,7 +193,7 @@ challenges:
 
     ```
     mvn spring-boot:run
-    ```command.
+    ```
 
     This time we will use the included web application into the *Fruit App* Tab to POST new Fruits to the application. Add a Fruit name into the `Add a Fruit` text box and click the `Save` button. If all is well it should show up in the right-hand `Fruits List` view.
 
@@ -349,7 +349,7 @@ challenges:
 
     Copy the URL from the output of the above command or click to it to open it in your browser.
 
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    We'll deploy our app as the `admin` user. Use the following credentials:
 
     * Username:
     ```

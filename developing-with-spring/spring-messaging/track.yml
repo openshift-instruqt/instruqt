@@ -12,6 +12,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -41,18 +42,18 @@ challenges:
 
     **1. Add JMS Dependencies**
 
-    To add Spring JMS to our project all we have to do is to add the following line in ``pom.xml``
+    To add Spring JMS to our project all we have to do is to add the following line in `pom.xml` after the `<!-- TODO: Add JMS dependency here -->` line:
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add JMS dependency here -->">
-        &lt;dependency&gt;
-          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-          &lt;artifactId&gt;spring-boot-starter-artemis&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-    </pre>
+    ```xml
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-artemis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+    ```
 
     Along with the JMS dependencies this starter also brings in the ActiveMQ Broker. The Broker manages connections to the Queue and acts as the mediator between the application and ActiveMQ. The `jackson-databind` dependency is for marshalling and unmarshalling the messages we will send. We will cover this later.
 
@@ -87,11 +88,11 @@ challenges:
 
     First we need a message object. Spring Boot allows us to code in the context of our own Java models when dealing with messages. For this purpose we will create a simple `Fruit` object which contains a String `body`.
 
-    Start with clicking on the following link which will open an empty file in the editor: ``src/main/java/com/example/domain/Fruit.java``
+    First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/domain/Fruit.java`.
 
-    Then, copy part of the below content into the files (or use the `Copy to Editor` button):
+    Copy the below content into the file:
 
-    <pre class="file" data-filename="src/main/java/com/example/domain/Fruit.java" data-target="replace">
+    ```java
     package com.example.domain;
 
     import java.util.List;
@@ -99,7 +100,7 @@ challenges:
 
     public class Fruit {
         private String name;
-        private static final List&ltString&gt FRUITS = List.of("Apple", "Banana", "Watermelon");
+        private static final List<String> FRUITS = List.of("Apple", "Banana", "Watermelon");
 
         private static String getRandomFruit() {
             Random rand = new Random();
@@ -128,12 +129,11 @@ challenges:
             return "Fruit{ Name ='" + this.name + '\'' + " }";
         }
     }
+    ```
 
-    </pre>
+    Do the same for `src/main/java/com/example/domain/MemCache.java` which adds/retrives messages to/from the cache.
 
-    Do the same for ``src/main/java/com/example/domain/MemCache.java`` which adds/retrives messages to/from the cache.
-
-    <pre class="file" data-filename="src/main/java/com/example/domain/MemCache.java" data-target="replace">
+    ```java
     package com.example.domain;
 
     import java.util.ArrayDeque;
@@ -146,7 +146,7 @@ challenges:
     @Service
     public class MemCache {
         private static final int CACHE_MAX_SIZE = 5;
-        private Queue&ltFruit&gt messages = new ArrayDeque&lt&gt(CACHE_MAX_SIZE);
+        private Queue<Fruit> messages = new ArrayDeque<>(CACHE_MAX_SIZE);
 
         public long getCount() {
             return this.messages.size();
@@ -160,19 +160,19 @@ challenges:
             }
         }
 
-        public List&ltFruit&gt getMessages() {
-            return new ArrayList&lt&gt(this.messages);
+        public List<Fruit> getMessages() {
+            return new ArrayList<>(this.messages);
         }
     }
-    </pre>
+    ```
 
     Just a Plain Old Java Object (POJO)!
 
-    To receive our Ping messages from a JMS Queue we'll need a class that listens for Queue messages. These components (typically called `Receivers`) in Spring Boot are `@Component`-annotated classes with a method annotated with `@JmsListener`. For this you need to click on the following link which will open an empty file in the editor: ``src/main/java/com/example/service/FruitReceiver.java``
+    To receive our Ping messages from a JMS Queue we'll need a class that listens for Queue messages. These components (typically called `Receivers`) in Spring Boot are `@Component`-annotated classes with a method annotated with `@JmsListener`.  From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/FruitReceiver.java`
 
-    Then, copy part of the below content into the file (or use the `Copy to Editor` button):
+    Then, copy part of the below content into the file:
 
-    <pre class="file" data-filename="src/main/java/com/example/service/FruitReceiver.java" data-target="replace">
+    ```java
     package com.example.service;
 
     import org.slf4j.Logger;
@@ -199,13 +199,13 @@ challenges:
             this.cache.addMessage(fruit);
         }
     }
-    </pre>
+    ```
 
     We annotate the class with `@Component` to get the class picked up by Spring's Component Scanning. Spring will manage this class' lifecycle and dependencies for us.
 
     The `@JmsListener` annotation is what sets this class up for JMS Message handling. We're essentially creating a binding: whenever a message of type `Fruit` is sent to the target Queue (called a `destination` here) this method will be called by Spring for processing. Spring will attempt to deserialize the message to an object and then pass that object to our method here.
 
-    The `"${queue.name}"` String in the destination utilizes the Spring Expression Language to allow parameterization of Queue names. This allows us to place the name of the Queue in our `.properties` files which can change between environments without the need for a code change. You can see the properties for openshift running by opening the ``src/main/resources/application-openshift.properties`` file.
+    The `"${queue.name}"` String in the destination utilizes the Spring Expression Language to allow parameterization of Queue names. This allows us to place the name of the Queue in our `.properties` files which can change between environments without the need for a code change. You can see the properties for openshift running by opening the `src/main/resources/application-openshift.properties` file.
 
     There also exists a second annotation parameter, `connectionFactory`, that we can use if we have a custom `ConnectionFactory` Bean but we don't use that here because we are defaulting to use the `ConnectionFactory` Spring Boot automatically creates.
 
@@ -219,7 +219,7 @@ challenges:
 
     Then, copy part of the below content into the file (or use the `Copy to Editor` button):
 
-    <pre class="file" data-filename="src/main/java/com/example/config/MessageConfig.java" data-target="replace">
+    ```java
     package com.example.config;;
 
     import org.springframework.context.annotation.Bean;
@@ -238,7 +238,7 @@ challenges:
             return converter;
         }
     }
-    </pre>
+    ```
 
     This `@Configuration` class has a single Bean - `MessageConverter`. Spring Boot uses this class to automatically serialize/deserialize JMS messages. Registering this Bean means that Spring Boot will automatically pick it up and use it for our JMS Messages. `MessageConverter` is the base type and `MappingJackson2MessageConverter` is the Jackson implementation of this base class.
 
@@ -248,7 +248,7 @@ challenges:
 
     Then, copy part of the below content into the file (or use the `Copy to Editor` button):
 
-    <pre class="file" data-filename="src/main/java/com/example/service/FruitPublisher.java" data-target="replace">
+    ```java
     package com.example.service;
 
     import org.slf4j.Logger;
@@ -281,7 +281,7 @@ challenges:
         }
 
     }
-    </pre>
+    ```
 
     Spring provides an abstraction called the `JmsTemplate` for sending messages to a JMS Queue. Spring Boot automatically configures this class for us so we need to `@Autowire` one into our `@Component`. Next we need to send the message. There are many variations of sending messages on the `JmsTemplate` class. We use the `.convertAndSend(String, Object)` variant which will marshall our Object to JSON (since we added the MessageConverter above) and then attempt to send to the target queue. We send a new `Fruit` message with a current timestamp on it to identify when it was sent.
 
@@ -303,7 +303,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
 - slug: 03-login-to-openshift
@@ -319,11 +319,17 @@ challenges:
 
     **1. Login to OpenShift Container Platform**
 
-    This sandbox has already authenticated you to OpenShift. To validate, we will use the `oc whoami` command:
+    Run the following command to login with the OpenShift CLI:
 
     ```
-    oc whoami
+    oc login -u admin -p admin
     ```
+
+    You should see:
+
+    ```bash
+    Login successful.
+    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
 
     **2. Create project**
 
@@ -337,13 +343,31 @@ challenges:
 
     **3. Open the OpenShift Web Console**
 
-    OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser. To get a feel for how the web console
-    works, click on the "OpenShift Console" tab. The login credentials are: admin/admin.
+    Access the OpenShift Web Console to login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
 
     ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/openshift-console-tab.png)
 
-    The first screen you will see is the authentication screen. Use `admin/admin` credentials (admin account is required to install the operator):
+    The first screen you will see is the authentication screen.
+
+
+    Use the following credentials:
+
+    * Username:
+    ```
+    admin
+    ```
+
+    * Password:
+    ```
+    admin
+
 
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
 
@@ -383,7 +407,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
 - slug: 04-deploy-to-openshift
@@ -397,20 +421,21 @@ challenges:
 
     **1. Add a health check**
 
-    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment..
+    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to `pom.xml` at the **TODO** comment..
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add Actuator dependency here -->">
-        &lt;dependency&gt;
-          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-          &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-    </pre>
+    ```xml
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    ```
 
     **2. Deploy a Red Hat AMQ Instance**
 
     Once the operator installation is successful, you will create two instances - an `ActiveMQArtemis` instance and an `ActiveMQArtemisAddress` instance. For your reference, the YAML file containing the instance details has been created for you and you can view the file as follows:
 
     ```
+    cd /root/projects/rhoar-getting-started/spring/spring-messaging
     cat amq.yml
     ```
 
@@ -432,9 +457,9 @@ challenges:
 
     The `mvn package` piece of the above command instructs Maven to run the package lifecycle. This builds a Spring Boot JAR file which is a Fat Jar containing all dependencies necessary to run our application.
 
-    For the deployment to OpenShift we are using the [jkube](https://www.eclipse.org/jkube) tool through the `org.eclipse.jkube:openshift-maven-plugin` which is configured in our ``pom.xml`` (found in the `<profiles/>` section). Configuration files for jkube are contained in the ``src/main/jkube`` folder mentioned earlier.
+    For the deployment to OpenShift we are using the [jkube](https://www.eclipse.org/jkube) tool through the `org.eclipse.jkube:openshift-maven-plugin` which is configured in our `pom.xml` (found in the `<profiles/>` section). Configuration files for jkube are contained in the ``src/main/jkube`` folder mentioned earlier.
 
-    After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can either go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below) or click [here](http://spring-messaging-training-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+    After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below):
 
     ![Spring Messaging App Route](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
 
@@ -469,7 +494,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
-checksum: "8768866473861875911"
+checksum: "10803828655919833354"
