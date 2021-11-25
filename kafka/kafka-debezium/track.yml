@@ -89,15 +89,8 @@ challenges:
 
     In AMQ Streams, you use Kafka Connect custom Kubernetes resources to deploy and manage the Debezium connectors.
 
-    ### Logging in to the cluster from the OpenShift CLI
+    ### Logging in to the cluster
 
-    Log in to the OpenShift cluster from a _terminal_ with the following command:
-
-    ```
-    oc login -u developer -p developer
-    ```
-
-    You can use the same credentials to log into the web console.
 
     Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
 
@@ -117,6 +110,12 @@ challenges:
     * Password:
     ```
     developer
+    ```
+
+    Log in to the OpenShift cluster from a _terminal_ with the following command:
+
+    ```
+    oc login -u developer -p developer
     ```
 
     ### Creating a namespace
@@ -899,4 +898,4 @@ challenges:
     path: /root/projects/debezium/
   difficulty: intermediate
   timelimit: 400
-checksum: "2872487067901951958"
+checksum: "4197479577157364731"
