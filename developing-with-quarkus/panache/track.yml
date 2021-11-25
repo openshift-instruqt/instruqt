@@ -126,9 +126,9 @@ challenges:
 
     # Define the entity
 
-    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** tabs:
+    This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** tabs.
 
-    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-prime.png) open this file `src/main/java/org/acme/person/model/Person.java` and add the following entity definition:
+    Open this file `src/main/java/org/acme/person/model/Person.java` and replace the following entity definition:
 
     ```java
     package org.acme.person.model;
@@ -159,6 +159,7 @@ challenges:
 
         // TODO: Add more queries
     }
+    ```
 
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
@@ -168,9 +169,13 @@ challenges:
 
     As you can see we've defined the three fields `name`, `birth`, and `eyes`. We're using the Java Persistence API's `@Enumerated` field type for our eye color.
 
-    We'll also need the definition of eye colors, so let's create an `enum`. Open up the `src/main/java/org/acme/person/model/EyeColor.java` file, and add the following enum definition:
+    We'll also need the definition of eye colors, so let's create an `enum`. Create a new `src/main/java/org/acme/person/model/EyeColor.java` files:
 
-    <pre class="file" data-filename="./src/main/java/org/acme/person/model/EyeColor.java" data-target="replace">
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-eye.png)
+
+    Open the `EyeColor.java` file then add the following enum definition:
+
+    ```java
     package org.acme.person.model;
 
     public enum EyeColor {
@@ -182,7 +187,7 @@ challenges:
 
     Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. From the **Visual Editor** Tab, create a new file in this path : `src/main/java/org/acme/person/PersonResource.java` and add its code:
 
-    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-person.png)
+
 
     open the `PersonResource.java` file then add this code:
 
@@ -908,4 +913,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "15346206381919498162"
+checksum: "12955427769486008093"
