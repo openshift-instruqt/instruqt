@@ -113,6 +113,7 @@ challenges:
     * Password:
     ```
     admin
+    ```
 
     ### Creating your own namespace
 
@@ -267,7 +268,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt
   difficulty: basic
   timelimit: 225
 - slug: step3
@@ -389,4 +390,4 @@ challenges:
     path: /opt
   difficulty: basic
   timelimit: 225
-checksum: "15603732221485581374"
+checksum: "3754768928977350911"
