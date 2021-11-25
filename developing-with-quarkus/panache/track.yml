@@ -276,29 +276,7 @@ challenges:
 
     We'll deploy our base application to OpenShift and connect it to your local environment. The end result will be a fully functional app, already running on the target platform (OpenShift).
 
-    ## Login to OpenShift
-
-    In order to login, we will use the **oc** command and then specify the server that we
-    want to authenticate to:
-
-    ```
-    oc login -u developer -p developer
-    ```
-
-    This will automatically log you in as the user `developer` whose password is `developer`.
-
-    > If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
-    step. Run in the first terminal and press CTRL-C to stop the application and try to `oc login` again!
-
-    ## Access OpenShift Project
-
-    For this scenario, let's create a project that you will use to house your applications. Run:
-
-    ```
-    oc new-project quarkus --display-name="Sample Quarkus Datatable App"
-    ```
-
-    **3. Open the OpenShift Web Console**
+    ## Open the OpenShift Web Console**
 
     OpenShift ships with a web-based console that will allow users to
     perform various tasks via a browser.
@@ -306,7 +284,7 @@ challenges:
     Access the OpenShift Web Console to also login from the Web UI:
 
     ```
-    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
     Copy the URL from the output of the above command and open it in your browser.
@@ -329,6 +307,30 @@ challenges:
     Run **Skip Tour** to skip the new user introduction.
 
     There's nothing there now ("No workloads found"), but that's about to change.
+
+    ## Login to OpenShift
+
+    In order to login, we will use the **oc** command and then specify the server that we
+    want to authenticate to:
+
+    ```
+    oc login -u developer -p developer
+    ```
+
+    This will automatically log you in as the user `developer` whose password is `developer`.
+
+    > If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
+    step. Run in the first terminal and press CTRL-C to stop the application and try to `oc login` again!
+
+    ## Access OpenShift Project
+
+    For this scenario, let's create a project that you will use to house your applications. Run:
+
+    ```
+    oc new-project quarkus --display-name="Sample Quarkus Datatable App"
+    ```
+
+
 
     ## Deploy Postgres
 
@@ -915,4 +917,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "12955427769486008093"
+checksum: "463513378131222846"

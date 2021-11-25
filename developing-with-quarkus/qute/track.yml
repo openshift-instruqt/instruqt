@@ -5,7 +5,7 @@ title: Templating with Qute Templating Engine
 description: |
   This exercise demonstrates how your Quarkus application can utilize the [Qute Templating Engine](https://quarkus.io/guides/qute) feature to build type-safe, server-side templates which can be rendered at will in Quarkus applications.
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
   Qute is a templating engine designed specifically to meet Quarkus' needs. The usage of reflection is minimized to reduce the size of native images. The API combines both the imperative and the non-blocking reactive style of coding. In the development mode, all files located in `src/main/resources/templates` are watched for changes and modifications are immediately visible. Furthermore, we try to detect most of the template problems at build time. In this exercise, you will learn how to easily render templates in your application.
 
@@ -35,7 +35,7 @@ challenges:
     contents: |
       This exercise demonstrates how your Quarkus application can utilize the [Qute Templating Engine](https://quarkus.io/guides/qute) feature to build type-safe, server-side templates which can be rendered at will in Quarkus applications.
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
       Qute is a templating engine designed specifically to meet Quarkus' needs. The usage of reflection is minimized to reduce the size of native images. The API combines both the imperative and the non-blocking reactive style of coding. In the development mode, all files located in `src/main/resources/templates` are watched for changes and modifications are immediately visible. Furthermore, we try to detect most of the template problems at build time. In this exercise, you will learn how to easily render templates in your application.
 
@@ -49,7 +49,7 @@ challenges:
   assignment: |-
     # Inspect Java runtime
 
-    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command:
+    An appropriate Java runtime has been installed for you. Ensure you can use it by running this command in Terminal 1:
 
     > If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
 
@@ -60,9 +60,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
     ## Create sample project
 
@@ -87,8 +87,7 @@ challenges:
     Let's begin Live Coding. Run on the following command to start the example app in _Live Coding_ mode:
 
     ```
-    cd /root/projects/quarkus/qute && \
-      mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
     ```
 
     You should see:
@@ -123,9 +122,11 @@ challenges:
 
     We’ll start by creating a new and very simple text-based template.
 
-    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/hello.txt` to create an empty template file.
+    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/hello.txt` to create an empty template files:
 
-    Add this template code:
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-hello.png)
+
+    Open the `hello.txt` file then add this template code:
 
     ```text
     Hello {name}!
@@ -136,6 +137,10 @@ challenges:
     > By default, all files located in the `src/main/resources/templates` directory and its
     > subdirectories are registered as templates. Templates are validated during startup
     > and watched for changes in the development mode.
+
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-hello-file.png)
 
     ## Create REST endpoint to access template
 
@@ -176,11 +181,13 @@ challenges:
     * `Template.data()` returns a new template instance that can be customized before the actual rendering is triggered. In this case, we put the name value under the key `name`. The data map is accessible during rendering.
     * Note that we don’t trigger the rendering - this is done automatically by a special `ContainerResponseFilter` implementation.
 
+    Save the file.
+
     ## Test endpoint
 
     With our application already running in _Live Coding_ mode, we can render the template by calling the endpoint.
 
-    Let's test itm from *Terminal 1* run this command:
+    Let's test itm from *Terminal 2* run this command:
 
     ```
     curl http://localhost:8080/hello?name=James
@@ -202,9 +209,14 @@ challenges:
     * [Extension methods](https://quarkus.io/guides/qute-reference#template_extension_methods) that can be used to extend the data classes with new functionality are also inspired by modern languages.
     * If you come from the world of JSP/JSF/Facelets you’ll appreciate that `@Named` CDI beans can be referenced directly in any template through the `inject` namespace, e.g. `{inject:foo.price}`. See [Injecting Beans Directly In Templates](https://quarkus.io/guides/qute-reference#injecting-beans-directly-in-templates) for more information.
 
-    Let's now explore some new features based on Quarkus principles.
+    Let's now explore some new features based on Quarkus principles. 
+    
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -232,7 +244,7 @@ challenges:
 
     There’s an alternate way to declare your templates in your Java code, which relies on the following convention:
 
-    * Organise your template files in the `/src/main/resources/templates` directory, by grouping them into one directory per resource class. So, if your `ItemResource` class references two templates `hello` and `goodbye`, place them at `/src/main/resources/templates/ItemResource/hello.txt` and `/src/main/resources/templates/ItemResource/goodbye.txt`. Grouping templates per resource class makes it easier to navigate to them.
+    * Organize your template files in the `/src/main/resources/templates` directory, by grouping them into one directory per resource class. So, if your `ItemResource` class references two templates `hello` and `goodbye`, place them at `/src/main/resources/templates/ItemResource/hello.txt` and `/src/main/resources/templates/ItemResource/goodbye.txt`. Grouping templates per resource class makes it easier to navigate to them.
 
     * In each of your resource class, declare a `@CheckedTemplate static class Template {}` class within your resource class.
 
@@ -335,7 +347,13 @@ challenges:
 
     ## Hello and Goodbye test
 
-    Let's test our new endpoints against the running Quarkus application, from *Terminal 1*:
+    Run on the Quarkus Dev mode again in Terminal 1:
+
+    ```
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
+    ```
+
+    Let's test our new endpoints against the running Quarkus application, from Terminal 2:
 
     ```
     curl http://localhost:8080/hello?name=James
@@ -372,6 +390,9 @@ challenges:
 
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -424,7 +445,7 @@ challenges:
     Now, suppose we want to render a simple HTML page that contains the item name and price. First, from *Terminal 1* create a directory:
 
     ```
-    mkdir -p src/main/resources/templates/ItemResource
+    mkdir -p /root/projects/quarkus/qute/src/main/resources/templates/ItemResource
     ```
 
     Create a Qute template, from the **Visual Editor** Tab create a new file in this path: `qute/src/main/resources/templates/ItemResource/item.html` and add this code:
@@ -510,7 +531,15 @@ challenges:
 
     Here we Declare a static `Templates` inner class with a method called `item()` that gives us a `TemplateInstance` for `templates/ItemResource/item.html` and declare its `Item item` parameter so we can validate the template.
 
-    We then pass the value of `id` to be used to render the template when the REST endpoint is called. Let's try it in *Terminal 1* with this command:
+    We then pass the value of `id` to be used to render the template when the REST endpoint is called. 
+    
+    Start the Quarkus Dev Mode in Terminal 1:
+
+    ```
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
+    ```
+
+    Let's try it in *Terminal 2* with this command:
 
     ```
     curl http://localhost:8080/item/1
@@ -585,9 +614,11 @@ challenges:
     }
     ```
 
-    Test it out again using by accessing or refreshing the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
+    Save the file.
 
-    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
+    Test it out again using by refreshing the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
+
+    ![Apple](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-apple.png)
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
@@ -603,6 +634,9 @@ challenges:
 
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -671,7 +705,13 @@ challenges:
 
     > You can place template extension methods in every class if you annotate them with `@TemplateExtension` but we advise to keep them either grouped by target type, or in a single `TemplateExtensions` class by convention.
 
-    Test it out by accessing the *Qute Item 1* Tab to see the result for Apples:
+    Start the Quarkus Dev Mode in Terminal 1:
+
+    ```
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
+    ```
+
+    Test it out by accessing the *Qute Item Apples* Tab to see the result for Apples:
 
     ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
 
@@ -764,13 +804,13 @@ challenges:
     Let's make a directory to house our new template with this command from Terminal 1:
 
     ```
-    mkdir -p src/main/resources/templates/reports/v1
+    mkdir -p /root/projects/quarkus/qute/src/main/resources/templates/reports/v1
     ```
 
     From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/reports/v1/report_01.json.template` to simulate some sort of organization of different reports, and add this content:
 
     ```json
-    \{
+    {
         "time": "{now}",
         "samples": [
           {#for sample in samples}
@@ -845,7 +885,13 @@ challenges:
     * The `TemplateInstance.render()` method triggers rendering. Note that this method blocks the current thread.
     * We use Quarkus' `StartupEvent` and `ShutdownEvent` to manage the File I/O on startup and shutdown
 
-    To trigger report to start generating (by triggering Quarkus Live Reload), from *Terminal 1* run this command and access the `hello` endpoint:
+    Start the Quarkus Dev Mode in Terminal 1:
+
+    ```
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
+    ```
+
+    To trigger report to start generating (by triggering Quarkus Live Reload), from *Terminal 2* run this command and access the `hello` endpoint:
 
     ```
     curl http://localhost:8080/hello?name=James
@@ -860,6 +906,9 @@ challenges:
     You should see new reports every second. When done, don't forget to type `CTRL-C` to stop the `tail -f`!
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -933,7 +982,13 @@ challenges:
 
     ## Test endpoint
 
-    Make sure the endpoint generates a report. From *Terminal 1*, run this command to try it:
+    Start the Quarkus Dev Mode in Terminal 1:
+
+    ```
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
+    ```
+
+    Make sure the endpoint generates a report. From *Terminal 2*, run this command to try it:
 
     ```
     curl http://localhost:8080/reactive
@@ -956,6 +1011,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Terminal 2
+    type: terminal
+    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
@@ -967,4 +1025,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "15235132459565049556"
+checksum: "5124752676775982723"
