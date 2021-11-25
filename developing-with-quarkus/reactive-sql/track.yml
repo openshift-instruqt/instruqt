@@ -92,7 +92,7 @@ challenges:
     $JAVA_HOME/bin/java --version
     ```
 
-    The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
+    The command in Terminal 1 should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
     openjdk 11 2018-09-25
