@@ -71,7 +71,7 @@ challenges:
     In this tutorial, we're not focusing on the OpenShift CLI, but we want you to be aware of it in case you prefer using the command line. You can check out our other courses that go into the use of the CLI in more depth. Now, we're just going to practice logging in so you can get some experience with how the CLI works.
 
     # Exercise: Logging in with the CLI
-    Let's get started by logging in. Your task is to enter the following into the console:
+    Let's get started by logging in. Your task is to enter the following into the console. You may need to wait a few minutes for the pods in openshift-authentication to be running before the command is successful.
 
     ```
     oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
@@ -176,7 +176,7 @@ challenges:
 
     Choose the **Container Image** option.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/introduction/getting-started-44/3add-to-empty-project.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/getting-started/assets/img/3add-to-empty-project.png)
 
     In the future, to get back to this menu of ways to add content to your project, you can click *+Add* in the left navigation.
 
