@@ -122,7 +122,7 @@ challenges:
 
     We’ll start by creating a new and very simple text-based template.
 
-    From the **Visual Editor** Tab, create a new file in this path: `qute/src/main/resources/templates/hello.txt` to create an empty template files:
+    From the **Visual Editor** Tab, create a new file in this path: `/root/projects/quarkus/qute/src/main/resources/templates/hello.txt` to create an empty template files:
 
     ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-hello.png)
 
@@ -239,7 +239,7 @@ challenges:
   id: 4xbqwvrrzkdl
   type: challenge
   title: Step 2
-  assignment: |+
+  assignment: |
     # Type-safe Templates
 
     There’s an alternate way to declare your templates in your Java code, which relies on the following convention:
@@ -388,6 +388,7 @@ challenges:
     ```
     This will cause Qute to look for the associated `hello.txt` or `goodbye.txt` in the `src/main/resources/templates` directory, instead of `src/main/resources/templates/HelloResource`. It is up to you how you wish to organize your templates.
 
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -415,7 +416,7 @@ challenges:
   id: rxd2ojyxj450
   type: challenge
   title: Step 3
-  assignment: |+
+  assignment: |
     # Template Parameter Declarations
 
     If you declare a parameter declaration in a template, Qute will attempt to validate all expressions that reference this parameter. If an incorrect expression is found the build wil fail. This can greatly reduce developer errors up front. Let's exercise this.
@@ -632,6 +633,7 @@ challenges:
 
     Be sure to change the value back to `{item.name}`!
 
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -720,6 +722,8 @@ challenges:
     ![Mango](https://katacoda.com/openshift/assets/middleware/quarkus/qute-mango.png)
 
     What a deal!
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
 
   tabs:
   - title: Terminal 1
@@ -904,6 +908,8 @@ challenges:
     ```
 
     You should see new reports every second. When done, don't forget to type `CTRL-C` to stop the `tail -f`!
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -1025,4 +1031,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "13220534477284372061"
+checksum: "3282467066637038959"
