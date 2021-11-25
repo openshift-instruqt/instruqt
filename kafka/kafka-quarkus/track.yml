@@ -41,8 +41,6 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -105,7 +103,7 @@ challenges:
 
     >The first time you add the extension will take longer, as Maven downloads new dependencies.
 
-    This will add the necessary entries in your `pom.xml` to bring in the Kafka extension. You should see a fragment similar to this around line 50:
+    This will add the necessary entries in your `pom.xml` to bring in the Kafka extension. From *Visual Editor* Tab, you should see a fragment similar to this around line 50:
 
     ```xml
     ...
@@ -132,18 +130,16 @@ challenges:
     mp.messaging.[outgoing|incoming].{channel-name}.connector=smallrye-kafka
     ```
 
-    Open the `src/main/resources/application.properties` file to add the following configuration:
+    From *Visual Editor* Tab, open the `src/main/resources/application.properties` file to add the following configuration:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="replace">
+    ```text
     # Configuration file
     kafka.bootstrap.servers=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
 
     mp.messaging.outgoing.uber.connector=smallrye-kafka
     mp.messaging.outgoing.uber.key.serializer=org.apache.kafka.common.serialization.StringSerializer
     mp.messaging.outgoing.uber.value.serializer=org.apache.kafka.common.serialization.StringSerializer
-    </pre>
-
-    > You can click **Copy to Editor** to add the values into the file
+    ```
 
     You can see we added the kafka bootstrap server hostname and port for the broker locations and the configuration for a channel named `uber`. The `key` and `value` serializers are part of the  [Producer configuration](https://kafka.apache.org/documentation/#producerconfigs) and [Consumer configuration](https://kafka.apache.org/documentation/#consumerconfigs) to encode the message payload.
 
@@ -155,9 +151,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 75
+  timelimit: 360
 - slug: step2
   id: djq7ycrosq8o
   type: challenge
@@ -169,11 +165,11 @@ challenges:
 
     The Kafka connector can write Reactive Messaging messages as Kafka records.
 
-    Open the `src/main/java/com/redhat/katacoda/kafka/VehicleGenerator.java` file to check the code.
+    From *Visual Editor* Tab, open the `src/main/java/com/redhat/katacoda/kafka/VehicleGenerator.java` file to check the code.
 
-    We will be sending the events to the `uber` channel by adding the following method:
+    We will be sending the events to the `uber` channel by adding the following method after the `// TODO-publisher` line:
 
-    <pre class="file" data-filename="./src/main/java/com/redhat/katacoda/kafka/VehicleGenerator.java" data-target="insert" data-marker="//  TODO-publisher">
+    ```java
         @Outgoing("uber")
         public Flowable&lt;KafkaRecord&lt;String, String&gt;&gt; generateUber()
         {
@@ -184,9 +180,7 @@ challenges:
                         return KafkaRecord.of(String.valueOf(vehicle.getVehicleId()), Json.encodePrettily(vehicle));
                     });
         }
-    </pre>
-
-    > You can click in **Copy to Editor** to add the values into the file
+    ```
 
     This simple method:
 
@@ -199,9 +193,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 75
+  timelimit: 360
 - slug: step3
   id: ghg8mlfch0ml
   type: challenge
@@ -212,12 +206,13 @@ challenges:
     Run the following command to add the extension to the project:
 
     ```
-    mvn quarkus:add-extension -Dextensions="openshift"
+    cd /opt/projects/kafka-quarkus &&
+      mvn quarkus:add-extension -Dextensions="openshift"
     ```
 
-    Reopen the `src/main/resources/application.properties` file and click **Copy to Editor** to add the following values:
+    Reopen the `src/main/resources/application.properties` file and add the following values:
 
-    <pre class="file" data-filename="./src/main/resources/application.properties" data-target="append">
+    ```text
     # Configures the OpenShift extension options
     quarkus.kubernetes-client.trust-certs=true
     quarkus.container-image.build=true
@@ -225,7 +220,7 @@ challenges:
     quarkus.kubernetes.deployment-target=openshift
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
     quarkus.s2i.base-jvm-image=registry.access.redhat.com/ubi8/openjdk-8
-    </pre>
+    ```
 
     Here's a summary of of the properties added:
 
@@ -293,7 +288,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 75
+  timelimit: 360
 - slug: step4
   id: 3jh20xkqze14
   type: challenge
@@ -329,7 +324,9 @@ challenges:
 
     To verify there was no problem with the application, we can check the logs with the following command:
 
-    ``oc logs dc/kafka-quarkus -f``
+    ```
+    oc logs dc/kafka-quarkus -f
+    ```
 
     You should see the information of the Quarkus application connecting to Kafka as well as the output of the sent events:
 
@@ -357,7 +354,9 @@ challenges:
 
     Check the messages with this command:
 
-    ``oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic uber --from-beginning | jq``
+    ```
+    oc exec -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic uber --from-beginning | jq
+    ```
 
     The output presents like this:
 
@@ -391,7 +390,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 75
-checksum: "8786554612597579282"
+  timelimit: 360
+checksum: "10451319161044402865"

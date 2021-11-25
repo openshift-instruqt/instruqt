@@ -25,8 +25,6 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -73,6 +71,26 @@ challenges:
 
     Use the same credentials to log in to the web console.
 
+    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
     ### Switch your own namespace
 
     Switch to the (project) namespace called ``kafka`` where the Cluster Operator manages the Kafka resources:
@@ -95,7 +113,9 @@ challenges:
 
     Deploy the Kafka Bridge with the custom image:
 
-    ``oc -n kafka apply -f /root/projects/http-bridge/kafka-bridge.yaml``
+    ```
+    oc -n kafka apply -f /root/projects/http-bridge/kafka-bridge.yaml
+    ```
 
     The Kafka Bridge node should be deployed after a few moments. To watch the pods status run the following command:
 
@@ -131,7 +151,9 @@ challenges:
 
     Run the following command to expose the bridge service as an OpenShift route:
 
-    ``oc expose svc my-bridge-bridge-service``
+    ```
+    oc expose svc my-bridge-bridge-service
+    ```
 
     When the route is created, the Kafka Bridge is reachable through the `https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com` host. You can now use any HTTP client to interact with the REST API exposed by the bridge to send and receive messages without needing to use the native Kafka protocol.
   tabs:
@@ -141,7 +163,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/http-bridge
   difficulty: intermediate
   timelimit: 225
 - slug: step2
@@ -149,9 +171,18 @@ challenges:
   type: challenge
   title: Producing messages
   assignment: |
-    To verify that the Ingress is working properly, try to access the ``/healthy` endpoint of the bridge with the following curl command:
+    Run this command to get the Ingress:
 
-    ``curl -ik https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/healthy``
+    ```
+    export KAFKA_BRIDGE_SERVICE=`oc get route my-bridge-bridge-service -n kafka -o jsonpath='{.spec.host}'`
+
+    ```
+
+    To verify that the Ingress is working properly, try to access the `/healthy` endpoint of the bridge with the following curl command:
+
+    ```
+    curl -ik https://$KAFKA_BRIDGE_SERVICE/healthy
+    ```
 
     If the bridge is reachable through the OpenShift route, it will return an HTTP response with `200 OK` HTTP code, but an empty body.
 
@@ -186,7 +217,7 @@ challenges:
     Let's send a couple of messages to the `my-topic` topic:
 
     ```
-    curl -s -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/topics/my-topic -H 'content-type: application/vnd.kafka.json.v2+json' -d '{ "records": [ {"key": "key-1","value": "sales-lead-0001"}, {"key": "key-2","value": "sales-lead-0002"} ] }' | jq
+    curl -s -k -X POST https://$KAFKA_BRIDGE_SERVICE/topics/my-topic -H 'content-type: application/vnd.kafka.json.v2+json' -d '{ "records": [ {"key": "key-1","value": "sales-lead-0001"}, {"key": "key-2","value": "sales-lead-0002"} ] }' | jq
     ```
 
     If the request is successful, the Kafka Bridge returns a `200 OK` HTTP code, with a JSON payload describing the `offsets` array, and the partition and offsets in which the messages are written.
@@ -216,7 +247,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/http-bridge
   difficulty: intermediate
   timelimit: 225
 - slug: step3
@@ -235,7 +266,8 @@ challenges:
     Execute the following command to create the consumer:
 
     ```
-    curl -s -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group -H 'content-type: application/vnd.kafka.v2+json' -d '{"name": "my-consumer","format": "json","auto.offset.reset": "earliest","fetch.min.bytes": 512,"enable.auto.commit": false}' | jq
+    export KAFKA_BRIDGE_SERVICE=`oc get route my-bridge-bridge-service -n kafka -o jsonpath='{.spec.host}'`
+    curl -s -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group -H 'content-type: application/vnd.kafka.v2+json' -d '{"name": "my-consumer","format": "json","auto.offset.reset": "earliest","fetch.min.bytes": 512,"enable.auto.commit": false}' | jq
     ```
 
     This will create a Kafka consumer connected to the Kafka cluster. If the request is successful, the bridge will reply back with a `200 OK` HTTP code, and a JSON payload with the consumer ID (`instance_id`) and base URL (`base_uri`).
@@ -258,7 +290,7 @@ challenges:
     Subscribe your `my-consumer` consumer to the `my-topic` topic with the following command:
 
     ```
-    curl -i -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/subscription -H 'content-type: application/vnd.kafka.v2+json' -d '{"topics": ["my-topic"]}'
+    curl -i -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/subscription -H 'content-type: application/vnd.kafka.v2+json' -d '{"topics": ["my-topic"]}'
     ```
 
     >This will return a `204 OK` HTTP code with an empty body.
@@ -273,7 +305,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/http-bridge
   difficulty: intermediate
   timelimit: 225
 - slug: step4
@@ -290,13 +322,14 @@ challenges:
     Submit a `GET` request to the `records` endpoint:
 
     ```
-    curl -s -k -X GET https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
+    export KAFKA_BRIDGE_SERVICE=`oc get route my-bridge-bridge-service -n kafka -o jsonpath='{.spec.host}'`
+    curl -s -k -X GET https://KAFKA_BRIDGE_SERVICE/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
     ```
 
     Repeat step a couple more times until you retrieve all messages from the Kafka Bridge consumer.
 
     ```
-    curl -s -k -X GET https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
+    curl -s -k -X GET https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/records -H 'accept: application/vnd.kafka.json.v2+json' | jq
     ```
 
     The Kafka Bridge returns an array of messages — describing the topic name, key, value, partition, and offset — in the response body, along with a `200` code. Messages are retrieved from the latest offset by default.
@@ -328,7 +361,7 @@ challenges:
     Commit offsets to the log for `my-consumer`:
 
     ```
-    curl -i -k -X POST https://my-bridge-bridge-service-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/consumers/my-group/instances/my-consumer/offsets
+    curl -i -k -X POST https://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-consumer/offsets
     ```
 
     >Because no request body is submitted, offsets are committed for all the records that have been received by the consumer. Alternatively, the request body can contain an array (OffsetCommitSeekList) that specifies the topics and partitions that you want to commit offsets for.
@@ -343,7 +376,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/http-bridge
   difficulty: intermediate
   timelimit: 225
-checksum: "7067126555879695264"
+checksum: "6216190687182870812"
