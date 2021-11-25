@@ -122,7 +122,7 @@ challenges:
 
     Further more we use a PostgreSQL database, where we create the databses, read from and write to it.
 
-    Lets get started. We have already created a project for you, and lets continue adding functionality to this bare bones project.
+    Lets get started. We have already created a project for you, and let's continue adding functionality to this bare bones project.
 
     > In this guide, we will use the Mutiny API of the Reactive PostgreSQL Client. If you’re not familiar with Mutiny reactive types, read the [Getting Started with Reactive guide](https://quarkus.io/guides/getting-started-reactive#mutiny) if you want to learn more!
 
@@ -148,7 +148,7 @@ challenges:
 
     There are a few other extensions we'll use that are already there, including `resteasy-jackson` (for encoding Java objects as JSON objects).
 
-    With the app initialized, lets start coding!
+    With the app initialized, let's start coding!
   tabs:
   - title: Terminal 1
     type: terminal
@@ -242,7 +242,7 @@ challenges:
 
     You'll see the Postgres pod spinning up from the Topology View in the Web Console.
 
-    ![Postgres pod](https://katacoda.com/openshift/assets/middleware/quarkus/rxpost.png)
+    ![Postgres pod](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/rxpost.png)
 
     ## Add Quarkus OpenShift extension
 
@@ -364,10 +364,16 @@ challenges:
 
     Your locally running Quarkus app is now connected to the remote side running on OpenShift, and changes you make here will be immediately reflected live in the remote application. Cool!
 
-    You will leave this connection up and running and live code using it in the next step.
+    Let's change the `src/main/resources/META-INF/resources/ndex.html`. Add ` - Remote Dev` to the banner text:
 
-    > **NOTE**: If you accidently quit (e.g. CTRL-C) the locally running app, no problem. The remote side continues to execute normally, and you can reconnect by re-running the above `quarkus:remote-dev` command!
-    
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/remote-dev-index.png)
+
+    Save the file then refresh your web browser. You will see that the index page on OpenShift is updated automatically:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/reload-index.png)
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
+
     # Congratulations!
 
     You've seen how to setup a remote connection to live code your application as it runs in the target environment (in this case OpenShift)
@@ -412,7 +418,7 @@ challenges:
 
     **2. Add REST methods**
 
-    First lets add our GET method so we can get the list of all the Coffee, and also if we want to look up with id where we add the `PathParam` to our method and with `@Path` annotation to enable the request to our `getSingle` method.
+    First let's add our GET method so we can get the list of all the Coffee, and also if we want to look up with id where we add the `PathParam` to our method and with `@Path` annotation to enable the request to our `getSingle` method.
 
     Add this content after the `// TODO GET` comment:
 
@@ -431,7 +437,7 @@ challenges:
         }
 
     ```
-    Next lets add the POST and PUT request methods.
+    Next let's add the POST and PUT request methods.
 
     Add this content after the `// TODO POST` comment:
 
@@ -454,7 +460,7 @@ challenges:
 
     ```
 
-    Finally lets add the DELETE method, so we can also delete Coffee from our quarkus app.
+    Finally let's add the DELETE method, so we can also delete Coffee from our quarkus app.
 
     Add this content after the `// TODO DELETE` comment:
 
@@ -520,26 +526,32 @@ challenges:
 
     In the above you can see we use a `PgPool` object and once the query is prepared we then apply successive `onItem` reactive methods to transform the result and finally passing that back as a `Uni<Coffee>`, part of the Mutiny reactive API.
 
-    ## Inspect the results
+    Save the file.
 
-    Since we still have our app running and connected remotely using Quarkus' remote development, when you make these changes and reload the endpoint, Quarkus will notice all of these changes and live reload them on the remote side.
+    ## Inspect the results
 
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
     ```
-    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    export APP_ROUTE=`oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
     ```
 
-    Copy the URL from the output of the above command and open it in your browser.
+    Run the remote dev mode:
 
-    Try to add and remove Coffee elements to the list.
+    ```
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_ROUTE -f /root/projects/rhoar-getting-started/quarkus/reactive-sql
+    ```
+
+    Go back to your browser then reload it. You will see Coffee elements to the list.
+
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/new-index.png)
 
     ## Congratulations!
 
     Now you have a running app, with a reactive database extension.
     In the next step, we'll redeploy it to OpenShift.
 
-    Now Cancel the running dev session by runing the `clear` before moving ahead.
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -565,7 +577,7 @@ challenges:
 
     To deploy the application "in production", we can simply re-deploy the application using the OpenShift extension, omitting the `quarkus-launch-devmode` environment variable. Run the following command to do this:
 
-    ```
+    ```bash
     cd /root/projects/rhoar-getting-started/quarkus/reactive-sql && \
       mvn clean package -DskipTests \
       -Dquarkus.kubernetes.deploy=true \
@@ -573,7 +585,8 @@ challenges:
       -Dquarkus.kubernetes-client.trust-certs=true \
       -Dquarkus.kubernetes.deployment-target=openshift \
       -Dquarkus.openshift.route.expose=true \
-      -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database`
+      -Dquarkus.openshift.annotations.\"app.openshift.io/connects-to\"=database
+    ```
 
     Finally, make sure it's actually done rolling out:
 
@@ -590,11 +603,12 @@ challenges:
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
     ```
-    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'
     ```
 
     Copy the URL from the output of the above command and open it in your browser.
-    ![Reactive SQL app UI](https://katacoda.com/openshift/assets/middleware/quarkus/reactive-sql-ui.png)
+    
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/new-index.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -616,4 +630,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 600
-checksum: "9256108677218925739"
+checksum: "11601123344773681211"
