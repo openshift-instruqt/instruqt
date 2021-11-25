@@ -130,7 +130,28 @@ challenges:
     oc get catalogsources -n openshift-marketplace
     ```
 
+    We have to include a new CatalagSource to get operators from OperatorHub.io:
+    ```
+    cd /root && \
+    cat > operatorhub-catalogsource.yaml <<EOF
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: CatalogSource
+    metadata:
+      name: operatorhubio-catalog
+      namespace: openshift-marketplace
+    spec:
+      sourceType: grpc
+      image: quay.io/operatorhubio/catalog:latest
+      displayName: Community Operators
+      publisher: OperatorHub.io
+    EOF
+    ```
 
+    Apply the new CatalogSource:
+
+    ```
+    oc apply -f operatorhub-catalogsource.yaml
+    ```
 
     Here is a brief summary of each CatalogSource:
 
@@ -275,10 +296,10 @@ challenges:
       name: argocd-operator
       namespace: myproject
     spec:
-      channel: stable
+      channel: alpha
       installPlanApproval: Manual
-      name: openshift-gitops-operator
-      source: redhat-operators
+      name: argocd-operator
+      source: operatorhubio-catalog
       sourceNamespace: openshift-marketplace
     EOF
     ```
@@ -380,7 +401,7 @@ challenges:
 
     ```
     ARGOCD_OPERATOR=`oc get pods -o jsonpath={$.items[0].metadata.name}`
-    oc logs $ARGOCD_OPERATOR
+    oc logs $ARGOCD_OPERATOR -c manager
     ```
 
 
