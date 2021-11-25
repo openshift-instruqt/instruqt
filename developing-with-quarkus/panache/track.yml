@@ -183,6 +183,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     # Define the RESTful endpoint
 
     Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. From the **Visual Editor** Tab, create a new file in this path : `src/main/java/org/acme/person/PersonResource.java` and add its code:
