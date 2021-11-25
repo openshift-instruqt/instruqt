@@ -185,8 +185,11 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     echo "AVAILABLE"
 # done
 
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-quarkus/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-quarkus/scripts/operator-install.yaml -o /tmp/operator-install.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-quarkus/scripts/operator-install.yaml -o /opt/operator-install.yaml
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-quarkus/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml 

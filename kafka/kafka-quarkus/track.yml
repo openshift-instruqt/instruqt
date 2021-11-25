@@ -40,7 +40,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
+- hguerrero@redhat.com
 private: false
 published: true
 challenges:
@@ -153,7 +153,7 @@ challenges:
     hostname: crc
     path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 360
+  timelimit: 460
 - slug: step2
   id: djq7ycrosq8o
   type: challenge
@@ -195,7 +195,7 @@ challenges:
     hostname: crc
     path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 360
+  timelimit: 460
 - slug: step3
   id: ghg8mlfch0ml
   type: challenge
@@ -288,7 +288,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
+  timelimit: 460
 - slug: step4
   id: 3jh20xkqze14
   type: challenge
@@ -392,5 +392,5 @@ challenges:
     hostname: crc
     path: /opt/projects/kafka-quarkus
   difficulty: basic
-  timelimit: 360
-checksum: "10451319161044402865"
+  timelimit: 460
+checksum: "5243876778789769286"
