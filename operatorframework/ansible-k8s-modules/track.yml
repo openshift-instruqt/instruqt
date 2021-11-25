@@ -23,9 +23,8 @@ tags:
 - openshift
 owner: openshift
 developers:
-- dahmed@redhat.com
+- yurimsa@gmail.com
 - nvinto@redhat.com
-- rjarvine@redhat.com
 private: false
 published: true
 challenges:
@@ -320,4 +319,4 @@ challenges:
     path: /root/tutorial
   difficulty: basic
   timelimit: 300
-checksum: "11945771863381103934"
+checksum: "3497585692771723858"

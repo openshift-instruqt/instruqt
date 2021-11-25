@@ -2,16 +2,19 @@ slug: operatorframework-k8s-api-fundamentals
 id: mvxpk334juek
 type: track
 title: Kubernetes API Fundamentals
-description: Before diving into the [Operator Framework](https://github.com/operator-framework), this section will give an overview of Kubernetes API fundamentals.  Although the [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating an Operator fun and easy, understanding the structure and features of the Kubernetes API is required.
+description: Before diving into the [Operator Framework](https://github.com/operator-framework),
+  this section will give an overview of Kubernetes API fundamentals.  Although the
+  [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating
+  an Operator fun and easy, understanding the structure and features of the Kubernetes
+  API is required.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
 owner: openshift
 developers:
+- yurimsa@gmail.com
 - nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -21,7 +24,11 @@ challenges:
   title: Kubernetes Manifests
   notes:
   - type: text
-    contents: Before diving into the [Operator Framework](https://github.com/operator-framework), this section will give an overview of Kubernetes API fundamentals.  Although the [Operator SDK](https://github.com/operator-framework/operator-sdk) makes creating an Operator fun and easy, understanding the structure and features of the Kubernetes API is required.
+    contents: Before diving into the [Operator Framework](https://github.com/operator-framework),
+      this section will give an overview of Kubernetes API fundamentals.  Although
+      the [Operator SDK](https://github.com/operator-framework/operator-sdk) makes
+      creating an Operator fun and easy, understanding the structure and features
+      of the Kubernetes API is required.
   assignment: |-
     Let's begin by creating a new project called `myproject`:
 
@@ -601,4 +608,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "14940042738647802480"
+checksum: "9405083853982411482"
