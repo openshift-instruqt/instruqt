@@ -896,7 +896,7 @@ challenges:
   assignment: |-
     Now that we have our app running on OpenShift, let's see what we can do.
 
-    Access the Web Console, and go to the `quarkus` project. Click on `Open URL` in Topology view:
+    Access the OpenShift Web Console, and go to the `quarkus` project. Click on `Open URL` in Topology view:
 
     ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/panache-reactive-datatable-topology.png)
 
