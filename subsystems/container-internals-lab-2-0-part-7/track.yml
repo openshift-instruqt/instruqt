@@ -90,6 +90,14 @@ challenges:
     With either stream, the underlying RHEL kernel, systemd, and other packages are treated as a rolling stream. The only choice is is whether to use the fast stream or one of the stable streams. Since RHEL provides a very stable [ABI/API Policy](https://access.redhat.com/articles/rhel8-abi-compatibility) the vast majority of container users will not notice and should not be concerned with kernel, systemd, glibc, etc updates on the container host. If the users selects one of the stable streams, the API to Podman will remains stable and updated for security.
 
     For a deeper dive, check out [RHEL 8 enables containers with the tools of software craftsmanship](https://www.redhat.com/en/blog/rhel-8-enables-containers-tools-software-craftsmanship-0). Now, let's move on to installing and using these different streams of software.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 02-different-streams
@@ -140,8 +148,10 @@ challenges:
 
     Let's clean up the environment, and start from scratch:
 
-    ``yum module remove -y container-tools
-    yum module reset -y container-tools``
+    ```
+    yum module remove -y container-tools
+    yum module reset -y container-tools
+    ```
 
     OK, now let's pretend we are a systems administrator or SRE that wants a set of stable tools which are supported for 24 months. First, inspect the stable stream that was released in RHEL 8.0. Notice that there are several versions of this Application Stream. Every time a package is updated a new stream version is generated to snapshot the exact versions of each package together as a stream:
 
@@ -165,13 +175,23 @@ challenges:
 
     Now, let's go back to the latest version of the container-tools for the rest of this module:
 
-    ``yum module remove -y container-tools
+    ```
+    yum module remove -y container-tools
     yum module reset -y container-tools
-    yum module install -y container-tools:rhel8``
+    yum module install -y container-tools:rhel8
+    ```
 
     Notice how easy it was to move between the stable streams and the fast moving stream. This is the power of modularity. Now, let's move on to using the actual tools.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 600
 - slug: 03-podman
   id: poot9tf6vot4
   type: challenge
@@ -305,6 +325,14 @@ challenges:
     ```
 
     The above commands show how easy and elegant Podman is to use. Podman is like a Chef's knife. It can be used for pretty much anything that you used Docker for, but let's move on to Builah and show some advanced use cases when building container images.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 04-buildah
@@ -490,8 +518,10 @@ challenges:
 
     Commit the new image layer and clean things up:
 
-    ``buildah commit ubi8-working-container ubi8-data
-    buildah delete -a``
+    ```
+    buildah commit ubi8-working-container ubi8-data
+    buildah delete -a
+    ```
 
     Test it and note that we only kept the pieces of the data that we wanted. This is just an example, but imagine using this with a Makefile cache, or Ansible playbooks, or even a copy of production database data which needs to be used to test the image build or do a schema upgrade, which must be accessed during the image build process. There are tons of places where you need to access data, only at build time, but don't want it during production deployment:
 
@@ -512,6 +542,14 @@ challenges:
     Now, you have a pretty good understanding of the cases where Buildah really shines. You can start from scratch, or use an existing image, use tools installed on the container host (not in the container image), and move data around as needed. This is a very flexible tool that should fit quite nicely in your tool belt. Buildah lets you script builds with any language you want, and build tiny images with only the bare minimum of utilities needed inside the image.
 
     Now, lets move on to sharing containers with Skopeo...
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 05-skopeo
@@ -531,8 +569,10 @@ challenges:
 
     We can easily see the "Architecture" and "Os" meta-data which tells us a lot about the image. We can also see the labels, which are consumed by most container engines, and passed to the runtime to be constructed as environment variables. By comparison, here's how to see this meta-data in a running container:
 
-    ``podman run --name meta-data-container -id registry.fedoraproject.org/fedora bash
-    podman inspect meta-data-container``
+    ```
+    podman run --name meta-data-container -id registry.fedoraproject.org/fedora bash
+    podman inspect meta-data-container
+    ```
 
     ## Pulling Images
 
@@ -604,6 +644,14 @@ challenges:
     ## Conclusion
 
     You have a new tool in your tool belt for sharing and moving containers. Hopefully, you find other uses for Skopeo.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 06-criu
@@ -694,6 +742,14 @@ challenges:
     ## Conclusions
 
     Checkpointing and restoring containers is easy with CRIU and Podman. As part of the container-tools application streams, specific versions of Podman and CRIU are tested and verified to work together (not all versions of Podman and CRIU are guaranteed to work together). Now, let's move on to some more tools.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 07-udica
@@ -760,6 +816,14 @@ challenges:
     ## Conclusions
 
     It's always best to have SELinux enabled, especially with containers. It's so easy to create a custom SELinux policy with Udica, that you should never disable it. If you'd like to understand Udica a bit deeper, check out this great article, [Use udica to build SELinux policy for containers](https://fedoramagazine.org/use-udica-to-build-selinux-policy-for-containers/) by Lukas Vrabec. Now, let's move on to another tool.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
   difficulty: intermediate
   timelimit: 300
 - slug: 08-oscap-podman
@@ -799,13 +863,23 @@ challenges:
     oscap-podman registry.access.redhat.com/ubi8/ubi:latest oval eval --report ./html/ubi-latest-report.html rhel-8.oval.xml.bz2
     ```
 
-    Look at the new report:
-
-    * https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ubi-latest-report.html
-
+    Look at the new report from thr *OSCAP Report* Tab.
     ## Conclusions
 
     In general you should almost never see any unapplied patches in this latest build of UBI. If you do, it's like a small window between the time that Red Hat Product Security has issued a CVE, and our product team has rebuilt and published the UBI image. The oscap-podman command allows you to verify this and is useful in "trust but verify" operations like CI/CD system tests. For more information and deeper dive on OSCAP-Podman, check out this great video by Brian Smith: [Scanning Containers for Vulnerabilities on RHEL 8.2 With OpenSCAP and Podman](https://www.youtube.com/watch?v=nQmIcK1vvYc)
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: rhel
+  - title: Visual Editor
+    type: code
+    hostname: rhel
+    path: /root
+  - title: OSCAP Report
+    type: service
+    hostname: rhel
+    path: /ubi-latest-report.html
+    port: 80
   difficulty: intermediate
   timelimit: 300
-checksum: "8251101976289844093"
+checksum: "4384542475216157374"
