@@ -1,4 +1,4 @@
-slug: developing-on-openshift-deploying-python
+slug: developing-on-openshift-from-source
 id: uzopg00q9enn
 type: track
 title: Deploying Applications From Source
@@ -56,11 +56,7 @@ challenges:
 
       [s2i]: https://docs.openshift.com/container-platform/4.7/cicd/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds
   assignment: |
-    Before we get started, you need to login and create a project in OpenShift
-    to work in.
-
-    To login to the OpenShift cluster used for this course from the _Terminal_,
-    run:
+    Let's get started by logging in. Your task is to enter the following into the console. You may need to wait a few minutes for the pods in openshift-authentication to be running before the command is successful.
 
     ```
     oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
