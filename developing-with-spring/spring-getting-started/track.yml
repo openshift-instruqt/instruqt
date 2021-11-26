@@ -100,7 +100,7 @@ challenges:
 
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
-    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-pom-file.png)
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-pom-file.png)
 
     **2. Test the application locally**
 
@@ -195,7 +195,7 @@ challenges:
 
     First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/Fruit.java`.
 
-    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-fruit-sb.png)
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fruit-sb.png)
 
     Open the `Fruit.java` file then copy the below content into the file:
 
@@ -611,7 +611,7 @@ challenges:
 
     Click on your new project name to be taken to the project overview page which will show you various options to add content to your project, create an application, component or service:
 
-    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/overview-new.png)
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/overview-new.png)
 
     There's nothing there now, but that's about to change.
 
@@ -757,4 +757,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
   timelimit: 600
-checksum: "9872728536700376921"
+checksum: "6759674848547084884"
