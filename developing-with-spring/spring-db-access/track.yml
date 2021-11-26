@@ -164,11 +164,7 @@ challenges:
 
     The repository should provide methods for inserting, updating, reading, and deleting Fruits from the database. We are going to use Spring Data for this which already provides us with a lot of the boilerplate code, so all we have to do is to add an interface that extends the `CrudRepository<T, I>` interface provided by Spring Data.
 
-    First, we need to fill out the skeletal java class file. For that, you need to create a new `src/main/java/com/example/service/FruitRepository.java` file:
-
-    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fr-sb.png)
-
-    Open the `FruitRepository.java` file then copy the below content into the file (or use the `Copy to Editor` button):
+    First, we need to fill out the skeletal java class file. For that, open the `src/main/java/com/example/service/FruitRepository.java` file then copy the below content into the file:
 
     ```java
     package com.example.service;
@@ -250,7 +246,7 @@ challenges:
 
     Fortunately there exists within the JPA specification a section on `Query Methods`. Query methods are methods on Repositories that follow a specific naming pattern. These methods can then be turned into implementation code by JPA providers for running actual queries.
 
-    Let's re-open the `FruitRepository.java`` file in the editor: `src/main/java/com/example/service` and add the following code at the TODO line:
+    Let's re-open the `FruitRepository.java` file in `src/main/java/com/example/service` and add the following code at the TODO line:
 
     ```java
         List<Fruit> findByName(String name);
@@ -411,27 +407,17 @@ challenges:
     oc rollout status dc/spring-data-jpa-training
     ```
 
-    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+    Access the web application:
 
     ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    oc get routes spring-data-jpa-training -n dev -o jsonpath='{"http://"}{.spec.host}{"\n"}'
     ```
 
-    Copy the URL from the output of the above command or click to it to open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
-
-    * Username:
-    ```
-    admin
-    ```
-
-    * Password:
-    ```
-    admin
-    ```
+    Copy the URL from the output of the above command then open it in your browser.
 
     Make sure that you can add and remove fruits using the web application.
+
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/jpa-web-openshift.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -451,4 +437,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-db-access
   difficulty: basic
   timelimit: 1000
-checksum: "14345765160412541330"
+checksum: "2508440126681259007"
