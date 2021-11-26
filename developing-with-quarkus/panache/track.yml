@@ -128,7 +128,7 @@ challenges:
 
     This app will be a database of people, each of which have a name, birthdate, and eye color. We'll need an entity, from the **Visual Editor** tabs.
 
-    Open this file `src/main/java/org/acme/person/model/Person.java` and replace the following entity definition:
+    Open this file `src/main/java/org/acme/person/model/Person.java` and replace withe the following entity definition:
 
     ```java
     package org.acme.person.model;
@@ -276,7 +276,7 @@ challenges:
 
     We'll deploy our base application to OpenShift and connect it to your local environment. The end result will be a fully functional app, already running on the target platform (OpenShift).
 
-    ## Open the OpenShift Web Console**
+    ## Open the OpenShift Web Console
 
     OpenShift ships with a web-based console that will allow users to
     perform various tasks via a browser.
@@ -387,6 +387,8 @@ challenges:
     quarkus.hibernate-orm.sql-load-script = import.sql
     ```
 
+    Save the file.
+
     The `quarkus.package.type=mutable-jar` instructs Quarkus to package the app as a _mutable_ app. Mutable applications also include the deployment time parts of Quarkus (need for dev mode), so they take up a bit more disk space. If run normally they start just as fast and use the same memory as an immutable application, however they can also be started in dev mode.
 
     We also configure Quarkus to use the Postgres database, using `postgres-database` as the hostname (which is resolved by OpenShift to the running Postgres database host).
@@ -434,13 +436,12 @@ challenges:
 
     ![Quarkus pod](https://katacoda.com/openshift/assets/middleware/quarkus/people-quarkus.png)
 
-
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
 
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
     ```
-    oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'`
+    oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'
     ```
 
     Copy the URL from the output of the above command and open it in your browser.
@@ -481,26 +482,11 @@ challenges:
 
     # Save Environment variable
 
+    We'll refer to this URL often, so run this command to save it in an environment variable called `APP_URL` (and put it in the Bash shell startup in case we open new terminals later):
 
-    # Remote Dev Connection
-
-    Now we are ready to run our in dev mode and connect it to the remote application. Run here to run:
-
+    ```bash
+    echo "export APP_URL=${APP_URL}" >> /root/.bashrc
     ```
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL
-    ```
-
-    You should see a bunch of log output including:
-
-    ```console
-    INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Connected to remote server
-    ```
-
-    Your locally running Quarkus app is now connected to the remote side running on OpenShift, and changes you make here will be immediately reflected live in the remote application. Cool!
-
-    You will leave this connection up and running and live code using it in the next step.
-
-    > **NOTE**: If you accidently quit (e.g. CTRL-C) the locally running app, no problem. The remote side continues to execute normally, and you can reconnect by re-running the above `quarkus:remote-dev` command!
 
     # Congratulations!
 
@@ -525,6 +511,24 @@ challenges:
   assignment: |
     In the previous step you created a basic RESTful Java application with Quarkus and a single Panache-based query. In this step we'll add a few more queries to demonstrate the ease of Panache queries vs. ordinary Hibernate/JQL queries.
 
+    # Remote Dev Connection
+
+    Now we are ready to run our in dev mode and connect it to the remote application. Run here to run in Terminal 1:
+
+    ```
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache
+    ```
+
+    You should see a bunch of log output including:
+
+    ```console
+    INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Connected to remote server
+    ```
+
+    Your locally running Quarkus app is now connected to the remote side running on OpenShift, and changes you make here will be immediately reflected live in the remote application. Cool!
+
+    You will leave this connection up and running and live code using it in the next step.
+
     ## Add Queries
 
     Let’s modify the application and add some queries. Much like traditional object-oriented programming, Panache and Quarkus recommend you place your custom entity queries as close to the entity definition as possible, in this case in the entity definition itself.
@@ -535,15 +539,17 @@ challenges:
 
     ```java
     public static List<Person> findByColor(EyeColor color) {
-            return list("eyes", color);
-      }
+        return list("eyes", color);
+    }
 
-      public static List<Person> getBeforeYear(int year) {
-            return Person.<Person>streamAll()
-            .filter(p -> p.birth.getYear() <= year)
-            .collect(Collectors.toList());
-      }
+    public static List<Person> getBeforeYear(int year) {
+        return Person.<Person>streamAll()
+        .filter(p -> p.birth.getYear() <= year)
+        .collect(Collectors.toList());
+    }
     ```
+
+    Save the file.
 
     These two queries will find a list of people in our database based on eye color, or birth year. Note the `getBeforeYear` is implemented using the Java Streams API.
 
@@ -554,7 +560,7 @@ challenges:
     Open the `src/main/java/org/acme/person/PersonResource.java` resource class once again to inject the new endpoints which will access our new queries after `// TODO: add basic queries` comment:
 
     ```java
-    @GET
+        @GET
         @Path("/eyes/{color}")
         @Produces(MediaType.APPLICATION_JSON)
         public List<Person> findByColor(@PathParam(value = "color") EyeColor color) {
@@ -569,15 +575,16 @@ challenges:
         }
     ```
 
+    Save the file.
+
     ## Inspect the results
 
-    When you make these changes, Quarkus will notice all of these changes and live reload them across the remoet connection.
+    When you make these changes, Quarkus will notice all of these changes and live reload them across the remote connection.
 
-    Check that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute:
+    Check that it works as expected by testing the new endpoints. Let's find all the people with `BLUE` eyes. Execute in Terminal 2:
 
     ```
-    /root/projects/rhoar-getting-started/quarkus/panache && \
-      curl -s $APP_URL/person/eyes/BLUE | jq
+    curl -s $APP_URL/person/eyes/BLUE | jq
     ```
 
     > This will open a new Terminal to execute the command. If the command fails to run just run the above command again!
@@ -626,8 +633,13 @@ challenges:
     The `Person` entity's superclass comes with lots of super useful static methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.
 
     In the next step we'll show you how Panache can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -640,7 +652,7 @@ challenges:
   id: xasxnvxdymkl
   type: challenge
   title: Add Paging/Filtering
-  assignment: |+
+  assignment: |
     In the previous step you added a few more custom queries to your entity and the associated RESTful endpoints. In this step we'll build a slightly more complex query including filtering, searching and paging capabilities.
 
     # Showing data in tables
@@ -663,24 +675,26 @@ challenges:
     Add this snippet after `// TODO: add datatable query` comment:
 
     ```java
-    @GET
+        @GET
         @Path("/datatable")
         @Produces(MediaType.APPLICATION_JSON)
         public DataTable datatable(
-            @QueryParam(value = "draw") int draw,
-            @QueryParam(value = "start") int start,
-            @QueryParam(value = "length") int length,
-            @QueryParam(value = "search[value]") String searchVal
+          @QueryParam(value = "draw") int draw,
+          @QueryParam(value = "start") int start,
+          @QueryParam(value = "length") int length,
+          @QueryParam(value = "search[value]") String searchVal
 
-            ) {
-                // TODO: Begin result
+          ) {
+            // TODO: Begin result
 
-                // TODO: Filter based on search
+            // TODO: Filter based on search
 
-                // TODO: Page and return
+            // TODO: Page and return
 
         }
     ```
+
+    Save the file.
 
     Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters and be able to use them when the frontend calls the `GET /person/datatable` endpoint.
 
@@ -699,8 +713,8 @@ challenges:
     Add this code in the same file after the `// TODO: Begin result` comment:
 
     ```java
-    DataTable result = new DataTable();
-                result.setDraw(draw);
+          DataTable result = new DataTable();
+            result.setDraw(draw);
     ```
 
     Next, if the request includes a search parameter, let's take care of that by including a search query, otherwise just collect all records:
@@ -708,14 +722,14 @@ challenges:
     Add this code in the same file after the `//TODO: Filter based on search` comment:
 
     ```java
-    PanacheQuery<Person> filteredPeople;
+          PanacheQuery<Person> filteredPeople;
 
-                if (searchVal != null && !searchVal.isEmpty()) {
-                    filteredPeople = Person.<Person>find("name like :search",
-                      Parameters.with("search", "%" + searchVal + "%"));
-                } else {
-                    filteredPeople = Person.findAll();
-                }
+          if (searchVal != null && !searchVal.isEmpty()) {
+              filteredPeople = Person.<Person>find("name like :search",
+                Parameters.with("search", "%" + searchVal + "%"));
+          } else {
+              filteredPeople = Person.findAll();
+          }
     ```
 
     And finally, we use the built-in Panache `page` operator to seek to the correct page of records and stream the number of entries desired, set the values into the `result` and return it:
@@ -723,21 +737,28 @@ challenges:
     Add this code in the same file after the `//TODO: Page and return` comment:
 
     ```java
-    int page_number = start / length;
-                filteredPeople.page(page_number, length);
+            int page_number = start / length;
+            filteredPeople.page(page_number, length);
 
-                result.setRecordsFiltered(filteredPeople.count());
-                result.setData(filteredPeople.list());
-                result.setRecordsTotal(Person.count());
+            result.setRecordsFiltered(filteredPeople.count());
+            result.setData(filteredPeople.list());
+            result.setRecordsTotal(Person.count());
 
-                return result;
+            return result;
     ```
 
-    Let's test out our new endpoint using `curl` to search for names with `yan` in their name:
+    Save the file.
+
+    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
+
+    ```bash
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache
+    ```
+
+    Let's test out our new endpoint using `curl` to search for names with `yan` in their name in Terminal 2:
 
     ```
-    cd /root/projects/rhoar-getting-started/quarkus/panache && \
-      curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq
+    curl -s "$APP_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq
     ```
 
     This should return a single entity (since in our 3-person sample data, only one has `yan` in their name), embedded in the return object that DataTable is expecting (with the `draw`, `recordsFiltered`, `recordsTotal` etc):
@@ -757,12 +778,17 @@ challenges:
       "recordsTotal": 3
     }
     ```
+
     # Congratulations
 
     You have successfully written an endpoint that can be used with 3rd-party frontend plugins like DataTable. In the next step we'll create a lot more data and deploy to OpenShift.
 
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -789,7 +815,7 @@ challenges:
     Add this code in the same file after the `TODO: Page and return` comment: `//TODO: Add lifecycle hook`:
 
     ```java
-    @Transactional
+        @Transactional
         void onStart(@Observes StartupEvent ev) {
             for (int i = 0; i < 10000; i++) {
                 String name = CuteNameGenerator.generate();
@@ -804,15 +830,26 @@ challenges:
         }
     ```
 
+    Save the file.
+
     This code will insert 10,000 fake people with random birthdates, eye colors, and names at startup.
 
-    Although this is listening for `StartupEvent`, and our application has already started, in `quarkus:dev` mode Quarkus will still fire this event once. So let's test it out and see if it picks up our new data. We'll search for a single letter `F` and limit the results to `2`:
+    Although this is listening for `StartupEvent`, and our application has already started, in `quarkus:dev` mode Quarkus will still fire this event once. S
+
+    Let's test it out and see if it picks up our new data.
+
+    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
+
+    ```bash
+    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache
+    ```
+
+    We'll search for a single letter `F` and limit the results to `2` in Terminal 2:
 
     > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
 
     ```
-    cd /root/projects/rhoar-getting-started/quarkus/panache && \
-      curl -s "$PEOPLE_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq
+    curl -s "$APP_URL/person/datatable?draw=1&start=0&length=2&search\[value\]=F" | jq
     ```
 
     You should get up to 2 records returned, but the total number available should show many more indicating our search found many more, and the total number of records should now be `10003` (the 10k we added plus the 3 original values):
@@ -846,8 +883,13 @@ challenges:
     You have successfully written a lifecycle hook to listen for `StartupEvent`. Anytime the application is started it will fire this method. You can also use `@Observes ShutdownEvent` to do cleanup when the application is gracefully stopped.
 
     In the next step we'll exercise the DataTables GUI, backed by our remotely developed, high performance Quarkus app!
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -863,25 +905,9 @@ challenges:
   assignment: |
     Now that we have our app running on OpenShift, let's see what we can do.
 
-        Access the OpenShift Web Console to also login from the Web UI:
+    Access the OpenShift Web Console, and go to the `quarkus` project. Click on `Open URL` in Topology view:
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
-
-    * Username:
-    ```
-    developer
-    ```
-
-    * Password:
-    ```
-    developer
-    ```
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/panache-reactive-datatable-topology.png)
 
     It should look like:
 
@@ -917,4 +943,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "463513378131222846"
+checksum: "804936652321744277"

@@ -5,7 +5,6 @@ title: Spring REST
 description: |+
   In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a RESTful application using Spring Rest.
 
-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -13,7 +12,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -26,11 +24,10 @@ challenges:
     contents: |+
       In this scenario you will learn more about developing Spring Boot applications using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. We will be building a RESTful application using Spring Rest.
 
-
   assignment: |
     # Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-rest-services
@@ -42,7 +39,7 @@ challenges:
 
     Since our application will be a web application, we need to use a servlet container like Apache Tomcat or Undertow to handle incoming connections from clients. Since Red Hat offers support for Apache Tomcat (e.g., security patches, bug fixes, etc.), we will use it here.
 
-    In addition we are going to utilize the Spring MVC project which contains many of the abstractions we will use to build our APIs. Observe the following code block in the ``pom.xml``
+    In addition we are going to utilize the Spring MVC project which contains many of the abstractions we will use to build our APIs. Observe the following code block in the `pom.xml` in Visual Editor.
 
     ```xml
         <dependency>
@@ -55,7 +52,7 @@ challenges:
 
     **2. Test the application locally**
 
-    Run the application by executing the following command:
+    Run the application by executing the following command in Terminal 1:
 
     ```
     mvn spring-boot:run
@@ -80,7 +77,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 02-create-rest-services
   id: xomky6qhyq5j
   type: challenge
@@ -100,7 +97,9 @@ challenges:
 
     First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/FruitController.java`.
 
-    Copy the below content into the file:
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fc-sb.png)
+
+    Open the `FruitController.java` file then copy the below content into the file:
 
     ```java
     package com.example.service;
@@ -128,6 +127,10 @@ challenges:
 
     `@RequestMapping` is our way to tell Spring which URIs this Controller services. In this case we say we service the `/api/fruits` URI. Spring will thus route HTTP requests to that URI to this Controller.
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-fc-file.png)
+
     **2. Add GET Mappings**
 
     At the moment our Controller doesn't actually do any work. We need to add some handler methods. Let's start with the two HTTP GET methods, one for fetching all fruits and one for fetching a specific fruit.
@@ -135,16 +138,18 @@ challenges:
     From *Visual Editor* Tab, copy the following at the `<!-- // TODO GET mappings -->` line:
 
     ```java
-            @GetMapping
-            public List<Fruit> getAll() {
-                return repository.findAll();
-            }
+        @GetMapping
+        public List<Fruit> getAll() {
+            return repository.findAll();
+        }
 
-            @GetMapping("/{id}")
-            public Fruit getFruit(@PathVariable("id") Long id) {
-                return repository.findById(id).orElse(null);
-            }
+        @GetMapping("/{id}")
+        public Fruit getFruit(@PathVariable("id") Long id) {
+            return repository.findById(id).orElse(null);
+        }
     ```
+
+    Save the file.
 
     To mark a method as a handler for HTTP GET verbs we use the `@GetMapping` annotation. There are a couple arguments that can be passed as arguments to the annotation. The most common argument is a `path` String. Like `@RequestMapping` (which `@GetMapping` is a specialized form of), if we provide a `path` to the annotation it tells Spring that `HTTP GET` requests to that path are to be handled by that method. In the absence of a path String, however, it tries to fall back to the `current path context`. In this case it falls back to the path we specified in the `@RequestMapping` annotation at the class level. This means that the actual route for this method is `GET /api/fruits`.
 
@@ -152,9 +157,10 @@ challenges:
 
     **3. Test the service from a web browser locally**
 
-    Run the application by executing the below command:
+    Run the application by executing the below command in Terminal 1:
 
     ```
+    cd /root/projects/rhoar-getting-started/spring/spring-rest-services
     mvn spring-boot:run
     ```
 
@@ -162,11 +168,9 @@ challenges:
 
     You should see something like this:
 
-    ```json
-    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
-    ```
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/get-fruits.png)
 
-    These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
+     These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
 
     >**NOTE:** JSON is not the only Media Type supported in Spring Boot. JSON is simply the default chosen by the framework.
 
@@ -181,11 +185,13 @@ challenges:
     From *Visual Editor* Tab, copy the following at the `// TODO POST mapping"` line:
 
     ```java
-            @PostMapping
-            public Fruit createFruit(@RequestBody Fruit fruit) {
-                return repository.save(fruit);
-            }
+        @PostMapping
+        public Fruit createFruit(@RequestBody Fruit fruit) {
+            return repository.save(fruit);
+        }
     ```
+
+    Save the file.
 
     For a `@PostMapping` we are expecting a JSON Request Body to be sent to our application that follows the `Fruit` form. As a reminder from above, a Fruit in JSON form looks like `{"name":"Cherry"}`. This Request Body will be automatically deserialized from JSON to a Java Object by Spring if we have a POJO that matches. In this case we have our `Fruit` class. The `@RequestBody` annotation instructs Spring to try to deserialize the Request JSON into a `Fruit` object and inject it as an argument to our handler method. We can then do whatever we need to do with the Java Object (in this case - save it off). We have omitted input checking for brevity but always remember to sanitize your inputs in real applications!
 
@@ -207,12 +213,14 @@ challenges:
 
 
     ```java
-            @PutMapping("/{id}")
-            public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit) {
-                fruit.setId(id);
-                return repository.save(fruit);
-            }
+        @PutMapping("/{id}")
+        public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit) {
+            fruit.setId(id);
+            return repository.save(fruit);
+        }
     ```
+
+    Save the file.
 
     Just like the `@GetMapping` above this PUT handler handles requests to a path segment of the `/api/fruits` URI. In this case it handles routes like `PUT /api/fruits/1`. The route defines the ID being updated and the `@RequestBody`, just like in the POST mapping, contains the JSON payload for the Fruit change.
 
@@ -230,15 +238,16 @@ challenges:
 
     Finally, let's add a handler for accepting HTTP DELETE requests to delete existing entries.
 
-
     From *Visual Editor* Tab, copy the following at the `// TODO DELETE mapping` line:
 
     ```java
-            @DeleteMapping("/{id}")
-            public void delete(@PathVariable("id") Long id) {
-                repository.deleteById(id);
-            }
+        @DeleteMapping("/{id}")
+        public void delete(@PathVariable("id") Long id) {
+            repository.deleteById(id);
+        }
     ```
+
+    Save the file.
 
     We are again utilizing a route segment to specify an ID in the route. Thus this handler will handle routes like `DELETE /api/fruits/1`.
 
@@ -273,7 +282,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 03-login-to-openshift
   id: z3wwo32proiy
   type: challenge
@@ -287,7 +296,7 @@ challenges:
 
     **1. Login to the OpenShift Container Platform**
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command in Terminal 1 to login with the OpenShift CLI:
 
     ```
     oc login -u admin -p admin
@@ -300,7 +309,6 @@ challenges:
     You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
     ```
 
-
     Then you'll create the project:
 
     ```
@@ -311,10 +319,10 @@ challenges:
 
     ```
     oc new-app -e POSTGRESQL_USER=dev \
-                 -e POSTGRESQL_PASSWORD=secret \
-                 -e POSTGRESQL_DATABASE=my_data \
-                 openshift/postgresql:12-el8 \
-                 --name=my-database
+              -e POSTGRESQL_PASSWORD=secret \
+              -e POSTGRESQL_DATABASE=my_data \
+              openshift/postgresql:12-el8 \
+              --name=my-database
     ```
 
     Our application knows how to interact with the database because you defined the properties in the `src/main/resources/application-openshift.properties` file. You can see below that the URL, username, password, and driver for the database have been supplied.
@@ -327,10 +335,12 @@ challenges:
     spring.jpa.hibernate.ddl-auto=create
     ```
 
-    Run the following command to deploy the application to OpenShift:
+    Save the file.
+
+    Run the following command to deploy the application to OpenShift in Terminal 1:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-rest-services
     ```
 
     This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
@@ -338,7 +348,6 @@ challenges:
     ```
     oc rollout status dc/spring-rest-services
     ```
-
 
     After the rollout is complete you can go to the OpenShift web console, login with **admin**/**admin** credentials, select **dev** project and find the route to your application under **Routes**.
 
@@ -360,42 +369,20 @@ challenges:
     * Password:
     ```
     admin
-
-    ![Route from Web Console](https://katacoda.com/openshift/assets/middleware/rhoar-spring-rest-services/route.png)
-
-    Run this command to get the app's Route:
-
-    ```
-    oc get route spring-rest-services -n dev -o jsonpath='{"http://"}{.spec.host}{"/api/fruits"}{"\n"}'
-
     ```
 
-    You should see the same JSON output as the previous step:
+    Go to Develop Console then click on `Open URL` in `dev` project:
 
-    ```json
-    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
-    ```
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-topology.png)
 
-    And if you open the web application, the same functionality from the previous steps should still work.
+    You should see the web application, the same functionality from the previous steps should still work:
+
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-web-openshift.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
     Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-rest-services/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring-rest-services` project inside the `spring` folder contains the completed solution for this scenario.
 
     ## Congratulations
 
@@ -411,5 +398,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-rest-services
   difficulty: basic
-  timelimit: 300
-checksum: "17834806837846258924"
+  timelimit: 1000
+checksum: "4271697448514666970"
