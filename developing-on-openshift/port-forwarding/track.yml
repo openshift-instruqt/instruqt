@@ -250,7 +250,7 @@ challenges:
     oc port-forward <pod-name> <local-port>:<remote-port>
     ```
 
-    You may need to reference the name of the pod again, using:
+    Execute the following command again as the $POD didn't persist from the previous session:
 
     ```
     POD=`oc get pods --selector name=database -o custom-columns=NAME:.metadata.name --no-headers`; echo $POD
@@ -280,7 +280,7 @@ challenges:
     jobs
     ```
 
-    With the port forwarding in place, you can now run ``psql`` again. This time it is being run from the local machine, and not inside of the container. Because the forwarded connection is using port 15432 on the local machine, you need to explicitly tell it to use that port rather than the default database port.
+    With the port forwarding in place, you can now run ``psql`` again within the Terminal 2. This time it is being run from the local machine, and not inside of the container. Because the forwarded connection is using port 15432 on the local machine, you need to explicitly tell it to use that port rather than the default database port.
 
     ```
     psql sampledb username --host=127.0.0.1 --port=15432
@@ -323,6 +323,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container  
   difficulty: basic
   timelimit: 500
 checksum: "11135150620697772913"
