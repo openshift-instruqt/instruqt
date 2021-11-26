@@ -14,7 +14,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- edeandrea@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -145,6 +145,7 @@ challenges:
     * Password:
     ```
     admin
+    ```
 
     ![Routes](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/routes.png)
 
@@ -275,9 +276,7 @@ challenges:
     In addition to the different monitoring endpoints we also have informational endpoints like the `/actuator/beans` endpoint, which will show all of the configured beans in the application. Spring Actuator provides multiple informational endpoints on top of the monitoring endpoints that can prove useful for information gathering about your deployed Spring application and can be helpful while debugging your applications in OpenShift.
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
-
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-monitoring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox).
 
     ## Congratulations
 
@@ -292,4 +291,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
   timelimit: 1000
-checksum: "3710557621216462497"
+checksum: "4743801525174177267"
