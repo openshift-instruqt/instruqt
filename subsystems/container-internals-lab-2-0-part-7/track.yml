@@ -34,7 +34,6 @@ tags:
 owner: openshift
 developers:
 - smccarty@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -884,4 +883,4 @@ challenges:
     port: 80
   difficulty: intermediate
   timelimit: 300
-checksum: "13237017589440644495"
+checksum: "11907694677627780618"

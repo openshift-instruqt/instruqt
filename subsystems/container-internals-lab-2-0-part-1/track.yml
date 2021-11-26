@@ -32,7 +32,6 @@ tags:
 owner: openshift
 developers:
 - smccarty@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -366,4 +365,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "3486700926189280517"
+checksum: "2490688925030196864"
