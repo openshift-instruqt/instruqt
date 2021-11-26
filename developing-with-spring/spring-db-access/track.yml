@@ -12,7 +12,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
+- edeandrea@redhat.com
 private: false
 published: true
 challenges:
@@ -68,7 +68,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 02-read-content-from-a-database
   id: zkopvns4m2xa
   type: challenge
@@ -292,7 +292,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 03-deploy-to-openshift
   id: jn8qqtqv8xel
   type: challenge
@@ -451,5 +451,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-db-access
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 checksum: "7844552728883007635"

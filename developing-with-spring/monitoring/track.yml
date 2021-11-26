@@ -14,7 +14,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
+- edeandrea@redhat.com
 private: false
 published: true
 challenges:
@@ -83,7 +83,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 02-deploy-to-openshift
   id: 9cwxogkbpbsk
   type: challenge
@@ -166,7 +166,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 03-add-health-checks
   id: qcqjksliao7y
   type: challenge
@@ -305,5 +305,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 checksum: "3710557621216462497"

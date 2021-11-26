@@ -11,7 +11,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
+- edeandrea@redhat.com
 private: false
 published: true
 challenges:
@@ -69,7 +69,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 02-deploy-to-openshift
   id: 9v3gfbg3chkt
   type: challenge
@@ -190,7 +190,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 03-modify-the-configmap
   id: 5wvgyxdyb10d
   type: challenge
@@ -261,5 +261,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 checksum: "7336073796765460781"

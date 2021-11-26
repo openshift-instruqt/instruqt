@@ -13,7 +13,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
+- edeandrea@redhat.com
 private: false
 published: true
 challenges:
@@ -80,7 +80,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 02-create-rest-services
   id: xomky6qhyq5j
   type: challenge
@@ -273,7 +273,7 @@ challenges:
     path: /
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: 03-login-to-openshift
   id: z3wwo32proiy
   type: challenge
@@ -411,5 +411,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-rest-services
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 checksum: "17834806837846258924"
