@@ -11,7 +11,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- edeandrea@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -40,7 +40,7 @@ challenges:
     String message = String.format(properties.getMessage(), name);
     ```
 
-    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file ``src/main/java/com/example/service/MessageProperties.java` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our `src/main/resources/application-local.properties`` file.
+    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file `src/main/java/com/example/service/MessageProperties.java` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our `src/main/resources/application-local.properties`` file.
 
     Our `application-local.properties` file contains only one property, `greeting.message`. This is the message that we return and display to the user. In order to get an understanding of the flow, let's run the application locally. On the terminal build the project:
 
@@ -161,7 +161,7 @@ challenges:
     * Password:
     ```
     admin
-
+    ```
 
     or run this command to get the app's Route:
 
@@ -230,10 +230,6 @@ challenges:
 
     This means that we were able to modify our application behavior through External Configuration of the `application.properties` file using a ConfigMap without having to even take down the application. That's pretty powerful!
 
-    # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
-
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/microservices-externalized-config/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     ## Congratulations
 
@@ -248,4 +244,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 1000
-checksum: "7336073796765460781"
+checksum: "14318175777723315806"
