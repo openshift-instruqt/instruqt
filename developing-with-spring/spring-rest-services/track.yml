@@ -138,15 +138,15 @@ challenges:
     From *Visual Editor* Tab, copy the following at the `<!-- // TODO GET mappings -->` line:
 
     ```java
-          @GetMapping
-          public List<Fruit> getAll() {
-              return repository.findAll();
-          }
+        @GetMapping
+        public List<Fruit> getAll() {
+            return repository.findAll();
+        }
 
-          @GetMapping("/{id}")
-          public Fruit getFruit(@PathVariable("id") Long id) {
-              return repository.findById(id).orElse(null);
-          }
+        @GetMapping("/{id}")
+        public Fruit getFruit(@PathVariable("id") Long id) {
+            return repository.findById(id).orElse(null);
+        }
     ```
 
     Save the file.
@@ -168,11 +168,9 @@ challenges:
 
     You should see something like this:
 
-    ```json
-    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
-    ```
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/get-fruits.png)
 
-    These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
+     These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
 
     >**NOTE:** JSON is not the only Media Type supported in Spring Boot. JSON is simply the default chosen by the framework.
 
@@ -187,10 +185,10 @@ challenges:
     From *Visual Editor* Tab, copy the following at the `// TODO POST mapping"` line:
 
     ```java
-          @PostMapping
-          public Fruit createFruit(@RequestBody Fruit fruit) {
-              return repository.save(fruit);
-          }
+        @PostMapping
+        public Fruit createFruit(@RequestBody Fruit fruit) {
+            return repository.save(fruit);
+        }
     ```
 
     Save the file.
@@ -215,11 +213,11 @@ challenges:
 
 
     ```java
-          @PutMapping("/{id}")
-          public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit) {
-              fruit.setId(id);
-              return repository.save(fruit);
-          }
+        @PutMapping("/{id}")
+        public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit) {
+            fruit.setId(id);
+            return repository.save(fruit);
+        }
     ```
 
     Save the file.
@@ -243,10 +241,10 @@ challenges:
     From *Visual Editor* Tab, copy the following at the `// TODO DELETE mapping` line:
 
     ```java
-          @DeleteMapping("/{id}")
-          public void delete(@PathVariable("id") Long id) {
-              repository.deleteById(id);
-          }
+        @DeleteMapping("/{id}")
+        public void delete(@PathVariable("id") Long id) {
+            repository.deleteById(id);
+        }
     ```
 
     Save the file.
@@ -298,7 +296,7 @@ challenges:
 
     **1. Login to the OpenShift Container Platform**
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command in Terminal 1 to login with the OpenShift CLI:
 
     ```
     oc login -u admin -p admin
@@ -371,23 +369,15 @@ challenges:
     * Password:
     ```
     admin
-
-    ![Route from Web Console](https://katacoda.com/openshift/assets/middleware/rhoar-spring-rest-services/route.png)
-
-    Run this command to get the app's Route:
-
-    ```
-    oc get route spring-rest-services -n dev -o jsonpath='{"http://"}{.spec.host}{"/api/fruits"}{"\n"}'
-
     ```
 
-    You should see the same JSON output as the previous step:
+    Go to Develop Console then click on `Open URL` in `dev` project:
 
-    ```json
-    [{"name":"Cherry"},{"name":"Apple"},{"name":"Banana"}]
-    ```
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-topology.png)
 
-    And if you open the web application, the same functionality from the previous steps should still work.
+    You should see the web application, the same functionality from the previous steps should still work:
+
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-web-openshift.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -409,4 +399,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rest-services
   difficulty: basic
   timelimit: 1000
-checksum: "18056467669547968902"
+checksum: "4271697448514666970"
