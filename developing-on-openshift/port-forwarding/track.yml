@@ -83,7 +83,9 @@ challenges:
 
     To create a new project called ``myproject`` run the command:
 
-    ``oc new-project myproject``
+    ```
+    oc new-project myproject
+    ```
 
     You should see output similar to:
 
@@ -103,7 +105,7 @@ challenges:
     type: terminal
     hostname: container
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 02-deploying-a-postgresql-database
   id: 1ockicjymrak
   type: challenge
@@ -133,7 +135,7 @@ challenges:
     type: terminal
     hostname: container
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 03-starting-an-interactive-shell
   id: wghs7gihsblx
   type: challenge
@@ -224,8 +226,11 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 04-creating-a-remote-connection
   id: iy3tcez3ltci
   type: challenge
@@ -243,6 +248,12 @@ challenges:
 
     ```
     oc port-forward <pod-name> <local-port>:<remote-port>
+    ```
+
+    You may need to reference the name of the pod again, using:
+
+    ```
+    POD=`oc get pods --selector name=database -o custom-columns=NAME:.metadata.name --no-headers`; echo $POD
     ```
 
     To create a connection to the PostgreSQL database, which uses port 5432, and expose it on the local machine where ``oc`` is being run, as port 15432, use:
@@ -263,7 +274,7 @@ challenges:
 
     When the ``oc port-forward`` command is run and the connection setup, it will stay running until the command is interrupted. You would then use a separate terminal window to run the administration tool which could connect via the forwarded connection. In this case, as we only have the one terminal window, we ran the ``oc port-forward`` command as a background job.
 
-    You can see that it is still running using:
+    Now, by moving to the *Terminal 2* tab, you can see that it is still running using:
 
     ```
     jobs
@@ -313,5 +324,5 @@ challenges:
     type: terminal
     hostname: container
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 checksum: "11135150620697772913"
