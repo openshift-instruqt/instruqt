@@ -124,11 +124,11 @@ challenges:
   assignment: |
     From the options presented for deploying an application, select _All Services_ under _Developer Catalog_. This will land you on the _Developer Catalog_.
 
-    ![Developer Catalog](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-developer-catalog.png)
+    ![Developer Catalog](https://github.com/openshift-instruqt/instruqt/blob/master/assets/developing-on-openshift/deploying-python/developer-catalog1.png)
 
     In this course you are going to deploy a web application which is implemented using the Python programming language.
 
-    ![Available Python Versions](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-deploy-python-source.png)
+    ![Available Python Versions](https://github.com/openshift-instruqt/instruqt/blob/master/assets/developing-on-openshift/deploying-python/developer-catalog2.png)
 
     Click on the _Python_ tile for the generic Python Source-to-Image (S2I) builder. This will bring up a dialog with the details of the builder image. Click on _Create Application_ in the dialog.
 
