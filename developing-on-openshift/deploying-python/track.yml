@@ -28,7 +28,6 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -93,12 +92,12 @@ challenges:
     ```
     You might have to wait a minute for the pod to be ready.
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-    
+
     ```
     oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
     Click the link under `HOST/PORT` column and navigate there from a web browser.
-    
+
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
@@ -124,11 +123,11 @@ challenges:
   assignment: |
     From the options presented for deploying an application, select _All Services_ under _Developer Catalog_. This will land you on the _Developer Catalog_.
 
-    ![Developer Catalog](https://github.com/openshift-instruqt/instruqt/blob/master/assets/developing-on-openshift/deploying-python/developer-catalog1.png)
+    ![Developer Catalog](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog1.png)
 
     In this course you are going to deploy a web application which is implemented using the Python programming language.
 
-    ![Available Python Versions](https://github.com/openshift-instruqt/instruqt/blob/master/assets/developing-on-openshift/deploying-python/developer-catalog2.png)
+    ![Available Python Versions](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog2.png)
 
     Click on the _Python_ tile for the generic Python Source-to-Image (S2I) builder. This will bring up a dialog with the details of the builder image. Click on _Create Application_ in the dialog.
 
@@ -596,4 +595,4 @@ challenges:
     hostname: crc
   difficulty: basic
   timelimit: 171
-checksum: "5825821474429911108"
+checksum: "1495538793618373650"
