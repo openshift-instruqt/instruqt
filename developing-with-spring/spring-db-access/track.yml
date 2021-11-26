@@ -12,7 +12,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- edeandrea@redhat.com
 private: false
 published: true
 challenges:
@@ -28,7 +27,7 @@ challenges:
   assignment: |-
     # Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command in Terminal 1 to clone the sample project:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-db-access
@@ -53,9 +52,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
@@ -82,7 +81,7 @@ challenges:
 
     Since our application will need to access a database to retrieve and store fruit entries we need to add a Database Connection library. One such implementation in Spring is the Spring Data JPA project, which contains the Java Persistence APIs (JPA) and a JPA implementation - Hibernate. Hibernate has been tested and verified as part of the Red Hat Runtimes, so we are going to use it here. Spring Boot has full knowledge of these libraries as well so we get to take advantage of Spring Boot's auto-configuration with these libraries as well!
 
-    To add Spring Data + JPA and Hibernate to our project all we have to do is to add the following line in `pom.xml`
+    To add Spring Data + JPA and Hibernate to our project all we have to do is to add the following line in `pom.xml` in Visual Editor:
 
     ```xml
         <dependency>
@@ -101,6 +100,10 @@ challenges:
         </dependency>
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-db-pom-file.png)
+
     If Spring Boot sees a database like H2 on the classpath it will automatically configure an in-memory one for us as well as all the connection Beans necessary to connect to it. We've chosen to override these settings in the ``src/main/resources/application-local.properties`` file to demonstrate that you can interact with Spring Boot's auto-configuration quite easily.
 
     **2. Create an Entity class**
@@ -109,7 +112,7 @@ challenges:
 
     First, we need to create the java class file. For that, you need to click on the following link which opens the skeletal class file in the editor: `src/main/java/com/example/service/Fruit.java`
 
-    Then, copy the below content into the file (or use the `Copy to Editor` button):
+    Then, replace with the below content into the file in Visual Editor:
 
     ```java
     package com.example.service;
@@ -155,13 +158,17 @@ challenges:
 
     The `@Entity` annotation marks the object as a persistable Entity for Spring Data. The `@Id` and `@GeneratedValue` annotations are JPA annotations which mark the the `id` field as the database ID field which has an auto-generated value. Spring provides the code which makes these annotations work behind the scenes.
 
+    Save the file.
+
     **3.Create a repository class for our content**
 
     The repository should provide methods for inserting, updating, reading, and deleting Fruits from the database. We are going to use Spring Data for this which already provides us with a lot of the boilerplate code, so all we have to do is to add an interface that extends the `CrudRepository<T, I>` interface provided by Spring Data.
 
-    First, we need to fill out the skeltal java class file. For that, you need to click on the following link which opens the file in the editor: `src/main/java/com/example/service/FruitRepository.java`
+    First, we need to fill out the skeletal java class file. For that, you need to create a new `src/main/java/com/example/service/FruitRepository.java` file:
 
-    Then, copy the below content into the file (or use the `Copy to Editor` button):
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fr-sb.png)
+
+    Open the `FruitRepository.java` file then copy the below content into the file (or use the `Copy to Editor` button):
 
     ```java
     package com.example.service;
@@ -178,13 +185,15 @@ challenges:
     }
     ```
 
+    Save the file.
+
     **4. Populate the database with initial content**
 
     To pre-populate the database with content, Hibernate offers a nifty feature where we can provide an SQL file that populates the content.
 
     First, we need to create the SQL file. For that, you need to click on the following link which opens the empty file in the editor: ``src/main/resources/import.sql``
 
-    Then, copy the below content into the file (or use the `Copy to Editor` button):
+    Then, copy the below content into the file:
 
     ```text
     insert into fruit (name) values ('Cherry');
@@ -192,15 +201,18 @@ challenges:
     insert into fruit (name) values ('Banana');
     ```
 
+    Save the file.
+
     **5. Test and Verify**
     To verify that we can use the `FruitRepository` for retrieving and storing Fruit objects we have created a JUnit Test Class at `src/test/java/com/example/service/DatabaseTest.java`
 
     Take a bit of time and review the tests. The `testGetAll` test will return all fruits in the repository, which should be three because of the content in `import.sql`. The `getOne` test will retrieve the fruit with ID 1 (e.g., the Cherry) and then check that it's not null. The `getWrongId` checks that if we try to retrieve a fruit id that doesn't exist and check that fruitRepository returns null.
 
     We can now test that our `FruitRepository` can connect to the data source, retrieve data and
-    Run the application by executing the below command:
+    Run the application by executing the below command in Terminal 1:
 
     ```
+    cd /root/projects/rhoar-getting-started/spring/spring-db-access
     mvn verify
     ```
 
@@ -216,7 +228,7 @@ challenges:
 
     **6. Review The Controller**
 
-    To see how this repository could be used in a web application we're going to quickly review the FruitController file. Open `src/main/java/com/example/service/FruitController.java` in your editor.
+    To see how this repository could be used in a web application we're going to quickly review the FruitController file. Open `src/main/java/com/example/service/FruitController.java` in Visual Editor.
 
     In order to use our FruitRepository we must first autowire one in our constructor:
 
@@ -238,7 +250,7 @@ challenges:
 
     Fortunately there exists within the JPA specification a section on `Query Methods`. Query methods are methods on Repositories that follow a specific naming pattern. These methods can then be turned into implementation code by JPA providers for running actual queries.
 
-    Let's re-open the FruitRepository class file in the editor: ``src/main/java/com/example/service/FruitRepository.java`` and add the following code at the TODO line (or use the `Copy to Editor` button):
+    Let's re-open the `FruitRepository.java`` file in the editor: `src/main/java/com/example/service` and add the following code at the TODO line:
 
     ```java
         List<Fruit> findByName(String name);
@@ -251,6 +263,8 @@ challenges:
         List<Fruit> findByNameLike(String name);
     ```
 
+    Save the file.
+
     The first method `findByName(String name)` is a standard JPA _Query Method_. The format of this method is `findBy` followed by the field we are querying on for our Fruit object. For the `name` field we use the same name. Note that the field name is capitalized to follow the standard Java _camelCase_ format.
 
     The format of these methods can get pretty complex but here we're only referring to the `name` field of our `Fruit` model so the method name is pretty short. For a more in depth guide to Query Methods see [this](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods) article.
@@ -261,7 +275,7 @@ challenges:
 
     **8. Verify the application**
 
-    To verify that the application actually works now we need to actually run the application. Run the application by executing the following command
+    To verify that the application actually works now we need to actually run the application. Run the application by executing the following command in Terminal 1:
 
     ```
     mvn spring-boot:run
@@ -306,7 +320,6 @@ challenges:
 
     **1. Create a project**
 
-
     Run the following command to login with the OpenShift CLI:
 
     ```
@@ -319,7 +332,6 @@ challenges:
     Login successful.
     You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
     ```
-
 
     Then you'll create the project:
 
@@ -371,7 +383,6 @@ challenges:
             </dependency>
     ```
 
-
     **5. Add a health check**
 
     We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to `pom.xml` at the **TODO** comment..
@@ -384,12 +395,14 @@ challenges:
         </dependency>
     ```
 
+    Save the file.
+
     **6. Deploy the application to OpenShift**
 
     Run the following command to deploy the application to OpenShift
 
     ```
-    mvn oc:deploy -Popenshift -DskipTests
+    mvn oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-db-access
     ```
 
     This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
@@ -416,7 +429,7 @@ challenges:
     * Password:
     ```
     admin
-
+    ```
 
     Make sure that you can add and remove fruits using the web application.
 
@@ -438,4 +451,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-db-access
   difficulty: basic
   timelimit: 1000
-checksum: "7844552728883007635"
+checksum: "14345765160412541330"
