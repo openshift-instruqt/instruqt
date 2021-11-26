@@ -42,7 +42,7 @@ challenges:
 
     **1. Add JMS Dependencies**
 
-    To add Spring JMS to our project all we have to do is to add the following line in `pom.xml` after the `<!-- TODO: Add JMS dependency here -->` line:
+    To add Spring JMS to our project go to the **Visual Editor** Tab, and add the following line in `pom.xml` after the `<!-- TODO: Add JMS dependency here -->` line
 
     ```xml
         <dependency>
@@ -69,7 +69,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
 - slug: 02-create-message-listeners
@@ -352,9 +352,6 @@ challenges:
 
     Copy the URL from the output of the above command or click to it to open it in your browser.
 
-
-    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/openshift-console-tab.png)
-
     The first screen you will see is the authentication screen.
 
 
@@ -368,6 +365,7 @@ challenges:
     * Password:
     ```
     admin
+    ```
 
 
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
@@ -422,7 +420,7 @@ challenges:
 
     **1. Add a health check**
 
-    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to `pom.xml` at the **TODO** comment..
+    Spring Boot provides a nice feature for health checks called Actuator. Actuator is a project which exposes health data under the API path `/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to `pom.xml` after `<!-- TODO: Add Actuator dependency here -->` comment:
 
     ```xml
         <dependency>
@@ -466,25 +464,6 @@ challenges:
 
     You should see the same web application as before. The scheduled Producer will continue to deploy messages every 3 seconds so you should observe a change in the values shown. The number of items in the list will remain 5.
 
-    # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
-
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-messaging/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring-messaging` project inside the `spring` folder contains the completed solution for this scenario.
-
     ## Congratulations
 
     You have now learned how to deploy a Spring Boot JMS application and a Red Hat AMQ resource to the OpenShift Container Platform.
@@ -498,4 +477,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 225
-checksum: "11906349005654559517"
+checksum: "4056615599183982547"
