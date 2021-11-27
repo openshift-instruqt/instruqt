@@ -114,10 +114,11 @@ challenges:
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
 
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
     
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
+
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
@@ -150,6 +151,11 @@ challenges:
 
     This will give a list of available charts from multiple repositories. If we want to install it, we need to have such repositories configured.
 
+    Let's navigate to a writable directory:
+
+    ```
+    cd /opt
+    ```
 
     By default the list of available repositories is empty. You can add a new one with the CLI. For NGINX, add Bitnami repository:
 
@@ -254,7 +260,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 400
+  timelimit: 500
 - slug: 02-first-chart
   id: phnktxgopn6g
   type: challenge
@@ -277,6 +283,12 @@ challenges:
 
     ## Creating a new Helm Chart
 
+    Navigate to `/opt` directory:
+
+    ```
+    cd /opt
+    ```
+
     With `helm create` command you can create a chart directory along with the common files and directories used in a chart.
 
     Lets generate a chart called `my-chart` with the following command:
@@ -287,7 +299,8 @@ challenges:
     Inside `my-chart/` folder you will find these files:
 
     ```
-    tree my-chart
+    cd my-chart
+    ls -la
     ```
 
     * `Chart.yaml`: is a YAML file containing multiple fields describing the chart
@@ -326,6 +339,7 @@ challenges:
     Install our custom Helm Chart from local folder.
 
     ```
+    cd ..
     helm install my-chart ./my-chart
     ```
 
@@ -353,7 +367,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 400
+  timelimit: 500
 - slug: 03-revision
   id: vvmdo6mdop5c
   type: challenge
@@ -372,8 +386,9 @@ challenges:
 
     ## Add OpenShift Route as Template
 
-    Create a new template for OpenShift Route in `templates` directory, click on `templates/routes.yaml` to create one. Click the **Copy to Editor** button below to place this code in `templates/routes.yaml`
-    <pre class="file" data-filename="templates/routes.yaml" data-target="replace">
+    From the Visual Editor, create a new template for OpenShift Route in `templates` directory. From the `templates` directory, create a new file called `routes.yaml`. Copy the following content to that file:
+    
+    ```yaml
     apiVersion: route.openshift.io/v1
     kind: Route
     metadata:
@@ -388,7 +403,7 @@ challenges:
         name: {{ include "my-chart.fullname" . }}
         weight: 100
       wildcardPolicy: None
-    </pre>
+    ```
 
     Run `helm upgrade` to publish a new revision containing a `my-charm` Route:
 
@@ -476,7 +491,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt/my-chart
   difficulty: basic
-  timelimit: 400
+  timelimit: 500
 checksum: "812749121532896983"
