@@ -25,7 +25,6 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -329,7 +328,7 @@ challenges:
     To illustrate the process for copying a single file, consider the case where you had deployed a web site and had not included a ``robots.txt`` file, but needed to quickly stop a web robot which was crawling your site.
 
     To find the URL for such a current ``robots.txt`` file for the web site that fails with a HTTP ``404 Not Found`` response, we can export and curl the following app route:
-    
+
     ```
     export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}{"/robots.txt"}'`
     curl $APP_ROUTE
@@ -420,7 +419,7 @@ challenges:
 
     POD=`pod deployment=blog`; echo $POD
     ```
-    
+
     To demonstrate this ability, clone the Git repository for the web application which you have already deployed.
 
     ```
@@ -609,12 +608,18 @@ challenges:
     With the dummy application now running, and with the persistent volume mounted, capture the name of the pod for the running application.
 
     ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+    
     POD=`pod deployment=dummy`; echo $POD
     ```
 
     We can now copy any files into the persistent volume, using the ``/mnt`` directory where we mounted the persistent volume, as the target directory. In this case since we are doing a one off copy, we can use the ``tar`` strategy instead of the ``rsync`` strategy.
 
     ```
+    cd /opt
+    mkdir persist
+    cd persist
+
     oc rsync ./ $POD:/mnt --strategy=tar
     ```
 
@@ -695,4 +700,4 @@ challenges:
     hostname: crc
   difficulty: intermediate
   timelimit: 240
-checksum: "14877783965732255422"
+checksum: "9392400223417483697"
