@@ -17,7 +17,6 @@ description: |
   ## Use case
 
   You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -51,7 +50,6 @@ challenges:
       ## Use case
 
       You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
-
   assignment: |
     The easiest way to access and interact with OpenShift is through the web console. The URL for the web console will be dictated by what was specified as the public URL for the OpenShift cluster when it was set up. Once the web console is accessed, how you then login will depend on the configured identity provider.
 
@@ -62,9 +60,10 @@ challenges:
     You might have to wait a minute for the pod to be ready.
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    Click or copy the link to access from your web browser.
+
     You will then be able to login with developer permissions with:
     * **Username:** ``developer``
     * **Password:** ``developer``
@@ -127,10 +126,10 @@ challenges:
         oc new-project <projectname>
     ```
 
-    Next, create a new project namespace:
+    Next, use the project namespace you created in the previous step:
 
     ```
-    oc new-project myproject
+    oc project myproject
     ```
 
     You can list all the projects you currently have access to by running:
@@ -290,9 +289,9 @@ challenges:
     oc whoami
     ```
 
-    If you are working against multiple OpenShift clusters, to switch between them, you again use ``oc login``, but supply just the URL for the OpenShift cluster. For example, if you had an account with the OpenShift Online free starter tier, and had been assigned to the ``us-east-1`` cluster, you could run:
+    If you are working against multiple OpenShift clusters, to switch between them, you again use ``oc login``, but supply just the URL for the OpenShift cluster. For example, if you had an account with the [Developer Sandbox for OpenShift](https://developers.redhat.com/developer-sandbox), you could run something similar:
 
-    ``oc login https://api.starter-us-east-1.openshift.com``
+    `oc login --token=<token> --server=https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443`
 
     When switching between OpenShift clusters, if you do not explicitly say which user to use, it will use whatever was the last user you were logged in as with that cluster. You can still provide ``--username`` if required.
 
@@ -323,4 +322,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "12896781078325888686"
+checksum: "9843492851489469258"

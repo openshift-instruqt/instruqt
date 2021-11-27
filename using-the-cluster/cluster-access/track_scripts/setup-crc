@@ -106,6 +106,7 @@ rm /tmp/pull-secret.yaml
 cat << EOF > /tmp/pass.htpasswd
 admin:\$2y\$05\$Sokv3so/TbycwilNeV6L6.lMIYT0ClbaW/RsPssFIBY.BWanJyMwe
 developer:\$apr1\$PFGWfRKw\$DbBab3TIlvsZGmHjVbehv0
+user1:\$apr1\$AWRDy/5p\$FgzPPvIIqhe3ZbWCgk4Cc1
 EOF
 
 cat << EOF > /tmp/oauth-admin.yaml
