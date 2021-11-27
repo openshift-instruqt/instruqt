@@ -407,6 +407,20 @@ challenges:
 
     For scripted programming languages such as PHP, Python or Ruby, where no separate compilation phase is required, provided that the web server can be manually restarted without causing the container to exit, or if the web server always reloads code files which have been modified, you can perform live code development with your application running inside of OpenShift.
 
+    Navigate to the previously created `opt/db` directory:
+
+    ```
+    cd /opt/db
+    ```
+
+    Execute the following commands again as the $POD did not persist from the previous assignment:
+
+    ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+
+    POD=`pod deployment=blog`; echo $POD
+    ```
+    
     To demonstrate this ability, clone the Git repository for the web application which you have already deployed.
 
     ```
