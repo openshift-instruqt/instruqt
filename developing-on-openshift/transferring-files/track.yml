@@ -236,6 +236,14 @@ challenges:
     oc rsync <pod-name>:/remote/dir/filename ./local/dir
     ```
 
+    Move to `/opt` directory and create a directory `db`:
+
+    ```
+    cd /opt
+    mkdir db
+    cd db
+    ```
+
     To copy the single database file run:
 
     ```
@@ -327,12 +335,28 @@ challenges:
     curl $APP_ROUTE
     ```
 
+    Navigate to the previously created `opt/db` directory:
+
+    ```
+    cd /opt/db
+    ```
+
+    Execute the following commands again as the $POD did not persist from the previous assignment:
+
+    ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+
+    POD=`pod deployment=blog`; echo $POD
+    ```
+
     Create a ``robots.txt`` file to upload.
 
-    ``cat > robots.txt << !
+    ```
+    cat > robots.txt << !
     User-agent: *
     Disallow: /
-    !``
+    !
+    ```
 
     For the web application being used, it hosts static files out of the ``htdocs`` sub directory of the application source code. To upload the ``robots.txt`` file run:
 
