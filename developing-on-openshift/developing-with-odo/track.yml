@@ -55,7 +55,7 @@ challenges:
 
       Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
   
-      assignment: |
+    assignment: |
     The application you will be deploying is a wild west shooter style game.
 
     Applications are often divided into components based on a logical division of labor. For example, an application might consist of a data-storage, backend component that performs the application's primary work and stores the results. The backend component is paired with a user interface, frontend component that accesses the backend to retrieve data and displays it to a user.
