@@ -493,8 +493,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 750
-<<<<<<< HEAD
-checksum: "2698115773181217484"
-=======
-checksum: "255315971748266194"
->>>>>>> 19eedd4390c0a57b6e802768f8de515b0f161440
+checksum: "6795687435989491723"
