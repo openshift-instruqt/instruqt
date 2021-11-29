@@ -40,9 +40,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- hguerrero@redhat.com
 private: false
 published: true
 challenges:
@@ -72,7 +70,7 @@ challenges:
 
       ### What is Debezium?
 
-      ![Logo](../../../assets/middleware/debezium-getting-started/debezium-logo.png)
+      ![Logo](https://github.com/openshift-instruqt/instruqt/blob/master/kafka/kafka-debezium/assets/debezium-logo.png?raw=true)
 
       [Debezium](https://debezium.io/) is a set of distributed services that capture row-level changes in a database.
       Debezium records the change events for each table in a database to a dedicated Kafka topic.
@@ -91,7 +89,28 @@ challenges:
 
     In AMQ Streams, you use Kafka Connect custom Kubernetes resources to deploy and manage the Debezium connectors.
 
-    ### Logging in to the cluster from the OpenShift CLI
+    ### Logging in to the cluster
+
+
+    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
 
     Log in to the OpenShift cluster from a _terminal_ with the following command:
 
@@ -99,16 +118,9 @@ challenges:
     oc login -u developer -p developer
     ```
 
-    The command logs you in with the following credentials:
-
-    * **Username:** ``developer``
-    * **Password:** ``developer``
-
-    You can use the same credentials to log into the web console.
-
     ### Creating a namespace
 
-    Create a namespace (project) with the name ``debezium`` for the AMQ Streams Kafka Cluster Operator:
+    Create a namespace (project) with the name `debezium` for the AMQ Streams Kafka Cluster Operator:
 
     ```
     oc new-project debezium
@@ -168,7 +180,9 @@ challenges:
 
     Enter the following command to send a message to the broker that you just deployed:
 
-    ``echo "Hello world" | oc exec -i -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test``
+    ```
+    echo "Hello world" | oc exec -i -c kafka my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
+    ```
 
     The command does not return any output unless it fails.
     If you see warning messages in the following format, you can ignore them:
@@ -197,7 +211,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/debezium/
   difficulty: intermediate
   timelimit: 400
 - slug: 02-deploying-a-kafka-connect
@@ -218,7 +232,9 @@ challenges:
 
     To deploy the Kafka Connect cluster with the custom image, enter the following command:
 
-    ``oc -n debezium apply -f /root/projects/debezium/kafka-connect.yaml``
+    ```
+    oc -n debezium apply -f /root/projects/debezium/kafka-connect.yaml
+    ```
 
     The Kafka Connect node is deployed.
 
@@ -249,7 +265,9 @@ challenges:
 
     List the connector plugins that are available on the Kafka Connect node:
 
-    ``oc get kafkaconnect/debezium -o json | jq .status.connectorPlugins``
+    ```
+    oc get kafkaconnect/debezium -o json | jq .status.connectorPlugins
+    ```
 
     The output shows the type and version for the connector plugins:
 
@@ -303,7 +321,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/debezium/
   difficulty: intermediate
   timelimit: 400
 - slug: 03-streaming-data-from-database
@@ -323,7 +341,9 @@ challenges:
 
     Register the database source:
 
-    ``oc -n debezium apply -f /root/projects/debezium/kafka-connector.yaml``
+    ```
+    oc -n debezium apply -f /root/projects/debezium/kafka-connector.yaml
+    ```
 
     Check the Kafka Connect log file to verify that the registration succeeded and Debezium started:
 
@@ -357,7 +377,9 @@ challenges:
 
     List the topics that Debezium has created:
 
-    ``oc get kafkatopics``
+    ```
+    oc get kafkatopics
+    ```
 
     The output shows us the topics that correspond to tables in the database:
 
@@ -873,7 +895,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/debezium/
   difficulty: intermediate
   timelimit: 400
-checksum: "7036001522010757500"
+checksum: "967215697527261829"

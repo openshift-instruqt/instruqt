@@ -1,4 +1,8 @@
 version: "2"
+containers:
+- name: container
+  image: fedora
+  shell: /bin/bash
 virtualmachines:
 - name: crc
   image: openshift-instruqt/openshift-instruqt-crc490-211026

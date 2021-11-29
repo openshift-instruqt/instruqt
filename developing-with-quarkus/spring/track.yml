@@ -16,9 +16,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- rjarvine@redhat.com
-- nvinto@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -47,17 +45,17 @@ challenges:
     $JAVA_HOME/bin/java --version
     ```
 
-    The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
+    The command should report the version in use, for example (the versions and dates may be slightly different than the below example). Run the following command in Terminal 1:
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     ## Create basic project
 
-    Let's create the basic Quarkus _Hello World_ application and include the necessary spring extensions. Click this command to create the project:
+    Let's create the basic Quarkus _Hello World_ application and include the necessary spring extensions. Run this command to create the project:
 
     ```
     cd /root/projects/quarkus &&
@@ -79,14 +77,10 @@ challenges:
 
     First, switch to the directory in which the app was built:
 
-    ```
-    cd /root/projects/quarkus/fruit-taster
-    ```
+    Let's begin Live Coding. Run on the following command to start the app in _Live Coding_ mode:
 
-    Let's begin Live Coding. Click on the following command to start the app in _Live Coding_ mode:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    ```bash
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
     ```
 
     You should see:
@@ -105,7 +99,7 @@ challenges:
     ```
     > The first time you build the app, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    Test that the app is running by accessing the **Fruit Taste App** Tab.
+    Test that the app is running by accessing the **Fruit Taster App** Tab.
 
     You should see
 
@@ -113,7 +107,7 @@ challenges:
     Hello Spring
     ```
 
-    This app doesn't use any Spring annotations yet. You'll _live code_ those in the next few steps while the app continues to run.
+    This app doesn't use any Spring annotations yet. Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -128,7 +122,7 @@ challenges:
     path: /greeting
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 02-create-data
   id: ya0aishykw1e
   type: challenge
@@ -142,9 +136,11 @@ challenges:
 
     ## Create Model
 
-    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.html
 
-    Then add this code:
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-fruit.png)
+
+    Open the `Fruit.java` file then add this code:
 
     ```java
     package org.acme;
@@ -199,6 +195,10 @@ challenges:
     }
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-fruit-file.png)
+
     This is a simple POJO representing a Fruit, with a name and color.
 
     ## Create Spring Data Repository
@@ -220,6 +220,8 @@ challenges:
 
     }
     ```
+
+    Save the file.
 
     Note that by extending Spring's `CrudRepository` interface you'll automatically get a complete set of methods to manipulate the entity (e.g. `count()`, `findAll()`, `delete()` and others).
 
@@ -270,7 +272,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 03-create-beans
   id: ye9oamwagcev
   type: challenge
@@ -304,6 +306,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     With the interface in place, we will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean. It will be used to create a `StringFunction` bean that will capitalize the text passed as parameter.
 
     From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/AppConfiguration.java`.
@@ -325,6 +329,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     ## Create Functions
 
@@ -438,7 +444,7 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 04-create-web
   id: yzucmjhdkgln
   type: challenge
@@ -530,15 +536,13 @@ challenges:
     From **Terminal 1** Tab, start the app:
 
     ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0
+    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
     ```
 
     Open the **Fruit Taster App** Tab to access the `/fruits` endpoint.
 
-
-    > Note you may need to click the command again, if it didn't execute in the new Terminal window.
-    > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Click on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
+    > Note you may need to run the command again, if it didn't execute in the new Terminal window.
+    > **If you get a `parse error:`**, it is likely you missed an earlier step, and the Quarkus live reload caught it. Run on the [app's landing page](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
     > to see details and clues about what may be wrong, and re-visit any prior steps to re-add the missing code.
 
     > Note that we pass the output to the `jq` utility which prints nicely-formatted JSON.
@@ -798,6 +802,8 @@ challenges:
 
     Notice the presence of our new suffix! Quarkus apps make it super easy to code, test, and re-code on the fly.
 
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
+
   tabs:
   - title: Terminal 1
     type: terminal
@@ -815,7 +821,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 05-build-app
   id: vrdbobcpy3c3
   type: challenge
@@ -823,11 +829,10 @@ challenges:
   assignment: |
     ## Build executable JAR
 
-    Quarkus applications can be built as executable JARs, or native binary images. Here we'll use an executable JAR to deploy our app. Build the application:
+    Quarkus applications can be built as executable JARs, or native binary images. Here we'll use an executable JAR to deploy our app. Build the application in Terminal 1:
 
-    ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn clean package -DskipTests
+    ```bash
+    mvn clean package -DskipTests -f /root/projects/quarkus/fruit-taster
     ```
 
     It produces 2 jar files:
@@ -846,22 +851,21 @@ challenges:
 
     ## Run the executable JAR
 
-    You can run the packaged application by clicking:
+    You can run the packaged application by runing:
 
     ```
-    java -jar target/quarkus-app/quarkus-run.jar
+    java -jar /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
     ```
 
     Access the app from the **Fruit Taster App** Tab.
 
     ## Congratulations!
 
-    You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory effeciency. Now let's give our app native powers by creating a Quarkus native app.
+    You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory efficiency. Now let's give our app native powers by creating a Quarkus native app.
+
+    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -874,7 +878,7 @@ challenges:
     path: /fruits
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 06-deploy-and-test
   id: f1bzosamqoxf
   type: challenge
@@ -889,8 +893,7 @@ challenges:
     Run the following command to add it to our project:
 
     ```
-    cd /root/projects/quarkus/fruit-taster
-    mvn quarkus:add-extension -Dextensions="openshift"
+    mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/fruit-taster
     ```
 
     ## Login to OpenShift
@@ -933,7 +936,7 @@ challenges:
 
     ## Create project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run:
 
     ```
     oc new-project quarkus-spring --display-name="Sample Quarkus App using Spring APIs"
@@ -943,7 +946,7 @@ challenges:
 
     ## Deploy Postgres
 
-    When running in production, we'll need a Postgres database on OpenShift. Click the next command to deploy Postgres to your new project:
+    When running in production, we'll need a Postgres database on OpenShift. Run the next command to deploy Postgres to your new project:
 
     ```
     oc new-app \
@@ -981,12 +984,14 @@ challenges:
     taste.suffix = (if you like fruit!)
     ```
 
+    Save the file.
+
     ## Deploy application to OpenShift
 
     Now let's deploy the application itself. Run the following command which will build and deploy the Quarkus app in Openshift:
 
     ```
-    mvn clean package \
+    mvn clean package -f /root/projects/quarkus/fruit-taster \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes.deploy=true \
@@ -1017,7 +1022,7 @@ challenges:
 
     You can see the app deployed from the OpenShift Web Console.
 
-    Enter the *quarkus-spring* project to see your app and click to the Route's URL.
+    Enter the *quarkus-spring* project to see your app and run to the Route's URL.
 
     To the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
@@ -1059,7 +1064,7 @@ challenges:
     We now have 10 instances running providing better performance. Make sure it still works.
 
 
-    **10 not enough? Try 50!** Click the command to scale this app to 50 instances:
+    **10 not enough? Try 50!** Run the command to scale this app to 50 instances:
 
     ```
     oc scale --replicas=50 dc/fruit-taster
@@ -1083,23 +1088,9 @@ challenges:
     ```
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/spring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring` project inside the `quarkus` folder contains the completed solution for this scenario.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/spring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     ## Congratulations!
 
@@ -1113,5 +1104,5 @@ challenges:
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
-  timelimit: 600
-checksum: "15709778362843763338"
+  timelimit: 500
+checksum: "15760425836117608175"

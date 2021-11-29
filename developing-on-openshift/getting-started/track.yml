@@ -107,18 +107,23 @@ challenges:
     Let's log in to our cluster to start working. 
 
     At first, check that the pod responsible for OpenShift Web Console to be ready:
+    
     ```
     oc get pods -n openshift-console | grep console
     ```
+    
     You might have to wait a minute for the pod to be ready.
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+    
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
+
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
+   
     ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     After logging in to the web console, you'll be on a *Administrator* page. Next, navigate to the developer perspective of the web console.
@@ -335,15 +340,19 @@ challenges:
 
     To deploy the application you are going to use the **+Add** option in the left navigation menu of the *Developer Perspective*, so ensure you have the OpenShift web console open and that you are in the project called `myproject`. Click **+Add**. This time, rather than using *Container Image*, choose *From Catalog*, which will take you to the following page:
 
-    ![Browse Catalog](https://katacoda.com/openshift/assets/introduction/getting-started-44/6browse-catalog.png)
+    ![Developer Catalog](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog1.png)
 
-    If you don't see any items, then uncheck the **Operator Backed** checkbox. Under the **Languages** section, select Python in the list of supported languages. When presented with the options of *Django + Postgres SQL*, *Django + Postgres SQL (Ephemeral)*, and *Python*, select the *Python* option and click on _Create Application_.
+    In this course you are going to deploy a web application which is implemented using the Python programming language.
 
-    ![Python Builder](https://katacoda.com/openshift/assets/introduction/getting-started-44/6python-builder.png)
+    ![Available Python Versions](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog2.png)
+
+    When presented with the options of *Django + Postgres SQL*, *Django + Postgres SQL (Ephemeral)*, and *Python*, select the *Python* option and click on _Create Application_.
 
     For the *Git Repo URL* use:
 
-    ``https://github.com/openshift-roadshow/nationalparks-katacoda``
+    ```
+    https://github.com/openshift-roadshow/nationalparks-katacoda
+    ```
 
     ![Create Python](https://katacoda.com/openshift/assets/introduction/getting-started-42/6python-version.png)
 

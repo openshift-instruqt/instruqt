@@ -29,9 +29,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -65,7 +63,7 @@ challenges:
   assignment: |
     ## Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started
@@ -82,9 +80,9 @@ challenges:
     The command should report the version in use, for example (the versions and dates may be slightly different than the below example):
 
     ```console
-    openjdk 11.0.10 2021-01-19
-    OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.10+9, mixed mode)
+    openjdk 11 2018-09-25
+    OpenJDK Runtime Environment 18.9 (build 11+28)
+    OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
     ```
 
     If the command fails, wait a few moments and try again (it is installed in a background process and make take a few moments depending on system load).
@@ -104,16 +102,15 @@ challenges:
 
     ## Add Extension
 
-    Like other exercises, we’ll need another extension to integrate Quarkus with Kafka. Install it by clicking on the following command:
+    Like other exercises, we’ll need another extension to integrate Quarkus with Kafka. Install it by runing on the following command in Terminal 1:
 
     ```
-    cd /root/projects/rhoar-getting-started/quarkus/kafka &&
-      mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka"
+    mvn quarkus:add-extension -Dextensions="smallrye-reactive-messaging-kafka" -f /root/projects/rhoar-getting-started/quarkus/kafka
     ```
 
     > The first time you add the extension, new dependencies may be downloaded via maven. This should only happen once, after that things will go even faster.
 
-    This will add the necessary entries in your `pom.xml` to bring in the Kafka extension. You'll see:
+    This will add the necessary entries in your `/root/projects/rhoar-getting-started/quarkus/kafka/pom.xml` to bring in the Kafka extension. You'll see in Visual Editor:
 
     ```xml
     <dependency>
@@ -130,7 +127,7 @@ challenges:
     hostname: crc
     path: /root/projects/
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 02-create-generator
   id: 7dmuf3kfv5im
   type: challenge
@@ -138,9 +135,11 @@ challenges:
   assignment: |
     # Create name generator
 
-    To start building the app, create a new Java class from the Visual Editor Tab, in this path `src/main/java/org/acme/people/stream/NameGenerator.java`.
+    To start building the app, create a new Java class from the Visual Editor Tab, in this path `src/main/java/org/acme/people/stream/NameGenerator.java`:
 
-    Next, add the following code to this file:
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-kafka.png)
+
+    Next, open the `NameGenerator.java` file then add the following code to this file:
 
     ```java
     package org.acme.people.stream;
@@ -166,6 +165,10 @@ challenges:
     }
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-name-file.png)
+
     This simple method:
 
     * Instructs Reactive Messaging to dispatch the items from returned stream to `generated-name`
@@ -182,7 +185,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 03-create-converter
   id: 6dqrjcvrgvri
   type: challenge
@@ -194,7 +197,7 @@ challenges:
 
     Create a new Java class in this path `src/main/java/org/acme/people/stream/NameConverter.java`.
 
-    Next, click **Visual Editor**  Tab to add the following code to this file:
+    Next, run **Visual Editor**  Tab to add the following code to this file:
 
     ```java
     package org.acme.people.stream;
@@ -219,6 +222,8 @@ challenges:
     }
     ```
 
+    Don't forget to save the file.
+
     This simple method:
 
     * Consumes the items from the `names` topic using `@Incoming`
@@ -236,7 +241,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 04-create-resource
   id: ylqcgloevdna
   type: challenge
@@ -279,6 +284,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     This method:
 
@@ -323,7 +330,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 05-configure-app
   id: g0sxepira4ir
   type: challenge
@@ -331,7 +338,7 @@ challenges:
   assignment: |
     # Configure the app
 
-    We need to configure our app to define how our app can connect to Kafka. Click: `src/main/resources/application.properties` to open this file. This file contains Quarkus configuration and is empty. The names of the properties for the Kafka extension are structured as follows:
+    We need to configure our app to define how our app can connect to Kafka. Open `src/main/resources/application.properties` file in Visual Editor. This file contains Quarkus configuration and is empty. The names of the properties for the Kafka extension are structured as follows:
 
     `mp.messaging.[outgoing|incoming].{channel-name}.property=value`
 
@@ -356,6 +363,8 @@ challenges:
     mp.messaging.incoming.names.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
     ```
 
+    Save the file.
+
     The hostnames used above refer to the in-cluster hostnames that resolve to our running Kafka cluster on OpenShift.
 
     More details about this configuration is available on the [Producer
@@ -368,11 +377,10 @@ challenges:
 
     # Compilation Test
 
-    To make sure you've got a compilable app and code is in its proper place, let's test the build. Run this command to compile and package the app:
+    To make sure you've got a compilable app and code is in its proper place, let's test the build. Run this command to compile and package the app in Terminal 1:
 
     ```
-    cd /root/projects/rhoar-getting-started/quarkus/kafka
-    mvn clean package
+    mvn clean package -f /root/projects/rhoar-getting-started/quarkus/kafka
     ```
   tabs:
   - title: Terminal 1
@@ -383,7 +391,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 06-deploy-kafka
   id: hrm8ifu679pm
   type: challenge
@@ -393,11 +401,13 @@ challenges:
 
     To deploy Kafka to OpenShift, you'll need to login.
 
-    Login as an admin user. 
-    
+    You should already be logged in as an admin user. Run this command to verify in Terminal 1:
+
     ```
-    oc login -u admin -p admin
+    oc whoami
     ```
+
+    It should respond with `admin`.
 
     ## Access OpenShift Project
 
@@ -406,7 +416,7 @@ challenges:
     OpenShift project allows a community of users (or a user) to organize and manage
     their content in isolation from other communities.
 
-    For this scenario, let's create a project that you will use to house Kafka. Click:
+    For this scenario, let's create a project that you will use to house Kafka. Run the following command in Terminal 1:
 
     ```
     oc new-project kafka --display-name="Apache Kafka"
@@ -416,7 +426,7 @@ challenges:
 
     To deploy Kafka, we'll use the _Strimzi_ Operator. Strimzi is an open source project that provides an easy way to run an Apache Kafka cluster on Kubernetes in various deployment configurations.
 
-    First, click this command to deploy the Operator to our new `kafka` namespace:
+    First, run this command to deploy the Operator to our new `kafka` namespace:
 
     ```
     oc create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
@@ -444,7 +454,7 @@ challenges:
     cd /root/projects/rhoar-getting-started/quarkus/kafka
     ```
 
-    Next, create a new `Kafka` object within Kubernetes that the operator is waiting for. Click this command to create it:
+    Next, create a new `Kafka` object within Kubernetes that the operator is waiting for. Run this command to create it:
 
     ```
     oc apply -f src/main/kubernetes/kafka-names-cluster.yaml
@@ -472,7 +482,7 @@ challenges:
 
     ## Deploy Kafka Topic
 
-    We’ll need to create a _topic_ for our application to stream to and from. To do so, click the following command to create the _topic_ object:
+    We’ll need to create a _topic_ for our application to stream to and from. To do so, run the following command to create the _topic_ object:
 
     ```
     oc apply -f src/main/kubernetes/kafka-names-topic.yaml
@@ -499,7 +509,7 @@ challenges:
     names-cluster-zookeeper-1                        1/1     Running   0          2m31s
     names-cluster-zookeeper-2                        1/1     Running   0          2m31s
     ```
-    If the pods are still spinning up (not all in the _Running_ state with `1/1` or `3/3` containers running), keep clicking the above command until you see 3 _kafka_ pods, 3 _zookeeper_ pods, and the single _entity operator_ pod.
+    If the pods are still spinning up (not all in the _Running_ state with `1/1` or `3/3` containers running), keep runing the above command until you see 3 _kafka_ pods, 3 _zookeeper_ pods, and the single _entity operator_ pod.
 
     It will take around 2 minutes to get all the Kafka pods up and running.
 
@@ -512,7 +522,7 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 128
+  timelimit: 428
 - slug: 07-deploy-and-test
   id: joral7dw0ew3
   type: challenge
@@ -525,8 +535,7 @@ challenges:
     Run the following command to add it to our project:
 
     ```
-    cd /root/projects/rhoar-getting-started/quarkus/kafka
-    mvn quarkus:add-extension -Dextensions="openshift"
+    mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/rhoar-getting-started/quarkus/kafka
     ```
 
     From **Visual Editor** Tab, add the following values to the `application.properties` file:
@@ -540,6 +549,8 @@ challenges:
     quarkus.openshift.expose=true
     quarkus.openshift.labels.app.openshift.io/runtime=quarkus
     ```
+
+    Save the file.
 
     For more details of the above options:
 
@@ -565,7 +576,6 @@ challenges:
 
     You don't have any projects. You can try to create a new project, by running
 
-    ```
     oc new-project <projectname>
     ```
 
@@ -582,7 +592,7 @@ challenges:
     Now let's deploy the application itself. Run the following command which will build and deploy using the OpenShift extension:
 
     ```
-    mvn clean package
+    mvn clean package -f /root/projects/rhoar-getting-started/quarkus/kafka
     ```
 
     > **NOTE**: This command will take a minute or two, as it builds the app, pushes a container image, and finally deploys the container to OpenShift.
@@ -599,10 +609,16 @@ challenges:
 
     You can see the app deployed from the OpenShift Web Console.
 
-    Access the OpenShift Web Console to also login from the Web UI:
+    Relogin with `admin` user to retrieve the OpenShift Web Console URL:
 
+     ```bash
+    oc login -u admin -p admin
     ```
-    oc get routes console -n openshift-console -o jsonpath='{.spec.host}{"\n"}'
+
+    Get the  OpenShift Web Console URL by running the following command in Terminal 1:
+
+    ```bash
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
     Copy the URL from the output of the above command and open it in your browser.
@@ -618,38 +634,20 @@ challenges:
     developer
     ```
 
-    ![topology](https://katacoda.com/openshift/assets/middleware/quarkus/peopletopology.png)
+     And now we can access the app by clicking on `Open URL`:
 
-    And now we can access using `curl` once again to confirm the app is up:
+    ![topology](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/peopletopology2.png)
 
-    `curl http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/hello`
-
-    So now our app is deployed to OpenShift. Finally, let's confirm our streaming Kafka app is working.
-
-    [Open up the web UI](http://people-quarkus-kafka.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com). You should see a word cloud being updated every 5 seconds:
+    You should see a word cloud being updated every 5 seconds:
 
     > It takes a few seconds to establish the connection to Kafka. If you don’t see new names generated every 5 seconds reload the browser page to re-initialize the SSE stream.
 
     ![kafka](https://katacoda.com/openshift/assets/middleware/quarkus/wordcloud.png)
 
     # Open the solution in an IDE in the Cloud!
-    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+    Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
-    Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/kafka/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `kafka` project inside the `quarkus` folder contains the completed solution for this scenario.
+    Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/kafka/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
     ## Congratulations!
 
@@ -667,5 +665,5 @@ challenges:
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
-  timelimit: 300
-checksum: "9050060957381340795"
+  timelimit: 428
+checksum: "15488804251159720434"

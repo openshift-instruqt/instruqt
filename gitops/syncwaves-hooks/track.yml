@@ -36,8 +36,8 @@ tags:
 - openshift
 owner: openshift
 developers:
+- chernand@redhat.com
 - nvinto@redhat.com
-- rjarvine@redhat.com
 - dahmed@redhat.com
 private: false
 published: true

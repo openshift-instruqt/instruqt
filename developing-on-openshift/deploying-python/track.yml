@@ -93,10 +93,12 @@ challenges:
     ```
     You might have to wait a minute for the pod to be ready.
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
+
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
@@ -120,15 +122,13 @@ challenges:
   type: challenge
   title: Topic 2 - Deploying Using the Web Console
   assignment: |
-    From the options presented for deploying an application, select _From Catalog_. This will land you on the _Developer Catalog_.
+    From the options presented for deploying an application, select _All Services_ under _Developer Catalog_. This will land you on the _Developer Catalog_.
 
-    ![Developer Catalog](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-developer-catalog.png)
+    ![Developer Catalog](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog1.png)
 
     In this course you are going to deploy a web application which is implemented using the Python programming language.
 
-    If no items are displayed when you view the _Developer Catalog_, uncheck _Operator Backed_ in the _Type_ filters on the left hand side. Click on _Languages_ on the left hand side and then select _Python_. Any options for deploying applications which are related to Python will be displayed.
-
-    ![Available Python Versions](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-deploy-python-source.png)
+    ![Available Python Versions](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/deploying-python/developer-catalog2.png)
 
     Click on the _Python_ tile for the generic Python Source-to-Image (S2I) builder. This will bring up a dialog with the details of the builder image. Click on _Create Application_ in the dialog.
 
@@ -596,4 +596,4 @@ challenges:
     hostname: crc
   difficulty: basic
   timelimit: 171
-checksum: "9402017722176335769"
+checksum: "1495538793618373650"

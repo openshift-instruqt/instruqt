@@ -31,9 +31,8 @@ tags:
 - openshift
 owner: openshift
 developers:
-- dahmed@redhat.com
+- yurimsa@gmail.com
 - nvinto@redhat.com
-- rjarvine@redhat.com
 private: false
 published: true
 challenges:
@@ -280,8 +279,6 @@ challenges:
     ```
     oc adm policy add-cluster-role-to-user cluster-admin admin
     ```
-    `
-    ```
   tabs:
   - title: Terminal 1
     type: terminal
@@ -313,8 +310,6 @@ challenges:
 
     ```
     oc describe pod -l app=mcrouter | grep Command -A2
-    ```
-    `
     ```
   tabs:
   - title: Terminal 1
@@ -352,8 +347,6 @@ challenges:
     ```
     oc get pods -l app=mcrouter-cache
     ```
-    `
-    ```
   tabs:
   - title: Terminal 1
     type: terminal
@@ -364,4 +357,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "18024226740066661474"
+checksum: "9586811141919324267"
