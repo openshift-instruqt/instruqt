@@ -25,9 +25,6 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -70,9 +67,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 01-creating-initial-project
   id: tam8dhs0g0uc
   type: challenge
@@ -80,17 +81,34 @@ challenges:
   assignment: |
     ## Logging in to OpenShift
 
-    Before we get started, you need to log in to OpenShift. To log in to the OpenShift cluster used for this scenario from the _Terminal_,
+    Access the OpenShift Web Console to login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+
+    To log in to the OpenShift cluster used for this scenario from the _Terminal_,
     run:
 
     ```
-    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
-
-    This will log you in using the credentials:
-
-    * **Username:** ``admin``
-    * **Password:** ``admin``
 
     You should see the output below:
 
@@ -117,22 +135,8 @@ challenges:
     ```
 
     # Creating a Service Account
-    The backend of our application uses the OpenShift REST API. In order for the backend to access the API, we need to grant access to the service account that the backend is using. We will do this in the web console.
 
-    At first, check that the pod responsible for OpenShift Web Console to be ready:
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
-    You will then be able to login with admin permissions with:
-    * **Username:** ``admin``
-    * **Password:** ``admin``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    The backend of our application uses the OpenShift REST API. In order for the backend to access the API, we need to grant access to the service account that the backend is using. We will do this in the web console.
 
     After logging in to the web console, you'll be in the **Administrator** perspective of the web console, which is a view of the console for handling operations and administrative tasks associated with your OpenShift cluster.
 
@@ -156,15 +160,23 @@ challenges:
 
     **Subject Name:** ``default``
 
-    Alternatively, this step can be completed via the command line by running `oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default`
+    Alternatively, this step can be completed via the command line by running:
+
+    ```
+    oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default
+    ```
 
     The default service account provided to the backend container will now have **view** access, allowing it can retrieve objects via the API. Note that you could choose to grant access to the **edit** role instead. Providing **edit** access would allow the backend to view, modify, or delete objects. Enabling this level of access allows the backend to destroy non-recoverable resources that are used to host the game (breaking the user-experience for app users) - which is why we are using **view** access for this scenario.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 02-creating-new-binary-component
   id: z5tera1vq7q3
   type: challenge
@@ -274,9 +286,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/backend
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 03-deploying-component-from-source-code
   id: 27d8xxrk1zte
   type: challenge
@@ -364,15 +380,25 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/backend
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 04-configuring-components
   id: fzr4hdledybp
   type: challenge
   title: Configuring components
   assignment: |
     With both components of our application running on the cluster, we need to confifigure the frontend to connect to the backend service.
+
+    Change directories to the `frontend` directory:
+
+    ```
+    cd /root/frontend
+    ```
 
     Configure the `frontend` component to connect to the `backend` by running:
 
@@ -400,15 +426,23 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 05-exposing-components-to-public
   id: xkzdusandmgi
   type: challenge
   title: Exposing components to public
   assignment: |
-    We have updated `frontend` to connect to our `backend`, allowing our application's components to communicate. Let's now create an external URL for our application so we can see it in action:
+    We have updated `frontend` to connect to our `backend`, allowing our application's components to communicate.
+
+    Change directories to the `frontend` directory:
+
+    ```
+    cd /root/frontend
+    ```
+
+    Let's now create an external URL for our application so we can see it in action:
 
     ```
     odo url create frontend --port 8080
@@ -450,9 +484,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 06-making-changes-to-source-code
   id: yxtyvlpdakbg
   type: challenge
@@ -497,11 +535,17 @@ challenges:
 
     __NOTE__: If you no longer have the application page opened in a browser, you can recall the url by executing:
 
-    `odo url list`
+    ```
+    odo url list
+    ```
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
-checksum: "302239931703818846"
+  timelimit: 300
+checksum: "12895934545397865060"
