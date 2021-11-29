@@ -37,7 +37,6 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -70,7 +69,7 @@ challenges:
       Be able to provide a great experience for both Developers and System Administrators to manage and deploy applications using Helm Charts on top of OpenShift.
 
       Helm Charts are particularly useful for installation and upgrade of stateless applications given that the Kubernetes resources and the application image can simply be updated to newer versions. The follow-up for this Day 1 experience, is to convert Helm Charts into an Operator, using [Operator Framework](https://github.com/operator-framework) for a complete Day 2 experience for your apps.
-      
+
       Let's get started!
 
   assignment: |+
@@ -114,10 +113,11 @@ challenges:
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
 
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
-    
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
+
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
@@ -149,7 +149,6 @@ challenges:
     ```
 
     This will give a list of available charts from multiple repositories. If we want to install it, we need to have such repositories configured.
-
 
     By default the list of available repositories is empty. You can add a new one with the CLI. For NGINX, add Bitnami repository:
 
@@ -248,13 +247,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: container
     path: /root
   difficulty: basic
-  timelimit: 400
+  timelimit: 600
 - slug: 02-first-chart
   id: phnktxgopn6g
   type: challenge
@@ -277,17 +276,24 @@ challenges:
 
     ## Creating a new Helm Chart
 
+    Navigate to `/opt` directory:
+
+    ```
+    cd /root
+    ```
+
     With `helm create` command you can create a chart directory along with the common files and directories used in a chart.
 
-    Lets generate a chart called `my-chart` with the following command:
+    An Helm chart called `my-chart` has been already generated with the following command:
 
     `helm create my-chart`
 
 
-    Inside `my-chart/` folder you will find these files:
+    Inside `my-chart/` folder you will find the following files, you can also review them from the **Visual Editor** Tab.
 
     ```
-    tree my-chart
+    cd my-chart
+    ls -la
     ```
 
     * `Chart.yaml`: is a YAML file containing multiple fields describing the chart
@@ -312,13 +318,20 @@ challenges:
 
     > **Note:** *By default `appVersion` from `Chart.yaml` is used as image tag*
 
-    In `values.yaml` add `image.repository` variable to define the container image for our chart. Click the **Copy to Editor** button below to place this code in `values.yaml`:
+    In `values.yaml` add `image.repository` variable to define the container image for our chart.
 
-    <pre class="file" data-filename="values.yaml" data-target="insert" data-marker="# TODO: image repository">repository: bitnami/nginx</pre>
+    From the **Visual Editor** Tab, open `values.yaml` file and add this line after the `# TODO: image repository` comment:
 
-    Now let's define which tag to use for this container image. Click the **Copy to Editor** button below to place this code in `values.yaml`:
+    ```yaml
+    repository: bitnami/nginx
+    ```
 
-    <pre class="file" data-filename="values.yaml" data-target="insert" data-marker="# TODO: image tag">tag: latest</pre>
+    Now let's define which tag to use for this container image.
+    Add this line after the `# TODO: image tag"` comment:
+
+    ```yaml
+    tag: latest
+    ```
 
 
     **3. Install**
@@ -326,6 +339,7 @@ challenges:
     Install our custom Helm Chart from local folder.
 
     ```
+    cd /root
     helm install my-chart ./my-chart
     ```
 
@@ -347,13 +361,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
-    path: /root
+    hostname: container
+    path: /root/my-chart
   difficulty: basic
-  timelimit: 400
+  timelimit: 600
 - slug: 03-revision
   id: vvmdo6mdop5c
   type: challenge
@@ -372,8 +386,9 @@ challenges:
 
     ## Add OpenShift Route as Template
 
-    Create a new template for OpenShift Route in `templates` directory, click on `templates/routes.yaml` to create one. Click the **Copy to Editor** button below to place this code in `templates/routes.yaml`
-    <pre class="file" data-filename="templates/routes.yaml" data-target="replace">
+    From the Visual Editor, create a new template for OpenShift Route in `templates` directory. From the `templates` directory, create a new file called `routes.yaml`. Copy the following content to that file:
+
+    ```yaml
     apiVersion: route.openshift.io/v1
     kind: Route
     metadata:
@@ -388,7 +403,7 @@ challenges:
         name: {{ include "my-chart.fullname" . }}
         weight: 100
       wildcardPolicy: None
-    </pre>
+    ```
 
     Run `helm upgrade` to publish a new revision containing a `my-charm` Route:
 
@@ -472,11 +487,11 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   - title: Visual Editor
     type: code
-    hostname: crc
-    path: /root
+    hostname: container
+    path: /root/my-chart
   difficulty: basic
-  timelimit: 400
-checksum: "812749121532896983"
+  timelimit: 600
+checksum: "9930226986394085350"

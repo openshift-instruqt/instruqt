@@ -12,5 +12,5 @@ tar -xzvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /opt/java/
 rm -fr /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 
 echo 'export JAVA_HOME=/opt/java/jdk-11/' >> /root/.bashrc
-echo 'export MAVEN_HOME=/opt/java/apache-maven-${MVN_VERSION}/' >> /root/.bashrc
+echo "export MAVEN_HOME=/opt/java/apache-maven-${MVN_VERSION}/" >> /root/.bashrc
 echo 'export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"'  >> /root/.bashrc

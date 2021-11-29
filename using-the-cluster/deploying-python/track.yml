@@ -18,9 +18,7 @@ description: |
 
   You can have OpenShift build an application from source to deploy it, so you don't have to construct a container by hand with every change. OpenShift can then build and deploy new versions automatically when notified of souce code changes.
 
-  This OpenShift cluster will self-destruct in one hour.
-
-  [s2i]: https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds
+  [s2i]: https://docs.openshift.com/container-platform/4.6/builds/understanding-image-builds.html#builds-strategy-s2i-build_understanding-image-builds
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -55,9 +53,7 @@ challenges:
 
       You can have OpenShift build an application from source to deploy it, so you don't have to construct a container by hand with every change. OpenShift can then build and deploy new versions automatically when notified of souce code changes.
 
-      This OpenShift cluster will self-destruct in one hour.
-
-      [s2i]: https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds
+      [s2i]: https://docs.openshift.com/container-platform/4.6/builds/understanding-image-builds.html#builds-strategy-s2i-build_understanding-image-builds
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -66,7 +62,7 @@ challenges:
     run:
 
     ```
-    oc login -u developer -p developer
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     This will log you in using the credentials:
@@ -104,23 +100,37 @@ challenges:
         kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
     ```
 
-    Switch to the _Console_ and login to the OpenShift web console using the
-    same credentials you used above.
+    SSwitch to the _Console_ and login to the OpenShift web console using the
+    same credentials you used above. At first, check that the pod responsible for OpenShift Web Console to be ready:
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/introduction/deploying-python-44/01-web-console-login.png)
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    You will then be able to login with admin permissions with:
+    * **Username:** ``developer``
+    * **Password:** ``developer``
+    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
 
     This should leave you at the list of projects you have access to. As we only
-    created the one project, all you should see is ``myproject``.
+    created the one project, you should see ``myproject``.
 
-    ![List of Projects](https://katacoda.com/openshift/assets/introduction/deploying-python-44/01-list-of-projects.png)
+    ![List of Projects](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-list-of-projects.png)
 
     Click on ``myproject`` and you should then be at the _Overview_ page for
     the project. Select the _Developer_ perspective for the project instead of the _Adminstrator_ perspective in the left hand side menu. If necessary click on the hamburger menu icon top left of the web console to expose the left hand side menu.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-add-to-project.png)
-
-
     As the project is currently empty, no workloads should be found and you will be presented with various options for how you can deploy an application.
+
+    ![Add to Project](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-add-to-project.png)
   tabs:
   - title: Terminal 1
     type: terminal

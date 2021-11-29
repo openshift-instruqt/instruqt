@@ -25,7 +25,6 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -101,7 +100,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 240
+  timelimit: 500
 - slug: 02-downloading-files-from-a-container
   id: ysvxuszjkesq
   type: challenge
@@ -236,6 +235,14 @@ challenges:
     oc rsync <pod-name>:/remote/dir/filename ./local/dir
     ```
 
+    Move to `/opt` directory and create a directory `db`:
+
+    ```
+    cd /opt
+    mkdir db
+    cd db
+    ```
+
     To copy the single database file run:
 
     ```
@@ -302,7 +309,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 240
+  timelimit: 500
 - slug: 03-uploading-files-to-a-container
   id: vutiuc5tde95
   type: challenge
@@ -321,18 +328,34 @@ challenges:
     To illustrate the process for copying a single file, consider the case where you had deployed a web site and had not included a ``robots.txt`` file, but needed to quickly stop a web robot which was crawling your site.
 
     To find the URL for such a current ``robots.txt`` file for the web site that fails with a HTTP ``404 Not Found`` response, we can export and curl the following app route:
-    
+
     ```
     export APP_ROUTE=`oc get route blog -n myproject -o jsonpath='{"http://"}{.spec.host}{"/robots.txt"}'`
     curl $APP_ROUTE
     ```
 
+    Navigate to the previously created `opt/db` directory:
+
+    ```
+    cd /opt/db
+    ```
+
+    Execute the following commands again as the $POD did not persist from the previous assignment:
+
+    ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+
+    POD=`pod deployment=blog`; echo $POD
+    ```
+
     Create a ``robots.txt`` file to upload.
 
-    ``cat > robots.txt << !
+    ```
+    cat > robots.txt << !
     User-agent: *
     Disallow: /
-    !``
+    !
+    ```
 
     For the web application being used, it hosts static files out of the ``htdocs`` sub directory of the application source code. To upload the ``robots.txt`` file run:
 
@@ -367,7 +390,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 240
+  timelimit: 500
 - slug: 04-synchronizing-files-with-a-container
   id: tsny4ymdk6fe
   type: challenge
@@ -382,6 +405,20 @@ challenges:
     An example of where it can be useful to have changes automatically copied from your local computer into the container is during the development of an application.
 
     For scripted programming languages such as PHP, Python or Ruby, where no separate compilation phase is required, provided that the web server can be manually restarted without causing the container to exit, or if the web server always reloads code files which have been modified, you can perform live code development with your application running inside of OpenShift.
+
+    Navigate to the previously created `opt/db` directory:
+
+    ```
+    cd /opt/db
+    ```
+
+    Execute the following commands again as the $POD did not persist from the previous assignment:
+
+    ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+
+    POD=`pod deployment=blog`; echo $POD
+    ```
 
     To demonstrate this ability, clone the Git repository for the web application which you have already deployed.
 
@@ -526,7 +563,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 240
+  timelimit: 500
 - slug: 05-copying-files-to-a-persistent-volume
   id: sj6mbfpet2y5
   type: challenge
@@ -571,12 +608,18 @@ challenges:
     With the dummy application now running, and with the persistent volume mounted, capture the name of the pod for the running application.
 
     ```
+    pod() { local selector=$1; local query='?(@.status.phase=="Running")'; oc get pods --selector $selector -o jsonpath="{.items[$query].metadata.name}"; }
+
     POD=`pod deployment=dummy`; echo $POD
     ```
 
     We can now copy any files into the persistent volume, using the ``/mnt`` directory where we mounted the persistent volume, as the target directory. In this case since we are doing a one off copy, we can use the ``tar`` strategy instead of the ``rsync`` strategy.
 
     ```
+    cd /opt
+    mkdir persist
+    cd persist
+
     oc rsync ./ $POD:/mnt --strategy=tar
     ```
 
@@ -656,5 +699,5 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 240
-checksum: "14877783965732255422"
+  timelimit: 500
+checksum: "5240095183594967969"

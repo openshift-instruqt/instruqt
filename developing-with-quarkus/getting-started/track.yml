@@ -7,7 +7,7 @@ description: |-
 
   ## What is Quarkus?
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
   ### Supersonic, Subatomic Java
 
@@ -45,7 +45,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- jfalkner@redhat.com
 private: false
 published: true
 challenges:
@@ -60,7 +59,7 @@ challenges:
 
       ## What is Quarkus?
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/quarkus/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/quarkus-logo.png)
 
       ### Supersonic, Subatomic Java
 
@@ -210,14 +209,14 @@ challenges:
     ```
     It's working!
 
-    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. 
-    Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `disk`` icon to save the files or press `Ctrl + s:
-    
-    ![Visual Editor](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/save-file.png)
-    
+    Now, let's exercise the **live reload** capabilities of Quarkus. From the *Visual Editor* Tab, open this file: `getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`.
+    Change `return "Hello RESTEasy";` to `return "Hola RESTEasy";` on line 14 in the editor. Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-file.png)
+
     Don't recompile or restart anything. Just try to reload the *Hello App* tab again:
 
-    ![Hello App](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/reload-app.png)
+    ![Hello App](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/reload-app.png)
 
     You should see the updated `hola` message.
 
@@ -232,7 +231,7 @@ challenges:
 
     To access the Dev UI for your running app, open the *Dev UI* Tab.
 
-    ![Dev UI](https://github.com/openshift-instruqt/instruqt/assets/middleware/quarkus/dev-ui-overview.png)
+    ![Dev UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/dev-ui-overview.png)
 
     For example, click on the `Config Editor` link within the `Configuration` tile to see and make updates to configuration. This is super useful for developers to confirm code and configuration changes, or experiment with various settings.
 
@@ -284,7 +283,7 @@ challenges:
     path: /q/dev
     port: 8080
   difficulty: basic
-  timelimit: 600
+  timelimit: 500
 - slug: 02-inject-bean
   id: xqafjcyorgsc
   type: challenge
@@ -294,9 +293,11 @@ challenges:
 
     ## Add Custom Bean
 
-    Let’s modify the application and add a companion bean. From the *Visual Editor* Tab, create a new file in this path: `getting-started/src/main/java/org/acme/quickstart/GreetingService.java`.
+    Let’s modify the application and add a companion bean. From the *Visual Editor* Tab, create a new file in this path: `getting-started/src/main/java/org/acme/quickstart/GreetingService.java`:
 
-    Add the following code to this file:
+    ![Create a file](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file.png)
+
+    Open the `GreetingService.java` file then add the following code to this file:
 
     ```java
     package org.acme.quickstart;
@@ -350,7 +351,7 @@ challenges:
 
     ## Inspect the results
 
-    Run the app again in dev mode:
+    Run the Quarkus Dev mode in Terminal 1:
 
 
     ```
@@ -363,10 +364,10 @@ challenges:
     Note we are exercising our new bean using the `/hello/greeting` endpoint, and you should see
 
     ```console
-    hello quarkus from 4090f59d1a69
+    hello quarkus from crc-dzk9v-master-0
     ```
 
-    > In this case, `4090f59d1a69` is the hostname of the local host we are running on. It will be different for you!
+    > In this case, `crc-dzk9v-master-0` is the hostname of the local host we are running on. It will be different for you!
 
     ## Add another test
 
@@ -432,7 +433,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 100
+  timelimit: 500
 - slug: 03-package-and-run
   id: npxb5umu42he
   type: challenge
@@ -457,6 +458,7 @@ challenges:
     See the files with this command in Terminal 1:
 
     ```
+    cd /root/projects/quarkus/getting-started/
     ls -l target/*.jar target/quarkus-app/*.jar
     ```
 
@@ -475,7 +477,7 @@ challenges:
     You should see:
 
     ```
-    hello quarkus from 4090f59d1a69
+    hello quarkus from crc-dzk9v-master-0
     ```
     Note the same hostname as before, and also note that since we're running it as a fast-jar, Quarkus runs in production mode (and does not enable continuous testing or other developer features).
 
@@ -503,7 +505,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 100
+  timelimit: 500
 - slug: 04-build-native
   id: liep5vzlwsis
   type: challenge
@@ -552,7 +554,7 @@ challenges:
 
     This will take a minute or so to finish. Wait for it!
 
-    In addition to the regular files, the build also produces `target/getting-started-1.0.0-SNAPSHOT-runner`. This is a native Linux binary:
+    In addition to the regular files, the build also produces `target/getting-started-1.0.0-SNAPSHOT-runner`. This is a native Linux binary. Run the following command in Terminal 1:
 
     ```
     file target/getting-started-1.0.0-SNAPSHOT-runner
@@ -564,7 +566,7 @@ challenges:
 
     ## Run native image
 
-    Since our environment here is Linux, you can _just run it_:
+    Since our environment here is Linux, you can _just run it_ in Terminal 1:
 
     ```
     ./target/getting-started-1.0.0-SNAPSHOT-runner
@@ -573,10 +575,10 @@ challenges:
     Notice the amazingly fast startup time:
 
     ```bash
-    INFO  [io.quarkus] (main) Quarkus x.xx.x started in 0.011s. Listening on: http://[::]:8080
+    INFO  [io.quarkus] (main) Quarkus x.xx.x started in 0.044s. Listening on: http://[::]:8080
     INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
     ```
-    That's 11 milliseconds!
+    That's 44 milliseconds! Note that the startup time can be shown a bit differently on your environment.
 
     And extremely low memory usage as reported by the Linux `ps` utility. Run the following command in Terminal 2:
 
@@ -588,10 +590,10 @@ challenges:
 
     ```bash
       PID   RSS COMMAND
-     6082 26744 target/getting-started-1.0.0-SNAPSHOT-runner
+     261971 53740 ./target/getting-started-1.0.0-SNAPSHOT-runner
     ```
 
-    This shows that our process is taking around 26 MB of memory ([Resident Set Size](https://en.wikipedia.org/wiki/Resident_set_size), or RSS). Pretty compact!
+    This shows that our process is taking around 53 MB of memory ([Resident Set Size](https://en.wikipedia.org/wiki/Resident_set_size), or RSS). Pretty compact!
 
     > Note that the RSS and memory usage of any app, including Quarkus, will vary depending your specific environment, and will rise as the application experiences load.
 
@@ -604,7 +606,7 @@ challenges:
     Then, the output should look like:
 
     ```bash
-    hello quarkus from 4090f59d1a69
+    hello quarkus from crc-dzk9v-master-0
     ```
 
     Nice!
@@ -634,7 +636,7 @@ challenges:
     path: /hello/greeting/quarkus
     port: 8080
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 05-deploy-to-openshift
   id: qyzpzfyccatz
   type: challenge
@@ -659,7 +661,7 @@ challenges:
     ```
     oc get routes console -n openshift-console -o jsonpath='https://{.spec.host}{"\n"}'
     ```
-    
+
     Copy the URL from the output of the above command and open it in your browser.
 
 
@@ -691,7 +693,7 @@ challenges:
 
     ## Create project
 
-    For this scenario, let's create a project that you will use to house your applications. Click:
+    For this scenario, let's create a project that you will use to house your applications. Run the following command:
 
     ```
     oc new-project quarkus --display-name="Sample Quarkus App"
@@ -702,7 +704,7 @@ challenges:
     Now let's deploy the application itself. Run the following command which will build and deploy a Quarkus native application using the OpenShift extension (this will take a few minutes to complete as it rebuilds the native executable, generates a container image and pushes it into OpenShift):
 
     ```
-    mvn clean package -Pnative \
+    mvn clean package -Pnative -f /root/projects/quarkus/getting-started \
     -Dquarkus.kubernetes-client.trust-certs=true \
     -Dquarkus.container-image.build=true \
     -Dquarkus.kubernetes.deploy=true \
@@ -747,7 +749,7 @@ challenges:
     Get the URL from command line, from *Terminal 1* run this command to get the app's Route:
 
     ```bash
-    APP_ROUTE=`oc get route getting-started -n quarkus-o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
+    APP_ROUTE=`oc get route getting-started -n quarkus -o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
     curl $APP_ROUTE
     ```
 
@@ -774,7 +776,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 100
+  timelimit: 500
 - slug: 06-scaling
   id: v9wxrteqt0hi
   type: challenge
@@ -784,7 +786,7 @@ challenges:
 
     ## Restrict resources
 
-    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit. 
+    Let's make _sure_ our Quarkus app doesn't go beyond a reasonable amount of memory for each instance by setting _resource constraints_ on it. We'll go with 50 MB of memory as an upper limit (which is pretty thin, compared to your average Java app!). This will let us scale up quite a bit.
     Run the following command to set this limit in Terminal 1:
 
     ```
@@ -799,6 +801,8 @@ challenges:
     oc scale --replicas=10 dc/getting-started
     ```
 
+    Note that you can ignore the warning message, _W1123 19:23:34.344132  306042 warnings.go:70] extensions/v1beta1 Scale is deprecated in v1.2+, unavailable in v1.16+_.
+
     Back in the OpenShift Developer Topology, you'll see the app scaling dynamically up to 10 pods:
 
     ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling.png)
@@ -806,7 +810,7 @@ challenges:
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
     ```
-    export APP_ROUTE=`oc get route getting-started -n quarkus-o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
+    export APP_ROUTE=`oc get route getting-started -n quarkus -o jsonpath='{"http://"}{.spec.host}{"/hello/greeting/quarkus-on-openshift"}{"\n"}'`
 
     for i in {1..50} ; do curl $APP_ROUTE; sleep .05 ; done
     ```
@@ -854,20 +858,6 @@ challenges:
 
     Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/getting-started/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `getting-started` project inside the `quarkus` folder contains the completed solution for this scenario.
-
     ## Congratulations
 
     In this scenario you got a glimpse of the power of Quarkus apps, both traditional JVM-based as well as native builds. There is much more to Quarkus than fast startup times and low resource usage, so keep on exploring additional scenarios to learn more, and be sure to visit [quarkus.io](https://quarkus.io) to learn even more about the architecture and capabilities of this exciting new framework for Java developers.
@@ -880,5 +870,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 100
-checksum: "18427624599769634974"
+  timelimit: 500
+checksum: "8970116211677458224"

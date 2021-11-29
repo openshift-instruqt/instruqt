@@ -39,9 +39,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- hguerrero@redhat.com
 private: false
 published: true
 challenges:
@@ -95,12 +93,27 @@ challenges:
     oc login -u admin -p admin
     ```
 
-    This will log you in using the credentials:
-
-    * **Username:** ``admin``
-    * **Password:** ``admin``
-
     Use the same credentials to log into the web console.
+
+    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `admin` user. Use the following credentials:
+
+    * Username:
+    ```
+    admin
+    ```
+
+    * Password:
+    ```
+    admin
+    ```
 
     ### Creating your own namespace
 
@@ -158,7 +171,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt
   difficulty: basic
   timelimit: 225
 - slug: step2
@@ -174,9 +187,11 @@ challenges:
 
     Create a new Kafka cluster named `my-cluster`, with 1 ZooKeeper, 1 broker node, and `ephemeral` storage to simplify the deployment. In production case scenarios, you will want to increase the amount of nodes and use persistent storage.
 
-    Check the configuration for the `Kafka` custom resource:
+    Check the configuration for the `Kafka` custom resource from *Visual Editor* or from here:
 
-    `cat /opt/kafka-cluster.yaml`
+    ```
+    cat /opt/kafka-cluster.yaml
+    ```
 
     Then create the Kafka cluster by applying the configuration:
 
@@ -235,7 +250,9 @@ challenges:
 
     Check the configuration for the `KafkaTopic` custom resource:
 
-    `cat /opt/kafka-topic.yaml`
+    ```
+    cat /opt/kafka-topic.yaml
+    ```
 
     Then apply the custom resource for the Topic Operator to pick up:
 
@@ -251,7 +268,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt
   difficulty: basic
   timelimit: 225
 - slug: step3
@@ -303,7 +320,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt
   difficulty: basic
   timelimit: 225
 - slug: step4
@@ -316,6 +333,12 @@ challenges:
     ### Producing events
 
     We will use a producer shell script to write events.
+
+    To get an interactive terminal issue the following command:
+
+    ```
+    oc exec -it my-cluster-kafka-0 -- bash
+    ```
 
     Run the console producer to send one message per line:
 
@@ -339,7 +362,9 @@ challenges:
 
     Run the console consumer shell script:
 
-    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning`
+    ```
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+    ```
 
     You should see the messages you wrote:
 
@@ -362,7 +387,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /opt
   difficulty: basic
   timelimit: 225
-checksum: "11880348937066118019"
+checksum: "231885422915932545"

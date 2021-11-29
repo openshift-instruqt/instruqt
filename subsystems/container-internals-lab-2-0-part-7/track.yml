@@ -33,9 +33,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- smccarty@redhat.com
 private: false
 published: true
 challenges:
@@ -93,10 +91,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -148,8 +146,10 @@ challenges:
 
     Let's clean up the environment, and start from scratch:
 
-    ``yum module remove -y container-tools
-    yum module reset -y container-tools``
+    ```
+    yum module remove -y container-tools
+    yum module reset -y container-tools
+    ```
 
     OK, now let's pretend we are a systems administrator or SRE that wants a set of stable tools which are supported for 24 months. First, inspect the stable stream that was released in RHEL 8.0. Notice that there are several versions of this Application Stream. Every time a package is updated a new stream version is generated to snapshot the exact versions of each package together as a stream:
 
@@ -173,21 +173,23 @@ challenges:
 
     Now, let's go back to the latest version of the container-tools for the rest of this module:
 
-    ``yum module remove -y container-tools
+    ```
+    yum module remove -y container-tools
     yum module reset -y container-tools
-    yum module install -y container-tools:rhel8``
+    yum module install -y container-tools:rhel8
+    ```
 
     Notice how easy it was to move between the stable streams and the fast moving stream. This is the power of modularity. Now, let's move on to using the actual tools.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
-  timelimit: 300
+  timelimit: 600
 - slug: 03-podman
   id: poot9tf6vot4
   type: challenge
@@ -324,10 +326,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -514,8 +516,10 @@ challenges:
 
     Commit the new image layer and clean things up:
 
-    ``buildah commit ubi8-working-container ubi8-data
-    buildah delete -a``
+    ```
+    buildah commit ubi8-working-container ubi8-data
+    buildah delete -a
+    ```
 
     Test it and note that we only kept the pieces of the data that we wanted. This is just an example, but imagine using this with a Makefile cache, or Ansible playbooks, or even a copy of production database data which needs to be used to test the image build or do a schema upgrade, which must be accessed during the image build process. There are tons of places where you need to access data, only at build time, but don't want it during production deployment:
 
@@ -539,10 +543,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -563,8 +567,10 @@ challenges:
 
     We can easily see the "Architecture" and "Os" meta-data which tells us a lot about the image. We can also see the labels, which are consumed by most container engines, and passed to the runtime to be constructed as environment variables. By comparison, here's how to see this meta-data in a running container:
 
-    ``podman run --name meta-data-container -id registry.fedoraproject.org/fedora bash
-    podman inspect meta-data-container``
+    ```
+    podman run --name meta-data-container -id registry.fedoraproject.org/fedora bash
+    podman inspect meta-data-container
+    ```
 
     ## Pulling Images
 
@@ -639,10 +645,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -737,10 +743,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -811,10 +817,10 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
   difficulty: intermediate
   timelimit: 300
@@ -845,9 +851,7 @@ challenges:
     oscap-podman registry.access.redhat.com/ubi8/ubi:8.0-126 oval eval --report ./html/ubi-8.0-126-report.html rhel-8.oval.xml.bz2
     ```
 
-    This will create a report. We've already set up a web server (in a container) so that you can quickly look at the report here:
-
-    https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ubi-8.0-126-report.html
+    This will create a report. We've already set up a web server (in a container) so that you can quickly look at the  *OSCAP Report 8.0-126* Tab.
 
     Notice that there are many orange lines displaying the CVEs/RHSAs. If you built and ran an application on this very old container image, it would be exposed to these vulnerabilities. Now, let's scan the latest version of UBI provided by Red Hat:
 
@@ -855,21 +859,28 @@ challenges:
     oscap-podman registry.access.redhat.com/ubi8/ubi:latest oval eval --report ./html/ubi-latest-report.html rhel-8.oval.xml.bz2
     ```
 
-    Look at the new report:
-
-    * https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ubi-latest-report.html
-
+    Look at the new report from thr *OSCAP Report latest* Tab.
     ## Conclusions
 
     In general you should almost never see any unapplied patches in this latest build of UBI. If you do, it's like a small window between the time that Red Hat Product Security has issued a CVE, and our product team has rebuilt and published the UBI image. The oscap-podman command allows you to verify this and is useful in "trust but verify" operations like CI/CD system tests. For more information and deeper dive on OSCAP-Podman, check out this great video by Brian Smith: [Scanning Containers for Vulnerabilities on RHEL 8.2 With OpenSCAP and Podman](https://www.youtube.com/watch?v=nQmIcK1vvYc)
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: rhel
   - title: Visual Editor
     type: code
-    hostname: crc
+    hostname: rhel
     path: /root
+  - title: OSCAP Report 8.0-126
+    type: service
+    hostname: rhel
+    path: /ubi-8.0-126-report.html
+    port: 80
+  - title: OSCAP Report latest
+    type: service
+    hostname: rhel
+    path: /ubi-latest-report.html
+    port: 80
   difficulty: intermediate
   timelimit: 300
-checksum: "8031170791540022819"
+checksum: "11907694677627780618"

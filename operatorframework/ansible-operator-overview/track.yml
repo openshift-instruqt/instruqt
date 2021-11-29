@@ -27,9 +27,8 @@ tags:
 - openshift
 owner: openshift
 developers:
-- dahmed@redhat.com
+- yurimsa@gmail.com
 - nvinto@redhat.com
-- rjarvine@redhat.com
 private: false
 published: true
 challenges:
@@ -854,4 +853,4 @@ challenges:
     path: /root/tutorial/memcached-operator
   difficulty: basic
   timelimit: 225
-checksum: "3355281736901610128"
+checksum: "13087826063848303362"

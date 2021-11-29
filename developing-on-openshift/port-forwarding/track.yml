@@ -28,7 +28,6 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -226,9 +225,6 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
-  - title: Terminal 2
-    type: terminal
-    hostname: container
   difficulty: basic
   timelimit: 500
 - slug: 04-creating-a-remote-connection
@@ -250,7 +246,7 @@ challenges:
     oc port-forward <pod-name> <local-port>:<remote-port>
     ```
 
-    You may need to reference the name of the pod again, using:
+    Execute the following command again as the $POD didn't persist from the previous session:
 
     ```
     POD=`oc get pods --selector name=database -o custom-columns=NAME:.metadata.name --no-headers`; echo $POD
@@ -274,13 +270,13 @@ challenges:
 
     When the ``oc port-forward`` command is run and the connection setup, it will stay running until the command is interrupted. You would then use a separate terminal window to run the administration tool which could connect via the forwarded connection. In this case, as we only have the one terminal window, we ran the ``oc port-forward`` command as a background job.
 
-    Now, by moving to the *Terminal 2* tab, you can see that it is still running using:
+    Now, in the same Terminal you can see that it is still running using:
 
     ```
     jobs
     ```
 
-    With the port forwarding in place, you can now run ``psql`` again. This time it is being run from the local machine, and not inside of the container. Because the forwarded connection is using port 15432 on the local machine, you need to explicitly tell it to use that port rather than the default database port.
+    With the port forwarding in place, you can now run ``psql`` again within the Terminal 1. This time it is being run from the local machine, and not inside of the container. Because the forwarded connection is using port 15432 on the local machine, you need to explicitly tell it to use that port rather than the default database port.
 
     ```
     psql sampledb username --host=127.0.0.1 --port=15432
@@ -325,4 +321,4 @@ challenges:
     hostname: container
   difficulty: basic
   timelimit: 500
-checksum: "11135150620697772913"
+checksum: "14891864393367753551"

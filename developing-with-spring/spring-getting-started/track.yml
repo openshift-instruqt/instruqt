@@ -5,7 +5,6 @@ title: Getting Started with Spring
 description: |
   In this scenario, you will learn more about developer application using Spring Boot using [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes).
 
-
   ## What you will learn
   You will learn how to get started with building a CRUD (Create, Read, Update and Delete) web application.
 
@@ -20,9 +19,7 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
+- doh@redhat.com
 private: false
 published: true
 challenges:
@@ -35,7 +32,6 @@ challenges:
     contents: |
       In this scenario, you will learn more about developer application using Spring Boot using [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes).
 
-
       ## What you will learn
       You will learn how to get started with building a CRUD (Create, Read, Update and Delete) web application.
 
@@ -47,7 +43,7 @@ challenges:
   assignment: |
     # Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-rhoar-intro
@@ -93,7 +89,7 @@ challenges:
     >**NOTE:** Undertow is another an open source project that is maintained by Red Hat and therefore Red Hat plans to add support for Undertow shortly.
 
 
-    To add Apache Tomcat to our project all we have to do is to add the following lines in ``pom.xml``
+    To add Apache Tomcat to our project all we have to do is to add the following lines in `pom.xml` at the `<!-- TODO: Add web (tomcat) dependency here pass:[-->]` marker in Visual Editor:
 
     ```xml
         <dependency>
@@ -102,11 +98,15 @@ challenges:
         </dependency>
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-pom-file.png)
+
     **2. Test the application locally**
 
     As we develop the application, we might want to test and verify our change at different stages. We can do that locally, by using the `spring-boot` maven plugin.
 
-    Run the application by executing the below command:
+    Run the application by executing the below command in Terminal 1:
 
     ```
     mvn spring-boot:run
@@ -116,11 +116,7 @@ challenges:
 
     **3. Verify the application**
 
-    To begin with, click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8080 on your client.
-
-    ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/web-browser-tab.png)
-
-    or use [this](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/) link.
+    To begin with, open the app from the *Fruit App* Tab.
 
     You should now see an HTML page that looks like this:
 
@@ -131,10 +127,6 @@ challenges:
 
     > **NOTE:** None of the button works at this stage since we haven't implemented services for them yet, but we will shortly do that.
 
-    **4. Stop the application**
-
-    Before moving on, click in the terminal window and then press <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the running application!
-
     ## Congratulations
 
     You have now successfully executed the first step in this scenario.
@@ -142,6 +134,8 @@ challenges:
     Now you've seen how to get started with Spring Boot development on Red Hat OpenShift Application Runtimes
 
     In next step of this scenario, we will add the logic to be able to read a list of fruits from the database.
+
+    Make sure to stop the Spring Boot app via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -149,9 +143,14 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
+  - title: Fruit App
+    type: service
+    hostname: crc
+    path: /
+    port: 8080
   difficulty: basic
-  timelimit: 180
+  timelimit: 600
 - slug: 02-read-content-from-a-database
   id: wjgexwsejw3e
   type: challenge
@@ -169,34 +168,38 @@ challenges:
 
     >**NOTE:** Hibernate is another Open Source project that is maintained by Red Hat and it will soon be productized (as in fully supported) in Red Hat Runtimes.
 
-    To add Hibernate to our project all we have to do is to add the following line in ``pom.xml``
+    From *Visual Editor* Tab, add Hibernate to our project by opening the `pom.xml` file and adding after the `<!-- TODO: Add JPA dependency here -->` comment this code:
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: Add JPA dependency here -->">
+    ```xml
         <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-    </pre>
+    ```
 
-    When testing starting locally or when running test we also need to use a local database. H2 is a small in-memory database that is perfect for testing but is not recommended for production environments. To add H2 add the following dependency at the comment `<!-- TODO: ADD H2 database dependency here -->` in the local profile.
+    When testing starting locally or when running test we also need to use a local database. H2 is a small in-memory database that is perfect for testing but is not recommended for production environments. To add H2 add the following dependency at the comment `<!-- TODO: ADD H2 database dependency here -->` in the `pom.xml`:
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: ADD H2 database dependency here -->">
+    ```xml
             <dependency>
               <groupId>com.h2database</groupId>
               <artifactId>h2</artifactId>
               <scope>runtime</scope>
-            </dependency></pre>
+            </dependency>
+    ```
 
+    Save the file.
 
     **2. Create an Entity class**
 
     We are going to implement an Entity class that represents a fruit. This class is used to map our object to a database schema.
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/Fruit.java``
+    First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/Fruit.java`.
 
-    Then, copy the below content into the file (or use the `Copy to editor` button):
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fruit-sb.png)
 
-    <pre class="file" data-filename="src/main/java/com/example/service/Fruit.java" data-target="replace">
+    Open the `Fruit.java` file then copy the below content into the file:
+
+    ```java
     package com.example.service;
 
     import javax.persistence.Entity;
@@ -236,48 +239,53 @@ challenges:
             this.name = name;
         }
     }
-    </pre>
+    ```
 
+    Save the file.
 
-     **3.Create a repository class for our content**
+     **3. Create a repository class for our content**
 
     The repository should provide methods for insert, update, select and delete operations on Fruits from the database. We use Spring Data which provides us with lots of boilerplate code. All we have to do is to add an interface that extends the `CrudRepository<Fruit, Integer>` interface provided by Spring Data.
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitRepository.java``
+    First, we need to create the java class file.  From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/FruitRepository.java`
 
-    Then, copy the below content into the file (or use the `Copy to editor` button):
+    Copy the below content into the file:
 
-    <pre class="file" data-filename="src/main/java/com/example/service/FruitRepository.java" data-target="replace">
+    ```java
     package com.example.service;
 
     import org.springframework.data.repository.CrudRepository;
 
     public interface FruitRepository extends CrudRepository<Fruit, Integer> {
     }
-    </pre>
+    ```
+
+    Save the file.
 
     **4. Populate the database with initial content**
 
     To pre-populate the database with content, Hibernate offers a nifty feature where we can provide a SQL file that populates the content.
 
-    First, we need to create the SQL  file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/resources/import.sql``
+    First, we need to create the SQL  file.  From the *Visual Editor* Tab, create this file: `src/main/resources/import.sql`
 
-    Then, copy the below content into the file (or use the `Copy to editor` button):
+    Copy the below content into the file:
 
-    <pre class="file" data-filename="src/main/resources/import.sql" data-target="replace">
+    ```sql
     insert into fruit (name) values ('Cherry');
     insert into fruit (name) values ('Apple');
     insert into fruit (name) values ('Banana');
-    </pre>
+    ```
+
+    Save the file.
 
     **5. Add a test class**
     Verify that we can use the `FruitRepository` for retrieving and storing Fruit objects by creating a test class.
 
-    First, we need to create the java class file. Click on the following link to open an empty file in the editor: ``src/test/java/com/example/ApplicationTest.java``
+    First, we need to create the java class file. From the *Visual Editor* Tab, create this file: ``src/test/java/com/example/ApplicationTest.java``
 
-    Then, copy the below content into the file (or use the `Copy to editor` button):
+    Copy the below content into the file:
 
-    <pre class="file" data-filename="src/test/java/com/example/ApplicationTest.java" data-target="replace">
+    ```java
     package com.example;
 
     import static org.assertj.core.api.Assertions.assertThat;
@@ -359,17 +367,20 @@ challenges:
               .isNotPresent();
         }
     }
+    ```
 
-    </pre>
+    Save the file.
 
     Take some time to review the tests. The `testGetAll` test returns all fruits in the repository, which should be three because of what the content in `import.sql`. The `getOne` test will retrieve the fruit with id 1 (e.g., the Cherry) and then check that it's not null. The `getWrongId` check that if we try to retrieve a fruit id that doesn't exist and check that fruitRepository return null.
 
     **6. Run and verify**
 
     We can now test that our `FruitRepository` can connect to the data source, retrieve data and
-    Run the application by executing the below command:
+    Run the application by executing the below command in Terminal 1:
 
-    ``mvn verify``
+    ```
+    mvn verify -f /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
+    ```
 
     In the console you should now see the following:
 
@@ -378,7 +389,6 @@ challenges:
 
     Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
     ```
-
 
     ## Congratulations
 
@@ -390,9 +400,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro/
   difficulty: basic
-  timelimit: 180
+  timelimit: 600
 - slug: 03-create-rest-services
   id: e8fklskjqvc1
   type: challenge
@@ -403,11 +413,11 @@ challenges:
 
     **1. Add a service**
 
-    First, we need to create the java class file. For that, you need to click on the following link, which open the empty file in the editor: ``src/main/java/com/example/service/FruitController.java``
+    First, Create a new `src/main/java/com/example/service/FruitController.java` file in Visual Editor.
 
-    Then, copy the below content into the file (or use the `Copy to editor` button):
+    Then, copy the below content into the file:
 
-    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="replace">
+    ```java
     package com.example.service;
 
     import java.util.Objects;
@@ -441,25 +451,25 @@ challenges:
 
     //TODO: Add additional service calls here
     }
-    </pre>
+    ```
+
+    Save the file.
 
     Take a minute and review the `FruitController`. At this stage is pretty simple and only has one method that exposes an endpoint for HTTP GET request for path `/api/fruits`, as specified in the class annotation `@RequestMapping(value = "/api/fruits")`. We should now be able to see a list of fruits on the web page.
 
     **2. Test the service from a web browser locally**
 
-    Run the application by executing the below command:
+    Run the application by executing the below command in Termnial 1:
 
-    ```
-    mvn spring-boot:run -DskipTests
+    ```bash
+    mvn spring-boot:run -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
     ```
 
     >**NOTE:** We skip the tests to speed up the start and since we do not have any tests for the REST service. Please note that the `spring-boot-crud-booster` [here](https://github.com/snowdrop/spring-boot-crud-booster) has test cases for REST, please review them if interested.
 
     In the interest of time, we will skip creating test cases for the service and instead test it directly in our web browser.
 
-    When the console reports that Spring is up and running access the web page by either click the Web Browser Tab or use [this](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com) link.
-
-    ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/web-browser-tab.png)
+    When the console reports that Spring is up and running access the *Fruit App* Tab.
 
     If everything works the web page should look something like this:
 
@@ -471,7 +481,7 @@ challenges:
 
     Add the following methods to the Fruit Controller at the TODO marker.
 
-    <pre class="file" data-filename="src/main/java/com/example/service/FruitController.java" data-target="insert" data-marker="//TODO: Add additional service calls here">
+    ```java
         @ResponseStatus(HttpStatus.CREATED)
         @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
         public Fruit post(@RequestBody(required = false) Fruit fruit) {
@@ -519,24 +529,23 @@ challenges:
                 throw new RuntimeException("Id field must be generated");
             }
         }
-    </pre>
+    ```
 
+    Save the file.
 
     **5. Run and verify**
 
     Build and start the application again
 
-    ```
-    mvn spring-boot:run -DskipTests
+    ```bash
+    mvn spring-boot:run -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
     ```
 
     Now that we have implemented all the services we are now able to see fruits on the page, and also update, create and delete them.
 
-    When the console reports that Spring is up and running access the web page by either click the Web Browser Tab or use [this](https://[[CLIENT_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com) link.
+    When the console reports that Spring is up and running access the app from the *Fruit App* Tab.
 
     Press <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the application.
-
-    ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/web-browser-tab.png)
 
     ## Congratulations
 
@@ -550,9 +559,14 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
+  - title: Fruit App
+    type: service
+    hostname: crc
+    path: /
+    port: 8080
   difficulty: basic
-  timelimit: 180
+  timelimit: 600
 - slug: 04-login-to-openshift
   id: asy4fupx9uzi
   type: challenge
@@ -564,31 +578,27 @@ challenges:
 
     OpenShift also ships with a feature rich web console as well as command line tools to provide users with a friendly interface to work with applications deployed to the platform.
 
-    **1. Login to OpenShift Container Platform**
+    **1. Open the OpenShift Web Console**
 
-    This sandbox has already authenticated you to OpenShift. To validate, we will use the `oc whoami` command:
-
-    ```
-    oc whoami
-    ```
-
-    **2. Create project**
-
-    [Projects](https://docs.openshift.com/container-platform/4.7/rest_api/project_apis/project-project-openshift-io-v1.html) are a top-level concept to help you organize your deployments. An OpenShift project allows a community of users (or a user) to organize and manage their content in isolation from other communities. Each project has its own resources, policies (who can or cannot perform actions), and constraints (quotas and limits on resources, etc.). Projects act as a wrapper around all the application services and endpoints you (or your teams) are using for your work.
-
-    For this scenario, let's create a project that you will use to house your applications.
+    Access the OpenShift Web Console to login from the Web UI:
 
     ```
-    oc new-project dev --display-name="Dev - Spring Boot App"
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
-    **3. Open the OpenShift Web Console**
+    Copy the URL from the output of the above command or click to it to open it in your browser.
 
-    OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser. To get a feel for how the web console
-    works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
+    We'll deploy our app as the `developer` user. Use the following credentials:
 
-    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/openshift-console-tab.png)
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
 
     The first screen you will see is the authentication screen. Enter your username (developer) and password (developer) and
     then login:
@@ -601,9 +611,34 @@ challenges:
 
     Click on your new project name to be taken to the project overview page which will show you various options to add content to your project, create an application, component or service:
 
-    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/overview.png)
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/overview-new.png)
 
     There's nothing there now, but that's about to change.
+
+    **2. Login to OpenShift Container Platform**
+
+    Run the following command to login with the OpenShift CLI:
+
+    ```
+    oc login -u developer -p developer
+    ```
+
+    You should see:
+
+    ```bash
+    Login successful.
+    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
+    ```
+
+    **3. Create project**
+
+    [Projects](https://docs.openshift.com/container-platform/4.7/rest_api/project_apis/project-project-openshift-io-v1.html) are a top-level concept to help you organize your deployments. An OpenShift project allows a community of users (or a user) to organize and manage their content in isolation from other communities. Each project has its own resources, policies (who can or cannot perform actions), and constraints (quotas and limits on resources, etc.). Projects act as a wrapper around all the application services and endpoints you (or your teams) are using for your work.
+
+    For this scenario, let's create a project that you will use to house your applications.
+
+    ```
+    oc new-project dev --display-name="Dev - Spring Boot App"
+    ```
 
     ## Congratulations
 
@@ -617,9 +652,9 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
-  timelimit: 180
+  timelimit: 600
 - slug: 05-deploy-to-openshift
   id: jxugo7guedyk
   type: challenge
@@ -634,21 +669,23 @@ challenges:
 
     **1. Create the database**
 
-    Since this is your own personal project you need to create a database instance that your application can connect to. In a shared environment this would typically be provided for you, that's why we are not deploying this as part of your application. It's however very simple to do that in openshift. All you need to do is to execute the below command in the console.
+    Since this is your own personal project you need to create a database instance that your application can connect to. In a shared environment this would typically be provided for you, that's why we are not deploying this as part of your application. It's however very simple to do that in openshift. All you need to do is to execute the below command in Terminal 1.
 
-    ``oc new-app -e POSTGRESQL_USER=luke \
+    ```
+    oc new-app -e POSTGRESQL_USER=luke \
                  -e POSTGRESQL_PASSWORD=secret \
                  -e POSTGRESQL_DATABASE=my_data \
                  openshift/postgresql:12-el8 \
-                 --name=my-database``
+                 --name=my-database
+    ```
 
     **2. Review Database configuration**
 
-    Take some time and review the ``src/main/jkube/deployment.yml``.
+    Take some time and review from the *Visual Editor* Tab the `src/main/jkube/deployment.yml` file.
 
     As you can see that file specifies a couple of elements that are needed for our deployment. It also uses the username and password from a Kubernetes Secret. For this environment we are providing the secret in this file ``src/main/jkube/credentials-secret.yml``, however in a production environment this would likely be provided to you by the Ops team.
 
-    Now, review the ``src/main/resources/application-openshift.properties``
+    Now, review the `src/main/resources/application-openshift.properties`
 
     In this file, we are using the configuration from the `deployment.yml` to read username, password, and other connection details.
 
@@ -656,32 +693,32 @@ challenges:
 
     So far our application has only used the H2 Database, we now need to add a dependency for PostgreSQL driver. We do that by adding a runtime dependency under the `openshift` profile in ``pom.xml``.
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: ADD PostgreSQL database dependency here -->">
+    ```xml
             <dependency>
               <groupId>org.postgresql</groupId>
               <artifactId>postgresql</artifactId>
               <scope>runtime</scope>
             </dependency>
-    </pre>
-
+    ```
 
     **4. Add a health check**
 
     We also need a health check so that OpenShift can detect when our application is responding correctly. Spring Boot provides a nice feature for this called Actuator, which exposes health data under the path `/health`. All we need to do is to add the following dependency to ``pom.xml`` at the **TODO** comment..
 
-    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- TODO: ADD Actuator dependency here -->">
+    ```xml
         <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-    </pre>
+    ```
+    Save the file.
 
     **5. Deploy the application to OpenShift**
 
     Run the following command to deploy the application to OpenShift:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
     ```
 
     This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
@@ -690,7 +727,13 @@ challenges:
     oc rollout status dc/spring-getting-started
     ```
 
-    Then either go to the OpenShift web console and click on the route or click [here](http://spring-getting-started-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).
+    Then either go to the OpenShift web console and click on get the URL of the app.
+
+    Run this command to get the app's Route:
+
+    ```
+    oc get route spring-getting-started -n dev -o jsonpath='{"http://"}{.spec.host}{"\n"}'
+    ```
 
     Make sure that you can add, edit, and remove fruits, using the web application.
 
@@ -698,20 +741,6 @@ challenges:
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
     Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/spring/spring-rhoar-intro/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
-
-    # Fork the source code to your own GitHub!
-    Want to experiment more with the solution code you just worked with? If so, you can fork the repository containing the solution to your own GitHub repository by clicking on the following command to execute it:
-
-    `/root/projects/forkrepo.sh`
-    - Make sure to follow the prompts. An error saying `Failed opening a web browser at https://github.com/login/device exit status 127` is expected.
-    - [Click here](https://github.com/login/device) to open a new browser tab to GitHub and paste in the code you were presented with and you copied.
-    - Once done with the GitHub authorization in the browser, close the browser tab and return to the console and press `Enter` to complete the authentication process.
-    - If asked to clone the fork, press `n` and then `Enter`.
-    - If asked to confirm logout, press `y` and the `Enter`.
-
-       > **NOTE:** This process uses the [GitHub CLI](https://cli.github.com) to authenticate with GitHub. The learn.openshift.com site is not requesting nor will have access to your GitHub credentials.
-
-    After completing these steps the `rhoar-getting-started` repo will be forked in your own GitHub account. On the `solution` branch in the repo, the `spring-rhoar-intro` project inside the `spring` folder contains the completed solution for this scenario.
 
     ## Congratulations
 
@@ -725,7 +754,7 @@ challenges:
   - title: Visual Editor
     type: code
     hostname: crc
-    path: /root
+    path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
-  timelimit: 180
-checksum: "2145752963737628436"
+  timelimit: 600
+checksum: "6759674848547084884"
