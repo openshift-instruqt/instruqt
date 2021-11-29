@@ -31,7 +31,7 @@ challenges:
   assignment: |
     # Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-monitoring
@@ -47,7 +47,7 @@ challenges:
 
     As we develop the application we want to be able to test and verify our change at different stages. One way we can do that locally is by using the `spring-boot` maven plugin.
 
-    Run the application by executing the following command:
+    Run the application by executing the following command in Terminal 1:
 
     ```
     mvn spring-boot:run
@@ -91,7 +91,7 @@ challenges:
     # Deploy to OpenShift Application Platform
     **1. Deploying the application to OpenShift**
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command to login with the OpenShift CLI in Terminal 1:
 
     ```
     oc login -u admin -p admin
@@ -110,10 +110,10 @@ challenges:
     oc new-project dev --display-name="Dev - Spring Boot App"
     ```
 
-    Run the following command to deploy the application to OpenShift:
+    Run the following command to deploy the application to OpenShift in Terminal 1:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
@@ -146,9 +146,10 @@ challenges:
     admin
     ```
 
+    Switch to `Developer Perspective` then click on `Topology` view in `Dev` project.  
     ![Routes](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/routes.png)
-
-    Either click on the route link through the _Location_ column from the above screen and navigate to the `/fruits` endpoint.
+    
+    Access the application endpoint by adding `/fruits` to the route URL that you click on `Open UR` link.
 
     We should now see the same `Success` page that we saw when we first tested our app locally:
 
@@ -186,16 +187,15 @@ challenges:
 
     Since a lack of health checks can cause container issues if they crash, OpenShift will alert you with a warning message if your project is lacking one.
 
-    Switch to the 'developer' perspective and from the _Topology_ tab of your project _dev_, select your deployment. You should see something like this:
+    In _Topology_ view, select your deployment. You should see something like this:
 
     ![Missing Health Checks](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/healthChecks.png)
-
 
     Since we have a Spring Boot application we have an easy option for implementation of health checks. We're able to pull in the `Spring Actuator` library.
 
     **2. Add Health Checks with Actuator**
 
-    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment..
+    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment.
 
     ```xml
         <dependency>
@@ -204,12 +204,16 @@ challenges:
         </dependency>
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/save-pom-file.png)
+
     Notice how the previous warning message from before regarding missing health checks is no longer present. This is because of the dependency that we just added to ourt `pom.xml`. Adding this dependency triggers jkube to create Readiness/Liveness probes for OpenShift. These probes will periodically query the new health endpoints to make sure the app is still up.
 
     Run the following command again to re-deploy the application to OpenShift:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     Now that we've added Spring Actuator, we're able to hit their provided `/actuator/health` endpoint. We can navigate to it by either adding `/actuator/health` to our landing page, or by clicking on the Route below.
@@ -225,7 +229,7 @@ challenges:
     We should now see the following response, confirming that our application is up and running properly:
 
     ```json
-    {"status":"UP"}
+    {"status":"UP","groups":["liveness","readiness"]}
     ```
 
     OpenShift will now continuously poll this endpoint to determine if any action is required to maintain the health of our container.
@@ -240,10 +244,12 @@ challenges:
     management.endpoints.web.exposure.include=*
     ```
 
+    Save the file.
+
     If we redeploy the application again with:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     Now we can hit the `/actuator/metrics` endpoint from the Web Console or from here:
@@ -260,7 +266,6 @@ challenges:
     ```
 
     We can then navigate to `/actuator/metrics/[metric-name]`. For example for JVM Memory Usage:
-
 
     ```
     oc get route spring-monitoring -n dev -o jsonpath='{"http://"}{.spec.host}{"/actuator/metrics/jvm.memory.max"}{"\n"}'
