@@ -14,7 +14,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -291,4 +290,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
   timelimit: 1000
-checksum: "12347280335339767526"
+checksum: "860636837114331703"
