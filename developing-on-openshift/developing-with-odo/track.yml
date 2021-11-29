@@ -18,7 +18,6 @@ description: |
   ## Use case
 
   Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
-  
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -54,8 +53,7 @@ challenges:
       ## Use case
 
       Odo is a developer-centric tool for building and running software on OpenShift. Odo streamlines common build and deployment tasks to let you focus on your application’s source code. You can use odo to reduce the cognitive load and rote steps that are typically involved when working on complex applications built using a mixed stack of component solutions.
-  
-      assignment: |
+  assignment: |
     The application you will be deploying is a wild west shooter style game.
 
     Applications are often divided into components based on a logical division of labor. For example, an application might consist of a data-storage, backend component that performs the application's primary work and stores the results. The backend component is paired with a user interface, frontend component that accesses the backend to retrieve data and displays it to a user.
@@ -128,7 +126,7 @@ challenges:
     You might have to wait a minute for the pod to be ready.
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
     ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    oc get routes console -n openshift-console
     ```
     Copy the link under `HOST/PORT` column and navigate there from a web browser.
     You will then be able to login with admin permissions with:
@@ -187,7 +185,7 @@ challenges:
     Source code for the backend of our `wildwest` application is available in the command line environment. Change directories into the source directory, `backend`:
 
     ```
-    cd /root/backend
+    cd ~/backend
     ```
 
     Take a look at the contents of the `backend` directory. It's a regular Java Spring Boot application using the Maven build system:
@@ -288,9 +286,7 @@ challenges:
 
     Change directories to the `frontend` directory:
 
-    ```
-    cd /root/frontend
-    ```
+    `cd ~/frontend`
 
     Listing the contents of this directory shows that `frontend` is a Node.js application.
 
@@ -465,7 +461,7 @@ challenges:
     First, make sure you are still in the `frontend` directory:
 
     ```
-    cd /root/frontend
+    cd ~/frontend
     ```
 
     Now, we will tell `odo` to `watch` for changes on the file system in the background. Note that the `&` is included to run `odo watch` in the background for this tutorial, but it is usually just run as `odo watch` and can be terminated using `ctrl+c`.
