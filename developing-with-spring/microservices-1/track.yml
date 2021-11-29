@@ -24,7 +24,7 @@ challenges:
       In this scenario you will learn more about developing Spring Boot Microservices using the [Red Hat Runtimes](https://www.redhat.com/en/products/runtimes) platform. You will learn about Externalized Configurations and how we can use Externalized Configurations to change specific values/variables without having to take down the entire application.
   assignment: |-
     # Import the code
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/microservices-externalized-config
@@ -39,7 +39,7 @@ challenges:
     String message = String.format(properties.getMessage(), name);
     ```
 
-    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file `src/main/java/com/example/service/MessageProperties.java` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our `src/main/resources/application-local.properties`` file.
+    If we take a closer look at this `properties` object, we see that it's of type `MessageProperties`. When we look at that file `src/main/java/com/example/service/MessageProperties.java` we see an annotation linking to a configuration prefix, `@ConfigurationProperties("greeting")`, which is pointing to our `src/main/resources/application-local.properties` file.
 
     Our `application-local.properties` file contains only one property, `greeting.message`. This is the message that we return and display to the user. In order to get an understanding of the flow, let's run the application locally. On the terminal build the project:
 
@@ -49,7 +49,7 @@ challenges:
 
     When the application finishes building, open the *Fruit App* Tab. You should see the same message that is in the `application-local.properties` file.
 
-    Be sure to stop the application with `ctrl-c`.
+    Be sure to stop the application with `CTRL-C`.
 
     ## Congratulations
 
@@ -78,7 +78,7 @@ challenges:
 
     **1. Create a project**
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command to login with the OpenShift CLI in Terminal 1:
 
     ```
     oc login -u admin -p admin
@@ -210,6 +210,10 @@ challenges:
          </dependency>
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-microservices/save-pom-file.png)
+
     **2. Modify the ConfigMap**
 
     Let's modify the greeting that our service is returning to the user. Since we set up the greeting in a properties file, we will not need to make any code change to change the functionality. This means that we won't need to have any downtime for this change, we're able to modify the response through our newly created `ConfigMap` from the previous step. We can edit our config map in the OpenShift Console. Navigate to ConfigMaps section in the `dev` project and open our `ConfigMap` in a YAML editor.
@@ -223,7 +227,7 @@ challenges:
     **3. Test changes**
 
     Now that we've modified the `ConfigMap` and deployed our changes, let's test the greeting service and see if it's returning our new value.
-    Click the app from the Web Console and put in a test value and click the button. Now instead of seeing `Greetings ...`, we should be seeing:
+    Go back to the app in your browser and put in a test value and click the button. Now instead of seeing `Greetings ...`, we should be seeing:
 
     `Bonjour, you picked %s as your favorite fruit!`
 
@@ -243,4 +247,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 1000
-checksum: "5634077380759835147"
+checksum: "17193478017985795802"
