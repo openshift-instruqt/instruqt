@@ -127,6 +127,38 @@ challenges:
     > **Note:** *These steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
     ## Log in and install the operator
+    
+    ### Logging in to the Cluster via Dashboard
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    ### Logging in to the Cluster via the terminal
+
+    To log in to the cluster as an administrator from the terminal:
+
+    ```
+    oc login -u admin -p admin
+    ```
+    
     This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
 
     ![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
@@ -179,17 +211,19 @@ challenges:
 
     To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
-    Next create a new project by executing: `oc new-project serverless-tutorial`
+    The project is already created for you but if you were running this tutorial on a different OpenShift cluster, here is the command on how to create a project from the terminal:
+      
+    ```
+    oc new-project serverless-tutorial
+    ```
 
     There we go! You are all set to kickstart your serverless journey with **OpenShift Serverless**.
-
-    Please check for the terminal output of `Serverless Tutorial Ready!` before continuing.  Once ready, click `continue` to go to the next module on how to deploy your first severless service.
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 02-serving
   id: o9rtgclttqbn
   type: challenge
@@ -237,9 +271,7 @@ challenges:
 
     Before deploying your first Serverless Service, let us take a moment to understand it's structure:
 
-    ```
-    # ./assets/02-serving/service.yaml
-
+    ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -256,7 +288,6 @@ challenges:
             readinessProbe:
               httpGet:
                 path: /healthz
-
     ```
 
     We now are deploying an instance of a `Service` that is provided by `serving.knative.dev`.  In our simple example we define a container `image` and the paths for `health checking` of the service.  We also provided the `name` and `namespace`.
@@ -271,16 +302,9 @@ challenges:
        --namespace serverless-tutorial
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing:
-    ```
-    cat 02-serving/service.yaml
-    ```
-
     Watch the status using the commands:
-    ```
-    # ./assets/02-serving/watch-service.bash
 
-    #!/usr/bin/env bash
+    ```bash
     while : ;
     do
       output=`oc get pod -n serverless-tutorial`
@@ -304,6 +328,7 @@ challenges:
 
     ### Service
     We can see the Serverless Service that we just created by executing:
+
     ```
     kn service list
     ```
@@ -319,9 +344,14 @@ challenges:
 
     The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
-    It also is possible to `describe` a specific service to gather detailed information about that service by executing: `kn service describe greeter
+    It also is possible to `describe` a specific service to gather detailed information about that service by executing: 
+      
+    ```
+    kn service describe greeter
+    ```
 
     The output should be similar to:
+
     ```
     Name:       greeter
     Namespace:  serverless-tutorial
@@ -355,10 +385,10 @@ challenges:
     kn route list
     ```
 
-    See the `NAME` of the route, the `URL`, as well as if it is `READY`:
+    See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
     ```bash
-    NAME      URL  READY
-    greeter   url  True
+    NAME      URL                                                                                  READY
+    greeter   https://greeter-serverless-tutorial.crc-dzk9v-master-0.crc.2rtmqs1ojyed.instruqt.io  True
     ```
 
     ### Revision
@@ -421,7 +451,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 03-traffic-distribution
   id: ikztbcqm3jtc
   type: challenge
@@ -550,7 +580,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 04-canary-releases
   id: qfk4aqzgcss1
   type: challenge
@@ -642,7 +672,7 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 05-scaling
   id: n4xtymidghv3
   type: challenge
@@ -837,7 +867,9 @@ challenges:
 
     ## Delete the Service
 
-    Cleanup the project using: ```
+    Cleanup the project using: 
+      
+    ```
     kn service delete prime-generator
     ```
 
@@ -847,5 +879,5 @@ challenges:
     type: terminal
     hostname: crc
   difficulty: intermediate
-  timelimit: 360
-checksum: "10080424791375440742"
+  timelimit: 500
+checksum: "12353213620169049547"

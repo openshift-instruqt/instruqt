@@ -198,3 +198,9 @@ bash /root/01-prepare/install-serverless.bash
 #     done
 #     echo "AVAILABLE"
 # done
+
+# Installing kn CLI
+
+curl -kL https://mirror.openshift.com/pub/openshift-v4/clients/serverless/latest/kn-linux-amd64.tar.gz -o /usr/local/bin/kn.tar.gz
+tar -xvf /usr/local/bin/kn.tar.gz -C /usr/local/bin
+chmod +x /usr/local/bin/kn
