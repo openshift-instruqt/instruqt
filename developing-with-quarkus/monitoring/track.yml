@@ -19,6 +19,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -398,7 +399,7 @@ challenges:
         }
     }
     ```
-    
+
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
     ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/save-prime-file.png)
@@ -742,7 +743,7 @@ challenges:
 
     Copy the URL and open it in your browser to access the Prometheus UI.
 
-    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/prom.png)
+    ![Prometheus UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/prom.png)
 
     With our app deployed to OpenShift, let's setup a loop that will test random numbers for primeness. Run the following command in Terminal 1 to endlessly run `curl` every 2 seconds with a random prime number:
 
@@ -765,17 +766,17 @@ challenges:
     > If you do not see any `prime` metrics when querying, wait 15 seconds, reload the Prometheus page, and try again. They
     > will eventually show up\!
 
-    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promnames.png)
+    ![Prometheus UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/promnames.png)
 
     Type `prime` in the query, and select `prime_number_max` in the box, and run **Execute**. This will
     fetch the values from our metric showing the largest prime number found so far:
 
-    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promchecks.png)
+    ![Prometheus UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/promchecks.png)
 
     Cool\! You can try this with some of the standard HTTP metrics as well, e.g. try to graph the `http_server_requests_seconds_count` to
     see how often our various HTTP endpoints are accessed. You can see the endpoints shown with different colors, one for each endpoint (`/is-prime/{number}`, `/q/metrics`, and the 404 not-found endpoint).
 
-    ![Prometheus UI](https://katacoda.com/openshift/assets/middleware/quarkus/promgraph.png)
+    ![Prometheus UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/promgraph.png)
 
     Keep the `curl` loop running and we'll move on to build a full dashboard for our app in the next step.
   tabs:
@@ -841,7 +842,7 @@ challenges:
       - Username: `admin`
       - Password: `admin`
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/graflogin.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/graflogin.png)
 
     At the password change prompt, use any password you wish.
 
@@ -864,7 +865,7 @@ challenges:
 
     Run **Save and Test**. You should see:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafworking.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafworking.png)
 
     With our data source working, let’s make a dashboard.
 
@@ -890,7 +891,7 @@ challenges:
 
     In the Grafana Dashboard, hover over the `+` button on the left, and select *Create \> Dashboard*:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafcreate.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafcreate.png)
 
     Next, run **Add an Empty Panel**.
 
@@ -899,11 +900,11 @@ challenges:
 
     In the _Metrics_ box, type `prime` to again get an autocompleted list of available metrics that match that name:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafquery.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafquery.png)
 
     Choose from the drop-down `prime_number_test_seconds_max`. Then run on the **Refresh** button to begin to show in the graph above:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafgraf.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafgraf.png)
 
     This is querying the custom `prime.number.test` metric from our earlier Java code we created. With the `seconds_max` suffix it will show the max # of seconds taken to calculate a prime from our `curl` loop still running.
 
@@ -928,7 +929,7 @@ challenges:
 
     See if you can add additional Panels. Use the **Add Panel** button to add a new Panel:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafmorepanels.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafmorepanels.png)
 
     Follow the same steps as before to create a few more panels, and **don’t forget to Save each panel when you’ve created
     it.**
@@ -940,24 +941,24 @@ challenges:
 
     To see the quantile metrics, create another panel for the `prime_number_test_seconds_bucket` metric. When you select that metric in Grafana, it will notice you'll want a histogram panel, so run the helpful tip to show the 95% quantile:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafhist.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafhist.png)
 
     The graph will update to show the 95% quantile of the time it takes to evaluate whether a number is prime or not:
 
-    ![Grafana UI](https://katacoda.com/openshift/assets/middleware/quarkus/grafhistdata.png)
+    ![Grafana UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/grafhistdata.png)
 
     # Fix layout
 
     After saving, go back to the main dashboard (run on **Quar** at the top and then select it under *Recent
     Dashboards*). Change the time value to *Last 15 Minutes* at the top-right:
 
-    ![time](https://katacoda.com/openshift/assets/middleware/quarkus/graftime.png)
+    ![time](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/graftime.png)
 
     Finally, drag and resize the different panels to look nice and fit on a single page.
 
     Run **Save Dashboad** again to save it. Your final Dashboard should look like:
 
-    ![final](https://katacoda.com/openshift/assets/middleware/quarkus/graffinal.png)
+    ![final](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/graffinal.png)
 
     You can add many more metrics to monitor and alert for Quarkus apps using these tools.
 
@@ -984,4 +985,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 428
-checksum: "2569956275454341504"
+checksum: "360907663684176921"

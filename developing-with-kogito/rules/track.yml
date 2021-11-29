@@ -5,7 +5,7 @@ title: Kogito and Rules with RuleUnits
 description: |
   In this scenario, you will learn how to implement (business) rules in [Kogito](https://kogito.kie.org) using _rule units_.
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
   ### Rule Units
 
@@ -36,7 +36,7 @@ challenges:
     contents: |
       In this scenario, you will learn how to implement (business) rules in [Kogito](https://kogito.kie.org) using _rule units_.
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
       ### Rule Units
 
@@ -98,7 +98,7 @@ challenges:
 
     You should see the following page:
 
-    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-empty-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/new-kogito-quarkus-empty-swagger-ui.png)
 
     It's working!
 
@@ -444,7 +444,7 @@ challenges:
 
     Open the **POST /adult** RESTful endpoint. Note that a fully typed API is generated for you, based on your business assets like your rule units and rules.
 
-    ![API](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-adult-post-api.png)
+    ![API](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-adult-post-api.png)
 
     ## Congratulations!
 
@@ -459,4 +459,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 240
-checksum: "17602673423729102891"
+checksum: "8163137802019338270"

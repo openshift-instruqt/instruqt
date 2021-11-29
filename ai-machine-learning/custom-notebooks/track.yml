@@ -137,7 +137,7 @@ challenges:
 
     Click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyter-notebooks-42/03-web-console-login.png)
 
     For the credentials, enter:
 
@@ -146,12 +146,12 @@ challenges:
 
     Once you have logged in, you should be shown the list of projects you have access to. A project called ``myproject`` has already been created for you to use in this workshop.
 
-    ![List of Projects](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-list-of-projects.png)
+    ![List of Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyter-notebooks-42/03-list-of-projects.png)
 
     Click on ``myproject`` and you should then be at the _Overview_ page for
     the project. Select the _Developer_ perspective for the project instead of the _Adminstrator_ perspective in the left hand side menu. If necessary click on the hamburger menu icon top left of the web console to expose the left hand side menu.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/03-add-to-project.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyter-notebooks-42/03-add-to-project.png)
 
     As the project is currently empty, no workloads should be found and you will be presented with various options for how you can deploy an application.
 
@@ -179,13 +179,13 @@ challenges:
 
     Ensure that _All Items_ is selected on the left hand side, and in the _Filter by keyword_ text entry field enter ``jupyter``. This will limit the displayed items to just the OpenShift templates you loaded.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/jupyter-notebooks-42/04-jupyter-notebook-templates.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyter-notebooks-42/04-jupyter-notebook-templates.png)
 
     Click on the tile for _Jupyter Notebook Builder_.
 
     This will bring up the description of the template. Click on _Instantiate Template_, which will bring up a form with the parameters for the template which you can customize.
 
-    ![Instatiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/04-instantiate-template.png)
+    ![Instatiate Template](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/04-instantiate-template.png)
 
     The purpose of the template parameters are:
 
@@ -247,13 +247,13 @@ challenges:
 
     Ensure that _All Items_ is selected on the left hand side, and in the _Filter by keyword_ text entry field enter ``jupyter``.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/05-jupyter-notebook-templates.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/05-jupyter-notebook-templates.png)
 
     This time click on the tile for _Jupyter Notebook_.
 
     This will bring up the description of the template. Click on _Instantiate Template_, which will bring up a form with the parameters for the template which you can customize.
 
-    ![Instatiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/05-instantiate-template.png)
+    ![Instatiate Template](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/05-instantiate-template.png)
 
     The purpose of the template parameters are:
 
@@ -271,7 +271,7 @@ challenges:
 
     To monitor the deployment, click on the _Topology_ view in the left hand side menu.
 
-    ![Topology View](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/05-topology-view.png)
+    ![Topology View](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/05-topology-view.png)
 
     The ring shown in the visualization of the deployment will change from white, indicating the deployment is pending, to light blue, indicating the application is starting, and finally blue, indicating the application is running.
 
@@ -279,11 +279,11 @@ challenges:
 
     Because a secure HTTP connection is used, but an environment may in some cases use a self signed SSL certificate, you will need to accept the certificate to proceed.
 
-    ![Login Prompt](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/05-notebook-login-prompt.png)
+    ![Login Prompt](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/05-notebook-login-prompt.png)
 
     At the login prompt, enter the password ``secret`` which you entered into the ``NOTEBOOK_PASSWORD`` field. You will then be granted access to the Jupyter notebook file browser.
 
-    ![Classic Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/05-classic-notebook-interface.png)
+    ![Classic Notebook](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/05-classic-notebook-interface.png)
 
     From the file browser you will see the the Jupyter notebook file and the ``requirements.txt`` file from the Git repository. The Python packages listed in the ``requirements.txt`` file have also been installed. If you were to open the notebook file you will be able to interact with and execute the cells.
 
@@ -363,7 +363,7 @@ challenges:
 
     This will bring up the description of the template. Click on _Instantiate Template_, which will bring up a form with the parameters for the template which you can customize.
 
-    ![Instatiate Template](https://katacoda.com/openshift/assets/jupyternotebooks/custom-notebooks-42/07-instantiate-template.png)
+    ![Instatiate Template](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/custom-notebooks-42/07-instantiate-template.png)
 
     The purpose of the template parameters are:
 
@@ -410,4 +410,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "14199021484936581544"
+checksum: "7001245640430104931"

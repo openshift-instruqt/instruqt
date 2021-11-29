@@ -28,11 +28,11 @@ description: |
 
   In this chapter we introduce you to one such platform -- [OpenShift Serverless][serverless-main].  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere.  This is known as `Serving`.
 
-  ![OpenShift Serving](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
+  ![OpenShift Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
 
   Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]).  This is known as `Eventing`.
 
-  ![OpenShift Eventing](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
+  ![OpenShift Eventing](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
 
   OpenShift Serverless applications can be integrated with other OpenShift services, such as OpenShift [Pipelines][pipelines-main], and [Service Mesh][service-mesh-main], delivering a complete serverless application development and deployment experience.
 
@@ -92,11 +92,11 @@ challenges:
 
       In this chapter we introduce you to one such platform -- [OpenShift Serverless][serverless-main].  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere.  This is known as `Serving`.
 
-      ![OpenShift Serving](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
+      ![OpenShift Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
 
       Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]).  This is known as `Eventing`.
 
-      ![OpenShift Eventing](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
+      ![OpenShift Eventing](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
 
       OpenShift Serverless applications can be integrated with other OpenShift services, such as OpenShift [Pipelines][pipelines-main], and [Service Mesh][service-mesh-main], delivering a complete serverless application development and deployment experience.
 
@@ -129,11 +129,11 @@ challenges:
     ## Log in and install the operator
     This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
 
-    ![01-login](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
+    ![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
 
     Cluster administrators can install the `OpenShift Serverless` operator via *Operator Hub*
 
-    ![02-operatorhub](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/02-operatorhub.png)
+    ![02-operatorhub](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/02-operatorhub.png)
 
     > **Note:** *We can inspect the details of the `serverless-operator` packagemanifest within the CLI via `oc describe packagemanifest serverless-operator -n openshift-marketplace`.*
     >
@@ -141,11 +141,11 @@ challenges:
 
     Next, our scripts will install the Serverless Operator into the `openshift-operators` project using the `stable` update channel.
 
-    ![03-serverlessoperator](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/03-serverlessoperator.png)
+    ![03-serverlessoperator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/03-serverlessoperator.png)
 
     Open the **Installed Operators** tab and watch the **OpenShift Serverless Operator**.  The operator is installed and ready when the `Status=Succeeded`.
 
-    ![05-succeeded](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/05-succeeded.png)
+    ![05-succeeded](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/05-succeeded.png)
 
     > **Note:** *We can inspect the additional api resouces that the serverless operator added to the cluster via the CLI command `oc api-resources | egrep 'Knative|KIND'`*.
 
@@ -158,17 +158,17 @@ challenges:
 
     First we create the `knative-serving` project.
 
-    ![06-kservingproject](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/06-kservingproject.png)
+    ![06-kservingproject](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/06-kservingproject.png)
 
     Within the `knative-serving` project open the **Installed Operators** tab and the **OpenShift Serverless Operator**.  Then create an instance of **Knative Serving**.
 
-    ![07-kservinginstance](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/07-kservinginstance.png)
+    ![07-kservinginstance](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/07-kservinginstance.png)
 
-    ![08-kservinginstance](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/08-kservinginstance.png)
+    ![08-kservinginstance](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/08-kservinginstance.png)
 
     Open the Knative Serving instance.  It is deployed when the **Condition** `Ready=True`.
 
-    ![09-kservingready](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/01-prepare/09-kservingready.png)
+    ![09-kservingready](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/09-kservingready.png)
 
     OpenShift Serverless should now be installed!
 
@@ -208,7 +208,7 @@ challenges:
     ## Explore Serving
     Let's take a moment to explore the new API resources available in the cluster since installing `Serving`.
 
-    Like before, we can see what `api-resources` are available now by running: 
+    Like before, we can see what `api-resources` are available now by running:
     ```
     oc api-resources --api-group serving.knative.dev
     ```
@@ -228,7 +228,7 @@ challenges:
 
     The diagram below shows how each of the components of the Serving module fit together.
 
-    ![Serving](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/02-serving/serving.png)
+    ![Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/02-serving/serving.png)
 
     We will discuss what each one of these new resources are used for in the coming sections.  Let's start with `services`.
 
@@ -271,7 +271,7 @@ challenges:
        --namespace serverless-tutorial
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
     ```
     cat 02-serving/service.yaml
     ```
@@ -303,7 +303,7 @@ challenges:
     As discussed in the [OpenShift Serverless Documentation][ocp-serving-components], Serverless Service deployments will create a few required serverless resources.  We will dive into each of them below.
 
     ### Service
-    We can see the Serverless Service that we just created by executing: 
+    We can see the Serverless Service that we just created by executing:
     ```
     kn service list
     ```
@@ -350,7 +350,7 @@ challenges:
     ### Route
     As the [OpenShift Serverless Documentation][ocp-serving-components] explains, a `Route` resource maps a network endpoint to one or more Knative revisions. It is possible to manage the traffic in several ways, including fractional traffic and named routes.  Currently, since our service is new, we have only one revision to direct our users to -- in later sections we will show how to manage multiple revisions at once using a `Canary Deployment Pattern`.
 
-    We can see the route by executing: 
+    We can see the route by executing:
     ```
     kn route list
     ```
@@ -373,7 +373,7 @@ challenges:
 
     > **Note:** *Updating the image of the service will create a new revision, or point-in-time snapshot of the workload.*
 
-    We can see the revision by executing: 
+    We can see the revision by executing:
     ```
     kn revision list
     ```
@@ -400,7 +400,7 @@ challenges:
     > **NOTE:** *You can also open this in your own local browser to test the service!*
 
     ### Scale to Zero
-    The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing 
+    The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing
     ```
     oc get pods -n serverless-tutorial -w
     ```
@@ -410,7 +410,7 @@ challenges:
     > **Question:** *Do you see now why the pod might not have been running earlier? The service scaled to zero before you checked!*
 
     ## Delete the Service
-    We can easily delete our service by executing: 
+    We can easily delete our service by executing:
     ```
     kn service delete greeter
     ```
@@ -446,7 +446,7 @@ challenges:
        --revision-name greeter-v1
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml
     ```
@@ -460,7 +460,7 @@ challenges:
        --env MESSAGE_PREFIX=GreeterV2
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml
     ```
@@ -502,7 +502,7 @@ challenges:
     >
     > *Using the latest tag allows changing the default behavior of services to route 100% of the traffic to the latest revision.*
 
-    We can validate the service traffic tags by executing: 
+    We can validate the service traffic tags by executing:
     ```
     kn route describe greeter
     ```
@@ -531,7 +531,7 @@ challenges:
       ++ IngressReady          23s
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml
     ```
@@ -662,7 +662,7 @@ challenges:
     ## In depth: Scaling to Zero
     As you might recall from the `Deploying your Service` section of the tutorial, Scale-to-zero is one of the main properties of Serverless. After a defined time of idleness *(called the `stable-window`)* a revision is considered inactive, which causes a few things to happen.  First off, all routes pointing to the now inactive revision will be pointed to the so-called **activator**.
 
-    ![serving-flow](https://katacoda.com/openshift/assets/developing-on-openshift/serverless/05-scaling/serving-flow.png)
+    ![serving-flow](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/05-scaling/serving-flow.png)
 
     The name `activator` is somewhat misleading these days.  Originally it used to activate inactive revisions, hence the name.  Today its primary responsibilites are to receive and buffer requests for revisions that are inactive as well as report metrics to the autoscaler.
 
@@ -848,4 +848,4 @@ challenges:
     hostname: crc
   difficulty: intermediate
   timelimit: 360
-checksum: "11806929545799131373"
+checksum: "10080424791375440742"

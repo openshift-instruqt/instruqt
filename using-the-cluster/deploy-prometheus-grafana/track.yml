@@ -63,7 +63,7 @@ challenges:
 
     The url for the food store is: http://metrics-demo-app-metrics-demo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
 
-    ![Demo Application Home Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/01-demo-app-home-page.png)
+    ![Demo Application Home Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/01-demo-app-home-page.png)
 
     * Once you are able to access the food store application, play around with it,
     try to buy the products you like [Everything here is free ;) ].
@@ -75,7 +75,7 @@ challenges:
 
     * This is the endpoint where Prometheus will scrape (collect) metrics from periodically and store them on a persistent storage device like a hard drive (Using [OpenShift PersistentVolumes](https://docs.openshift.com/container-platform/4.2/storage/understanding-persistent-storage.html#persistent-storage-overview_understanding-persistent-storage)).
 
-    ![Demo Application Metrics Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/01-demo-app-metrics-page.png)
+    ![Demo Application Metrics Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/01-demo-app-metrics-page.png)
 
     * If you don't see similar metrics (pictured above) in your environment, try to make an order with the ecommerce application to generate a few metrics.
   tabs:
@@ -191,7 +191,7 @@ challenges:
       The targets page should show you a list of targets that Prometheus has been configured to collect metrics from.
 
     It should look something like:
-    ![Prometheus Targets Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/02-prometheus-targets-page.png)
+    ![Prometheus Targets Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/02-prometheus-targets-page.png)
 
     * If you cannot find the demo application, in the targets list, <br>
     Try to fix your Prometheus configuration in the ConfigMap file `prometheus-configmap.yaml` and repeat the previous step.
@@ -252,30 +252,30 @@ challenges:
 
     * You might see a warning like in the image below, this is because we don't generate valid ssl certificates for all our routes. You can click on `Advanced...` and then click on `Accept the Risk and Continue` to continue to the Grafana login page.
 
-      ![Cert Warning Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-cert-warning-page.png)
+      ![Cert Warning Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-cert-warning-page.png)
 
     The default credentials for Grafana are:
       * username: `admin`
       * password: `admin`
 
-      ![Grafana Login Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-grafana-login-page.png)
+      ![Grafana Login Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-grafana-login-page.png)
 
     * Next it will prompt you to change the default credentials, <br>
     you can safely skip this for the purposes of this exercise.  <br>
-    ![Grafana Login Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-grafana-password-change-page.png)
+    ![Grafana Login Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-grafana-password-change-page.png)
 
     * Next you should see the Grafana Welcome page. <br>
-    ![Grafana Login Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-grafana-welcome-page.png)
+    ![Grafana Login Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-grafana-welcome-page.png)
 
     ### Configuring Grafana to visualize metrics from Prometheus
 
     * On the Grafana Welcome page, click on `Add data source` button to add Prometheus as a data source.
 
     * You should see a list of Grafana compatible data source types. You can type in `Prometheus` to filter the results. <br>
-    ![Grafana Login Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-grafana-add-ds-page.png)
+    ![Grafana Login Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-grafana-add-ds-page.png)
 
     * When you click on the Prometheus Data Source, you should see the Data Source settings. <br>
-    ![Grafana Login Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/03-grafana-add-prom-ds-page.png)
+    ![Grafana Login Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/03-grafana-add-prom-ds-page.png)
 
       * Fill the URL in the HTTP section with the Prometheus URL: <br>
     `http://prometheus-demo-route-pad-monitoring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com`
@@ -311,7 +311,7 @@ challenges:
     * Let's start with creating a dashboard for our visualizations.
 
     * In the left panel, click on `Create` and then select `Dashboard` <br>
-    ![Grafana Create Dashboard Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/04-grafana-create-dashboard-page.png)
+    ![Grafana Create Dashboard Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/04-grafana-create-dashboard-page.png)
 
 
     ### Creating a Panel
@@ -323,7 +323,7 @@ challenges:
 
     * Below the graphing area, you should have an empty text box for your PromQL queries. <br>
     Enter your query `flask_http_request_total`
-    ![Grafana Create Panel Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/04-grafana-create-panel-page.png)
+    ![Grafana Create Panel Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/04-grafana-create-panel-page.png)
 
     * In the upper right corner, you can change the graphing duration. <br>
     Change the duration to `Last 5 minutes`. <br>
@@ -334,14 +334,14 @@ challenges:
     * Once you can see some lines in your graphing area, click on the left arrow (`<-`) in the upper left corner.
 
     * Now you should have a dashboard with a single panel, let's add another panel with a different metric.
-    ![Grafana Create Panel Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/04-grafana-1-panel-dashboard-page.png)
+    ![Grafana Create Panel Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/04-grafana-1-panel-dashboard-page.png)
 
     * In the upper right corner of the dashboard page, click on `Add Panel` and repeat the previous steps only this time
     use a different query. <br>
     `rate(flask_http_request_total[2m])` this should give you the rate of requests served by the application over 2 minutes.
 
     * Once you have set up the second panel, your dashboard should look something like this <br>
-    ![Grafana Create Panel Page](https://katacoda.com/openshift/assets/introduction/deploy-prometheus-grafana/04-grafana-2-panel-dashboard-page.png)
+    ![Grafana Create Panel Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploy-prometheus-grafana/04-grafana-2-panel-dashboard-page.png)
 
     If you want to see live changes to the dashboard, go to the [food store application page](http://metrics-demo-app-metrics-demo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/) and make some purchases. <br>
     Then click on the refresh button in the upper right corner.
@@ -360,4 +360,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 500
-checksum: "14372340991717341441"
+checksum: "4234800505749025249"

@@ -41,6 +41,7 @@ tags:
 owner: openshift
 developers:
 - hguerrero@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -898,4 +899,4 @@ challenges:
     path: /root/projects/debezium/
   difficulty: intermediate
   timelimit: 400
-checksum: "967215697527261829"
+checksum: "9666208669586285588"

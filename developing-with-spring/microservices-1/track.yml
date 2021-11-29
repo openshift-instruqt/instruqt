@@ -172,7 +172,7 @@ challenges:
 
     We should see the following screen, meaning everything was successful:
 
-    ![Greeting Service](https://katacoda.com/openshift/assets/middleware/rhoar-microservices/greeting-service-mini.png)
+    ![Greeting Service](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-microservices/greeting-service-mini.png)
 
     **4. Test functionality**
 
@@ -217,7 +217,7 @@ challenges:
 
     Change the `greeting.message` property to: `greeting.message=Bonjour, you picked %s as your favorite fruit!`
 
-    ![Greeting Service](https://katacoda.com/openshift/assets/middleware/rhoar-microservices/editconfigmap.png)
+    ![Greeting Service](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-microservices/editconfigmap.png)
 
     Hit `Save` (at the bottom of the editor) and that's all there is to it!
 
@@ -244,4 +244,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 1000
-checksum: "14318175777723315806"
+checksum: "5634077380759835147"

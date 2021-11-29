@@ -12,6 +12,10 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+<<<<<<< HEAD
+=======
+- nvinto@redhat.com
+>>>>>>> 19eedd4390c0a57b6e802768f8de515b0f161440
 private: false
 published: true
 challenges:
@@ -380,7 +384,7 @@ challenges:
     admin
     ```
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
 
@@ -476,7 +480,7 @@ challenges:
 
     After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below):
 
-    ![Spring Messaging App Route](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
+    ![Spring Messaging App Route](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
 
     You should see the same web application as before. The scheduled Producer will continue to deploy messages every 3 seconds so you should observe a change in the values shown. The number of items in the list will remain 5.
 
@@ -493,4 +497,8 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 750
+<<<<<<< HEAD
 checksum: "2698115773181217484"
+=======
+checksum: "255315971748266194"
+>>>>>>> 19eedd4390c0a57b6e802768f8de515b0f161440

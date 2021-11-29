@@ -17,6 +17,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -1059,7 +1060,7 @@ challenges:
 
     Back in the OpenShift Developer Topology view in the Web Console, you'll see the app scaling dynamically up to 10 pods:
 
-    ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling_spring.png)
+    ![Scaling](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/scaling_spring.png)
 
     We now have 10 instances running providing better performance. Make sure it still works.
 
@@ -1105,4 +1106,4 @@ challenges:
     path: /root/projects/quarkus/fruit-taster
   difficulty: basic
   timelimit: 500
-checksum: "15760425836117608175"
+checksum: "9701818147827794460"

@@ -7,7 +7,7 @@ description: |+
 
   Learn how to use the [Helm](https://helm.sh/), a package manager that helps you managing and deploying applications on OpenShift.
 
-  ![Logo](https://katacoda.com/openshift/assets/developing-on-openshift/helm/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/helm/logo.png)
 
   [Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes which helps users create templated packages called Helm Charts to include all Kubernetes resources that are required to deploy a particular application.  Helm then assists with installing the Helm Chart on Kubernetes, and afterwards it can upgrade or rollback the installed package when new versions are available.
 
@@ -51,7 +51,7 @@ challenges:
 
       Learn how to use the [Helm](https://helm.sh/), a package manager that helps you managing and deploying applications on OpenShift.
 
-      ![Logo](https://katacoda.com/openshift/assets/developing-on-openshift/helm/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/helm/logo.png)
 
       [Helm](https://www.openshift.com/learn/topics/helm) is a package manager for Kubernetes which helps users create templated packages called Helm Charts to include all Kubernetes resources that are required to deploy a particular application.  Helm then assists with installing the Helm Chart on Kubernetes, and afterwards it can upgrade or rollback the installed package when new versions are available.
 
@@ -87,7 +87,7 @@ challenges:
 
     When a user instructs the Helm CLI to install a Helm Chart, the information about the Helm Chart is fetched from the repository, rendered on the client and then applied to Kubernetes while a record of this installation is created within the namespace (which is known as a Release).
 
-    ![Helm on OpenShift](https://katacoda.com/openshift/assets/developing-on-openshift/helm/helm-diagram.png)
+    ![Helm on OpenShift](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/helm/helm-diagram.png)
 
 
     ## Logging in to the Cluster
@@ -121,7 +121,7 @@ challenges:
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
     Let's create a new OpenShift Project to have a namespace for our  helm charts to work with.
 
@@ -494,4 +494,4 @@ challenges:
     path: /root/my-chart
   difficulty: basic
   timelimit: 600
-checksum: "9930226986394085350"
+checksum: "14990396350448359938"

@@ -15,7 +15,7 @@ description: |
   are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
   breaks up the delivery of these manifests in different phases.
 
-  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -36,9 +36,9 @@ tags:
 - openshift
 owner: openshift
 developers:
-- chernand@redhat.com
 - nvinto@redhat.com
 - dahmed@redhat.com
+- chernand@redhat.com
 private: false
 published: true
 challenges:
@@ -61,7 +61,7 @@ challenges:
       are applied to the cluster. Whereas [resource hooks](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/)
       breaks up the delivery of these manifests in different phases.
 
-      ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+      ![ArgoCD Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-logo.png)
 
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -112,10 +112,10 @@ challenges:
     ## Installing OpenShift GitOps operator
 
     OpenShift GitOps operator includes Argo CD and provides an Argo CD instance out-of-the-box.
-    
+
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
-    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
 
     This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
@@ -125,8 +125,8 @@ challenges:
 
     You should see that the OpenShift GitOps Operator is installed.
 
-    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
-    
+    ![OpenShift GitOps Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/os-gitops-installed.png)
+
     ## Exploring Manifests
 
     The manifests that will be deployed have been annotated with the following values:
@@ -175,12 +175,12 @@ challenges:
 
     You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
 
-    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
+    ![ArgoCD UI Shortcut](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+    ![ArgoCD Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-login.png)
 
     You can use the same credentials to login from the UI.
 
@@ -194,13 +194,13 @@ challenges:
 
     This should create the `welcome-syncwaves` application.
 
-    ![welcome-syncwaves](https://katacoda.com/openshift/assets/gitops/welcome-syncwaves.png)
+    ![welcome-syncwaves](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/welcome-syncwaves.png)
 
     Clicking on this "card" will take you to the application overview
     page. Clicking on "show hidden resources" should expand the "tree"
     view.
 
-    ![welcome-syncwaves-tree](https://katacoda.com/openshift/assets/gitops/welcome-syncwaves-tree.png)
+    ![welcome-syncwaves-tree](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/welcome-syncwaves-tree.png)
 
     If you follow along, you'll note that these manfiests get applied in
     order of their annotated syncwave!
@@ -288,19 +288,19 @@ challenges:
     will show that this will deploy the application in the `welcome-hooks`
     namespace.
 
-    Create this application 
-    
+    Create this application
+
     ```
     oc apply -f https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/main/components/applications/welcome-hooks.yaml
     ```
 
     On the Argo CD WebUI, you should see another application appear.
 
-    ![hooks-card](https://katacoda.com/openshift/assets/gitops/hooks-card.png)
+    ![hooks-card](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/hooks-card.png)
 
     Clicking on this "card" should take you over to the tree view.
 
-    ![hooks-tree](https://katacoda.com/openshift/assets/gitops/hooks-tree.png)
+    ![hooks-tree](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/hooks-tree.png)
 
     Observe the sync process. You will see that the `PreSync` manifest has
     an anchor icon ⚓ . You will also notice that the other manifests don't
@@ -356,7 +356,7 @@ challenges:
 
     Take a look at the following diagram.
 
-    ![resource-wave-hooks](https://katacoda.com/openshift/assets/gitops/resource-hooks.png)
+    ![resource-wave-hooks](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/resource-hooks.png)
 
     The workflow can be summarized like this:
 
@@ -396,11 +396,11 @@ challenges:
 
     This should create the 3rd application on Argo CD.
 
-    ![waves-and-hooks-card](https://katacoda.com/openshift/assets/gitops/waves-and-hooks-card.png)
+    ![waves-and-hooks-card](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/waves-and-hooks-card.png)
 
     Clicking on this card should take you to the tree view.
 
-    ![waves-and-hooks-tree](https://katacoda.com/openshift/assets/gitops/waves-and-hooks-tree.png)
+    ![waves-and-hooks-tree](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/waves-and-hooks-tree.png)
 
     Here you can observe the sync process happening in the order
     specified. You will also note that the `PreSync` Pod and the `PostSync`
@@ -433,4 +433,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "11827957391873803613"
+checksum: "762672133761127021"

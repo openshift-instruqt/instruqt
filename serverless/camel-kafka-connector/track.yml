@@ -70,7 +70,7 @@ challenges:
 
     This tutorial is an simple *Managed File Transfer* scenario, where a laboratory uploads medical reports to an online object store, and we will need to transfer the file from the cloud object store to our local FTP server in order for the legacy system to consume.
 
-    ![overview](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
+    ![overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
 
     ## Logging in to the Cluster via CLI
 
@@ -484,7 +484,7 @@ challenges:
        ............
     ```
 
-    ![overview](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
+    ![overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-camelk/camel-kafka-connector/camel-kafka-step01-overview.png)
 
     ## Congratulations
 
@@ -499,4 +499,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "2257998432597175673"
+checksum: "16130038700561993207"

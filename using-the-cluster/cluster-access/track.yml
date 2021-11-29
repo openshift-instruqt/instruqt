@@ -67,21 +67,21 @@ challenges:
     You will then be able to login with developer permissions with:
     * **Username:** ``developer``
     * **Password:** ``developer``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
     As this is the first time you have logged in as this user in this OpenShift cluster, you will be presented with a "Welcome to OpenShift" message and the option of creating a new project.
 
-    ![Web Console Welcome](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-web-console-welcome.png)
+    ![Web Console Welcome](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/01-web-console-welcome.png)
 
     Create a new project by selecting _Create Project_. Call the project ``myproject``.
 
-    ![Create New Project](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-create-new-project.png)
+    ![Create New Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/01-create-new-project.png)
 
     Upon creating a project you will be left on the overview page for the new project.
 
     If you want to get to a list of all the projects you have available, you can select "Home->Projects" from the left hand side menu. If you do not see the menu, you can click on the hamburger menu item button in the top level corner of the web console.
 
-    ![List of Projects](https://katacoda.com/openshift/assets/introduction/cluster-access-44/01-list-of-projects.png)
+    ![List of Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/01-list-of-projects.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -103,7 +103,7 @@ challenges:
 
     If you were using a different OpenShift cluster and did not already have the ``oc`` command line tool, you can download it by following the links in the _Command Line Tools_ menu option of the web console.
 
-    ![Command Line Tools](https://katacoda.com/openshift/assets/introduction/cluster-access-44/02-command-line-tools.png)
+    ![Command Line Tools](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/02-command-line-tools.png)
 
     A link to details on where to get the command line tools was also shown on the initial welcome page when you first accessed the cluster when there were no projects.
 
@@ -166,7 +166,7 @@ challenges:
 
     If you are already logged into the web console, you can also retrieve the details of the login command and access token by accessing the _Copy Login Command_ menu option under your login name.
 
-     ![Request Access Token](https://katacoda.com/openshift/assets/introduction/cluster-access-44/02-login-access-token.png)
+     ![Request Access Token](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/02-login-access-token.png)
 
     Whichever mechanism you use to login from the command line using ``oc login``, the login will periodically expire and you will need to login again. The expiration period is typically 24 hours.
   tabs:
@@ -204,17 +204,17 @@ challenges:
 
     To grant this user access to your project, go to the list of projects in the web console and select on the drop down menu to the right of the project name and select on _Edit Project_.
 
-    ![Edit Project Details](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-edit-project-option.png)
+    ![Edit Project Details](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/03-edit-project-option.png)
 
     When the project details are displayed, select on the _Role Bindings_ tab.
 
-    ![Project Role Bindings](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-project-role-bindings.png)
+    ![Project Role Bindings](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/03-project-role-bindings.png)
 
     You will see that only the ``developer`` user is a member of the project at this point, with the user having `admin` access.
 
     Click on _Create Binding_ to grant an additional user access to the project.
 
-    ![Create Role Binding](https://katacoda.com/openshift/assets/introduction/cluster-access-44/03-create-role-binding.png)
+    ![Create Role Binding](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/cluster-access-44/03-create-role-binding.png)
 
     For the name of the role binding use ``user1-edit``.
 
@@ -322,4 +322,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "9843492851489469258"
+checksum: "9566365893324473784"

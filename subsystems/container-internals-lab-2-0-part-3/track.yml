@@ -30,6 +30,7 @@ tags:
 owner: openshift
 developers:
 - smccarty@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -203,7 +204,7 @@ challenges:
 
     We should see something similar to:
 
-    ![Evaluating Trust](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-3/02-evaluating-trust.png)
+    ![Evaluating Trust](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-3/02-evaluating-trust.png)
 
 
     # Evaluating Registries
@@ -296,4 +297,4 @@ challenges:
     path: /root/labs
   difficulty: intermediate
   timelimit: 900
-checksum: "6140632870447659797"
+checksum: "9245881527911313899"

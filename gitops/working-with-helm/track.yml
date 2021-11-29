@@ -17,7 +17,7 @@ description: |
   applications.
 
 
-  ![Helm Logo](https://katacoda.com/openshift/assets/gitops/helm-logo.png)
+  ![Helm Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/helm-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -37,9 +37,9 @@ tags:
 - openshift
 owner: openshift
 developers:
-- chernand@redhat.com
 - nvinto@redhat.com
 - dahmed@redhat.com
+- chernand@redhat.com
 private: false
 published: true
 challenges:
@@ -64,7 +64,7 @@ challenges:
       applications.
 
 
-      ![Helm Logo](https://katacoda.com/openshift/assets/gitops/helm-logo.png)
+      ![Helm Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/helm-logo.png)
 
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -95,7 +95,7 @@ challenges:
     into the Helm template YAML to produce a consumable YAML that us deployed
     to the Kubernetes cluster.
 
-    ![helm-overview](https://katacoda.com/openshift/assets/gitops/helm-overview.png)
+    ![helm-overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/helm-overview.png)
 
     Argo CD has native support for Helm built in. You can directly
     call a Helm chart repo and provide the values directly in the
@@ -168,14 +168,14 @@ challenges:
 
     * **Username:** ``admin``
     * **Password:** ``admin``
-    
+
     ## Installing OpenShift GitOps operator
 
     OpenShift GitOps operator includes Argo CD and provides an Argo CD instance out-of-the-box.
 
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
-    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
 
     This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
@@ -185,7 +185,7 @@ challenges:
 
     You should see that the OpenShift GitOps Operator is installed.
 
-    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+    ![OpenShift GitOps Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/os-gitops-installed.png)
 
     ## Deploying The Application
 
@@ -218,12 +218,12 @@ challenges:
 
     You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
 
-    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
+    ![ArgoCD UI Shortcut](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+    ![ArgoCD Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-login.png)
 
     You can use the same credentials to login from the UI.
 
@@ -238,13 +238,13 @@ challenges:
     This should create the `quarkus-app` application. Note the Helm icon
     ⎈ denoting it's a Helm application.
 
-    ![quarkus-app](https://katacoda.com/openshift/assets/gitops/quarkus-app.png)
+    ![quarkus-app](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/quarkus-app.png)
 
     Clicking on this "card" will take you to the application overview
     page. Clicking on "show hidden resources" should expand the "tree"
     view.
 
-    ![quarkus-app-tree](https://katacoda.com/openshift/assets/gitops/quarkus-app-tree.png)
+    ![quarkus-app-tree](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/quarkus-app-tree.png)
 
     Grab the URL by running the following command:
 
@@ -255,7 +255,7 @@ challenges:
     If you visit that URL, you should see the following page.
 
 
-    ![gitops-loves-helm](https://katacoda.com/openshift/assets/gitops/gitops-loves-helm.png)
+    ![gitops-loves-helm](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/gitops-loves-helm.png)
 
     You can now interact with this `Application` using the `argocd` CLI. For instance; if I want to change the scale of my application to 2 replicas, I just modify that value using the `argocd` CLI.
 
@@ -294,7 +294,7 @@ challenges:
 
     The Argo CD UI should show the application with 2 pods and fully healthy/in sync.
 
-    ![quarkus-2-pods](https://katacoda.com/openshift/assets/gitops/quarkus-2-pods.png)
+    ![quarkus-2-pods](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/quarkus-2-pods.png)
 
     This is a valid, and completely supported way of deploying your Helm
     charts using Argo CD. But this isn't GitOps friendly. Lets see how we
@@ -419,13 +419,13 @@ challenges:
 
     > **NOTE** The Helm logo ⎈ does not appear. It's now a git logo since we're now just loading YAML
 
-    ![quarkus-subchart-app](https://katacoda.com/openshift/assets/gitops/quarkus-subchart-app.png)
+    ![quarkus-subchart-app](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/quarkus-subchart-app.png)
 
     Clicking on this "card" will take you to the application overview
     page. Click on "show hidden resources" if you need to, to expand the
     "tree" view.
 
-    ![quarkus-subchart-app-tree](https://katacoda.com/openshift/assets/gitops/quarkus-subchart-app-tree.png)
+    ![quarkus-subchart-app-tree](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/quarkus-subchart-app-tree.png)
 
     That's it! You've now deployed a Helm chart in a GitOps friendly way
     using Argo CD!
@@ -485,4 +485,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "2119577259551310847"
+checksum: "5289690177749561029"

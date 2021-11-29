@@ -25,6 +25,7 @@ tags:
 owner: openshift
 developers:
 - hguerrero@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -378,4 +379,4 @@ challenges:
     path: /root/projects/http-bridge
   difficulty: intermediate
   timelimit: 360
-checksum: "7854741554109516049"
+checksum: "16593756697772959616"

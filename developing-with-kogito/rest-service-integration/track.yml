@@ -7,7 +7,7 @@ description: |
 
   ## What is Kogito?
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
   ### BPMN2 and Services
 
@@ -41,7 +41,7 @@ challenges:
 
       ## What is Kogito?
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
       ### BPMN2 and Services
 
@@ -101,7 +101,7 @@ challenges:
 
     We see the following Swagger-UI page. Because we have not yet implemented our application, there are no operations defined yet in our API:
 
-    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-quarkus-empty-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/new-quarkus-empty-swagger-ui.png)
 
     It's working!
 
@@ -167,7 +167,7 @@ challenges:
 
     We create a simple process that will look like this:
 
-    ![Process](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-rest-coffeeshop-process.png)
+    ![Process](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-rest-coffeeshop-process.png)
 
     Click the following path to open a new _coffeeshop process_ BPMN2 file: `coffeeshop/src/main/resources/coffeeshop-process.bpmn`
 
@@ -196,7 +196,7 @@ challenges:
     ** Operation: `getCoffees`
     ** Assignments: See image below
 
-    ![GetCoffees Input Output](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-coffee-process-getcoffee-data-assignment.png)
+    ![GetCoffees Input Output](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-coffee-process-getcoffee-data-assignment.png)
 
     * Create an EndEvent node and connect it to the Service Task node.
 
@@ -766,4 +766,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "9065537209358275592"
+checksum: "15150249106793700385"

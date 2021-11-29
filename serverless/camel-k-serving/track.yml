@@ -183,7 +183,7 @@ challenges:
     #### (OPTIONAL)
     The document is written in YAML, this is what it looks like.
     You can take this and view it in https://www.apicur.io, as a web based UI to design and view your OpenAPI based APIs.
-    ![apicurio](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)
+    ![apicurio](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step2-01-API.png)
 
 
     ```
@@ -530,7 +530,7 @@ challenges:
 
     The Camel K API service will automatically scale down to zero if it does not get request for approximately 90 seconds. Try watching the service scaling down from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph).
 
-    ![scalezero](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
+    ![scalezero](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-01-scalezero.png)
 
     Invoking the service to see the service scaling up.
     ```
@@ -547,7 +547,7 @@ challenges:
 
     Watch the service scaling up from [OpenShift Dev Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/topology/ns/camel-api/graph) login with *admin/admin*. If you wait at another 90 seconds without invoking the API, you'll find that the pod will disappear. Calling the API again will make the pod appear to serve the request.
 
-    ![scaleup](https://katacoda.com/openshift/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
+    ![scaleup](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-camelk/camel-k-serving/Serving-Step4-02-scaleup.png)
 
 
     ## Congratulations
@@ -563,4 +563,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 450
-checksum: "9870957871762440868"
+checksum: "3370305759808672883"

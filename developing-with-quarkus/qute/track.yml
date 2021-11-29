@@ -23,6 +23,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -108,13 +109,13 @@ challenges:
 
     Test that the app is running by accessing the sample page from the **Qute Sample Page** Tab. You should see
 
-    ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample.png)
+    ![Qute sample](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-sample.png)
 
     This page is rendered using the `qute/src/main/resources/templates/page.qute.html` HTML template. If you look closely you can see a `{name ?: "Qute"}` directive that renders the passed-in `name` query present in the `qute/src/main/java/org/acme/SomePage.java` class and passed into the template renderer in the `data()` method, making the `name` variable available to the renderer and returning the rendered HTML to your browser. If you pass a different name, say, `Jerry` adding `?name=Jerry` to the URL) you'll see the new name rendered via the Qute template.
 
     Access the **Qute Sample Page Jerry** Tab to see it.
 
-    ![Qute sample](https://katacoda.com/openshift/assets/middleware/quarkus/qute-sample-jerry.png)
+    ![Qute sample](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-sample-jerry.png)
 
     Let's keep the app running and continue using Quarkus' _Live Coding_ feature. Changes you make are immediately available in the running app when developing Quarkus apps.
 
@@ -557,7 +558,7 @@ challenges:
 
     You can also run to the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
 
-    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
+    ![Apple](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-apple.png)
 
     ## Template parameter declaration inside the template
 
@@ -625,7 +626,7 @@ challenges:
 
     If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}`. Now run again to the *Qute Item 1* Tab or reload it. You should get an error:
 
-    ![Err](https://katacoda.com/openshift/assets/middleware/quarkus/qute-err.png)
+    ![Err](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-err.png)
 
     Qute checks the syntax and will fail the build (and result in a prettified HTML error screen) when syntax errors are detected in the template. This makes it very easy to quickly iterate, update code and template, and see the results.
 
@@ -715,11 +716,11 @@ challenges:
 
     Test it out by accessing the *Qute Item Apples* Tab to see the result for Apples:
 
-    ![Apple](https://katacoda.com/openshift/assets/middleware/quarkus/qute-apple.png)
+    ![Apple](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-apple.png)
 
     Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But try with Mangos, open the *Qute Item Mangos* Tab to see it.
 
-    ![Mango](https://katacoda.com/openshift/assets/middleware/quarkus/qute-mango.png)
+    ![Mango](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-mango.png)
 
     What a deal!
 
@@ -1031,4 +1032,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "3282467066637038959"
+checksum: "1955604249380506413"

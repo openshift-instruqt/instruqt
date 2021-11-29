@@ -17,7 +17,6 @@ description: |
   ## Use case
 
   You can deploy a container image on an OpenShift cluster to make the application easier to manage, scale, connect and monitor.
-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -51,7 +50,6 @@ challenges:
       ## Use case
 
       You can deploy a container image on an OpenShift cluster to make the application easier to manage, scale, connect and monitor.
-
   assignment: |
     Before we get started, you need to login and create a project in OpenShift
     to work in.
@@ -116,19 +114,19 @@ challenges:
     You will then be able to login with admin permissions with:
     * **Username:** ``developer``
     * **Password:** ``developer``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
     This should leave you at the list of projects you have access to. As we only
     created the one project, you should see ``myproject``.
 
-    ![List of Projects](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-list-of-projects.png)
+    ![List of Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/01-list-of-projects.png)
 
     Click on ``myproject`` and you should then be at the _Overview_ page for
     the project. Select the _Developer_ perspective for the project instead of the _Adminstrator_ perspective in the left hand side menu. If necessary click on the hamburger menu icon top left of the web console to expose the left hand side menu.
 
     As the project is currently empty, no workloads should be found and you will be presented with various options for how you can deploy an application.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-add-to-project.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/01-add-to-project.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -154,7 +152,7 @@ challenges:
 
     Press tab or click outside of the text field. This should trigger a query validate the image.
 
-    ![Image Search](https://katacoda.com/openshift/assets/introduction/deploying-images-44/02-image-search.png)
+    ![Image Search](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/02-image-search.png)
 
     From the name of the image, the _Application Name_ and deployment _Name_ fields will be automatically populated.
 
@@ -168,7 +166,7 @@ challenges:
 
     When you are ready, at the bottom of the page click on _Create_. This will return you to the _Topology_ view, but this time you will see a representation of the deployment, rather than the options for deploying an application.
 
-    ![Topology View](https://katacoda.com/openshift/assets/introduction/deploying-images-44/02-topology-view.png)
+    ![Topology View](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/02-topology-view.png)
 
     You may see the color of the ring in the visualization change from white, to light blue and then blue. This represents the phases of deployment as the container for the application starts up.
   tabs:
@@ -188,11 +186,11 @@ challenges:
   assignment: |
     To drill down and get further details on the deployment, click in the middle of the ring. This will result in a panel sliding out from the right hand side providing access to both an _Overview_:
 
-    ![Deployment Overview](https://katacoda.com/openshift/assets/introduction/deploying-images-44/03-deployment-overview.png)
+    ![Deployment Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/03-deployment-overview.png)
 
     and details on _Resources_ related to the deployment.
 
-    ![Deployment Resources](https://katacoda.com/openshift/assets/introduction/deploying-images-44/03-deployment-resources.png)
+    ![Deployment Resources](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/03-deployment-resources.png)
 
     From the _Overview_ for the deployment, you can adjust the number of replicas, or pods, by clicking on the up and down arrows to the right of the ring.
 
@@ -200,7 +198,7 @@ challenges:
 
     If you dismiss the panel, you can also access the application via its public URL, by clicking on the URL shortcut icon on the visualization of the deployment.
 
-    ![URL Shortcut Icon](https://katacoda.com/openshift/assets/introduction/deploying-images-44/03-url-shortcut-icon.png)
+    ![URL Shortcut Icon](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/03-url-shortcut-icon.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -397,4 +395,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 180
-checksum: "15300668551778631690"
+checksum: "15257478329583257689"

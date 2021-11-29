@@ -123,10 +123,10 @@ challenges:
 
     Red Hat OpenShift Service Mesh is logically split into a data plane and a control plane:
 
-    ![Red Hat OpenShift Service Mesh Architecture](https://katacoda.com/openshift/assets/servicemesh/1-introduction/ossm-arch.png)
+    ![Red Hat OpenShift Service Mesh Architecture](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/servicemesh/1-introduction/ossm-arch.png)
 
     ### [Istio](https://istio.io)
-    ![Istio](https://katacoda.com/openshift/assets/servicemesh/1-introduction/istio.png)
+    ![Istio](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/servicemesh/1-introduction/istio.png)
 
     As mentioned, Istio drives the service mesh and the **data plane** used withn the mesh is a set of intelligent proxies deployed as sidecars. These proxies intercept and control all inbound and outbound network communication between microservices in the service mesh.
 
@@ -142,7 +142,7 @@ challenges:
 
     ### [Kiali](https://kiali.io)
 
-    ![Kiali](https://katacoda.com/openshift/assets/servicemesh/1-introduction/kiali.png)
+    ![Kiali](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/servicemesh/1-introduction/kiali.png)
 
     Kiali provides observability into the Service Mesh running on OpenShift Container Platform. Kiali helps you define, validate, and observe your Istio service mesh. It helps you to understand the structure of your service mesh by inferring the topology, and also provides information about the health of your service mesh.
 
@@ -152,7 +152,7 @@ challenges:
 
     ### [Jaeger](https://jaegertracing.io)
 
-    ![Jaeger](https://katacoda.com/openshift/assets/servicemesh/1-introduction/jaeger.png)
+    ![Jaeger](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/servicemesh/1-introduction/jaeger.png)
 
     Every time a user takes an action in an application, a request is executed by the architecture that may require dozens of different services to participate to produce a response. The path of this request is a distributed transaction. Jaeger lets you perform distributed tracing, which follows the path of a request through various microservices that make up an application.
 
@@ -234,4 +234,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "9749582106589382147"
+checksum: "14774739926293035280"

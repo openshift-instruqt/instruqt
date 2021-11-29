@@ -17,7 +17,6 @@ description: |
   ## Use case
 
   You can find, query, and change the OpenShift resources that make up an application.
-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -51,7 +50,6 @@ challenges:
       ## Use case
 
       You can find, query, and change the OpenShift resources that make up an application.
-
   assignment: |
     Before you can start this course you need to deploy a sample application to work with.
 
@@ -569,4 +567,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 112
-checksum: "7857516264121187612"
+checksum: "11219879300587951413"

@@ -45,6 +45,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -93,7 +94,7 @@ challenges:
   assignment: |
     In this step, you will create a straightforward application serving a `hello` endpoint. To demonstrate dependency injection this endpoint uses a `greeting` bean.
 
-    ![Architecture](https://katacoda.com/openshift/assets/middleware/quarkus/arch.png)
+    ![Architecture](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/arch.png)
 
     # Wait for prerequisite downloads
 
@@ -513,7 +514,7 @@ challenges:
   assignment: |+
     Let’s now produce a native executable for our application. It improves the startup time of the application, and produces a minimal disk footprint. The executable would have everything to run the application including the "JVM" (shrunk to be just enough to run the application), and the application.
 
-    ![Native process](https://katacoda.com/openshift/assets/middleware/quarkus/native-image-process.png)
+    ![Native process](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/native-image-process.png)
 
     We will be using GraalVM, which includes a native compiler for producing native images for a number of languages, including Java. GraalVM is installed in `$GRAALVM_HOME`:
 
@@ -740,7 +741,7 @@ challenges:
     * Username: `developer`
     * Password: `developer`
 
-    ![topology](https://katacoda.com/openshift/assets/middleware/quarkus/greetingtopology.png)
+    ![topology](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/greetingtopology.png)
 
     So now our app is deployed to OpenShift
 
@@ -805,7 +806,7 @@ challenges:
 
     Back in the OpenShift Developer Topology, you'll see the app scaling dynamically up to 10 pods:
 
-    ![Scaling](https://katacoda.com/openshift/assets/middleware/quarkus/scaling.png)
+    ![Scaling](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/scaling.png)
 
     This should only take a few seconds to complete the scaling. Now that we have 10 pods running, let's hit it with some load:
 
@@ -835,7 +836,7 @@ challenges:
 
     Back in the Overview in the OpenShift Console, you'll see the app scaling dynamically up to 50 pods:
 
-    ![Scaling to 50](https://katacoda.com/openshift/assets/middleware/quarkus/50pods.png)
+    ![Scaling to 50](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/50pods.png)
 
     Once they are all up and running, try the same load again:
 
@@ -871,4 +872,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 500
-checksum: "8970116211677458224"
+checksum: "16960205019981314381"

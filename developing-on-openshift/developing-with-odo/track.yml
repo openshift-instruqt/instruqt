@@ -25,9 +25,6 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
-- dahmed@redhat.com
-- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -70,9 +67,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 01-creating-initial-project
   id: tam8dhs0g0uc
   type: challenge
@@ -80,17 +81,34 @@ challenges:
   assignment: |
     ## Logging in to OpenShift
 
-    Before we get started, you need to log in to OpenShift. To log in to the OpenShift cluster used for this scenario from the _Terminal_,
+    Access the OpenShift Web Console to login from the Web UI:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Copy the URL from the output of the above command or click to it to open it in your browser.
+
+    We'll deploy our app as the `developer` user. Use the following credentials:
+
+    * Username:
+    ```
+    developer
+    ```
+
+    * Password:
+    ```
+    developer
+    ```
+
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
+
+    To log in to the OpenShift cluster used for this scenario from the _Terminal_,
     run:
 
     ```
-    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
-
-    This will log you in using the credentials:
-
-    * **Username:** ``admin``
-    * **Password:** ``admin``
 
     You should see the output below:
 
@@ -117,38 +135,24 @@ challenges:
     ```
 
     # Creating a Service Account
-    The backend of our application uses the OpenShift REST API. In order for the backend to access the API, we need to grant access to the service account that the backend is using. We will do this in the web console.
 
-    At first, check that the pod responsible for OpenShift Web Console to be ready:
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
-    You will then be able to login with admin permissions with:
-    * **Username:** ``admin``
-    * **Password:** ``admin``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    The backend of our application uses the OpenShift REST API. In order for the backend to access the API, we need to grant access to the service account that the backend is using. We will do this in the web console.
 
     After logging in to the web console, you'll be in the **Administrator** perspective of the web console, which is a view of the console for handling operations and administrative tasks associated with your OpenShift cluster.
 
     To start, select the project you just created using `odo` (i.e. `myproject`) by clicking on `myproject` on the **Projects** page as shown below:
 
-    ![Projects](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/myproject.png)
+    ![Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/myproject.png)
 
     By clicking on the project name, you will be taken to the **Project Details** page that shows information about what is happening in your project. By clicking on the project name, you are also now using this project and all actions via the web console will now happen in this project.
 
     On the left side of the console, click the **Administration** tab and select the **RoleBindings** option as shown below:
 
-    ![Role Binding](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/role-binding.png)
+    ![Role Binding](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/role-binding.png)
 
     On the **RoleBindings** page, click the **Create Binding** button and fill out the wizard with the information shown below:
 
-    ![Role Binding Wizard](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/role-binding-wizard.png)
+    ![Role Binding Wizard](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/role-binding-wizard.png)
 
     Feel free to copy the information for the role binding name and service account subject name below:
 
@@ -156,15 +160,23 @@ challenges:
 
     **Subject Name:** ``default``
 
-    Alternatively, this step can be completed via the command line by running `oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default`
+    Alternatively, this step can be completed via the command line by running:
+
+    ```
+    oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default
+    ```
 
     The default service account provided to the backend container will now have **view** access, allowing it can retrieve objects via the API. Note that you could choose to grant access to the **edit** role instead. Providing **edit** access would allow the backend to view, modify, or delete objects. Enabling this level of access allows the backend to destroy non-recoverable resources that are used to host the game (breaking the user-experience for app users) - which is why we are using **view** access for this scenario.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 02-creating-new-binary-component
   id: z5tera1vq7q3
   type: challenge
@@ -250,11 +262,11 @@ challenges:
 
     You can view the `backend` component being started up in the web console by switching over from the **Administrator** perspective to the **Developer** perspective. To do this, select the **Developer** option from the dropdown menu as shown below:
 
-    ![Developer Perspective](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/developer-perspective.png)
+    ![Developer Perspective](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/developer-perspective.png)
 
     After selecting the **Developer** option, you will be on the **Topology** view that shows what components are deployed in your OpenShift project. The `backend` component is successfully deployed as a container that runs on a pod. When a dark blue circle appears around the backend component as shown below, the pod is ready and the `backend` component container will start running on it.
 
-    ![Backend Pod](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/backend-pod.png)
+    ![Backend Pod](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/backend-pod.png)
 
     If you want to check on the status of an action in `odo`, you can use the `odo log` command. When `odo push` is finished, run `odo log` to follow the progress of the `backend` component deployment:
 
@@ -274,9 +286,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/backend
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 03-deploying-component-from-source-code
   id: 27d8xxrk1zte
   type: challenge
@@ -339,15 +355,15 @@ challenges:
 
     Depending on how far along your `odo push` is, you may see the pod for the `frontend` component starting up with a light blue ring as shown below. This light blue ring means the pod is in a pending state and hasn't started yet:
 
-    ![Frontend Pending](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-pending.png)
+    ![Frontend Pending](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/frontend-pending.png)
 
     Once the pod becomes available, you'll see the `frontend` component become available with a dark blue ring around it like the `backend` component has. This is shown below:
 
-    ![Frontend Running](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-running.png)
+    ![Frontend Running](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/frontend-running.png)
 
     To see the logs of the `frontend` component, wait for the dark blue ring to appear around the component and then click on the `frontend` component circle. This should bring up the deployment config for `frontend` and present the option to **View Logs** under the **Pods** section. This is shown below:
 
-    ![Frontend Logs](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/frontend-logs.png)
+    ![Frontend Logs](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/frontend-logs.png)
 
     Click on **View Logs** where you should eventually see the following logs confirming `frontend` is running:
 
@@ -364,15 +380,25 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root/backend
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 04-configuring-components
   id: fzr4hdledybp
   type: challenge
   title: Configuring components
   assignment: |
     With both components of our application running on the cluster, we need to confifigure the frontend to connect to the backend service.
+
+    Change directories to the `frontend` directory:
+
+    ```
+    cd /root/frontend
+    ```
 
     Configure the `frontend` component to connect to the `backend` by running:
 
@@ -400,15 +426,23 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 05-exposing-components-to-public
   id: xkzdusandmgi
   type: challenge
   title: Exposing components to public
   assignment: |
-    We have updated `frontend` to connect to our `backend`, allowing our application's components to communicate. Let's now create an external URL for our application so we can see it in action:
+    We have updated `frontend` to connect to our `backend`, allowing our application's components to communicate.
+
+    Change directories to the `frontend` directory:
+
+    ```
+    cd /root/frontend
+    ```
+
+    Let's now create an external URL for our application so we can see it in action:
 
     ```
     odo url create frontend --port 8080
@@ -450,9 +484,13 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
+  timelimit: 300
 - slug: 06-making-changes-to-source-code
   id: yxtyvlpdakbg
   type: challenge
@@ -474,7 +512,7 @@ challenges:
 
     Let's change the displayed name for our wild west game. Currently, the title is "Wild West The OpenShift Way!" We will change this to "My App The OpenShift Way!"
 
-    ![Application Title](https://katacoda.com/openshift/assets/introduction/developing-with-odo-42/app-name.png)
+    ![Application Title](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/developing-with-odo-42/app-name.png)
 
     Edit the file `index.html` with a search-and-replace one-liner performed with the Unix stream editor, `sed`:
 
@@ -497,11 +535,17 @@ challenges:
 
     __NOTE__: If you no longer have the application page opened in a browser, you can recall the url by executing:
 
-    `odo url list`
+    ```
+    odo url list
+    ```
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Visual Editor
+    type: code
+    hostname: container
+    path: /root
   difficulty: basic
-  timelimit: 128
-checksum: "302239931703818846"
+  timelimit: 300
+checksum: "11536559063881550627"

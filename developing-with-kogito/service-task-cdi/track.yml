@@ -5,7 +5,7 @@ title: Kogito and CDI
 description: |
   In this scenario, you will learn how to implement process and workflow logic with CDI beans in [Kogito](https://kogito.kie.org).
 
-  ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+  ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
   ### BPMN2 Service Task and CDI
 
@@ -37,7 +37,7 @@ challenges:
     contents: |
       In this scenario, you will learn how to implement process and workflow logic with CDI beans in [Kogito](https://kogito.kie.org).
 
-      ![Logo](https://katacoda.com/openshift/assets/middleware/middleware-kogito/logo.png)
+      ![Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/logo.png)
 
       ### BPMN2 Service Task and CDI
 
@@ -102,7 +102,7 @@ challenges:
 
     You should see the following page:
 
-    ![New Kogito Quarkus Web Page](https://katacoda.com/openshift/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
+    ![New Kogito Quarkus Web Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/new-kogito-quarkus-swagger-ui.png)
 
     It's working!
 
@@ -202,11 +202,11 @@ challenges:
 
     In the BPMN editor, click on the pencil icon in the upper-right corner to open the properties panel.
 
-    ![BPMN Editor Properties Panel](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-bpmn-editor-open-properties-panel.png)
+    ![BPMN Editor Properties Panel](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-bpmn-editor-open-properties-panel.png)
 
     Change the _Name_ and _ID_ of the process to `text_processor`.
 
-    ![Process Name](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-name.png)
+    ![Process Name](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-name.png)
 
     ## Add Process Variable
 
@@ -214,17 +214,17 @@ challenges:
 
     Scroll down in the properties panel until you see the section _Process Data_. Expand this section and click on the _+_ sign to add a new process variable. Give the variable the name `mytext` and the type `String`. Leave the _KPI_ checkbox unchecked.
 
-    ![Process Variable](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-variable.png)
+    ![Process Variable](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-variable.png)
 
     ## Create Service Task
 
     In the diagram, double-click on the `Hello` _Script Task_ to change the name of the node. Change the name to `Process Text`.
 
-    ![Process Text Node](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-text-node.png)
+    ![Process Text Node](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-process-text-node.png)
 
     Next, we need to change the node from a _Script Task_ to a _Service Task_. To do this, click on the node, hoover over the gear icon in the lower-left corner of the node, and select _Convert into Service Task_ in the menu.
 
-    ![Convert Into Service Task](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-convert-into-service-task.png)
+    ![Convert Into Service Task](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-convert-into-service-task.png)
 
     ## Configuring the Service Task
 
@@ -234,11 +234,11 @@ challenges:
     * Interface: `org.acme.TextProcessor`
     * Operation: `toUpper`
 
-    ![Service Task Implementation](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-implementation.png)
+    ![Service Task Implementation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-implementation.png)
 
     With the implementation configuration set, we can now configure the data _Assignments_. In the properties panel, click on the pencil icon in the _Assignments_ section. In the form that opens, add the following _input_ and _output_ data assignments.
 
-    ![Service Task Data Assignment](https://katacoda.com/openshift/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-data-assignment.png)
+    ![Service Task Data Assignment](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-kogito/kogito-service-task-cdi-service-task-data-assignment.png)
 
     Note that the _Name_ of the input assignment is the name of the `toUpper` method argument in our `TextProcessor` CDI bean.
 
@@ -269,4 +269,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "8260432864032337322"
+checksum: "12780996889654029311"
