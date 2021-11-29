@@ -22,7 +22,7 @@ description: |
   * Associate templated configuration with different environments.
 
 
-  ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+  ![ArgoCD Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-logo.png)
 
   [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -44,9 +44,9 @@ tags:
 - openshift
 owner: openshift
 developers:
-- chernand@redhat.com
 - nvinto@redhat.com
 - dahmed@redhat.com
+- chernand@redhat.com
 private: false
 published: true
 challenges:
@@ -77,7 +77,7 @@ challenges:
       * Associate templated configuration with different environments.
 
 
-      ![ArgoCD Logo](https://katacoda.com/openshift/assets/gitops/argocd-logo.png)
+      ![ArgoCD Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-logo.png)
 
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -124,7 +124,7 @@ challenges:
 
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
-    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
 
     This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
@@ -134,7 +134,7 @@ challenges:
 
     You should see that the OpenShift GitOps Operator is installed.
 
-    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+    ![OpenShift GitOps Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/os-gitops-installed.png)
 
     Another way to view what was installed is to run the following:
 
@@ -216,12 +216,12 @@ challenges:
 
     You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
 
-    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
+    ![ArgoCD UI Shortcut](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+    ![ArgoCD Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-login.png)
 
     You can use the same credentials to login from the UI.
 
@@ -270,7 +270,7 @@ challenges:
 
     Once you've logged in, you should see the following page.
 
-    ![ArgoCD](https://katacoda.com/openshift/assets/gitops/argocd.png)
+    ![ArgoCD](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd.png)
 
     This is the Argo CD Web UI. Keep this tab open for the next exercise.
   tabs:
@@ -319,11 +319,11 @@ challenges:
 
     This should create the `bgd-app` in the ArgoCD UI.
 
-    ![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgd-app.png)
+    ![bgdk-app](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgd-app.png)
 
     Clicking on this "card" takes you to the overview page. You may see it as still progressing or full synced.
 
-    ![synced-app](https://katacoda.com/openshift/assets/gitops/synced-app.png)
+    ![synced-app](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/synced-app.png)
 
     > **NOTE**: You may have to click on `show hidden resources` on this page to see it all
 
@@ -361,7 +361,7 @@ challenges:
 
     Your application should look like this.
 
-    ![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)
+    ![bgd](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgd.png)
 
     Let's introduce a change! Patch the live manifest to change the color
     of the box from blue to green:
@@ -378,12 +378,12 @@ challenges:
 
     If you refresh your tab where your application is running you should see a green square now.
 
-    ![bgd-green](https://katacoda.com/openshift/assets/gitops/bgd-green.png)
+    ![bgd-green](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgd-green.png)
 
     Looking over at your Argo CD Web UI, you can see that Argo detects your
     application as "Out of Sync".
 
-    ![outofsync](https://katacoda.com/openshift/assets/gitops/out-of-sync.png)
+    ![outofsync](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/out-of-sync.png)
 
     You can sync your app via the Argo CD by:
 
@@ -398,12 +398,12 @@ challenges:
 
     After the sync process is done, the Argo CD UI should mark the application as in sync.
 
-    ![fullysynced](https://katacoda.com/openshift/assets/gitops/fullysynced.png)
+    ![fullysynced](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/fullysynced.png)
 
     If you reload the page on the tab where the application is running. It
     should have returned to a blue square.
 
-    ![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)
+    ![bgd](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgd.png)
 
     You can setup Argo CD to automatically correct drift by setting the
     `Application` manifest to do so. Here is an example snippet:
@@ -431,4 +431,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 600
-checksum: "11862043285992058350"
+checksum: "4906110934550468624"

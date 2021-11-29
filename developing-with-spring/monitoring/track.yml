@@ -58,7 +58,7 @@ challenges:
 
     You should now see an HTML page with a `Success` welcome message that looks like this:
 
-    ![Success](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
+    ![Success](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/landingPage.png)
 
     If you see this then you've successfully set up the application! If not check the logs in the terminal. Spring Boot adds a couple helper layers to catch common errors and print helpful messages to the console so check for those first.
 
@@ -147,13 +147,13 @@ challenges:
     admin
     ```
 
-    ![Routes](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/routes.png)
+    ![Routes](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/routes.png)
 
     Either click on the route link through the _Location_ column from the above screen and navigate to the `/fruits` endpoint.
 
     We should now see the same `Success` page that we saw when we first tested our app locally:
 
-    ![Success](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/landingPage.png)
+    ![Success](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/landingPage.png)
 
     ## Congratulations
 
@@ -189,7 +189,7 @@ challenges:
 
     Switch to the 'developer' perspective and from the _Topology_ tab of your project _dev_, select your deployment. You should see something like this:
 
-    ![Missing Health Checks](https://katacoda.com/openshift/assets/middleware/rhoar-monitoring/healthChecks.png)
+    ![Missing Health Checks](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/healthChecks.png)
 
 
     Since we have a Spring Boot application we have an easy option for implementation of health checks. We're able to pull in the `Spring Actuator` library.
@@ -291,4 +291,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
   timelimit: 1000
-checksum: "4743801525174177267"
+checksum: "12347280335339767526"

@@ -120,7 +120,7 @@ challenges:
 
     If you still want to make use of the web console, click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/03-web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyterhub-workspace-42/03-web-console-login.png)
 
     For the credentials, enter:
 
@@ -201,7 +201,7 @@ challenges:
 
     What you will see is a progress screen as a separate Jupyter notebook instance is started up for the user ``user1``. Once the instance has started, you will have access to the JupyterLab web interface.
 
-    ![JupyterLab Notebook](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/04-lab-notebook-interface.png)
+    ![JupyterLab Notebook](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyterhub-workspace-42/04-lab-notebook-interface.png)
 
     At this point you can create new notebooks or upload existing notebooks. If you need to install additional Python packages, when using this type of deployment you would need to start a terminal from the Jupyter notebook web interface and install the packages manually.
 
@@ -269,7 +269,7 @@ challenges:
 
     You will see what projects you can access.
 
-    ![Terminal Session](https://katacoda.com/openshift/assets/jupyternotebooks/jupyterhub-workspace-42/05-jupyter-notebook-terminal-session.png)
+    ![Terminal Session](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyterhub-workspace-42/05-jupyter-notebook-terminal-session.png)
 
     Where the JupyterHub environment was created and a custom Jupyter notebook image was used containing a set of Jupyter notebook files, it could also include an OpenShift template, or set of resources for ``kustomize`` which can then be used to deploy any workloads required for the Jupyter notebook. For example, you might deploy a Dask or Spark cluster within the project right from the Jupyter notebook terminal interface.
 
@@ -332,4 +332,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 200
-checksum: "1800862921400818741"
+checksum: "18046486310522028800"

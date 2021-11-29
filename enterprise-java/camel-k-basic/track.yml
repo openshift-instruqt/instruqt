@@ -1,469 +1,416 @@
-challenges:
-- assignment: 'In order to run Camel K, you will need access to an Kubernetes/OpenShift
-    environment. Let''s setup the fundamentals.
-
-
-    ## Logging in to the Cluster via Dashboard
-
-
-    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com)
-    tab to open the dashboard.
-
-
-    You will then able able to login with admin permissions with:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-
-    ## Logging in to the Cluster via CLI
-
-
-    Before creating any applications, login as admin. This will be required if you
-    want to log in to the web console and
-
-    use it.
-
-
-    To login to the OpenShift cluster from the _Terminal_ run:
-
-
-    ```
-
-    oc login -u admin -p admin
-
-    ```
-
-
-    This will log you in using the credentials:
-
-
-    * **Username:** ``admin``
-
-    * **Password:** ``admin``
-
-
-    Use the same credentials to log into the web console.
-
-
-
-    ## Creating your own Project
-
-
-    To create a new project called ``camel-basic`` run the command:
-
-
-    ```
-
-    oc new-project camel-basic
-
-    ```
-
-
-    ## Install Camel K Operator
-
-
-    ```
-
-    oc apply -f /opt/operator-install.yaml -n camel-basic
-
-    ```
-
-    '
-  difficulty: basic
-  notes:
-  - contents: '
-
-      This scenario will introduce [Camel K ](https://camel.apache.org/camel-k/latest/index.html).
-
-
-      ## What is Camel K?
-
-
-
-      ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
-
-
-
-      ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
-
-
-      Apache Camel K is a lightweight integration framework built from Apache Camel
-      that runs natively on Kubernetes and is specifically designed for serverless
-      and microservice architectures.
-
-
-      Camel K supports multiple languages for writing integrations. Based the Operator
-      Pattern, Camel K performs operations on Kubernetes resources. Bringing integration
-      to the next level. utilizing the benefit of the Apache Camel project, such as
-      the wide variety of components and Enterprise Integration Patterns (EIP).
-
-
-      Camel K integrate seamlessly with Knative making it the best serverless technology
-      for integration. This scenario will get you started and hands on Camel K.
-
-      '
-    type: text
-  slug: step1
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 225
-  title: Step 1
-  type: challenge
-- assignment: "## Writing the first Camel K application\nWe are going to start fresh\
-    \ with a simple Camel K getting started application. Go to the text editor on\
-    \ the right, under the folder /root/camel-basic. Right click on the directory\
-    \ and choose New -> File and name it `Basic.java`.\n\nPaste the following code\
-    \ into the application.\n\n<pre class=\"file\" data-filename=\"Basic.java\" data-target=\"\
-    replace\">\n// camel-k: language=java\n\nimport org.apache.camel.builder.RouteBuilder;\n\
-    \npublic class Basic extends RouteBuilder {\n  @Override\n  public void configure()\
-    \ throws Exception {\n\n      from(\"timer:java?period=1000&fixedRate=true\")\n\
-    \      .setHeader(\"example\")\n      .constant(\"java\")\n      .setBody().simple(\"\
-    Hello World! Camel K route written in ${header.example}.\")\n      .to(\"log:ingo\"\
-    );\n\n  }\n}\n\n</pre>\n\nNotice you don't need to specify ANY dependency specification\
-    \ in the folder, Camel K will figure it out, and inject it during the build. So\
-    \ all you need is to JUST write your application. In this case, the Kamel binary\
-    \ will push it to the cluster and the operator will do all the tedious footworks\
-    \ for you.\n\n```\nkamel run camel-basic/Basic.java --dev\n```\n\nWait for the\
-    \ integration to be running (you should see the logs streaming in the terminal\
-    \ window).\n```\nintegration \"basic\" created\nProgress: integration \"basic\"\
-    \ in phase Initialization\nIntegrationPlatformAvailable for Integration basic:\
-    \ camel-k\nIntegration basic in phase Initialization\nProgress: integration \"\
-    basic\" in phase Building Kit\nNo IntegrationKitAvailable for Integration basic:\
-    \ creating a new integration kit\nIntegration basic in phase Building Kit\nIntegration\
-    \ basic dependent resource kit-bqceoqg41jjjfrfg2okg (Integration Kit) changed\
-    \ phase to Build Submitted\nIntegration basic dependent resource kit-bqceoqg41jjjfrfg2okg\
-    \ (Build) changed phase to Scheduling\nIntegration basic dependent resource kit-bqceoqg41jjjfrfg2okg\
-    \ (Integration Kit) changed phase to Build Running\n```\n\nIt's going to take\
-    \ 1-2 mins to start up your first application, since it needs to pull and build\
-    \ the image for the first time. But the next build will only take seconds.\n\n\
-    Once it started. You can find the pod running this Basic application in the terminal.\n\
-    \n```\n[3] 2020-04-17 00:31:44.003 INFO  [Camel (camel-k) thread #1 - timer://java]\
-    \ ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World!\
-    \ Camel K route written in java.]\n[3] 2020-04-17 00:31:45.003 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType:\
-    \ String, Body: Hello World! Camel K route written in java.]\n[3] 2020-04-17 00:31:46.002\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern:\
-    \ InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]\n\
-    [3] 2020-04-17 00:31:47.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo\
-    \ - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel\
-    \ K route written in java.]\n[3] 2020-04-17 00:31:48.002 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType:\
-    \ String, Body: Hello World! Camel K route written in java.]\n[3] 2020-04-17 00:31:49.004\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern:\
-    \ InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]\n\
-    [3] 2020-04-17 00:31:50.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo\
-    \ - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel\
-    \ K route written in java.]\n[3] 2020-04-17 00:31:51.003 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType:\
-    \ String, Body: Hello World! Camel K route written in java.]\n```\n\nGo to  [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/camel-basic/pods).\
-    \ Login if you have not already do so. Click into the *basic-xxxxxxxxxx* pod,\
-    \ click on the log tab. The output in the console should be the same as in the\
-    \ terminal.\n\nGo back to the editor and try changing the word `java` to  `Java`\
-    \ with Capital letter. And see what happens.   \n\n\n```\n[3] 2020-04-17 00:32:11.003\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern:\
-    \ InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]\n\
-    [3] 2020-04-17 00:32:12.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo\
-    \ - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel\
-    \ K route written in Java.]\n[3] 2020-04-17 00:32:13.002 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType:\
-    \ String, Body: Hello World! Camel K route written in Java.]\n[3] 2020-04-17 00:32:14.002\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern:\
-    \ InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]\n\
-    [3] 2020-04-17 00:32:15.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo\
-    \ - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel\
-    \ K route written in Java.]\n[3] 2020-04-17 00:32:16.004 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType:\
-    \ String, Body: Hello World! Camel K route written in Java.]\n[3] 2020-04-17 00:32:17.002\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern:\
-    \ InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]\n\
-    [3] 2020-04-17 00:32:18.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo\
-    \ - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel\
-    \ K route written in Java.]\n```\n\nHit ctrl+c on the terminal window. This will\
-    \ also terminate the execution of the integration.\n"
-  difficulty: basic
-  slug: step2
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 225
-  title: Step 2
-  type: challenge
-- assignment: "## Applying configuration and routing\n\nThis step shows how to configure\
-    \ the integration using external properties with simple content-based router.\n\
-    Go to the text editor on the right, under the folder /root/camel-basic. Right\
-    \ click on the directory and choose New -> File and name it `Routing.java`\n\n\
-    Paste the following code into the application.\n\n<pre class=\"file\" data-filename=\"\
-    Routing.java\" data-target=\"replace\">\n// camel-k: language=java\n\nimport java.util.Random;\n\
-    \nimport org.apache.camel.PropertyInject;\nimport org.apache.camel.builder.RouteBuilder;\n\
-    \npublic class Routing extends RouteBuilder {\n\n  private Random random = new\
-    \ Random();\n\n  @PropertyInject(\"priority-marker\")\n  private String priorityMarker;\n\
-    \n  @Override\n  public void configure() throws Exception {\n\n\n\n      from(\"\
-    timer:java?period=3000\")\n        .id(\"generator\")\n        .bean(this, \"\
-    generateRandomItem({{items}})\")\n        .choice()\n          .when().simple(\"\
-    ${body.startsWith('{{priority-marker}}')}\")\n            .transform().body(String.class,\
-    \ item -> item.substring(priorityMarker.length()))\n            .to(\"direct:priorityQueue\"\
-    )\n          .otherwise()\n            .to(\"direct:standardQueue\");\n\n    \
-    \  from(\"direct:standardQueue\")\n        .id(\"standard\")\n        .log(\"\
-    Standard item: ${body}\");\n\n      from(\"direct:priorityQueue\")\n        .id(\"\
-    priority\")\n        .log(\"!!Priority item: ${body}\");\n\n  }\n\n  public String\
-    \ generateRandomItem(String items) {\n    if (items == null || items.equals(\"\
-    \")) {\n      return \"[no items configured]\";\n    }\n    String[] list = items.split(\"\
-    \\\\s\");\n    return list[random.nextInt(list.length)];\n  }\n\n}\n\n</pre>\n\
-    \nThe `Routing.java` file shows how to inject properties into the routes via property\
-    \ placeholders and also the usage of the `@PropertyInject` annotation.\nThe routes\
-    \ use two configuration properties named `items` and `priority-marker` that should\
-    \ be provided using an external file such as the `routing.properties`\n\nGo to\
-    \ the text editor on the right, under the folder /root/camel-basic. Right click\
-    \ on the directory and choose New -> File and name it `routing.properties`\n\n\
-    <pre class=\"file\" data-filename=\"routing.properties\" data-target=\"replace\"\
-    >\n# List of items for random generation\nitems=*radiator *engine door window\
-    \ *chair\n\n# Marker to identify priority items\npriority-marker=*\n</pre>\n\n\
-    To run the integration, we should link the integration to the property file providing\
-    \ configuration for it:\n\n```\nkamel run camel-basic/Routing.java --property-file\
-    \  camel-basic/routing.properties --dev\n```\nOnce it started. You can find the\
-    \ pod running this Routing application in the terminal.\n\n```\n[1] 2020-04-17\
-    \ 03:35:40.528 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard\
-    \ item: door\n[1] 2020-04-17 03:35:43.532 INFO  [Camel (camel-k) thread #1 - timer://java]\
-    \ standard - Standard item: door\n[1] 2020-04-17 03:35:46.538 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] priority - !!Priority item: engine\n[1] 2020-04-17\
-    \ 03:35:49.526 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard\
-    \ item: door\n[1] 2020-04-17 03:35:52.532 INFO  [Camel (camel-k) thread #1 - timer://java]\
-    \ priority - !!Priority item: chair\n[1] 2020-04-17 03:35:55.532 INFO  [Camel\
-    \ (camel-k) thread #1 - timer://java] priority - !!Priority item: radiator\n[1]\
-    \ 2020-04-17 03:35:58.529 INFO  [Camel (camel-k) thread #1 - timer://java] priority\
-    \ - !!Priority item: chair\n[1] 2020-04-17 03:36:01.527 INFO  [Camel (camel-k)\
-    \ thread #1 - timer://java] standard - Standard item: door\n[1] 2020-04-17 03:36:04.536\
-    \ INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: window\n\
-    [1] 2020-04-17 03:36:07.541 INFO  [Camel (camel-k) thread #1 - timer://java] priority\
-    \ - !!Priority item: radiator\n```\n\nNow make some changes to the property file\
-    \ and see the integration redeployed.\nFor example, change the word `door` with\
-    \ `*door` to see it sent to the priority queue.\n\n\nHit `ctrl+c` on the terminal\
-    \ window.This will also terminate the execution of the integration.\n"
-  difficulty: basic
-  slug: step3
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 225
-  title: Step 3
-  type: challenge
-- assignment: '## Running integrations as Kubernetes CronJobs
-
-
-    The previous step can be automatically deployed as a Kubernetes CronJob if the
-    delay between executions is changed into a value that can be expressed by a cron
-    tab expression.
-
-
-    For example, you can edit the first endpoint (`timer:java?period=3000`) in *Routing.java*
-    into the following: `timer:java?period=60000` (1 minute between executions).
-
-
-    Now you can run the integration again:
-
-
-    ```
-
-    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties
-
-    ```
-
-
-    Now you''ll see that Camel K has materialized a cron job (it''s might take one
-    minute to appear.):
-
-
-    ```
-
-    oc get cronjob
-
-    ```
-
-
-    You''ll find a Kubernetes CronJob named "routing".
-
-
-    ```
-
-    NAME      SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-
-    routing   0/1 * * * ?   False     0        39s             51s
-
-    ```
-
-
-    The running behavior changes, because now there''s no pod always running (beware
-    you should not store data in memory when using the cronJob strategy).
-
-
-    You can see the pods starting and being destroyed by watching the namespace:
-
-
-    ```
-
-    oc get pod -w
-
-    ```
-
-
-    Hit `ctrl+c` on the terminal window.
-
-    To see the logs of each integration starting up, you can use the `kamel log` command:
-
-
-    ```
-
-    kamel log routing
-
-    ```
-
-
-    You should see every minute a JVM starting, executing a single operation and terminating.
-
-
-
-    The CronJob behavior is controlled via a Trait called `cron`. Traits are the main
-    way to configure high level Camel K features, to customize how integrations are
-    rendered.
-
-
-    To disable the cron feature and use the deployment strategy, you can run the integration
-    with:
-
-
-    ```
-
-    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties
-    -t cron.enabled=false
-
-    ```
-
-
-
-    This will disable the cron trait and restore the classic behavior (always running
-    pod).
-
-
-    You should see it reflected in the logs (which will be printed every minute by
-    the same JVM):
-
-
-    ```
-
-    kamel log routing
-
-    ```
-
-
-    Hit `ctrl+c` on the terminal window.
-
-
-    ## Congratulations
-
-
-    In this scenario you got to play with Camel K. Focusing on the code, and see the
-    power of how Camel K can enhance your experience when working on Kubernetes/OpenShift.
-    There is much more to Camel K than realtime development and  developer joy. Be
-    sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to
-    learn even more about the architecture and capabilities of this exciting new framework.
-
-    '
-  difficulty: basic
-  slug: step4
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 225
-  title: Step 4
-  type: challenge
-description: '
+slug: enterprise-java-camel-k-basic
+id: kwehv4mmyzjt
+type: track
+title: Getting Started with Camel K
+description: |2
 
   This scenario will introduce [Camel K ](https://camel.apache.org/camel-k/latest/index.html).
 
-
   ## What is Camel K?
-
 
 
   ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
 
 
-
   ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
 
+  Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-  Apache Camel K is a lightweight integration framework built from Apache Camel that
-  runs natively on Kubernetes and is specifically designed for serverless and microservice
-  architectures.
+  Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
 
-
-  Camel K supports multiple languages for writing integrations. Based the Operator
-  Pattern, Camel K performs operations on Kubernetes resources. Bringing integration
-  to the next level. utilizing the benefit of the Apache Camel project, such as the
-  wide variety of components and Enterprise Integration Patterns (EIP).
-
-
-  Camel K integrate seamlessly with Knative making it the best serverless technology
-  for integration. This scenario will get you started and hands on Camel K.
-
-  '
+  Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: false
 published: true
-skipping_enabled: false
-slug: enterprise-java-camel-k-basic
-tags:
-- openshift
-title: Getting Started with Camel K
-type: track
+challenges:
+- slug: step1
+  id: f8juhskmpquw
+  type: challenge
+  title: Step 1
+  notes:
+  - type: text
+    contents: |2
+
+      This scenario will introduce [Camel K ](https://camel.apache.org/camel-k/latest/index.html).
+
+      ## What is Camel K?
+
+
+      ![Logo](https://www.nicolaferraro.me/images/post-logo-apache-camel-d.png)
+
+
+      ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
+
+      Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
+
+      Camel K supports multiple languages for writing integrations. Based the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+
+      Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
+  assignment: |
+    In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
+
+    ## Logging in to the Cluster via Dashboard
+
+    Click the [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com) tab to open the dashboard.
+
+    You will then able able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+
+    ## Logging in to the Cluster via CLI
+
+    Before creating any applications, login as admin. This will be required if you want to log in to the web console and
+    use it.
+
+    To login to the OpenShift cluster from the _Terminal_ run:
+
+    ```
+    oc login -u admin -p admin
+    ```
+
+    This will log you in using the credentials:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+    Use the same credentials to log into the web console.
+
+
+    ## Creating your own Project
+
+    To create a new project called ``camel-basic`` run the command:
+
+    ```
+    oc new-project camel-basic
+    ```
+
+    ## Install Camel K Operator
+
+    ```
+    oc apply -f /opt/operator-install.yaml -n camel-basic
+    ```
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 225
+- slug: step2
+  id: gh61439tjujt
+  type: challenge
+  title: Step 2
+  assignment: |
+    ## Writing the first Camel K application
+    We are going to start fresh with a simple Camel K getting started application. Go to the text editor on the right, under the folder /root/camel-basic. Right click on the directory and choose New -> File and name it `Basic.java`.
+
+    Paste the following code into the application.
+
+    <pre class="file" data-filename="Basic.java" data-target="replace">
+    // camel-k: language=java
+
+    import org.apache.camel.builder.RouteBuilder;
+
+    public class Basic extends RouteBuilder {
+      @Override
+      public void configure() throws Exception {
+
+          from("timer:java?period=1000&fixedRate=true")
+          .setHeader("example")
+          .constant("java")
+          .setBody().simple("Hello World! Camel K route written in ${header.example}.")
+          .to("log:ingo");
+
+      }
+    }
+
+    </pre>
+
+    Notice you don't need to specify ANY dependency specification in the folder, Camel K will figure it out, and inject it during the build. So all you need is to JUST write your application. In this case, the Kamel binary will push it to the cluster and the operator will do all the tedious footworks for you.
+
+    ```
+    kamel run camel-basic/Basic.java --dev
+    ```
+
+    Wait for the integration to be running (you should see the logs streaming in the terminal window).
+    ```
+    integration "basic" created
+    Progress: integration "basic" in phase Initialization
+    IntegrationPlatformAvailable for Integration basic: camel-k
+    Integration basic in phase Initialization
+    Progress: integration "basic" in phase Building Kit
+    No IntegrationKitAvailable for Integration basic: creating a new integration kit
+    Integration basic in phase Building Kit
+    Integration basic dependent resource kit-bqceoqg41jjjfrfg2okg (Integration Kit) changed phase to Build Submitted
+    Integration basic dependent resource kit-bqceoqg41jjjfrfg2okg (Build) changed phase to Scheduling
+    Integration basic dependent resource kit-bqceoqg41jjjfrfg2okg (Integration Kit) changed phase to Build Running
+    ```
+
+    It's going to take 1-2 mins to start up your first application, since it needs to pull and build the image for the first time. But the next build will only take seconds.
+
+    Once it started. You can find the pod running this Basic application in the terminal.
+
+    ```
+    [3] 2020-04-17 00:31:44.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:45.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:46.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:47.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:48.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:49.004 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:50.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    [3] 2020-04-17 00:31:51.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in java.]
+    ```
+
+    Go to  [Console](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/camel-basic/pods). Login if you have not already do so. Click into the *basic-xxxxxxxxxx* pod, click on the log tab. The output in the console should be the same as in the terminal.
+
+    Go back to the editor and try changing the word `java` to  `Java` with Capital letter. And see what happens.
+
+
+    ```
+    [3] 2020-04-17 00:32:11.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:12.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:13.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:14.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:15.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:16.004 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:17.002 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    [3] 2020-04-17 00:32:18.003 INFO  [Camel (camel-k) thread #1 - timer://java] ingo - Exchange[ExchangePattern: InOnly, BodyType: String, Body: Hello World! Camel K route written in Java.]
+    ```
+
+    Hit ctrl+c on the terminal window. This will also terminate the execution of the integration.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 225
+- slug: step3
+  id: kvk3ppvqqxkh
+  type: challenge
+  title: Step 3
+  assignment: |
+    ## Applying configuration and routing
+
+    This step shows how to configure the integration using external properties with simple content-based router.
+    Go to the text editor on the right, under the folder /root/camel-basic. Right click on the directory and choose New -> File and name it `Routing.java`
+
+    Paste the following code into the application.
+
+    <pre class="file" data-filename="Routing.java" data-target="replace">
+    // camel-k: language=java
+
+    import java.util.Random;
+
+    import org.apache.camel.PropertyInject;
+    import org.apache.camel.builder.RouteBuilder;
+
+    public class Routing extends RouteBuilder {
+
+      private Random random = new Random();
+
+      @PropertyInject("priority-marker")
+      private String priorityMarker;
+
+      @Override
+      public void configure() throws Exception {
+
+
+
+          from("timer:java?period=3000")
+            .id("generator")
+            .bean(this, "generateRandomItem({{items}})")
+            .choice()
+              .when().simple("${body.startsWith('{{priority-marker}}')}")
+                .transform().body(String.class, item -> item.substring(priorityMarker.length()))
+                .to("direct:priorityQueue")
+              .otherwise()
+                .to("direct:standardQueue");
+
+          from("direct:standardQueue")
+            .id("standard")
+            .log("Standard item: ${body}");
+
+          from("direct:priorityQueue")
+            .id("priority")
+            .log("!!Priority item: ${body}");
+
+      }
+
+      public String generateRandomItem(String items) {
+        if (items == null || items.equals("")) {
+          return "[no items configured]";
+        }
+        String[] list = items.split("\\s");
+        return list[random.nextInt(list.length)];
+      }
+
+    }
+
+    </pre>
+
+    The `Routing.java` file shows how to inject properties into the routes via property placeholders and also the usage of the `@PropertyInject` annotation.
+    The routes use two configuration properties named `items` and `priority-marker` that should be provided using an external file such as the `routing.properties`
+
+    Go to the text editor on the right, under the folder /root/camel-basic. Right click on the directory and choose New -> File and name it `routing.properties`
+
+    <pre class="file" data-filename="routing.properties" data-target="replace">
+    # List of items for random generation
+    items=*radiator *engine door window *chair
+
+    # Marker to identify priority items
+    priority-marker=*
+    </pre>
+
+    To run the integration, we should link the integration to the property file providing configuration for it:
+
+    ```
+    kamel run camel-basic/Routing.java --property-file  camel-basic/routing.properties --dev
+    ```
+    Once it started. You can find the pod running this Routing application in the terminal.
+
+    ```
+    [1] 2020-04-17 03:35:40.528 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: door
+    [1] 2020-04-17 03:35:43.532 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: door
+    [1] 2020-04-17 03:35:46.538 INFO  [Camel (camel-k) thread #1 - timer://java] priority - !!Priority item: engine
+    [1] 2020-04-17 03:35:49.526 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: door
+    [1] 2020-04-17 03:35:52.532 INFO  [Camel (camel-k) thread #1 - timer://java] priority - !!Priority item: chair
+    [1] 2020-04-17 03:35:55.532 INFO  [Camel (camel-k) thread #1 - timer://java] priority - !!Priority item: radiator
+    [1] 2020-04-17 03:35:58.529 INFO  [Camel (camel-k) thread #1 - timer://java] priority - !!Priority item: chair
+    [1] 2020-04-17 03:36:01.527 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: door
+    [1] 2020-04-17 03:36:04.536 INFO  [Camel (camel-k) thread #1 - timer://java] standard - Standard item: window
+    [1] 2020-04-17 03:36:07.541 INFO  [Camel (camel-k) thread #1 - timer://java] priority - !!Priority item: radiator
+    ```
+
+    Now make some changes to the property file and see the integration redeployed.
+    For example, change the word `door` with `*door` to see it sent to the priority queue.
+
+
+    Hit `ctrl+c` on the terminal window.This will also terminate the execution of the integration.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 225
+- slug: step4
+  id: li7abdsweyzc
+  type: challenge
+  title: Step 4
+  assignment: |
+    ## Running integrations as Kubernetes CronJobs
+
+    The previous step can be automatically deployed as a Kubernetes CronJob if the delay between executions is changed into a value that can be expressed by a cron tab expression.
+
+    For example, you can edit the first endpoint (`timer:java?period=3000`) in *Routing.java* into the following: `timer:java?period=60000` (1 minute between executions).
+
+    Now you can run the integration again:
+
+    ```
+    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties
+    ```
+
+    Now you'll see that Camel K has materialized a cron job (it's might take one minute to appear.):
+
+    ```
+    oc get cronjob
+    ```
+
+    You'll find a Kubernetes CronJob named "routing".
+
+    ```
+    NAME      SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+    routing   0/1 * * * ?   False     0        39s             51s
+    ```
+
+    The running behavior changes, because now there's no pod always running (beware you should not store data in memory when using the cronJob strategy).
+
+    You can see the pods starting and being destroyed by watching the namespace:
+
+    ```
+    oc get pod -w
+    ```
+
+    Hit `ctrl+c` on the terminal window.
+    To see the logs of each integration starting up, you can use the `kamel log` command:
+
+    ```
+    kamel log routing
+    ```
+
+    You should see every minute a JVM starting, executing a single operation and terminating.
+
+
+    The CronJob behavior is controlled via a Trait called `cron`. Traits are the main way to configure high level Camel K features, to customize how integrations are rendered.
+
+    To disable the cron feature and use the deployment strategy, you can run the integration with:
+
+    ```
+    kamel run camel-basic/Routing.java --property-file camel-basic/routing.properties -t cron.enabled=false
+    ```
+
+
+    This will disable the cron trait and restore the classic behavior (always running pod).
+
+    You should see it reflected in the logs (which will be printed every minute by the same JVM):
+
+    ```
+    kamel log routing
+    ```
+
+    Hit `ctrl+c` on the terminal window.
+
+    ## Congratulations
+
+    In this scenario you got to play with Camel K. Focusing on the code, and see the power of how Camel K can enhance your experience when working on Kubernetes/OpenShift. There is much more to Camel K than realtime development and  developer joy. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to learn even more about the architecture and capabilities of this exciting new framework.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 225
+checksum: "7800703980122867541"

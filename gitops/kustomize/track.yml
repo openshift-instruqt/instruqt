@@ -19,7 +19,7 @@ description: |
   * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
   * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
-  ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
+  ![Kustomize Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/kustomize_logo.png)
 
   ## Use case
 
@@ -33,9 +33,9 @@ tags:
 - openshift
 owner: openshift
 developers:
-- chernand@redhat.com
-- nvinto@redhat.com
 - dahmed@redhat.com
+- nvinto@redhat.com
+- chernand@redhat.com
 private: false
 published: true
 challenges:
@@ -62,7 +62,7 @@ challenges:
       * Every artifact that kustomize uses is plain YAML and can be validated and processed as such
       * As a "templateless" templating system; it encourages using YAML without forking the repo it.
 
-      ![Kustomize Logo](https://katacoda.com/openshift/assets/gitops/kustomize_logo.png)
+      ![Kustomize Logo](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/kustomize_logo.png)
 
       ## Use case
 
@@ -282,7 +282,7 @@ challenges:
 
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
-    ![OpenShift GitOps Operator Installation](https://katacoda.com/openshift/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
 
     This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
@@ -292,7 +292,7 @@ challenges:
 
     You should see that the OpenShift GitOps Operator is installed.
 
-    ![OpenShift GitOps Installed](https://katacoda.com/openshift/assets/gitops/os-gitops-installed.png)
+    ![OpenShift GitOps Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/os-gitops-installed.png)
 
 
     ## The Argo CD Web Console
@@ -323,12 +323,12 @@ challenges:
 
     You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
 
-    ![ArgoCD UI Shortcut](https://katacoda.com/openshift/assets/gitops/argocd-shortcut.png)
+    ![ArgoCD UI Shortcut](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-shortcut.png)
 
     Once you have accepted the self signed certificate, you should be
     presented with the Argo CD login screen.
 
-    ![ArgoCD Login](https://katacoda.com/openshift/assets/gitops/argocd-login.png)
+    ![ArgoCD Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd-login.png)
 
     You can use the same credentials to login from the UI.
 
@@ -346,7 +346,7 @@ challenges:
 
     This should create an `Application` in the Argo CD UI.
 
-    ![bgdk-app](https://katacoda.com/openshift/assets/gitops/bgdk-app.png)
+    ![bgdk-app](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgdk-app.png)
 
     You can wait for the rollout of the application by running
 
@@ -358,7 +358,7 @@ challenges:
 
     It should look something like this.
 
-    ![bgd](https://katacoda.com/openshift/assets/gitops/bgd.png)
+    ![bgd](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/bgd.png)
 
     If you did the previous scenario, this should be familiar. But what
     if I wanted to deploy this application with modifications?
@@ -392,11 +392,11 @@ challenges:
 
     This should show you two apps on the Argo CD UI.
 
-    ![two-apps](https://katacoda.com/openshift/assets/gitops/two-apps.png)
+    ![two-apps](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/two-apps.png)
 
     Open the applicaiton's route by [CLICKING HERE](http://bgd-bgdk.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
 
-    ![yellow-square](https://katacoda.com/openshift/assets/gitops/yellow-square.png)
+    ![yellow-square](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/yellow-square.png)
 
     As you can see, the application deployed with your customizations! To review what we just did.
 
@@ -414,4 +414,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "18313114484201793342"
+checksum: "13121523132707308097"

@@ -1,512 +1,488 @@
-challenges:
-- assignment: "# Build your first application\n\nFor your convenience, this scenario\
-    \ has been created with a base project using the Java programming language and\
-    \ the Apache Maven build tool.\n\nFor educational purposes, this scenario uses\
-    \ one single Java class named `HttpApplication.java`. Now open that file, by clicking\
-    \ on the link below:\n\n``src/main/java/com/example/HttpApplication.java``\n\n\
-    As you review the content, you will notice that there are a lot of **TODO** comments.\
-    \ **Do not remove them!** These comments are used as a marker and without them,\
-    \ you will not be able to finish this scenario.\n\nNotice that `HttpApplication`\
-    \ class extends another class called `AbstractVerticle`. Before we start implementing\
-    \ our logic, let's discuss a bit what a Verticle is.\n\n# What is a verticle?\n\
-    Verticles \u2014 the Building Blocks of Eclipse Vert.x\n\nVert.x gives you a lot\
-    \ of freedom in how you can shape your application and code. But it also provides\
-    \ bricks to start writing reactive applications. Verticles are chunks of code\
-    \ that get deployed and run by Vert.x. An application, such as a microservice,\
-    \ would typically be comprised of many verticles. A verticle typically creates\
-    \ servers or clients, registers a set of Handlers', and encapsulates a part of\
-    \ the business logic of the system.\n\nIn Java, a verticle is a class extending\
-    \ the Abstract Verticle class:\n\n```java\n    import io.vertx.core.AbstractVerticle;\n\
-    \n    public class MyVerticle extends AbstractVerticle {\n        @Override\n\
-    \        public void start() throws Exception {\n            // Executed when\
-    \ the verticle is deployed\n        }\n\n        @Override\n        public void\
-    \ stop() throws Exception {\n            // Executed when the verticle is un-deployed\n\
-    \        }\n    }\n```\n\n## Creating a simple web server that can serve static\
-    \ content\n\n**1. Compile and run the application Eclipse Vert.x application**\n\
-    \nBefore we add code to create our web server you should build and test that current\
-    \ application starts as it should.\n\nFirst, switch to the project directory:\n\
-    \n```\ncd /root/projects/rhoar-getting-started/vertx/vertx-intro\n```\n\nSince\
-    \ this is already a working application, you can run it without any code changes\
-    \ locally directly using `maven` with goal `vertx:run`\n\n```\nmvn compile vertx:run\n\
-    ```\n\n>**NOTE:** The vert.x maven plugin replays the phases executed before it\
-    \ starts the application and it's therefor good practice to also specify the goals.\
-    \  \n\nAt this stage, the application doesn't do anything, but after a while,\
-    \ you should see the following two lines in your console window:\n\n```console\n\
-    [INFO] Starting vert.x application...\n[INFO] THE HTTP APPLICATION HAS STARTED\n\
-    ```\n>**NOTE:** The `\"Starting vert.x application...\"` line indicates that your\
-    \ application is starting and that the Verticles are triggered asynchronously.\
-    \ The message `\"THE HTTP APPLICATION HAS STARTED\"` that comes from a `System.out.println`\
-    \ in `HttpApplication.java` Verticle.\n\n**2. Add a router that can serve static\
-    \ content**\n\nYour first job will be to add an `HTTP` server that can return\
-    \ HTML pages.\n\n> **NOTE:** For your convenience the `HttpApplication` already\
-    \ has the necessary import statements.\n\nFirst, you need to create a `Router`\
-    \ object. This router will handle all incoming requests. Add the following line\
-    \ in the `start` method `HttpApplication.java` where the matching `TODO` statement\
-    \ is (or click the handy button that will insert the code in the correct place)\n\
-    \n<pre class=\"file\" data-filename=\"src/main/java/com/example/HttpApplication.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Create a router object\">Router\
-    \ router = Router.router(vertx);</pre>\n\nWe also need to tell the router to map\
-    \ incoming requests to files in the default location (e.g. `src/main/resources/webroot`).\
-    \ You can do that by adding the following line to the matching `TODO` statement.\n\
-    \n<pre class=\"file\" data-filename=\"src/main/java/com/example/HttpApplication.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Add a StaticHandler for accepting\
-    \ incoming requests\">router.get(\"/*\").handler(StaticHandler.create());</pre>\n\
-    \nNow we are ready to start the HTTP server,\n<pre class=\"file\" data-filename=\"\
-    src/main/java/com/example/HttpApplication.java\" data-target=\"insert\" data-marker=\"\
-    // TODO: Create the HTTP server listening on port 8080\">vertx.createHttpServer().requestHandler(router).listen(8080);</pre>\n\
-    \nNOTE: As you may have noticed Vert.x will automatically detect when you change\
-    \ and files an immediately redeploy the changes. The automatic redeploy is very\
-    \ convenient for development purposes but can be turned off for production usage.\n\
-    \n**3. Test the application**\n\nTo begin, click on the **Local Web Browser**\
-    \ tab in the console frame of this browser window, which will open another tab\
-    \ or window of your browser pointing to port 8080 on your client.\n\n![Local Web\
-    \ Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/web-browser-tab.png)\n\
-    \nYou should now see an HTML page that looks like this:\n\n![Local Web Browser\
-    \ Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/web-page.png)\n\
-    \nor use [this](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)\
-    \ link.\n\n> **NOTE:** The Invoke button doesn't work yet, but we will fix that\
-    \ in the next step.\n\n## Congratulations\n\nYou have now successfully executed\
-    \ the first step in this scenario.\n\nNow you've seen how you with basically three\
-    \ lines of code can create an HTTP Server that is capable of serving static content\
-    \ using the Vert.x Toolkit.\n\nIn next step of this scenario, we will add server-side\
-    \ business logic to our application.\n"
-  difficulty: basic
-  notes:
-  - contents: 'In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io),
-      one of the runtimes included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).
-
-
-
-
-      ## What you will learn
-
-      You will learn how to get started with building a reactive web application that
-      can serve static content as well as server-side business logic using Eclipse
-      Vert.x.
-
-
-      ## What is Eclipse Vert.x?
-
-
-      ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
-
-
-      Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot
-      (e.g., supports multiple programming languages).
-
-      In this session, we will focus on Java, but it would be possible to build the
-      same application in JavaScript, Groovy, Ruby, Ceylon, Scala, and Kotlin.
-
-
-      Eclipse Vert.x is event-driven and non-blocking, which means that applications
-      in Vert.x can handle a lot of concurrent requests using a small number of kernel
-      threads.
-
-      Vert.x lets your app scale with minimal hardware.
-
-
-      Vert.x is incredibly flexible - whether it''s network utilities, sophisticated
-      modern web applications, HTTP/REST microservices, high volume event processing
-      or a full-blown back-end message-bus application, Vert.x is a great fit.
-
-
-      Vert.x is used by many [different companies](http://vertx.io/whos_using/) from
-      real-time gaming to banking and everything in between.
-
-
-      Vert.x is not a restrictive framework or container and we don''t tell you a
-      correct way to write an application. Instead, we give you a lot of useful bricks
-      and let you create your app the way you want to.
-
-
-      Vert.x is fun - Enjoy being a developer again. Unlike restrictive traditional
-      application containers, Vert.x gives you incredible power and agility to create
-      compelling, scalable, 21st-century applications the way you want to, with a
-      minimum of fuss, in the language you want.
-
-
-      * Vert.x is lightweight - Vert.x core is around 650kB in size.
-
-      * Vert.x is fast. Here are some independent [numbers](https://www.techempower.com/benchmarks/#section=data-r8&hw=i7&test=plaintext).
-
-      * Vert.x is not an application server. There''s no monolithic Vert.x instance
-      into which you deploy applications. You just run your apps wherever you want
-      to.
-
-      * Vert.x is modular - when you need more bits just add the bits you need and
-      nothing more.
-
-      * Vert.x is simple but not simplistic. Vert.x allows you to create powerful
-      apps, simply.
-
-      * Vert.x is an ideal choice for creating light-weight, high-performance, microservices.
-
-      '
-    type: text
-  slug: 01-local-build
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 180
-  title: Step 1
-  type: challenge
-- assignment: "# Expand your application with server side logic\n\nIn Step 1 you learned\
-    \ how to start an HTTP Server and use a static handler to server static files\
-    \ like HTML, CSS, etc. In this step, we will create a new handler that uses server-side\
-    \ code.\n\nLooking closer at ``src/main/resources/webroot/index.html`` we can\
-    \ see that there is a JavaScript function at the end that should react if someone\
-    \ clicks the `Invoke` button. From this line `$.getJSON(\"/api/greeting?name=\"\
-    ` we can see that the webpage expects an API call that will act as a greetings\
-    \ function. The idea is that the API function should take the value of the input\
-    \ field and turn it into a greeting string. \n\n**1. Add a method for handle greetings\
-    \ call**\n\nFirst, we are going to implement a route handler called greeting.\
-    \ You will implement it as a private method in the `HttpApplication` class that\
-    \ takes a `RoutingContext` as a parameter. \n\nFirst open ``src/main/java/com/example/HttpApplication.java``\
-    \ again.\n\nFirst copy and paste the code below on the line stating `// TODO:\
-    \ Add method for greeting here`.\n\n<pre class=\"file\" data-filename=\"src/main/java/com/example/HttpApplication.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Add method for greeting here\"\
-    >private void greeting(RoutingContext rc) {\n    String name = rc.request().getParam(\"\
-    name\");\n    if (name == null) {\n        name = \"World\";\n    }\n\n    JsonObject\
-    \ response = new JsonObject()\n        .put(\"content\", String.format(template,\
-    \ name));\n\n    rc.response()\n        .putHeader(CONTENT_TYPE, \"application/json;\
-    \ charset=utf-8\")\n        .end(response.encodePrettily());\n    }\n</pre>\n\n\
-    The method uses a member variable called `template` that currently is defined\
-    \ as ``static final String template = \"Hello, %s!\";``.\n\nNOTE: Since we want\
-    \ our handler to return the response to the browser immediately we will use the\
-    \ `rc.response().end()`. It is however possible to chain several handlers by using\
-    \ `rc.response().write()` and `rc.next()`.  \n\n **2.Add a route**\n\nAfter implementing\
-    \ the handler we now need to add a route matching `/api/greeting` like this:\n\
-    \n<pre class=\"file\" data-filename=\"src/main/java/com/example/HttpApplication.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: Add router for /api/greeting here\"\
-    >router.get(\"/api/greeting\").handler(this::greeting);</pre>\n\nNOTE: It's best\
-    \ practice to add more specific routes before wildcard routes since Vert.x will\
-    \ go through the routers in the same order they were added and if a matching route\
-    \ is found and it calls `rc.end()` any subsequent routes will not be executed.\n\
-    \n**3. Test the application**\n\nNow you should be able to use the **Invoke**\
-    \ Button [here](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/).\
-    \ Test by adding different values in the input and also test by changing the `template`\
-    \ String in `HttpApplication.java`, to use another language. \n\n**4. Stop the\
-    \ application**\n\nBefore moving on, click in the terminal window and then press\
-    \ **CTRL-C** to stop the running application!\n\n## Congratulations\n\nYou have\
-    \ now learned how to use multiple **Routes** and how to implement an HTTP Service\
-    \ call that returns JSON. \n\nIn next step of this scenario we will deploy our\
-    \ application to the OpenShift Container Platform."
-  difficulty: basic
-  slug: 02-local-build2
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 180
-  title: Step 2
-  type: challenge
-- assignment: '
-
-    **Red Hat OpenShift Container Platform** is the preferred runtime for the **Red
-    Hat OpenShift Application Runtimes** like **Vert.x**. OpenShift Container Platform
-    is based on **Kubernetes** which is probably the most used Orchestration for containers
-    running in production. **OpenShift** is currently the only container platform
-    based on Kuberenetes that offers multitenancy. This means that developers can
-    have their own personal, isolated projects to test and verify application before
-    committing to a shared code repository.
-
-
-    OpenShift also ships with a feature rich web console as well as command line tools
-    to provide users with a friendly interface to work with applications deployed
-    to the platform.
-
-
-    **1. Login to OpenShift Container Platform**
-
-
-    To login, we will use the `oc` command and then specify username and password
-    like this:
-
-
-    ```
-
-    oc login [[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com -u
-    developer -p developer --insecure-skip-tls-verify=true
-
-    ```
-
-
-    Congratulations, you are now authenticated to the OpenShift server.
-
-
-    >**IMPORTANT:** If the above `oc login` command doesn''t seem to do anything,
-    you may have forgotten to stop the application from the previous
-
-    step. Click on the terminal and press **CTRL-C** to stop the application and try
-    the above `oc login` command again!
-
-
-    **2. Create project**
-
-
-    [Projects](https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/projects_and_users.html#projects)
-    are a top-level concept to help you organize your deployments. An OpenShift project
-    allows a community of users (or a user) to organize and manage their content in
-    isolation from other communities. Each project has its own resources, policies
-    (who can or cannot perform actions), and constraints (quotas and limits on resources,
-    etc.). Projects act as a wrapper around all the application services and endpoints
-    you (or your teams) are using for your work.
-
-
-    For this scenario, let''s create a project that you will use to house your applications.
-
-
-    ```
-
-    oc new-project dev --display-name="Dev - Eclipse Vert.x Http App"
-
-    ```
-
-
-    **3. Open the OpenShift Web Console**
-
-
-    OpenShift ships with a web-based console that will allow users to
-
-    perform various tasks via a browser. To get a feel for how the web console
-
-    works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
-
-
-    ![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)
-
-
-    The first screen you will see is the authentication screen. Enter your username
-    and password and
-
-    then login:
-
-
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/login.png)
-
-
-    After you have authenticated to the web console, you will be presented with a
-    list of projects that your user has permission to view.
-
-
-    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/projects.png)
-
-
-    Click on your new project name to be taken to the project overview page which
-    will list all of the routes, services, deployments, and pods that you have created
-    as part of your project:
-
-
-    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/overview.png)
-
-
-    There''s nothing there now, but that''s about to change.
-
-    '
-  difficulty: basic
-  slug: 03-login-to-openshift
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 180
-  title: Step 3
-  type: challenge
-- assignment: "# Deploy to OpenShift\n\nRunning the application on your local computer\
-    \ is great for a quick turn around, but it's also good to test the application\
-    \ in a production like environment. \n\n\nNOTE: **Openshift** also provides great\
-    \ CI/CD and pipeline functionality, but that is out of scope for the *Getting\
-    \ started scenarios*.\n\n\n\n**1. Deploying the application to your private project**\n\
-    \nRed Hat OpenShift Application Runtimes includes a powerful maven plugin that\
-    \ can take an existing Vert.x application and generate necessary Kubernetes configuration.\
-    \ \n\nTo deploy our application (and route) just execute the following\n\n```\n\
-    mvn fabric8:deploy -Popenshift\n```\n\n**2. Verify**\n\nAfter the maven build\
-    \ as finished, it will typically take less than 20 sec for the application to\
-    \ be available. To verify that everything is started run the following command\
-    \ and wait for it to report `replication controller \"http-vertx-1\" successfully\
-    \ rolled out`:\n\n```\noc rollout status dc/http-vertx\n```\n\nThen either go\
-    \ to the openshift web console and click on the route or click [here](http://http-vertx-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)\n\
-    \nTest and verify that the Invoke button works.\n\n## Congratulations\n\nYou have\
-    \ now successfully deploy your application to the OpenShift Container Platform.\
-    \ \n\nNow you've learned how to take an existing application and deploy it to\
-    \ OpenShift/Kubernetes. \n"
-  difficulty: basic
-  slug: 04-deploy-to-openshift
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 180
-  title: Step 4
-  type: challenge
-- assignment: "# Add health check\nOne limitation of our current application is that\
-    \ we do not provide an away for OpenShift to correctly monitoring it. Optimally\
-    \ we should probably add a specific health check route so please check out the\
-    \ [health check mission](https://access.redhat.com/documentation/en-us/red_hat_openshift_application_runtimes/1/html/eclipse_vert.x_runtime_guide/missions-intro#mission-health-check-vertx)\
-    \ , but for the moment we will add a simple call to '/', just to check that the\
-    \ Vert.x instance is alive and responding.\n\n## Health check warning\n\nOpen\
-    \ the [OpenShift webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)\n\
-    \nYou will then see the following warning\n\n![Health Check Warning](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/health-check-warning.png)\n\
-    \nThis is just a warning, and your container might be working 100% correctly,\
-    \ but without a proper health-check configured there is no way for OpenShift to\
-    \ tell if the application is responding correctly or not.  \n\n# Monitor if applications\
-    \ are responding correctly\n\n**1. Add a health check**\n\nOpen the `pom.xml`\
-    \ file and add the following lines at the `<!-- ADD HEALTH CHECK HERE -->` comment.\n\
-    \n<pre class=\"file\" data-filename=\"pom.xml\" data-target=\"insert\" data-marker=\"\
-    <!-- ADD HEALTH CHECK HERE -->\">\n  &lt;config&gt;\n    &lt;vertx-health-check&gt;\n\
-    \      &lt;path&gt;/&lt;/path&gt;\n    &lt;/vertx-health-check&gt;\n  &lt;/config&gt;\n\
-    </pre>\n\nAfter making this change, the fabric8:plugin has enough details to create\
-    \ the health-checks for us, and we can now redeploy our application with health\
-    \ checks active\n\n**2. Re-deploy the application**\n\nRedeploy the application\
-    \ by running the fabric8:deploy goal again.\n\n```\nmvn fabric8:undeploy fabric8:deploy\
-    \ -Popenshift\n```\n\nWait for the rollout to finish.\n\n```\noc rollout status\
-    \ dc/http-vertx\n```\n\nCheck that the warning is now gone from the [OpenShift\
-    \ webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)\n\
-    \n**3. Test**\n\nBelow is a rather complex command that does several steps in\
-    \ one. After the command, the different steps are explained in more detail.\n\n\
-    ```\noc --server https://$(hostname):8443 --insecure-skip-tls-verify=true rsh\
-    \ $(oc get pods -l app=http-vertx -o name) pkill java && oc get pods -w\n```\n\
-    \n`oc get pods -l app=http-vertx -o name` will return the name of the running\
-    \ pod, which is different each time.\n\n`oc rsh <pod> pkill java` stops the application.\n\
-    \n`oc get pods -w` will watch the pods over time and report any status changes\
-    \ to the pods, e.g., if they have crashed and needs to be restarted, etc.\n\n\
-    Type **CTRL+c** after a new pod is up and running to stop the watching the status\
-    \ of the pods.\n\nNow verify that the application has recovered and is responding\
-    \ again [here](http://http-vertx-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).\n"
-  difficulty: basic
-  slug: 05-add-health-check
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 180
-  title: Step 5
-  type: challenge
-description: 'In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io),
-  one of the runtimes included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).
-
+slug: developing-with-vertx-getting-started-vertx
+id: obkhicypfb4y
+type: track
+title: Getting Started with Vert.x
+description: |
+  In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io), one of the runtimes included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).
 
 
 
   ## What you will learn
-
-  You will learn how to get started with building a reactive web application that
-  can serve static content as well as server-side business logic using Eclipse Vert.x.
-
+  You will learn how to get started with building a reactive web application that can serve static content as well as server-side business logic using Eclipse Vert.x.
 
   ## What is Eclipse Vert.x?
 
+  ![Local Web Browser Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
 
-  ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
+  Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot (e.g., supports multiple programming languages).
+  In this session, we will focus on Java, but it would be possible to build the same application in JavaScript, Groovy, Ruby, Ceylon, Scala, and Kotlin.
 
-
-  Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot
-  (e.g., supports multiple programming languages).
-
-  In this session, we will focus on Java, but it would be possible to build the same
-  application in JavaScript, Groovy, Ruby, Ceylon, Scala, and Kotlin.
-
-
-  Eclipse Vert.x is event-driven and non-blocking, which means that applications in
-  Vert.x can handle a lot of concurrent requests using a small number of kernel threads.
-
+  Eclipse Vert.x is event-driven and non-blocking, which means that applications in Vert.x can handle a lot of concurrent requests using a small number of kernel threads.
   Vert.x lets your app scale with minimal hardware.
 
+  Vert.x is incredibly flexible - whether it's network utilities, sophisticated modern web applications, HTTP/REST microservices, high volume event processing or a full-blown back-end message-bus application, Vert.x is a great fit.
 
-  Vert.x is incredibly flexible - whether it''s network utilities, sophisticated modern
-  web applications, HTTP/REST microservices, high volume event processing or a full-blown
-  back-end message-bus application, Vert.x is a great fit.
+  Vert.x is used by many [different companies](http://vertx.io/whos_using/) from real-time gaming to banking and everything in between.
 
+  Vert.x is not a restrictive framework or container and we don't tell you a correct way to write an application. Instead, we give you a lot of useful bricks and let you create your app the way you want to.
 
-  Vert.x is used by many [different companies](http://vertx.io/whos_using/) from real-time
-  gaming to banking and everything in between.
-
-
-  Vert.x is not a restrictive framework or container and we don''t tell you a correct
-  way to write an application. Instead, we give you a lot of useful bricks and let
-  you create your app the way you want to.
-
-
-  Vert.x is fun - Enjoy being a developer again. Unlike restrictive traditional application
-  containers, Vert.x gives you incredible power and agility to create compelling,
-  scalable, 21st-century applications the way you want to, with a minimum of fuss,
-  in the language you want.
-
+  Vert.x is fun - Enjoy being a developer again. Unlike restrictive traditional application containers, Vert.x gives you incredible power and agility to create compelling, scalable, 21st-century applications the way you want to, with a minimum of fuss, in the language you want.
 
   * Vert.x is lightweight - Vert.x core is around 650kB in size.
-
   * Vert.x is fast. Here are some independent [numbers](https://www.techempower.com/benchmarks/#section=data-r8&hw=i7&test=plaintext).
-
-  * Vert.x is not an application server. There''s no monolithic Vert.x instance into
-  which you deploy applications. You just run your apps wherever you want to.
-
-  * Vert.x is modular - when you need more bits just add the bits you need and nothing
-  more.
-
-  * Vert.x is simple but not simplistic. Vert.x allows you to create powerful apps,
-  simply.
-
+  * Vert.x is not an application server. There's no monolithic Vert.x instance into which you deploy applications. You just run your apps wherever you want to.
+  * Vert.x is modular - when you need more bits just add the bits you need and nothing more.
+  * Vert.x is simple but not simplistic. Vert.x allows you to create powerful apps, simply.
   * Vert.x is an ideal choice for creating light-weight, high-performance, microservices.
-
-  '
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: false
 published: true
-skipping_enabled: false
-slug: developing-with-vertx-getting-started-vertx
-tags:
-- openshift
-title: Getting Started with Vert.x
-type: track
+challenges:
+- slug: 01-local-build
+  id: qgvixwc15s1w
+  type: challenge
+  title: Step 1
+  notes:
+  - type: text
+    contents: |
+      In this scenario, you will learn more about [Eclipse Vert.x](https://vertx.io), one of the runtimes included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar).
+
+
+
+      ## What you will learn
+      You will learn how to get started with building a reactive web application that can serve static content as well as server-side business logic using Eclipse Vert.x.
+
+      ## What is Eclipse Vert.x?
+
+      ![Local Web Browser Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/vertx-logo.png)
+
+      Eclipse Vert.x is a reactive toolkit for the Java Virtual Machine that is polyglot (e.g., supports multiple programming languages).
+      In this session, we will focus on Java, but it would be possible to build the same application in JavaScript, Groovy, Ruby, Ceylon, Scala, and Kotlin.
+
+      Eclipse Vert.x is event-driven and non-blocking, which means that applications in Vert.x can handle a lot of concurrent requests using a small number of kernel threads.
+      Vert.x lets your app scale with minimal hardware.
+
+      Vert.x is incredibly flexible - whether it's network utilities, sophisticated modern web applications, HTTP/REST microservices, high volume event processing or a full-blown back-end message-bus application, Vert.x is a great fit.
+
+      Vert.x is used by many [different companies](http://vertx.io/whos_using/) from real-time gaming to banking and everything in between.
+
+      Vert.x is not a restrictive framework or container and we don't tell you a correct way to write an application. Instead, we give you a lot of useful bricks and let you create your app the way you want to.
+
+      Vert.x is fun - Enjoy being a developer again. Unlike restrictive traditional application containers, Vert.x gives you incredible power and agility to create compelling, scalable, 21st-century applications the way you want to, with a minimum of fuss, in the language you want.
+
+      * Vert.x is lightweight - Vert.x core is around 650kB in size.
+      * Vert.x is fast. Here are some independent [numbers](https://www.techempower.com/benchmarks/#section=data-r8&hw=i7&test=plaintext).
+      * Vert.x is not an application server. There's no monolithic Vert.x instance into which you deploy applications. You just run your apps wherever you want to.
+      * Vert.x is modular - when you need more bits just add the bits you need and nothing more.
+      * Vert.x is simple but not simplistic. Vert.x allows you to create powerful apps, simply.
+      * Vert.x is an ideal choice for creating light-weight, high-performance, microservices.
+  assignment: |
+    # Build your first application
+
+    For your convenience, this scenario has been created with a base project using the Java programming language and the Apache Maven build tool.
+
+    For educational purposes, this scenario uses one single Java class named `HttpApplication.java`. Now open that file, by clicking on the link below:
+
+    ``src/main/java/com/example/HttpApplication.java``
+
+    As you review the content, you will notice that there are a lot of **TODO** comments. **Do not remove them!** These comments are used as a marker and without them, you will not be able to finish this scenario.
+
+    Notice that `HttpApplication` class extends another class called `AbstractVerticle`. Before we start implementing our logic, let's discuss a bit what a Verticle is.
+
+    # What is a verticle?
+    Verticles — the Building Blocks of Eclipse Vert.x
+
+    Vert.x gives you a lot of freedom in how you can shape your application and code. But it also provides bricks to start writing reactive applications. Verticles are chunks of code that get deployed and run by Vert.x. An application, such as a microservice, would typically be comprised of many verticles. A verticle typically creates servers or clients, registers a set of Handlers', and encapsulates a part of the business logic of the system.
+
+    In Java, a verticle is a class extending the Abstract Verticle class:
+
+    ```java
+        import io.vertx.core.AbstractVerticle;
+
+        public class MyVerticle extends AbstractVerticle {
+            @Override
+            public void start() throws Exception {
+                // Executed when the verticle is deployed
+            }
+
+            @Override
+            public void stop() throws Exception {
+                // Executed when the verticle is un-deployed
+            }
+        }
+    ```
+
+    ## Creating a simple web server that can serve static content
+
+    **1. Compile and run the application Eclipse Vert.x application**
+
+    Before we add code to create our web server you should build and test that current application starts as it should.
+
+    First, switch to the project directory:
+
+    ```
+    cd /root/projects/rhoar-getting-started/vertx/vertx-intro
+    ```
+
+    Since this is already a working application, you can run it without any code changes locally directly using `maven` with goal `vertx:run`
+
+    ```
+    mvn compile vertx:run
+    ```
+
+    >**NOTE:** The vert.x maven plugin replays the phases executed before it starts the application and it's therefor good practice to also specify the goals.
+
+    At this stage, the application doesn't do anything, but after a while, you should see the following two lines in your console window:
+
+    ```console
+    [INFO] Starting vert.x application...
+    [INFO] THE HTTP APPLICATION HAS STARTED
+    ```
+    >**NOTE:** The `"Starting vert.x application..."` line indicates that your application is starting and that the Verticles are triggered asynchronously. The message `"THE HTTP APPLICATION HAS STARTED"` that comes from a `System.out.println` in `HttpApplication.java` Verticle.
+
+    **2. Add a router that can serve static content**
+
+    Your first job will be to add an `HTTP` server that can return HTML pages.
+
+    > **NOTE:** For your convenience the `HttpApplication` already has the necessary import statements.
+
+    First, you need to create a `Router` object. This router will handle all incoming requests. Add the following line in the `start` method `HttpApplication.java` where the matching `TODO` statement is (or click the handy button that will insert the code in the correct place)
+
+    <pre class="file" data-filename="src/main/java/com/example/HttpApplication.java" data-target="insert" data-marker="// TODO: Create a router object">Router router = Router.router(vertx);</pre>
+
+    We also need to tell the router to map incoming requests to files in the default location (e.g. `src/main/resources/webroot`). You can do that by adding the following line to the matching `TODO` statement.
+
+    <pre class="file" data-filename="src/main/java/com/example/HttpApplication.java" data-target="insert" data-marker="// TODO: Add a StaticHandler for accepting incoming requests">router.get("/*").handler(StaticHandler.create());</pre>
+
+    Now we are ready to start the HTTP server,
+    <pre class="file" data-filename="src/main/java/com/example/HttpApplication.java" data-target="insert" data-marker="// TODO: Create the HTTP server listening on port 8080">vertx.createHttpServer().requestHandler(router).listen(8080);</pre>
+
+    NOTE: As you may have noticed Vert.x will automatically detect when you change and files an immediately redeploy the changes. The automatic redeploy is very convenient for development purposes but can be turned off for production usage.
+
+    **3. Test the application**
+
+    To begin, click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8080 on your client.
+
+    ![Local Web Browser Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/web-browser-tab.png)
+
+    You should now see an HTML page that looks like this:
+
+    ![Local Web Browser Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/web-page.png)
+
+    or use [this](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/) link.
+
+    > **NOTE:** The Invoke button doesn't work yet, but we will fix that in the next step.
+
+    ## Congratulations
+
+    You have now successfully executed the first step in this scenario.
+
+    Now you've seen how you with basically three lines of code can create an HTTP Server that is capable of serving static content using the Vert.x Toolkit.
+
+    In next step of this scenario, we will add server-side business logic to our application.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 180
+- slug: 02-local-build2
+  id: 8vzfmun5j995
+  type: challenge
+  title: Step 2
+  assignment: |-
+    # Expand your application with server side logic
+
+    In Step 1 you learned how to start an HTTP Server and use a static handler to server static files like HTML, CSS, etc. In this step, we will create a new handler that uses server-side code.
+
+    Looking closer at ``src/main/resources/webroot/index.html`` we can see that there is a JavaScript function at the end that should react if someone clicks the `Invoke` button. From this line `$.getJSON("/api/greeting?name="` we can see that the webpage expects an API call that will act as a greetings function. The idea is that the API function should take the value of the input field and turn it into a greeting string.
+
+    **1. Add a method for handle greetings call**
+
+    First, we are going to implement a route handler called greeting. You will implement it as a private method in the `HttpApplication` class that takes a `RoutingContext` as a parameter.
+
+    First open ``src/main/java/com/example/HttpApplication.java`` again.
+
+    First copy and paste the code below on the line stating `// TODO: Add method for greeting here`.
+
+    <pre class="file" data-filename="src/main/java/com/example/HttpApplication.java" data-target="insert" data-marker="// TODO: Add method for greeting here">private void greeting(RoutingContext rc) {
+        String name = rc.request().getParam("name");
+        if (name == null) {
+            name = "World";
+        }
+
+        JsonObject response = new JsonObject()
+            .put("content", String.format(template, name));
+
+        rc.response()
+            .putHeader(CONTENT_TYPE, "application/json; charset=utf-8")
+            .end(response.encodePrettily());
+        }
+    </pre>
+
+    The method uses a member variable called `template` that currently is defined as ``static final String template = "Hello, %s!";``.
+
+    NOTE: Since we want our handler to return the response to the browser immediately we will use the `rc.response().end()`. It is however possible to chain several handlers by using `rc.response().write()` and `rc.next()`.
+
+     **2.Add a route**
+
+    After implementing the handler we now need to add a route matching `/api/greeting` like this:
+
+    <pre class="file" data-filename="src/main/java/com/example/HttpApplication.java" data-target="insert" data-marker="// TODO: Add router for /api/greeting here">router.get("/api/greeting").handler(this::greeting);</pre>
+
+    NOTE: It's best practice to add more specific routes before wildcard routes since Vert.x will go through the routers in the same order they were added and if a matching route is found and it calls `rc.end()` any subsequent routes will not be executed.
+
+    **3. Test the application**
+
+    Now you should be able to use the **Invoke** Button [here](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/). Test by adding different values in the input and also test by changing the `template` String in `HttpApplication.java`, to use another language.
+
+    **4. Stop the application**
+
+    Before moving on, click in the terminal window and then press **CTRL-C** to stop the running application!
+
+    ## Congratulations
+
+    You have now learned how to use multiple **Routes** and how to implement an HTTP Service call that returns JSON.
+
+    In next step of this scenario we will deploy our application to the OpenShift Container Platform.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 180
+- slug: 03-login-to-openshift
+  id: mpnpmjqnhcar
+  type: challenge
+  title: Step 3
+  assignment: |2
+
+    **Red Hat OpenShift Container Platform** is the preferred runtime for the **Red Hat OpenShift Application Runtimes** like **Vert.x**. OpenShift Container Platform is based on **Kubernetes** which is probably the most used Orchestration for containers running in production. **OpenShift** is currently the only container platform based on Kuberenetes that offers multitenancy. This means that developers can have their own personal, isolated projects to test and verify application before committing to a shared code repository.
+
+    OpenShift also ships with a feature rich web console as well as command line tools to provide users with a friendly interface to work with applications deployed to the platform.
+
+    **1. Login to OpenShift Container Platform**
+
+    To login, we will use the `oc` command and then specify username and password like this:
+
+    ```
+    oc login [[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com -u developer -p developer --insecure-skip-tls-verify=true
+    ```
+
+    Congratulations, you are now authenticated to the OpenShift server.
+
+    >**IMPORTANT:** If the above `oc login` command doesn't seem to do anything, you may have forgotten to stop the application from the previous
+    step. Click on the terminal and press **CTRL-C** to stop the application and try the above `oc login` command again!
+
+    **2. Create project**
+
+    [Projects](https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/projects_and_users.html#projects) are a top-level concept to help you organize your deployments. An OpenShift project allows a community of users (or a user) to organize and manage their content in isolation from other communities. Each project has its own resources, policies (who can or cannot perform actions), and constraints (quotas and limits on resources, etc.). Projects act as a wrapper around all the application services and endpoints you (or your teams) are using for your work.
+
+    For this scenario, let's create a project that you will use to house your applications.
+
+    ```
+    oc new-project dev --display-name="Dev - Eclipse Vert.x Http App"
+    ```
+
+    **3. Open the OpenShift Web Console**
+
+    OpenShift ships with a web-based console that will allow users to
+    perform various tasks via a browser. To get a feel for how the web console
+    works, click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
+
+    ![OpenShift Console Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)
+
+    The first screen you will see is the authentication screen. Enter your username and password and
+    then login:
+
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/login.png)
+
+    After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
+
+    ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/projects.png)
+
+    Click on your new project name to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have created as part of your project:
+
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/overview.png)
+
+    There's nothing there now, but that's about to change.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 180
+- slug: 04-deploy-to-openshift
+  id: 3esgnap3vep3
+  type: challenge
+  title: Step 4
+  assignment: |
+    # Deploy to OpenShift
+
+    Running the application on your local computer is great for a quick turn around, but it's also good to test the application in a production like environment.
+
+
+    NOTE: **Openshift** also provides great CI/CD and pipeline functionality, but that is out of scope for the *Getting started scenarios*.
+
+
+
+    **1. Deploying the application to your private project**
+
+    Red Hat OpenShift Application Runtimes includes a powerful maven plugin that can take an existing Vert.x application and generate necessary Kubernetes configuration.
+
+    To deploy our application (and route) just execute the following
+
+    ```
+    mvn fabric8:deploy -Popenshift
+    ```
+
+    **2. Verify**
+
+    After the maven build as finished, it will typically take less than 20 sec for the application to be available. To verify that everything is started run the following command and wait for it to report `replication controller "http-vertx-1" successfully rolled out`:
+
+    ```
+    oc rollout status dc/http-vertx
+    ```
+
+    Then either go to the openshift web console and click on the route or click [here](http://http-vertx-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+
+    Test and verify that the Invoke button works.
+
+    ## Congratulations
+
+    You have now successfully deploy your application to the OpenShift Container Platform.
+
+    Now you've learned how to take an existing application and deploy it to OpenShift/Kubernetes.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 180
+- slug: 05-add-health-check
+  id: zpz7e3nffofn
+  type: challenge
+  title: Step 5
+  assignment: |
+    # Add health check
+    One limitation of our current application is that we do not provide an away for OpenShift to correctly monitoring it. Optimally we should probably add a specific health check route so please check out the [health check mission](https://access.redhat.com/documentation/en-us/red_hat_openshift_application_runtimes/1/html/eclipse_vert.x_runtime_guide/missions-intro#mission-health-check-vertx) , but for the moment we will add a simple call to '/', just to check that the Vert.x instance is alive and responding.
+
+    ## Health check warning
+
+    Open the [OpenShift webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)
+
+    You will then see the following warning
+
+    ![Health Check Warning](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/health-check-warning.png)
+
+    This is just a warning, and your container might be working 100% correctly, but without a proper health-check configured there is no way for OpenShift to tell if the application is responding correctly or not.
+
+    # Monitor if applications are responding correctly
+
+    **1. Add a health check**
+
+    Open the `pom.xml` file and add the following lines at the `<!-- ADD HEALTH CHECK HERE -->` comment.
+
+    <pre class="file" data-filename="pom.xml" data-target="insert" data-marker="<!-- ADD HEALTH CHECK HERE -->">
+      &lt;config&gt;
+        &lt;vertx-health-check&gt;
+          &lt;path&gt;/&lt;/path&gt;
+        &lt;/vertx-health-check&gt;
+      &lt;/config&gt;
+    </pre>
+
+    After making this change, the fabric8:plugin has enough details to create the health-checks for us, and we can now redeploy our application with health checks active
+
+    **2. Re-deploy the application**
+
+    Redeploy the application by running the fabric8:deploy goal again.
+
+    ```
+    mvn fabric8:undeploy fabric8:deploy -Popenshift
+    ```
+
+    Wait for the rollout to finish.
+
+    ```
+    oc rollout status dc/http-vertx
+    ```
+
+    Check that the warning is now gone from the [OpenShift webconsole Deployment config page](https://[[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com/console/project/dev/browse/dc/http-vertx?tab=configuration)
+
+    **3. Test**
+
+    Below is a rather complex command that does several steps in one. After the command, the different steps are explained in more detail.
+
+    ```
+    oc --server https://$(hostname):8443 --insecure-skip-tls-verify=true rsh $(oc get pods -l app=http-vertx -o name) pkill java && oc get pods -w
+    ```
+
+    `oc get pods -l app=http-vertx -o name` will return the name of the running pod, which is different each time.
+
+    `oc rsh <pod> pkill java` stops the application.
+
+    `oc get pods -w` will watch the pods over time and report any status changes to the pods, e.g., if they have crashed and needs to be restarted, etc.
+
+    Type **CTRL+c** after a new pod is up and running to stop the watching the status of the pods.
+
+    Now verify that the application has recovered and is responding again [here](http://http-vertx-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com).
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 180
+checksum: "2366533576587204119"

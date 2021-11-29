@@ -1,371 +1,514 @@
-challenges:
-- assignment: "## Composing methods returning Single\n\nOpen the `io.vertx.workshop.audit.impl.AuditVerticle`\
-    \ class:\n\n`audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java`\
-    \ \n\nThe first important detail of this verticle is its `start` method. As the\
-    \ `start` method from the traders, the method is asynchronous, and report its\
-    \ completion in the given `Future` object.\n\nVert.x would consider the verticle\
-    \ deploy when the Future is valuated. It may also report a failure if the verticle\
-    \ cannot be started correctly.\n\nInitializing the audit service includes:\n\n\
-    * Discover and configure the database (already in the code), and prepare the database\
-    \ (create the table),\n* Start the HTTP service and expose the REST API,\n* Retrieve\
-    \ the message source on which the operation are sent\n\nSo, it\u2019s clearly\
-    \ 3 independent actions, but the audit service is started only when all of them\
-    \ has been completed. So, we need to implement this orchestration.\n\nReplace\
-    \ the matching  `// TODO: retrieveSingles` block with code below\n\n<pre class=\"\
-    file\" data-filename=\"audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: retrieveSingles\">\nSingle&lt;JDBCClient&gt;\
-    \ databaseReady = jdbc\n    .flatMap(client -> initializeDatabase(client, true));\n\
-    Single&lt;HttpServer&gt; httpServerReady = configureTheHTTPServer();\nSingle&lt;MessageConsumer&lt;JsonObject&gt;&gt;\
-    \ messageConsumerReady = retrieveThePortfolioMessageSource();\n\nSingle&lt;MessageConsumer&lt;JsonObject&gt;&gt;\
-    \ readySingle = Single.zip(databaseReady, httpServerReady,\n    messageConsumerReady,\
-    \ (db, http, consumer) -> consumer);\n</pre>\n\nThis code should retrieves 3 Single\
-    \ objects (from methods provided in the class) and wait for the completion of\
-    \ the three tasks. The three singles are then combined in one `Single<MessageConsumer<JsonObject>>`.\
-    \ Don\u2019t forget that the `initializeDatabase` requires the JDBC client as\
-    \ parameter and so should be called once the ``jdbc Single`` has completed. Also\
-    \ look at the `retrieveThePortfolioMessageSource` method to see how you can create\
-    \ a ``Single`` object from an already known entity (we should have used service\
-    \ discovery - it\u2019s just to give an example). When you have the three Singles,\
-    \ zip them to be notified when all of them have completed. The zip function must\
-    \ return the `MessageConsumer<JsonObject>>`.\n\nOn success this Single registers\
-    \ a message listener on the portfolio message source storing the operation in\
-    \ the database for each received message.\n\nIts completion notifies Vert.x that\
-    \ the start process is completed (or successfully or not), it calls `future.complete()`\
-    \ and `future.fail(cause)`."
-  difficulty: basic
-  notes:
-  - contents: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley\
-      \ Act requires you to keep a track of every transaction you do on a financial\
-      \ market. The audit service records the shares you buy and sell in a database.\
-      \ It\u2019s going to be a PostGreSQL database, but is would be similar with\
-      \ another database, even no-sql database. The database is going to be deployed\
-      \ in OpenShift.\n \nIn this chapter we are going to cover: \n\n* advanced asynchronous\
-      \ orchestration \n* asynchronous JDBC \n* Vert.x Web to build REST API \n* Managing\
-      \ secrets with OpenShift\n\n**1. Initialize katacoda environment**\n\nYou may\
-      \ have noticed a script running in the terminal. This is getting the lab ready\
-      \ up to this scenario i.e. it is \n1. Cloning the source code\n2. Initialize\
-      \ the OpenShift environment\n3. Build and deploy the quote-generator scenario\n\
-      4. Build and deploy the portfolio-service sceanrio\n5. Build and deploy the\
-      \ compulsive-traders sceanrio\n6. Build and deploy the micro-trader-dashboard\n\
-      \n\n**2. Accessing data asynchronously**\n\nAs said previously, Vert.x is asynchronous\
-      \ and you must never block the event loop. And you know what\u2019s definitely\
-      \ blocking? Database accesses and more particularly JDBC! Fortunately, Vert.x\
-      \ provides a JDBC client that is asynchronous.\n\nThe principle is simple (and\
-      \ is applied to all clients accessing blocking systems):\n\n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
-      \nHowever, interactions with databases are rarely a single operation, but a\
-      \ composition of operations. For example:\n\n1. Get a connection\n2. Drop some\
-      \ tables\n3. Create some tables\n4. Close the connection\n\n**3. The Audit service**\n\
-      \nThe Audit service:\n\n1. Listens for the financial operations on the event\
-      \ bus\n2. Stores the received operations in a database\n3. Exposes a REST API\
-      \ to get the last 10 operations\n\nInteractions with the database use the `vertx-jdbc-client`,\
-      \ an async version of JDBC. So expect to see some SQL code (I know you love\
-      \ it). But, to orchestrate all these asynchronous calls, we need the right weapons.\
-      \ We are going to use RX Java 2 for this."
-    type: text
-  slug: 01-audit-verticle
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 1
-  type: challenge
-- assignment: "##  Implementing a method returning a Single & Vert.x Web\n\nTake a\
-    \ look at the `configureTheHTTPServer` method. In this method we are going to\
-    \ use a new Vert.x Component: Vert.x Web. Vert.x Web is a Vert.x extension to\
-    \ build modern web application. Here we are going to use a Router which let us\
-    \ implement REST APIs easily (\xE0 la Hapi or ExpressJS). So:\n\n1. Create a `Router`\
-    \ object with: `Router.router(vertx)`\n2. Register a route (on /) on the router,\
-    \ calling `retrieveOperations` (using ``router.get(\"/\").handler(\u2026\u200B\
-    )``)\n3. Create a HTTP server delegating the request handler to router.accept.\n\
-    4. Retrieve the port passed in the configuration or 0 if not set (it picks an\
-    \ available port), we can pick a random port as it is exposed in the service record,\
-    \ so consumer are bound to the right port.\n5. Start the server with the `rxListen`\
-    \ version of the listen method that returns a single.\n\nIn the same `io.vertx.workshop.audit.impl.AuditVerticle`\
-    \ class, add the below content to the matching `// TODO: configureTheHTTPServer`\
-    \ statement (or use the `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"\
-    audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: configureTheHTTPServer\">\nRouter\
-    \ router = Router.router(vertx);\nrouter.get(\"/\").handler(this::retrieveOperations);\n\
-    router.get(\"/health\").handler(rc -> {\n        if (ready) {\n            rc.response().end(\"\
-    Ready\");\n        } else {\n            // Service not yet available\n      \
-    \      rc.response().setStatusCode(503).end();\n        }\n    });\nreturn vertx.createHttpServer().requestHandler(router::accept).rxListen(8080);\n\
-    </pre>\n\nIt creates a `Router`. The Router is an object from Vert.x web that\
-    \ ease the creation of REST API with Vert.x. We won\u2019t go into too much details\
-    \ here, but if you want to implement REST API with Vert.x, this is the way to\
-    \ go. On our `Router` we declare a route: when a request arrive on `/`, it calls\
-    \ this `Handler`. Then, we create the HTTP server. The requestHandler is a specific\
-    \ method of the router, and we return the result of the `rxListen` method.\n\n\
-    So, the caller can call this method and get a Single. It can subscribe on it to\
-    \ bind the server and be notified of the completion of the operation (or failure).\n\
-    \nThe audit service needs to orchestrate a set of task before being ready to serve.\
-    \ We should indicate this readiness state to Kubernetes so it can know when we\
-    \ are ready. This would let it implement a rolling update strategy without downtime\
-    \ as the previous version of the service will still be used until the new one\
-    \ is ready.\n\nYou may have notice that our class has a `ready` field set to true\
-    \ when we have completed our startup. In addition, our pom.xml has the `<vertx.health.path>/health</vertx.health.path>`\
-    \ property indicating a health check. It instructs Kubernetes to ping this endpoint\
-    \ to know when the application is ready. But, there is still one thing required:\
-    \ serving these request. Jump back to the configureTheHTTPServer method and add\
-    \ a route handling ``GET /health`` and returning a 200 response when the ``ready``\
-    \ field is true, or a 503 response otherwise. Set the status code with: `rc.response().setStatusCode(200).end(\"\
-    Ready\")` (and don\u2019t forget to call end).\n\nWith this in place, during the\
-    \ deployment, you will see that the pod state stays a \"long\" time in the not\
-    \ ready state (light blue). When the readiness check succeed, Kubernetes starts\
-    \ routing request to this pod."
-  difficulty: basic
-  slug: 02-vertx-web
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 2
-  type: challenge
-- assignment: "## Using Async JDBC\n\nIn the `start` method, we are calling `initializeDatabase`.\
-    \ This method is also not very functional at this point. Let\u2019s look at this\
-    \ method using another type of action composition. This method:\n\n* get a connection\
-    \ to the database\n* drop the table\n* create the table\n* close the connection\
-    \ (whatever the result of the two last operations)\n\nAll these operations may\
-    \ fail. Unlike in the start method where the actions were unrelated, these actions\
-    \ are related. Fortunately, we can chain asynchronous action using the flatMap\
-    \ operator of RX Java 2.\n\n```java\nSingle<X> chain = input.flatMap(function1);\n\
-    ```\n\nSo to use the composition pattern, we just need a set of Functions and\
-    \ a Single that would trigger the chain.\n\nLook at the `initializeDatabase` method\
-    \ in the `AuditVerticle` class\n\nAdd the below content to the matching `// TODO:\
-    \ retrieveConnection` statement in the `initializeDatabase` method (or use the\
-    \ `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: retrieveConnection\">\nSingle&lt;SQLConnection&gt;\
-    \ connectionRetrieved = jdbc.rxGetConnection();\n</pre>\n\nThen, we need compose\
-    \ the Single with the flatMap operator that is taking a SQLConnection as parameter\
-    \ and returns a Single containing the result of the database initialization:\n\
-    \n1. we create the batch to execute\n2. the rxBatch executes the batch gives us\
-    \ the single returns of the operation\n3. finally we close the connection with\
-    \ doAfterTerminate\n\nSo, insert into the matching `// TODO: executeBatch` statement\
-    \ in the `initializeDatabase` method\n\n<pre class=\"file\" data-filename=\"audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: executeBatch\">\nreturn connectionRetrieved\n\
-    \    .flatMap(conn -> {\n        // When the connection is retrieved\n\n     \
-    \   // Prepare the batch\n        List&lt;String&gt; batch = new ArrayList<>();\n\
-    \        if (drop) {\n            // When the table is dropped, we recreate it\n\
-    \            batch.add(DROP_STATEMENT);\n        }\n        // Just create the\
-    \ table\n        batch.add(CREATE_TABLE_STATEMENT);\n\n        // We compose with\
-    \ a statement batch\n        Single&lt;List&lt;Integer&gt;&gt; next = conn.rxBatch(batch);\n\
-    \n        // Whatever the result, if the connection has been retrieved, close\
-    \ it\n        return next.doAfterTerminate(conn::close);\n    })\n</pre>\n\nThe\
-    \ previous statement return a Single&lt;List&lt;Integer&gt;&gt; but we need a\
-    \ Single<JDBCClient>. Append .map(x \u2192 jdbc) and return the result:\n\nSo,\
-    \ insert into the matching `// TODO: returnResult` statement in the `initializeDatabase`\
-    \ method\n\n<pre class=\"file\" data-filename=\"audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: returnResult\">\n.map(list ->\
-    \ client);\n</pre>\n"
-  difficulty: basic
-  slug: 03-async-jdbc
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 3
-  type: challenge
-- assignment: "## Async JDBC with a callback-based composition\n\nYou may ask why\
-    \ we do such kind of composition. Let\u2019s implement a method without any composition\
-    \ operator (just using callbacks). The retrieveOperations method is called when\
-    \ a HTTP request arrives and should return a JSON object containing the last 10\
-    \ operations. So, in other words:\n\n1. Get a connection to the database\n2. Query\
-    \ the database\n3. Iterate over the result to get the list\n4. Write the list\
-    \ in the HTTP response\n5. Close the database\n\nThe step (1) and (2) are asynchronous.\
-    \ (5) is asynchronous too, but we don\u2019t have to wait for the completion.\
-    \ In this code, don\u2019t use composition (that\u2019s the purpose of this exercise).\
-    \ In `retrieveOperations`, write the required code using Handlers / Callbacks.\n\
-    \nAdd the below content to the matching `// TODO: retrieveOperations` statement\
-    \ in the `retrieveOperations` method of the `AuditVerticle` class (or use the\
-    \ `Copy to Editor` button):\n\n<pre class=\"file\" data-filename=\"audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java\"\
-    \ data-target=\"insert\" data-marker=\"// TODO: retrieveOperations\">\n // 1.\
-    \ Get the connection\n jdbc.getConnection(ar -> {\n     SQLConnection connection\
-    \ = ar.result();\n     if (ar.failed()) {\n         context.fail(ar.cause());\n\
-    \     } else {\n         // 2. When done, execute the query\n         connection.query(SELECT_STATEMENT,\
-    \ result -> {\n             // 3. When done, iterate over the result to build\
-    \ a list\n             ResultSet set = result.result();\n             List&lt;JsonObject&gt;\
-    \ operations = set.getRows().stream()\n                 .map(json -> new JsonObject(json.getString(\"\
-    operation\")))\n                 .collect(Collectors.toList());\n            \
-    \ // 5. write this list into the response\n             context.response().setStatusCode(200).end(Json.encodePrettily(operations));\n\
-    \             // 6. close the connection\n             connection.close();\n \
-    \        });\n     }\n });\n</pre>\n\nSo obviously it\u2019s possible too not\
-    \ use RX Java. But imagine when you have several asynchronous operations to chain,\
-    \ it become a callback hell very quickly. But again, Vert.x gives you the freedom\
-    \ to choose what you prefer."
-  difficulty: basic
-  slug: 04-async-jdbc-with-callback
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 4
-  type: challenge
-- assignment: "## Deploy to OpenShift\n\nFirst, we need a database.\n\n**1. Deploy\
-    \ the database**\n\n```\ncd /root/code/audit-service\n```\n\n```\noc new-app -e\
-    \ POSTGRESQL_USER=admin -ePOSTGRESQL_PASSWORD=secret -ePOSTGRESQL_DATABASE=audit\
-    \ registry.access.redhat.com/rhscl/postgresql-94-rhel7 --name=audit-database\n\
-    ```\n\nIt creates a new database service named `audit-database` with the given\
-    \ credentials and settings. Be aware that for sake of simplicity this database\
-    \ is not using a persistent storage.\n\nNow, we can deploy our audit service:\n\
-    \n```\nmvn fabric8:deploy\n```\n\n**2. Access the Micro-trader dashboard**\n\n\
-    Click on the \"OpenShift Console\" tab next to the \"Local Web Browser\" tab.\n\
-    \n![OpenShift Console Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)\n\
-    \nLog in using `developer/developer` for username and password. You should see\
-    \ the newly created project called `\u201Cvertx-kubernetes-workshop\"`. Click\
-    \ on it. You should see six pods running, one each for the quote-generator, portfolio-service,\
-    \ compulsive-traders and micro-trader-dashboard microservices that you created\
-    \ in previous scenarios and new ones for the audit-database and audit-service\
-    \ that you created just now.\n\nClick on the route for the `micro-trader-dashboard`.\
-    \ Append `\u201C/admin\u201D` at the end of the route and you should see the dashboard.\
-    \ You should see some new services and if you click on the \u201CTrader\u201D\
-    \ tab on the left, you should see the operations in the top right corner!\n\n\
-    Alternatively, you can click on the\n[route URL](http://micro-trader-dashboard-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/admin)\n\
-    to access the dashboard."
-  difficulty: basic
-  slug: 05-deploy-to-openshift
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 5
-  type: challenge
-- assignment: "## Managing Secrets\n\nBut wait\u2026\u200B we have hardcoded the database\
-    \ credentials in our code. This is not optimal. OpenShift provides a way to manage\
-    \ secrets.\n\nLet\u2019s first create a Secret entity using:\n\n```\noc create\
-    \ -f src/kubernetes/database-secret.yaml\n```\n\nYou can open the specified file\
-    \ and see how this object is structured. Basically it\u2019s a set of key/value\
-    \ pairs.\n\nThere are several ways to access secrets from your application:\n\n\
-    1, ENV variables\n2. Mounted as a file\n3. Using the Vert.x config\n\nFor sake\
-    \ of simplicity we are going to use the first approach.\n\nSo, we first need to\
-    \ bind the secret with our deployment. \n\nOpen `audit-service/src/main/fabric8/deployment.yml`\
-    \ and copy the following content (or uncomment the commented part):\n\n```yaml\n\
-    spec:\n  template:\n    spec:\n      containers:\n        - name: vertx\n    \
-    \      env:\n            - name: KUBERNETES_NAMESPACE\n              valueFrom:\n\
-    \                fieldRef:\n                  apiVersion: v1\n               \
-    \   fieldPath: metadata.namespace\n            - name: JAVA_OPTIONS\n        \
-    \      value: '-Dvertx.cacheDirBase=/tmp -Dvertx.jgroups.config=default-configs/default-jgroups-kubernetes.xml\
-    \ -Djava.net.preferIPv4Stack=true'\n            - name: JAVA_ARGS\n          \
-    \    value: '-cluster'\n            - name: DB_USERNAME\n              valueFrom:\n\
-    \                 secretKeyRef:\n                   name: audit-database-config\n\
-    \                   key: user\n            - name: DB_PASSWORD\n             \
-    \ valueFrom:\n                 secretKeyRef:\n                   name: audit-database-config\n\
-    \                   key: password\n            - name: DB_URL\n              valueFrom:\n\
-    \                secretKeyRef:\n                  name: audit-database-config\n\
-    \                  key: url\n```\n\nNotice the 3 last env variables retrieving\
-    \ values from the audit-database-config secret.\n\nNow, we need to update our\
-    \ code. Open `io.vertx.workshop.audit.impl.AuditVerticle` and replace the content\
-    \ of the `getDatabaseConfiguration` method with:\n\n```java\nreturn new JsonObject()\n\
-    \    .put(\"user\", System.getenv(\"DB_USERNAME\"))\n    .put(\"password\", System.getenv(\"\
-    DB_PASSWORD\"))\n    .put(\"driver_class\", \"org.postgresql.Driver\")\n    .put(\"\
-    url\", System.getenv(\"DB_URL\"));\n```\n\nAnd redeploy your service using: \n\
-    \n```\nmvn fabric8:undeploy fabric8:deploy\n```\n\nVoil\xE0! we have externalized\
-    \ the credentials from the application."
-  difficulty: basic
-  slug: 06-managing-secrets
-  tabs:
-  - hostname: crc
-    title: Terminal 1
-    type: terminal
-  - hostname: crc
-    path: /
-    port: 30001
-    title: Web Console
-    type: service
-  - hostname: crc
-    path: /root
-    title: Visual Editor
-    type: code
-  timelimit: 150
-  title: Step 6
-  type: challenge
-description: "## The Audit Service\n\nThe law is the law. The Sarbanes\u2013Oxley\
-  \ Act requires you to keep a track of every transaction you do on a financial market.\
-  \ The audit service records the shares you buy and sell in a database. It\u2019\
-  s going to be a PostGreSQL database, but is would be similar with another database,\
-  \ even no-sql database. The database is going to be deployed in OpenShift.\n \n\
-  In this chapter we are going to cover: \n\n* advanced asynchronous orchestration\
-  \ \n* asynchronous JDBC \n* Vert.x Web to build REST API \n* Managing secrets with\
-  \ OpenShift\n\n**1. Initialize katacoda environment**\n\nYou may have noticed a\
-  \ script running in the terminal. This is getting the lab ready up to this scenario\
-  \ i.e. it is \n1. Cloning the source code\n2. Initialize the OpenShift environment\n\
-  3. Build and deploy the quote-generator scenario\n4. Build and deploy the portfolio-service\
-  \ sceanrio\n5. Build and deploy the compulsive-traders sceanrio\n6. Build and deploy\
-  \ the micro-trader-dashboard\n\n\n**2. Accessing data asynchronously**\n\nAs said\
-  \ previously, Vert.x is asynchronous and you must never block the event loop. And\
-  \ you know what\u2019s definitely blocking? Database accesses and more particularly\
-  \ JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.\n\nThe\
-  \ principle is simple (and is applied to all clients accessing blocking systems):\n\
-  \n![Architecture](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)\n\
-  \nHowever, interactions with databases are rarely a single operation, but a composition\
-  \ of operations. For example:\n\n1. Get a connection\n2. Drop some tables\n3. Create\
-  \ some tables\n4. Close the connection\n\n**3. The Audit service**\n\nThe Audit\
-  \ service:\n\n1. Listens for the financial operations on the event bus\n2. Stores\
-  \ the received operations in a database\n3. Exposes a REST API to get the last 10\
-  \ operations\n\nInteractions with the database use the `vertx-jdbc-client`, an async\
-  \ version of JDBC. So expect to see some SQL code (I know you love it). But, to\
-  \ orchestrate all these asynchronous calls, we need the right weapons. We are going\
-  \ to use RX Java 2 for this."
+slug: developing-with-vertx-audit-service
+id: g7rdxqr7xvvn
+type: track
+title: 'MicroTrader App Part 4: Audit Service'
+description: |-
+  ## The Audit Service
+
+  The law is the law. The Sarbanes–Oxley Act requires you to keep a track of every transaction you do on a financial market. The audit service records the shares you buy and sell in a database. It’s going to be a PostGreSQL database, but is would be similar with another database, even no-sql database. The database is going to be deployed in OpenShift.
+
+  In this chapter we are going to cover:
+
+  * advanced asynchronous orchestration
+  * asynchronous JDBC
+  * Vert.x Web to build REST API
+  * Managing secrets with OpenShift
+
+  **1. Initialize katacoda environment**
+
+  You may have noticed a script running in the terminal. This is getting the lab ready up to this scenario i.e. it is
+  1. Cloning the source code
+  2. Initialize the OpenShift environment
+  3. Build and deploy the quote-generator scenario
+  4. Build and deploy the portfolio-service sceanrio
+  5. Build and deploy the compulsive-traders sceanrio
+  6. Build and deploy the micro-trader-dashboard
+
+
+  **2. Accessing data asynchronously**
+
+  As said previously, Vert.x is asynchronous and you must never block the event loop. And you know what’s definitely blocking? Database accesses and more particularly JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.
+
+  The principle is simple (and is applied to all clients accessing blocking systems):
+
+  ![Architecture](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)
+
+  However, interactions with databases are rarely a single operation, but a composition of operations. For example:
+
+  1. Get a connection
+  2. Drop some tables
+  3. Create some tables
+  4. Close the connection
+
+  **3. The Audit service**
+
+  The Audit service:
+
+  1. Listens for the financial operations on the event bus
+  2. Stores the received operations in a database
+  3. Exposes a REST API to get the last 10 operations
+
+  Interactions with the database use the `vertx-jdbc-client`, an async version of JDBC. So expect to see some SQL code (I know you love it). But, to orchestrate all these asynchronous calls, we need the right weapons. We are going to use RX Java 2 for this.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
 developers:
 - dahmed@redhat.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-icon: https://logodix.com/logo/1910931.png
-level: beginner
-owner: openshift
 private: false
 published: true
-skipping_enabled: false
-slug: developing-with-vertx-audit-service
-tags:
-- openshift
-title: 'MicroTrader App Part 4: Audit Service'
-type: track
+challenges:
+- slug: 01-audit-verticle
+  id: zpej8hcxh804
+  type: challenge
+  title: Step 1
+  notes:
+  - type: text
+    contents: |-
+      ## The Audit Service
+
+      The law is the law. The Sarbanes–Oxley Act requires you to keep a track of every transaction you do on a financial market. The audit service records the shares you buy and sell in a database. It’s going to be a PostGreSQL database, but is would be similar with another database, even no-sql database. The database is going to be deployed in OpenShift.
+
+      In this chapter we are going to cover:
+
+      * advanced asynchronous orchestration
+      * asynchronous JDBC
+      * Vert.x Web to build REST API
+      * Managing secrets with OpenShift
+
+      **1. Initialize katacoda environment**
+
+      You may have noticed a script running in the terminal. This is getting the lab ready up to this scenario i.e. it is
+      1. Cloning the source code
+      2. Initialize the OpenShift environment
+      3. Build and deploy the quote-generator scenario
+      4. Build and deploy the portfolio-service sceanrio
+      5. Build and deploy the compulsive-traders sceanrio
+      6. Build and deploy the micro-trader-dashboard
+
+
+      **2. Accessing data asynchronously**
+
+      As said previously, Vert.x is asynchronous and you must never block the event loop. And you know what’s definitely blocking? Database accesses and more particularly JDBC! Fortunately, Vert.x provides a JDBC client that is asynchronous.
+
+      The principle is simple (and is applied to all clients accessing blocking systems):
+
+      ![Architecture](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/database-sequence.png)
+
+      However, interactions with databases are rarely a single operation, but a composition of operations. For example:
+
+      1. Get a connection
+      2. Drop some tables
+      3. Create some tables
+      4. Close the connection
+
+      **3. The Audit service**
+
+      The Audit service:
+
+      1. Listens for the financial operations on the event bus
+      2. Stores the received operations in a database
+      3. Exposes a REST API to get the last 10 operations
+
+      Interactions with the database use the `vertx-jdbc-client`, an async version of JDBC. So expect to see some SQL code (I know you love it). But, to orchestrate all these asynchronous calls, we need the right weapons. We are going to use RX Java 2 for this.
+  assignment: |-
+    ## Composing methods returning Single
+
+    Open the `io.vertx.workshop.audit.impl.AuditVerticle` class:
+
+    `audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java`
+
+    The first important detail of this verticle is its `start` method. As the `start` method from the traders, the method is asynchronous, and report its completion in the given `Future` object.
+
+    Vert.x would consider the verticle deploy when the Future is valuated. It may also report a failure if the verticle cannot be started correctly.
+
+    Initializing the audit service includes:
+
+    * Discover and configure the database (already in the code), and prepare the database (create the table),
+    * Start the HTTP service and expose the REST API,
+    * Retrieve the message source on which the operation are sent
+
+    So, it’s clearly 3 independent actions, but the audit service is started only when all of them has been completed. So, we need to implement this orchestration.
+
+    Replace the matching  `// TODO: retrieveSingles` block with code below
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: retrieveSingles">
+    Single&lt;JDBCClient&gt; databaseReady = jdbc
+        .flatMap(client -> initializeDatabase(client, true));
+    Single&lt;HttpServer&gt; httpServerReady = configureTheHTTPServer();
+    Single&lt;MessageConsumer&lt;JsonObject&gt;&gt; messageConsumerReady = retrieveThePortfolioMessageSource();
+
+    Single&lt;MessageConsumer&lt;JsonObject&gt;&gt; readySingle = Single.zip(databaseReady, httpServerReady,
+        messageConsumerReady, (db, http, consumer) -> consumer);
+    </pre>
+
+    This code should retrieves 3 Single objects (from methods provided in the class) and wait for the completion of the three tasks. The three singles are then combined in one `Single<MessageConsumer<JsonObject>>`. Don’t forget that the `initializeDatabase` requires the JDBC client as parameter and so should be called once the ``jdbc Single`` has completed. Also look at the `retrieveThePortfolioMessageSource` method to see how you can create a ``Single`` object from an already known entity (we should have used service discovery - it’s just to give an example). When you have the three Singles, zip them to be notified when all of them have completed. The zip function must return the `MessageConsumer<JsonObject>>`.
+
+    On success this Single registers a message listener on the portfolio message source storing the operation in the database for each received message.
+
+    Its completion notifies Vert.x that the start process is completed (or successfully or not), it calls `future.complete()` and `future.fail(cause)`.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: 02-vertx-web
+  id: 4zoodqgikjqw
+  type: challenge
+  title: Step 2
+  assignment: |-
+    ##  Implementing a method returning a Single & Vert.x Web
+
+    Take a look at the `configureTheHTTPServer` method. In this method we are going to use a new Vert.x Component: Vert.x Web. Vert.x Web is a Vert.x extension to build modern web application. Here we are going to use a Router which let us implement REST APIs easily (à la Hapi or ExpressJS). So:
+
+    1. Create a `Router` object with: `Router.router(vertx)`
+    2. Register a route (on /) on the router, calling `retrieveOperations` (using ``router.get("/").handler(…​)``)
+    3. Create a HTTP server delegating the request handler to router.accept.
+    4. Retrieve the port passed in the configuration or 0 if not set (it picks an available port), we can pick a random port as it is exposed in the service record, so consumer are bound to the right port.
+    5. Start the server with the `rxListen` version of the listen method that returns a single.
+
+    In the same `io.vertx.workshop.audit.impl.AuditVerticle` class, add the below content to the matching `// TODO: configureTheHTTPServer` statement (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: configureTheHTTPServer">
+    Router router = Router.router(vertx);
+    router.get("/").handler(this::retrieveOperations);
+    router.get("/health").handler(rc -> {
+            if (ready) {
+                rc.response().end("Ready");
+            } else {
+                // Service not yet available
+                rc.response().setStatusCode(503).end();
+            }
+        });
+    return vertx.createHttpServer().requestHandler(router::accept).rxListen(8080);
+    </pre>
+
+    It creates a `Router`. The Router is an object from Vert.x web that ease the creation of REST API with Vert.x. We won’t go into too much details here, but if you want to implement REST API with Vert.x, this is the way to go. On our `Router` we declare a route: when a request arrive on `/`, it calls this `Handler`. Then, we create the HTTP server. The requestHandler is a specific method of the router, and we return the result of the `rxListen` method.
+
+    So, the caller can call this method and get a Single. It can subscribe on it to bind the server and be notified of the completion of the operation (or failure).
+
+    The audit service needs to orchestrate a set of task before being ready to serve. We should indicate this readiness state to Kubernetes so it can know when we are ready. This would let it implement a rolling update strategy without downtime as the previous version of the service will still be used until the new one is ready.
+
+    You may have notice that our class has a `ready` field set to true when we have completed our startup. In addition, our pom.xml has the `<vertx.health.path>/health</vertx.health.path>` property indicating a health check. It instructs Kubernetes to ping this endpoint to know when the application is ready. But, there is still one thing required: serving these request. Jump back to the configureTheHTTPServer method and add a route handling ``GET /health`` and returning a 200 response when the ``ready`` field is true, or a 503 response otherwise. Set the status code with: `rc.response().setStatusCode(200).end("Ready")` (and don’t forget to call end).
+
+    With this in place, during the deployment, you will see that the pod state stays a "long" time in the not ready state (light blue). When the readiness check succeed, Kubernetes starts routing request to this pod.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: 03-async-jdbc
+  id: uw5t8mtkyibz
+  type: challenge
+  title: Step 3
+  assignment: |
+    ## Using Async JDBC
+
+    In the `start` method, we are calling `initializeDatabase`. This method is also not very functional at this point. Let’s look at this method using another type of action composition. This method:
+
+    * get a connection to the database
+    * drop the table
+    * create the table
+    * close the connection (whatever the result of the two last operations)
+
+    All these operations may fail. Unlike in the start method where the actions were unrelated, these actions are related. Fortunately, we can chain asynchronous action using the flatMap operator of RX Java 2.
+
+    ```java
+    Single<X> chain = input.flatMap(function1);
+    ```
+
+    So to use the composition pattern, we just need a set of Functions and a Single that would trigger the chain.
+
+    Look at the `initializeDatabase` method in the `AuditVerticle` class
+
+    Add the below content to the matching `// TODO: retrieveConnection` statement in the `initializeDatabase` method (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: retrieveConnection">
+    Single&lt;SQLConnection&gt; connectionRetrieved = jdbc.rxGetConnection();
+    </pre>
+
+    Then, we need compose the Single with the flatMap operator that is taking a SQLConnection as parameter and returns a Single containing the result of the database initialization:
+
+    1. we create the batch to execute
+    2. the rxBatch executes the batch gives us the single returns of the operation
+    3. finally we close the connection with doAfterTerminate
+
+    So, insert into the matching `// TODO: executeBatch` statement in the `initializeDatabase` method
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: executeBatch">
+    return connectionRetrieved
+        .flatMap(conn -> {
+            // When the connection is retrieved
+
+            // Prepare the batch
+            List&lt;String&gt; batch = new ArrayList<>();
+            if (drop) {
+                // When the table is dropped, we recreate it
+                batch.add(DROP_STATEMENT);
+            }
+            // Just create the table
+            batch.add(CREATE_TABLE_STATEMENT);
+
+            // We compose with a statement batch
+            Single&lt;List&lt;Integer&gt;&gt; next = conn.rxBatch(batch);
+
+            // Whatever the result, if the connection has been retrieved, close it
+            return next.doAfterTerminate(conn::close);
+        })
+    </pre>
+
+    The previous statement return a Single&lt;List&lt;Integer&gt;&gt; but we need a Single<JDBCClient>. Append .map(x → jdbc) and return the result:
+
+    So, insert into the matching `// TODO: returnResult` statement in the `initializeDatabase` method
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: returnResult">
+    .map(list -> client);
+    </pre>
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: 04-async-jdbc-with-callback
+  id: m30nflz07hzk
+  type: challenge
+  title: Step 4
+  assignment: |-
+    ## Async JDBC with a callback-based composition
+
+    You may ask why we do such kind of composition. Let’s implement a method without any composition operator (just using callbacks). The retrieveOperations method is called when a HTTP request arrives and should return a JSON object containing the last 10 operations. So, in other words:
+
+    1. Get a connection to the database
+    2. Query the database
+    3. Iterate over the result to get the list
+    4. Write the list in the HTTP response
+    5. Close the database
+
+    The step (1) and (2) are asynchronous. (5) is asynchronous too, but we don’t have to wait for the completion. In this code, don’t use composition (that’s the purpose of this exercise). In `retrieveOperations`, write the required code using Handlers / Callbacks.
+
+    Add the below content to the matching `// TODO: retrieveOperations` statement in the `retrieveOperations` method of the `AuditVerticle` class (or use the `Copy to Editor` button):
+
+    <pre class="file" data-filename="audit-service/src/main/java/io/vertx/workshop/audit/impl/AuditVerticle.java" data-target="insert" data-marker="// TODO: retrieveOperations">
+     // 1. Get the connection
+     jdbc.getConnection(ar -> {
+         SQLConnection connection = ar.result();
+         if (ar.failed()) {
+             context.fail(ar.cause());
+         } else {
+             // 2. When done, execute the query
+             connection.query(SELECT_STATEMENT, result -> {
+                 // 3. When done, iterate over the result to build a list
+                 ResultSet set = result.result();
+                 List&lt;JsonObject&gt; operations = set.getRows().stream()
+                     .map(json -> new JsonObject(json.getString("operation")))
+                     .collect(Collectors.toList());
+                 // 5. write this list into the response
+                 context.response().setStatusCode(200).end(Json.encodePrettily(operations));
+                 // 6. close the connection
+                 connection.close();
+             });
+         }
+     });
+    </pre>
+
+    So obviously it’s possible too not use RX Java. But imagine when you have several asynchronous operations to chain, it become a callback hell very quickly. But again, Vert.x gives you the freedom to choose what you prefer.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: 05-deploy-to-openshift
+  id: t0nh7zcsv4ma
+  type: challenge
+  title: Step 5
+  assignment: |-
+    ## Deploy to OpenShift
+
+    First, we need a database.
+
+    **1. Deploy the database**
+
+    ```
+    cd /root/code/audit-service
+    ```
+
+    ```
+    oc new-app -e POSTGRESQL_USER=admin -ePOSTGRESQL_PASSWORD=secret -ePOSTGRESQL_DATABASE=audit registry.access.redhat.com/rhscl/postgresql-94-rhel7 --name=audit-database
+    ```
+
+    It creates a new database service named `audit-database` with the given credentials and settings. Be aware that for sake of simplicity this database is not using a persistent storage.
+
+    Now, we can deploy our audit service:
+
+    ```
+    mvn fabric8:deploy
+    ```
+
+    **2. Access the Micro-trader dashboard**
+
+    Click on the "OpenShift Console" tab next to the "Local Web Browser" tab.
+
+    ![OpenShift Console Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-vertx/openshift-console-tab.png)
+
+    Log in using `developer/developer` for username and password. You should see the newly created project called `“vertx-kubernetes-workshop"`. Click on it. You should see six pods running, one each for the quote-generator, portfolio-service, compulsive-traders and micro-trader-dashboard microservices that you created in previous scenarios and new ones for the audit-database and audit-service that you created just now.
+
+    Click on the route for the `micro-trader-dashboard`. Append `“/admin”` at the end of the route and you should see the dashboard. You should see some new services and if you click on the “Trader” tab on the left, you should see the operations in the top right corner!
+
+    Alternatively, you can click on the
+    [route URL](http://micro-trader-dashboard-vertx-kubernetes-workshop.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/admin)
+    to access the dashboard.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+- slug: 06-managing-secrets
+  id: d9zdl7hqwlhx
+  type: challenge
+  title: Step 6
+  assignment: |-
+    ## Managing Secrets
+
+    But wait…​ we have hardcoded the database credentials in our code. This is not optimal. OpenShift provides a way to manage secrets.
+
+    Let’s first create a Secret entity using:
+
+    ```
+    oc create -f src/kubernetes/database-secret.yaml
+    ```
+
+    You can open the specified file and see how this object is structured. Basically it’s a set of key/value pairs.
+
+    There are several ways to access secrets from your application:
+
+    1, ENV variables
+    2. Mounted as a file
+    3. Using the Vert.x config
+
+    For sake of simplicity we are going to use the first approach.
+
+    So, we first need to bind the secret with our deployment.
+
+    Open `audit-service/src/main/fabric8/deployment.yml` and copy the following content (or uncomment the commented part):
+
+    ```yaml
+    spec:
+      template:
+        spec:
+          containers:
+            - name: vertx
+              env:
+                - name: KUBERNETES_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
+                - name: JAVA_OPTIONS
+                  value: '-Dvertx.cacheDirBase=/tmp -Dvertx.jgroups.config=default-configs/default-jgroups-kubernetes.xml -Djava.net.preferIPv4Stack=true'
+                - name: JAVA_ARGS
+                  value: '-cluster'
+                - name: DB_USERNAME
+                  valueFrom:
+                     secretKeyRef:
+                       name: audit-database-config
+                       key: user
+                - name: DB_PASSWORD
+                  valueFrom:
+                     secretKeyRef:
+                       name: audit-database-config
+                       key: password
+                - name: DB_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: audit-database-config
+                      key: url
+    ```
+
+    Notice the 3 last env variables retrieving values from the audit-database-config secret.
+
+    Now, we need to update our code. Open `io.vertx.workshop.audit.impl.AuditVerticle` and replace the content of the `getDatabaseConfiguration` method with:
+
+    ```java
+    return new JsonObject()
+        .put("user", System.getenv("DB_USERNAME"))
+        .put("password", System.getenv("DB_PASSWORD"))
+        .put("driver_class", "org.postgresql.Driver")
+        .put("url", System.getenv("DB_URL"));
+    ```
+
+    And redeploy your service using:
+
+    ```
+    mvn fabric8:undeploy fabric8:deploy
+    ```
+
+    Voilà! we have externalized the credentials from the application.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: crc
+  - title: Web Console
+    type: service
+    hostname: crc
+    path: /
+    port: 30001
+  - title: Visual Editor
+    type: code
+    hostname: crc
+    path: /root
+  difficulty: basic
+  timelimit: 150
+checksum: "878970921565639005"

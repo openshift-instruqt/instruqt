@@ -12,7 +12,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- edeandrea@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -368,15 +368,15 @@ challenges:
     ```
 
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
 
-    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/projects.png)
+    ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/projects.png)
 
     Click on your new project name to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have created as part of your project:
 
-    ![Web Console Overview](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/overview.png)
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/overview.png)
 
     There's nothing there now, but that's about to change.
 
@@ -384,15 +384,15 @@ challenges:
 
     From OpenShift Web Console administrator perspective, navigate the OperatorHub and search for the **Red Hat Integration - AMQ Broker** operator.
 
-    ![Red Hat Integration - AMQ Broker operator](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/amq-operator.png)
+    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/amq-operator.png)
 
     Click **Install** and and follow this configuration:
 
-    ![Red Hat Integration - AMQ Broker operator](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/operator-configuration.png)
+    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/operator-configuration.png)
 
     The installation might take a few minutes. Wait till the operator installation is complete.
 
-    ![Red Hat Integration - AMQ Broker operator installation complete](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/operator-installation-complete.png)
+    ![Red Hat Integration - AMQ Broker operator installation complete](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/operator-installation-complete.png)
 
     ## Congratulations
 
@@ -460,7 +460,7 @@ challenges:
 
     After the Maven build/deploy is finished, it will typically take less than 20 sec for the application to be available. Then you can go to the OpenShift web console from the developer perspective and click on the route from the topology tab (refer to the image below):
 
-    ![Spring Messaging App Route](https://katacoda.com/openshift/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
+    ![Spring Messaging App Route](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/spring-messaging-training-route.png)
 
     You should see the same web application as before. The scheduled Producer will continue to deploy messages every 3 seconds so you should observe a change in the values shown. The number of items in the list will remain 5.
 
@@ -477,4 +477,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-messaging
   difficulty: basic
   timelimit: 750
-checksum: "11906349005654559517"
+checksum: "255315971748266194"

@@ -118,19 +118,19 @@ challenges:
     You will then be able to login with admin permissions with:
     * **Username:** ``developer``
     * **Password:** ``developer``
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
     This should leave you at the list of projects you have access to. As we only
     created the one project, you should see ``myproject``.
 
-    ![List of Projects](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-list-of-projects.png)
+    ![List of Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/01-list-of-projects.png)
 
     Click on ``myproject`` and you should then be at the _Overview_ page for
     the project. Select the _Developer_ perspective for the project instead of the _Adminstrator_ perspective in the left hand side menu. If necessary click on the hamburger menu icon top left of the web console to expose the left hand side menu.
 
     As the project is currently empty, no workloads should be found and you will be presented with various options for how you can deploy an application.
 
-    ![Add to Project](https://katacoda.com/openshift/assets/introduction/deploying-images-44/01-add-to-project.png)
+    ![Add to Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-images-44/01-add-to-project.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -148,17 +148,17 @@ challenges:
   assignment: |
     From the options presented for deploying an application, select _From Catalog_. This will land you on the _Developer Catalog_.
 
-    ![Developer Catalog](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-developer-catalog.png)
+    ![Developer Catalog](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-developer-catalog.png)
 
     In this course you are going to deploy a web application which is implemented using the Python programming language.
 
     If no items are displayed when you view the _Developer Catalog_, uncheck _Operator Backed_ in the _Type_ filters on the left hand side. Click on _Languages_ on the left hand side and then select _Python_. Any options for deploying applications which are related to Python will be displayed.
 
-    ![Available Python Versions](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-deploy-python-source.png)
+    ![Available Python Versions](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-deploy-python-source.png)
 
     Click on the _Python_ tile for the generic Python Source-to-Image (S2I) builder. This will bring up a dialog with the details of the builder image. Click on _Create Application_ in the dialog.
 
-    ![Create Python Application #1](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-create-python-application-1.png)
+    ![Create Python Application #1](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-create-python-application-1.png)
 
     Under the _Git_ settings, in the _Git Repo URL_ enter:
 
@@ -166,13 +166,13 @@ challenges:
 
     Scroll down to the _General_ settings and click on the _Application Name_ field.
 
-    ![Create Python Application #2](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-create-python-application-2.png)
+    ![Create Python Application #2](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-create-python-application-2.png)
 
     When you click on the _Application Name_ field, the settings in this section should be pre-populated with values based on the Git repository name. Leave the settings with their default values.
 
     When you are ready, at the bottom of the page click on _Create_. This will create resources to manage the build and deployment of the application. You will then be redirected to the topology overview for the project.
 
-    ![Application Topology View](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-application-topology-view.png)
+    ![Application Topology View](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-application-topology-view.png)
 
     The topology overview provides a visual representation of the application you have deployed.
 
@@ -186,7 +186,7 @@ challenges:
 
     Clicking anywhere on the area enclosed by the ring will bring up a panel giving details of the resources for the application, and access to a general overview of the deployment.
 
-    ![Deployment Details](https://katacoda.com/openshift/assets/introduction/deploying-python-44/02-deployment-details.png)
+    ![Deployment Details](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/02-deployment-details.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -204,7 +204,7 @@ challenges:
   assignment: |
     Once the build has started, click on the _View Logs_ link shown on the _Resources_ panel.
 
-    ![Accessing Build Logs](https://katacoda.com/openshift/assets/introduction/deploying-python-44/03-application-build-logs.png)
+    ![Accessing Build Logs](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/03-application-build-logs.png)
 
     This will allow you to monitor the progress of the build as it runs. The build will have completely successfully when you see a final message of "Push successful". This indicates that the container image for the application was pushed to the OpenShift internal image registry.
   tabs:
@@ -226,7 +226,7 @@ challenges:
 
     Click on _Topology_ in the left hand menu bar to return to the topology view for the project.
 
-    ![Topology View](https://katacoda.com/openshift/assets/introduction/deploying-python-44/04-application-topology-view.png)
+    ![Topology View](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/04-application-topology-view.png)
 
     When you created the application using the web console, a _Route_ was automatically created for the application and it will be exposed outside of the cluster. The URL which can be used to access the application from a web browser was visible on the _Resources_ tab for the application you viewed previously.
 
@@ -234,7 +234,7 @@ challenges:
 
     Wait for the ring to turn from light blue to blue to indicate the deployment is complete. Now click on the icon and you should see the blog application you deployed.
 
-    ![Blog Web Site](https://katacoda.com/openshift/assets/introduction/deploying-python-44/04-blog-web-site.png)
+    ![Blog Web Site](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/04-blog-web-site.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -589,7 +589,7 @@ challenges:
 
     Once the build and deployment is finished, if you visit the web application once more, you will see that the banner colour has been changed to blue.
 
-    ![Blog Web Site](https://katacoda.com/openshift/assets/introduction/deploying-python-44/07-blog-web-site-blue.png)
+    ![Blog Web Site](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/introduction/deploying-python-44/07-blog-web-site-blue.png)
 
     When you use the ``--from-dir=.`` option with ``oc start-build``, the contents from the current working directory will only be used for that one build. If you wanted to run further builds with source code from your local directory, you would need to supply ``--from-dir=.`` each time.
 
@@ -646,4 +646,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 360
-checksum: "14031455279158190783"
+checksum: "3935891336714594913"

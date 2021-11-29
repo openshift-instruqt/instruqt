@@ -32,6 +32,7 @@ tags:
 owner: openshift
 developers:
 - smccarty@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -85,7 +86,7 @@ challenges:
 
     Now, let's start with the introductory lab, which covers these four basic primitives:
 
-    ![New Primitives](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/01-new-primitives.png)
+    ![New Primitives](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/01-new-primitives.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -103,7 +104,7 @@ challenges:
   assignment: |
     Container images are really just tar files. Seriously, they are tar files, with an associated JSON file. Together we call these an Image Bundle. The on-disk format of this bundle is defined by the [OCI Image Specification](https://github.com/opencontainers/image-spec). All major container engines including Podman, Docker, RKT, CRI-O and containerd build and consume these bundles.
 
-    ![Container Images](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-basic-container-image.png)
+    ![Container Images](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/02-basic-container-image.png)
 
     But let's dig into three concepts a little deeper:
 
@@ -127,15 +128,15 @@ challenges:
 
     Analyzing portability, compatibility, and supportability, we can deduce that a RHEL 7 image will work on RHEL 7 host perfectly. The code in both were designed, compiled, and tested together. The Product Security Team at Red Hat is analyzing CVEs for this combination, performance teams are testing RHEL 7 web servers, with a RHEL 7 kernel, etc, etc. The entire machine of software creation and testing does its work in this configuration with programs and kernels compiled, built and tested together. Matching versions of container images and hosts inherit all of this work:
 
-    ![Matching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-rhel7-image-rhel7-host.png)
+    ![Matching Container Image and Host](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/02-rhel7-image-rhel7-host.png)
 
     However, there are limits. Red Hat can't guarantee that RHEL 5, Fedora, and Alpine images will work like they were intended to on a RHEL 7 host. The container image standards guarantee that the container engine will be able to ingest the images, pulling them down and caching them locally. But, nobody can guarantee that the binaries in the container images will work correctly. Nobody can guarantee that there won't be strange CVEs that show up because of the version combinations (yeah, that's "a thing"), and of course, nobody can guarantee the performance of the binaries running on a kernel for which it wasn't compiled. That said, many times, these binaries will appear to just work.
 
-    ![Mismatching Container Image and Host](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-mismatch.png)
+    ![Mismatching Container Image and Host](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-mismatch.png)
 
     This leads us to supportability as a concept seperate from portability and compatibility. This is the ability to guarantee to some level that certain images will work on certain hosts. Red Hat can do this between selected major versions of RHEL for the same reason that we can do it with the [RHEL Application Compatibility Guide](https://access.redhat.com/articles/rhel-abi-compatibility). We take special precautions to compile our programs in a way that doesn't break compatibility, we analyze CVEs, and we test performance. A bare minimum of testing, security, and performance can go a long way in ensuring supportability between versions of Linux, but there are limits. One should not expect that container images from RHEL 9, 10, or 11 will run on RHEL 8 hosts.
 
-    ![Container Image & Host Supportability](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-supportability.png)
+    ![Container Image & Host Supportability](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/02-container-image-host-supportability.png)
 
     Alright, now that we have sorted out the basics of container images, let's move on to registries...
   tabs:
@@ -155,7 +156,7 @@ challenges:
   assignment: |
     Registries are really just fancy file servers that help users share container images with each other. The magic of containers is really the ability to find, run, build, share and collaborate with a new packaging format that groups applications and all of their dependencies together.
 
-    ![Container Registry](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/03-basic-container-registry.png)
+    ![Container Registry](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/03-basic-container-registry.png)
 
     Container images make it easy for software builders to package software, as well as provide information about how to run it. Using metadata, software builders can communicate how users *can* and *should* run their software, while providing the flexibility to also build new things based on existing software.
 
@@ -233,7 +234,7 @@ challenges:
     The kernel is responsible for the last mile of container creation, as well as resource management during its running lifecycle. The container runtime talks to the kernel to create the new container with a special kernel function called clone(). The runtime also handles talking to the kernel to configure things like cgroups, SELinux, and SECCOMP (more on these later). The combination of kernel technologies invoked are defined by the container runtime, but there are very recent [efforts to standardize this in the kernel](https://lwn.net/Articles/780364/).
 
 
-    ![Container Engine](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/04-simple-container-engine.png)
+    ![Container Engine](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/04-simple-container-engine.png)
 
 
     Containers are just regular Linux processes that were started as child processes of a container runtime instead of by a user running commands in a shell. All Linux processes live side by side, whether they are daemons, batch jobs or user commands - the container engine, container runtime, and containers (child processes of the container runtime) are no different. All of these processes make requests to the Linux kernel for protected resources like memory, RAM, TCP sockets, etc.
@@ -278,7 +279,7 @@ challenges:
     * Operational Automation - The [Kubernetes Operator Framework](https://coreos.com/operators/) can be thought of as a robot systems administrator deployed side by side with applications managing mundane and complex tasks for the application (backups, restores, etc)
     * Higher Level Frameworks - Once you adopt Kubernetes orchestration, you gain access to an innovative ecosystem of tools like Istio, Knative, and the previously mentioned Operator Framework
 
-    ![Orchestration Node](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/05-simple-orchestration-node.png)
+    ![Orchestration Node](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/05-simple-orchestration-node.png)
 
 
     To demonstrate, all we need is bash, curl, and netcat which lets us pipe text across a TCP port. If you are familiar with basic bash scripting, this tiny lab teases apart the value of the orchestration, versus the application itself. This application doesn't do much, but it does demonstrate the power of a two-tier application running in containers with both a database and a web front end. In this lab, we use the same container image from before, but this time we embed the *how* to run logic in the Kubernetes YAML. Here's a simple representation of what our application does:
@@ -343,7 +344,7 @@ challenges:
   assignment: |
     In this lab, we have covered container images, registries, hosts, and orchestration as four new primitives you need to learn on your container journey. If you are struggling to understand why you need containers, or why need to move to orchestration - or maybe you are struggling to explain it to your management or others in your team - maybe thinking about it in this context will help:
 
-    ![Container Journey](https://katacoda.com/openshift/assets/subsystems/container-internals-lab-2-0-part-1/06-journey.png)
+    ![Container Journey](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-1/06-journey.png)
 
     It is a journey, and we are always happy to help. If you want help along the way, here are some people to follow on Twitter:
 
@@ -365,4 +366,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 200
-checksum: "2490688925030196864"
+checksum: "1713613997110026179"

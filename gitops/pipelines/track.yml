@@ -54,9 +54,9 @@ tags:
 - openshift
 owner: openshift
 developers:
-- chernand@redhat.com
 - nvinto@redhat.com
 - dahmed@redhat.com
+- chernand@redhat.com
 private: false
 published: true
 challenges:
@@ -136,7 +136,7 @@ challenges:
     * **Username:** ``admin``
     * **Password:** ``admin``
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
     ## Installing the OpenShift Pipelines Operator in Web Console
 
@@ -146,13 +146,13 @@ challenges:
 
     Use the _Filter by keyword_ box to search for `OpenShift Pipelines Operator` in the catalog. Click the _OpenShift Pipelines Operator_ tile.
 
-    ![Web Console Hub](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-hub.png)
+    ![Web Console Hub](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-hub.png)
 
     Read the brief description of the Operator on the _OpenShift Pipelines Operator_ page. Click _Install_.
 
     Select _All namespaces on the cluster (default)_ for installation mode & _Automatic_ for the approval strategy. Click Subscribe!
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-settings.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-settings.png)
 
     Be sure to verify that the OpenShift Pipelines Operator has installed through the Operators → Installed Operators page.
 
@@ -227,11 +227,11 @@ challenges:
 
     If you deploy the application directly, you should be able to see the deployment in the OpenShift Web Console by switching over to the **Developer** perspective of the OpenShift Web Console. Change from **Administrator** to **Developer** from the drop-down as shown below:
 
-    ![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+    ![Web Console Developer](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-developer.png)
 
     Make sure you are on the `pipelines-tutorial` project by selecting it from the **Project** dropdown menu. Either search for `pipelines-tutorial` in the search bar or scroll down until you find `pipelines-tutorial` and click on the name of your project.
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-project.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-project.png)
 
     Next, we'll work on creating a sample `Task` that outputs to the console!
   tabs:
@@ -379,7 +379,7 @@ challenges:
 
     Below is an example definition of a `Pipeline`, created using the following diagram:
 
-    ![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/pipeline-diagram.png)
+    ![Web Console Developer](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/pipeline-diagram.png)
 
     Below is a YAML file that represents the above pipeline:
 
@@ -539,7 +539,7 @@ challenges:
     To view the `PipelineRun` visually, visit the Pipelines section of the developer perspective. From here, you can see the details of our `Pipeline`, including the YAML file we've applied, the `PipelineRun`, input custom `params`, and more:
 
     // TODO : Update the following image to show the actual pipelineruns
-    ![Web Console Pipelines](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+    ![Web Console Pipelines](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-developer.png)
 
     Congrats! Your `Pipeline` has successfully ran, and the final step will provide instructions on how to access the deployed image.
   tabs:
@@ -561,11 +561,11 @@ challenges:
 
     Click on the Topology tab on the left side of the web console. You should see something similar to what is shown in the screenshot below:
 
-    ![Web Console Deployed](https://katacoda.com/openshift/assets/middleware/pipelines/application-deployed.png)
+    ![Web Console Deployed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/application-deployed.png)
 
     The Topology view of the OpenShift web console helps to show what is deployed out to your OpenShift project visually. As mentioned earlier, the dark blue lining around the _ui_ circle means that a container has started up and running the _api_ application. By clicking on the arrow icon as shown below, you can open the URL for _ui_ in a new tab and see the application running.
 
-    ![Web Console URL Icon](https://katacoda.com/openshift/assets/middleware/pipelines/url-icon.png)
+    ![Web Console URL Icon](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/url-icon.png)
 
     After clicking on the icon, you should see the application running in a new tab.
 
@@ -588,4 +588,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "14073143526730809243"
+checksum: "9767179071128645496"

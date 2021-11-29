@@ -3,7 +3,7 @@ id: gs6uksswufnj
 type: track
 title: Operator Lifecycle Manager
 description: |-
-  ![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+  ![Operator Lifecycle Manager](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
 
   The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) project is a component of the Operator Framework, an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
 
@@ -48,7 +48,7 @@ challenges:
   notes:
   - type: text
     contents: |-
-      ![Operator Lifecycle Manager](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
+      ![Operator Lifecycle Manager](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
 
       The [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) project is a component of the Operator Framework, an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
 
@@ -229,7 +229,7 @@ challenges:
 
     The OLM panel appears in the **Operators** pane:
 
-    ![OLM on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-console.png)
+    ![OLM on the OpenShift Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/operatorframework/operator-lifecycle-manager/olm-console.png)
   tabs:
   - title: Terminal 1
     type: terminal
@@ -353,7 +353,7 @@ challenges:
 
     Navigate to the Operators section of the UI and select the ArgoCD Operator under **Installed Operators**. Ensure you are scoped to the **myproject** namespace. You should click on the InstallPlan on the bottom right of the screen:
 
-    ![InstallPlan on the OpenShift Console](https://katacoda.com/openshift/assets/operatorframework/operator-lifecycle-manager/olm-installplan.png)
+    ![InstallPlan on the OpenShift Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/operatorframework/operator-lifecycle-manager/olm-installplan.png)
 
     You can install the Operator by approving the InstallPlan via the OpenShift console or with the following command:
 
@@ -543,4 +543,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 225
-checksum: "2555037075276899387"
+checksum: "10009027092162830472"

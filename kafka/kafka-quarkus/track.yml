@@ -41,6 +41,7 @@ tags:
 owner: openshift
 developers:
 - hguerrero@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -393,4 +394,4 @@ challenges:
     path: /opt/projects/kafka-quarkus
   difficulty: basic
   timelimit: 460
-checksum: "5243876778789769286"
+checksum: "14090784921938935511"

@@ -20,6 +20,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -120,7 +121,7 @@ challenges:
 
     You should now see an HTML page that looks like this:
 
-    ![Local Web Browser Tab](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/web-page.png)
+    ![Local Web Browser Tab](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/web-page.png)
 
     As you can probably guess by now the application we are building is a Fruit repository where we create, read, update and delete different kinds of fruits.
 
@@ -473,7 +474,7 @@ challenges:
 
     If everything works the web page should look something like this:
 
-    ![Fruit List](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/fruit-list.png)
+    ![Fruit List](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/fruit-list.png)
 
     Press <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the application.
 
@@ -603,11 +604,11 @@ challenges:
     The first screen you will see is the authentication screen. Enter your username (developer) and password (developer) and
     then login:
 
-    ![Web Console Login](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
 
-    ![Web Console Projects](https://katacoda.com/openshift/assets/middleware/rhoar-getting-started-spring/projects.png)
+    ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/projects.png)
 
     Click on your new project name to be taken to the project overview page which will show you various options to add content to your project, create an application, component or service:
 
@@ -757,4 +758,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
   timelimit: 600
-checksum: "6759674848547084884"
+checksum: "3690246899470376776"

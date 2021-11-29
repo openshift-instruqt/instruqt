@@ -30,6 +30,7 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -98,7 +99,7 @@ challenges:
     The app consists of 3 components that pass messages via Kafka and an in-memory stream, then uses SSE to push messages to
     the browser. It looks like:
 
-    ![kafka](https://katacoda.com/openshift/assets/middleware/quarkus/kafkaarch.png)
+    ![kafka](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/kafkaarch.png)
 
     ## Add Extension
 
@@ -642,7 +643,7 @@ challenges:
 
     > It takes a few seconds to establish the connection to Kafka. If you don’t see new names generated every 5 seconds reload the browser page to re-initialize the SSE stream.
 
-    ![kafka](https://katacoda.com/openshift/assets/middleware/quarkus/wordcloud.png)
+    ![kafka](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/wordcloud.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
@@ -666,4 +667,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/kafka
   difficulty: basic
   timelimit: 428
-checksum: "15488804251159720434"
+checksum: "17284115211940535528"

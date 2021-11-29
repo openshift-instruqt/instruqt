@@ -82,13 +82,13 @@ challenges:
     * The Prometheus console can be accessed using the following url: <br>
     http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
 
-      ![Prometheus Console](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console.png)
+      ![Prometheus Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console.png)
 
     * To check if the test data was generated successfully, go to the following url: <br>
       http://prometheus-demo-route-myproject.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/graph?g0.range_input=12h&g0.expr=test&g0.tab=0
 
     * The above link will query the Prometheus instance for a metric called `test` for the past 12 hours and if the data was generated successfully your Prometheus console should look like this:
-      ![Prometheus Console Data](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console-data.png)
+      ![Prometheus Console Data](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/02-prometheus-console-data.png)
 
     ### Accessing the Jupyter Notebooks Environment
 
@@ -97,17 +97,17 @@ challenges:
 
     * You might see a warning like in the image below, this is because we don't generate valid ssl certificates for all our routes. You can click on `Advanced...` and then click on `Accept the Risk and Continue` to continue to the Jupyter environment.
 
-      ![Cert Warning Page](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-cert-warning-page.png)
+      ![Cert Warning Page](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/02-cert-warning-page.png)
 
     * You will need a password to access the environment. <br>
       The password is `secret` <br>
-      ![Jupyter Environment Secret](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-secret.png)
+      ![Jupyter Environment Secret](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/02-jupyter-secret.png)
 
     * There are 2 notebooks available in the Jupyter environment:
       1. `(Exercises) Introduction_Prometheus_API_Client.ipynb` - In this notebook you will explore and solve few exercises on using the Prometheus API client.
       2. `(Solutions) Introduction_Prometheus_API_Client.ipynb` - You will find the solutions to the exercises in this notebook. <br><br>
 
-      ![Jupyter Notebook List](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/02-jupyter-notebook-list.png)
+      ![Jupyter Notebook List](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/02-jupyter-notebook-list.png)
 
     * The idea behind this scenario is to work through the `Exercises` notebook and only check the solutions notebook when you need help.
 
@@ -139,7 +139,7 @@ challenges:
 
     * Click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
 
-      ![Web Console Login](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-login-page.png)
+      ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/03-openshift-login-page.png)
 
       For the credentials, enter:
 
@@ -150,12 +150,12 @@ challenges:
 
     You should be able to see the deployment in the OpenShift Web Console by switching over to the **Developer** perspective of the OpenShift Web Console. Change from **Administrator** to **Developer** from the drop-down as shown below:
 
-    ![Web Console Developer](https://katacoda.com/openshift/assets/middleware/pipelines/web-console-developer.png)
+    ![Web Console Developer](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-developer.png)
 
     Make sure you are on the `myproject` project by selecting it from the projects list or **Project** dropdown menu.
 
     * In this project you should be able to see two different applications that have been deployed. <br>
-      ![Web Console Project](https://katacoda.com/openshift/assets/ai-machine-learning/prometheus-api-client/03-openshift-console-page.png)
+      ![Web Console Project](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/ai-machine-learning/prometheus-api-client/03-openshift-console-page.png)
 
       * The `prometheus-anomaly-detection-workshop` application is the Jupyter notebook environment.
 
@@ -173,4 +173,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "12688059315695622233"
+checksum: "15284023586613274223"
