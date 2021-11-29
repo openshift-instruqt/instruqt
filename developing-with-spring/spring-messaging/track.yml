@@ -12,10 +12,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-<<<<<<< HEAD
-=======
-- nvinto@redhat.com
->>>>>>> 19eedd4390c0a57b6e802768f8de515b0f161440
 private: false
 published: true
 challenges:
