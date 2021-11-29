@@ -97,7 +97,7 @@ challenges:
 
     First, we need to create the java class file. From the *Visual Editor* Tab, create this file: `src/main/java/com/example/service/FruitController.java`.
 
-    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/create-file-fc-sb.png)
+    ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/create-file-fc-sb.png)
 
     Open the `FruitController.java` file then copy the below content into the file:
 
@@ -129,7 +129,7 @@ challenges:
 
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
-    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-fc-file.png)
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/save-fc-file.png)
 
     **2. Add GET Mappings**
 
@@ -168,7 +168,7 @@ challenges:
 
     You should see something like this:
 
-    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/get-fruits.png)
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/get-fruits.png)
 
      These values are seeded values we've added to the project for you. What is important to note is that Spring automatically serialized our Fruit models to JSON, created the appropriate HTTP header for clients, and returned that response to the client without any extra code from us!
 
@@ -373,11 +373,11 @@ challenges:
 
     Go to Develop Console then click on `Open URL` in `dev` project:
 
-    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-topology.png)
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/rest-topology.png)
 
     You should see the web application, the same functionality from the previous steps should still work:
 
-    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/rest-web-openshift.png)
+    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/rest-web-openshift.png)
 
     # Open the solution in an IDE in the Cloud!
     Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.

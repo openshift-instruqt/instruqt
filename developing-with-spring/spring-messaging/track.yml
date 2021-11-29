@@ -60,7 +60,7 @@ challenges:
 
     Click on the `Disk` icon to save the files or press `CTRL-S`:
 
-    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/save-pom-messaging-file.png)
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/save-pom-messaging-file.png)
 
     ## Congratulations
 
@@ -380,15 +380,15 @@ challenges:
     admin
     ```
 
-    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/login.png)
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/login.png)
 
     After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
 
-    ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/projects-new.png)
+    ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/projects-new.png)
 
     Switch to `Developer Perspective` then change the project to `dev`. Click on `Topology` view to list all of the routes, services, deployments, and pods that you have created as part of your project:
 
-    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/overview-new.png)
+    ![Web Console Overview](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/overview-new.png)
 
     There's nothing there now, but that's about to change.
 
@@ -396,15 +396,15 @@ challenges:
 
     Go back to `Administrator` perspective, navigate the OperatorHub and search for the **Red Hat Integration - AMQ Broker** operator.
 
-    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/amq-operator-new.png)
+    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/amq-operator-new.png)
 
     Click **Install** and and follow this configuration:
 
-    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/operator-configuration-new.png)
+    ![Red Hat Integration - AMQ Broker operator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/operator-configuration-new.png)
 
     The installation might take a few minutes. Wait till the operator installation is complete.
 
-    ![Red Hat Integration - AMQ Broker operator installation complete](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/operator-installation-complete-new.png)
+    ![Red Hat Integration - AMQ Broker operator installation complete](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-messaging/operator-installation-complete-new.png)
 
     ## Congratulations
 
