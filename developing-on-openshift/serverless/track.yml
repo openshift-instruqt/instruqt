@@ -270,6 +270,12 @@ challenges:
 
     Before deploying your first Serverless Service, let us take a moment to understand it's structure:
 
+    ```
+    cat /root/02-serving/service.yaml
+    ```
+    
+    You'll see the following output:
+
     ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -481,7 +487,7 @@ challenges:
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
 
     ```
-    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml | cat
+    cat /root/03-traffic-distribution/greeter-v1-service.yaml
     ```
 
     Next, we are going to update the greeter service to add a message prefix environment variable and change the revision name to `greeter-v2`.  Do so by executing:
@@ -497,7 +503,7 @@ challenges:
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
 
     ```
-    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml | cat
+    cat /root/03-traffic-distribution/greeter-v2-service.yaml
     ```
 
     See that the two greeter services have deployed successfully by executing
@@ -573,7 +579,7 @@ challenges:
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
 
     ```
-    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml | cat
+    cat /root/03-traffic-distribution/service-pinned.yaml
     ```
 
     The configuration change we issued above does not create any new `configuration`, `revision`, or `deployment` as there was no application update (e.g. image tag, env var, etc).  When calling the service without the sub-route, Serverless scales up the `greeter-v1`, as our configuration specifies and the service responds with the text `Hi greeter ⇒ '9861675f8845' : 1`.
@@ -626,7 +632,7 @@ challenges:
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
 
     ```
-    curl 04-canary-releases/greeter-canary-service.yaml | cat
+    cat /root/04-canary-releases/greeter-canary-service.yaml
     ```
 
     As in the previous section on Applying Blue-Green Deployment Pattern deployments, the command will not create a new configuration, revision, or deployment.
@@ -758,11 +764,15 @@ challenges:
     >
     > There are other settings of Serverless available.  It is possible to describe other configmaps in the `knative-serving` project to find them.
     >
-    > Explore what all is available by running: ```
+    > Explore what all is available by running: 
+      
+    ```
     oc get cm -n knative-serving
     ```
 
-    Now, log back in as the developer as we do not need elevated privileges to continue: ```
+    Now, log back in as the developer as we do not need elevated privileges to continue: 
+      
+    ```
     oc login -u developer -p developer
     ```
 
@@ -775,8 +785,13 @@ challenges:
 
     > **Note:** *You can also limit your maximum pods using `autoscaling.knative.dev/maxScale`*
 
+    ```
+    cat /root/05-scaling/service-min-max-scale.yaml
+    ```
+
+    You'll see the following output:
+
     ```yaml
-    # ./assets/05-scaling/service-min-max-scale.yaml
 
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -818,8 +833,9 @@ challenges:
     `
     ```
 
-    See that the ```
-    prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking: `oc get pods -n serverless-tutorial
+    See that the `prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking: 
+    ```
+    oc get pods -n serverless-tutorial
     ```
 
     This now guarantee that there will always be at least two instances available at all times to provide the service with no initial lag at the cost of consuming additional resources.  Next, test the service won't scale past 5.
@@ -840,16 +856,18 @@ challenges:
     To help with this, it is possible to adjust the service to scale up sooner, say 50 concurrent requests via configuring an annotation of `autoscaling.knative.dev/target`.
 
     Update the prime-generator service by executing:
+    
     ```bash
     kn service update prime-generator \
        --annotation autoscaling.knative.dev/target=50
     ```
-    `
-    ```
+   
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 05-scaling/service-50.yaml
-    ```*.
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+      
+    ```
+    cat /root/05-scaling/service-50.yaml
+    ```
 
     Again test the scaling by loading the service.  This time send 275 concurrent requests totaling 1100.
 
@@ -873,16 +891,16 @@ challenges:
        --annotation autoscaling.knative.dev/metric=cpu \
        --annotation autoscaling.knative.dev/class=hpa.autoscaling.knative.dev
     ```
-    `
-    ```
 
     > **Note:** *Notice that the above `kn` command removes, adds, and updates existing annotations to the service.  To delete use `—annotation name-`.*
     >
     > *Getting the service to scale on the large CPU nodes that this tutorial is running on is relatively hard.  If you have any ideas to see this in action put an issue in at [this tutorial's github][learn-katacoda]*
     >
-    > *The equivalent yaml for the service above can be seen by executing: ```
-    cat 05-scaling/service-hpa.yaml
-    ```*.
+    > *The equivalent yaml for the service above can be seen by executing: 
+      
+    ```
+    cat /root/05-scaling/service-hpa.yaml
+    ```
 
 
     ## Delete the Service
