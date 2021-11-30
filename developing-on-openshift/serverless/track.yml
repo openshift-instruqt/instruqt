@@ -421,7 +421,7 @@ challenges:
     Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command:
 
     ```
-    export APP_ROUTE=`oc get route greeter -n serverless-tutorial -o jsonpath='{"http://"}{.spec.host}'`
+    export APP_ROUTE=kn route list | awk '{print $2}' | sed -n 2p
     curl $APP_ROUTE
     ```
 
@@ -431,6 +431,7 @@ challenges:
 
     ### Scale to Zero
     The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing
+    
     ```
     oc get pods -n serverless-tutorial -w
     ```
@@ -441,11 +442,12 @@ challenges:
 
     ## Delete the Service
     We can easily delete our service by executing:
+    
     ```
     kn service delete greeter
     ```
 
-    Awesome! You have successfully deployed your very first serverless service using OpenShift Serverless. In the next chapter we will go a bit deeper in understanding how to distribute traffic between multiple revisions of the same service.
+    Awesome! You have successfully deployed your very first serverless service using OpenShift Serverless. In the next assignment, we will go a bit deeper in understanding how to distribute traffic between multiple revisions of the same service.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -461,7 +463,7 @@ challenges:
     - Provide a custom `name` to the deployment
     - Configure a service to use a `blue-green` deployment pattern
 
-    Serverless services always route traffic to the **latest** revision of the deployment. In this section we will learn a few different ways to split the traffic between revisions in our service.
+    Serverless services always route traffic to the **latest** revision of the deployment. In this assignment, we will learn a few different ways to split the traffic between revisions in our service.
 
     ## Revision Names
     By default, Serverless generates random revision names for the service that is based on using the Serverless service’s `metadata.name` as a prefix.
@@ -469,6 +471,7 @@ challenges:
     The following service deployment uses the same greeter service as the last section in the tutorial except it is configured with an arbitrary revision name.
 
     Let's deploy the greeter service again, but this time set its **revision name** to `greeter-v1` by executing:
+    
     ```
     kn service create greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -477,11 +480,13 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+    
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml
     ```
 
     Next, we are going to update the greeter service to add a message prefix environment variable and change the revision name to `greeter-v2`.  Do so by executing:
+    
     ```
     kn service update greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -491,11 +496,14 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+    
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml
     ```
 
-    See that the two greeter services have deployed successfully by executing ```
+    See that the two greeter services have deployed successfully by executing 
+    
+    ```
     kn revision list
     ```
 
@@ -515,6 +523,7 @@ challenges:
     With the deployment of `greeter-v2` serverless automatically started to direct 100% of the traffic to `greeter-v2`. Now let us assume that we need to roll back `greeter-v2` to `greeter-v1` for some reason.
 
     Update the greeter service by executing:
+    
     ```
     kn service update greeter \
        --traffic greeter-v1=100 \
@@ -533,6 +542,7 @@ challenges:
     > *Using the latest tag allows changing the default behavior of services to route 100% of the traffic to the latest revision.*
 
     We can validate the service traffic tags by executing:
+    
     ```
     kn route describe greeter
     ```
@@ -562,19 +572,23 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+    
     ```
     cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml
     ```
 
     The configuration change we issued above does not create any new `configuration`, `revision`, or `deployment` as there was no application update (e.g. image tag, env var, etc).  When calling the service without the sub-route, Serverless scales up the `greeter-v1`, as our configuration specifies and the service responds with the text `Hi greeter ⇒ '9861675f8845' : 1`.
 
-    We can check that ```
-    greeter-v1` is receiving 100% of the traffic now to our main route by executing: `curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    We can check that `greeter-v1` is receiving 100% of the traffic now to our main route by executing:
+    
+    ```
+    APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
+    curl $APP_ROUTE
     ```
 
     > **Challenge:** *As a test, route all of the traffic back to `greeter-v2` (green).*
 
-    Congrats! You now are able to apply a a `blue-green` deployment pattern using Serverless.  In the next section we will look at `canary release` deployments.
+    Congrats! You now are able to apply a a `blue-green` deployment pattern using Serverless.  In the next assignment, we will look at `canary release` deployments.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -595,13 +609,12 @@ challenges:
     kn service create greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v1
     kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v2 --env MESSAGE_PREFIX=GreeterV2
     ```
-    `
-    ```
 
     ## Applying a Canary Release Pattern
     A Canary release is more effective when looking to reduce the risk of introducing new features. Using this type of deployment model allows a more effective feature-feedback loop before rolling out the change to the entire user base.  Using this deployment approach with Serverless allows splitting the traffic between revisions in increments as small as 1%.
 
     To see this in action, apply the following service update that will split the traffic 80% to 20% between `greeter-v1` and `greeter-v2` by executing:
+    
     ```bash
     kn service update greeter \
        --traffic greeter-v1=80 \
@@ -611,7 +624,9 @@ challenges:
 
     In the service configuration above see the 80/20 split between v1 and v2 of the greeter service.  Also see that the current service is set to receive 0% of the traffic using the `latest` tag.
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+    
+    ```
     cat 04-canary-releases/greeter-canary-service.yaml
     ```
 
@@ -620,15 +635,12 @@ challenges:
     To observe the new traffic distribution execute the following:
 
     ```bash
-    # ./assets/04-canary-releases/poll-svc-10.bash
-
-    #!/usr/bin/env bash
+    APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
+    
     for run in {1..10}
     do
-      curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+      curl $APP_ROUTE
     done
-    ```
-    `
     ```
 
     80% of the responses are returned from greeter-v1 and 20% from greeter-v2. See the listing below for sample output:
@@ -646,7 +658,9 @@ challenges:
     Hi  greeter => '6fee83923a9f' : 8
     ```
 
-    Also notice that two pods are running, representing both greeter-v1 and greeter-v2: ```
+    Also notice that two pods are running, representing both greeter-v1 and greeter-v2: 
+    
+    ```
     oc get pods -n serverless-tutorial
     ```
 
@@ -662,7 +676,9 @@ challenges:
 
     ## Delete the Service
 
-    We will need to cleanup the project for our next section by executing: ```
+    We will need to cleanup the project for our next section by executing: 
+    
+    ```
     kn service delete greeter
     ```
 
@@ -702,11 +718,15 @@ challenges:
 
     > **Note:** *You might have noticed an initial lag when trying to access your service.  The reason for that delay is highly likely that your request is being held by the activator!*
 
-    First login as an administrator for the cluster: ```
+    First login as an administrator for the cluster: 
+    
+    ```
     oc login -u admin -p admin
     ```
 
-    It is possible to see the default configurations of the autoscaler by executing: ```
+    It is possible to see the default configurations of the autoscaler by executing: 
+    
+    ```
     oc -n knative-serving describe cm config-autoscaler
     ```
 
@@ -732,7 +752,8 @@ challenges:
 
     > **Tip:** Another, possibly better, way to make those changes would be to add configuration to the `KnativeServing` instance that was applied in the `Prepare for Exercises` section early in this tutorial.
     >
-    > Open and inspect that yaml by executing: ```
+    > Open and inspect that yaml by executing: 
+    ```
     cat 01-prepare/serving.yaml
     ```
     >
