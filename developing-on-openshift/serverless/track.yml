@@ -127,7 +127,7 @@ challenges:
     > **Note:** *These steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
     ## Log in and install the operator
-    
+
     ### Logging in to the Cluster
 
     To log in to the cluster as an administrator from the terminal:
@@ -135,7 +135,7 @@ challenges:
     ```
     oc login -u admin -p admin
     ```
-    
+
     At first, check that the pod responsible for OpenShift Web Console to be ready:
 
     ```
@@ -147,17 +147,17 @@ challenges:
     When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
 
     ```
-    oc get routes console -n openshift-console
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
     ```
 
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
 
     You will then be able to login with admin permissions with:
 
     * **Username:** ``admin``
     * **Password:** ``admin``
 
-    
+
     This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
 
     ![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
@@ -211,7 +211,7 @@ challenges:
     To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
     The project is already created for you but if you were running this tutorial on a different OpenShift cluster, here is the command on how to create a project from the terminal:
-      
+
     ```
     oc new-project serverless-tutorial
     ```
@@ -343,8 +343,8 @@ challenges:
 
     The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
-    It also is possible to `describe` a specific service to gather detailed information about that service by executing: 
-      
+    It also is possible to `describe` a specific service to gather detailed information about that service by executing:
+
     ```
     kn service describe greeter
     ```
@@ -430,7 +430,7 @@ challenges:
 
     ### Scale to Zero
     The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing
-    
+
     ```
     oc get pods -n serverless-tutorial -w
     ```
@@ -441,7 +441,7 @@ challenges:
 
     ## Delete the Service
     We can easily delete our service by executing:
-    
+
     ```
     kn service delete greeter
     ```
@@ -470,7 +470,7 @@ challenges:
     The following service deployment uses the same greeter service as the last section in the tutorial except it is configured with an arbitrary revision name.
 
     Let's deploy the greeter service again, but this time set its **revision name** to `greeter-v1` by executing:
-    
+
     ```
     kn service create greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -479,13 +479,13 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
-    
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml
+    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml | cat
     ```
 
     Next, we are going to update the greeter service to add a message prefix environment variable and change the revision name to `greeter-v2`.  Do so by executing:
-    
+
     ```
     kn service update greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -495,13 +495,13 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
-    
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml
+    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml | cat
     ```
 
-    See that the two greeter services have deployed successfully by executing 
-    
+    See that the two greeter services have deployed successfully by executing
+
     ```
     kn revision list
     ```
@@ -522,7 +522,7 @@ challenges:
     With the deployment of `greeter-v2` serverless automatically started to direct 100% of the traffic to `greeter-v2`. Now let us assume that we need to roll back `greeter-v2` to `greeter-v1` for some reason.
 
     Update the greeter service by executing:
-    
+
     ```
     kn service update greeter \
        --traffic greeter-v1=100 \
@@ -541,7 +541,7 @@ challenges:
     > *Using the latest tag allows changing the default behavior of services to route 100% of the traffic to the latest revision.*
 
     We can validate the service traffic tags by executing:
-    
+
     ```
     kn route describe greeter
     ```
@@ -571,18 +571,18 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
-    
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml
+    curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml | cat
     ```
 
     The configuration change we issued above does not create any new `configuration`, `revision`, or `deployment` as there was no application update (e.g. image tag, env var, etc).  When calling the service without the sub-route, Serverless scales up the `greeter-v1`, as our configuration specifies and the service responds with the text `Hi greeter ⇒ '9861675f8845' : 1`.
 
     We can check that `greeter-v1` is receiving 100% of the traffic now to our main route by executing:
-    
+
     ```
     APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
-    curl $APP_ROUTE
+    curl --insecure $APP_ROUTE
     ```
 
     > **Challenge:** *As a test, route all of the traffic back to `greeter-v2` (green).*
@@ -613,7 +613,7 @@ challenges:
     A Canary release is more effective when looking to reduce the risk of introducing new features. Using this type of deployment model allows a more effective feature-feedback loop before rolling out the change to the entire user base.  Using this deployment approach with Serverless allows splitting the traffic between revisions in increments as small as 1%.
 
     To see this in action, apply the following service update that will split the traffic 80% to 20% between `greeter-v1` and `greeter-v2` by executing:
-    
+
     ```bash
     kn service update greeter \
        --traffic greeter-v1=80 \
@@ -623,10 +623,10 @@ challenges:
 
     In the service configuration above see the 80/20 split between v1 and v2 of the greeter service.  Also see that the current service is set to receive 0% of the traffic using the `latest` tag.
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
-    
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
     ```
-    cat 04-canary-releases/greeter-canary-service.yaml
+    curl 04-canary-releases/greeter-canary-service.yaml | cat
     ```
 
     As in the previous section on Applying Blue-Green Deployment Pattern deployments, the command will not create a new configuration, revision, or deployment.
@@ -635,10 +635,10 @@ challenges:
 
     ```bash
     APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
-    
+
     for run in {1..10}
     do
-      curl $APP_ROUTE
+      curl --insecure $APP_ROUTE
     done
     ```
 
@@ -657,8 +657,8 @@ challenges:
     Hi  greeter => '6fee83923a9f' : 8
     ```
 
-    Also notice that two pods are running, representing both greeter-v1 and greeter-v2: 
-    
+    Also notice that two pods are running, representing both greeter-v1 and greeter-v2:
+
     ```
     oc get pods -n serverless-tutorial
     ```
@@ -675,8 +675,8 @@ challenges:
 
     ## Delete the Service
 
-    We will need to cleanup the project for our next section by executing: 
-    
+    We will need to cleanup the project for our next section by executing:
+
     ```
     kn service delete greeter
     ```
@@ -717,14 +717,14 @@ challenges:
 
     > **Note:** *You might have noticed an initial lag when trying to access your service.  The reason for that delay is highly likely that your request is being held by the activator!*
 
-    First login as an administrator for the cluster: 
-    
+    First login as an administrator for the cluster:
+
     ```
     oc login -u admin -p admin
     ```
 
-    It is possible to see the default configurations of the autoscaler by executing: 
-    
+    It is possible to see the default configurations of the autoscaler by executing:
+
     ```
     oc -n knative-serving describe cm config-autoscaler
     ```
@@ -751,7 +751,7 @@ challenges:
 
     > **Tip:** Another, possibly better, way to make those changes would be to add configuration to the `KnativeServing` instance that was applied in the `Prepare for Exercises` section early in this tutorial.
     >
-    > Open and inspect that yaml by executing: 
+    > Open and inspect that yaml by executing:
     ```
     cat 01-prepare/serving.yaml
     ```
@@ -887,8 +887,8 @@ challenges:
 
     ## Delete the Service
 
-    Cleanup the project using: 
-      
+    Cleanup the project using:
+
     ```
     kn service delete prime-generator
     ```
@@ -900,4 +900,4 @@ challenges:
     hostname: crc
   difficulty: intermediate
   timelimit: 500
-checksum: "12353213620169049547"
+checksum: "6497480836933434545"

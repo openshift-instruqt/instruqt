@@ -169,6 +169,28 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/dev
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/serving.yaml -o /root/01-prepare/serving.yaml
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-knative-serving.bash -o /root/01-prepare/watch-knative-serving.bash
 
+mkdir -p /root/02-serving
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/service.yaml -o /root/02-serving/service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/watch-service.bash -o /root/02-serving/watch-service.bash
+
+mkdir -p /root/03-traffic-distribution
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml -o /root/03-traffic-distribution/greeter-v1-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml -o /root/03-traffic-distribution/greeter-v2-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml -o /root/03-traffic-distribution/service-pinned.yaml
+
+mkdir -p /root/04-canary-releases
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/greeter-canary-service.yaml -o /root/04-canary-releases/greeter-canary-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/poll-svc-10.bash -o /root/04-canary-releases/poll-svc-10.bash
+
+mkdir -p /root/05-scaling
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-50.yaml -o /root/05-scaling/service-50.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-hpa.yaml -o /root/05-scaling/service-hpa.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-min-max-scale.yaml -o /root/05-scaling/service-min-max-scale.yaml
+
 bash /root/01-prepare/install-serverless.bash
 
 # for dd in `ls -d */`; do 
