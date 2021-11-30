@@ -128,8 +128,14 @@ challenges:
 
     ## Log in and install the operator
     
-    ### Logging in to the Cluster via Dashboard
+    ### Logging in to the Cluster
 
+    To log in to the cluster as an administrator from the terminal:
+
+    ```
+    oc login -u admin -p admin
+    ```
+    
     At first, check that the pod responsible for OpenShift Web Console to be ready:
 
     ```
@@ -151,13 +157,6 @@ challenges:
     * **Username:** ``admin``
     * **Password:** ``admin``
 
-    ### Logging in to the Cluster via the terminal
-
-    To log in to the cluster as an administrator from the terminal:
-
-    ```
-    oc login -u admin -p admin
-    ```
     
     This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
 
@@ -421,8 +420,8 @@ challenges:
     Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command:
 
     ```
-    export APP_ROUTE=kn route list | awk '{print $2}' | sed -n 2p
-    curl $APP_ROUTE
+    export APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
+    curl --insecure $APP_ROUTE
     ```
 
     The service will return a response like **Hi  greeter => '6fee83923a9f' : 1**
