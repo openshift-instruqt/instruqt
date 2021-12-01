@@ -31,7 +31,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -944,4 +943,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/panache
   difficulty: basic
   timelimit: 500
-checksum: "8104155841527401905"
+checksum: "1192538560285374706"
