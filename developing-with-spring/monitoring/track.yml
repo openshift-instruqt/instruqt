@@ -14,7 +14,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -32,7 +31,7 @@ challenges:
   assignment: |
     # Import the code
 
-    Let's refresh the code we'll be using. Run the following command to clone the sample project:
+    Let's refresh the code we'll be using. Run the following command to clone the sample project in Terminal 1:
 
     ```
     cd /root/projects && rm -rf rhoar-getting-started && git clone https://github.com/openshift-katacoda/rhoar-getting-started && cd rhoar-getting-started/spring/spring-monitoring
@@ -48,7 +47,7 @@ challenges:
 
     As we develop the application we want to be able to test and verify our change at different stages. One way we can do that locally is by using the `spring-boot` maven plugin.
 
-    Run the application by executing the following command:
+    Run the application by executing the following command in Terminal 1:
 
     ```
     mvn spring-boot:run
@@ -92,7 +91,7 @@ challenges:
     # Deploy to OpenShift Application Platform
     **1. Deploying the application to OpenShift**
 
-    Run the following command to login with the OpenShift CLI:
+    Run the following command to login with the OpenShift CLI in Terminal 1:
 
     ```
     oc login -u admin -p admin
@@ -111,10 +110,10 @@ challenges:
     oc new-project dev --display-name="Dev - Spring Boot App"
     ```
 
-    Run the following command to deploy the application to OpenShift:
+    Run the following command to deploy the application to OpenShift in Terminal 1:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     This step may take some time to do the Maven build and the OpenShift deployment. After the build completes you can verify that everything is started by running the following command:
@@ -147,9 +146,10 @@ challenges:
     admin
     ```
 
+    Switch to `Developer Perspective` then click on `Topology` view in `Dev` project.
     ![Routes](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/routes.png)
 
-    Either click on the route link through the _Location_ column from the above screen and navigate to the `/fruits` endpoint.
+    Access the application endpoint by adding `/fruits` to the route URL that you click on `Open UR` link.
 
     We should now see the same `Success` page that we saw when we first tested our app locally:
 
@@ -187,16 +187,15 @@ challenges:
 
     Since a lack of health checks can cause container issues if they crash, OpenShift will alert you with a warning message if your project is lacking one.
 
-    Switch to the 'developer' perspective and from the _Topology_ tab of your project _dev_, select your deployment. You should see something like this:
+    In _Topology_ view, select your deployment. You should see something like this:
 
     ![Missing Health Checks](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/healthChecks.png)
-
 
     Since we have a Spring Boot application we have an easy option for implementation of health checks. We're able to pull in the `Spring Actuator` library.
 
     **2. Add Health Checks with Actuator**
 
-    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment..
+    Spring Actuator is a project which exposes health data under the API path `/actuator/health` that is collected during application runtime automatically. All we need to do to enable this feature is to add the following dependency to ``pom.xml`` at the **TODO** comment.
 
     ```xml
         <dependency>
@@ -205,12 +204,16 @@ challenges:
         </dependency>
     ```
 
+    Click on the `Disk` icon to save the files or press `CTRL-S`:
+
+    ![Visual Editor](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-monitoring/save-pom-file.png)
+
     Notice how the previous warning message from before regarding missing health checks is no longer present. This is because of the dependency that we just added to ourt `pom.xml`. Adding this dependency triggers jkube to create Readiness/Liveness probes for OpenShift. These probes will periodically query the new health endpoints to make sure the app is still up.
 
     Run the following command again to re-deploy the application to OpenShift:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     Now that we've added Spring Actuator, we're able to hit their provided `/actuator/health` endpoint. We can navigate to it by either adding `/actuator/health` to our landing page, or by clicking on the Route below.
@@ -226,7 +229,7 @@ challenges:
     We should now see the following response, confirming that our application is up and running properly:
 
     ```json
-    {"status":"UP"}
+    {"status":"UP","groups":["liveness","readiness"]}
     ```
 
     OpenShift will now continuously poll this endpoint to determine if any action is required to maintain the health of our container.
@@ -241,10 +244,12 @@ challenges:
     management.endpoints.web.exposure.include=*
     ```
 
+    Save the file.
+
     If we redeploy the application again with:
 
     ```
-    mvn package oc:deploy -Popenshift -DskipTests
+    mvn package oc:deploy -Popenshift -DskipTests -f /root/projects/rhoar-getting-started/spring/spring-monitoring
     ```
 
     Now we can hit the `/actuator/metrics` endpoint from the Web Console or from here:
@@ -257,11 +262,10 @@ challenges:
     This returns a list of metrics types accessible to us:
 
     ```json
-    {"names":["jvm.memory.max","jvm.threads.states","process.files.max","jvm.gc.memory.promoted","system.load.average.1m","jvm.memory.used","jvm.gc.max.data.size","jvm.memory.committed","system.cpu.count","logback.events","http.server.requests","tomcat.global.sent","jvm.buffer.memory.used","tomcat.sessions.created","jvm.threads.daemon","system.cpu.usage","jvm.gc.memory.allocated","tomcat.global.request.max","tomcat.global.request","tomcat.sessions.expired","jvm.threads.live","jvm.threads.peak","tomcat.global.received","process.uptime","tomcat.sessions.rejected","process.cpu.usage","tomcat.threads.config.max","jvm.classes.loaded","jvm.classes.unloaded","tomcat.global.error","tomcat.sessions.active.current","tomcat.sessions.alive.max","jvm.gc.live.data.size","tomcat.threads.current","process.files.open","jvm.buffer.count","jvm.gc.pause","jvm.buffer.total.capacity","tomcat.sessions.active.max","tomcat.threads.busy","process.start.time"]}
+    {"names":["http.server.requests","jvm.buffer.count","jvm.buffer.memory.used","jvm.buffer.total.capacity","jvm.classes.loaded","jvm.classes.unloaded","jvm.gc.live.data.size","jvm.gc.max.data.size","jvm.gc.memory.allocated","jvm.gc.memory.promoted","jvm.gc.pause","jvm.memory.committed","jvm.memory.max","jvm.memory.used","jvm.threads.daemon","jvm.threads.live","jvm.threads.peak","jvm.threads.states","logback.events","process.cpu.usage","process.files.max","process.files.open","process.start.time","process.uptime","system.cpu.count","system.cpu.usage","system.load.average.1m","tomcat.sessions.active.current","tomcat.sessions.active.max","tomcat.sessions.alive.max","tomcat.sessions.created","tomcat.sessions.expired","tomcat.sessions.rejected"]}
     ```
 
     We can then navigate to `/actuator/metrics/[metric-name]`. For example for JVM Memory Usage:
-
 
     ```
     oc get route spring-monitoring -n dev -o jsonpath='{"http://"}{.spec.host}{"/actuator/metrics/jvm.memory.max"}{"\n"}'
@@ -270,7 +274,7 @@ challenges:
     This will display different types of metric data about the JVM Metrics:
 
     ```json
-    {"name":"jvm.memory.max","description":"The maximum amount of memory in bytes that can be used for memory management","baseUnit":"bytes","measurements":[{"statistic":"VALUE","value":2.543321088E9}],"availableTags":[{"tag":"area","values":["heap","nonheap"]},{"tag":"id","values":["Compressed Class Space","PS Survivor Space","PS Old Gen","Metaspace","PS Eden Space","Code Cache"]}]}
+    {"name":"jvm.memory.max","description":"The maximum amount of memory in bytes that can be used for memory management","baseUnit":"bytes","measurements":[{"statistic":"VALUE","value":9.115271167E9}],"availableTags":[{"tag":"area","values":["heap","nonheap"]},{"tag":"id","values":["CodeHeap 'profiled nmethods'","PS Eden Space","CodeHeap 'non-profiled nmethods'","Compressed Class Space","PS Old Gen","PS Survivor Space","Metaspace","CodeHeap 'non-nmethods'"]}]}
     ```
 
     In addition to the different monitoring endpoints we also have informational endpoints like the `/actuator/beans` endpoint, which will show all of the configured beans in the application. Spring Actuator provides multiple informational endpoints on top of the monitoring endpoints that can prove useful for information gathering about your deployed Spring application and can be helpful while debugging your applications in OpenShift.
@@ -291,4 +295,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-monitoring
   difficulty: basic
   timelimit: 1000
-checksum: "12347280335339767526"
+checksum: "11920960641302153860"

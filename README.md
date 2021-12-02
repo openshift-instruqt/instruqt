@@ -249,6 +249,7 @@ The connection is made inside the setup scripts like [this one](https://github.c
 
 #### How we have skaffolded it
 
+We used git submodules to clone this [repo](https://github.com/openshift-labs/learn-katacoda/) and then we used this [script](https://gist.github.com/blues-man/d74b7aba058e62ba2e2042b4eb5d892c)
 
 ```bash
 git submodule update --init

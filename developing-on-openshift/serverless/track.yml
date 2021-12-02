@@ -132,10 +132,31 @@ challenges:
     To log in to the cluster as an administrator from the terminal:
 
     ```
+<<<<<<< HEAD
     oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     You can login to the Web Console using the **Web Console** Tab with this credentials:
+=======
+    oc login -u admin -p admin
+    ```
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+    ```
+
+    Click the link under `HOST/PORT` column and navigate there from a web browser.
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
 
     You will then be able to login with admin permissions with:
 
@@ -143,7 +164,11 @@ challenges:
     * **Password:** ``admin``
 
 
+<<<<<<< HEAD
     ### Install Serverless Operator
+=======
+    This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
 
     ![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
 
@@ -201,6 +226,7 @@ challenges:
 
     To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
+<<<<<<< HEAD
     ```
     oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
@@ -211,6 +237,14 @@ challenges:
     oc new-project serverless-tutorial
     ```
 
+=======
+    The project is already created for you but if you were running this tutorial on a different OpenShift cluster, here is the command on how to create a project from the terminal:
+
+    ```
+    oc new-project serverless-tutorial
+    ```
+
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     There we go! You are all set to kickstart your serverless journey with **OpenShift Serverless**.
   tabs:
   - title: Terminal 1
@@ -272,7 +306,11 @@ challenges:
     ```
     cat /root/02-serving/service.yaml
     ```
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     You'll see the following output:
 
     ```yaml
@@ -737,7 +775,11 @@ challenges:
     First login as an administrator for the cluster:
 
     ```
+<<<<<<< HEAD
     oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+=======
+    oc login -u admin -p admin
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
 
     It is possible to see the default configurations of the autoscaler by executing:
@@ -775,16 +817,28 @@ challenges:
     >
     > There are other settings of Serverless available.  It is possible to describe other configmaps in the `knative-serving` project to find them.
     >
+<<<<<<< HEAD
     > Explore what all is available by running:
 
+=======
+    > Explore what all is available by running: 
+      
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
     oc get cm -n knative-serving
     ```
 
+<<<<<<< HEAD
     Now, log back in as the developer as we do not need elevated privileges to continue:
 
     ```
     oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+=======
+    Now, log back in as the developer as we do not need elevated privileges to continue: 
+      
+    ```
+    oc login -u developer -p developer
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
 
     ## Minimum Scale
@@ -844,7 +898,11 @@ challenges:
     `
     ```
 
+<<<<<<< HEAD
     See that the `prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking:
+=======
+    See that the `prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking: 
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
     oc get pods -n serverless-tutorial
     ```
@@ -867,15 +925,26 @@ challenges:
     To help with this, it is possible to adjust the service to scale up sooner, say 50 concurrent requests via configuring an annotation of `autoscaling.knative.dev/target`.
 
     Update the prime-generator service by executing:
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```bash
     kn service update prime-generator \
        --annotation autoscaling.knative.dev/target=50
     ```
+<<<<<<< HEAD
 
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
 
+=======
+   
+
+    > **Note:** *The equivalent yaml for the service above can be seen by executing: 
+      
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
     cat /root/05-scaling/service-50.yaml
     ```
@@ -907,8 +976,13 @@ challenges:
     >
     > *Getting the service to scale on the large CPU nodes that this tutorial is running on is relatively hard.  If you have any ideas to see this in action put an issue in at [this tutorial's github][learn-katacoda]*
     >
+<<<<<<< HEAD
     > *The equivalent yaml for the service above can be seen by executing:
 
+=======
+    > *The equivalent yaml for the service above can be seen by executing: 
+      
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
     ```
     cat /root/05-scaling/service-hpa.yaml
     ```
@@ -933,4 +1007,8 @@ challenges:
     new_window: true
   difficulty: intermediate
   timelimit: 500
+<<<<<<< HEAD
 checksum: "2440311963037087464"
+=======
+checksum: "6497480836933434545"
+>>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
