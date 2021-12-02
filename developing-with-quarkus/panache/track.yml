@@ -278,18 +278,11 @@ challenges:
 
     ## Open the OpenShift Web Console
 
-    OpenShift ships with a web-based console that will allow users to
-    perform various tasks via a browser.
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-    Access the OpenShift Web Console to also login from the Web UI:
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -301,7 +294,6 @@ challenges:
     developer
     ```
 
-
     ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/login.png)
 
     Run **Skip Tour** to skip the new user introduction.
@@ -311,7 +303,7 @@ challenges:
     ## Login to OpenShift
 
     In order to login, we will use the **oc** command and then specify the server that we
-    want to authenticate to:
+    want to authenticate to in Terminal 1:
 
     ```
     oc login -u developer -p developer
@@ -502,6 +494,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 03-add-query-endpoints
@@ -538,15 +534,15 @@ challenges:
     Add the following two new queries after `// TODO: Add more queries` comment:
 
     ```java
-    public static List<Person> findByColor(EyeColor color) {
-        return list("eyes", color);
-    }
+        public static List<Person> findByColor(EyeColor color) {
+            return list("eyes", color);
+        }
 
-    public static List<Person> getBeforeYear(int year) {
-        return Person.<Person>streamAll()
-        .filter(p -> p.birth.getYear() <= year)
-        .collect(Collectors.toList());
-    }
+        public static List<Person> getBeforeYear(int year) {
+            return Person.<Person>streamAll()
+            .filter(p -> p.birth.getYear() <= year)
+            .collect(Collectors.toList());
+        }
     ```
 
     Save the file.
@@ -633,8 +629,6 @@ challenges:
     The `Person` entity's superclass comes with lots of super useful static methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person`, and getting completion for all the operations in a single place.
 
     In the next step we'll show you how Panache can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -713,8 +707,8 @@ challenges:
     Add this code in the same file after the `// TODO: Begin result` comment:
 
     ```java
-          DataTable result = new DataTable();
-            result.setDraw(draw);
+            DataTable result = new DataTable();
+              result.setDraw(draw);
     ```
 
     Next, if the request includes a search parameter, let's take care of that by including a search query, otherwise just collect all records:
@@ -722,14 +716,14 @@ challenges:
     Add this code in the same file after the `//TODO: Filter based on search` comment:
 
     ```java
-          PanacheQuery<Person> filteredPeople;
+            PanacheQuery<Person> filteredPeople;
 
-          if (searchVal != null && !searchVal.isEmpty()) {
-              filteredPeople = Person.<Person>find("name like :search",
-                Parameters.with("search", "%" + searchVal + "%"));
-          } else {
-              filteredPeople = Person.findAll();
-          }
+            if (searchVal != null && !searchVal.isEmpty()) {
+                filteredPeople = Person.<Person>find("name like :search",
+                  Parameters.with("search", "%" + searchVal + "%"));
+            } else {
+                filteredPeople = Person.findAll();
+            }
     ```
 
     And finally, we use the built-in Panache `page` operator to seek to the correct page of records and stream the number of entries desired, set the values into the `result` and return it:
@@ -749,13 +743,7 @@ challenges:
 
     Save the file.
 
-    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
-
-    ```bash
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache
-    ```
-
-    Let's test out our new endpoint using `curl` to search for names with `yan` in their name in Terminal 2:
+    Let's test out our new endpoint using `curl` to search for names with `yan` in their name in Terminal 1:
 
     ```
     curl -s "$APP_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq
@@ -782,13 +770,8 @@ challenges:
     # Congratulations
 
     You have successfully written an endpoint that can be used with 3rd-party frontend plugins like DataTable. In the next step we'll create a lot more data and deploy to OpenShift.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -838,13 +821,7 @@ challenges:
 
     Let's test it out and see if it picks up our new data.
 
-    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
-
-    ```bash
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache
-    ```
-
-    We'll search for a single letter `F` and limit the results to `2` in Terminal 2:
+    We'll search for a single letter `F` and limit the results to `2` in Terminal 1:
 
     > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
 
@@ -883,13 +860,8 @@ challenges:
     You have successfully written a lifecycle hook to listen for `StartupEvent`. Anytime the application is started it will fire this method. You can also use `@Observes ShutdownEvent` to do cleanup when the application is gracefully stopped.
 
     In the next step we'll exercise the DataTables GUI, backed by our remotely developed, high performance Quarkus app!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -941,6 +913,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "1192538560285374706"
+checksum: "7357061782165331855"
