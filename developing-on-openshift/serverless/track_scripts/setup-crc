@@ -162,38 +162,6 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
 
-<<<<<<< HEAD
-=======
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/serverless/serverless/scripts/01-prepare/install-serverless.bash -o /root/01-prepare/install-serverless.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/operator-subscription.yaml -o /root/01-prepare/operator-subscription.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-serverless-operator.bash -o /root/01-prepare/watch-serverless-operator.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/serving.yaml -o /root/01-prepare/serving.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-knative-serving.bash -o /root/01-prepare/watch-knative-serving.bash
-
-mkdir -p /root/02-serving
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/service.yaml -o /root/02-serving/service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/watch-service.bash -o /root/02-serving/watch-service.bash
-
-mkdir -p /root/03-traffic-distribution
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml -o /root/03-traffic-distribution/greeter-v1-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml -o /root/03-traffic-distribution/greeter-v2-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml -o /root/03-traffic-distribution/service-pinned.yaml
-
-mkdir -p /root/04-canary-releases
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/greeter-canary-service.yaml -o /root/04-canary-releases/greeter-canary-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/poll-svc-10.bash -o /root/04-canary-releases/poll-svc-10.bash
-
-mkdir -p /root/05-scaling
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-50.yaml -o /root/05-scaling/service-50.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-hpa.yaml -o /root/05-scaling/service-hpa.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-min-max-scale.yaml -o /root/05-scaling/service-min-max-scale.yaml
-
-bash /root/01-prepare/install-serverless.bash
->>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
 
 # for dd in `ls -d */`; do 
 #    echo $dd;
@@ -225,9 +193,3 @@ bash /root/01-prepare/install-serverless.bash
 
 # Installing kn CLI
 
-<<<<<<< HEAD
-=======
-curl -kL https://mirror.openshift.com/pub/openshift-v4/clients/serverless/latest/kn-linux-amd64.tar.gz -o /usr/local/bin/kn.tar.gz
-tar -xvf /usr/local/bin/kn.tar.gz -C /usr/local/bin
-chmod +x /usr/local/bin/kn
->>>>>>> 623254cd2bf627381db752f6be394941b2d9977b
