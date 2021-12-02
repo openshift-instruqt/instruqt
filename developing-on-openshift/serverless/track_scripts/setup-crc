@@ -161,15 +161,7 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
-mkdir -p /root/01-prepare
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/serverless/serverless/scripts/01-prepare/install-serverless.bash -o /root/01-prepare/install-serverless.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/operator-subscription.yaml -o /root/01-prepare/operator-subscription.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-serverless-operator.bash -o /root/01-prepare/watch-serverless-operator.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/serving.yaml -o /root/01-prepare/serving.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-knative-serving.bash -o /root/01-prepare/watch-knative-serving.bash
-
-bash /root/01-prepare/install-serverless.bash
 
 # for dd in `ls -d */`; do 
 #    echo $dd;
@@ -198,3 +190,6 @@ bash /root/01-prepare/install-serverless.bash
 #     done
 #     echo "AVAILABLE"
 # done
+
+# Installing kn CLI
+

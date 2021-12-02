@@ -54,14 +54,13 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
 - dahmed@redhat.com
 - cclyburn@redhat.com
 private: false
 published: true
 challenges:
 - slug: 01-prepare
-  id: mga0xrg14hum
+  id: mqke0cdpjcqr
   type: challenge
   title: Prepare for Exercises
   notes:
@@ -127,7 +126,24 @@ challenges:
     > **Note:** *These steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
     ## Log in and install the operator
-    This section is automated, so you won't need to install the operator.  If you wanted to reproduce these results on another cluster, you'd need to authenticate as an admin to complete the following steps:
+
+    ### Logging in to the Cluster
+
+    To log in to the cluster as an administrator from the terminal:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+    You can login to the Web Console using the **Web Console** Tab with this credentials:
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
+
+
+    ### Install Serverless Operator
 
     ![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
 
@@ -172,6 +188,12 @@ challenges:
 
     OpenShift Serverless should now be installed!
 
+    > NOTE: If you want to install Serverless manually instead, you can run this script:
+
+    ```
+    bash /root/01-prepare/install-serverless.bash
+    ```
+
     ## Login as a Developer and Create a Project
     Before beginning we should change to the non-privileged user `developer` and create a new `project` for the tutorial.
 
@@ -179,19 +201,29 @@ challenges:
 
     To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
-    Next create a new project by executing: `oc new-project serverless-tutorial`
+    ```
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+    ```
+
+    Create a project from the terminal:
+
+    ```
+    oc new-project serverless-tutorial
+    ```
 
     There we go! You are all set to kickstart your serverless journey with **OpenShift Serverless**.
-
-    Please check for the terminal output of `Serverless Tutorial Ready!` before continuing.  Once ready, click `continue` to go to the next module on how to deploy your first severless service.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 02-serving
-  id: o9rtgclttqbn
+  id: rryylofzwwmu
   type: challenge
   title: Deploying your service
   assignment: |
@@ -238,8 +270,12 @@ challenges:
     Before deploying your first Serverless Service, let us take a moment to understand it's structure:
 
     ```
-    # ./assets/02-serving/service.yaml
+    cat /root/02-serving/service.yaml
+    ```
 
+    You'll see the following output:
+
+    ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -256,7 +292,6 @@ challenges:
             readinessProbe:
               httpGet:
                 path: /healthz
-
     ```
 
     We now are deploying an instance of a `Service` that is provided by `serving.knative.dev`.  In our simple example we define a container `image` and the paths for `health checking` of the service.  We also provided the `name` and `namespace`.
@@ -271,16 +306,9 @@ challenges:
        --namespace serverless-tutorial
     ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing:
-    ```
-    cat 02-serving/service.yaml
-    ```
-
     Watch the status using the commands:
-    ```
-    # ./assets/02-serving/watch-service.bash
 
-    #!/usr/bin/env bash
+    ```bash
     while : ;
     do
       output=`oc get pod -n serverless-tutorial`
@@ -304,6 +332,7 @@ challenges:
 
     ### Service
     We can see the Serverless Service that we just created by executing:
+
     ```
     kn service list
     ```
@@ -319,9 +348,14 @@ challenges:
 
     The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
-    It also is possible to `describe` a specific service to gather detailed information about that service by executing: `kn service describe greeter
+    It also is possible to `describe` a specific service to gather detailed information about that service by executing:
+
+    ```
+    kn service describe greeter
+    ```
 
     The output should be similar to:
+
     ```
     Name:       greeter
     Namespace:  serverless-tutorial
@@ -355,10 +389,10 @@ challenges:
     kn route list
     ```
 
-    See the `NAME` of the route, the `URL`, as well as if it is `READY`:
+    See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
     ```bash
-    NAME      URL  READY
-    greeter   url  True
+    NAME      URL                                                                                  READY
+    greeter   https://greeter-serverless-tutorial.crc-dzk9v-master-0.crc.2rtmqs1ojyed.instruqt.io  True
     ```
 
     ### Revision
@@ -391,8 +425,8 @@ challenges:
     Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command:
 
     ```
-    export APP_ROUTE=`oc get route greeter -n serverless-tutorial -o jsonpath='{"http://"}{.spec.host}'`
-    curl $APP_ROUTE
+    export APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
+    curl --insecure $APP_ROUTE
     ```
 
     The service will return a response like **Hi  greeter => '6fee83923a9f' : 1**
@@ -401,6 +435,7 @@ challenges:
 
     ### Scale to Zero
     The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing
+
     ```
     oc get pods -n serverless-tutorial -w
     ```
@@ -411,19 +446,24 @@ challenges:
 
     ## Delete the Service
     We can easily delete our service by executing:
+
     ```
     kn service delete greeter
     ```
 
-    Awesome! You have successfully deployed your very first serverless service using OpenShift Serverless. In the next chapter we will go a bit deeper in understanding how to distribute traffic between multiple revisions of the same service.
+    Awesome! You have successfully deployed your very first serverless service using OpenShift Serverless. In the next assignment, we will go a bit deeper in understanding how to distribute traffic between multiple revisions of the same service.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 03-traffic-distribution
-  id: ikztbcqm3jtc
+  id: g5vly2fgvm9n
   type: challenge
   title: Traffic Distribution
   assignment: |
@@ -431,7 +471,7 @@ challenges:
     - Provide a custom `name` to the deployment
     - Configure a service to use a `blue-green` deployment pattern
 
-    Serverless services always route traffic to the **latest** revision of the deployment. In this section we will learn a few different ways to split the traffic between revisions in our service.
+    Serverless services always route traffic to the **latest** revision of the deployment. In this assignment, we will learn a few different ways to split the traffic between revisions in our service.
 
     ## Revision Names
     By default, Serverless generates random revision names for the service that is based on using the Serverless service’s `metadata.name` as a prefix.
@@ -439,6 +479,7 @@ challenges:
     The following service deployment uses the same greeter service as the last section in the tutorial except it is configured with an arbitrary revision name.
 
     Let's deploy the greeter service again, but this time set its **revision name** to `greeter-v1` by executing:
+
     ```
     kn service create greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -447,11 +488,13 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml
+    cat /root/03-traffic-distribution/greeter-v1-service.yaml
     ```
 
     Next, we are going to update the greeter service to add a message prefix environment variable and change the revision name to `greeter-v2`.  Do so by executing:
+
     ```
     kn service update greeter \
        --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus \
@@ -461,11 +504,14 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml
+    cat /root/03-traffic-distribution/greeter-v2-service.yaml
     ```
 
-    See that the two greeter services have deployed successfully by executing ```
+    See that the two greeter services have deployed successfully by executing
+
+    ```
     kn revision list
     ```
 
@@ -485,6 +531,7 @@ challenges:
     With the deployment of `greeter-v2` serverless automatically started to direct 100% of the traffic to `greeter-v2`. Now let us assume that we need to roll back `greeter-v2` to `greeter-v1` for some reason.
 
     Update the greeter service by executing:
+
     ```
     kn service update greeter \
        --traffic greeter-v1=100 \
@@ -503,6 +550,7 @@ challenges:
     > *Using the latest tag allows changing the default behavior of services to route 100% of the traffic to the latest revision.*
 
     We can validate the service traffic tags by executing:
+
     ```
     kn route describe greeter
     ```
@@ -532,27 +580,35 @@ challenges:
     ```
 
     > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
     ```
-    cat https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml
+    cat /root/03-traffic-distribution/service-pinned.yaml
     ```
 
     The configuration change we issued above does not create any new `configuration`, `revision`, or `deployment` as there was no application update (e.g. image tag, env var, etc).  When calling the service without the sub-route, Serverless scales up the `greeter-v1`, as our configuration specifies and the service responds with the text `Hi greeter ⇒ '9861675f8845' : 1`.
 
-    We can check that ```
-    greeter-v1` is receiving 100% of the traffic now to our main route by executing: `curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+    We can check that `greeter-v1` is receiving 100% of the traffic now to our main route by executing:
+
+    ```
+    APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
+    curl --insecure $APP_ROUTE
     ```
 
     > **Challenge:** *As a test, route all of the traffic back to `greeter-v2` (green).*
 
-    Congrats! You now are able to apply a a `blue-green` deployment pattern using Serverless.  In the next section we will look at `canary release` deployments.
+    Congrats! You now are able to apply a a `blue-green` deployment pattern using Serverless.  In the next assignment, we will look at `canary release` deployments.
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 04-canary-releases
-  id: qfk4aqzgcss1
+  id: djgewxdaiohv
   type: challenge
   title: Canary Releases
   assignment: |
@@ -565,13 +621,12 @@ challenges:
     kn service create greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v1
     kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v2 --env MESSAGE_PREFIX=GreeterV2
     ```
-    `
-    ```
 
     ## Applying a Canary Release Pattern
     A Canary release is more effective when looking to reduce the risk of introducing new features. Using this type of deployment model allows a more effective feature-feedback loop before rolling out the change to the entire user base.  Using this deployment approach with Serverless allows splitting the traffic between revisions in increments as small as 1%.
 
     To see this in action, apply the following service update that will split the traffic 80% to 20% between `greeter-v1` and `greeter-v2` by executing:
+
     ```bash
     kn service update greeter \
        --traffic greeter-v1=80 \
@@ -581,8 +636,10 @@ challenges:
 
     In the service configuration above see the 80/20 split between v1 and v2 of the greeter service.  Also see that the current service is set to receive 0% of the traffic using the `latest` tag.
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 04-canary-releases/greeter-canary-service.yaml
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
+    ```
+    cat /root/04-canary-releases/greeter-canary-service.yaml
     ```
 
     As in the previous section on Applying Blue-Green Deployment Pattern deployments, the command will not create a new configuration, revision, or deployment.
@@ -590,15 +647,12 @@ challenges:
     To observe the new traffic distribution execute the following:
 
     ```bash
-    # ./assets/04-canary-releases/poll-svc-10.bash
+    APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
 
-    #!/usr/bin/env bash
     for run in {1..10}
     do
-      curl http://greeter-serverless-tutorial.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+      curl --insecure $APP_ROUTE
     done
-    ```
-    `
     ```
 
     80% of the responses are returned from greeter-v1 and 20% from greeter-v2. See the listing below for sample output:
@@ -616,7 +670,9 @@ challenges:
     Hi  greeter => '6fee83923a9f' : 8
     ```
 
-    Also notice that two pods are running, representing both greeter-v1 and greeter-v2: ```
+    Also notice that two pods are running, representing both greeter-v1 and greeter-v2:
+
+    ```
     oc get pods -n serverless-tutorial
     ```
 
@@ -632,7 +688,9 @@ challenges:
 
     ## Delete the Service
 
-    We will need to cleanup the project for our next section by executing: ```
+    We will need to cleanup the project for our next section by executing:
+
+    ```
     kn service delete greeter
     ```
 
@@ -640,11 +698,15 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
-  timelimit: 360
+  timelimit: 500
 - slug: 05-scaling
-  id: n4xtymidghv3
+  id: xbflmxy8yyz2
   type: challenge
   title: Scaling
   assignment: |
@@ -672,11 +734,15 @@ challenges:
 
     > **Note:** *You might have noticed an initial lag when trying to access your service.  The reason for that delay is highly likely that your request is being held by the activator!*
 
-    First login as an administrator for the cluster: ```
-    oc login -u admin -p admin
+    First login as an administrator for the cluster:
+
+    ```
+    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
-    It is possible to see the default configurations of the autoscaler by executing: ```
+    It is possible to see the default configurations of the autoscaler by executing:
+
+    ```
     oc -n knative-serving describe cm config-autoscaler
     ```
 
@@ -702,18 +768,23 @@ challenges:
 
     > **Tip:** Another, possibly better, way to make those changes would be to add configuration to the `KnativeServing` instance that was applied in the `Prepare for Exercises` section early in this tutorial.
     >
-    > Open and inspect that yaml by executing: ```
+    > Open and inspect that yaml by executing:
+    ```
     cat 01-prepare/serving.yaml
     ```
     >
     > There are other settings of Serverless available.  It is possible to describe other configmaps in the `knative-serving` project to find them.
     >
-    > Explore what all is available by running: ```
+    > Explore what all is available by running:
+
+    ```
     oc get cm -n knative-serving
     ```
 
-    Now, log back in as the developer as we do not need elevated privileges to continue: ```
-    oc login -u developer -p developer
+    Now, log back in as the developer as we do not need elevated privileges to continue:
+
+    ```
+    oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
     ```
 
     ## Minimum Scale
@@ -725,8 +796,13 @@ challenges:
 
     > **Note:** *You can also limit your maximum pods using `autoscaling.knative.dev/maxScale`*
 
+    ```
+    cat /root/05-scaling/service-min-max-scale.yaml
+    ```
+
+    You'll see the following output:
+
     ```yaml
-    # ./assets/05-scaling/service-min-max-scale.yaml
 
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -768,8 +844,9 @@ challenges:
     `
     ```
 
-    See that the ```
-    prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking: `oc get pods -n serverless-tutorial
+    See that the `prime-generator` is deployed and it will never be scaled outside of 2-5 pods available by checking:
+    ```
+    oc get pods -n serverless-tutorial
     ```
 
     This now guarantee that there will always be at least two instances available at all times to provide the service with no initial lag at the cost of consuming additional resources.  Next, test the service won't scale past 5.
@@ -790,16 +867,18 @@ challenges:
     To help with this, it is possible to adjust the service to scale up sooner, say 50 concurrent requests via configuring an annotation of `autoscaling.knative.dev/target`.
 
     Update the prime-generator service by executing:
+
     ```bash
     kn service update prime-generator \
        --annotation autoscaling.knative.dev/target=50
     ```
-    `
-    ```
 
-    > **Note:** *The equivalent yaml for the service above can be seen by executing: ```
-    cat 05-scaling/service-50.yaml
-    ```*.
+
+    > **Note:** *The equivalent yaml for the service above can be seen by executing:
+
+    ```
+    cat /root/05-scaling/service-50.yaml
+    ```
 
     Again test the scaling by loading the service.  This time send 275 concurrent requests totaling 1100.
 
@@ -823,21 +902,23 @@ challenges:
        --annotation autoscaling.knative.dev/metric=cpu \
        --annotation autoscaling.knative.dev/class=hpa.autoscaling.knative.dev
     ```
-    `
-    ```
 
     > **Note:** *Notice that the above `kn` command removes, adds, and updates existing annotations to the service.  To delete use `—annotation name-`.*
     >
     > *Getting the service to scale on the large CPU nodes that this tutorial is running on is relatively hard.  If you have any ideas to see this in action put an issue in at [this tutorial's github][learn-katacoda]*
     >
-    > *The equivalent yaml for the service above can be seen by executing: ```
-    cat 05-scaling/service-hpa.yaml
-    ```*.
+    > *The equivalent yaml for the service above can be seen by executing:
+
+    ```
+    cat /root/05-scaling/service-hpa.yaml
+    ```
 
 
     ## Delete the Service
 
-    Cleanup the project using: ```
+    Cleanup the project using:
+
+    ```
     kn service delete prime-generator
     ```
 
@@ -845,7 +926,11 @@ challenges:
   tabs:
   - title: Terminal 1
     type: terminal
-    hostname: crc
+    hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
-  timelimit: 360
-checksum: "10080424791375440742"
+  timelimit: 500
+checksum: "2440311963037087464"
