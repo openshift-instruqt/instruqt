@@ -123,6 +123,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -144,6 +147,9 @@ challenges:
     We should now see the `/api`, `config`, and `/controllers` directories.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -199,6 +205,9 @@ challenges:
     was successfully created:\n\n```\noc get crd podsets.app.example.com -o yaml\n```\n"
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -421,6 +430,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -447,6 +459,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -528,6 +543,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -560,6 +578,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
