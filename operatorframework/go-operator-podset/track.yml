@@ -144,7 +144,7 @@ challenges:
       operator-sdk create api --group=app --version=v1alpha1 --kind=PodSet --resource --controller
     ```
 
-    We should now see the `/api`, `config`, and `/controllers` directories.
+    We should now see the `/api`, `/config`, and `/controllers` directories.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -457,24 +457,7 @@ challenges:
     cd /root/projects/podset-operator && \
       WATCH_NAMESPACE=myproject make run
     ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: container
-  - title: Terminal 2
-    type: terminal
-    hostname: container
-  - title: Visual Editor
-    type: code
-    hostname: container
-    path: /root
-  difficulty: basic
-  timelimit: 257
-- slug: step6
-  id: r3cdgpmcxnv4
-  type: challenge
-  title: Creating the PodSet Custom Resource
-  assignment: |
+
     In a new terminal, inspect the Custom Resource manifest:
 
     ```
@@ -552,7 +535,7 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-- slug: step7
+- slug: step6
   id: rmjs0f69wgdf
   type: challenge
   title: Deleting the PodSet Custom Resource
