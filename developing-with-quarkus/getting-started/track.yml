@@ -306,10 +306,8 @@ challenges:
     @ApplicationScoped
     public class GreetingService {
 
-        private String hostname = System.getenv().getOrDefault("HOSTNAME", "unknown");
-
         public String greeting(String name) {
-            return "hello " + name + " from " + hostname;
+            return "hello " + name;
         }
 
     }
@@ -355,10 +353,8 @@ challenges:
     Note we are exercising our new bean using the `/hello/greeting` endpoint, and you should see
 
     ```console
-    hello quarkus from crc-dzk9v-master-0
+    hello quarkus
     ```
-
-    > In this case, `crc-dzk9v-master-0` is the hostname of the local host we are running on. It will be different for you!
 
     ## Add another test
 
@@ -472,7 +468,7 @@ challenges:
     You should see:
 
     ```
-    hello quarkus from crc-dzk9v-master-0
+    hello quarkus
     ```
     Note the same hostname as before, and also note that since we're running it as a fast-jar, Quarkus runs in production mode (and does not enable continuous testing or other developer features).
 
@@ -552,6 +548,7 @@ challenges:
     In addition to the regular files, the build also produces `target/getting-started-1.0.0-SNAPSHOT-runner`. This is a native Linux binary. Run the following command in Terminal 1:
 
     ```
+    cd /root/projects/quarkus/getting-started
     file target/getting-started-1.0.0-SNAPSHOT-runner
     ```
 
@@ -601,7 +598,7 @@ challenges:
     Then, the output should look like:
 
     ```bash
-    hello quarkus from crc-dzk9v-master-0
+    hello quarkus
     ```
 
     Nice!
@@ -739,7 +736,7 @@ challenges:
     You should see:
 
     ```console
-    hello quarkus-on-openshift from getting-started-1-9sgsm
+    hello quarkus-on-openshift
     ```
 
     > Your pod's name will be different from the above.
@@ -856,6 +853,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "13060695426872548077"
+checksum: "13644418031754999795"
