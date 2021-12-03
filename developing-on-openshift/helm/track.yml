@@ -103,27 +103,14 @@ challenges:
     * **Username:** ``admin``
     * **Password:** ``admin``
 
-    Let's also log in to our web console. At first, check that the pod responsible for OpenShift Web Console to be ready:
-
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Click the link under `HOST/PORT` column and navigate there from a web browser.
+    Let's also log in to our web console. This can be done by clicking the **Web Console** tab near the top of your screen.
 
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
     * **Password:** ``admin``
     ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
-    Let's create a new OpenShift Project to have a namespace for our  helm charts to work with.
+    Let's create a new OpenShift Project to have a namespace for our helm charts to work with.
 
     ```
     oc new-project helm
@@ -248,6 +235,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -362,6 +353,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -488,6 +483,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
