@@ -96,22 +96,10 @@ challenges:
         kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
     ```
 
-    Switch to the _Console_ and login to the OpenShift web console using the
-    same credentials you used above. At first, check that the pod responsible for OpenShift Web Console to be ready:
+    Switch to the _Console_ and login to the OpenShift web console using the same credentials you used above. This can be done by clicking the *Web Console* tab near the top of your screen.
 
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-    ```
-    oc get routes console -n openshift-console
-    ```
-
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
     You will then be able to login with admin permissions with:
+    
     * **Username:** ``developer``
     * **Password:** ``developer``
     ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
@@ -131,6 +119,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -173,6 +165,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -203,6 +199,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -301,6 +301,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -389,6 +393,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
