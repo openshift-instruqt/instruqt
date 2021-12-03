@@ -263,8 +263,6 @@ challenges:
     You've seen how to build a basic app, package it as an executable JAR and start it up very quickly. You also saw how Quarkus can run tests continuously to turbocharge your development tasks and facilitate test-driven development. We'll leave the app running and rely on hot reload for the next steps.
 
     In the next step we'll inject a custom bean to showcase Quarkus' CDI capabilities.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -352,14 +350,6 @@ challenges:
 
     ## Inspect the results
 
-    Run the Quarkus Dev mode in Terminal 1:
-
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started
-
-    ```
-
     Check that it works as expected by opening the *Greeting Endpoint* Tab.
 
     Note we are exercising our new bean using the `/hello/greeting` endpoint, and you should see
@@ -406,20 +396,19 @@ challenges:
 
     This test generates a random string (a UUID), and uses that to call into our new service, looking for the same random name in the returned value.
 
-    Go to Terminal 1 then you should now see that both tests pass:
+    Open the *Dev UI* Tab then click on `Test results` icon. If you see *Tests not running*, click on it to be sure to show *All test passed*.
 
-    Note: If you haven't start the continuous testing yet, press `r` in Terminal 1.
+    ![Dev UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/dev-ui-test.png)
 
-    ```
-    All 2 tests are passing (0 skipped), 1 tests were run in 429ms. Tests completed at 12:35:33 due to changes to GreetingServiceTest.class.
-    ```
+    You should see the following 2 passed test results.
+
+    ![Dev UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/dev-ui-test.png)
+
     As you add more tests, Quarkus will simply continuously run them to produce the result in realtime.
 
     ## Congratulations!
 
     It's a familiar CDI-based environment for you Enterprise Java developers out there, with powerful mechanisms to reload your code _as you type_ (or very close to realtime). In the next step, we'll package and run it as a standalone executable JAR, which should also be familiar to microservice developers.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -432,6 +421,11 @@ challenges:
     type: service
     hostname: crc
     path: /hello/greeting/quarkus
+    port: 8080
+  - title: Dev UI
+    type: service
+    hostname: crc
+    path: /q/dev
     port: 8080
   difficulty: basic
   timelimit: 500
@@ -657,16 +651,9 @@ challenges:
 
     ## Login to OpenShift
 
-    Access the OpenShift Web Console to also login from the Web UI:
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='https://{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -736,11 +723,6 @@ challenges:
 
     You can also see the app deployed in the OpenShift Web Console, from Developer Perspective select `quarkus` project and go to Topology view.
 
-    You'll need to login with the same credentials as before:
-
-    * Username: `developer`
-    * Password: `developer`
-
     ![topology](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/greetingtopology.png)
 
     So now our app is deployed to OpenShift
@@ -776,6 +758,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 06-scaling
@@ -872,4 +858,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 500
-checksum: "8157163373437144042"
+checksum: "8642621003691291454"

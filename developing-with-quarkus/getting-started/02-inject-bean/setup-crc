@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pkill java
+nohup mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started > /root/log.out 2> /root/log.err < /dev/null & disown
