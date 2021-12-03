@@ -127,6 +127,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -151,6 +154,9 @@ challenges:
     **Note:** This guide will cover the default case of a single group API. If you would like to support Multi-Group APIs see the [Single Group to Multi-Group](https://book.kubebuilder.io/migration/multi-group.html) doc.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -269,6 +275,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -496,6 +505,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -540,6 +552,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -570,6 +585,9 @@ challenges:
     * Choose the type of [EventHandler](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/handler#hdr-EventHandlers) to change how a watch event will translate to reconcile requests for the reconcile loop. For operator relationships that are more complex than primary and secondary resources, the [EnqueueRequestsFromMapFunc](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/handler#EnqueueRequestsFromMapFunc) handler can be used to transform a watch event into an arbitrary set of reconcile requests.
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -611,6 +629,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -644,6 +665,9 @@ challenges:
 
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -681,6 +705,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -705,6 +732,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
@@ -787,6 +817,9 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Terminal 2
+    type: terminal
+    hostname: container
   - title: Visual Editor
     type: code
     hostname: container
@@ -819,6 +852,9 @@ challenges:
     ```
   tabs:
   - title: Terminal 1
+    type: terminal
+    hostname: container
+  - title: Terminal 2
     type: terminal
     hostname: container
   - title: Visual Editor
