@@ -286,15 +286,9 @@ challenges:
 
     ## Login to OpenShift
 
-    Access the OpenShift Web Console to also login from the Web UI:
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -439,7 +433,6 @@ challenges:
 
     ![Quarkus pod](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/people-quarkus-new.png)
 
-
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
 
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
@@ -500,6 +493,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 03-add-query-endpoints
@@ -536,14 +533,14 @@ challenges:
     Add the following two new queries after `// TODO: Add more queries` comment:
 
     ```java
-    public static Uni<List<Person>> findByColor(EyeColor color) {
-            return list("eyes", color);
-      }
+        public static Uni<List<Person>> findByColor(EyeColor color) {
+              return list("eyes", color);
+        }
 
-      public static Multi<Person> getBeforeYear(int year) {
-            return Person.<Person>streamAll()
-              .filter(p -> p.birth.getYear() <= year);
-      }
+        public static Multi<Person> getBeforeYear(int year) {
+              return Person.<Person>streamAll()
+                .filter(p -> p.birth.getYear() <= year);
+        }
     ```
 
     Save the file.
@@ -557,19 +554,19 @@ challenges:
     Open the `src/main/java/org/acme/person/PersonResource.java` resource class once again to inject the new endpoints which will access our new queries after `// TODO: add basic queries` comment:
 
     ```java
-      @GET
-      @Path("/eyes/{color}")
-      @Produces(MediaType.APPLICATION_JSON)
-      public Uni<List<Person>> findByColor(@PathParam("color") EyeColor color) {
-          return Person.findByColor(color);
-      }
+        @GET
+        @Path("/eyes/{color}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Uni<List<Person>> findByColor(@PathParam("color") EyeColor color) {
+            return Person.findByColor(color);
+        }
 
-      @GET
-      @Path("/birth/before/{year}")
-      @Produces(MediaType.APPLICATION_JSON)
-      public Multi<Person> getBeforeYear(@PathParam("year") int year) {
-          return Person.getBeforeYear(year);
-      }
+        @GET
+        @Path("/birth/before/{year}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Multi<Person> getBeforeYear(@PathParam("year") int year) {
+            return Person.getBeforeYear(year);
+        }
     ```
 
     Save the file.
@@ -630,8 +627,6 @@ challenges:
     The `Person` entity's superclass comes with lots of super useful `static` methods and you can add your own in your entity class. Users can just start using your entity `Person` by typing `Person.`, and getting completion for all the operations in a single place.
 
     In the next step we'll show you how Panache Reactive can help to adapt entities to high performance frontends, even in the face of millions of records. On to the next scenario!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -670,15 +665,15 @@ challenges:
     From the **Visual Editor** Tab, open the file in this path: `src/main/java/org/acme/person/PersonResource.java` resource class add this code after the `// TODO: add datatable query` comment:
 
     ```java
-      @GET
-      @Path("/datatable")
-      @Produces(MediaType.APPLICATION_JSON)
-      public Uni<DataTable> datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
-          // TODO: Construct query
+          @GET
+          @Path("/datatable")
+          @Produces(MediaType.APPLICATION_JSON)
+          public Uni<DataTable> datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
+              // TODO: Construct query
 
-          // TODO: Execute pipeline
+              // TODO: Execute pipeline
 
-      }
+          }
     ```
 
     Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters and be able to use them when the frontend calls the `GET /person/datatable` endpoint.
@@ -704,13 +699,13 @@ challenges:
     Add this code after the `// TODO: Construct query` comment:
 
     ```java
-          int pageNumber = start / length;
+            int pageNumber = start / length;
 
-          PanacheQuery<Person> filteredPeople = Optional.ofNullable(searchVal)
-              .filter(val -> !val.isEmpty())
-              .map(val -> Person.<Person>find("name like :search", Parameters.with("search", "%" + val + "%")))
-              .orElseGet(() -> Person.findAll())
-              .page(pageNumber, length);
+            PanacheQuery<Person> filteredPeople = Optional.ofNullable(searchVal)
+                .filter(val -> !val.isEmpty())
+                .map(val -> Person.<Person>find("name like :search", Parameters.with("search", "%" + val + "%")))
+                .orElseGet(() -> Person.findAll())
+                .page(pageNumber, length);
     ```
 
     Next, execute the pipeline and convert the results into a `DataTable` instance.
@@ -718,33 +713,27 @@ challenges:
     Add this code after the `// TODO: Execute pipeline` comment:
 
     ```java
-          return filteredPeople.list()
-              .map(people -> {   // Convert List<Person> to DataTable
-                  DataTable result = new DataTable();
-                  result.setDraw(draw);
-                  result.setData(people);
+              return filteredPeople.list()
+                  .map(people -> {   // Convert List<Person> to DataTable
+                      DataTable result = new DataTable();
+                      result.setDraw(draw);
+                      result.setData(people);
 
-                  return result;
-              })
-              .flatMap(datatable -> Person.count().map(recordsTotal -> {   // Get the total records count
-                  datatable.setRecordsTotal(recordsTotal);
-                  return datatable;
-              }))
-              .flatMap(datatable -> filteredPeople.count().map(recordsFilteredCount -> {   // Get the number of records filtered
-                  datatable.setRecordsFiltered(recordsFilteredCount);
-                  return datatable;
-          }));
+                      return result;
+                  })
+                  .flatMap(datatable -> Person.count().map(recordsTotal -> {   // Get the total records count
+                      datatable.setRecordsTotal(recordsTotal);
+                      return datatable;
+                  }))
+                  .flatMap(datatable -> filteredPeople.count().map(recordsFilteredCount -> {   // Get the number of records filtered
+                      datatable.setRecordsFiltered(recordsFilteredCount);
+                      return datatable;
+              }));
     ```
 
     Save the file.
 
-    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
-
-    ```bash
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache-reactive
-    ```
-
-    Let's test out our new endpoint using `curl` to search for names with `yan` in their name in Terminal 2:
+    Let's test out our new endpoint using `curl` to search for names with `yan` in their name in Terminal 1:
 
     ```bash
     curl -s "$APP_URL/person/datatable?draw=1&start=0&length=10&search\[value\]=yan" | jq
@@ -770,13 +759,8 @@ challenges:
     # Congratulations
 
     You have successfully written an endpoint that can be used with 3rd-party frontend plugins like DataTable. In the next step we'll create a lot more data and deploy to OpenShift.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -801,27 +785,27 @@ challenges:
     From the **Visual Editor** Tab, open the resource class from this path: `src/main/java/org/acme/person/PersonResource.java` and add this code after the `// TODO: Add lifecycle hook` to inject the lifecycle listener:
 
     ```java
-      void onStart(@Observes StartupEvent ev) {
-          // Create a reactive pipeline that will create 10,000 people
-          List<Uni<Person>> people = IntStream.range(0, 10000)
-              .mapToObj(i -> CuteNameGenerator.generate())
-              .map(name -> {
-                  LocalDate birth = LocalDate.now().plusWeeks(Math.round(Math.floor(Math.random() * 20 * 52 * -1)));
-                  EyeColor color = EyeColor.values()[(int)(Math.floor(Math.random() * EyeColor.values().length))];
+        void onStart(@Observes StartupEvent ev) {
+            // Create a reactive pipeline that will create 10,000 people
+            List<Uni<Person>> people = IntStream.range(0, 10000)
+                .mapToObj(i -> CuteNameGenerator.generate())
+                .map(name -> {
+                    LocalDate birth = LocalDate.now().plusWeeks(Math.round(Math.floor(Math.random() * 20 * 52 * -1)));
+                    EyeColor color = EyeColor.values()[(int)(Math.floor(Math.random() * EyeColor.values().length))];
 
-                  return new Person(name, birth, color);
-              })
-              .map(person -> person.<Person>persist())
-              .collect(Collectors.toList());
+                    return new Person(name, birth, color);
+                })
+                .map(person -> person.<Person>persist())
+                .collect(Collectors.toList());
 
-          // Execute the pipeline inside a single transaction, waiting for it to complete
-          Panache.withTransaction(() ->
-              Uni.combine()
-                  .all()
-                  .unis(people)
-                  .combinedWith(l -> null)
-          ).await().indefinitely();
-      }
+            // Execute the pipeline inside a single transaction, waiting for it to complete
+            Panache.withTransaction(() ->
+                Uni.combine()
+                    .all()
+                    .unis(people)
+                    .combinedWith(l -> null)
+            ).await().indefinitely();
+        }
     ```
 
     Save the file.
@@ -830,13 +814,7 @@ challenges:
 
     Let's test it out and see if it picks up our new data.
 
-    Reconnect to the remote Quarkus app on OpenShift using the following command in Terminal 1:
-
-    ```bash
-    mvn quarkus:remote-dev -Dquarkus.live-reload.url=$APP_URL -f /root/projects/rhoar-getting-started/quarkus/panache-reactive
-    ```
-
-    We'll search for a single letter `F` and limit the results to `2` in Terminal 2:
+    We'll search for a single letter `F` and limit the results to `2` in Terminal 1:
 
     > Note that adding 10k entries will make startup time artificially high, around 5-10 seconds.
 
@@ -875,13 +853,8 @@ challenges:
     You have successfully written a lifecycle hook to listen for `StartupEvent`. Anytime the application is started it will fire this method. You can also use `@Observes ShutdownEvent` to do cleanup when the application is gracefully stopped.
 
     In the next step we'll exercise the DataTables GUI, backed by our remotely developed, high performance Quarkus app!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -931,6 +904,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "5213468052562559989"
+checksum: "14357034875955741076"

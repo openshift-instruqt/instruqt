@@ -1,0 +1,6 @@
+#!/bin/bash
+
+kill -9 $(ps aux | grep people-dev.jar | grep -v grep | awk '{print $2}')
+export APP_URL=`oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
+echo ${APP_URL}
+nohup mvn quarkus:remote-dev -Dquarkus.live-reload.url=${APP_URL} -f /root/projects/rhoar-getting-started/quarkus/panache-reactive > /root/log.out 2> /root/log.err < /dev/null & disown

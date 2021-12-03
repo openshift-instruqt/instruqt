@@ -189,8 +189,6 @@ challenges:
 
     Next, we'll create a `PersonResource` class which we will use for our RESTful endpoint. From the **Visual Editor** Tab, create a new file in this path : `src/main/java/org/acme/person/PersonResource.java` and add its code:
 
-
-
     open the `PersonResource.java` file then add this code:
 
     ```java
@@ -322,8 +320,6 @@ challenges:
     oc new-project quarkus --display-name="Sample Quarkus Datatable App"
     ```
 
-
-
     ## Deploy Postgres
 
     Our app will need a Postgres database. Run the next command to quickly deploy a Postgres instance to your new project:
@@ -431,12 +427,6 @@ challenges:
     Do a quick test to ensure the remote app is running by using `curl` to retrieve the list of sample people:
 
     To get the URL from command line, from *Terminal 1* run this command to get the app's Route:
-
-    ```
-    oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
 
     ```
     export APP_URL=`oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'`
