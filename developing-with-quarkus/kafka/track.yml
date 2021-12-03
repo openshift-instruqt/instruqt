@@ -608,23 +608,13 @@ challenges:
 
     Wait for that command to report `replication controller "people-1" successfully rolled out` before continuing.
 
-    You can see the app deployed from the OpenShift Web Console.
+    ## Open the OpenShift Web Console
 
-    Relogin with `admin` user to retrieve the OpenShift Web Console URL:
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-     ```bash
-    oc login -u admin -p admin
-    ```
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    Get the  OpenShift Web Console URL by running the following command in Terminal 1:
-
-    ```bash
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command and open it in your browser.
-
-    You'll need to login with the same credentials as before:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -665,6 +655,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/quarkus/kafka
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 428
-checksum: "17284115211940535528"
+checksum: "11409531737416332413"
