@@ -127,6 +127,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step2
@@ -148,6 +152,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step3
@@ -181,6 +189,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step4
@@ -266,6 +278,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step5
@@ -294,6 +310,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step6
@@ -339,6 +359,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step7
@@ -367,6 +391,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step8
@@ -411,6 +439,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 - slug: step9
@@ -439,6 +471,10 @@ challenges:
     type: code
     hostname: container
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 200
 checksum: "1712457461016215603"
