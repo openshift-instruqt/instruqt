@@ -163,6 +163,17 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
+# Deploy the demo metrics app
+mkdir -p /root/prometheus
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/using-the-cluster/deploy-prometheus-grafana/scripts/deploy-prometheus.yaml -o /root/prometheus/deploy-prometheus.yaml
+
+oc new-project metrics-demo
+oc new-app quay.io/4n4nd/metrics-demo-app:workshop
+oc expose svc/metrics-demo-app
+
+oc new-project pad-monitoring
+oc process -f /root/prometheus/deploy-prometheus.yaml | oc apply -n pad-monitoring -f -
+oc import-image grafana/grafana:6.6.1 --confirm
 
 # wait until cluster operators are "available"
 # for co in $(oc get co -oname)
