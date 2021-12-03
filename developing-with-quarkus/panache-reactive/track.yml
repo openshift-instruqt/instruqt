@@ -665,15 +665,15 @@ challenges:
     From the **Visual Editor** Tab, open the file in this path: `src/main/java/org/acme/person/PersonResource.java` resource class add this code after the `// TODO: add datatable query` comment:
 
     ```java
-          @GET
-          @Path("/datatable")
-          @Produces(MediaType.APPLICATION_JSON)
-          public Uni<DataTable> datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
-              // TODO: Construct query
+        @GET
+        @Path("/datatable")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Uni<DataTable> datatable(@QueryParam("draw") int draw, @QueryParam("start") int start, @QueryParam("length") int length, @QueryParam("search[value]") String searchVal) {
+          // TODO: Construct query
 
-              // TODO: Execute pipeline
+          // TODO: Execute pipeline
 
-          }
+        }
     ```
 
     Here we are using JAX-RS `@QueryParam` values to specify the incoming parameters and be able to use them when the frontend calls the `GET /person/datatable` endpoint.
@@ -699,13 +699,13 @@ challenges:
     Add this code after the `// TODO: Construct query` comment:
 
     ```java
-            int pageNumber = start / length;
+          int pageNumber = start / length;
 
-            PanacheQuery<Person> filteredPeople = Optional.ofNullable(searchVal)
-                .filter(val -> !val.isEmpty())
-                .map(val -> Person.<Person>find("name like :search", Parameters.with("search", "%" + val + "%")))
-                .orElseGet(() -> Person.findAll())
-                .page(pageNumber, length);
+          PanacheQuery<Person> filteredPeople = Optional.ofNullable(searchVal)
+              .filter(val -> !val.isEmpty())
+              .map(val -> Person.<Person>find("name like :search", Parameters.with("search", "%" + val + "%")))
+              .orElseGet(() -> Person.findAll())
+              .page(pageNumber, length);
     ```
 
     Next, execute the pipeline and convert the results into a `DataTable` instance.
@@ -713,22 +713,22 @@ challenges:
     Add this code after the `// TODO: Execute pipeline` comment:
 
     ```java
-              return filteredPeople.list()
-                  .map(people -> {   // Convert List<Person> to DataTable
-                      DataTable result = new DataTable();
-                      result.setDraw(draw);
-                      result.setData(people);
+            return filteredPeople.list()
+                .map(people -> {   // Convert List<Person> to DataTable
+                    DataTable result = new DataTable();
+                    result.setDraw(draw);
+                    result.setData(people);
 
-                      return result;
-                  })
-                  .flatMap(datatable -> Person.count().map(recordsTotal -> {   // Get the total records count
-                      datatable.setRecordsTotal(recordsTotal);
-                      return datatable;
-                  }))
-                  .flatMap(datatable -> filteredPeople.count().map(recordsFilteredCount -> {   // Get the number of records filtered
-                      datatable.setRecordsFiltered(recordsFilteredCount);
-                      return datatable;
-              }));
+                    return result;
+                })
+                .flatMap(datatable -> Person.count().map(recordsTotal -> {   // Get the total records count
+                    datatable.setRecordsTotal(recordsTotal);
+                    return datatable;
+                }))
+                .flatMap(datatable -> filteredPeople.count().map(recordsFilteredCount -> {   // Get the number of records filtered
+                    datatable.setRecordsFiltered(recordsFilteredCount);
+                    return datatable;
+            }));
     ```
 
     Save the file.
