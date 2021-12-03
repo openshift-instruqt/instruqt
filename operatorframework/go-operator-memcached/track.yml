@@ -135,7 +135,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step2
   id: bm8jxo53g4vk
   type: challenge
@@ -164,7 +164,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step3
   id: zzdvbdqdcbym
   type: challenge
@@ -285,7 +285,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step4
   id: uxu9wxlqrdao
   type: challenge
@@ -513,7 +513,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step5
   id: wpyybjvkb6fs
   type: challenge
@@ -560,7 +560,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step6
   id: 24uvbc8htl19
   type: challenge
@@ -595,7 +595,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step7
   id: z38atfrzao2w
   type: challenge
@@ -637,7 +637,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step8
   id: zn5pwami5dog
   type: challenge
@@ -675,7 +675,7 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step9
   id: haqmb8nhiigc
   type: challenge
@@ -713,7 +713,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 - slug: step10
   id: admwwuly6cil
   type: challenge
@@ -728,27 +728,10 @@ challenges:
 
     ```
     cd /root/projects/memcached-operator && \
-      WATCH_NAMESPACE=myproject make run & disown
+      WATCH_NAMESPACE=myproject make run
     ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: container
-  - title: Terminal 2
-    type: terminal
-    hostname: container
-  - title: Visual Editor
-    type: code
-    hostname: container
-    path: /root/projects/memcached-operator
-  difficulty: basic
-  timelimit: 150
-- slug: step11
-  id: 0pktxxydtzbb
-  type: challenge
-  title: Creating the Memcached Custom Resource
-  assignment: |
-    In a new terminal, inspect the Custom Resource manifest:
+
+    From **Terminal 2**, inspect the Custom Resource manifest:
 
     ```
     cd $HOME/projects/memcached-operator
@@ -825,8 +808,8 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
-- slug: step12
+  timelimit: 300
+- slug: step11
   id: eh3yfaykpyt1
   type: challenge
   title: Deleting the Memcached Custom Resource
@@ -862,5 +845,5 @@ challenges:
     hostname: container
     path: /root/projects/memcached-operator
   difficulty: basic
-  timelimit: 150
+  timelimit: 300
 checksum: "8094992266309445031"
