@@ -580,15 +580,11 @@ challenges:
 
     **1. Open the OpenShift Web Console**
 
-    Access the OpenShift Web Console to login from the Web UI:
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    Copy the URL from the output of the above command or click to it to open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -600,12 +596,9 @@ challenges:
     developer
     ```
 
-    The first screen you will see is the authentication screen. Enter your username (developer) and password (developer) and
-    then login:
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/login.png)
 
-    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/login.png)
-
-    After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to view.
+    Run **Skip Tour** to skip the new user introduction, you will be presented with a list of projects that your user has permission to view.
 
     ![Web Console Projects](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-getting-started-spring/projects.png)
 
@@ -653,6 +646,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 600
 - slug: 05-deploy-to-openshift
@@ -757,4 +754,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/spring-rhoar-intro
   difficulty: basic
   timelimit: 600
-checksum: "10636841168667417497"
+checksum: "15517802202342234011"
