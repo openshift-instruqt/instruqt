@@ -92,6 +92,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 - slug: 2explore-console
@@ -102,21 +106,7 @@ challenges:
     This section focuses on using the web console.
 
     # Exercise: Logging in with the Web Console
-    Let's log in to our cluster to start working.
-
-    At first, check that the pod responsible for OpenShift Web Console to be ready:
-
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-    Click the link under `HOST/PORT` column and navigate there from a web browser.
+    To begin, let's log into our cluster to start working. This can be done by clicking the *Web Console* tab near the top of your screen.
 
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
@@ -162,6 +152,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 - slug: 3deploy-docker
@@ -208,6 +202,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 - slug: 4scaling
@@ -261,6 +259,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 - slug: 5routes
@@ -302,6 +304,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 - slug: 6s2i
@@ -383,6 +389,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 150
 checksum: "10935126695708752252"

@@ -17,7 +17,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -107,8 +106,7 @@ challenges:
     ```bash
     Hello Spring
     ```
-
-    This app doesn't use any Spring annotations yet. Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
+    This app doesn't use any Spring annotations yet.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -137,7 +135,7 @@ challenges:
 
     ## Create Model
 
-    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.html
+    From the **Visual Editor** Tab, create a new file in this path: `fruit-taster/src/main/java/org/acme/Fruit.java`.
 
     ![File](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/create-file-fruit.png)
 
@@ -242,6 +240,8 @@ challenges:
     INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'strawberry', 'red');
     ```
 
+    Save the file.
+
     ## Configure Quarkus
 
     We need to configure our app to define database connection settings.
@@ -257,6 +257,8 @@ challenges:
     quarkus.hibernate-orm.log.sql=true
     quarkus.hibernate-orm.sql-load-script=import.sql
     ```
+
+    Save the file.
 
     That’s it! Now you have a database, domain model (`Fruit`) and a repository (`FruitRepository`) to retrieve the domain model, and some sample data.
 
@@ -356,6 +358,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     ## Add injectable configuration
 
     Quarkus also provides support for injecting configuration values using Spring’s `@Value` annotation. To see that in action, from **Visual Editor** Tab, append this code in this file `fruit-taster/src/main/resources/application.properties`:
@@ -363,6 +367,8 @@ challenges:
     ```text
     taste.message = tastes great
     ```
+
+    Save the file.
 
     We'll also need a new Spring Bean to use this configuration!
 
@@ -387,6 +393,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     ## Tie them all together
 
@@ -431,6 +439,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     In the code above, we see that both field injection and constructor injection are being used (note that constructor injection does not need the `@Autowired` annotation since there is a single constructor). Furthermore, the `@Value` annotation on `suffix` has also a default value defined, which in this case will be used since we have not defined `taste.suffix` in `application.properties`.
 
     This new `TasterBean` has a method `taste()` which will report how each fruit tastes. It also uses our functions `noopStringFunction` and `capitalizerStringFunction` that we've injected via `@Autowired` to both do nothing and also transform the result INTO ALL CAPS.
@@ -450,7 +460,7 @@ challenges:
   id: yzucmjhdkgln
   type: challenge
   title: Step 4
-  assignment: |+
+  assignment: |
     # Using Spring Web Annotations in Quarkus
 
     While you are encouraged to use JAX-RS annotation for defining REST endpoints, Quarkus provides a compatibility layer for Spring Web in the form of the `spring-web` extension.
@@ -522,6 +532,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     Notice the use of familiar Spring annotations like `@GetMapping` and `@PathVariable`. This exposes a set of RESTful APIs:
 
     * `GET /fruits` - Retrieve all Fruits as a JSON array
@@ -534,12 +546,6 @@ challenges:
 
     With this in place, we can now test our fruits access.
 
-    From **Terminal 1** Tab, start the app:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
-    ```
-
     Open the **Fruit Taster App** Tab to access the `/fruits` endpoint.
 
     > Note you may need to run the command again, if it didn't execute in the new Terminal window.
@@ -547,6 +553,8 @@ challenges:
     > to see details and clues about what may be wrong, and re-visit any prior steps to re-add the missing code.
 
     > Note that we pass the output to the `jq` utility which prints nicely-formatted JSON.
+
+    > Note that reload the **Fruit Taster App** Tab when you see *404 - Resource Not Found*.
 
     You should see:
 
@@ -580,7 +588,7 @@ challenges:
     ]
     ```
 
-    From **Terminal 2**, add a fruit:
+    From **Terminal 1**, add a fruit:
 
     ```
     curl -X POST -s http://localhost:8080/fruits/name/apple/color/red | jq
@@ -690,6 +698,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     Again, we're using Spring Rest annotations like `@GetMapping` but we're also injecting our repository and taster bean in the constructor. This controller exposes 2 RESTful APIs:
 
     * `GET /taster` - taste all fruits and report result
@@ -697,7 +707,7 @@ challenges:
 
     App still running? Check. Let's test our new API:
 
-    From **Terminal 2**, taste all the fruits:
+    From **Terminal 1**, taste all the fruits:
 
     ```
     curl -s http://localhost:8080/taster | jq
@@ -754,7 +764,6 @@ challenges:
 
     ```
     curl -s http://localhost:8080/taster/green | jq
-
     ```
 
     You should get this output:
@@ -780,7 +789,9 @@ challenges:
     taste.suffix = (if you like fruit!)
     ```
 
-    From **Terminal 2**, taste yellow fruits:
+    Save the file.
+
+    Taste yellow fruits:
 
     ```
     curl -s http://localhost:8080/taster/yellow | jq
@@ -802,14 +813,8 @@ challenges:
     ```
 
     Notice the presence of our new suffix! Quarkus apps make it super easy to code, test, and re-code on the fly.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
-
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -845,26 +850,24 @@ challenges:
     See the files with this command:
 
     ```
-    ls -l target/*.jar target/quarkus-app/*.jar
+    ls -l /root/projects/quarkus/fruit-taster/target/*.jar /root/projects/quarkus/fruit-taster/target/quarkus-app/*.jar
     ```
 
     > **NOTE**: Quarkus uses the _fast-jar_ packaging by default. The fast-jar packaging format is introduced as an alternative to the default jar packaging format. The main goal of this new format is to bring faster startup times.
 
     ## Run the executable JAR
 
-    You can run the packaged application by runing:
+    You can run the packaged application by running:
 
     ```
     java -jar /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
     ```
 
-    Access the app from the **Fruit Taster App** Tab.
+    Reload the **Fruit Taster App** Tab to access the app.
 
     ## Congratulations!
 
     You've now built a Java application as an executable JAR. Quarkus also supports building to _native_ images providing even greater startup speed and memory efficiency. Now let's give our app native powers by creating a Quarkus native app.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -897,17 +900,13 @@ challenges:
     mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/fruit-taster
     ```
 
-    ## Login to OpenShift
+    ## Open the OpenShift Web Console
 
-    Access the OpenShift Web Console to also login from the Web UI:
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    Copy the URL from the output of the above command and open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -918,6 +917,14 @@ challenges:
     ```
     developer
     ```
+
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/login.png)
+
+    Run **Skip Tour** to skip the new user introduction.
+
+    There's nothing there now ("No workloads found"), but that's about to change.
+
+    ## Login to OpenShift CLI
 
     Run the following command to login with the OpenShift CLI:
 
@@ -1029,11 +1036,9 @@ challenges:
 
     ```
     oc get route fruit-taster -n quarkus-spring -o jsonpath='{"http://"}{.spec.host}{"/taster"}{"\n"}'
-
     ```
 
     Copy the URL and open it in your browser.
-
 
     You should see the same fruits being tasted:
 
@@ -1071,7 +1076,6 @@ challenges:
     oc scale --replicas=50 dc/fruit-taster
     ```
 
-
     Access the app again from the browser.
 
     You can watch the 50 pods spinning up:
@@ -1104,6 +1108,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/quarkus/fruit-taster
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "9701818147827794460"
+checksum: "16401656532522740073"

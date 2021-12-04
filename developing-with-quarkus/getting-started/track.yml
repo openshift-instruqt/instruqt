@@ -45,7 +45,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -348,7 +347,7 @@ challenges:
 
     ## Inspect the results
 
-    Check that it works as expected by opening the *Greeting Endpoint* Tab.
+    Check that it works as expected by reloading the *Greeting Endpoint* Tab.
 
     Note we are exercising our new bean using the `/hello/greeting` endpoint, and you should see
 
@@ -393,10 +392,6 @@ challenges:
     This test generates a random string (a UUID), and uses that to call into our new service, looking for the same random name in the returned value.
 
     Open the *Dev UI* Tab then click on `Test results` icon. If you see *Tests not running*, click on it to be sure to show *All test passed*.
-
-    ![Dev UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/dev-ui-test.png)
-
-    You should see the following 2 passed test results.
 
     ![Dev UI](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/dev-ui-test.png)
 
@@ -463,7 +458,7 @@ challenges:
     java -jar target/quarkus-app/quarkus-run.jar
     ```
 
-    And then test it again using the *Greeting Endpoint* Tab.
+    And then reload the *Greeting Endpoint* Tab.
 
     You should see:
 
@@ -643,7 +638,7 @@ challenges:
     Run the following command to add it to our project in Terminal 1:
 
     ```bash
-      mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/getting-started
+    mvn quarkus:add-extension -Dextensions="openshift" -f /root/projects/quarkus/getting-started
     ```
 
     ## Login to OpenShift
@@ -802,10 +797,10 @@ challenges:
     You can see the 10 instances of our Quarkus app being load-balanced and responding evenly:
 
     ```console
-    hello quarkus-on-openshift from getting-started-2-tfvn4
-    hello quarkus-on-openshift from getting-started-2-8f45l
-    hello quarkus-on-openshift from getting-started-2-xgg97
-    hello quarkus-on-openshift from getting-started-2-8xw8b
+    hello quarkus-on-openshift
+    hello quarkus-on-openshift
+    hello quarkus-on-openshift
+    hello quarkus-on-openshift
     ...
     ```
 
@@ -859,4 +854,4 @@ challenges:
     new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "13644418031754999795"
+checksum: "6744200110779896593"

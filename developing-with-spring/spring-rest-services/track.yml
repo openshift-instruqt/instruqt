@@ -351,15 +351,11 @@ challenges:
 
     After the rollout is complete you can go to the OpenShift web console, login with **admin**/**admin** credentials, select **dev** project and find the route to your application under **Routes**.
 
-    Access the OpenShift Web Console to login from the Web UI:
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    Copy the URL from the output of the above command or click to it to open it in your browser.
-
-    We'll deploy our app as the `admin` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -371,11 +367,9 @@ challenges:
     admin
     ```
 
-    Go to Develop Console then click on `Open URL` in `dev` project:
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/login.png)
 
-    ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/rest-topology.png)
-
-    You should see the web application, the same functionality from the previous steps should still work:
+    Run **Skip Tour** to skip the new user introduction, you will be presented with a list of projects that your user has permission to view.
 
     ![Route from Web Console](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/rhoar-spring-rest-services/rest-web-openshift.png)
 
@@ -397,6 +391,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/spring-rest-services
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 1000
-checksum: "6693495597679547323"
+checksum: "17030226527677687979"

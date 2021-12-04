@@ -23,7 +23,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -211,8 +210,6 @@ challenges:
     * If you come from the world of JSP/JSF/Facelets you’ll appreciate that `@Named` CDI beans can be referenced directly in any template through the `inject` namespace, e.g. `{inject:foo.price}`. See [Injecting Beans Directly In Templates](https://quarkus.io/guides/qute-reference#injecting-beans-directly-in-templates) for more information.
 
     Let's now explore some new features based on Quarkus principles.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
     type: terminal
@@ -270,13 +267,19 @@ challenges:
     Hello {name} from HelloResource!
     ```
 
-    For Goodbye, create a new file in this path: `qute/src/main/resources/templates/HelloResource/goodbye.txt`.
+    Save the file.
+
+    For Goodbye, create a new file in this path:
+
+    `qute/src/main/resources/templates/HelloResource/goodbye.txt`.
 
     Add this code:
 
     ```text
     Goodbye {name} from GoodbyeResource!
     ```
+
+    Save the file.
 
     Now let’s declare and use those templates in the resource class. Update the `HelloResource` class with this code:
 
@@ -308,6 +311,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     * This declares a template with path `templates/HelloResource/hello.txt`, since the `@CheckedTemplate` static class is declared inside the `HelloWorld` class. The name of the method `hello` is used to match files in the directory with common extensions like `.txt`, `.html` etc. You can specify an exact name and path using `@Location`.
     * `Templates.hello()` returns a new template instance that can be customized before the actual rendering is triggered. In this case, we put the name value under the key `name`. The data map is accessible during rendering.
@@ -346,15 +351,11 @@ challenges:
     }
     ```
 
+    Save the file.
+
     ## Hello and Goodbye test
 
-    Run on the Quarkus Dev mode again in Terminal 1:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
-    ```
-
-    Let's test our new endpoints against the running Quarkus application, from Terminal 2:
+    Let's test our new endpoints against the running Quarkus application in Terminal 1:
 
     ```
     curl http://localhost:8080/hello?name=James
@@ -388,13 +389,8 @@ challenges:
     }
     ```
     This will cause Qute to look for the associated `hello.txt` or `goodbye.txt` in the `src/main/resources/templates` directory, instead of `src/main/resources/templates/HelloResource`. It is up to you how you wish to organize your templates.
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -440,6 +436,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     This is a simple `Item` object with two fields (`name` and `price`).
 
     ## Create Template
@@ -465,6 +463,8 @@ challenges:
     </body>
     </html>
     ```
+
+    Save the file.
 
     ## Create Service
 
@@ -493,6 +493,8 @@ challenges:
         }
     }
     ```
+
+    Save the file.
 
     ## Create REST endpoint
 
@@ -531,17 +533,13 @@ challenges:
     }
     ```
 
+    Save the file.
+
     Here we Declare a static `Templates` inner class with a method called `item()` that gives us a `TemplateInstance` for `templates/ItemResource/item.html` and declare its `Item item` parameter so we can validate the template.
 
     We then pass the value of `id` to be used to render the template when the REST endpoint is called.
 
-    Start the Quarkus Dev Mode in Terminal 1:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
-    ```
-
-    Let's try it in *Terminal 2* with this command:
+    Let's try it with this command in Terminal 1:
 
     ```
     curl http://localhost:8080/item/1
@@ -556,7 +554,9 @@ challenges:
     </body>
     ```
 
-    You can also run to the *Qute Item 1* Tab to see an actual HTML rendering in your browser:
+    You can also run to the *Qute Item 1* Tab to see an actual HTML rendering in your browser.
+
+    *Note* that reload the Qute Item 1 Tab if you see an error page. Because it takes sometimes a few seconds to render a web page.
 
     ![Apple](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-apple.png)
 
@@ -624,22 +624,17 @@ challenges:
 
     It's the same value, but with additional checking in the template itself. If you made any errors, you'll see it immediately in the rendered output (the live coding rebuild will fail).
 
-    If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}`. Now run again to the *Qute Item 1* Tab or reload it. You should get an error:
+    If you did not see errors, congratulations! But let's see what happens if we do. From the **Visual Editor** Tab, open the `qute/src/main/resources/templates/ItemResource/item.html` file to open the template. Change `{item.name}` to `{item.nonSense}` then save it. Now run again to the *Qute Item 1* Tab or reload it. You should see `NOT_FOUND`:
 
-    ![Err](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-err.png)
+    ![Err](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-notfound.png)
 
     Qute checks the syntax and will fail the build (and result in a prettified HTML error screen) when syntax errors are detected in the template. This makes it very easy to quickly iterate, update code and template, and see the results.
 
     # Before moving on
 
     Be sure to change the value back to `{item.name}`!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -657,7 +652,7 @@ challenges:
   id: 7l1bnmupgpba
   type: challenge
   title: Step 4
-  assignment: |+
+  assignment: |
     # Template Extension Methods
 
     **Template extension methods** are used to extend the set of accessible properties of data objects.
@@ -683,6 +678,8 @@ challenges:
     </html>
     ```
 
+    Save the file.
+
     Notice the use of Handlebar-esque `{#if ...}`. It's part of Qute's basic control flow features.
 
     Also notice the use of `{item.discountedPrice}`. This field does not exist in our `Item` class (which only has `name` and `price`). We'll add an _extension_ to our java code to make this property be available to the template, and write the code that computes its value in Java.
@@ -704,28 +701,21 @@ challenges:
     }
     ```
 
+    Save the file.
+
     Here we declare a static template extension method that can be used to add "computed properties" to a data class. The class of the first parameter (in this case `Item`) is used to match the base object and the method name is used to match the property name (in this case `discountedPrice`). When we declare `{item.discountedPrice}`, the contextual value of `item` is passed to this `discountedPrice` method to compute its value (where we use the `item.price.multiply()` method to apply a 10% discount by multiplying by `0.9`).
 
     > You can place template extension methods in every class if you annotate them with `@TemplateExtension` but we advise to keep them either grouped by target type, or in a single `TemplateExtensions` class by convention.
-
-    Start the Quarkus Dev Mode in Terminal 1:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
-    ```
 
     Test it out by accessing the *Qute Item Apples* Tab to see the result for Apples:
 
     ![Apple](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-apple.png)
 
-    Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But try with Mangos, open the *Qute Item Mangos* Tab to see it.
+    Since Apples cost less than $100, no discount for you (you won't see the discounted price)! But try with Mangos, open the *Qute Item Mangos* Tab to see it (Reload the tab if you don't see the discounted price).
 
     ![Mango](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/qute-mango.png)
 
     What a deal!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
-
   tabs:
   - title: Terminal 1
     type: terminal
@@ -778,6 +768,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     Now let's ceate a service whose `get()` method returns a random list of samples. Create the file in this path: `qute/src/main/java/org/acme/SampleService.java` and add this content:
 
     ```java
@@ -804,6 +796,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     ## Create Template
 
     Let's make a directory to house our new template with this command from Terminal 1:
@@ -824,6 +818,8 @@ challenges:
         ]
       }
     ```
+
+    Save the file.
 
     Here we are looping over the passed-in `samples`. You can iterate over `Iterable`s, `Map`s and `Stream`s. Since we are rendering JSON, we also need to escape the first of any pair of JSON-related `}` or `{` using `\}` or `\{`.
 
@@ -885,18 +881,14 @@ challenges:
     }
     ```
 
+    Save the file.
+
     * In this case, we use the `@ResourcePath` qualifier to specify the template path: `templates/reports/v1/report_01.json`.
     * Use the `@Scheduled` annotation to instruct Quarkus to execute this method every second. For more information see the [Scheduler](https://quarkus.io/guides/scheduler) guide.
     * The `TemplateInstance.render()` method triggers rendering. Note that this method blocks the current thread.
     * We use Quarkus' `StartupEvent` and `ShutdownEvent` to manage the File I/O on startup and shutdown
 
-    Start the Quarkus Dev Mode in Terminal 1:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
-    ```
-
-    To trigger report to start generating (by triggering Quarkus Live Reload), from *Terminal 2* run this command and access the `hello` endpoint:
+    To trigger report to start generating (by triggering Quarkus Live Reload), from *Terminal 1* run this command and access the `hello` endpoint:
 
     ```
     curl http://localhost:8080/hello?name=James
@@ -909,13 +901,8 @@ challenges:
     ```
 
     You should see new reports every second. When done, don't forget to type `CTRL-C` to stop the `tail -f`!
-
-    Make sure to stop the Quarkus Dev mode via pressing `CTRL-C` in Terminal 1.
   tabs:
   - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Terminal 2
     type: terminal
     hostname: crc
   - title: Visual Editor
@@ -981,6 +968,8 @@ challenges:
     }
     ```
 
+    Save the file.
+
     * The `@Route` annotation indicates that the method is a reactive route. Again, by default, the code contained in the method must not block.
     * Note the use of the Qute `.renderAsync()` method - this method will be completed with the rendered template asynchronously.
     * The method gets a `RoutingExchange` as a parameter. `RoutingExchange` is a convenient wrapper of `RoutingContext` which provides some useful methods. With `RoutingContext` you can retrieve the HTTP request (using `request()`) and write the response using `response().end(...​)`.
@@ -989,13 +978,7 @@ challenges:
 
     ## Test endpoint
 
-    Start the Quarkus Dev Mode in Terminal 1:
-
-    ```
-    mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/qute
-    ```
-
-    Make sure the endpoint generates a report. From *Terminal 2*, run this command to try it:
+    Make sure the endpoint generates a report in Terminal 1, run this command to try it:
 
     ```
     curl http://localhost:8080/reactive
@@ -1018,9 +1001,6 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
-  - title: Terminal 2
-    type: terminal
-    hostname: crc
   - title: Visual Editor
     type: code
     hostname: crc
@@ -1032,4 +1012,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "1955604249380506413"
+checksum: "770663184350201281"

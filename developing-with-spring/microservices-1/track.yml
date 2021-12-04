@@ -142,15 +142,11 @@ challenges:
 
     Once the application deployment completes, navigate to our route in the OpenShift Web Console.
 
-    Access the OpenShift Web Console to login from the Web UI and access the `dev` project:
+    OpenShift ships with a web-based console that will allow users to perform various tasks via a browser.
 
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
+    Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
-    Copy the URL from the output of the above command or click to it to open it in your browser.
-
-    We'll deploy our app as the `developer` user. Use the following credentials:
+    *Note* that you might see *Your connection is not private* notification due to using an untrusted security certificate. Then, proceed to access the OpenShift web console via clicking *Advanced* option.
 
     * Username:
     ```
@@ -162,12 +158,15 @@ challenges:
     admin
     ```
 
+    ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/quarkus/login.png)
+
+    Run **Skip Tour** to skip the new user introduction.
+
     or run this command to get the app's Route:
 
     ```
     oc get route spring-boot-configmap-greeting -n dev -o jsonpath='{"http://"}{.spec.host}{"\n"}'
     ```
-
 
     We should see the following screen, meaning everything was successful:
 
@@ -188,6 +187,10 @@ challenges:
     type: code
     hostname: crc
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
+  - title: OpenShift Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 1000
 - slug: 03-modify-the-configmap
@@ -247,4 +250,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/spring/microservices-externalized-config
   difficulty: basic
   timelimit: 1000
-checksum: "18140261470862253075"
+checksum: "4071118530389434293"
