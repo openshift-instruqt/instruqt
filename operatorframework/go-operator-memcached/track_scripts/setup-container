@@ -19,6 +19,12 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/ope
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-memcached/assets/memcached_controller.go -o /tmp/memcached_controller.go
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-memcached/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
 
+mkdir -p /root/projects/memcached-operator
+
+cd /root/projects/memcached-operator
+
+operator-sdk init --domain example.com --repo github.com/example/memcached-operator
+
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"
     sleep 1

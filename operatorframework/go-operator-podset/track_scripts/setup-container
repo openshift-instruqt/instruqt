@@ -15,3 +15,15 @@ chmod +x /usr/bin/kubectl
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
 
+mkdir -p /root/projects/podset-operator
+
+cd /root/projects/podset-operator
+
+operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
+
+
