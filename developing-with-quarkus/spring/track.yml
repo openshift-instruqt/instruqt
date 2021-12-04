@@ -17,7 +17,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -1115,4 +1114,4 @@ challenges:
     new_window: true
   difficulty: basic
   timelimit: 500
-checksum: "4842954099064090040"
+checksum: "16401656532522740073"

@@ -23,7 +23,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -1013,4 +1012,4 @@ challenges:
     port: 8080
   difficulty: basic
   timelimit: 500
-checksum: "12257162911908970768"
+checksum: "770663184350201281"

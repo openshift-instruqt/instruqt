@@ -40,7 +40,6 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
 private: false
 published: true
 challenges:
@@ -612,4 +611,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
   difficulty: basic
   timelimit: 600
-checksum: "9005305796518217433"
+checksum: "15875900377627558408"
