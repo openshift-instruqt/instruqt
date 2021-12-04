@@ -103,6 +103,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 02-deploying-a-postgresql-database
@@ -133,6 +137,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 03-starting-an-interactive-shell
@@ -225,6 +233,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 - slug: 04-creating-a-remote-connection
@@ -319,6 +331,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 500
 checksum: "14891864393367753551"
