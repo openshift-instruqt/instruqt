@@ -27,7 +27,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - doh@redhat.com
-private: false
+private: true
 published: true
 challenges:
 - slug: 01-review-the-weather-app
