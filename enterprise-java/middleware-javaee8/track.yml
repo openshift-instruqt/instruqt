@@ -145,7 +145,7 @@ challenges:
     oc new-project my-project --display-name="Weather App"
     ```
 
-    **3. Login to OpenShift
+    **3. Login to OpenShift**
 
     Click on `OpenShift Web Console` tab then, login using the following credentials from the Web using.
 
@@ -423,7 +423,7 @@ challenges:
     Now we can use the `EntityManager` to collect Country object. There are many different API calls we can do including creating our own query, however the fastest and easiest way is to use a methods called `find(Class returnType,Object key)` like this:
 
     ```java
-        return em.find(Country.class,"en");
+          return em.find(Country.class,"en");
     ```
 
     Save the file.
@@ -536,15 +536,15 @@ challenges:
     Create a `src/main/webapp/WEB-INF/beans.xml` file then, copy the following content.
 
     ```xml
-    <xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="
+          xsi:schemaLocation="
           http://xmlns.jcp.org/xml/ns/javaee
           http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
-           bean-discovery-mode="all">
+          bean-discovery-mode="all">
     </beans>
     ```
-    
+
     Save the file.
 
     **3. Let the user select the country**
@@ -558,18 +558,18 @@ challenges:
     Using CDI we can inject a reference to the SelectedCountry. Since the selected country is annotated with @SessionScope we don't have to care about retrieving a HttpSession object or similar. Instead, we can safely assume that an update to the selected country object will be kept in the user's session.
 
     ```java
-      @Inject
-      SelectedCountry selectedCountry;
+        @Inject
+        SelectedCountry selectedCountry;
     ```
 
     We can now create a rest service that allows the user to set the country of choice. Our REST service needs to be annotated with @PUT and since the `RestApplication` defines a base path to `/api` and the `CountryService` defines a path of `country` we only need to add a @Path annotation specifying `{code}`. The brackets tell JAX-RS that this is a path parameter and that it will match to any request matching `/api/country/*`. Our rest service should look like this:
 
     ```java
-      @PUT
-      @Path("/{code}")
-      public void setSelectedCountry(@PathParam("code") String countryCode) {
-          selectedCountry.setCode(countryCode);
-      }
+        @PUT
+        @Path("/{code}")
+        public void setSelectedCountry(@PathParam("code") String countryCode) {
+            selectedCountry.setCode(countryCode);
+        }
     ```
 
     Save the file.
@@ -579,8 +579,8 @@ challenges:
     Open  `src/main/java/com/redhat/example/weather/WeatherService.java` and inject the user selected country.
 
     ```java
-      @Inject
-      SelectedCountry selectedCountry;
+        @Inject
+        SelectedCountry selectedCountry;
     ```
 
     Then we can replace the hardcoded value of "en" and instead invoke.
@@ -669,6 +669,8 @@ challenges:
     </datasources>
     ```
 
+    Save the file.
+
     This configures our app to access the database using a hostname of `weather-postgresql` and corresponding ports, usernames, and password. We'll need to deploy Postgres itself to respond to these connection requests.
 
     **2. Start a PostgreSQL database**
@@ -698,13 +700,13 @@ challenges:
     Since EAP does not ship with a Postgres DB driver by default, we'll need to download it and include it with our application. Click the following command to download the driver to the `target/` directory:
 
     ```
-    curl -o target/postgresql.jar https://jdbc.postgresql.org/download/postgresql-42.2.20.jar
+    curl -o /root/projects/rhoar-getting-started/javaee/weather-app/target/postgresql.jar https://jdbc.postgresql.org/download/postgresql-42.2.20.jar
     ```
 
     Next, build a container by starting an OpenShift S2I build and provide the files as input.
 
     ```
-    oc start-build weather-app --from-file=/root/projects/rhoar-getting-started/javaee/weather-app/target/ROOT.war --follow
+    oc start-build weather-app --from-dir=/root/projects/rhoar-getting-started/javaee/weather-app/target/ --follow
     ```
 
     When the build has finished, you can test the REST endpoint directly using for example curl:
@@ -750,4 +752,4 @@ challenges:
     path: /root/projects/rhoar-getting-started/javaee/weather-app
   difficulty: intermediate
   timelimit: 600
-checksum: "9187061156718900033"
+checksum: "8436122214981056368"
