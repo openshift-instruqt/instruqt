@@ -184,3 +184,13 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 #     done
 #     echo "AVAILABLE"
 # done
+
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+mkdir -p /root/projects
+cd /root/projects
+rm -rf rhoar-getting-started
+git clone https://github.com/openshift-katacoda/rhoar-getting-started
+cd /root/projects/rhoar-getting-started/javaee/weather-app
+
+echo "-w \"\n\"" >> ~/.curlrc
