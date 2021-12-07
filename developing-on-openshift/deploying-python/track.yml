@@ -87,17 +87,7 @@ challenges:
     kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
     ```
 
-    Let's also log in to our web console. At first, check that the pod responsible for OpenShift Web Console to be ready:
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-    You might have to wait a minute for the pod to be ready.
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-    Click the link under `HOST/PORT` column and navigate there from a web browser.
+    Let's also log in to our web console. This can be done by clicking the *Web Console* tab near the top of your screen.
 
     You will then be able to login with admin permissions with:
     * **Username:** ``admin``
@@ -115,6 +105,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 - slug: 02-deploying-using-the-web-console
@@ -165,6 +159,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 - slug: 03-viewing-the-builder-logs
@@ -205,6 +203,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 - slug: 05-deleting-the-application
@@ -304,6 +306,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 - slug: 06-deploying-using-the-command-line
@@ -402,6 +408,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 - slug: 07-triggering-a-new-build
@@ -594,6 +604,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 171
 checksum: "12675524580309141299"

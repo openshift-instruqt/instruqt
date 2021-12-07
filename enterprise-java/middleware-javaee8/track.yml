@@ -629,7 +629,7 @@ challenges:
   id: ydyvazhz3dg1
   type: challenge
   title: Externalize the data storage
-  assignment: |-
+  assignment: |
     So far we have been using an in-memory database that is part of JBoss EAP. However, JBoss EAP only provides this to make it easy to develop and test application. The in-memory database H2 is not recommended for production use.
 
     In this part, you will learn how to setup a simple PostgreSQL database in OpenShift, how to configure a datasource within the JBoss EAP image that connects to the database, and finally how to make use of that database in your application.

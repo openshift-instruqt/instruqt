@@ -1,2 +1,0 @@
-#!/bin/bash
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/operatorframework/go-operator-podset/assets/podset_controller.go -o /tmp/podset_controller.go 

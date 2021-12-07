@@ -68,6 +68,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -81,13 +85,7 @@ challenges:
   assignment: |
     ## Logging in to OpenShift
 
-    Access the OpenShift Web Console to login from the Web UI:
-
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-
-    Copy the URL from the output of the above command or click to it to open it in your browser.
+    To begin, let's log into our cluster to start working. This can be done by clicking the **Web Console** tab near the top of your screen.
 
     We'll deploy our app as the `developer` user. Use the following credentials:
 
@@ -171,6 +169,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -287,6 +289,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -381,6 +387,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -427,6 +437,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: basic
   timelimit: 300
 - slug: 05-exposing-components-to-public
@@ -485,6 +499,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
@@ -542,6 +560,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: container
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: container
