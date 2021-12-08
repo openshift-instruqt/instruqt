@@ -124,7 +124,7 @@ challenges:
 
     From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
 
-    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/Install%20OpenShift%20GitOps%20Operator.png)
+    ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/openshift-gitops-operator-installation.png)
 
     This is a cluster-wide operator and install the operator with the default settings provided. Once installed:
 
