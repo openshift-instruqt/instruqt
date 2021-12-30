@@ -132,6 +132,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
   timelimit: 600
 - slug: app
@@ -187,6 +191,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
   timelimit: 600
 - slug: parameter
@@ -232,6 +240,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
   timelimit: 600
 - slug: deploy
@@ -301,6 +313,10 @@ challenges:
     type: code
     hostname: crc
     path: /root
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   difficulty: intermediate
   timelimit: 600
 checksum: "16369156194788999445"
