@@ -84,9 +84,7 @@ challenges:
     ## Logging in to the Cluster via CLI
 
     When the OpenShift playground is created you will be logged in initially as
-    a cluster admin (```
-    oc whoami
-    ```) on the command line. This will allow you to perform
+    a cluster admin (``oc whoami``) on the command line. This will allow you to perform
     operations which would normally be performed by a cluster admin.
 
     Before creating any applications, it is recommended you login as a distinct
