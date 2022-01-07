@@ -1,0 +1,126 @@
+slug: managing-vulnerabilities-with-thoth
+id: i2raqubknxi1
+type: track
+title: Managing vulnerabilities in Python applications with Thoth
+description: |-
+  In this tutorial, we are going to demonstrate how to manage vulnerabilities in Python applications with Thoth via the Thamos CLI.
+
+  ## Manage vulnerablities in your dependencies with an example application
+
+  This track includes an example of an application which uses Thoth's recommendations to recommend a software stack for specific security requirements. 
+  The application is showing one of the [Integrations of Thoth](https://pypi.org/project/thamos/) using Thamos CLI.
+
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+-
+private: false
+published: true
+challenges:
+- slug: run
+  id: nyhdkkmqfndq
+  type: challenge
+  title: Running the application
+  notes:
+  - type: text
+    contents: |-
+      In this tutorial, we are going to demonstrate how to manage vulnerabilities in Python applications with Thoth via the Thamos CLI.
+
+      ## Manage vulnerablities in your dependencies with an example application
+
+      This track includes an example of an application which uses Thoth's recommendations to recommend a software stack for specific security requirements. 
+      The application is showing one of the [integrations of Thoth](https://pypi.org/project/thamos/) using Thamos CLI.
+
+  assignment: |-
+    One of the integration for Thoth is [Thamos](https://pypi.org/project/thamos/). You can use Thoth's recommendation engine directly from within your terminal. 
+    First, you need to clone this example repo and install Thamos CLI:
+
+    ```
+    git clone https://github.com/thoth-station/cli-examples.git && cd cli-examples
+    pip3 install thamos
+    thamos --help
+    ```
+
+    The pre-configured template for Thamos CLI is available in the `.thoth.yaml` file:
+
+    ```
+    cat .thoth.yaml
+    ```
+
+    Now you are ready to ask for advice:
+
+    ```
+    thamos advise
+    ```
+
+    This might take some time. Once Thoth recommends you the application stack to be used for running the application, 
+    you can use Thamos to create a Python environment (based on configuration in .thoth.yaml) and install the recommended requirements into it:
+
+    ```
+    thamos install
+    ```
+
+    And finally, run the application:
+
+    ```
+    thamos run ./game_of_life.py
+    ```
+
+    To browse Thoth's logs produced during the resolution:
+
+    ```
+    thamos log
+    ```
+
+  difficulty: beginner
+  timelimit: 600
+- slug: vulnerability
+  id: ot5kvp3syaxx
+  type: challenge
+  title: Thamos vulnerabilities management
+  assignment: |-
+    The `game_of_life.py` program is a simple application that shows how Thamos manages known vulnerablities in the dependencies of a project. 
+    To use this example application, follow the steps mentioned above relative to the installation of the Thamos CLI and to its configuration using `.thoth.yaml.`
+
+    To introduce voluntarily a known vulnerability in the project, specify that you would like to add `pillow` version 8.0.0 in your requirements:
+
+    ```
+    thamos add pillow==8.0.0
+    ```
+
+    This version of `pillow` is known for introducing a vulnerability further described on the [`pypa/advisory-db`](https://github.com/pypa/advisory-db/blob/main/vulns/pillow/PYSEC-2021-94.yaml) repository. 
+    Thamos can also manage user requirements for dependencies using [constraints files](https://pip.pypa.io/en/stable/user_guide/#constraints-files). 
+    To add `pillow` version 8.0.0 in your dependency requirements this way, you can simply write the package with its version into this file.
+
+    To get a stack guidance based on security, run the following command:
+
+    ```
+    thamos advise --recommendation-type security
+    ```
+
+    or modify the `recommendation_type` field to `security` in `.thoth.yaml` to set it as your default recommendation type, and simply run:
+
+    ```
+    thamos advise
+    ```
+
+    Thamos report should show that an error occured during the resolution process because a known vulnerability was found in `pillow` version 8.0.0 .
+
+    **Run the example application**
+
+    Now that you know how Thamos prevents the use of unsafe dependencies in your application, you can revert to another version of `pillow` to complete this part of the tutorial. 
+    To run the example application with the resolved dependencies, run:
+
+    ```
+    thamos run ./game_of_life.py
+    ```
+
+    To launch a new game with the default parameters or choose your own parameters as specified in the `help` section. 
+    Click on the coordinates to select your first generation of individuals and press `p` to see next generations.
+  difficulty: beginner
+  timelimit: 600
+
+checksum: "16369156194788999445"
