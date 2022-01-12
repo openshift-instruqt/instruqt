@@ -106,7 +106,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 02-deploying-a-postgresql-database
   id: sou4lbpbr3ut
   type: challenge
@@ -140,7 +140,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 03-starting-an-interactive-shell
   id: l6p067zejhjc
   type: challenge
@@ -236,7 +236,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 - slug: 04-creating-a-remote-connection
   id: yr1qwuajtwxc
   type: challenge
@@ -328,5 +328,5 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 225
+  timelimit: 500
 checksum: "13314507858630139885"

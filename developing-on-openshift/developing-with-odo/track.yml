@@ -77,7 +77,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 01-creating-initial-project
   id: tam8dhs0g0uc
   type: challenge
@@ -178,7 +178,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 02-creating-new-binary-component
   id: z5tera1vq7q3
   type: challenge
@@ -298,7 +298,7 @@ challenges:
     hostname: container
     path: /root/backend
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 03-deploying-component-from-source-code
   id: 27d8xxrk1zte
   type: challenge
@@ -396,7 +396,7 @@ challenges:
     hostname: container
     path: /root/backend
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 04-configuring-components
   id: fzr4hdledybp
   type: challenge
@@ -442,7 +442,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 05-exposing-components-to-public
   id: xkzdusandmgi
   type: challenge
@@ -508,7 +508,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 - slug: 06-making-changes-to-source-code
   id: yxtyvlpdakbg
   type: challenge
@@ -569,5 +569,5 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 500
 checksum: "11536559063881550627"
