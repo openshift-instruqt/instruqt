@@ -270,7 +270,7 @@ challenges:
     ```
 
 
-    Now that you have scheduled it in the katacoda terminal on the right, you should see this -
+    Now that you have scheduled it in the terminal on the right, you should see this -
     ```
     buildconfig.build.openshift.io/s2i-example-log created
     deploymentconfig.apps.openshift.io/s2i-example-log created
@@ -336,7 +336,7 @@ challenges:
     ```
 
 
-    Now that you have scheduled it in the katacoda terminal on the right, you should see this -
+    Now that you have scheduled it in the terminal on the right, you should see this -
     ```
     buildconfig.build.openshift.io/s2i-example-log created
     deploymentconfig.apps.openshift.io/s2i-example-log created
