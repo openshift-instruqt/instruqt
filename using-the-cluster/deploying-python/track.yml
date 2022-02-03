@@ -140,7 +140,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 02-deploying-using-the-web-console
   id: g8knyrnlqevs
   type: challenge
@@ -196,7 +196,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 03-viewing-the-builder-logs
   id: kveewjuddevx
   type: challenge
@@ -216,7 +216,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 04-accessing-the-application
   id: llw9mpkjnc41
   type: challenge
@@ -244,7 +244,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 05-deleting-the-application
   id: unmcnaqundvl
   type: challenge
@@ -347,7 +347,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 06-deploying-using-the-command-line
   id: sk8gnctfaa22
   type: challenge
@@ -449,7 +449,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 - slug: 07-triggering-a-new-build
   id: v3ffbo8faxy8
   type: challenge
@@ -645,5 +645,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 350
 checksum: "3935891336714594913"

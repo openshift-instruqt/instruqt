@@ -97,7 +97,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: 2explore-console
   id: igqwroy9zatm
   type: challenge
@@ -157,7 +157,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: 3deploy-docker
   id: 65tlr1c4seao
   type: challenge
@@ -207,7 +207,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: 4scaling
   id: yimq9ypncpqi
   type: challenge
@@ -264,7 +264,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: 5routes
   id: srigstx2dsky
   type: challenge
@@ -309,7 +309,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: 6s2i
   id: uetksk6zpzrj
   type: challenge
@@ -394,5 +394,5 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 checksum: "10935126695708752252"

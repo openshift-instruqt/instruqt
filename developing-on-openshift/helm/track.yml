@@ -244,7 +244,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 600
 - slug: 02-first-chart
   id: phnktxgopn6g
   type: challenge
@@ -362,7 +362,7 @@ challenges:
     hostname: container
     path: /root/my-chart
   difficulty: basic
-  timelimit: 1800
+  timelimit: 600
 - slug: 03-revision
   id: vvmdo6mdop5c
   type: challenge
@@ -492,5 +492,5 @@ challenges:
     hostname: container
     path: /root/my-chart
   difficulty: basic
-  timelimit: 1800
+  timelimit: 600
 checksum: "14990396350448359938"

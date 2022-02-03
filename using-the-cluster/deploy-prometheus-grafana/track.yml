@@ -87,7 +87,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 450
 - slug: 2deploy-prometheus
   id: ruepdfubnvrb
   type: challenge
@@ -210,7 +210,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 450
 - slug: 3deploy-grafana
   id: fxui4ywi1tx0
   type: challenge
@@ -292,7 +292,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 450
 - slug: 4create-dashboard
   id: fyric26xunnb
   type: challenge
@@ -359,5 +359,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 1800
+  timelimit: 450
 checksum: "4234800505749025249"
