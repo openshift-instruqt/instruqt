@@ -165,22 +165,27 @@ oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAM
 
 
 # wait until cluster operators are "available"
-# for co in $(oc get co -oname)
-# do
-#     # skip this one
-#     if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
-#     then
-#       continue
-#     fi
-#     
-#     echo -n "Waiting for $co ..."
-#     co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
-# 
-#     while [ "${co_available}" == "" ]
-#     do
-#       sleep 5
-#       echo -n "."
-#       co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
-#     done
-#     echo "AVAILABLE"
-# done
+for co in $(oc get co -oname)
+do
+    # skip this one
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    then
+      continue
+    fi
+    
+    echo -n "Waiting for $co ..."
+    co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+
+    while [ "${co_available}" == "" ]
+    do
+      sleep 5
+      echo -n "."
+      co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+    done
+    echo "AVAILABLE"
+done
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
