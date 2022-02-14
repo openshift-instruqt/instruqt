@@ -86,7 +86,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 450
 - slug: 02-logging-in-via-the-command-line
   id: btsyo4jaranu
   type: challenge
@@ -177,7 +177,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 450
 - slug: 03-collaborating-with-other-users
   id: mxdmy7j7hldx
   type: challenge
@@ -264,7 +264,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 450
 - slug: 04-switching-between-accounts
   id: fmxuiuw4trpl
   type: challenge
@@ -328,5 +328,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 150
+  timelimit: 450
 checksum: "9566365893324473784"

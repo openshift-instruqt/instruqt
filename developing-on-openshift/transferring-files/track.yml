@@ -104,7 +104,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 500
+  timelimit: 360
 - slug: 02-downloading-files-from-a-container
   id: ysvxuszjkesq
   type: challenge
@@ -317,7 +317,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 500
+  timelimit: 360
 - slug: 03-uploading-files-to-a-container
   id: vutiuc5tde95
   type: challenge
@@ -402,7 +402,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 500
+  timelimit: 360
 - slug: 04-synchronizing-files-with-a-container
   id: tsny4ymdk6fe
   type: challenge
@@ -579,7 +579,7 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 500
+  timelimit: 360
 - slug: 05-copying-files-to-a-persistent-volume
   id: sj6mbfpet2y5
   type: challenge
@@ -719,5 +719,5 @@ challenges:
     url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 500
+  timelimit: 360
 checksum: "10269395037749599472"
