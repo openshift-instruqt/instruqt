@@ -25,6 +25,7 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
