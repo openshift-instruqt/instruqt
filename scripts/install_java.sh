@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-export MVN_VERSION=3.8.4
+export MVN_VERSION=3.8.5
 
 mkdir -p /opt/java
 curl -s https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz -o /tmp/openjdk-11_linux-x64_bin.tar.gz
