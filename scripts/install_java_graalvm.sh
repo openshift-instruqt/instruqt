@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export GRAALVM_VERSION=19.3.6
-export MVN_VERSION=3.8.4
+export MVN_VERSION=3.8.5
 
 mkdir -p /opt/java
 curl -sL https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-java11-linux-amd64-${GRAALVM_VERSION}.tar.gz -o /tmp/graalvm-ce-java11-linux-amd64-${GRAALVM_VERSION}.tar.gz
