@@ -1,4 +1,4 @@
-dnf install -y procps-ng iputils bind-utils postgresql
+dnf install -y procps-ng iputils bind-utils postgresql git
 
 crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
 

@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 virtualmachines:
 - name: crc
   image: openshift-instruqt/openshift-instruqt-crc490-211026
