@@ -21,16 +21,16 @@ In this topic you will learn how to transfer files to and from a container. You'
 
 ----
 
-`Step 1:` Run the following command to create an OpenShift application named `simplemessage` based on the container image `quay.io/reselbob/simplemessage`:
+`Step 1:` Run the following command to create an OpenShift application named `simplemessage` based on the container image `quay.io/openshiftlabs/simplemessage:1.0`:
 
 ```
-oc new-app quay.io/reselbob/simplemessage --name simplemessage
+oc new-app quay.io/openshiftlabs/simplemessage:1.0 --name simplemessage
 ```
 
 You'll get output similar to the following:
 
 ```
---> Found container image f5becdb (28 minutes old) from quay.io for "quay.io/reselbob/simplemessage"
+--> Found container image f5becdb (28 minutes old) from quay.io for "quay.io/openshiftlabs/simplemessage:1.0"
 
     Node.js 14
     ----------
