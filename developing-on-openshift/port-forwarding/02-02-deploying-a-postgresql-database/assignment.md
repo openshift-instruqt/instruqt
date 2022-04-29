@@ -16,7 +16,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 2250
+timelimit: 225
 ---
 
 In this topic you will learn how to create a new application named `postgresql-ephemeral` by using the command `oc new-app`.

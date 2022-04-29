@@ -18,7 +18,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 2250
+timelimit: 225
 ---
 
 In this topic, you will execute port forwarding to connect the Postgres database running internally in the OpenShift cluster to a local process running in the terminal window to the left.

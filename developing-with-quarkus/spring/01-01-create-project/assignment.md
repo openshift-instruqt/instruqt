@@ -18,7 +18,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 5001
+timelimit: 500
 ---
 # Inspecting the Java runtime
 

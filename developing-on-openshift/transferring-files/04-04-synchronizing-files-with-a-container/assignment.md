@@ -11,7 +11,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 3601
+timelimit: 360
 ---
 
 In this topic you will learn how to implement automatic synchronization of the file updates between the local machine and the file system for the SimpleMessage application running within this track's OpenShift clusters.

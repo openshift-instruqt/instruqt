@@ -29,7 +29,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 1501
+timelimit: 150
 ---
 In this topic you will learn how to use the command line to discover the URL for accessing the OpenShift web console. Also, you'll use the web console to create a project in OpenShift. You will work with the project you create here throughout the remainder of this track.
 

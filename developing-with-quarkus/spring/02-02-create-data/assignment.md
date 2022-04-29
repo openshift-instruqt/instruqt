@@ -18,7 +18,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 5001
+timelimit: 500
 ---
 # Create Spring Data Repository
 The Spring Data repository abstraction simplifies working with data models and data binding by reducing the amount of boilerplate code required to implement data access layers for various persistence stores (such as JPA). The `@Repository` annotation and annotations such as `@CrudRepository` for associated sub-interfaces are the [central concepts in Spring Data](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.core-concepts). (`@Repository` is a marker interface that provides data manipulation functionality for the entity class that is being managed.)

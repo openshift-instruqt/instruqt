@@ -18,7 +18,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 5001
+timelimit: 500
 ---
 
 In addition to using Java's Contexts and Dependency Injection (CDI) annotations for dependency injection management, Quarkus provides a compatibility layer for Spring's `spring-di` extension framework.

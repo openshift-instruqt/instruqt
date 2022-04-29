@@ -15,7 +15,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 1501
+timelimit: 150
 ---
 In this topic you will learn how to log into OpenShift from a terminal using the `oc login` command.
 

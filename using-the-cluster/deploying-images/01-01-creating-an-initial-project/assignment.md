@@ -33,7 +33,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 1800
+timelimit: 180
 ---
 
 In this topic you will learn how to log into an OpenShift cluster from the command line, and also by using the web console.

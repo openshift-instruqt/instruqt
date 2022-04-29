@@ -15,7 +15,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 2250
+timelimit: 225
 ---
 
 In this topic you will learn how to connect to an underlying Linux container that's driving the OpenShift application, and then work within an interactive shell within the container.

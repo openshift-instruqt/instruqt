@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 3001
+timelimit: 300
 ---
 This topic focuses on learning how to log into the Red Hat OpenShift web console and then create an application once logged in.
 

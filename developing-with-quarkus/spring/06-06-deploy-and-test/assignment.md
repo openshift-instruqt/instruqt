@@ -22,7 +22,7 @@ tabs:
   url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
-timelimit: 5001
+timelimit: 500
 ---
 In this topic your going to create special .jar files for the Fruit Taster application that you'll deploy to Red Hat OpenShift. Then, you'll exercise the Fruit Taster application that's running on OpenShift using the browser based OpenShift web console.
 

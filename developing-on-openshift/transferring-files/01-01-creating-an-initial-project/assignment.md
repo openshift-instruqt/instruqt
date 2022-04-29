@@ -25,7 +25,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 3601
+timelimit: 360
 ---
 In this topic you will log in and create a project in OpenShift, for use through the following topics.
 

@@ -11,7 +11,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 3601
+timelimit: 360
 ---
 In this topic you will learn how to transfer files to and from a container. You'll create an application from an existing container image hosted in the Quay.io container registry. Then you will access a command line shell within the application's underlying Linux container. Finally, you'll use the `oc rsync` command from the shell's command line to copy a file out of the container and into the local machine.
 

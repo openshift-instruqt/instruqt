@@ -24,7 +24,7 @@ tabs:
   path: /q/dev
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 In this topic you will use Quarkus to create an API application that publishes a `/hello` endpoint. Also, you will use dependency injection to build on the `/hello` endpoint to publish an additional endpoint `/hello/greeting` by creating a **Greeting** bean.
 

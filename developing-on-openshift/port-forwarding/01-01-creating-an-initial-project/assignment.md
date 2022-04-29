@@ -30,7 +30,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 2250
+timelimit: 225
 ---
 In this topic you will learn how to log into an OpenShift cluster from the command line, and then create a demonstration project within the OpenShift cluster.
 

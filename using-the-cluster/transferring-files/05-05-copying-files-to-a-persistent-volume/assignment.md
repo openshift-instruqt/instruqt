@@ -11,7 +11,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 3601
+timelimit: 360
 ---
 In this topic you will learn how to use persistent volumes under OpenShift in conjunction with the `oc rsync` command.
 

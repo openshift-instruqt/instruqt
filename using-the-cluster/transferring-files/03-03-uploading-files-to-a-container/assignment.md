@@ -11,7 +11,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 3601
+timelimit: 360
 ---
 In this topic you will learn how to copy a file from the local machine into the application container. You will copy a new version of the `message.txt` file from the local machine into the application container.
 

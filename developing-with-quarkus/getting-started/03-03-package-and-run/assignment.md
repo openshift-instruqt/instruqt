@@ -19,7 +19,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 In the previous step you added a custom CDI bean to the app. Now you're going to package and run the bean as a self-contained JAR file.
 
