@@ -17,7 +17,7 @@ In this topic you will learn how to transfer files to and from a container. You'
 
 |NOTE|
 |----|
-|This topic uses the `oc rsync` command many time. Thus, you might want to learn the details of the command before proceeding. Click this [link](https://docs.openshift.com/container-platform/3.11/dev_guide/copy_files_to_container.html) to go to a in-depth discussion of  `oc rsync`|
+|This topic uses the `oc rsync` command many times. Thus, you might want to learn the details of the command before proceeding. Click this [link](https://docs.openshift.com/container-platform/3.11/dev_guide/copy_files_to_container.html) to go to a in-depth discussion of  `oc rsync`|
 
 ----
 
