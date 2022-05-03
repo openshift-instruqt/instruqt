@@ -197,12 +197,9 @@ You will use this directory path in upcoming steps and topics.
 exit
 ```
 
-Next you will use the `oc rsync` command to copy files from the container into the local machine.
+In upcoming steps you will use the `oc rsync` command to copy files from the container into the local machine.
 
-The form of the command when copying a single file from the container to the local machine is:
-```
-oc rsync <pod-name>:/remote/dir/filename ./local/dir
-```
+The form of the command when copying a single file from the container to the local machine is: `oc rsync <pod-name>:/remote/dir/filename ./local/dir`
 
 ----
 
