@@ -1,7 +1,7 @@
 slug: quarkus-for-spring-boot-developers-v2
 id: v8jut5mykpe4
 type: track
-title: Quarkus for Spring Boot Developers -v2
+title: Quarkus for Spring Boot Developers
 description: |-
   This track demonstrates how Spring and Spring Boot developers can use Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications.
 
