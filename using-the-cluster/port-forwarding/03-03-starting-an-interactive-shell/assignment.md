@@ -1,6 +1,6 @@
 ---
 slug: 03-starting-an-interactive-shell
-id: pjxykvpnkonh
+id: xexmidu8ae6k
 type: challenge
 title: Topic 3 - Starting an interactive shell
 notes:

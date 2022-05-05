@@ -1,6 +1,6 @@
 ---
 slug: 06-replacing-resource-objects
-id: ckfmw2ogejya
+id: shbx0smwonih
 type: challenge
 title: Topic 6 - Replacing Resource Objects
 notes:

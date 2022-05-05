@@ -1,6 +1,6 @@
 ---
 slug: 01-create-project
-id: hx9ekwxjgihd
+id: 5ji1bqrcwvcx
 type: challenge
 title: Topic 1 - Getting Quarkus up and running
 notes:

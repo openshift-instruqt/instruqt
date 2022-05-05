@@ -1,6 +1,6 @@
 ---
 slug: 04-configuring-components
-id: 2b6axbhdgf9x
+id: pv8ct16wfczf
 type: challenge
 title: Topic 4 - Configuring and application's components
 notes:

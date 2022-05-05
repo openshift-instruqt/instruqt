@@ -1,5 +1,5 @@
 slug: getting-started-with-openshift-for-developers
-id: ok4cpp9twucl
+id: ncxqq8htsyue
 type: track
 title: Getting Started with OpenShift for Developers
 description: |
@@ -31,6 +31,7 @@ developers:
 - bclayton@redhat.com
 - dleblanc@redhat.com
 - dschenck@redhat.com
+- nvinto@redhat.com
 private: true
 published: false
-checksum: "4041708139062887172"
+checksum: "13064373925927308195"

@@ -1,6 +1,6 @@
 ---
 slug: 04-accessing-the-application
-id: fyolj0x2ihlr
+id: oax6vwaygdbb
 type: challenge
 title: Topic 4 - Accessing the application using the Web Console
 notes:

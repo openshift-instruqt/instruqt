@@ -1,6 +1,6 @@
 ---
 slug: 03-querying-resource-objects
-id: twfc5omou3m2
+id: 7fcelw2qlutx
 type: challenge
 title: Topic 3 - Querying Resource Objects
 notes:

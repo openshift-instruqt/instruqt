@@ -1,6 +1,6 @@
 ---
 slug: 04-deleting-the-application
-id: abizrs8g63r6
+id: faje3hq0dffo
 type: challenge
 title: Topic 4 - Deleting the Application Using the Web Console
 notes:

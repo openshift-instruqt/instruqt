@@ -1,6 +1,6 @@
 ---
 slug: 05-creating-resource-objects
-id: gpa68c2sfnvc
+id: 0yprfuwn3n7c
 type: challenge
 title: Topic 5 - Creating Resource Objects
 notes:

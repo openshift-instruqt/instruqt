@@ -1,6 +1,6 @@
 ---
 slug: 2explore-console
-id: nhofdkza1xge
+id: xcmblkj6eybv
 type: challenge
 title: Step 2 - Exploring The Web Console
 notes:

@@ -1,6 +1,6 @@
 ---
 slug: 02-deploying-using-the-web-console
-id: yubs6se1jowk
+id: 1onxjvyov07s
 type: challenge
 title: Topic 2 - Deploying an Application from a Container Image Using the Web Console
 notes:

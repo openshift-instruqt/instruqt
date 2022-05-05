@@ -1,5 +1,5 @@
 slug: developing-with-odo
-id: brlnaufhozdo
+id: wfx38z1wiime
 type: track
 title: Developing with odo
 description: |
@@ -34,6 +34,7 @@ developers:
 - dleblanc@redhat.com
 - dschenck@redhat.com
 - doh@redhat.com
+- nvinto@redhat.com
 private: true
 published: false
-checksum: "2034289561503341650"
+checksum: "3305835050663420684"

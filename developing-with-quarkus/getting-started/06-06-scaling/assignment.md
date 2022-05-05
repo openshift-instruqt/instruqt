@@ -1,6 +1,6 @@
 ---
 slug: 06-scaling
-id: xmjcgctjogbn
+id: klsyczfk5jx6
 type: challenge
 title: Topic 6 - Scaling Quarkus
 teaser: Topic 6 - Scaling Quarkus

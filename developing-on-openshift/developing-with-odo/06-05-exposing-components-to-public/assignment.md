@@ -1,6 +1,6 @@
 ---
 slug: 05-exposing-components-to-public
-id: xlsieb6s40fa
+id: tdrpbrtl3vyx
 type: challenge
 title: Topic 5 - Creating an OpenShift route to expose an application to the public
 notes:

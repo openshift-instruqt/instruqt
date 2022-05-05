@@ -1,6 +1,6 @@
 ---
 slug: 07-triggering-a-new-build
-id: yiwekdz4qasy
+id: xza0snumwg0r
 type: challenge
 title: Topic 7 - Triggering new builds from the command line
 notes:

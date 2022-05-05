@@ -1,6 +1,6 @@
 ---
 slug: 01-creating-an-initial-project
-id: b5s27lp5c2a3
+id: 0sdpul4yutc2
 type: challenge
 title: Topic 1 - Creating the demonstration project
 notes:

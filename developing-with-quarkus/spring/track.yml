@@ -1,5 +1,5 @@
-slug: quarkus-for-spring-boot-developers-v2
-id: v8jut5mykpe4
+slug: quarkus-for-spring-boot-developers
+id: hvvntetofy81
 type: track
 title: Quarkus for Spring Boot Developers
 description: |-
@@ -31,4 +31,4 @@ developers:
 - dschenck@redhat.com
 private: true
 published: false
-checksum: "3581600364928164768"
+checksum: "16980653241094342176"

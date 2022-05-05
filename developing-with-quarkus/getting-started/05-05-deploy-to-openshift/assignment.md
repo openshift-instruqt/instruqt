@@ -1,6 +1,6 @@
 ---
 slug: 05-deploy-to-openshift
-id: uoh2haev5nau
+id: y4y7labghnnt
 type: challenge
 title: Topic 5 - Moving the container to the cloud
 teaser: Topic 5 - Moving the container to the cloud

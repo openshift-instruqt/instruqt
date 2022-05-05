@@ -1,6 +1,6 @@
 ---
 slug: 1explore-cli
-id: ak1frxhadgrk
+id: bsplaenzkosg
 type: challenge
 title: Step 1 - Getting started with OpenShift
 notes:

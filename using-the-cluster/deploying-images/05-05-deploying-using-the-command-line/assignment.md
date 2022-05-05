@@ -1,6 +1,6 @@
 ---
 slug: 05-deploying-using-the-command-line
-id: e0x7mf9xtdwr
+id: 6duhudrflowl
 type: challenge
 title: Topic 5 - Deploying the Application from a Container Image Using the Command
   Line

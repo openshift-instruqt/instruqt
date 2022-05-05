@@ -1,5 +1,5 @@
 slug: connecting-to-a-database-using-port-forwarding
-id: hzh7bhq98lnv
+id: l5r0k51d6nl8
 type: track
 title: Connecting to a Database Using Port Forwarding
 description: |
@@ -30,6 +30,7 @@ owner: openshift
 developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
+- nvinto@redhat.com
 private: true
 published: false
-checksum: "549809613220379385"
+checksum: "2995661333537408621"

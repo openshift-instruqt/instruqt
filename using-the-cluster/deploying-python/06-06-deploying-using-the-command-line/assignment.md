@@ -1,6 +1,6 @@
 ---
 slug: 06-deploying-using-the-command-line
-id: mn0dlwm0d85y
+id: d5f29ixdfgrp
 type: challenge
 title: Topic 6 - Deploying the application from the command line
 notes:

@@ -1,5 +1,5 @@
 slug: deploying-applications-from-images
-id: llxuehiwxxxx
+id: 1d6c1r9b5rks
 type: track
 title: Deploying Applications From Images
 description: |
@@ -29,6 +29,7 @@ owner: openshift
 developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
+- nvinto@redhat.com
 private: true
 published: false
-checksum: "8846634786812057423"
+checksum: "227424699147010391"

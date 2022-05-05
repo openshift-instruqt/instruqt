@@ -1,6 +1,6 @@
 ---
 slug: 02-resource-object-types
-id: ncxjzfv7jox3
+id: wddia9ypfkcg
 type: challenge
 title: Topic 2 - Understanding Resource Objects
 notes:

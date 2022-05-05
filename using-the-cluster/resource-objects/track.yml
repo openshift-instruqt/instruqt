@@ -1,5 +1,5 @@
 slug: using-the-cli-to-manage-resource-objects
-id: cqss0tsvceig
+id: yirn7alueife
 type: track
 title: Using the CLI to Manage Resource Objects
 description: |
@@ -31,6 +31,7 @@ owner: openshift
 developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
+- nvinto@redhat.com
 private: true
 published: false
-checksum: "16429235179892303374"
+checksum: "4411189881955356852"

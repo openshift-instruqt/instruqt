@@ -1,6 +1,6 @@
 ---
 slug: 08-deleting-resource-objects
-id: jldriaykk0o3
+id: wrlk7cpngdjy
 type: challenge
 title: Topic 8 - Deleting Resource Objects
 notes:
