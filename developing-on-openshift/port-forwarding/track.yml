@@ -1,7 +1,7 @@
-slug: connecting-to-a-database-using-port-forwarding-v2
+slug: connecting-to-a-database-using-port-forwarding
 id: hzh7bhq98lnv
 type: track
-title: Connecting to a Database Using Port Forwarding -v2
+title: Connecting to a Database Using Port Forwarding
 description: |
   The goal of this track is to teach you how to use port forwarding to run a database as persistent storage on OpenShift.
 
