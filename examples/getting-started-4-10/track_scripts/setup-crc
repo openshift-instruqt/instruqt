@@ -76,18 +76,46 @@ fi
 # Check with crictl ps
 echo "### Boostrap START ###"
 date
+
 until oc get pods -A 2>/dev/null 1>&2; do 
-  echo "Waiting for bootstrap to complete";
-  #crictl ps
-  #oc get co 
+  echo "Waiting for pods to start..";
   sleep 5;
 done
+
+until oc get co 2>/dev/null 1>&2; do 
+  echo "Waiting for Cluster Operators to complete first rollout";
+  sleep 5;
+done
+
+for co in $(oc get co -oname)
+do
+    # skip this one
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    then
+      continue
+    fi
+    
+    echo -n "Waiting for $co ..."
+    co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+
+    while [ "${co_available}" == "" ]
+    do
+      sleep 5
+      echo -n "."
+      co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+    done
+    echo "AVAILABLE"
+done
+
 
 
 # INGRESS
 
 # check if ingresses.config.openshift.io cluster is present
 oc patch -p '{"spec": {"domain": "'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' ingresses.config.openshift.io cluster --type=merge
+
+# Wait 30 seconds for the old pod to be terminated
+sleep 30
 
 oc delete -n openshift-ingress-operator ingresscontroller/default
 
@@ -136,6 +164,16 @@ do
       co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
     done
     echo "AVAILABLE"
+
+    co_progressing=$(oc get $co 2>/dev/null | awk -v col=PROGRESSING 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep False)
+
+    while [ "${co_progressing}" == "" ]
+    do
+      echo "Cluster Operator $co still progressing"
+      sleep 5
+      echo -n "."
+      co_progressing=$(oc get $co 2>/dev/null | awk -v col=PROGRESSING 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep False)
+    done
 done
 
 date
