@@ -176,6 +176,37 @@ do
     done
 done
 
+# do twice since cluster operator rolls out continuously
+for co in $(oc get co -oname)
+do
+    # skip this one
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    then
+      continue
+    fi
+    
+    echo -n "Waiting for $co ..."
+    co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+
+    while [ "${co_available}" == "" ]
+    do
+      sleep 5
+      echo -n "."
+      co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
+    done
+    echo "AVAILABLE"
+
+    co_progressing=$(oc get $co 2>/dev/null | awk -v col=PROGRESSING 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep False)
+
+    while [ "${co_progressing}" == "" ]
+    do
+      echo "Cluster Operator $co still progressing"
+      sleep 5
+      echo -n "."
+      co_progressing=$(oc get $co 2>/dev/null | awk -v col=PROGRESSING 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep False)
+    done
+done
+
 date
 echo "### Boostrap END ###"
 
