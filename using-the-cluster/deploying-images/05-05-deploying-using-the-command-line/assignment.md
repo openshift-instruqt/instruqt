@@ -13,7 +13,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code
@@ -117,10 +117,10 @@ You'll get output similar to the following
 
 ```
 NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap   parksmap-myproject.crc-dzk9v-master-0.crc.2fxr0dqhkd8a.instruqt.io          parksmap   8080-tcp                 None
+parksmap   parksmap-myproject.crc-gh9wd-master-0.crc.2fxr0dqhkd8a.instruqt.io          parksmap   8080-tcp                 None
 ```
 
-Notice the output above has the URL `parksmap-myproject.crc-dzk9v-master-0.crc.2fxr0dqhkd8a.instruqt.io`.
+Notice the output above has the URL `parksmap-myproject.crc-gh9wd-master-0.crc.2fxr0dqhkd8a.instruqt.io`.
 
 This is the `route` to the new instance of the ParkMap application that was just installed. You can copy into a browser window to access the ParksMap application.
 
