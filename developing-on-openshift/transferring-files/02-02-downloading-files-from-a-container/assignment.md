@@ -124,7 +124,7 @@ export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://
 You'll get output similar to the following:
 
 ```
-http://simplemessage-myproject.crc-dzk9v-master-0.crc.ogrx0anbjp74.instruqt.io
+http://simplemessage-myproject.crc-gh9wd-master-0.crc.ogrx0anbjp74.instruqt.io
 ```
 
 Remember: The output shown above is special to this running instance of OpenShift. The URL you get when you run this track will be different.

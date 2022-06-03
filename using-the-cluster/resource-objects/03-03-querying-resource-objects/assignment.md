@@ -39,8 +39,8 @@ Labels:                 app=parksmap
                         app.kubernetes.io/component=parksmap
                         app.kubernetes.io/instance=parksmap
 Annotations:            openshift.io/host.generated=true
-Requested Host:         parksmap-myproject.crc-dzk9v-master-0.crc.vzc8lf1zaimp.instruqt.io
-                           exposed on router default (host router-default.crc-dzk9v-master-0.crc.vzc8lf1zaimp.instruqt.io) 2 minutes ago
+Requested Host:         parksmap-myproject.crc-gh9wd-master-0.crc.vzc8lf1zaimp.instruqt.io
+                           exposed on router default (host router-default.crc-gh9wd-master-0.crc.vzc8lf1zaimp.instruqt.io) 2 minutes ago
 Path:                   <none>
 TLS Termination:        <none>
 Insecure Policy:        <none>

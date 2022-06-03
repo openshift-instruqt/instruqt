@@ -106,7 +106,7 @@ You get results as follows:
 
 ```
 NAME            HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap        parksmap-myproject.crc-dzk9v-master-0.crc.dlzdxnbljgoz.instruqt.io          parksmap   8080-tcp                 None
+parksmap        parksmap-myproject.crc-gh9wd-master-0.crc.dlzdxnbljgoz.instruqt.io          parksmap   8080-tcp                 None
 parksmap-fqdn   www.example.com                                                             parksmap   8080-tcp   edge/Allow    None                                                      parksmap   8080-tcp   edge/Allow    None
 ```
 
@@ -142,7 +142,7 @@ You'll get output similar to the following:
 
 ```
 NAME             HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap         parksmap-myproject.crc-dzk9v-master-0.crc.xdos3cn6o5qf.instruqt.io          parksmap   8080-tcp                 None
+parksmap         parksmap-myproject.crc-gh9wd-master-0.crc.xdos3cn6o5qf.instruqt.io          parksmap   8080-tcp                 None
 parksmap-fqdn    www.example.com                                                             parksmap   8080-tcp   edge/Allow    None
 parksmap-fqdn2   www.otherexample.com                                                        parksmap   8080-tcp   edge/Allow    None
 ```

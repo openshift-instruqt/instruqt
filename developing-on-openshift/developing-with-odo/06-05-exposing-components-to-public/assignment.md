@@ -13,7 +13,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code
@@ -73,7 +73,7 @@ Creating Kubernetes resources for component frontend
  ✓  Waiting for component to start [2ms]
 
 Applying URL changes
- ✓  URL frontend: http://frontend-50480802-myproject.crc-dzk9v-master-0.crc.xqhfxqg1mlcp.instruqt.io/ created
+ ✓  URL frontend: http://frontend-50480802-myproject.crc-gh9wd-master-0.crc.xqhfxqg1mlcp.instruqt.io/ created
 
 Syncing to component frontend
  ✓  Checking file changes for pushing [2ms]
@@ -90,7 +90,7 @@ Pushing devfile component "frontend"
 Notice that executing `odo push` returns a URL in the response in the line that starts with `✓  URL frontend`, as shown below:
 
 ```
-http://frontend-app-myproject.crc-dzk9v-master-0.crc.ghds3bg5bjox.instruqt.io/
+http://frontend-app-myproject.crc-gh9wd-master-0.crc.ghds3bg5bjox.instruqt.io/
 ```
 
 |NOTE:|
