@@ -1,6 +1,6 @@
 ---
 slug: 03-collaborating-with-other-users
-id: 70fn7czdaumq
+id: suhxfpfdogle
 type: challenge
 title: Topic 3 - Collaborating with Other Users
 notes:
@@ -10,6 +10,10 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc
