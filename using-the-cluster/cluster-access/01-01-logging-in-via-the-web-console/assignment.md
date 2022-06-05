@@ -1,6 +1,6 @@
 ---
 slug: 01-logging-in-via-the-web-console
-id: 8g7sdlcx7xqq
+id: q0lij8myxuk8
 type: challenge
 title: Topic 1 - Logging in Via the Web Console
 notes:
@@ -24,6 +24,10 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc

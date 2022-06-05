@@ -1,6 +1,6 @@
 ---
 slug: 04-switching-between-accounts
-id: lvag0hdchamx
+id: bk9wx5vym7dy
 type: challenge
 title: Topic 4 - Switching Users Between Accounts
 notes:
@@ -10,6 +10,10 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc

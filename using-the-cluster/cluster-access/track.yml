@@ -1,5 +1,5 @@
 slug: using-the-cluster-cluster-access
-id: cfirbzppkjxl
+id: tyrhthzthmld
 type: track
 title: Logging in to an OpenShift Cluster
 description: |
@@ -29,6 +29,7 @@ owner: openshift
 developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
+- nvinto@redhat.com
 private: false
 published: true
-checksum: "3907337609136077361"
+checksum: "14291066158212076930"
