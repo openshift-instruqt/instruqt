@@ -1,6 +1,6 @@
 ---
 slug: 4scaling
-id: vjda0vmeybkj
+id: cayedn5y3l3n
 type: challenge
 title: Step 3 - Scaling Your Application
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

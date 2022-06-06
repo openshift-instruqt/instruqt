@@ -1,6 +1,6 @@
 ---
 slug: 05-build-app
-id: ison8usipscy
+id: 8vklzen4iwf0
 type: challenge
 title: Topic 5 - Running the demonstration app in an executable JAR
 notes:

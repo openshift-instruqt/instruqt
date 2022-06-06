@@ -1,5 +1,5 @@
-slug: deploying-applications-from-source
-id: rintyznjtvkq
+slug: using-the-cluster-deploying-python
+id: njh5qyjkwkju
 type: track
 title: Deploying Applications From Source
 description: |
@@ -30,11 +30,11 @@ tags:
 - openshift
 owner: openshift
 developers:
+- nvinto@redhat.com
 - bob@cogarttech.com
 - dleblanc@redhat.com
 - bclayton@redhat.com
 - dschenck@redhat.com
-- nvinto@redhat.com
 private: true
 published: false
-checksum: "730510285419214444"
+checksum: "3448765035501469460"

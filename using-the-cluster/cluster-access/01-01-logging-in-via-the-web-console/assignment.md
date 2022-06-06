@@ -1,6 +1,6 @@
 ---
 slug: 01-logging-in-via-the-web-console
-id: q0lij8myxuk8
+id: vvndcjg6jy2x
 type: challenge
 title: Topic 1 - Logging in Via the Web Console
 notes:
@@ -24,10 +24,6 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
-  type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
-  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc
@@ -64,7 +60,7 @@ oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}
 You'll get the URL to the web console that is special to your instance of OpenShift running in the Instruqt interactive learning environment. The following is an example URL. **Yours will be different**.
 
 ```
-https://console-openshift-console.crc-gh9wd-master-0.crc.q82njnglzds2.instruqt.io
+https://console-openshift-console.crc-dzk9v-master-0.crc.q82njnglzds2.instruqt.io
 ```
 
 ----

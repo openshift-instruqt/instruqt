@@ -1,6 +1,6 @@
 ---
 slug: 02-deploying-using-the-web-console
-id: 1onxjvyov07s
+id: txxiaagm0ffb
 type: challenge
 title: Topic 2 - Deploying an Application from a Container Image Using the Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code

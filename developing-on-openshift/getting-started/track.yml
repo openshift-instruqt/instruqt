@@ -1,5 +1,5 @@
-slug: getting-started-with-openshift-for-developers
-id: ncxqq8htsyue
+slug: developing-on-openshift-getting-started
+id: akihuxyag7aw
 type: track
 title: Getting Started with OpenShift for Developers
 description: |
@@ -27,11 +27,11 @@ tags:
 - openshift
 owner: openshift
 developers:
+- nvinto@redhat.com
 - bob@cogarttech.com
 - bclayton@redhat.com
 - dleblanc@redhat.com
 - dschenck@redhat.com
-- nvinto@redhat.com
 private: true
 published: false
-checksum: "13064373925927308195"
+checksum: "12491738959117454923"

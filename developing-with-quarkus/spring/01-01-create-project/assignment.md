@@ -1,11 +1,22 @@
 ---
 slug: 01-create-project
-id: 5ji1bqrcwvcx
+id: eesyfulnld5v
 type: challenge
 title: Topic 1 - Getting Quarkus up and running
 notes:
 - type: text
-  contents: Topic 1 - Getting Quarkus up and running
+  contents: |-
+    This track demonstrates how Spring and Spring Boot developers can use Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications.
+
+    |What you need to know before you start|
+    |----|
+    |In order to get full benefit from taking this track you should...<br>• Have experience programming applications in Java using the [Maven](https://maven.apache.org/) framework.<br>• Have a working knowledge of application programming using [Spring Boot](https://spring.io/projects/spring-boot). <br>• Some introductory experience creating Java/Maven applications using Quarkus|
+
+    <br>
+
+    Quarkus enables Spring developers to become productive quickly using their existing knowledge and familiarity of the Spring APIs.
+
+    You'll build a simple application that uses Spring Data to integrate with an underlying database via JPA. Also. you'll inject beans using Spring DI and expose them as RESTful endpoints via Spring Rest.
 tabs:
 - title: Terminal 1
   type: terminal
