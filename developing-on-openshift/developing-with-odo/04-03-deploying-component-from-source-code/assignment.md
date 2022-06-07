@@ -1,6 +1,6 @@
 ---
 slug: 03-deploying-component-from-source-code
-id: tixd7qj7fyoo
+id: ybxah0xzwgxq
 type: challenge
 title: Topic 4 - Deploying components from source-code
 notes:

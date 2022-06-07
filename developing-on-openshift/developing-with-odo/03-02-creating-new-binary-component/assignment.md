@@ -1,6 +1,6 @@
 ---
 slug: 02-creating-new-binary-component
-id: fcl2cdtbqgiq
+id: kvqduzrjsboy
 type: challenge
 title: Topic 3 -Creating new application components
 notes:

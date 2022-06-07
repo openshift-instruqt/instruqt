@@ -1,6 +1,6 @@
 ---
 slug: 06-making-changes-to-source-code
-id: uyzjg2m5vj8c
+id: mbpcyniksvxe
 type: challenge
 title: Topic 6 - Updating an application by making changes to source-code
 notes:

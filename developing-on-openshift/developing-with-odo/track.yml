@@ -1,5 +1,5 @@
-slug: developing-with-odo
-id: wfx38z1wiime
+slug: developing-on-openshift-developing-with-odo
+id: dnttxho7bem5
 type: track
 title: Developing with odo
 description: |
@@ -29,12 +29,12 @@ tags:
 - openshift
 owner: openshift
 developers:
+- nvinto@redhat.com
 - bob@cogarttech.com
 - bclayton@redhat.com
 - dleblanc@redhat.com
 - dschenck@redhat.com
 - doh@redhat.com
-- nvinto@redhat.com
 private: true
 published: false
-checksum: "294898401569798334"
+checksum: "7303609014068913956"
