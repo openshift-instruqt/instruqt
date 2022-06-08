@@ -1,6 +1,6 @@
 ---
 slug: 04-deleting-the-application
-id: faje3hq0dffo
+id: rtn43jx9xotp
 type: challenge
 title: Topic 4 - Deleting the Application Using the Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code
@@ -50,8 +50,8 @@ Labels:                 app=parksmap
                         app.kubernetes.io/part-of=parksmap-app
                         app.openshift.io/runtime-version=latest
 Annotations:            openshift.io/host.generated=true
-Requested Host:         parksmap-myproject.crc-gh9wd-master-0.crc.2fxr0dqhkd8a.instruqt.io
-                           exposed on router default (host router-default.crc-gh9wd-master-0.crc.2fxr0dqhkd8a.instruqt.io) 59 minutes ago
+Requested Host:         parksmap-myproject.crc-dzk9v-master-0.crc.2fxr0dqhkd8a.instruqt.io
+                           exposed on router default (host router-default.crc-dzk9v-master-0.crc.2fxr0dqhkd8a.instruqt.io) 59 minutes ago
 Path:                   <none>
 TLS Termination:        <none>
 Insecure Policy:        <none>

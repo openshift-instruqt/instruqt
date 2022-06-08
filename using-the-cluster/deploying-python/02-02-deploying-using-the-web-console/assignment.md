@@ -1,6 +1,6 @@
 ---
 slug: 02-deploying-using-the-web-console
-id: qysvkqzjyif8
+id: 1to4i5ofop7o
 type: challenge
 title: Topic 2 - Deploying an application using the Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

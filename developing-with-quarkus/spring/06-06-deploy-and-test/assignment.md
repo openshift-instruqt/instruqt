@@ -1,6 +1,6 @@
 ---
 slug: 06-deploy-and-test
-id: zm8hhopcpe4c
+id: eduwkrc4nrlu
 type: challenge
 title: Topic 6 - Creating a Quarkus native app running in OpenShift
 notes:
@@ -19,7 +19,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 500

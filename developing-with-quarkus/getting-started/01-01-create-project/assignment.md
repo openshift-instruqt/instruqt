@@ -1,12 +1,35 @@
 ---
 slug: 01-create-project
-id: exf4ef1syvda
+id: 7oopl4wfzf2m
 type: challenge
 title: Topic 1 - Creating an introductory application using Quarkus
 teaser: Topic 1 - Creating an introductory application using Quarkus
 notes:
 - type: text
-  contents: Topic 1 - Creating an introductory application using Quarkus
+  contents: |-
+    In this track, you will get an introduction to [Quarkus](https://quarkus.io).
+
+    |What you need to know before you start:|
+    |----|
+    |In order to get full benefit from taking this track you should...<br>• Have experience programming applications in Java using the [Maven](https://maven.apache.org/) framework.<br>• Understand how Maven uses the Project Object Model (POM) to manage artifacts and plugins.<br>• Know how Maven applications are described and built using a Maven [`pom.xml`](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html) file.|
+
+    <br>
+
+    # What is Quarkus?
+
+    For years the client-server architecture has been the de-facto standard to build distributed applications. But a major shift has happened. The _one model rules them all_ age is over. A new range of applications and architecture styles has emerged. These new styles impact how code is written and how applications are deployed and executed. HTTP microservices, reactive applications, message-driven microservices and serverless are now central players in the development of modern distributed systems.
+
+    Quarkus has been designed with this new world in mind. The Quarkus development model morphs to adapt itself to these new types of applications that you are developing. Quarkus provides first-class support for these different paradigms.
+
+    Quarkus is a Kubernetes Native Java stack tailored for [GraalVM](https://www.graalvm.org/) and [OpenJDK HotSpot](https://openjdk.java.net/groups/hotspot/).
+
+    Quarkus is crafted from the best of breed Java libraries and standards. Amazingly fast boot time, incredibly low RSS memory (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms like Kubernetes. Quarkus uses a technique called compile time boot. [Learn more](https://quarkus.io/vision/container-first).
+
+    # Quarkus Unifies Imperative and Reactive Programming
+
+    Application requirements have changed over the last few years. For any application to succeed in the era of big data, IoT or cloud computing, adhering to the principles and practices of the [reactive architecture style](https://developers.redhat.com/coderland/reactive/reactive-intro) is essential.
+
+    Quarkus combines both the familiar imperative code and the non-blocking reactive styles when developing applications.
 tabs:
 - title: Terminal 1
   type: terminal

@@ -1,6 +1,6 @@
 ---
 slug: 02-deploying-a-postgresql-database
-id: 4bvlnq3dckfc
+id: efhmnqllk2kj
 type: challenge
 title: Topic 2 - Deploying a PostgreSQL database
 notes:

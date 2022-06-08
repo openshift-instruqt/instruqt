@@ -1,6 +1,6 @@
 ---
 slug: 04-configuring-components
-id: pv8ct16wfczf
+id: j2hykcwypvff
 type: challenge
 title: Topic 4 - Configuring and application's components
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

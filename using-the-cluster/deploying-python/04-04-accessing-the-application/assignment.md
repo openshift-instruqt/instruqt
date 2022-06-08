@@ -1,6 +1,6 @@
 ---
 slug: 04-accessing-the-application
-id: oax6vwaygdbb
+id: yslmxbceaxob
 type: challenge
 title: Topic 4 - Accessing the application using the Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

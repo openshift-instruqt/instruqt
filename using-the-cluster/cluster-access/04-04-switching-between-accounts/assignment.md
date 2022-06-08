@@ -1,6 +1,6 @@
 ---
 slug: 04-switching-between-accounts
-id: bk9wx5vym7dy
+id: lvk1hzl0nvz3
 type: challenge
 title: Topic 4 - Switching Users Between Accounts
 notes:
@@ -10,10 +10,6 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
-  type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
-  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc
@@ -115,7 +111,7 @@ oc config get-contexts
 You'll get output similar to the following:
 
 ```
-root@crc-gh9wd-master-0 /]# oc config get-contexts
+root@crc-dzk9v-master-0 /]# oc config get-contexts
 CURRENT   NAME                                         CLUSTER                AUTHINFO                         NAMESPACE
           /api-crc-testing:6443/user1                  api-crc-testing:6443   user1/api-crc-testing:6443
           admin                                        crc                    admin

@@ -1,5 +1,5 @@
-slug: quarkus-for-spring-boot-developers
-id: hvvntetofy81
+slug: developing-with-quarkus-spring
+id: r5623ypubfbf
 type: track
 title: Quarkus for Spring Boot Developers
 description: |-
@@ -15,20 +15,14 @@ description: |-
   Quarkus enables Spring developers to become productive quickly using their existing knowledge and familiarity of the Spring APIs.
 
   You'll build a simple application that uses Spring Data to integrate with an underlying database via JPA. Also. you'll inject beans using Spring DI and expose them as RESTful endpoints via Spring Rest.
-
-  Learn more at [quarkus.io](https://quarkus.io), or just drive on and get hands-on!
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
 owner: openshift
 developers:
-- bob@cogarttech.com
-- nvinto@redhat.com
-- ryanj@redhat.com
 - doh@redhat.com
-- cclyburn@redhat.com
-- dschenck@redhat.com
-private: true
-published: false
-checksum: "16980653241094342176"
+- bob@cogarttech.com
+private: false
+published: true
+checksum: "11787931259095471386"

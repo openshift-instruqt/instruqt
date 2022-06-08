@@ -1,6 +1,6 @@
 ---
 slug: 03-package-and-run
-id: bndigf9ktjte
+id: wnnsxj1ui9au
 type: challenge
 title: Topic 3 - Packaging a custom bean in to a .jar file
 teaser: Topic 3 - Packaging a custom bean in to a .jar file

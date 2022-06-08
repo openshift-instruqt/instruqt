@@ -1,6 +1,6 @@
 ---
 slug: 06-deploying-using-the-command-line
-id: d5f29ixdfgrp
+id: 937vrpzmaj4t
 type: challenge
 title: Topic 6 - Deploying the application from the command line
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300
@@ -129,7 +129,7 @@ You'll get output similar to the following:
 
 ```
 NAME             HOST/PORT                                                                  PATH   SERVICES         PORT       TERMINATION   WILDCARD
-blog-django-py   blog-django-py-myproject.crc-gh9wd-master-0.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
+blog-django-py   blog-django-py-myproject.crc-dzk9v-master-0.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
 ```
 
 # Congratulations!

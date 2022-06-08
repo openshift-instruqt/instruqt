@@ -1,6 +1,6 @@
 ---
 slug: 05-deleting-the-application
-id: sqanygtvmwbn
+id: e2c2ltvvatqq
 type: challenge
 title: Topic 5 - Deleting the application from the command line
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

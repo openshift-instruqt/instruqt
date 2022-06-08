@@ -1,6 +1,6 @@
 ---
 slug: 02-logging-in-via-the-command-line
-id: ir7ciyp4ixnd
+id: jhfhyx567dbp
 type: challenge
 title: Topic 2 - Logging in via the Command Line
 notes:
@@ -10,10 +10,6 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
-  type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
-  new_window: true
 - title: Visual Editor
   type: code
   hostname: crc
@@ -101,7 +97,7 @@ In the case where an external authentication service is used as the identity pro
 When you log in at the command line using `oc login` without providing the username (`-u`) and password (`-p`) options, you will get an error similar to the following. The response directs you to an authentication server:
 
 ```
-You must obtain an API token by visiting https://oauth-openshift.crc-gh9wd-master-0.crc.d9avlfzludvk.instruqt.io/oauth/token/request
+You must obtain an API token by visiting https://oauth-openshift.crc-dzk9v-master-0.crc.d9avlfzludvk.instruqt.io/oauth/token/request
 ```
 
 Once you get your API token, you receive a user's login credentials from the authentication server according to that server's authentication process.

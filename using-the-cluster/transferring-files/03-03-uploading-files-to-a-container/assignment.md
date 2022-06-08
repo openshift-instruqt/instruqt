@@ -1,6 +1,6 @@
 ---
 slug: 03-uploading-files-to-a-container
-id: ly4x7cgjq4dw
+id: nglthirlo3z4
 type: challenge
 title: Topic 3 - Uploading Files to a Container
 notes:
@@ -102,7 +102,7 @@ export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://
 You'll get output similar to the following:
 
 ```
-http://simplemessage-myproject.crc-gh9wd-master-0.crc.ai7oaxyso7ih.instruqt.io
+http://simplemessage-myproject.crc-dzk9v-master-0.crc.ai7oaxyso7ih.instruqt.io
 ```
 
 The output above is the URL to the SimpleMessage application running in this OpenShift cluster. The URL you create will be different. Remember: The actual structure of the URL is special to the running instance of OpenShift.
