@@ -69,6 +69,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -105,6 +109,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -132,6 +140,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -212,6 +224,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -265,7 +281,7 @@ challenges:
 
     To test access to the cluster, from the Jupyter notebook web interface, create a terminal instance. At the login prompt of the terminal running in the Jupyter notebook, run:
 
-    ``oc projects``
+    ```oc projects```
 
     You will see what projects you can access.
 
@@ -278,6 +294,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -294,7 +314,7 @@ challenges:
     To validate that you are deleting the correct resources, first run:
 
     ```
-    oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub -o name
+    oc get svc,dc,route,is,secret,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub -o name
     ```
 
     This uses a label selector to reference only the resources for this deployment.
@@ -302,7 +322,7 @@ challenges:
     When happy that you will be deleting the correct resources, run:
 
     ```
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
+    oc delete svc,dc,route,is,secret,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
     ```
 
     This will only delete resources from the project JupyterHub is deployed to.
@@ -326,10 +346,14 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
   timelimit: 200
-checksum: "18046486310522028800"
+checksum: "13357776013489407894"

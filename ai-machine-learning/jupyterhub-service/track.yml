@@ -20,7 +20,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -69,6 +68,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -125,6 +128,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -138,7 +145,7 @@ challenges:
   assignment: |
     You can work with the templates using either the command line or the OpenShift web console. We will use the web console in this example.
 
-    Click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
+    Click on the _Web Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
 
     ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyterhub-service-42/03-web-console-login.png)
 
@@ -163,12 +170,16 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
+  timelimit: 200
 - slug: 04-deploying-jupyterhub-service
   id: rrukjxmxzzoo
   type: challenge
@@ -230,12 +241,16 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
+  timelimit: 200
 - slug: 05-deleting-the-jupyterhub-service
   id: 1nilxhlysoxx
   type: challenge
@@ -246,7 +261,7 @@ challenges:
     To validate that you are deleting the correct resources, first run:
 
     ```
-    oc get all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub -o name
+    oc get svc,dc,route,is,secret,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub -o name
     ```
 
     This uses a label selector to reference only the resources for this deployment.
@@ -254,18 +269,22 @@ challenges:
     When happy that you will be deleting the correct resources, run:
 
     ```
-    oc delete all,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
+    oc delete svc,dc,route,is,secret,configmap,pvc,serviceaccount,rolebinding --selector app=jupyterhub
     ```
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
+  timelimit: 200
 - slug: 06-customizing-the-configuration
   id: gpja68hctfds
   type: challenge
@@ -280,7 +299,8 @@ challenges:
     The first of these is to provide configuration through the template parameters. To do this we will create the deployment from the command line by running:
 
     ```
-    oc process jupyterhub-deployer --param JUPYTERHUB_CONFIG="`cat jupyterhub_config.py`" --param JUPYTERHUB_ENVVARS="`cat jupyterhub_config.sh`" | oc apply -f -
+    cd /root && \
+      oc process jupyterhub-deployer --param JUPYTERHUB_CONFIG="`cat jupyterhub_config.py`" --param JUPYTERHUB_ENVVARS="`cat jupyterhub_config.sh`" | oc apply -f -
     ```
 
     This will supply configuration which configures the JupyterHub service to use OpenShift as the authentication mechanism to control who can access the service. Only users who have an existing user account in the OpenShift cluster will be able to access the service.
@@ -307,12 +327,16 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
+  timelimit: 200
 - slug: 07-source-to-image-builder
   id: 63yven4g1qpo
   type: challenge
@@ -393,12 +417,16 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
+  timelimit: 200
 - slug: 08-building-the-notebook-image
   id: slvorez7j7zh
   type: challenge
@@ -446,10 +474,14 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: intermediate
-  timelimit: 150
-checksum: "11107685861452104529"
+  timelimit: 200
+checksum: "212966035595809832"

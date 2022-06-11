@@ -13,7 +13,7 @@ description: |
 
   ### The Environment
 
-  During this tutorial you will be using a hosted OpenShift 4.7 environment that is created just for you. This environment is not shared with other users of the system. <br>
+  During this tutorial you will be using a hosted OpenShift 4.10 environment that is created just for you. This environment is not shared with other users of the system. <br>
   Your environment will only be active for a one hour period. Keep this in mind before embarking on getting through the content. <br>
   Each time you start this tutorial, a new environment will be created on the fly.
 
@@ -26,7 +26,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -47,7 +46,7 @@ challenges:
 
       ### The Environment
 
-      During this tutorial you will be using a hosted OpenShift 4.7 environment that is created just for you. This environment is not shared with other users of the system. <br>
+      During this tutorial you will be using a hosted OpenShift 4.10 environment that is created just for you. This environment is not shared with other users of the system. <br>
       Your environment will only be active for a one hour period. Keep this in mind before embarking on getting through the content. <br>
       Each time you start this tutorial, a new environment will be created on the fly.
 
@@ -62,6 +61,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -117,6 +120,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -167,10 +174,14 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: basic
   timelimit: 400
-checksum: "15284023586613274223"
+checksum: "324299777545565378"

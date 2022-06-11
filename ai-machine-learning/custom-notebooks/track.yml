@@ -20,7 +20,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -66,6 +65,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -122,6 +125,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -160,6 +167,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -230,6 +241,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -292,6 +307,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -316,13 +335,13 @@ challenges:
     When happy that you will be deleting the correct resources, run:
 
     ```
-    oc delete all --selector app=custom-notebook
+    oc delete svc,dc,route,is,secret --selector app=custom-notebook
     ```
 
     This will only delete the Jupyter notebook instance in this case and will not delete the custom Jupyter notebook image. For the image, run:
 
     ```
-    oc get all --selector build=custom-notebook -o name
+    oc get svc,dc,route,is,secret --selector build=custom-notebook -o name
     ```
 
     The label selector this time is `build=custom-notebook`.
@@ -410,4 +429,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 128
-checksum: "7001245640430104931"
+checksum: "10451551586774373600"

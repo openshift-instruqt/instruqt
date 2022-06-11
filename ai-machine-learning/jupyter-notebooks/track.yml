@@ -20,7 +20,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -66,6 +65,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -110,6 +113,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -123,7 +130,7 @@ challenges:
   assignment: |
     To deploy a Jupyter notebook using the `notebook-deployer` template, you can use the command line or the OpenShift web console. We will use the web console in this example.
 
-    Click on the _Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
+    Click on the _Web Console_ tab in the workshop dashboard. You will be presented with the OpenShift login screen.
 
     ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/jupyternotebooks/jupyter-notebooks-42/03-web-console-login.png)
 
@@ -148,6 +155,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -159,7 +170,7 @@ challenges:
   type: challenge
   title: Topic 4 - Deploying the Jupyter Notebook
   assignment: |
-    From the options for deploying applications to your project, select _From Catalog_. This will bring up the _Developer Catalog_.
+    From the options for deploying applications to your project, select _Developer Catalog_ and then _All Services_.
 
     Ensure that _All Items_ is selected on the left hand side, and in the _Filter by keyword_ text entry field enter ``jupyter``. This will limit the displayed items to just the OpenShift templates you loaded.
 
@@ -204,6 +215,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -220,7 +235,7 @@ challenges:
     To validate that you are deleting the correct resources, first run:
 
     ```
-    oc get all --selector app=custom-notebook -o name
+    oc get svc,dc,route,is,secret --selector app=custom-notebook --selector app=custom-notebook -o name
     ```
 
     This uses a label selector to reference only the resources for this deployment.
@@ -228,16 +243,20 @@ challenges:
     When happy that you will be deleting the correct resources, run:
 
     ```
-    oc delete all --selector app=custom-notebook
+    oc delete svc,dc,route,is,secret --selector app=custom-notebook
     ```
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: basic
   timelimit: 180
-checksum: "12201154490258189198"
+checksum: "1034941994180071801"

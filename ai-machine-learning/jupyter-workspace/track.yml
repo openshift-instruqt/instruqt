@@ -20,7 +20,6 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
 private: false
 published: true
 challenges:
@@ -66,6 +65,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -110,6 +113,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -148,6 +155,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -205,6 +216,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -275,6 +290,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -291,7 +310,7 @@ challenges:
     To validate that you are deleting the correct resources, first run:
 
     ```
-    oc get all --selector app=custom-notebook -o name
+    oc get svc,dc,route,is,secret --selector app=custom-notebook -o name
     ```
 
     This uses a label selector to reference only the resources for this deployment.
@@ -299,7 +318,7 @@ challenges:
     When happy that you will be deleting the correct resources, run:
 
     ```
-    oc delete all --selector app=custom-notebook
+    oc delete svc,dc,route,is,secret --selector app=custom-notebook
     ```
   tabs:
   - title: Terminal 1
@@ -311,4 +330,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 150
-checksum: "4834396515434087378"
+checksum: "15267613780196532807"

@@ -40,7 +40,7 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
+- mcostant@redhat.com
 private: false
 published: true
 challenges:
@@ -384,4 +384,4 @@ challenges:
     new_window: true
   difficulty: intermediate
   timelimit: 480
-checksum: "15647793726453536332"
+checksum: "1366078502090620446"
