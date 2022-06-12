@@ -84,7 +84,7 @@ challenges:
     ## Logging in to the Cluster via CLI
 
     When the OpenShift playground is created you will be logged in initially as
-    a cluster admin (``oc whoami``) on the command line. This will allow you to perform
+    a cluster admin (`oc whoami`) on the command line. This will allow you to perform
     operations which would normally be performed by a cluster admin.
 
     Before creating any applications, it is recommended you login as a distinct
@@ -135,7 +135,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 600
+  timelimit: 150
 - slug: app
   id: ot5kvp3syaxx
   type: challenge
@@ -194,7 +194,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 600
+  timelimit: 150
 - slug: parameter
   id: dcyic0uje3vh
   type: challenge
@@ -243,7 +243,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 600
+  timelimit: 150
 - slug: deploy
   id: qdsm2jaz1inh
   type: challenge
@@ -316,5 +316,5 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 600
-checksum: "3424164693850694437"
+  timelimit: 300
+checksum: "17802469700334139941"

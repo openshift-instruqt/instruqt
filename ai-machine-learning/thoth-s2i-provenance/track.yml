@@ -121,7 +121,7 @@ challenges:
 
     ## Creating your own Project
 
-    To create a new project called ``myproject`` run the command:
+    To create a new project called `myproject` run the command:
 
     ```
     oc new-project myproject
@@ -149,7 +149,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 480
+  timelimit: 150
 - slug: app
   id: gcwle98lsv4p
   type: challenge
@@ -206,7 +206,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 480
+  timelimit: 150
 - slug: parameter
   id: vklqumyhxpby
   type: challenge
@@ -253,7 +253,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 480
+  timelimit: 150
 - slug: deploy
   id: ihc00g6xcjvd
   type: challenge
@@ -319,7 +319,7 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 480
+  timelimit: 300
 - slug: fix
   id: 8pok5v4gaohg
   type: challenge
@@ -383,5 +383,5 @@ challenges:
     url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
-  timelimit: 480
-checksum: "1366078502090620446"
+  timelimit: 300
+checksum: "10062824505150873752"
