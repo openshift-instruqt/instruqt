@@ -1,6 +1,6 @@
 ---
 slug: 01-define-entity
-id: i7cun2vjwfe9
+id: nznwn2hapj6f
 type: challenge
 title: Topic 1 - Setting up the demonstration project and defining a data entity
 notes:

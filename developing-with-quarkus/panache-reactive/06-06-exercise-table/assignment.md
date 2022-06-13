@@ -1,6 +1,6 @@
 ---
 slug: 06-exercise-table
-id: mcv5m4yejwy0
+id: d8llwadkcmxx
 type: challenge
 title: Topic 6 - Exercising the demonstration application's web page
 notes:
