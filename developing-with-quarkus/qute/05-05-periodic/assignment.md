@@ -20,7 +20,7 @@ tabs:
   path: /hello?name=James
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 
 Templating engines can be useful when rendering periodic reports. This topic demonstrates how to create these type of reports.

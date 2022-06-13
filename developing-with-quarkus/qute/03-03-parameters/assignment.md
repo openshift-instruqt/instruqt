@@ -20,7 +20,7 @@ tabs:
   path: /item/1
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 In this topic you will learn how to create Qute templates that consume data in a data source. In this case, the data source will be a mock database exposed via a service.
 
