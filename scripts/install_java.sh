@@ -7,7 +7,8 @@ curl -s https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz 
 tar -xvf /tmp/openjdk-11_linux-x64_bin.tar.gz -C /opt/java/
 rm -f /tmp/openjdk-11_linux-x64_bin.tar.gz
 
-curl -s https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
+curl -s https://archive.apache.org/dist/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
+
 tar -xzvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /opt/java/
 rm -fr /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 
