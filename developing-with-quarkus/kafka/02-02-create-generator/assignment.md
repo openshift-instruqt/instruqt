@@ -17,7 +17,7 @@ tabs:
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/kafka
 difficulty: basic
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you will create a Java class named, `NameGenerator` has a method named `generate()`that returns an active stream.
 

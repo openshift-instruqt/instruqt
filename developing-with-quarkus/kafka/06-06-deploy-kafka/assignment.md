@@ -16,7 +16,7 @@ tabs:
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/kafka
 difficulty: basic
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you will deploy a running instance of Kafka in OpenShift. You will then use the `oc` command line tool to log into OpenShift. Then you will create a project in OpenShift using the `oc` command line tool. Finally, you'll deploy Kafka as a [Kubernetes Operator](https://developers.redhat.com/topics/kubernetes/operators).
 

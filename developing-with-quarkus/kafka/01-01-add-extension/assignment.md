@@ -42,7 +42,7 @@ tabs:
   hostname: crc
   path: /root/projects/
 difficulty: basic
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you will import the source code for the demonstration application from GitHub. Also, you will learn about the Kafka architecture the demonstration application uses. Finally, you will add the Kafka extension for Maven to the demonstration project's `pom.xml` file.
 

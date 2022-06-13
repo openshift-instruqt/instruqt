@@ -16,7 +16,7 @@ tabs:
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/kafka
 difficulty: basic
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you are going to bind the stream you created previously to a [JAX-RS resource](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.1/html/developing_web_services_applications/developing_jax_rs_web_services).
 

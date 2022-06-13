@@ -20,7 +20,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you will install the Quarkus application in OpenShift, and then add the OpenShift extensions to Quarkus. Then, you'll add configuration settings for Quarkus and Openshift to the demonstration application's `application.properties` file.
 
