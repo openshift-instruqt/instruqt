@@ -77,7 +77,7 @@ fi
 echo "### Boostrap START ###"
 date
 
-until oc get pods -A 2>/dev/null 1>&2; do 
+until oc get pods -A 2>/dev/null 1>&2; do
   echo "Waiting for pods to start..";
   sleep 5;
 done
@@ -144,6 +144,10 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+mkdir -p /root/projects/quarkus
+echo "-w \"\n\"" >> ~/.curlrc
 
 #wait until cluster operators are "available"
 for co in $(oc get co -oname)
@@ -210,3 +214,12 @@ done
 date
 echo "### Boostrap END ###"
 
+export HOME="/root"
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+export JAVA_HOME=/opt/java/jdk-11/
+export MAVEN_HOME=/opt/java/apache-maven-3.8.5/
+export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"
+
+mkdir -p /root/projects/quarkus
+echo "-w \"\n\"" >> ~/.curlrc
