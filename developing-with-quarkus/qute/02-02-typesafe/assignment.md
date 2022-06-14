@@ -15,7 +15,7 @@ tabs:
   hostname: crc
   path: /root/projects/quarkus/qute
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 # Working with type-safe templates
 

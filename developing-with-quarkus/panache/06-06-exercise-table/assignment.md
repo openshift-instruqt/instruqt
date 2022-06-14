@@ -1,6 +1,6 @@
 ---
 slug: 06-exercise-table
-id: j43mmm9biv8s
+id: clw4ktpbct8n
 type: challenge
 title: Topic 6 - Exercising data queries using the demonstration application's Web
   GUI access Web UI
@@ -20,7 +20,7 @@ tabs:
   path: /root/projects/rhoar-getting-started/quarkus/panache
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

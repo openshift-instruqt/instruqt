@@ -77,7 +77,7 @@ fi
 echo "### Boostrap START ###"
 date
 
-until oc get pods -A 2>/dev/null 1>&2; do 
+until oc get pods -A 2>/dev/null 1>&2; do
   echo "Waiting for pods to start..";
   sleep 5;
 done

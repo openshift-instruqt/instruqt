@@ -20,7 +20,7 @@ tabs:
   path: /reactive
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 # Reactive and Asynchronous APIs
 

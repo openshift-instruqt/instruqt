@@ -25,7 +25,7 @@ tabs:
   path: /item/4
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 # Understanding template extension methods
 

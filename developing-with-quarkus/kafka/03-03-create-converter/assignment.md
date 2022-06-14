@@ -16,7 +16,7 @@ tabs:
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/kafka
 difficulty: basic
-timelimit: 4281
+timelimit: 428
 ---
 In this topic you will insert Java code that reads names coming in from a Kafka stream, then adds a random honorific title (in English) to the beginning of the name.
 

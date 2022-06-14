@@ -54,7 +54,7 @@ tabs:
   path: /some-page
   port: 8080
 difficulty: basic
-timelimit: 5001
+timelimit: 500
 ---
 In this topic you will install the demonstration application using the Maven Quarkus plugin. The installation process also installs the Qute extensions. You'll get the application up and running in [Live Coding](https://developers.redhat.com/blog/2021/02/11/enhancing-the-development-loop-with-quarkus-remote-development) mode.
 

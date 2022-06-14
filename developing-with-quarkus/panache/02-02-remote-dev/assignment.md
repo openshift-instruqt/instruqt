@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: wwf4yygpsbfc
+id: py7ewigesvvm
 type: challenge
 title: Topic 2 - Deploying a database to OpenShift and enabling live coding under
   Quarkus
@@ -20,7 +20,7 @@ tabs:
   path: /root/projects/rhoar-getting-started/quarkus/panache
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300
@@ -363,7 +363,7 @@ echo $APP_URL
 You'll get output similar to, but not exactly like, the following:
 
 ```
-http://people-quarkus.crc-dzk9v-master-0.crc.nqguvly2ktsc.instruqt.io
+http://people-quarkus.crc-gh9wd-master-0.crc.nqguvly2ktsc.instruqt.io
 ```
 
 ----
