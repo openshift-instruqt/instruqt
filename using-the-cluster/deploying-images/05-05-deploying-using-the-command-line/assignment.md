@@ -80,9 +80,9 @@ OpenShift assigns a default name to the application based on the name of the ima
 
 You can specify a different name to be given to the application, and the resources created, by using the `--name` option with `oc new-app`.
 
-For example this command will create a version of the ParksMap application with the name, `myPparksmap`:
+For example this command will create a version of the ParksMap application with the name, `myparksmap`:
 ```
-oc new-app quay.io/openshiftroadshow/parksmap --name myPparksmap
+oc new-app quay.io/openshiftroadshow/parksmap --name myparksmap
 ```
 # Exposing the application to the public
 
