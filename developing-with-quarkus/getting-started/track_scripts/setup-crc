@@ -215,11 +215,7 @@ date
 echo "### Boostrap END ###"
 
 export HOME="/root"
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java_graalvm.sh | bash
-
-export JAVA_HOME=/opt/java/jdk-11/
-export MAVEN_HOME=/opt/java/apache-maven-3.8.5/
-export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java_graalvm.sh | bashrc
 
 mkdir -p /root/projects/quarkus
 echo "-w \"\n\"" >> ~/.curlrc
