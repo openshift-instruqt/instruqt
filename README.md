@@ -211,8 +211,8 @@ The setting to have this image is from the `config.yml` file:
 version: "2"
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/openshift-instruqt-crc490-211026
-  machine_type: n1-standard-8
+  image: openshift-instruqt/crc-4-10-latest
+  machine_type: n1-highmem-4
   allow_external_ingress:
   - http
   - https
@@ -229,8 +229,8 @@ containers:
   shell: /bin/bash
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/openshift-instruqt-crc490-211026
-  machine_type: n1-standard-8
+  image: openshift-instruqt/crc-4-10-latest
+  machine_type: n1-highmem-4
   allow_external_ingress:
   - http
   - https
