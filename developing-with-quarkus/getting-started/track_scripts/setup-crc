@@ -215,7 +215,7 @@ date
 echo "### Boostrap END ###"
 
 export HOME="/root"
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java_graalvm.sh | bash
 
 export JAVA_HOME=/opt/java/jdk-11/
 export MAVEN_HOME=/opt/java/apache-maven-3.8.5/

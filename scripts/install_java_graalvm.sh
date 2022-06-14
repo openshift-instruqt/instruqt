@@ -8,7 +8,7 @@ curl -sL https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRA
 tar -xvf /tmp/graalvm-ce-java11-linux-amd64-${GRAALVM_VERSION}.tar.gz -C /opt/java/
 rm -fr /tmp/graalvm-ce-java11-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
-curl -s https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
+curl -s https://archive.apache.org/dist/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 tar -xzvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /opt/java/
 rm -fr /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 
