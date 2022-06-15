@@ -65,7 +65,7 @@ The  `native` property is used to configure the Quarkus Maven plugin to create n
 
 You are using the profile shown above because, as you will see very soon, packaging the code into a native image provides a significant benefit.
 
-Packaging the code into a native image takes a few seconds. However, this compilation time is only incurred once, when the application starts. Other approaches for building and executing JARs compile the code every time the application starts. Requiring only a single compilation improves performance significantly.
+Packaging the code into a native image takes a few seconds. However, this compilation time is only incurred once, when the application is built for deployment. Other approaches for building and executing JARs compile the code every time the application starts. Requiring only a single compilation improves performance significantly.
 
 ----
 
@@ -137,7 +137,7 @@ Notice in the output shown above is reporting a startup time of 44 milliseconds!
 
 # Inspecting memory usage
 
-One of th key features of applications running under Quarkus is that they consume small amounts of memory.
+One of the key features of applications running under Quarkus is that they consume small amounts of memory.
 
 Let's take a look at how much memory the application binary is using.
 
@@ -182,7 +182,7 @@ Quarkus is still operational. Nice!
 
 # Congratulations!
 
-You've learned how to built a Java application as both an executable JAR and as a Linux native binary. Now let's give the app superpowers by deploying to it to an OpenShift cluster as a Linux container image.
+You've learned how to build a Java application as both an executable JAR and as a Linux native binary. Now let's give the app superpowers by deploying to it to an OpenShift cluster as a Linux container image.
 
 ----
 
