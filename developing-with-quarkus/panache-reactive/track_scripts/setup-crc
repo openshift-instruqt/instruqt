@@ -5,15 +5,6 @@ set -x
 export TERM=xterm-color
 export KUBECONFIG=/opt/kubeconfig
 
-export HOME="/root"
-export JAVA_HOME=/opt/java/jdk-11/
-export MAVEN_HOME=/opt/java/apache-maven-3.8.5/
-export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"
-mkdir -p /root/projects/quarkus
-echo "-w \"\n\"" >> ~/.curlrc
-
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
-
 ENS4IP=$(ip -4 -o addr show ens4 | awk '{print $4}' | cut -d "/" -f 1)
 
 # set hostname
@@ -225,10 +216,6 @@ echo "### Boostrap END ###"
 
 export HOME="/root"
 curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
-
-export JAVA_HOME=/opt/java/jdk-11/
-export MAVEN_HOME=/opt/java/apache-maven-3.8.5/
-export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"
 
 mkdir -p /root/projects/quarkus
 echo "-w \"\n\"" >> ~/.curlrc
