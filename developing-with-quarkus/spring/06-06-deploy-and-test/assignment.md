@@ -101,7 +101,7 @@ You've created the project, but you have yet to create the application it's goin
 
 The application needs a Postgres database in order to work. You're going to install the the database first, before installing the application.
 
-## Deploying a Postgres data
+## Deploying a Postgres database on OpenShift
 
 `Step 4:` Run the following command in **Terminal 1** to deploy a Postgres database to the new project:
 
@@ -138,7 +138,7 @@ You see output similar to the following:
 
 ## Configuring Quarkus
 
-Since you are now deploying the application to OpenShift, the app's database will no longer be accessed on localhost. Instead, the app will use a Postgres database running in production on OpenShift. Thus, you need to extend the application's configuration with an additional profile to support the additional Postgres database.
+Since you are now deploying the application to OpenShift, the app's database will no longer be accessed on localhost. Instead, the app will use a Postgres database running in production on OpenShift. Thus, you need to extend the application's configuration with an additional profile to support the Postgres database when running on OpenShift.
 
 Quarkus has a neat feature that allows you to create different profiles.
 
@@ -287,9 +287,9 @@ The Topology page for the `quarkus-spring` has two circular graphics as shown in
 ![Openshift UI](../assets/open-shift-ui.png)
 
 
-One graphic represents to the Fruit Taster demonstration application. The other circular graphic represents the Postgres database that's storing the fruit data. When you click on the center of the Fruit Taster graphic an information page will side out from the right side of the web console.
+One graphic represents to the Fruit Taster demonstration application. The other circular graphic represents the Postgres database that's storing the fruit data. When you click on the center of the Fruit Taster graphic an information page will slide out from the right side of the web console.
 
-As you become more familiar with OpenShift, you'll find that can do a lot of work withing the application's information page on the  web console.
+As you become more familiar with OpenShift, you'll find that can do a lot of work within the application's information page on the  web console.
 
 But, you can also use the `oc` command line tool to work with OpenShift directly. For example, you used the `oc` tool previously to log into the OpenShift cluster. In addition, you used the `oc` tool to create an OpenShift project and get the Quarkus/Spring Boot demonstration application up and running.
 
@@ -386,18 +386,16 @@ oc scale --replicas=1 dc/fruit-taster
 oc get pods  -l app.kubernetes.io/name=fruit-taster
 ```
 
-Notice that  the pods are terminating.
+Notice that the pods are terminating.
 
 ----
 
-`Step 25:` Run the following `oc` command in **Terminal 1** again:
+`Step 25:` Run the previous `oc` command in **Terminal 1** again. Notice that only one pod is running in the deployment:
 
 ```
 NAME                   READY   STATUS    RESTARTS   AGE
 fruit-taster-1-8j82l   1/1     Running   0          73m
 ```
-
-Notice that only one pod is running in the deployment
 
 ## Congratulations!
 

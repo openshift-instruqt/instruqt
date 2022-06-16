@@ -39,7 +39,7 @@ The Java Runtime, which is essential for both Quarkus and Spring Boot, has been 
 `Step 1:` Run the following command in the **Terminal 1** window to the left to verify that Java is installed.
 
 ```
-$JAVA_HOME/bin/java --version
+java --version
 ```
 
 You'll get output similar to the following:
@@ -134,7 +134,7 @@ Tests paused, press [r] to resume, [h] for more options>
 
 ----
 
-`Step 5:` Click the **Terminal 2** tab on this horizontal menu bar over the terminal window to the left.
+`Step 5:` Click the **Terminal 2** tab on the horizontal menu bar over the terminal window to the left.
 
 ----
 
