@@ -36,6 +36,35 @@ sed -i '/^search.*/a nameserver 10.88.0.8' /etc/resolv.conf
 systemctl start crc-dnsmasq.service
 systemctl start kubelet
 
+
+# User Accounts
+
+cat << EOF > /tmp/pass.htpasswd
+admin:\$2y\$05\$Sokv3so/TbycwilNeV6L6.lMIYT0ClbaW/RsPssFIBY.BWanJyMwe
+developer:\$apr1\$PFGWfRKw\$DbBab3TIlvsZGmHjVbehv0
+user1:\$apr1\$AWRDy/5p\$FgzPPvIIqhe3ZbWCgk4Cc1
+EOF
+
+cat << EOF > /tmp/oauth-admin.yaml
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: admin_htpasswd_provider
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpass-secret-admin
+EOF
+
+until oc create secret generic htpass-secret-admin --from-file=htpasswd=/tmp/pass.htpasswd -n openshift-config -o yaml --dry-run=client 2>/dev/null | oc replace -f - ; do echo "Add admin secret. This fails when the apiserver is not ready."; sleep 5; done
+until oc apply -f /tmp/oauth-admin.yaml 2>/dev/null 1>&2; do echo "Adding admin user. This fails when the apiserver is not ready."; sleep 5; done
+
+rm /tmp/oauth-admin.yaml /tmp/pass.htpasswd
+
 # INGRESS
 
 # Check for cert expiration
@@ -106,8 +135,6 @@ do
     done
     echo "AVAILABLE"
 done
-
-
 
 # INGRESS
 
