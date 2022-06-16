@@ -170,7 +170,7 @@ You'll get the following output:
 
 ----
 
-`Step 6:`  Run the the following command in the **Terminal 1** window to add a fruit wit the name `apple` and the color `red `to the REST API data store.
+`Step 6:` Run the the following command in the **Terminal 1** window to add a fruit with the name `apple` and the color `red` to the data store using the REST API.
 
 ```
 curl -X POST -s http://localhost:8080/fruits/name/apple/color/red
