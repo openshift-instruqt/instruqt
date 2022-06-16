@@ -1,5 +1,5 @@
 slug: using-the-cluster-port-forwarding
-id: wfixmw0lrsek
+id: 7shcy6kfokps
 type: track
 title: Connecting to a Database Using Port Forwarding
 description: |
@@ -31,6 +31,7 @@ developers:
 - nvinto@redhat.com
 - bob@cogarttech.com
 - dschenck@redhat.com
+- ryanj@redhat.com
 private: true
 published: false
-checksum: "8824892242864075088"
+checksum: "7069369752531967598"
