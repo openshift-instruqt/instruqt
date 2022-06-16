@@ -23,6 +23,7 @@ owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
+- eshortis@redhat.com
 private: false
 published: true
-checksum: "11787931259095471386"
+checksum: "8689209527819656399"
