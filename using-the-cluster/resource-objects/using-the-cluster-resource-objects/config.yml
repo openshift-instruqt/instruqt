@@ -1,0 +1,13 @@
+version: "3"
+containers:
+- name: container
+  image: fedora
+  shell: /bin/bash
+virtualmachines:
+- name: crc
+  image: openshift-instruqt/openshift-instruqt-crc490-211026
+  machine_type: n1-standard-8
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports

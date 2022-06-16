@@ -1,6 +1,6 @@
 ---
 slug: 07-labelling-resource-objects
-id: hoxyni7ulv4q
+id: dthpuuwjd6p5
 type: challenge
 title: Topic 7 - Labelling Resource Objects
 notes:

@@ -1,6 +1,6 @@
 ---
 slug: 04-editing-resource-objects
-id: klq90d5rqoyk
+id: pyzgxdvhgp67
 type: challenge
 title: Topic 4 - Editing Resource Objects
 notes:
