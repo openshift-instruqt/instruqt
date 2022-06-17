@@ -1,6 +1,6 @@
 ---
 slug: 04-switching-between-accounts
-id: lvk1hzl0nvz3
+id: lwj7kidt0q8c
 type: challenge
 title: Topic 4 - Switching Users Between Accounts
 notes:
