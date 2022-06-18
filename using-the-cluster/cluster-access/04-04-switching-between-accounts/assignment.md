@@ -15,7 +15,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 150
+timelimit: 501
 ---
 In this topic you'll learn how to use the `oc login` command to move among a variety of OpenShift user accounts
 
