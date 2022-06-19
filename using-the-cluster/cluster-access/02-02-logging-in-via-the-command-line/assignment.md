@@ -1,6 +1,6 @@
 ---
 slug: 02-logging-in-via-the-command-line
-id: jhfhyx567dbp
+id: i9cb5z0y9gxt
 type: challenge
 title: Topic 2 - Logging in via the Command Line
 notes:
