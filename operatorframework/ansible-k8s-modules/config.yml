@@ -1,7 +1,7 @@
-version: "2"
+version: "3"
 containers:
 - name: container
-  image: openshift-instruqt/crc-4-10-latest
+  image: fedora
   shell: /bin/bash
 virtualmachines:
 - name: crc
