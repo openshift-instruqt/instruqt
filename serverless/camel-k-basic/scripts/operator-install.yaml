@@ -14,7 +14,7 @@ metadata:
   name: red-hat-camel-k
   namespace: camel-basic
 spec:
-  channel: 1.4.x
+  channel: 1.6.x
   installPlanApproval: Automatic
   name: red-hat-camel-k
   source: redhat-operators
