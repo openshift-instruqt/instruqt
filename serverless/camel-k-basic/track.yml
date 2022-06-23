@@ -28,11 +28,12 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
 challenges:
 - slug: step1
-  id: hyux6edvb2zb
+  id: swidp2xmljex
   type: challenge
   title: Step 1
   notes:
@@ -409,4 +410,4 @@ challenges:
     new_window: true
   difficulty: basic
   timelimit: 225
-checksum: "3459817545102945323"
+checksum: "18105241267943229223"
