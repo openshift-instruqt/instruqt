@@ -26,8 +26,9 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- rjarvine@redhat.com
 - bmesegue@redhat.com
+- rjarvine@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
-checksum: "8995630337989867162"
+checksum: "1354584350300580817"

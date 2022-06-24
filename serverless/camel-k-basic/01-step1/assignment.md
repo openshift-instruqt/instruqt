@@ -1,6 +1,6 @@
 ---
 slug: step1
-id: tybluea8c5sz
+id: jnyxgknwdtqh
 type: challenge
 title: Step 1 - Installing the Camel K Operator
 notes:
