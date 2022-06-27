@@ -2,7 +2,7 @@
 slug: step4
 id: rc9brkyvdmxi
 type: challenge
-title: Step 4 - Using Camel K traits to run an integration as a CronJob
+title: Step 4 - Using Camel K traits
 tabs:
 - title: Terminal 1
   type: terminal
@@ -16,11 +16,11 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 375
 ---
 ## Running integrations as Kubernetes CronJobs
 
-In Camel K, traits are high level named features that can be enabled/disabled or configured to customize the behavior of the final integration. For this step, we will rely on Camel K's [**Cron Trait**](https://camel.apache.org/camel-k/latest/traits/cron.html) to run the integration as a CronJob.
+In Camel K, [*Traits*](https://camel.apache.org/camel-k/latest/traits/traits.html) are high level named features that can be enabled/disabled or configured to customize the behavior of the final integration. For this step, we will rely on Camel K's [**Cron Trait**](https://camel.apache.org/camel-k/latest/traits/cron.html) to run the integration as a CronJob.
 
 Because our Camel route in our previous step is triggered by the `timer` component, Camel K applies by default the Cron trait, ideal for periodic batch processing. As long as the timer's period parameter can be written as a cron expression, the integration can automatically be deployed as a Kubernetes CronJob.
 
@@ -35,13 +35,17 @@ For example, you can edit the first endpoint (`timer:java?period=3000`) in *Rout
 Now you can run the integration again:
 
 ```
-kamel run Routing.java --property file:routing.properties --dev
+kamel run \
+--name routing \
+--property file:routing.properties \
+Routing.java \
+SupportRoutes.xml
 ```
 
 Now you'll see that Camel K has materialized a cron job (it might take one minute to appear.):
 
 ```
-oc get cronjob
+oc get cronjob -w
 ```
 
 You'll find a Kubernetes CronJob named "routing".
@@ -59,7 +63,7 @@ You can see the pods starting and being destroyed by watching the namespace:
 oc get pod -w
 ```
 
-Hit `ctrl+c` on the terminal window.
+Hit `ctrl`+`C` on the terminal window.
 To see the logs of each integration starting up, you can use the `kamel log` command:
 
 ```
@@ -74,7 +78,12 @@ The CronJob behavior is controlled via a Trait called `cron`. Traits are the mai
 To disable the cron feature and use the deployment strategy, you can run the integration with:
 
 ```
-kamel run Routing.java --property-file routing.properties -t cron.enabled=false
+kamel run \
+--name routing \
+--property file:routing.properties \
+--trait cron.enabled=false \
+Routing.java \
+SupportRoutes.xml
 ```
 
 
@@ -86,7 +95,7 @@ You should see it reflected in the logs (which will be printed every minute by t
 kamel log routing
 ```
 
-Hit `ctrl+C` on the terminal window.
+Hit `ctrl`+`C` on the terminal window.
 
 ## Congratulations
 
