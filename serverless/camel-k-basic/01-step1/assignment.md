@@ -17,7 +17,7 @@ notes:
 
     Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-    Camel K supports multiple languages for writing integrations. Based on the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+    Camel K supports multiple languages for writing integrations. Based on the Operator Pattern, Camel K performs operations on Kubernetes resources, bringing integration to the next level and utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
 
     Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
 tabs:
@@ -29,7 +29,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 375
 ---
 In order to run Camel K, you will need access to an Kubernetes/OpenShift environment. Let's setup the fundamentals.
 
@@ -42,24 +42,19 @@ You will then able able to login with admin permissions with:
 * **Username:** ```admin```
 * **Password:** ```admin```
 
+For now there are no Camel K deployments, but later in the lab, the Web Console will allow you to visualise what's happening in the Cluster.
+
+<br>
 
 ## Logging in to the Cluster via CLI
 
-Before creating any applications, login as admin. This will be required if you want to log in to the web console and
-use it.
-
-To login to the OpenShift cluster from the _Terminal_ run:
+Before creating any applications from the command line, login as admin. To login to the OpenShift cluster from the _Terminal_ run:
 
 ```
 oc login -u admin -p admin
 ```
 
-This will log you in using the credentials:
-
-* **Username:** ```admin```
-* **Password:** ```admin```
-
-Use the same credentials to log into the web console.
+This will log you in using the same credentials used to log into the web console.
 
 
 ## Creating your own Project
@@ -70,7 +65,7 @@ To create a new project called `camel-basic` run the command:
 oc new-project camel-basic
 ```
 
-## Install Camel K Operator
+## Install the Camel K Operator
 
 ```
 oc apply -f /opt/operator-install.yaml -n camel-basic

@@ -16,7 +16,7 @@ description: |2
 
   Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-  Camel K supports multiple languages for writing integrations. Based on the Operator Pattern, Camel K performs operations on Kubernetes resources. Bringing integration to the next level. utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
+  Camel K supports multiple languages for writing integrations. Based on the Operator Pattern, Camel K performs operations on Kubernetes resources, bringing integration to the next level and utilizing the benefit of the Apache Camel project, such as the wide variety of components and Enterprise Integration Patterns (EIP).
 
   Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
 icon: https://logodix.com/logo/1910931.png
