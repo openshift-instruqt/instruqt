@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300
@@ -129,7 +129,7 @@ You'll get output similar to the following:
 
 ```
 NAME             HOST/PORT                                                                  PATH   SERVICES         PORT       TERMINATION   WILDCARD
-blog-django-py   blog-django-py-myproject.crc-gh9wd-master-0.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
+blog-django-py   blog-django-py-myproject.crc-5nvrm-master-0.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
 ```
 
 # Congratulations!
