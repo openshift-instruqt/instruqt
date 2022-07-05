@@ -1,6 +1,6 @@
 # OpenShift Labs on Instruqt
 
-Welcome to the OpenShift Labs on Instruqt repositories. This repo is the source code of labs you find at https://play.instruqt.com/openshift
+Welcome to the OpenShift Labs on Instruqt repositories. This repo is the source code of labs you find at https://developers.redhat.com/learn
 
 Please refer to the [Instruqt Documentation](https://docs.instruqt.com/) to understand how it works.
 
