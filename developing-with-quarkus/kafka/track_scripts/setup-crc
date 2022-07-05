@@ -77,7 +77,7 @@ fi
 echo "### Boostrap START ###"
 date
 
-until oc get pods -A 2>/dev/null 1>&2; do
+until oc get pods -A 2>/dev/null 1>&2; do 
   echo "Waiting for pods to start..";
   sleep 5;
 done
@@ -90,7 +90,7 @@ done
 for co in $(oc get co -oname)
 do
     # skip this one
-    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.io/openshift-controller-manager" ]
     then
       continue
     fi
@@ -144,16 +144,12 @@ oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$IN
 
 oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
-
-mkdir -p /root/projects/quarkus
-echo "-w \"\n\"" >> ~/.curlrc
 
 #wait until cluster operators are "available"
 for co in $(oc get co -oname)
 do
     # skip this one
-    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.io/openshift-controller-manager" ]
     then
       continue
     fi
@@ -180,11 +176,29 @@ do
     done
 done
 
+
+### YOUR SETUP SCRIPT (E.G. INSTALL JDK, GO ETC) SHOULD GO HERE 
+# In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
+# https://bugzilla.redhat.com/show_bug.cgi?id=2082539
+
+export HOME="/root"
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+mkdir -p /root/projects/quarkus
+echo "-w \"\n\"" >> ~/.curlrc
+
+###
+
+until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep 5nvrm` ]]; do 
+    echo "Routes not patched yet, waiting 30 seconds..";
+    sleep 30;
+done
+
 # do twice since cluster operator rolls out continuously
 for co in $(oc get co -oname)
 do
     # skip this one
-    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.ioopenshift-controller-manager" ]
+    if [ $co == "clusteroperator.config.openshift.io/machine-config" -o $co == "clusteroperator.config.openshift.io/openshift-controller-manager" ]
     then
       continue
     fi
@@ -214,8 +228,3 @@ done
 date
 echo "### Boostrap END ###"
 
-export HOME="/root"
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
-
-mkdir -p /root/projects/quarkus
-echo "-w \"\n\"" >> ~/.curlrc

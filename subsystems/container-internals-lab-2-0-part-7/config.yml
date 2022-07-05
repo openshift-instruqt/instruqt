@@ -1,7 +1,7 @@
 version: "2"
 virtualmachines:
 - name: rhel
-  image: openshift-instruqt/crc-4-10-latest
+  image: openshift-instruqt/crc-4-10-18
   shell: /bin/bash
   environment:
     TERM: xterm

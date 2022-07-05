@@ -5,7 +5,7 @@ containers:
   shell: /bin/bash
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/crc-4-10-latest
+  image: openshift-instruqt/crc-4-10-18
   machine_type: n1-highmem-4
   allow_external_ingress:
   - http

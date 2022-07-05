@@ -217,7 +217,7 @@ challenges:
     hostname: container
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
   timelimit: 360
@@ -390,7 +390,7 @@ challenges:
     See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
     ```bash
     NAME      URL                                                                                  READY
-    greeter   https://greeter-serverless-tutorial.crc-gh9wd-master-0.crc.2rtmqs1ojyed.instruqt.io  True
+    greeter   https://greeter-serverless-tutorial.crc-5nvrm-master-0.crc.2rtmqs1ojyed.instruqt.io  True
     ```
 
     ### Revision
@@ -456,7 +456,7 @@ challenges:
     hostname: container
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
   timelimit: 360
@@ -601,7 +601,7 @@ challenges:
     hostname: container
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
   timelimit: 360
@@ -699,7 +699,7 @@ challenges:
     hostname: container
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
   timelimit: 360
@@ -927,7 +927,7 @@ challenges:
     hostname: container
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: intermediate
   timelimit: 360

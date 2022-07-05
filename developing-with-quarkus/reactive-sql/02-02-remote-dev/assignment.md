@@ -18,7 +18,7 @@ tabs:
   path: /root/projects/rhoar-getting-started/quarkus/reactive-sql
 - title: OpenShift Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-5nvrm-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 240
@@ -303,7 +303,7 @@ echo $APP_ROUTE
 You'll get output similar to the following:
 
 ```
-http://reactive-sql-reactive-sql.crc-gh9wd-master-0.crc.hbie33wmyvpb.instruqt.io
+http://reactive-sql-reactive-sql.crc-5nvrm-master-0.crc.hbie33wmyvpb.instruqt.io
 ```
 
 (The actual details of your URL will differ because each running instance of OpenShift will have a unique URL.)
