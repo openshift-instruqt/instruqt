@@ -4,6 +4,9 @@ set -x
 # setup vars
 export TERM=xterm-color
 export KUBECONFIG=/opt/kubeconfig
+echo "export TERM=xterm-color" >> /root/.bashrc
+echo "export KUBECONFIG=/opt/kubeconfig" >> /root/.bashrc
+echo "export HOME=/root" >> /root/.bashrc
 
 ENS4IP=$(ip -4 -o addr show ens4 | awk '{print $4}' | cut -d "/" -f 1)
 
