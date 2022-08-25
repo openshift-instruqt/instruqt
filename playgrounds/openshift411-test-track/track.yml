@@ -1,0 +1,33 @@
+slug: playground-410-test-track
+id: st0kb0sqbblo
+type: track
+title: OpenShift 4.11 Playground
+description: |
+  ## Goal
+
+  Explore OpenShift version 4.11.
+
+  ## Concepts
+
+  * OpenShift Web Console
+  * `oc` command line tool
+  * OpenShift Projects and Applications
+  * Your applications on OpenShift
+
+  ## Use case
+
+  You control an OpenShift cluster for one hour. You can deploy your own container image, or set up a pipeline to build your application from source, then monitor it with Prometheus as it runs. Use an Operator to deploy and manage a database backend for your web app.
+
+  This OpenShift cluster will self-destruct in one hour.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+- ryanj@redhat.com
+- nvinto@redhat.com
+- rjarvine@redhat.com
+private: true
+published: false
+checksum: "8389880814563019653"
