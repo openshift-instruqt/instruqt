@@ -222,6 +222,13 @@ do
     done
 done
 
-date
+# Wait until web console is available
+until curl -k https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io > /dev/null 2>/dev/null
+do
+    echo "Waiting for web console - not available yet"
+    sleep 6
+done
+
+echo $(date)
 echo "### Boostrap END ###"
 
