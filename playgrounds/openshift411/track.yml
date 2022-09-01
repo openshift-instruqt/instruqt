@@ -1,5 +1,5 @@
-slug: playground-410-test-track
-id: st0kb0sqbblo
+slug: playgrounds-openshift411
+id: hlujba8rmi8j
 type: track
 title: OpenShift 4.11 Playground
 description: |
@@ -30,4 +30,4 @@ developers:
 - rjarvine@redhat.com
 private: true
 published: false
-checksum: "8389880814563019653"
+checksum: "3430391132677758607"
