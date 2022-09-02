@@ -186,7 +186,7 @@ done
 
 ###
 
-until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep 9jm8r` ]]; do 
+until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do 
     echo "Routes not patched yet, waiting 30 seconds..";
     sleep 30;
 done
