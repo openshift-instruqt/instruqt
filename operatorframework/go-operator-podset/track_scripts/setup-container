@@ -13,7 +13,42 @@ tar -xvf /tmp/openshift-client-linux-4.9.0.tar.gz -C /usr/bin/
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+
+curl -s https://dl.google.com/go/go1.18.1.linux-amd64.tar.gz -o /tmp/go1.18.1.linux-amd64.tar.gz 
+
+tar -xvf /tmp/go1.18.1.linux-amd64.tar.gz -C /usr/local/
+rm -f /tmp/go1.18.1.linux-amd64.tar.gz
+
+
+mkdir -p /root/tutorial/go
+
+echo 'export GOROOT=/usr/local/go' >> /root/.bashrc
+echo 'export GOPATH=/root/tutorial/go/' >> /root/.bashrc
+echo 'export GOBIN=/root/tutorial/go/bin' >> /root/.bashrc
+echo 'export PATH=$GOROOT/bin:$PATH' >> /root/.bashrc
+
+mkdir -p /root/tutorial/go/bin
+
+source /root/.bashrc
+
+#go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0
+#cp -a /root/go/bin/controller-gen bin/
+
+
+
+
+# Download dep
+curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+# Download Operator SDK
+export ARCH=$(case $(uname -m) in x86_64) echo -n amd64 ;; aarch64) echo -n arm64 ;; *) echo -n $(uname -m) ;; esac)
+export OS=$(uname | awk '{print tolower($0)}')
+export OPERATOR_SDK_DL_URL=https://github.com/operator-framework/operator-sdk/releases/download/v1.20.0
+
+
+curl -sL ${OPERATOR_SDK_DL_URL}/operator-sdk_${OS}_${ARCH} -o /usr/local/bin/operator-sdk
+chmod +x /usr/local/bin/operator-sdk
+
 
 mkdir -p /root/projects/podset-operator
 
@@ -21,9 +56,12 @@ cd /root/projects/podset-operator
 
 operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
 
+go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0
+mkdir bin
+cp -a /root/tutorial/go/bin/controller-gen bin/
+
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"
     sleep 1
 done
-
 
