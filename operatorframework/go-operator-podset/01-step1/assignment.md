@@ -82,8 +82,12 @@ Navigate to the directory:
 cd $HOME/projects/podset-operator
 ```
 
-Initialize a new Go-based Operator SDK project for the PodSet Operator:
+A new Go-based Operator SDK project for the PodSet Operator has been already initialized for convenience with the following command
+ `operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator `
+
+You can list all file generated with this command:
 
 ```
-operator-sdk init --domain=example.com --repo=github.com/redhat/podset-operator
+ls -lh
 ```
+
