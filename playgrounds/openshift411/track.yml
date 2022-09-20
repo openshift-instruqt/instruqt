@@ -1,6 +1,5 @@
 slug: playgrounds-openshift411
 id: hlujba8rmi8j
-type: track
 title: OpenShift 4.11 Playground
 description: |
   ## Goal
@@ -26,10 +25,10 @@ tags:
 owner: openshift
 developers:
 - ryanj@redhat.com
-- nvinto@redhat.com
-- rjarvine@redhat.com
 - cclyburn@redhat.com
 - bob@cogarttech.com
-private: true
-published: false
-checksum: "2890035144032136383"
+- nvinto@redhat.com
+- rjarvine@redhat.com
+private: false
+published: true
+checksum: "4817482053156953930"
