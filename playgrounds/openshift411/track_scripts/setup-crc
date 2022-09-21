@@ -222,6 +222,9 @@ do
     done
 done
 
+# Get equipped with sudoer cluster-role
+oc adm policy add-cluster-role-to-user sudoer developer
+
 # Wait until web console is available
 until curl -k https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io > /dev/null 2>/dev/null
 do
