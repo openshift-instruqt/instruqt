@@ -184,6 +184,36 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
+# User Accounts
+
+cat << EOF > /tmp/pass.htpasswd
+admin:\$2y\$05\$Sokv3so/TbycwilNeV6L6.lMIYT0ClbaW/RsPssFIBY.BWanJyMwe
+developer:\$apr1\$PFGWfRKw\$DbBab3TIlvsZGmHjVbehv0
+user1:\$apr1\$AWRDy/5p\$FgzPPvIIqhe3ZbWCgk4Cc1
+EOF
+
+cat << EOF > /tmp/oauth-admin.yaml
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: admin_htpasswd_provider
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpass-secret-admin
+EOF
+
+until oc create secret generic htpass-secret-admin --from-file=htpasswd=/tmp/pass.htpasswd -n openshift-config -o yaml --dry-run=client 2>/dev/null | oc create -f - ; do echo "Add admin secret. This fails when the apiserver is not ready."; sleep 5; done
+until oc apply -f /tmp/oauth-admin.yaml 2>/dev/null 1>&2; do echo "Adding admin user. This fails when the apiserver is not ready."; sleep 5; done
+until oc create clusterrolebinding adminclusteradmin --clusterrole=cluster-admin --user=admin 2>/dev/null 1>&2; do echo "Config admin policy. This fails when the apiserver is not ready."; sleep 5; done
+until oc create clusterrolebinding devsudoer --clusterrole=sudoer --user=developer 2>/dev/null 1>&2; do echo "adding sudoer role to the developer account"; sleep 5; done
+
+rm /tmp/oauth-admin.yaml /tmp/pass.htpasswd
+
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep dzk9v` ]]; do 
