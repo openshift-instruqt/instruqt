@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code
@@ -120,7 +120,7 @@ You'll get output similar to the following:
 ```
 Found the following URLs for component frontend
 NAME         STATE      URL                                                                               PORT     SECURE     KIND
-frontend     Pushed     http://frontend-app-myproject.crc-gh9wd-master-0.crc.l2bwmvk0f3e4.instruqt.io     8080     false      route
+frontend     Pushed     http://frontend-app-myproject.crc-lgph7-master-0.crc.l2bwmvk0f3e4.instruqt.io     8080     false      route
 ```
 ----
 # Congratulations!
