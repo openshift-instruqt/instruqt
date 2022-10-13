@@ -1,6 +1,5 @@
 slug: developing-on-openshift-developing-with-odo
 id: dnttxho7bem5
-type: track
 title: Developing with odo
 description: |
   ## Goal
@@ -38,4 +37,4 @@ developers:
 - ryanj@redhat.com
 private: true
 published: false
-checksum: "8292956828763943396"
+checksum: "12325861645831899206"
