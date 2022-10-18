@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export OPENSHIFT_RELEASE_VERSION="4.10.12"
+export OPENSHIFT_RELEASE_VERSION="4.11.7"
 
 dnf install -y procps-ng iputils bind-utils git java-11-openjdk-devel.x86_64 maven
 
@@ -13,7 +13,7 @@ tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/b
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
 
-export ODO_INSTALL="latest"
+export ODO_INSTALL="v2.5.1"
 export ODO_RESPONSE=$(odo version 2> /dev/null)
 export ODO_VERSION=${ODO_RESPONSE:0:10}
 
@@ -24,4 +24,3 @@ mv -f odo /usr/bin/odo && \
 chmod +x /usr/bin/odo && \
 odo preference set -f ConsentTelemetry false > /dev/null 2>&1
 odo preference set UpdateNotification false > /dev/null 2>&1
-
