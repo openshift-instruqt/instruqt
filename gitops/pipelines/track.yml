@@ -55,7 +55,7 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- dahmed@redhat.com
+- cclyburn@redhat.com
 - chernand@redhat.com
 private: false
 published: true
@@ -144,11 +144,11 @@ challenges:
 
     In the _Administrator_ perspective of the web console, navigate to Operators → OperatorHub. You can see the list of available operators for OpenShift provided by Red Hat as well as a community of partners and open-source projects.
 
-    Use the _Filter by keyword_ box to search for `OpenShift Pipelines Operator` in the catalog. Click the _OpenShift Pipelines Operator_ tile.
+    Use the _Filter by keyword_ box to search for `Red Hat OpenShift Pipelines` in the catalog. Click the _Red Hat OpenShift Pipelines_ tile.
 
     ![Web Console Hub](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-hub.png)
 
-    Read the brief description of the Operator on the _OpenShift Pipelines Operator_ page. Click _Install_.
+    Read the brief description of the Operator on the _Red Hat OpenShift Pipelines_ page. Click _Install_.
 
     Select _All namespaces on the cluster (default)_ for installation mode & _Automatic_ for the approval strategy. Click Subscribe!
 
