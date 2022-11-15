@@ -80,12 +80,12 @@ fi
 echo "### Boostrap START ###"
 date
 
-until oc get pods -A 2>/dev/null 1>&2; do 
+until oc get pods -A 2>/dev/null 1>&2; do
   echo "Waiting for pods to start..";
   sleep 5;
 done
 
-until oc get co 2>/dev/null 1>&2; do 
+until oc get co 2>/dev/null 1>&2; do
   echo "Waiting for Cluster Operators to complete first rollout";
   sleep 5;
 done
@@ -180,13 +180,13 @@ do
 done
 
 
-### YOUR SETUP SCRIPT (E.G. INSTALL JDK, GO ETC) SHOULD GO HERE 
+### YOUR SETUP SCRIPT (E.G. INSTALL JDK, GO ETC) SHOULD GO HERE
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
 ###
 
-until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do 
+until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do
     echo "Routes not patched yet, waiting 30 seconds..";
     sleep 30;
 done
