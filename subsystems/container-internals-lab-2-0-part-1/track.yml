@@ -1,6 +1,5 @@
 slug: subsystems-container-internals-lab-2-0-part-1
 id: ngpjngaqj7nl
-type: track
 title: Introduction to Containers
 description: |
   ## Background
@@ -34,6 +33,7 @@ developers:
 - smccarty@redhat.com
 - nvinto@redhat.com
 - bob@cogarttech.com
+- ryanj@redhat.com
 private: false
 published: true
-checksum: "6437273855409702112"
+checksum: "2073413964663957289"
