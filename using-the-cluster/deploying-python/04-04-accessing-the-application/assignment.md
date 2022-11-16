@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 In the previous topics, you built and deployed the Python application. In this topic you will open the application in a web browser from the Topology page using the **Route** assigned by OpenShift.
 

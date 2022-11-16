@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 
 In this topic you will use the OpenShift web console to create and deploy an application from source code that is stored in GitHub.

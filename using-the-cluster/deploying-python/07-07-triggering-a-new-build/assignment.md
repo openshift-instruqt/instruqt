@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 In this topic you will learn how to use the command line to rebuild an app that's already running in OpenShift. Also, you will learn how to execute a rebuild in OpenShift when code changes in source control.
 

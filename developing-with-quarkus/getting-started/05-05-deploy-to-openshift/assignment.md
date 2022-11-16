@@ -23,7 +23,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 Now that we have the demonstration application built, let's move it into Linux a container and then on into the cloud.
 

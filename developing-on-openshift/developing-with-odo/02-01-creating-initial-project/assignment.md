@@ -19,7 +19,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 300
+timelimit: 800
 ---
 # Logging in to OpenShift
 

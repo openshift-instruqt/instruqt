@@ -20,7 +20,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 300
+timelimit: 800
 ---
 In this topic you will create a `route` in OpenShift to make the demonstration application accessible to the public on the Internet.
 

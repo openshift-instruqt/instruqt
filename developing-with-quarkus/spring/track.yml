@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-spring
 id: r5623ypubfbf
-type: track
 title: Quarkus for Spring Boot Developers
 description: |-
   This track demonstrates how Spring and Spring Boot developers can use Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications.
@@ -24,6 +23,7 @@ developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - eshortis@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
-checksum: "8689209527819656399"
+checksum: "11659413093954224335"

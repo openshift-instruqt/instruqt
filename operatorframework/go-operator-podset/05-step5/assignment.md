@@ -19,7 +19,7 @@ tabs:
   url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 Once the CRD is registered, there are two ways to run the Operator:
 

@@ -1,6 +1,5 @@
 slug: operatorframework-etcd-operator
 id: wt4etvcedo9u
-type: track
 title: Etcd Operator
 description: |
   The etcd operator manages etcd clusters deployed to Kubernetes and automates tasks related to operating an etcd cluster.
@@ -28,6 +27,7 @@ owner: openshift
 developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -112,7 +112,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step2
   id: zcxgpe6gyrqx
   type: challenge
@@ -229,7 +229,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step3
   id: qyykecaxyt2g
   type: challenge
@@ -318,7 +318,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step4
   id: y8vkazhypisq
   type: challenge
@@ -381,7 +381,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step5
   id: jakpxnovlnui
   type: challenge
@@ -436,7 +436,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step6
   id: ujwnpiy5yoxe
   type: challenge
@@ -463,7 +463,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: step7
   id: kvs8dfokc5zh
   type: challenge
@@ -517,4 +517,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "8041393728757907224"
+checksum: "11868400250980061507"

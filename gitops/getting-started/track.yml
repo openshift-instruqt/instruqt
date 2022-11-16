@@ -1,6 +1,5 @@
 slug: gitops-getting-started
 id: ec9auzkeypbz
-type: track
 title: Getting Started with ArgoCD and OpenShift GitOps Operator
 description: |
   ## Goal
@@ -47,6 +46,7 @@ developers:
 - nvinto@redhat.com
 - dahmed@redhat.com
 - chernand@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -178,7 +178,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
+  timelimit: 800
 - slug: 02-connecting-to-argocd
   id: flg5wffrvkeo
   type: challenge
@@ -282,7 +282,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
+  timelimit: 800
 - slug: 03-deploying-sample-application
   id: gmdtqtlq8dhx
   type: challenge
@@ -430,5 +430,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
-checksum: "4906110934550468624"
+  timelimit: 800
+checksum: "9730957638134822608"

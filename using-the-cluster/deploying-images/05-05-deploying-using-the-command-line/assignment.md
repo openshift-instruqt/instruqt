@@ -20,7 +20,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 
 In this topic you will deploy an application into OpenShift from the command line.

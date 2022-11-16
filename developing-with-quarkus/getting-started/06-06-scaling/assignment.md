@@ -23,7 +23,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 Now that we have our app running on OpenShift, let's see what we can do.
 

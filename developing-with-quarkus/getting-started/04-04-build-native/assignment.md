@@ -19,7 +19,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 In this topic you're going to learn how produce a native executable for the demonstration application.
 

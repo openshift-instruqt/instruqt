@@ -1,6 +1,5 @@
 slug: using-the-cluster-deploying-images
 id: 5n6yatx8rmn6
-type: track
 title: Deploying Applications From Images
 description: |
   ## Goal
@@ -31,6 +30,7 @@ developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
 private: true
 published: false
-checksum: "8149632628729697945"
+checksum: "5072625026862977390"

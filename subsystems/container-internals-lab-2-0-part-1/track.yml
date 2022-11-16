@@ -1,6 +1,5 @@
 slug: subsystems-container-internals-lab-2-0-part-1
 id: ngpjngaqj7nl
-type: track
 title: Introduction to Containers
 description: |
   ## Background
@@ -33,6 +32,7 @@ owner: openshift
 developers:
 - smccarty@redhat.com
 - nvinto@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -96,7 +96,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 600
 - slug: 02-images
   id: xprdnkkg3f4n
   type: challenge
@@ -148,7 +148,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 600
 - slug: 03-registries
   id: ox2tmj5g60mi
   type: challenge
@@ -212,7 +212,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 600
 - slug: 04-hosts
   id: gte82b8eqk9k
   type: challenge
@@ -264,7 +264,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 600
 - slug: 05-orchestration
   id: u0bt0faqe52g
   type: challenge
@@ -336,7 +336,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
+  timelimit: 600
 - slug: 06-closing
   id: 5wivn4yihpmz
   type: challenge
@@ -365,5 +365,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 200
-checksum: "1713613997110026179"
+  timelimit: 600
+checksum: "13772124845326712458"

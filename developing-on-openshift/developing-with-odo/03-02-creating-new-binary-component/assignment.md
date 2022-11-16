@@ -19,7 +19,7 @@ tabs:
   hostname: container
   path: /root/backend
 difficulty: basic
-timelimit: 300
+timelimit: 800
 ---
 
 In this topic you will add new components to the OpenShift project you created in the previous topic. The components make up the **Wild West** application, which is the demonstration application for this project. Also, once the application is installed you'll view it in the OpenShift web console. In addition, you'll learn how to view logging activity within OpenShift.
