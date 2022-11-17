@@ -1,6 +1,6 @@
 ---
 slug: 03-uploading-files-to-a-container
-id: ly4x7cgjq4dw
+id: hhm0ia3j36yv
 type: challenge
 title: Topic 3 - Uploading Files to a Container
 notes:

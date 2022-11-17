@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-panache
 id: epiodrxuvz7f
-type: track
 title: Effective Data with Hibernate and Panache
 description: |-
   In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
@@ -39,4 +38,4 @@ developers:
 - ryanj@redhat.com
 private: false
 published: true
-checksum: "17135179774926059385"
+checksum: "1448069964642575293"

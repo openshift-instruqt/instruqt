@@ -1,6 +1,6 @@
 ---
 slug: 03-viewing-the-builder-logs
-id: aoojou5ct3bq
+id: fejdyxn5u9gf
 type: challenge
 title: Topic 3 - Viewing the build logs in the Web Console
 notes:

@@ -1,6 +1,5 @@
 slug: using-the-cluster-cluster-access
 id: tyrhthzthmld
-type: track
 title: Logging in to an OpenShift Cluster
 description: |
   ## Goal
@@ -33,4 +32,4 @@ developers:
 - ryanj@redhat.com
 private: true
 published: false
-checksum: "5921584878274093479"
+checksum: "516786536677991576"

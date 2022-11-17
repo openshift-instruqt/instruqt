@@ -1,6 +1,6 @@
 ---
 slug: 05-deleting-the-application
-id: gvkd6hyzkgyj
+id: rmqxavuo4mkd
 type: challenge
 title: Topic 5 - Deleting the application from the command line
 notes:

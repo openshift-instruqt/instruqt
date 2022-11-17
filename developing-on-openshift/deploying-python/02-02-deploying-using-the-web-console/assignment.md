@@ -1,6 +1,6 @@
 ---
 slug: 02-deploying-using-the-web-console
-id: 4pcjeslvkri5
+id: uh9567r8wtqm
 type: challenge
 title: Topic 2 - Deploying an application using the Web Console
 notes:

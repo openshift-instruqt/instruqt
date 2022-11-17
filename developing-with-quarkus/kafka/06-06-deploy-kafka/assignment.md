@@ -1,6 +1,6 @@
 ---
 slug: 06-deploy-kafka
-id: gqvbkp57hxxt
+id: ipxcxugaqyuc
 type: challenge
 title: Topic 6 - Deploying Kafka to OpenShift
 teaser: Learn how to host Kafka in an OpenShift project

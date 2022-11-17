@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-getting-started
 id: riixlttwv5ye
-type: track
 title: Getting Started with Quarkus
 description: |-
   In this track, you will get an introduction to [Quarkus](https://quarkus.io).
@@ -50,6 +49,7 @@ developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - eshortis@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
-checksum: "9720058667181478886"
+checksum: "16417912177902044327"
