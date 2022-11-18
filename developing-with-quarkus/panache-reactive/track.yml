@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-panache-reactive
 id: gyon3t6zkpfs
-type: track
 title: Implementing a reactive application using Quarkus, Hibernate Reactive and Panache
 description: |-
   In this track, you will get an introduction to reactive programming using [**Hibernate Reactive**](http://hibernate.org/reactive) with [**Panache**](https://quarkus.io/guides/hibernate-orm-panache).
@@ -56,4 +55,4 @@ developers:
 - ryanj@redhat.com
 private: false
 published: true
-checksum: "5888224751786900458"
+checksum: "7344286018701513195"

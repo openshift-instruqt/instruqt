@@ -1,6 +1,5 @@
 slug: transferring-files-in-and-out-of-containers
-id: cmpwrxg4tvow
-type: track
+id: 6qkqwwtzmsdj
 title: Transferring Files in and out of Containers
 description: |
   ## Goal
@@ -30,6 +29,7 @@ owner: openshift
 developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
+- ryanj@redhat.com
 private: true
 published: false
-checksum: "8980025108754920346"
+checksum: "15286954738703359797"

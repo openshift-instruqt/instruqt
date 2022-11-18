@@ -94,7 +94,7 @@ oc get route origin-grafana -n quarkus -o jsonpath='{"http://"}{.spec.host}'
 You'll get output similar to the following, but the exact URL will be different for your instance:
 
 ```
-http://origin-grafana-quarkus.crc-gh9wd-master-0.crc.ihd2pmeddknj.instruqt.io
+http://origin-grafana-quarkus.crc-lgph7-master-0.crc.ihd2pmeddknj.instruqt.io
 ```
 
 ----

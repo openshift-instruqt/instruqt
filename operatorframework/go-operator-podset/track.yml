@@ -1,6 +1,5 @@
 slug: operatorframework-go-operator-podset
 id: 0kxlnfxsiqqw
-type: track
 title: Operator SDK with Go
 description: |
   ## Why an Operator?
@@ -45,6 +44,7 @@ owner: openshift
 developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
-checksum: "9279577567418909559"
+checksum: "14647439614318015833"

@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-kafka
-id: xvfhtif4zzks
-type: track
+id: 2wpuz3xbtyb5
 title: Reactive Streaming with Quarkus and Kafka
 description: |-
   In this track, you will use the Quarkus Kafka extension to build a streaming application using MicroProfile Reactive
@@ -41,4 +40,4 @@ developers:
 - ryanj@redhat.com
 private: false
 published: true
-checksum: "12797449075374213627"
+checksum: "9802266188790367881"

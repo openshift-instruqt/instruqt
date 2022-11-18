@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-reactive-sql
 id: zyn7xvmau2y6
-type: track
 title: Reactive programming with Quarkus Reactive SQL
 description: |-
   In this track, you will get an introduction to the reactive programming model of Quarkus
@@ -42,6 +41,7 @@ developers:
 - dschenck@redhat.com
 - nvinto@redhat.com
 - eshortis@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
-checksum: "13430417025447460790"
+checksum: "2508152418688464016"

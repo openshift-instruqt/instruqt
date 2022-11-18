@@ -16,7 +16,7 @@ tabs:
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
 - title: OpenShift Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500

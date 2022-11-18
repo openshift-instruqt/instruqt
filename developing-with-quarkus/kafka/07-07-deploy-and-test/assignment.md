@@ -1,6 +1,6 @@
 ---
 slug: 07-deploy-and-test
-id: adwdgrx6txg7
+id: t5ap6bc033fc
 type: challenge
 title: Topic 7 - Adding the OpenShift extensions to Quarkus
 teaser: Learn how to get a Quarkus application to run under OpenShift
@@ -17,7 +17,7 @@ tabs:
   path: /root/projects/rhoar-getting-started/quarkus/kafka
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 428
