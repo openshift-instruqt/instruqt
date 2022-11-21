@@ -39,6 +39,8 @@ systemctl start crc-dnsmasq.service
 ## start openshift
 # systemctl start kubelet
 
+git clone --quiet --depth 1 https://github.com/fatherlinux/container-internals-lab.git /root/labs
+
 echo "### Boostrap START ###"
 echo $(date)
 echo "### Boostrap END ###"
