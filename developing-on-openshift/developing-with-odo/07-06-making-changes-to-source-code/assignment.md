@@ -19,7 +19,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 800
+timelimit: 500
 ---
 In this topic you will alter the source code for the demonstration application and redeploy it automatically with the help of `odo`.
 

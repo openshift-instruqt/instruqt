@@ -34,7 +34,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 800
+timelimit: 500
 ---
 The application you will be deploying in this track is a wild west shooter style game.
 

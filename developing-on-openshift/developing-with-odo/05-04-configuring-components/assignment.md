@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 800
+timelimit: 500
 ---
 In this topic you will learn how to configure the `frontend` and `backend` components you installed previously.
 
