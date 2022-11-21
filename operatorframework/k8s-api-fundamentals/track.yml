@@ -1,6 +1,5 @@
 slug: operatorframework-k8s-api-fundamentals
 id: mvxpk334juek
-type: track
 title: Kubernetes API Fundamentals
 description: Before diving into the [Operator Framework](https://github.com/operator-framework),
   this section will give an overview of Kubernetes API fundamentals.  Although the
@@ -15,6 +14,7 @@ owner: openshift
 developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -115,7 +115,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
+  timelimit: 500
 - slug: step2
   id: yfv4cyxcuxod
   type: challenge
@@ -229,7 +229,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
+  timelimit: 500
 - slug: step3
   id: 8jt7kdllban0
   type: challenge
@@ -333,7 +333,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
+  timelimit: 500
 - slug: step4
   id: mvlwrvbrisvj
   type: challenge
@@ -489,7 +489,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
+  timelimit: 500
 - slug: step5
   id: dh2okez0uiwl
   type: challenge
@@ -607,5 +607,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 360
-checksum: "9405083853982411482"
+  timelimit: 500
+checksum: "18332722122774750147"

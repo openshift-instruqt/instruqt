@@ -79,7 +79,7 @@ challenges:
     - Search, install and uninstall `Helm Charts`
     - Review Helm Charts from `OpenShift Console`
 
-    ## Helm Command Line Interface (CLI)
+    ## Helm Command Line Interface (CLI)
 
     In this scenario you will find the Helm CLI already installed for you, which can be  also retrieved from OpenShift Console, top right corner, click on ? -> Command Line Tools.
 
@@ -244,7 +244,7 @@ challenges:
     hostname: container
     path: /root
   difficulty: basic
-  timelimit: 600
+  timelimit: 900
 - slug: 02-first-chart
   id: phnktxgopn6g
   type: challenge
@@ -362,7 +362,7 @@ challenges:
     hostname: container
     path: /root/my-chart
   difficulty: basic
-  timelimit: 600
+  timelimit: 900
 - slug: 03-revision
   id: vvmdo6mdop5c
   type: challenge
@@ -492,5 +492,5 @@ challenges:
     hostname: container
     path: /root/my-chart
   difficulty: basic
-  timelimit: 600
+  timelimit: 900
 checksum: "14990396350448359938"

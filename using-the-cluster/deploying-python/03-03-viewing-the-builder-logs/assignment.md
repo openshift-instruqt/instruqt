@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 
 In this topic you will learn how to view a deployment's logs from within the OpenShift web console. In this case, you will view the logs for the Python application deployment you started in the previous topic.

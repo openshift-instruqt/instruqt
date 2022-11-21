@@ -19,7 +19,7 @@ tabs:
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 Let's begin by inspecting the newly generated `api/v1alpha1/podset_types.go` file for our PodSet API from the **Visual Editor** Tab, or just run the Terminal:
 

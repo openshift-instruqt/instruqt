@@ -19,7 +19,7 @@ tabs:
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 500
+timelimit: 800
 ---
 Add a new Custom Resource Definition (CRD) API called PodSet with APIVersion `app.example.com/v1alpha1` and Kind `PodSet`. This command will also create our boilerplate controller logic and [Kustomize](https://kustomize.io) configuration files.
 

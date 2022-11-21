@@ -19,7 +19,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 In this topic you will learn how to delete an OpenShift application from the command line using the `oc delete` command.
 

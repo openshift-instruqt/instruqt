@@ -31,7 +31,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 
 In this topic, you will log into OpenShift using the `oc login` command line tool. Then you will create an application using `oc new-project`. Finally, you'll expose the application for access outside of the OpenShift cluster using the `oc expose` command.

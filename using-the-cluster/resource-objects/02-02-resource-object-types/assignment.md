@@ -15,7 +15,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 
 In this topic you will learn to list and examine the various resource objects available in OpenShift. You'll also learn about the various ways to use the `oc get` and `oc api-resources` commands.

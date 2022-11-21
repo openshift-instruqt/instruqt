@@ -15,7 +15,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 
 In this topic you will learn how to use labels to work with OpenShift resource objects.

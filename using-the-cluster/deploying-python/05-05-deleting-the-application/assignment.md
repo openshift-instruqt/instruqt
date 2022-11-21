@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 
 In this topic you will use the OpenShift `oc` command line to tool to delete the application you created using the web console in previous topics. Then you will recreate the application from the command line using `oc`.
