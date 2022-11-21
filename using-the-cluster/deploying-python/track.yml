@@ -1,6 +1,5 @@
 slug: using-the-cluster-deploying-python
 id: njh5qyjkwkju
-type: track
 title: Deploying Applications From Source
 description: |
   ## Goal
@@ -36,6 +35,7 @@ developers:
 - bclayton@redhat.com
 - dschenck@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
 private: true
 published: false
-checksum: "10162603001384504495"
+checksum: "12405120608468226912"

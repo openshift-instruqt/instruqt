@@ -1,6 +1,5 @@
 slug: using-the-cluster-resource-objects
 id: uysmncjvfgvk
-type: track
 title: Using the CLI to Manage Resource Objects
 description: |
   ## Goal
@@ -33,6 +32,7 @@ developers:
 - bob@cogarttech.com
 - dschenck@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
 private: true
 published: false
-checksum: "2473221192554153743"
+checksum: "17870890182677008578"

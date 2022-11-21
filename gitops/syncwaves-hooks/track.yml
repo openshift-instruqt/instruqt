@@ -1,6 +1,5 @@
 slug: gitops-syncwaves-hooks
 id: x4sq3mhjp9sc
-type: track
 title: Syncwaves and Hooks
 description: |
   ## Goal
@@ -39,6 +38,7 @@ developers:
 - nvinto@redhat.com
 - dahmed@redhat.com
 - chernand@redhat.com
+- cclyburn@redhat.com
 private: false
 published: true
 challenges:
@@ -108,6 +108,29 @@ challenges:
     * By name (ascending order)
 
     Read more about syncwaves on the [official documentation site](https://argoproj.github.io/argo-cd/user-guide/sync-waves/#how-do-i-configure-waves)
+
+    ## Logging in to the Cluster via Dashboard
+
+    At first, check that the pod responsible for OpenShift Web Console to be ready:
+
+    ```
+    oc get pods -n openshift-console | grep console
+    ```
+
+    You might have to wait a minute for the pod to be ready.
+
+    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
+
+    ```
+    oc get routes console -n openshift-console
+    ```
+
+    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+
+    You will then be able to login with admin permissions with:
+
+    * **Username:** ``admin``
+    * **Password:** ``admin``
 
     ## Installing OpenShift GitOps operator
 
@@ -215,7 +238,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
+  timelimit: 800
 - slug: 02-exploring-resource-hooks
   id: tgyhn1d9xzob
   type: challenge
@@ -335,7 +358,7 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
+  timelimit: 800
 - slug: 03-using-syncwaves-and-hooks
   id: 6d6icwg4a0oz
   type: challenge
@@ -432,5 +455,5 @@ challenges:
     hostname: crc
     path: /root
   difficulty: basic
-  timelimit: 600
-checksum: "762672133761127021"
+  timelimit: 800
+checksum: "6130093753506320138"

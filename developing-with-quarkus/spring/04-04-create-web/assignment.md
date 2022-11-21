@@ -18,7 +18,7 @@ tabs:
   type: terminal
   hostname: crc
 difficulty: intermediate
-timelimit: 500
+timelimit: 800
 ---
 This topic shows you how your Quarkus application can leverage the well known Spring Web annotations to define RESTful services.
 

@@ -15,7 +15,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 In this topic you're going to learn how to make changes to an existing resource object using the `oc edit` command.
 

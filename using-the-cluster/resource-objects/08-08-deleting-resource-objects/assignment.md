@@ -15,7 +15,7 @@ tabs:
   hostname: container
   path: /root
 difficulty: basic
-timelimit: 180
+timelimit: 500
 ---
 In this topic you will learn how to delete resource objects using the `oc delete` command.
 

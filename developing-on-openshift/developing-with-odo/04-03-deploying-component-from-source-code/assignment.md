@@ -19,7 +19,7 @@ tabs:
   hostname: container
   path: /root/backend
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 In this topic you will learn how to bring up the `frontend` component for the Wild West demonstration application and connect it to the `backend` component. The source code for the component is already available in the command line environment.
 

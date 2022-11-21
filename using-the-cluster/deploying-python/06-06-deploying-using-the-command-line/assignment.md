@@ -15,7 +15,7 @@ tabs:
   url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
-timelimit: 300
+timelimit: 500
 ---
 
 In this topic you will use the `oc` command line tool to deploy the application that was previously deployed using the web console.
