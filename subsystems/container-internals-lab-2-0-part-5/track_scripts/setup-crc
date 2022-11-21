@@ -184,6 +184,8 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
+git clone --depth 1 https://github.com/fatherlinux/container-internals-lab.git /root/labs
+
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do
@@ -231,4 +233,3 @@ done
 
 echo $(date)
 echo "### Boostrap END ###"
-
