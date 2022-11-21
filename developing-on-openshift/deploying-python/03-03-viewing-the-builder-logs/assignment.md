@@ -1,6 +1,6 @@
 ---
 slug: 03-viewing-the-builder-logs
-id: aoojou5ct3bq
+id: fejdyxn5u9gf
 type: challenge
 title: Topic 3 - Viewing the build logs in the Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

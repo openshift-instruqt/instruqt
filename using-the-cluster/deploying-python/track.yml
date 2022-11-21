@@ -38,4 +38,8 @@ developers:
 - cclyburn@redhat.com
 private: true
 published: false
+<<<<<<< HEAD
 checksum: "12405120608468226912"
+=======
+checksum: "1076041505809027014"
+>>>>>>> upstream/master

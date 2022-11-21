@@ -1,6 +1,6 @@
 ---
 slug: 01-creating-an-initial-project
-id: 3r0gwr77uboo
+id: mt4hywcwwvdk
 type: challenge
 title: Topic 1 - Creating an Initial Project
 notes:
@@ -29,7 +29,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

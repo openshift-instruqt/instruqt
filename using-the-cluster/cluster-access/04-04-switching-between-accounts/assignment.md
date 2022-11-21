@@ -111,7 +111,7 @@ oc config get-contexts
 You'll get output similar to the following:
 
 ```
-root@crc-gh9wd-master-0 /]# oc config get-contexts
+root@crc-lgph7-master-0 /]# oc config get-contexts
 CURRENT   NAME                                         CLUSTER                AUTHINFO                         NAMESPACE
           /api-crc-testing:6443/user1                  api-crc-testing:6443   user1/api-crc-testing:6443
           admin                                        crc                    admin

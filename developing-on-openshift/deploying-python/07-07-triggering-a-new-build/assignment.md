@@ -1,6 +1,6 @@
 ---
 slug: 07-triggering-a-new-build
-id: yiwekdz4qasy
+id: xzkxltrn7mbm
 type: challenge
 title: Topic 7 - Triggering new builds from the command line
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

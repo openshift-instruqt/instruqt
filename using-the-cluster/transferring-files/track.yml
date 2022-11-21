@@ -1,6 +1,5 @@
 slug: using-the-cluster-transferring-files
 id: fpczaosk7rlm
-type: track
 title: Transferring Files in and out of Containers
 description: |
   ## Goal
@@ -34,4 +33,4 @@ developers:
 - ryanj@redhat.com
 private: true
 published: false
-checksum: "3788862145683469519"
+checksum: "8444639698684285153"

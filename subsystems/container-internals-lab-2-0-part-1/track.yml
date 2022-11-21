@@ -5,7 +5,7 @@ description: |
   ## Background
   In this self-paced tutorial, you will gain a basic understanding of the moving parts that make up the typical container architecture.  This will cover container images, registries, hosts, and orchestration.
 
-  By the end of this lab you should be able to:
+  By the end of this lab you will be able to:
   - Draw a diagram showing how the Linux kernel, services and daemons work together to create and deploy containers
   - Internalize how the architecture of the kernel and supporting services affect security and performance
   - Explain the API interactions of daemons and the host kernel to create isolated processes
@@ -32,6 +32,7 @@ owner: openshift
 developers:
 - smccarty@redhat.com
 - nvinto@redhat.com
+<<<<<<< HEAD
 - cclyburn@redhat.com
 private: false
 published: true
@@ -367,3 +368,10 @@ challenges:
   difficulty: basic
   timelimit: 600
 checksum: "13772124845326712458"
+=======
+- bob@cogarttech.com
+- ryanj@redhat.com
+private: false
+published: true
+checksum: "2073413964663957289"
+>>>>>>> upstream/master

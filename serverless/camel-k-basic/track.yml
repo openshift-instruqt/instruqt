@@ -1,6 +1,5 @@
 slug: serverless-camel-k-basic
 id: 6sghia8rj0pj
-type: track
 title: Camel K Basics
 description: |2
 
@@ -31,4 +30,4 @@ developers:
 - ryanj@redhat.com
 private: false
 published: true
-checksum: "1354584350300580817"
+checksum: "7297407590419942022"

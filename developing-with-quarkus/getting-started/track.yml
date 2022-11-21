@@ -49,7 +49,14 @@ developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - eshortis@redhat.com
+<<<<<<< HEAD
 - cclyburn@redhat.com
 private: false
 published: true
 checksum: "9240581991898773294"
+=======
+- ryanj@redhat.com
+private: false
+published: true
+checksum: "16417912177902044327"
+>>>>>>> upstream/master

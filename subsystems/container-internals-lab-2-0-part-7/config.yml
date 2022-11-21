@@ -1,8 +1,8 @@
-version: "2"
+version: "3"
 virtualmachines:
 - name: rhel
-  image: openshift-instruqt/crc-4-10-latest
+  image: instruqt-redhat/rhel-latest
   shell: /bin/bash
   environment:
     TERM: xterm
-  machine_type: n1-highmem-4
+  machine_type: n1-standard-2

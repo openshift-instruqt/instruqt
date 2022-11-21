@@ -1,6 +1,6 @@
 ---
 slug: 01-creating-an-initial-project
-id: o3xvfrcevopx
+id: e6xfeurfocu7
 type: challenge
 title: Topic 1 - Creating an Initial Project
 notes:

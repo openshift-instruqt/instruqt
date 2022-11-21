@@ -1,7 +1,7 @@
-version: "2"
+version: "3"
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/crc-4-10-latest
+  image: rhd-devx-instruqt/openshift-4-11-7-lgph7
   machine_type: n1-highmem-4
   allow_external_ingress:
   - http

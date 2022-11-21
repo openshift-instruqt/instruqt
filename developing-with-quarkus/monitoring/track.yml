@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-monitoring
 id: husayvyvw0ax
-type: track
 title: Monitoring Quarkus with Micrometer
 description: |-
   |What you need to know before you start|
@@ -35,4 +34,4 @@ developers:
 - ryanj@redhat.com
 private: false
 published: true
-checksum: "3339510995978469219"
+checksum: "14737915110798932923"

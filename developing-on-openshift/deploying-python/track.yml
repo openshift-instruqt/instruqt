@@ -1,6 +1,5 @@
 slug: deploying-applications-from-source
-id: 8tt2fotzutgn
-type: track
+id: ycxzqi6gk4pn
 title: Deploying Applications From Source
 description: |
   ## Goal
@@ -34,6 +33,7 @@ developers:
 - dleblanc@redhat.com
 - bclayton@redhat.com
 - dschenck@redhat.com
+- ryanj@redhat.com
 private: true
 published: false
-checksum: "12284671698978785406"
+checksum: "16463249862275598584"

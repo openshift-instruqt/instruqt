@@ -1,6 +1,6 @@
 ---
 slug: 04-synchronizing-files-with-a-container
-id: 781nix9feced
+id: zrmvxzumtcxy
 type: challenge
 title: Topic 4 - Synchronizing Files with a Container
 notes:
@@ -126,7 +126,7 @@ export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://
 You'll get output similar to the following. (Your actual URL will be different):
 
 ```
-http://simplemessage-myproject.crc-gh9wd-master-0.crc.ai7oaxyso7ih.instruqt.io
+http://simplemessage-myproject.crc-lgph7-master-0.crc.ai7oaxyso7ih.instruqt.io
 ```
 
 ----
