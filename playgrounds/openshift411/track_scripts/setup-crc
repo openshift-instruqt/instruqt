@@ -223,12 +223,17 @@ do
 done
 
 # Wait until web console is available
-until curl -k https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io > /dev/null 2>/dev/null
+while [ "$(oc rollout status deploy console -n openshift-console)" != "deployment \"console\" successfully rolled out" ]
 do
     echo "Waiting for web console - not available yet"
-    sleep 6
+    sleep 5
+done
+
+while [ "$(curl -k -I https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io -o /dev/null -w '%{http_code}\n' -s 2>/dev/null)" != "200" ]
+do
+    echo "Waiting for web console - unavailable via curl"
+    sleep 5
 done
 
 echo $(date)
 echo "### Boostrap END ###"
-
