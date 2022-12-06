@@ -1,6 +1,8 @@
 slug: playgrounds-openshift411
 id: hlujba8rmi8j
-title: OpenShift 4.11 Playground
+title: Red Hat OpenShift 4.11 playground
+teaser: Use the web console or the command-line interface to explore Red Hat OpenShift,
+  then build and control a cluster.
 description: |
   ## Goal
 
@@ -31,4 +33,4 @@ developers:
 - rjarvine@redhat.com
 private: false
 published: true
-checksum: "10787376899991601924"
+checksum: "777549404282319689"
