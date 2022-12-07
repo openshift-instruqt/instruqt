@@ -94,7 +94,7 @@ do
     then
       continue
     fi
-
+    
     echo -n "Waiting for $co ..."
     co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
 
@@ -153,7 +153,7 @@ do
     then
       continue
     fi
-
+    
     echo -n "Waiting for $co ..."
     co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
 
@@ -184,7 +184,7 @@ do
     then
       continue
     fi
-
+    
     echo -n "Waiting for $co ..."
     co_available=$(oc get $co 2>/dev/null | awk -v col=AVAILABLE 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $c}' | grep True)
 

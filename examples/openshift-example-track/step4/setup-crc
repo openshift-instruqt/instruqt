@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Download Service YAML
-curl -s https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/service/networking/nginx-svc.yaml -o /root/nginx-svc.yaml

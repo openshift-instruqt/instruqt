@@ -1,20 +1,26 @@
 slug: openshift-example-track
-id: mdqdws7j7qmd
-type: track
-title: OpenShift example track
+id: qspfr3skm2w3
+title: OpenShift Example Track
+teaser: Get started quickly with this OpenShift example track.
 description: |
-  ## OpenShift example track
+  ## Goal
 
-  OpenShift is a family of containerization software products developed by Red Hat.
+  The goal of this track is to learn how to use the OpenShift Container Platform to build and deploy an application that has a data backend and a web frontend.
 
-  Its flagship product is the OpenShift Container Platform — an on-premises platform as a service built around Linux containers orchestrated and managed by Kubernetes on a foundation of Red Hat Enterprise Linux.
+  |What you need to know before you start|
+  |----|
+  |In order to get full benefit from taking this track you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform)|
 
-  The family's other products provide this platform through different environments:
+  ## Concepts and techniques you'll cover
 
-  * OKD serves as the community-driven upstream (akin to the way that Fedora is upstream of Red Hat Enterprise Linux)
-  * Developer Sandbox for OpenShift is the platform offered as software as a service, and OpenShift Dedicated is the platform offered as a managed service.
+  * Understanding the OpenShift Web Console and viewing perspectives
+  * Understanding how to login to OpenShift using the `oc` command line tool
+  * How to build applications from a container image using OpenShift Web Console
+  * How to access public URLs by working with OpenShift Routes
 
-  ![Logo](https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB%20%284%29.png)
+  ## Use case
+
+  You'll use the concepts and techniques covered in this track to get a basic understanding of how to work with OpenShift in the Web Console and at the command line. OpenShift runs as a layer over Kubernetes and makes working with both Kubernetes and Linux containers easier. The result is that when developers use OpenShift they are free to focus on their code instead of spending time writing Dockerfiles and running container builds.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
@@ -22,130 +28,10 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
+- bob@cogarttech.com
+- ryanj@redhat.com
+- cclyburn@redhat.com
 private: true
 published: false
-challenges:
-- slug: step1
-  id: ansgrpbdnsvw
-  type: challenge
-  title: Login to OpenShift
-  notes:
-  - type: text
-    contents: In this step you will learn how to connect to OpenShift
-  assignment: |2-
-
-    Let's begin by connecting to OpenShift.
-
-    From *Terminal 1*, run the following command to login with the OpenShift CLI:
-
-    ```
-    oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
-    ```
-
-    You should see:
-    ```bash
-    Login successful.
-    You don't have any projects. You can try to create a new project, by running `oc new-project <projectname>`
-    ```
-    Congratulations, you are now authenticated to the OpenShift cluster.
-
-    Access the OpenShift Web Console to login from the Web UI:
-    ```
-    oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-    ```
-    Copy the URL from the output of the above command and open it in your browser.
-    We'll deploy our app as the `admin` user. Use the following credentials:
-    * Username:
-    ```
-    admin
-    ```
-    * Password:
-    ```
-    admin
-    ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Visual Editor
-    type: code
-    hostname: crc
-    path: /root
-  difficulty: basic
-  timelimit: 150
-- slug: step2
-  id: ihzitshniij8
-  type: challenge
-  title: Create a new Project
-  notes:
-  - type: text
-    contents: In this step you will learn how create a new project
-  assignment: |-
-    Now let's create a new project where to work with:
-    ```
-    oc new-project myproject
-    ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: crc
-  - title: Visual Editor
-    type: code
-    hostname: crc
-    path: /root/
-  difficulty: basic
-  timelimit: 150
-- slug: step3
-  id: owpqm1xt7lpb
-  type: challenge
-  title: Create a Pod
-  notes:
-  - type: text
-    contents: In this step you will learn how create a new Pod
-  assignment: |2-
-
-    Review from *Visual Editor* Tab the YAML of `/root/simple-pod.yaml`.
-
-    Now let's create a new Pod:
-
-    ```
-    oc create -f /root/simple-pod.yaml
-    ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: crc
-    path: /root
-  - title: Visual Editor
-    type: code
-    hostname: crc
-    path: /root/
-  difficulty: basic
-  timelimit: 150
-- slug: step4
-  id: px6mpjyg1lyw
-  type: challenge
-  title: Create a Service
-  notes:
-  - type: text
-    contents: In this step you will learn how create a new Service
-  assignment: |-
-    Review from *Visual Editor* Tab the YAML of `/root/nginx-svc.yaml`.
-
-    Now let's create a new Service:
-
-    ```
-    oc create -f /root/nginx-svc.yaml
-    ```
-  tabs:
-  - title: Terminal 1
-    type: terminal
-    hostname: crc
-    path: /root
-  - title: Visual Editor
-    type: code
-    hostname: crc
-    path: /root/
-  difficulty: basic
-  timelimit: 150
-checksum: "4752646369238682723"
+show_timer: true
+checksum: "14251957756985774840"
