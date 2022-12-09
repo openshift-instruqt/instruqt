@@ -1,6 +1,6 @@
 ---
-slug: 1explore-cli
-id: 9hvnbh8ps8fw
+slug: explore-cli
+id: g1jmjvsktaxu
 type: challenge
 title: Step 1 - Getting started with OpenShift
 notes:
@@ -30,7 +30,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300

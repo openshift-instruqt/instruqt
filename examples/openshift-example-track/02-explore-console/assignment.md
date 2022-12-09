@@ -1,6 +1,6 @@
 ---
-slug: 2explore-console
-id: lenohyqt6s9b
+slug: explore-console
+id: wfpoo6ve89vn
 type: challenge
 title: Step 2 - Exploring The Web Console
 notes:
@@ -12,7 +12,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 300
