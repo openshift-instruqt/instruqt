@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Download Pod YAML
+curl -s https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/pods/simple-pod.yaml -o /root/simple-pod.yaml
