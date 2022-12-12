@@ -6,7 +6,7 @@ crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
 
 echo "$crc api.crc.testing" >> /etc/hosts
 
-export OC_VERSION=4.9.0
+export OC_VERSION=4.11.7
 export HELM_VERSION=3.3.4
 
 curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/$OC_VERSION/openshift-client-linux-$OC_VERSION.tar.gz -o /tmp/openshift-client-linux-$OC_VERSION.tar.gz

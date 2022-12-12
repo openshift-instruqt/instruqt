@@ -1,6 +1,5 @@
 slug: operatorframework-operator-lifecycle-manager
 id: gs6uksswufnj
-type: track
 title: Operator Lifecycle Manager
 description: |-
   ![Operator Lifecycle Manager](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/operatorframework/operator-lifecycle-manager/olm-logo.png)
@@ -38,8 +37,7 @@ owner: openshift
 developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: step1
   id: x1xjubrnqhrx
@@ -118,7 +116,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -206,7 +204,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -248,7 +246,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -348,7 +346,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -431,7 +429,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -492,7 +490,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -522,7 +520,7 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
@@ -571,8 +569,8 @@ challenges:
     path: /root
   - title: Web Console
     type: website
-    url: https://console-openshift-console.crc-gh9wd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
     new_window: true
   difficulty: basic
   timelimit: 225
-checksum: "10009027092162830472"
+checksum: "3104949137269210647"
