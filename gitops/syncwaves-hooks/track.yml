@@ -39,8 +39,7 @@ developers:
 - dahmed@redhat.com
 - chernand@redhat.com
 - cclyburn@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: 01-using-syncwaves
   id: jv1yo6nlycw0
@@ -456,4 +455,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 800
-checksum: "6130093753506320138"
+checksum: "13269047268957537138"

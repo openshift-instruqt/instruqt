@@ -1,7 +1,7 @@
 slug: gitops-pipelines
 id: lqsxxbn4a6qy
-type: track
-title: Using OpenShift Pipelines
+title: Use Red Hat OpenShift Pipelines
+teaser: Learn how to use Red Hat OpenShift Pipelines to automate application deployment.
 description: |-
   In this self-paced tutorial, you will learn how to use OpenShift Pipelines to automate the deployment of your applications.
 
@@ -55,10 +55,9 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
-- cclyburn@redhat.com
 - chernand@redhat.com
-private: false
-published: true
+- cclyburn@redhat.com
+- ryanj@redhat.com
 challenges:
 - slug: 01install-op
   id: emxtfxxh93ig
@@ -588,4 +587,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "9767179071128645496"
+checksum: "4289987404340873371"
