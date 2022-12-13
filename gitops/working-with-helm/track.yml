@@ -1,6 +1,5 @@
 slug: gitops-working-with-helm
 id: 5fe6ueeeypty
-type: track
 title: Working with Helm
 description: |
   ## Goal
@@ -40,8 +39,7 @@ developers:
 - nvinto@redhat.com
 - dahmed@redhat.com
 - chernand@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: 01-helm-integration
   id: 57dyymuekbzf
@@ -485,4 +483,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "5289690177749561029"
+checksum: "18034628246225753638"

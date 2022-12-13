@@ -1,6 +1,5 @@
 slug: serverless-camel-k-serving
 id: uxa1a3iktb6p
-type: track
 title: Serverless Camel K
 description: |
   # Serverless Camel K
@@ -41,8 +40,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: step1
   id: o3zvlhfkm7w9
@@ -563,4 +561,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 450
-checksum: "3370305759808672883"
+checksum: "2486446096879779548"

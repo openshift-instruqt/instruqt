@@ -1,6 +1,5 @@
 slug: gitops-kustomize
 id: 8sy0nyxias34
-type: track
 title: Working with Kustomize
 description: |
   ## Goal
@@ -36,8 +35,7 @@ developers:
 - dahmed@redhat.com
 - nvinto@redhat.com
 - chernand@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: 01-exploring-kustomize
   id: jygx5whmnqt1
@@ -414,4 +412,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 900
-checksum: "13121523132707308097"
+checksum: "1498929938192296855"

@@ -1,6 +1,5 @@
 slug: serverless-camel-kafka-connector
 id: 3iss6yyk7w3a
-type: track
 title: Camel Kafka Connector Basics
 description: |2
 
@@ -32,9 +31,8 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
-- dahmed@redhat.com
-private: false
-published: true
+- bmesegue@redhat.com
+- ryanj@redhat.com
 challenges:
 - slug: step1
   id: zlfqmxoxbvni
@@ -499,4 +497,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "16130038700561993207"
+checksum: "7273795974498570217"
