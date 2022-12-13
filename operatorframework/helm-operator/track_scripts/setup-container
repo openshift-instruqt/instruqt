@@ -7,9 +7,10 @@ crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
 
 echo "$crc api.crc.testing" >> /etc/hosts
 
+export OPENSHIFT_VERSION=4.11.7
 
-curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.9.0/openshift-client-linux-4.9.0.tar.gz -o /tmp/openshift-client-linux-4.9.0.tar.gz
-tar -xvf /tmp/openshift-client-linux-4.9.0.tar.gz -C /usr/bin/
+curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/$OPENSHIFT_VERSION/openshift-client-linux-$OPENSHIFT_VERSION.tar.gz -o /tmp/openshift-client-linux-$OPENSHIFT_VERSION.tar.gz
+tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_VERSION.tar.gz -C /usr/bin/
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
 

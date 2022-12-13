@@ -15,6 +15,7 @@ developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
 private: false
 published: true
 challenges:
@@ -608,4 +609,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 500
-checksum: "18332722122774750147"
+checksum: "6284526807357586953"

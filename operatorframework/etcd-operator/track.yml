@@ -28,8 +28,7 @@ developers:
 - yurimsa@gmail.com
 - nvinto@redhat.com
 - cclyburn@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: step1
   id: d9s2gxxn9mc3
@@ -517,4 +516,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 300
-checksum: "11868400250980061507"
+checksum: "16289905858904969829"
