@@ -1,6 +1,5 @@
 slug: serverless-serverless
 id: yel78w43xp9x
-type: track
 title: Getting Started with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
@@ -58,8 +57,7 @@ developers:
 - nvinto@redhat.com
 - rjarvine@redhat.com
 - dahmed@redhat.com
-private: false
-published: true
+- ryanj@redhat.com
 challenges:
 - slug: 01-prepare
   id: z2b4ri8gr8rr
@@ -878,4 +876,4 @@ challenges:
     path: /root
   difficulty: intermediate
   timelimit: 360
-checksum: "16837034797322223096"
+checksum: "8384810129880780885"
