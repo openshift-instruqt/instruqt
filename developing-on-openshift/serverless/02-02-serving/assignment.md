@@ -9,7 +9,7 @@ tabs:
   hostname: container
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-dzk9v-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 360
@@ -178,7 +178,7 @@ kn route list
 See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
 ```bash
 NAME      URL                                                                                  READY
-greeter   https://greeter-serverless-tutorial.crc-dzk9v-master-0.crc.2rtmqs1ojyed.instruqt.io  True
+greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.2rtmqs1ojyed.instruqt.io  True
 ```
 
 ### Revision
