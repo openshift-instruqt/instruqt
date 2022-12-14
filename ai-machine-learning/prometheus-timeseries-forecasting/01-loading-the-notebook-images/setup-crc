@@ -1,5 +1,0 @@
-#!/bin/bash
-oc login -u admin -p admin
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-timeseries-forecasting/assets/notebook-imagestream.yaml -o /root/notebook-imagestream.yaml
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-timeseries-forecasting/assets/setup.sh -o /root/setup.sh
-cd  /root && bash setup.sh

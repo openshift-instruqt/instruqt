@@ -1,3 +1,0 @@
-#!/bin/bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/ai-machine-learning/jupyterhub-service/scripts/jupyterhub_config.py -O /root/jupyterhub_config.py
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/ai-machine-learning/jupyterhub-service/scripts/jupyterhub_config.sh -O /root/jupyterhub_config.sh
