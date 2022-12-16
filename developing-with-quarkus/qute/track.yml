@@ -1,6 +1,5 @@
 slug: developing-with-quarkus-qute
 id: whkravwkm3hs
-type: track
 title: Templating with Qute Templating Engine
 description: |-
   In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
@@ -36,6 +35,4 @@ developers:
 - bob@cogarttech.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "3721127086050598941"
+checksum: "14419716264343137359"
