@@ -1,0 +1,36 @@
+slug: using-the-cluster-transferring-files
+id: fpczaosk7rlm
+title: Transferring Files in and out of Containers
+description: |
+  ## Goal
+
+  The goal of this track is to demonstrate how to copy files to and from a running container without rebuilding the container image. In addition, the track will demonstrate how to use a Persistent Volume and Persistent Volume claim under OpenShift to store data independent of a container.
+
+  |What you need to know before you start|
+  |----|
+  |In order to get full benefit from taking this track you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) as a management framework for Linux containers.<br>• Know how to use the [`oc`](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html) CLI to work with OpenShift at the command line.|
+
+
+  ## Concepts and techniques you'll cover
+
+  * Creating OpenShift projects and applications from the command line using the `oc` command
+  * Copying files from a container and into a local machine using the `oc resync` command
+  * Using the implicit automation available in OpenShift to copy changed files on a local machine to a container's file system.
+  * Work with a Persistent Volume and Persistent Volume claim independent of a container
+
+  ## Use case
+
+  You use the concepts and techniques covered in this track when you want to manually or automatically synchronize changes in the files on a local machine with containers in an OpenShift cluster and vice versa.
+icon: https://logodix.com/logo/1910931.png
+level: intermediate
+tags:
+- openshift
+owner: openshift
+developers:
+- bob@cogarttech.com
+- dschenck@redhat.com
+- nvinto@redhat.com
+- ryanj@redhat.com
+private: true
+published: false
+checksum: "8444639698684285153"
