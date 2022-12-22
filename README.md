@@ -1,14 +1,18 @@
 # OpenShift Labs on Instruqt
 
-Welcome to the OpenShift Labs on Instruqt repositories. This repo is the source code of labs you find at https://developers.redhat.com/learn
+Welcome to the OpenShift Labs on Instruqt repositories. This repo contains the source code of our self-paced labs you can access at https://developers.redhat.com/learn
 
-Please refer to the [Instruqt Documentation](https://docs.instruqt.com/) to understand how it works.
+To learn more about Instruqt for OpenShift Labs, check out our internal presentation [here](https://docs.google.com/presentation/d/1J-QQoiRbrkLzrbuvAZeISBuSmgS2_mIHD9XdbMumuTo/edit?usp=sharing).
 
-## Instruqt CLI
+## Instruqt
 
-The first thing to do is to download the [Instruqt CLI](https://docs.instruqt.com/reference/software-development-kit-sdk)
+This repository contains images and tracks for the [Instruqt](https://instruqt.com) platform. Red Hat is using Instruqt for in-browser demonstrations of OpenShift labs, as well as the Ansible Automation Platform and RHEL. Please refer to the [Instruqt Documentation](https://docs.instruqt.com) to understand how it works.
 
-## Login
+### Using Instruqt
+
+The first thing to do is to download the [Instruqt CLI](https://docs.instruqt.com/reference/software-development-kit-sdk), which allows you to create new tracks, push tracks, and more. This [how-to](https://docs.instruqt.com/how-to-guides/build-tracks) guide on building tracks provides a great reference in pair with our  internal presentation for OpenShift-specific labs.
+
+### Login to Instruqt
 
 If don't have an account on Instruqt, create a new account: https://play.instruqt.com/login
 
@@ -20,39 +24,39 @@ instruqt auth login
 
 This will open a browser where you can login, then your CLI session is authenticated.
 
-## Track Development
+The OpenShift Instruqt organization page is hosted at https://play.instruqt.com/openshift
 
-You can create a new track in general with this command:
+### Track Development
 
-### Track Create
+Here's how to get started on working on or maintaining an Instruqt OpenShift track:
+
+#### Creating tracks from scratch/template
+
+*Create a new track, from scratch*
 
 Create an empty track:
 ```
 instruqt track create --title "First track"
 ```
 
-Use commands below to create a new track starting from a template OpenShift track
+*Start from an OpenShift template track*
 
-
-#### OpenShift track example
-
-This creates an example track using CRC 4.9 VM with `root` user and authenticated by default with `system:admin` as in [this example](https://github.com/openshift-instruqt/instruqt/tree/master/examples/openshift-example-track):
+This creates an example track using CRC 4.11 VM with `root` user and authenticated by default with `system:admin` as in [this example](https://github.com/openshift-instruqt/instruqt/tree/master/examples/openshift-example-track):
 
 ```
 instruqt track create --from openshift/openshift-example-track --title "My First OpenShift Track"
 ```
 
-#### OpenShift track with Fedora sidecar example
+*Start from an OpenShift template track with a Fedora sidecar*
 
-This creates an example track using CRC 4.9 VM and a sidecar Fedora container using `root` user where to install packages/dependencies.
+This creates an example track using CRC 4.11 VM and a sidecar Fedora container using `root` user where to install packages/dependencies.
 The container can be connected to the CRC VM with the oc CLI as in [this example](https://github.com/openshift-instruqt/instruqt/tree/master/examples/openshift-example-track-with-fedora-sidecar):
 
 ```
 instruqt track create --from openshift/openshift-example-track-with-fedora-sidecar --title "My First OpenShift Track with Fedora Sidecar"
 ```
 
-
-### Track Pull
+#### Track Pull
 
 You can download an existing track:
 
@@ -60,7 +64,7 @@ You can download an existing track:
 instruqt track pull openshift/operatorframework-k8s-api-fundamentals
 ```
 
-### Track Push
+#### Track Push
 
 You can push the change to your track in this way:
 
@@ -68,7 +72,7 @@ You can push the change to your track in this way:
 instruqt track push
 ```
 
-### Logs
+#### Check Logs
 
 You can check the logs from your track in this way:
 
@@ -76,7 +80,7 @@ You can check the logs from your track in this way:
 instruqt track logs
 ```
 
-### Tips for katacoda's automatically converted context
+### Converting legacy Katacoda content to Instruqt's format
 
 #### Web Console
 
@@ -203,15 +207,16 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/ope
 
 ## CRC Image
 
-We are currently using nested virtualization with a CRC 4.9 inside a RHEL 8 VM.
+We are currently using nested virtualization with a CRC 4.11 (`rhd-devx-instruqt/openshift-4-11-7-lgph7
+`) inside a RHEL 8 VM.
 
 The setting to have this image is from the `config.yml` file:
 
 ```
-version: "2"
+version: "3"
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/crc-4-10-latest
+  image: rhd-devx-instruqt/openshift-4-11-7-lgph7
   machine_type: n1-highmem-4
   allow_external_ingress:
   - http
@@ -222,14 +227,14 @@ virtualmachines:
 We can also have a sidecar container that can connect to the CRC VM with oc CLI in this way:
 
 ```
-version: "2"
+version: "3"
 containers:
 - name: container
   image: fedora
   shell: /bin/bash
 virtualmachines:
 - name: crc
-  image: openshift-instruqt/crc-4-10-latest
+  image: rhd-devx-instruqt/openshift-4-11-7-lgph7
   machine_type: n1-highmem-4
   allow_external_ingress:
   - http
@@ -237,9 +242,9 @@ virtualmachines:
   - high-ports
 ```
 
-The connection is made inside the setup scripts like [this one](https://github.com/openshift-instruqt/instruqt/blob/master/operatorframework/go-operator-podset/track_scripts/setup-container). Please refer to Instruqt doc to understand [track's lifecycle scripts](https://docs.instruqt.com/tracks/lifecycle-scripts).
+The connection is made inside the setup scripts like [this one](https://github.com/openshift-instruqt/instruqt/blob/master/developing-on-openshift/developing-with-odo/track_scripts/setup-container). Please refer to Instruqt's documentation to understand [track lifecycle scripts](https://docs.instruqt.com/tracks/lifecycle-scripts).
 
-## Other
+## Misc
 
 ### Mapping with Katacoda
 * First level:  [Pathways](https://github.com/openshift-labs/learn-katacoda/blob/master/using-the-cluster-pathway.json)->[Topics](https://play.instruqt.com/openshift/topics/using-the-cluster)
@@ -294,4 +299,3 @@ for d in `ls -d */ | grep -v learn-katacoda`; do
 done
 
 ```
-
