@@ -1,0 +1,28 @@
+name: Track Promote
+description: Prepares track for validate, push and test.
+inputs:
+  path:
+    description: Path to the Instruqt track.
+    required: true
+  id:
+    description: ID of Track
+    required: true
+runs:
+  using: composite
+  steps:
+  - name: Inject track id and prepare for push
+    shell: bash
+    run: |
+
+      cd ${{ inputs.path }}
+
+      # Remove the dev suffix and title prefix if they exist, also update tags
+      sed -i '0,/^slug/{s/-dev//}' track.yml
+      sed -i '0,/^title/{s/DEV - //}' track.yml
+      sed -i 's/^- dev/- prod/g' track.yml
+
+      # Update the track ID to the original
+      sed -i 's/^id:.*/id: ${{ inputs.id }}/g' track.yml
+
+      # Remove maintenance tag
+      sed -i 's/^maintenance: true/maintenance: false/g' track.yml

@@ -1,0 +1,49 @@
+##############################################################################
+# Instruqt Github Actions Workflow
+#
+# This workflow will convert the provided track-slug into a DEV variant
+#
+##############################################################################
+name: convert
+
+env:
+  INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
+  TRACK_DIR: instruqt-tracks
+  
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on: 
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Track Slug
+        required: true
+        type: string
+    branches:    
+      - '!main'
+      - '!master'
+
+jobs:
+  CreateDevTrack:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Create dev track
+        uses: ./.github/actions/track-dev
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ inputs.slug }}
+
+      - name: Push dev tracks
+        uses: ./.github/actions/track-push
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ inputs.slug }}
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Creating dev version of ${{ inputs.slug }}
