@@ -1,9 +1,0 @@
-#!/bin/bash
-oc login -u admin -p admin
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-api-client/assets/deploy-prometheus.yaml -o /root/deploy-prometheus.yaml
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-api-client/assets/generate-metrics.yaml -o /root/generate-metrics.yaml
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-api-client/assets/notebook-imagestream.yaml -o /root/notebook-imagestream.yaml
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-api-client/assets/setup.sh -o /root/setup.sh
-curl -s https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/ai-machine-learning/prometheus-api-client/assets/volumes.json -o /root/volumes.json
-cd  /root && bash setup.sh
-
