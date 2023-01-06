@@ -1,0 +1,57 @@
+##############################################################################
+# Instruqt Github Actions Workflow
+#
+# This workflow will promote a DEV track back to its PROD version
+#
+##############################################################################
+name: promote
+
+env:
+  INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
+  TRACK_DIR: instruqt-tracks
+  
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on: 
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Track Slug
+        required: true
+        type: string
+    branches:    
+      - '!main'
+      - '!master'
+
+jobs:
+  PromoteTrack:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Pull latest track
+        uses: ./.github/actions/track-pull
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ inputs.slug }}
+
+      - name: Get Track ID
+        run: echo "ID=$(TRACKNAME=${{ inputs.slug }} yq eval '.tracks[] | select(.slug == env(TRACKNAME) ) | .id' instruqt-tracks/track-slugs.yml)" >> $GITHUB_ENV
+
+      - name: Update file permissions
+        run: sudo chmod -R a+rwx ${{ env.TRACK_DIR }}/${{ inputs.slug }}
+
+      - name: Promote dev tracks
+        uses: ./.github/actions/track-promote
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ inputs.slug }}
+          id: ${{ env.ID }}
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Promoting ${{ inputs.slug }} track

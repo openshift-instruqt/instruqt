@@ -1,0 +1,13 @@
+name: Install yq
+description: Installs the yq package for parsing YAML files
+runs:
+  using: composite
+  steps:
+
+    - name: Download yq package
+      shell: bash
+      run: wget https://github.com/mikefarah/yq/releases/download/v4.26.1/yq_linux_amd64
+
+    - name: Configure yq executable
+      shell: bash
+      run: sudo mv yq_linux_amd64 /usr/bin/yq && chmod +x /usr/bin/yq

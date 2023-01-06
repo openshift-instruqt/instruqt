@@ -1,0 +1,34 @@
+name: CI Check
+description: Pulls track tags from Instruqt to determine if "no-ci" tag is set
+inputs:
+  id:
+    description: ID of instruqt track to pull
+    required: true
+outputs:
+  ci:
+    description: Whether CI is enabled or disabled
+runs:
+  using: composite
+  steps:
+  - name: Run CURL request 
+    shell: bash
+    run: |
+      
+      cat >query.json <<EOF
+      {
+        "query": "query {
+          track(trackID: \"${{ inputs.id }}\") {
+            tags
+          }
+        }"
+      }
+      EOF
+
+      TAGS=$(curl -H "Authorization: Bearer ${{ env.INSTRUQT_TOKEN }}" -X POST -d @query.json https://play.instruqt.com/graphql)
+
+      if echo $TAGS | grep "no-ci"; then 
+        echo "CI is disabled for this track"
+        exit 1
+      else 
+        echo "CI is enabled for this track"
+      fi

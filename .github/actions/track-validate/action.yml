@@ -1,0 +1,15 @@
+
+name: Instruqt Track Validate
+description: Validates an Instruqt track. Must be in the track directory to run.
+inputs:
+  path:
+    description: Path to the Instruqt track.
+    required: true
+runs:
+  using: composite
+  steps:
+  - name: Run track validate
+    shell: bash
+    run: |
+      cd ${{ inputs.path }}
+      docker run -e INSTRUQT_TOKEN=${{ env.INSTRUQT_TOKEN }} --workdir="/track" --mount type=bind,source="$(pwd)",target=/track instruqt/cli track validate

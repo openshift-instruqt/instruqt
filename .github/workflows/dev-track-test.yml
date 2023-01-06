@@ -1,0 +1,82 @@
+##############################################################################
+# Instruqt Github Actions Workflow
+#
+# This workflow file and its actions will run a validate/push/test cycle on
+# one or more Instruqt DEV tracks directories in your repo. Each job targets a
+# separate directory of tracks. All the tracks in each directory must belong
+# to the same organization.
+#
+##############################################################################
+name: development
+
+env:
+  # Set these values to match your environment. Your token should be 
+  # stored as a Github secret in your tracks repo. Also make sure you 
+  # have a track-slugs.yml file in your tracks directory.
+  TRACK_DIR: instruqt-tracks
+  INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+  workflow_dispatch:
+
+jobs:
+  GetTrackSlugs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+    
+    - name: Install yq Package
+      uses: ./.github/actions/install-yq
+    
+    - name: Create Matrix Data
+      run: echo "TRACKS=$(yq -o j $TRACK_DIR/track-slugs.yml | jq tostring | sed -e 's/^"//' -e 's/"$//')" >> $GITHUB_ENV
+
+    - id: set-matrix
+      run: echo "::set-output name=matrix::${{ env.TRACKS }}"
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  TestDevTracks:
+    runs-on: ubuntu-latest
+    needs: GetTrackSlugs
+    strategy:
+      matrix: ${{ fromJson(needs.GetTrackSlugs.outputs.matrix) }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        
+      - name: Install yq Package
+        uses: ./.github/actions/install-yq
+
+      - name: Convert to DEV version 
+        uses: ./.github/actions/track-dev
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ matrix.tracks.slug }}
+
+      # Remaining steps will skip any tracks that do not have existing DEV variants on Instruqt
+      - name: Pull track from instruqt
+        id: track-pull
+        uses: ./.github/actions/track-pull
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ matrix.tracks.slug }}
+        continue-on-error: true
+        
+      - name: Track Validate
+        uses: ./.github/actions/track-validate
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ matrix.tracks.slug }}
+        if: steps.track-pull.outcome == 'success'
+      
+      - name: Track Test
+        uses: ./.github/actions/track-test
+        with:
+          path: ${{ env.TRACK_DIR }}/${{ matrix.tracks.slug }}
+        if: steps.track-pull.outcome == 'success'
