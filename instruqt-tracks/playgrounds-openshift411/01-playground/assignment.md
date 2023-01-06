@@ -1,6 +1,6 @@
 ---
 slug: playground
-id: c6r3tdoe8dri
+id: zw6aqeoq7ol1
 type: challenge
 title: OpenShift Playground
 notes:
