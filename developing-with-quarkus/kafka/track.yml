@@ -38,6 +38,5 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "9802266188790367881"
+- cclyburn@redhat.com
+checksum: "11053060211124046676"
