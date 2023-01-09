@@ -235,6 +235,8 @@ Finally, let's look at the list of pods being spun up to determine that the Kafk
 
 `Step 8:` Run the following command in **Terminal 1** to get a list of pods and then pipe the response to `grep` to filter out only those pods that have the string `names-cluster` in its name:
 
+(It might take a minute or so for all the pods to appear.)
+
 ```
 oc get pods | grep names-cluster
 ```
