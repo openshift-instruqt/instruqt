@@ -187,6 +187,11 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
+# Get the tar.xz
+curl -LO https://github.com/tektoncd/cli/releases/download/v0.29.0/tkn_0.29.0_Linux_x86_64.tar.gz
+# Extract tkn to your PATH (e.g. /usr/local/bin)
+sudo tar xvzf tkn_0.29.0_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
+
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do

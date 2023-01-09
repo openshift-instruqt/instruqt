@@ -35,7 +35,7 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
 
 ## Creating a new Helm Chart
 
-Navigate to `/opt` directory:
+Navigate to `/root` directory:
 
 ```
 cd /root
