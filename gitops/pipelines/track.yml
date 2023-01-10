@@ -537,7 +537,6 @@ challenges:
 
     To view the `PipelineRun` visually, visit the Pipelines section of the developer perspective. From here, you can see the details of our `Pipeline`, including the YAML file we've applied, the `PipelineRun`, input custom `params`, and more:
 
-    // TODO : Update the following image to show the actual pipelineruns
     ![Web Console Pipelines](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-developer.png)
 
     Congrats! Your `Pipeline` has successfully ran, and the final step will provide instructions on how to access the deployed image.
@@ -587,4 +586,4 @@ challenges:
     path: /root
   difficulty: basic
   timelimit: 257
-checksum: "4289987404340873371"
+checksum: "10521993167633573352"
