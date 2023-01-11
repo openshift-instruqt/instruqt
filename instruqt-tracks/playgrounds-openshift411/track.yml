@@ -24,6 +24,7 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
+- prod
 owner: openshift
 developers:
 - ryanj@redhat.com
@@ -31,4 +32,5 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-checksum: "2426535290424978197"
+maintenance: false
+checksum: "9991676589578419314"

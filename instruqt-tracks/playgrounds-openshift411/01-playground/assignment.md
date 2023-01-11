@@ -1,6 +1,6 @@
 ---
 slug: playground
-id: c6r3tdoe8dri
+id: zw6aqeoq7ol1
 type: challenge
 title: OpenShift Playground
 notes:
@@ -57,7 +57,7 @@ admin
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
 
-You can login also with as `developer` user. Use the following credentials:
+You can also login as the `developer` user. Use the following credentials:
 
 * Username:
 ```
