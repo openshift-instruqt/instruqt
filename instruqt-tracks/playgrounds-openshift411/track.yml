@@ -1,6 +1,6 @@
-slug: playgrounds-openshift411
-id: hlujba8rmi8j
-title: Red Hat OpenShift 4.11 playground
+slug: playgrounds-openshift411-dev
+id: wvc8ssjkpx6u
+title: DEV - Red Hat OpenShift 4.11 playground
 teaser: Use the web console or the command-line interface to explore Red Hat OpenShift,
   then build and control a cluster.
 description: |
@@ -24,7 +24,7 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
-- prod
+- dev
 owner: openshift
 developers:
 - ryanj@redhat.com
@@ -32,5 +32,5 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-maintenance: false
-checksum: "9991676589578419314"
+maintenance: true
+checksum: "3022932326632509756"
