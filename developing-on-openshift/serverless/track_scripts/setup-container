@@ -20,33 +20,33 @@ chmod +x /usr/local/bin/kn
 
 mkdir -p /root/01-prepare
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/serverless/serverless/scripts/01-prepare/install-serverless.bash -o /root/01-prepare/install-serverless.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/operator-subscription.yaml -o /root/01-prepare/operator-subscription.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-serverless-operator.bash -o /root/01-prepare/watch-serverless-operator.bash
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/serving.yaml -o /root/01-prepare/serving.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/01-prepare/watch-knative-serving.bash -o /root/01-prepare/watch-knative-serving.bash
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/serverless/serverless/scripts/01-prepare/install-serverless.bash -o /root/01-prepare/install-serverless.bash
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/01-prepare/operator-subscription.yaml -o /root/01-prepare/operator-subscription.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/01-prepare/watch-serverless-operator.bash -o /root/01-prepare/watch-serverless-operator.bash
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/01-prepare/serving.yaml -o /root/01-prepare/serving.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/01-prepare/watch-knative-serving.bash -o /root/01-prepare/watch-knative-serving.bash
 
 mkdir -p /root/02-serving
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/service.yaml -o /root/02-serving/service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/02-serving/watch-service.bash -o /root/02-serving/watch-service.bash
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/02-serving/service.yaml -o /root/02-serving/service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/02-serving/watch-service.bash -o /root/02-serving/watch-service.bash
 
 mkdir -p /root/03-traffic-distribution
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml -o /root/03-traffic-distribution/greeter-v1-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml -o /root/03-traffic-distribution/greeter-v2-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml -o /root/03-traffic-distribution/service-pinned.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml -o /root/03-traffic-distribution/greeter-v1-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml -o /root/03-traffic-distribution/greeter-v2-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/03-traffic-distribution/service-pinned.yaml -o /root/03-traffic-distribution/service-pinned.yaml
 
 mkdir -p /root/04-canary-releases
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/greeter-canary-service.yaml -o /root/04-canary-releases/greeter-canary-service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/04-canary-releases/poll-svc-10.bash -o /root/04-canary-releases/poll-svc-10.bash
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/04-canary-releases/greeter-canary-service.yaml -o /root/04-canary-releases/greeter-canary-service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/04-canary-releases/poll-svc-10.bash -o /root/04-canary-releases/poll-svc-10.bash
 
 mkdir -p /root/05-scaling
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-50.yaml -o /root/05-scaling/service-50.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-hpa.yaml -o /root/05-scaling/service-hpa.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/serverless/scripts/05-scaling/service-min-max-scale.yaml -o /root/05-scaling/service-min-max-scale.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/05-scaling/service-50.yaml -o /root/05-scaling/service-50.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/05-scaling/service-hpa.yaml -o /root/05-scaling/service-hpa.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/serverless/scripts/05-scaling/service-min-max-scale.yaml -o /root/05-scaling/service-min-max-scale.yaml
 
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"

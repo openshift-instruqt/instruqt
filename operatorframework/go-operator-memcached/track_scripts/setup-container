@@ -14,11 +14,11 @@ tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/b
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-memcached/assets/memcached_types.go -o /tmp/memcached_types.go
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-memcached/assets/memcached_controller.go -o /tmp/memcached_controller.go
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-memcached/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/go-operator-memcached/assets/memcached_types.go -o /tmp/memcached_types.go
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/go-operator-memcached/assets/memcached_controller.go -o /tmp/memcached_controller.go
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/go-operator-memcached/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
 
 mkdir -p /root/projects/memcached-operator
 

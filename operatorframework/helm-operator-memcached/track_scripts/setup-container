@@ -18,11 +18,11 @@ chmod +x /usr/bin/kubectl
 curl -sL -o /usr/local/bin/helm https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64
 chmod +x /usr/local/bin/helm
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
 
 mkdir -p /root/tutorial
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/helm-operator-memcached/assets/charts_v1alpha1_memcached.yaml -o /tmp/charts_v1alpha1_memcached.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/helm-operator-memcached/assets/charts_v1alpha1_memcached.yaml -o /tmp/charts_v1alpha1_memcached.yaml
 
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"

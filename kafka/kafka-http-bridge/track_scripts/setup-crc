@@ -190,13 +190,13 @@ done
 mkdir -p /root/projects/http-bridge/
 
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/kafka-bridge.yaml -o /root/projects/http-bridge/kafka-bridge.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-http-bridge/scripts/kafka-bridge.yaml -o /root/projects/http-bridge/kafka-bridge.yaml
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-http-bridge/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/operator-install.yaml -o /opt/operator-install.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-http-bridge/scripts/operator-install.yaml -o /opt/operator-install.yaml
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/kafka/kafka-http-bridge/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-http-bridge/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml
 
 ###
 

@@ -184,7 +184,7 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
-curl -sL https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/serverless/camel-k-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
+curl -sL https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/serverless/camel-k-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
 
 CAMELK_VERSION=1.6.7
 
