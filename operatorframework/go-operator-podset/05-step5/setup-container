@@ -1,3 +1,3 @@
 #!/bin/bash
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/scripts/app_v1alpha1_podset.yaml -o /tmp/app_v1alpha1_podset.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/go-operator-podset/scripts/app_v1alpha1_podset.yaml -o /tmp/app_v1alpha1_podset.yaml

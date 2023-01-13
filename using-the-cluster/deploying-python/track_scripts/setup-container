@@ -30,15 +30,15 @@ curl -o /usr/local/bin/helm https://mirror.openshift.com/pub/openshift-v4/client
 mkdir -p /root/my-chart
 mkdir -p /root/my-chart/templates
 mkdir -p /root/my-chart/templates/tests
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/Chart.yaml -o /root/my-chart/Chart.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/values.yaml -o /root/my-chart/values.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/NOTES.txt -o /root/my-chart/templates/NOTES.txt
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/_helpers.tpl -o /root/my-chart/templates/_helpers.tpl
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/deployment.yaml -o /root/my-chart/templates/deployment.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/ingress.yaml -o /root/my-chart/templates/ingress.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/service.yaml -o /root/my-chart/templates/service.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/serviceaccount.yaml -o /root/my-chart/templates/serviceaccount.yaml
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/developing-on-openshift/helm/assets/my-chart/templates/tests/test-connection.yaml -o /root/my-chart/templates/tests/test-connection.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/Chart.yaml -o /root/my-chart/Chart.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/values.yaml -o /root/my-chart/values.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/NOTES.txt -o /root/my-chart/templates/NOTES.txt
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/_helpers.tpl -o /root/my-chart/templates/_helpers.tpl
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/deployment.yaml -o /root/my-chart/templates/deployment.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/ingress.yaml -o /root/my-chart/templates/ingress.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/service.yaml -o /root/my-chart/templates/service.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/serviceaccount.yaml -o /root/my-chart/templates/serviceaccount.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/developing-on-openshift/helm/assets/my-chart/templates/tests/test-connection.yaml -o /root/my-chart/templates/tests/test-connection.yaml
 
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"

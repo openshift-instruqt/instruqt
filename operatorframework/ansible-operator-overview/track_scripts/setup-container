@@ -14,14 +14,14 @@ tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/b
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/scripts/install_operatorsdk_toolbox.sh -o /tmp/install.sh && bash /tmp/install.sh
 
 mkdir -p /root/tutorial
 mkdir -p /opt/ansible/roles
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/ansible-operator-overview/assets/watches.yaml -o /tmp/watches.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/ansible-operator-overview/assets/watches.yaml -o /tmp/watches.yaml
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/ansible-operator-overview/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/ansible-operator-overview/assets/cache_v1alpha1_memcached.yaml -o /tmp/cache_v1alpha1_memcached.yaml
 
 until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
     echo "Waiting for instruqt bootstrap to complete"

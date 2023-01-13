@@ -200,7 +200,7 @@ E.g. from `setup-crc`:
 ```
 #!/bin/bash
 
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/operatorframework/go-operator-podset/assets/podset_types.go -o /tmp/podset_types.go
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/operatorframework/go-operator-podset/assets/podset_types.go -o /tmp/podset_types.go
 ```
 
 
