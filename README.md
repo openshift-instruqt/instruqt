@@ -30,6 +30,48 @@ The OpenShift Instruqt organization page is hosted at https://play.instruqt.com/
 
 Here's how to get started on working on or maintaining an Instruqt OpenShift track:
 
+#### Updating an existing track
+
+1. Change into the directory containing your repository and create a new branch. Make sure to push the new branch to GitHub as well:
+    ```
+    cd <repository_dir>
+    git pull
+    git checkout -b my-new-content
+    git push -u origin my-new-content
+    ```
+2. Run the convert workflow, providing the branch and track slug you wish to modify:
+    ```
+    gh workflow run "convert" -F "slug=<track-slug>" -r my-new-content
+    ```
+3. Pull the changes made by the workflow (the name and IDs will be modified):
+    ```
+    git pull
+    ```
+4. Make your changes to the dev version of the track:
+    ```
+    cd instruqt-tracks/<track-slug>
+    # make your changes...
+    ```
+5. Make sure your final local changes are reflected in the track on Instruqt, because it will be used as the source of truth for the development version of the track:
+    ```
+    instruqt track validate
+    instruqt track push
+    instruqt track open
+    instruqt track test
+    ```
+6. Add, commit, and push your changes to GitHub:
+    ```
+    git add .
+    git commit -m "Adding new content!"
+    git push
+    ```
+7. Once you are satisfied with your development track, and the latest changes have been pushed to Instruqt, run the promote workflow:
+    ```
+    gh workflow run "promote" -F "slug=<track-slug>" -r my-new-content
+    ```
+8. Create a pull request by selecting **Pull requests** in the top menu of your repository, followed by **New pull request**. Indicate your new branch, and select **Create pull request**.
+9. Have a colleague review your work, and merge the pull requests. Once merged, the changes will automatically be applied to the production version of your track.
+
 #### Creating tracks from scratch/template
 
 *Create a new track, from scratch*
