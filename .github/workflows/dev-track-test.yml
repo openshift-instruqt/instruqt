@@ -46,6 +46,7 @@ jobs:
 
   TestDevTracks:
     runs-on: ubuntu-latest
+    if: ${{ needs.GetTrackSlugs.outputs.matrix != '[]' && needs.GetTrackSlugs.outputs.matrix != '' }}
     needs: GetTrackSlugs
     strategy:
       matrix: ${{ fromJson(needs.GetTrackSlugs.outputs.matrix) }}
