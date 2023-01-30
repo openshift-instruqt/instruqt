@@ -1,6 +1,6 @@
 ---
 slug: 01-create-project
-id: epbqwdkqqxa5
+id: x9qwcbobm6dn
 type: challenge
 title: Topic 1 - Creating an introductory application using Quarkus
 teaser: Topic 1 - Creating an introductory application using Quarkus
