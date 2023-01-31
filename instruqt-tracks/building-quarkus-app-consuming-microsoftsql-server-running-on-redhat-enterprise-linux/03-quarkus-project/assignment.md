@@ -96,9 +96,10 @@ quarkus dev
 
 
 
-When the webpage successfully arrives on the browser we need to check if the API’ are working or not.
+When in the terminal you will get the output like shown above.  You are good to go for API testing.
 
 
+**Open Terminal 2**
 
 Let's install http cli
 
@@ -109,7 +110,7 @@ sudo pip3 install httpie
 
 
 ### List a new person
-Open Terminal 3
+
 
 ```
 http :8080/person
@@ -168,14 +169,17 @@ http DELETE :8080/person/1
 ![](https://lh5.googleusercontent.com/GoieZ_esZkVBDnc22SR0uR_kJ_Kbsx6nE90xENZ4LTmvp2aegzT096N78evYVWsKoqv9VQ-lZZyg3hufOpMajHQGmoe_ULB4d05jebdajHLahjlXWnNSAagjTBOOVEMPK6RyQStogjybaLAlEoloEz4Z1gb6ZQvrcQHeqcWZiNF2giKkfEJ9E7jBO2d4)
 
 
+**Open Terminal 3**
 
 
 
 Now with help of API we created, deleted & updated the database. To check all changes are reflected in the database we have to cross-verify. For that Please follow the below steps.
 
+Add one person in Database
 
-
-
+```
+http POST :8080/person firstName=Karan lastName=Singh salutation=Mr
+```
 
 First, we need to login into the Microsoft SQL database. For that, we need to use sqlcmd. please run the following command:
 
@@ -222,3 +226,5 @@ After running the above command you will get the following result in your termin
 
 
 ![](https://lh4.googleusercontent.com/A0mHeUoCYV5HgfPfb0Bt4Oi73zY5Z4ao-ihr1bFqNwm_F7GxDT5hn6PE1-1sIJ_WzkR_7TKsmpLCaOtHD-HOHjfXO1wcU9_OSN_1O6CCNBtbuf6VOxA2RXXn1xtBIdC-25YNX8dd1kSgJ3Y_P-xI-rgWwa1UMrT6M1aBS8wtrl_kdxzPIOatk105IonA)
+
+Quarkus CRUD application is working fine. Click on **Next** for containerization of quarkus application.
