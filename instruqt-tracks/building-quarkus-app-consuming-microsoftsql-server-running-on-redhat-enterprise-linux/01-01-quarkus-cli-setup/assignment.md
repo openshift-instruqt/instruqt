@@ -27,7 +27,7 @@ timelimit: 1000
 ---
 # Quarkus CLI Install
 
-`Step 1:` Run the following command in the **Terminal 1**
+`Step1:` Run the following command in the **Terminal 1**
 
 ```
 curl -Ls https://sh.jbang.dev | bash -s - trust add https://repo1.maven.org/maven2/io/quarkus/quarkus-cli/
@@ -44,3 +44,4 @@ Type the following command to check quarkus is successfully installed
 quarkus
 ```
 
+Quarkus is successfully installed click on **Next** now

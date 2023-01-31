@@ -30,7 +30,7 @@ To begin with install Microsoft SQL Server on RHEL (locally), here are the steps
 
 
 
-1.1. **Install Microsoft SQL Server**
+2.1. **Install Microsoft SQL Server**
 
 
 
@@ -91,7 +91,7 @@ SQL Server is now running on your RHEL machine and is ready to use!
 
 
 
-1.2. **Installation of Microsoft SQL CLI tool**
+2.2. **Installation of Microsoft SQL CLI tool**
 
 
 
@@ -129,7 +129,7 @@ source ~/.bashrc
 
 
 
-1.3. **Connect to Database locally**
+2.3. **Connect to Database locally**
 
 Run the sqlcmd with parameters for your SQL Server IP/name (-S), username (-U), and password (-P). In this tutorial, you are connecting locally, so the server name is localhost. The user name is sa and the password is the one you provided for the SA account during setup.
 
@@ -159,3 +159,5 @@ To execute the above queries write GO
 ```
 GO
 ```
+
+MicrosoftSQL is successfully installed & TestDB database  creation done. Click on **Next** now.

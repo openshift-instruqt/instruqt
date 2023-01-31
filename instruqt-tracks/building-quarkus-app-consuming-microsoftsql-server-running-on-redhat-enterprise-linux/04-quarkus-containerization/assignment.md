@@ -115,7 +115,7 @@ podman run -it -p 8080:8080 --network=host quarkus/quarks-crud-app
 
 As we tested all the API above we have to test it again after containerization like GET. POST, PUT, and DELETE.
 
-
+Open **Terminal 2**
 
 GET:
 ```
