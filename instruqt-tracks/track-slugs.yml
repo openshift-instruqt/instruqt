@@ -1,10 +1,12 @@
 ---
 tracks:
+  - { slug: building-quarkus-app-consuming-microsoftsql-server-running-on-redhat-enterprise-linux, id: b3dmslfwtbit }
   - { slug: connecting-to-a-database-using-port-forwarding, id: yqk1773maodp }
   - { slug: developing-on-openshift-developing-with-odo, id: dnttxho7bem5 }
   - { slug: developing-on-openshift-getting-started, id: akihuxyag7aw }
   - { slug: developing-on-openshift-helm, id: 3xvvirjszgeu }
   - { slug: developing-on-openshift-serverless, id: inqukbuabjas }
+  - { slug: developing-with-quarkus-getting-started-short, id: 8ggoprmy6nzc }
   - { slug: developing-with-quarkus-getting-started, id: riixlttwv5ye }
   - { slug: developing-with-quarkus-kafka, id: 2wpuz3xbtyb5 }
   - { slug: developing-with-quarkus-monitoring, id: husayvyvw0ax }
