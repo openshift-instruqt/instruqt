@@ -2,8 +2,8 @@
 slug: 01-create-project
 id: epbqwdkqqxa5
 type: challenge
-title: Topic 1 - Creating an introductory application using Quarkus
-teaser: Topic 1 - Creating an introductory application using Quarkus
+title: Topic 1 - Getting started with a Quarkus QuickStart
+teaser: Topic 1 - Getting started with a Quarkus QuickStart
 notes:
 - type: text
   contents: |-
@@ -17,19 +17,17 @@ notes:
 
     # What is Quarkus?
 
-    For years the client-server architecture has been the de-facto standard to build distributed applications. But a major shift has happened. The _one model rules them all_ age is over. A new range of applications and architecture styles has emerged. These new styles impact how code is written and how applications are deployed and executed. HTTP microservices, reactive applications, message-driven microservices and serverless are now central players in the development of modern distributed systems.
+    Quarkus is a Kubernetes Native Java stack tailored for [GraalVM](https://www.graalvm.org/) and [OpenJDK HotSpot](https://openjdk.java.net/groups/hotspot/). Quarkus is also crafted from the best of breed Java libraries and standards. Amazingly fast boot time, incredibly low RSS memory (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms like Kubernetes. Quarkus uses a technique called compile time boot. [Learn more](https://quarkus.io/vision/container-first).
 
-    Quarkus has been designed with this new world in mind. The Quarkus development model morphs to adapt itself to these new types of applications that you are developing. Quarkus provides first-class support for these different paradigms.
-
-    Quarkus is a Kubernetes Native Java stack tailored for [GraalVM](https://www.graalvm.org/) and [OpenJDK HotSpot](https://openjdk.java.net/groups/hotspot/).
-
-    Quarkus is crafted from the best of breed Java libraries and standards. Amazingly fast boot time, incredibly low RSS memory (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms like Kubernetes. Quarkus uses a technique called compile time boot. [Learn more](https://quarkus.io/vision/container-first).
-
-    # Quarkus Unifies Imperative and Reactive Programming
+    Quarkus maximizes the Developer Productivity with the following features:
+    * [Zero-config Live coding](https://quarkus.io/guides/maven-tooling#dev-mode/)
+    * [Dev Services](https://quarkus.io/guides/dev-services)
+    * [Continuous testing](https://quarkus.io/guides/continuous-testing)
+    * [Dev UI](https://quarkus.io/guides/dev-ui)
+    * [Command Line Interface (CLI)](https://quarkus.io/guides/cli-tooling)
+    * [Remote Development](https://quarkus.io/guides/maven-tooling#remote-development-mode)
 
     Application requirements have changed over the last few years. For any application to succeed in the era of big data, IoT or cloud computing, adhering to the principles and practices of the [reactive architecture style](https://developers.redhat.com/coderland/reactive/reactive-intro) is essential.
-
-    Quarkus combines both the familiar imperative code and the non-blocking reactive styles when developing applications.
 tabs:
 - title: Terminal 1
   type: terminal
@@ -47,7 +45,7 @@ tabs:
   path: /q/dev
   port: 8080
 difficulty: basic
-timelimit: 800
+timelimit: 300
 ---
 In this topic you will use Quarkus to create an API application that publishes a `/hello` endpoint. Also, you will use dependency injection to build on the `/hello` endpoint to publish an additional endpoint `/hello/greeting` by creating a **Greeting** bean.
 
@@ -78,7 +76,7 @@ You'll get the following output.
 `Step 2:` Run the following command in the **Terminal 1** window to create the basic Maven project.
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.16.0.Final:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=getting-started \
     -DclassName="org.acme.quickstart.GreetingResource" \
@@ -93,8 +91,8 @@ The snippet of code below shows you the output you'll get at the end of the inst
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  14.432 s
-[INFO] Finished at: 2022-03-30T23:32:21Z
+[INFO] Total time:  16.275 s
+[INFO] Finished at: 2023-01-31T03:22:05Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -139,7 +137,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output:
 
 ```
-Hello RESTEasy
+Hello from RESTEasy Reactive
 ```
 
 As you can see, the service endpoint is up and running.
@@ -152,7 +150,7 @@ Let's take a look.
 
 ----
 
-You are going to change the output of the **Hello App** API application from `Hello RESTeasy` to `Hola RESTeasy` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
+You are going to change the output of the **Hello App** API application from `Hello RESTeasy Reactive` to `Hola RESTeasy Reactive` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
 
 ----
 
@@ -180,7 +178,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output with the new phrase:
 
 ```
-Hola RESTEasy
+Hola from RESTEasy Reactive
 ```
 
 As you can see, all you did was change a string in a line of code. Quarkus did the rest!
@@ -227,7 +225,7 @@ Entering the character `r` at the testing prompt will run the application's unit
 
 `Step 11:` Click the **Terminal 1** tab and then press the `r` key in the terminal window. (The installation process will still be running in the terminal.)
 
-As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy`. The output failed to meet the expectation.
+As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy Reactive`. The output failed to meet the expectation.
 
 Let's fix the code and get the tests to pass.
 
@@ -241,7 +239,7 @@ Let's fix the code and get the tests to pass.
 
 ----
 
-`Step 14:` Change `Hola RESTEasy` back to `Hello RESTEasy` in the editor.
+`Step 14:` Change `Hola RESTEasy Reactive` back to `Hello RESTEasy Reactive` in the editor.
 
 ----
 
@@ -259,7 +257,7 @@ As soon as your reset the code, Quarkus automatically re-runs the test.
 `Step 17:` Look at the output at the bottom of the **Terminal 1** window. You'll see output similar to the following.
 
 ```
-All 1 tests are passing (0 skipped), 1 tests were run in 389ms. Tests completed at 12:25:40 due to changes to GreetingResource.class.
+All 1 test is passing (0 skipped), 1 test was run in 618ms. Tests completed at 03:33:55 due to changes to GreetingResource.class.
 ```
 
 Quarkus was smart enough to detect that you made a change to the code and ran the relevant test automatically.
@@ -268,10 +266,6 @@ The way Quarkus works is that it analyzes your unit tests and only re-runs the t
 
 # Congratulations!
 
-You've learned how to build a basic Quarkus application. You packaged the code into an executable JAR file which Quarks ran quickly.
-
-You also saw how Quarkus runs tests continuously to turbocharge your development tasks and facilitate test-driven development.
+You've learned how to create a new Quarkus application. Then, you could keep developing the application without recompiling, rebuilding, redeploying, and restarting the application runtime based on Quarkus Live Coding. You also saw how Quarkus runs tests continuously to turbocharge your development tasks and facilitate test-driven development.
 
 ----
-
-**NEXT:** Adding a custom CDI bean to the demonstration application
