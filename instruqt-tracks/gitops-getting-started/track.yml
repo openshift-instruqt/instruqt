@@ -98,23 +98,15 @@ challenges:
     Welcome! In this section we will be exploring the OpenShift GitOps
     Operator, what it installs, and how all the components fit together.
 
-    ## Logging in to the Cluster via Dashboard
+    ## Logging in to OpenShift
 
-    At first, check that the pod responsible for OpenShift Web Console to be ready:
+    At first, Click the **Web Console** from the row of horizontal tabs at the top of the interactive terminal window. (The **Web Console** tab is the second tab to the right.)
 
-    ```
-    oc get pods -n openshift-console | grep console
-    ```
-
-    You might have to wait a minute for the pod to be ready.
-
-    When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-    ```
-    oc get routes console -n openshift-console
-    ```
-
-    Copy the link under `HOST/PORT` column and navigate there from a web browser.
+    |NOTE:|
+    |----|
+    |You might see the following warning notification due to using an untrusted security certificate.
+    ![Security warning](../assets/security_warning.png)
+    If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
     You will then be able to login with admin permissions with:
 
@@ -123,7 +115,7 @@ challenges:
 
     ## Exploring the GitOps Operator Installation
 
-    From the Administrator perspective, go to the *OperatorHub* and search for "OpenShift GitOps" operator.
+    From the Administrator perspective, go to the *OperatorHub* and search for "Red Hat OpenShift GitOps" operator.
 
     ![OpenShift GitOps Operator Installation](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/openshift-gitops-operator-installation.png)
 
@@ -174,6 +166,10 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -196,13 +192,20 @@ challenges:
     ```
     oc get routes -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'
     ```
-    Find the default password for the `admin` account as follows:
+
+    Now, let's store this as an enviroment variable so we can use it later to login to ArgoCD through our terminal.
+
+    ```
+    export ARGOCD_SERVER_URL=$(oc get routes -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}')
+    ```
+
+    Next, find the default password for the `admin` account as follows:
 
     ```
     oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
     ```
 
-    To login from the terminal, execute the following (replace $ARGOCD_SERVER_URL with the above URL):
+    To login from the terminal, execute the following, using the $ARGOCD_SERVER_URL we just saved:
 
     ```
     argocd login $ARGOCD_SERVER_URL
@@ -213,7 +216,9 @@ challenges:
 
     You can login with the following:
     * **Username:** ``admin``
-    * **Password:** <from previous command>
+    * **Password:** ``default password from previous command``
+
+    ## The Argo CD Web Console
 
     You can also find this URL by clicking the shortcut from the Application Launcher tab from the OpenShift Web Console:
 
@@ -228,6 +233,13 @@ challenges:
 
     > **NOTE** The Password is stored in a secret on the platform.
 
+    Once you've logged in, you should see the following page.
+
+    ![ArgoCD](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd.png)
+
+    This is the Argo CD Web UI. Keep this tab open for the next exercise.
+
+    ## ArgoCD Configuration
 
     Let's come back to the terminal. Verify that you're connected to the Argo CD API server
     by running the following:
@@ -264,20 +276,14 @@ challenges:
     ```
 
     The `argocd` CLI tool is useful for debugging and viewing status of your apps deployed.
-
-    ## The Argo CD Web Console
-
-
-
-    Once you've logged in, you should see the following page.
-
-    ![ArgoCD](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/gitops/argocd.png)
-
-    This is the Argo CD Web UI. Keep this tab open for the next exercise.
   tabs:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
@@ -426,10 +432,14 @@ challenges:
   - title: Terminal 1
     type: terminal
     hostname: crc
+  - title: Web Console
+    type: website
+    url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+    new_window: true
   - title: Visual Editor
     type: code
     hostname: crc
     path: /root
   difficulty: basic
   timelimit: 800
-checksum: "11456382743442434745"
+checksum: "5146556526446305375"
