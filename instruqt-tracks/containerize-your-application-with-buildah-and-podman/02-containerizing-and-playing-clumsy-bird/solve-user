@@ -1,0 +1,12 @@
+#!/bin/bash
+podman stop --all
+podman rm --all
+buildah from registry.access.redhat.com/ubi9/ubi
+buildah run ubi-working-container-1 -- dnf -y install httpd
+buildah run ubi-working-container-1 -- systemctl enable httpd
+buildah copy ubi-working-container-1 clumsy-bird /var/www/html
+buildah config --port 80 --cmd "/usr/sbin/init" ubi-working-container-1
+buildah commit ubi-working-container-1 clumsy-bird
+podman run --name clumsy-bird -d -p 8080:80 clumsy-bird
+podman ps
+podman port clumsy-bird

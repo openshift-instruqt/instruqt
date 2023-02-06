@@ -1,0 +1,4 @@
+#!/bin/bash
+dnf install -y buildah
+dnf install -y epel-release
+dnf install -y podman

@@ -1,0 +1,9 @@
+#!/bin/bash
+podman stop --all
+podman rm --all
+buildah from registry.access.redhat.com/ubi9/ubi
+buildah run ubi-working-container -- dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+buildah run ubi-working-container -- dnf -y install moon-buggy
+buildah commit ubi-working-container moon-buggy
+podman image list
+podman run --name moon-buggy -it moon-buggy /usr/bin/moon-buggy

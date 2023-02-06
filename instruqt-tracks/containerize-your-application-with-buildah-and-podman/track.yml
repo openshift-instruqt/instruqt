@@ -1,0 +1,19 @@
+slug: containerize-your-application-with-buildah-and-podman
+id: fshx8utbbaxd
+version: 0.0.1
+title: Containerize Your Application With Buildah And Podman
+teaser: Discover the simplicity of containerizing your application with Buildah and
+  Podman with 2 projects! Get your app up and running in no time
+description: |
+  # **Exploring Buildah and Podman**
+
+
+  In this **Track**, we'll explore the basics of **Buildah** and **Podman** and learn how to use them to **build, run, and share container images** with examples of deploying two games. Whether you're new to **containers** or a seasoned pro, this track will provide you with the **knowledge and skills** you need to confidently use Buildah and Podman in your own projects.
+icon: ""
+level: beginner
+tags: []
+owner: openshift
+developers:
+- dejain@redhat.com
+checksum: "13727917882988873502"
+timelimit: 2000

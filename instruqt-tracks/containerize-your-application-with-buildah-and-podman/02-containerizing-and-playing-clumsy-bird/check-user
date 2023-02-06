@@ -1,0 +1,8 @@
+#!/bin/bash
+check_clumsy_bird_exist=$(podman image list | grep "clumsy-bird" | wc | awk '{print $1}')
+
+if [[ $check_clumsy_bird_exist -eq 1 ]];then   
+    echo "Pass: Congratualtions You can successfully move towards the next step"; 
+else
+    fail-message "Fail: Please create an image as 'clumsy-bird' for the lab to proceed"
+fi

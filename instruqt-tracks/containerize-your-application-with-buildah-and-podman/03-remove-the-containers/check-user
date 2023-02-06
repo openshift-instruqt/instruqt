@@ -1,0 +1,9 @@
+#!/bin/bash
+check_if_clumsy_bird_deleted=$(podman ps | grep "clumsy-bird" | wc | awk '{print $1}')
+check_if_moon_buggy_deleted=$(podman ps | grep "moon-buggy" | wc | awk '{print $1}')
+
+if [[ $check_if_clumsy_bird_deleted -eq 0 ]] && [[ $check_if_moon_buggy_deleted -eq 0 ]];then 
+    echo "Pass: Congratulations You can successfully move towards the next step"; 
+else
+    fail-message "Fail: Please delete the containers - Clumsy-Bird and Moon-Buggy for the lab to proceed"
+fi

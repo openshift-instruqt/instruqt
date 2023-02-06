@@ -1,0 +1,3 @@
+#!/bin/bash
+podman stop clumsy-bird moon-buggy
+podman rm clumsy-bird moon-buggy
