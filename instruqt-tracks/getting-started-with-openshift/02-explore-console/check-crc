@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "Checking status of project 'myproject'"
+MYPROJECT=$(oc get projects | grep myproject | cut -f1 -d ' ')
+
+if [ $MYPROJECT == "myproject" ]
+  then
+  echo "project 'myproject' has been created!"
+else
+  echo "FAIL: Project 'myproject' not found"
+  exit 1
+fi
