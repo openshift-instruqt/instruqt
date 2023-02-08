@@ -8,18 +8,16 @@ notes:
   contents: |
     ## Goal
 
-    Explore OpenShift version 4.11.
+    Explore OpenShift version 4.12.
 
     ## Concepts
 
     * OpenShift Web Console
     * `oc` command line tool
-    * OpenShift Projects and Applications
-    * Your applications on OpenShift
 
     ## Use case
 
-    You control an OpenShift cluster for one hour. You can deploy your own container image, or set up a pipeline to build your application from source, then monitor it with Prometheus as it runs. Use an Operator to deploy and manage a database backend for your web app.
+    You control an OpenShift cluster for one hour. You can deploy your own container image, or set up a pipeline to build your application from source, then use an Operator to deploy and manage a database backend.
 
     This OpenShift cluster will self-destruct in one hour.
 tabs:
@@ -28,7 +26,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-chf7b-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code
@@ -167,3 +165,11 @@ user ID. This can be done by running the command:
 oc adm policy add-scc-to-user anyuid -z default -n myproject --as system:admin
 ```
 
+# Next Steps!
+
+Congratulations on completing this self-paced lab and learning about the capabilities of Red Hat OpenShift. To continue your journey, here's some handy links:
+
+* [Red Hat Developer learning page](https://developers.redhat.com/learn)
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and provide your feedback on the next page. Thanks for playing!
