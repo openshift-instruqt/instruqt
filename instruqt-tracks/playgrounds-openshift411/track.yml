@@ -1,6 +1,6 @@
-slug: playgrounds-openshift411-dev
-id: wvc8ssjkpx6u
-title: DEV - Red Hat OpenShift Playground
+slug: playgrounds-openshift411
+id: hlujba8rmi8j
+title: Red Hat OpenShift Playground
 teaser: Quick access to the web console or the command-line interface to explore Red
   Hat OpenShift
 description: |
@@ -22,7 +22,7 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
-- dev
+- prod
 owner: openshift
 developers:
 - ryanj@redhat.com
@@ -30,5 +30,5 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-maintenance: true
-checksum: "6040324421461588489"
+maintenance: false
+checksum: "608807076344185221"
