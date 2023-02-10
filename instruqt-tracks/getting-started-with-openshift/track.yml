@@ -1,0 +1,30 @@
+slug: getting-started-with-openshift
+id: xxd4hkpxifsf
+title: Getting Started with OpenShift
+description: |
+  ## Goal
+
+  The goal of this track is to learn how to use the OpenShift Container Platform to deploy a containerized web application.
+
+  |What you need to know before you start|
+  |----|
+  |In order to get full benefit from taking this track you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform)|
+
+  ## Concepts and techniques you'll cover
+
+  * Understanding the OpenShift Web Console and viewing perspectives
+  * Understanding how to login to OpenShift using the `oc` command line tool
+  * How to build applications from a container image using OpenShift Web Console
+  * How to access public URLs by working with OpenShift Routes
+
+  ## Use case
+
+  You'll use the concepts and techniques covered in this track to get a basic understanding of how to work with OpenShift in the Web Console and at the command line. OpenShift runs as a layer over Kubernetes and makes working with both Kubernetes and Linux containers easier. The result is that when developers use OpenShift they are free to focus on their code instead of spending time writing Dockerfiles and running container builds.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+- ryanj@redhat.com
+checksum: "6878796676682477044"
