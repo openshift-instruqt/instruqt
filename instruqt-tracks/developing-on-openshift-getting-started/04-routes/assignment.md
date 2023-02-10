@@ -1,5 +1,5 @@
 ---
-slug: 5routes
+slug: routes
 id: 0axgarfnlwmb
 type: challenge
 title: Step 4 - Routing HTTP Requests
@@ -70,4 +70,13 @@ Clicking the icon opens the application's web page in a browser as shown in th f
  You have now located the application's **route** URL in the OpenShift web console. Also, you've learned how to open the application in a web page from the **Resource** tab in the application detail, and also directly from application's circular graphic in the **Topology** view.
 
 This is the final step in this track.
+
+# Next Steps!
+
+To continue your journey, here are some handy links:
+
+* [Red Hat Developer learning page](https://developers.redhat.com/learn)
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks!
 
