@@ -1,5 +1,5 @@
 ---
-slug: 4scaling
+slug: scaling
 id: cayedn5y3l3n
 type: challenge
 title: Step 3 - Scaling Your Application

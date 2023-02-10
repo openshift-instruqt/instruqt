@@ -1,5 +1,5 @@
 ---
-slug: 2explore-console
+slug: explore-console
 id: pfx4gogkjlqi
 type: challenge
 title: Step 2 - Exploring The Web Console
