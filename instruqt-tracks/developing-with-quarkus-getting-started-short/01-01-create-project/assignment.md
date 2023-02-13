@@ -1,6 +1,6 @@
 ---
 slug: 01-create-project
-id: asxhadp3qylq
+id: ulkhfsgarl5g
 type: challenge
 title: Topic 1 - Getting started with a Quarkus QuickStart
 teaser: Topic 1 - Getting started with a Quarkus QuickStart
@@ -76,7 +76,7 @@ You'll get the following output.
 `Step 2:` Run the following command in the **Terminal 1** window to create the basic Maven project.
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:2.16.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=getting-started \
     -DclassName="org.acme.quickstart.GreetingResource" \
@@ -90,9 +90,6 @@ The snippet of code below shows you the output you'll get at the end of the inst
 ```
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  16.275 s
-[INFO] Finished at: 2023-01-31T03:22:05Z
 [INFO] ------------------------------------------------------------------------
 ```
 
