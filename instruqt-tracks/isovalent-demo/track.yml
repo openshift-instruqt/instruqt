@@ -1,0 +1,30 @@
+slug: isovalent-demo
+id: cdtsfodlqdhv
+title: Isovalent demo on Red Hat OpenShift
+teaser: Quick access to the web console or the command-line interface to exploreisovalent
+  on Red Hat OpenShift
+description: |
+  ## Goal
+
+  Explore OpenShift version 4.12.
+
+  ## Concepts
+
+  * OpenShift Web Console
+  * `oc` command line tool
+
+  ## Use case
+
+  You control an OpenShift cluster for one hour. You can test and deploy your own container image, or set up a pipeline to build your application from source, then monitor it with Prometheus as it runs.
+
+  This OpenShift cluster will self-destruct in one hour.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+- prod
+owner: openshift
+developers:
+- ryanj@redhat.com
+- cclyburn@redhat.com
+checksum: "16585047754995432760"
