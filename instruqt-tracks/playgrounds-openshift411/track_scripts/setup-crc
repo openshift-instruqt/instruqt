@@ -38,10 +38,6 @@ EOF
 
 sed -i '/^search.*/a nameserver 10.88.0.8' /etc/resolv.conf
 
-# suppress error messages related to qemu-guest-agent
-systemctl disable qemu-guest-agent.service
-systemctl reset-failed
-
 # start openshift
 systemctl start crc-dnsmasq.service
 systemctl start kubelet
