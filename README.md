@@ -61,16 +61,16 @@ Here's how to get started on working on or maintaining an Instruqt OpenShift tra
     ```
     cd <repository_dir>
     git pull
-    git checkout -b my-new-content
-    git push -u origin my-new-content
+    git checkout -b my-new-branch
+    git push -u origin my-new-branch
     ```
 2. Run the convert workflow, providing the branch and track slug you wish to modify:
     ```
-    gh workflow run "convert" -F "slug=<track-slug>" -r my-new-content
+    gh workflow run "convert" -F "slug=<track-slug>" -r my-new-branch
     ```
 3. Pull the changes made by the workflow (the name and IDs will be modified):
     ```
-    git pull
+    git pull origin my-new-branch
     ```
 4. Make your changes to the dev version of the track:
     ```
@@ -92,7 +92,7 @@ Here's how to get started on working on or maintaining an Instruqt OpenShift tra
     ```
 7. Once you are satisfied with your development track, and the latest changes have been pushed to Instruqt, run the promote workflow:
     ```
-    gh workflow run "promote" -F "slug=<track-slug>" -r my-new-content
+    gh workflow run "promote" -F "slug=<track-slug>" -r my-new-branch
     ```
 8. Create a pull request by selecting **Pull requests** in the top menu of your repository, followed by **New pull request**. Indicate your new branch, and select **Create pull request**.
 9. Have a colleague review your work, and merge the pull requests. Once merged, the changes will automatically be applied to the production version of your track.
