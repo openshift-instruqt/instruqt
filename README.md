@@ -88,7 +88,7 @@ Here's how to get started on working on or maintaining an Instruqt OpenShift tra
     ```
     git add .
     git commit -m "Adding new content!"
-    git push
+    git push origin my-new-branch
     ```
 7. Once you are satisfied with your development track, and the latest changes have been pushed to Instruqt, run the promote workflow:
     ```
