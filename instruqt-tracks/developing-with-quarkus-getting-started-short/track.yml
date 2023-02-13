@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-getting-started-short-dev
-id: wmvzex7vrw99
-title: DEV - Getting Started with Quarkus - QuickStart
+slug: developing-with-quarkus-getting-started-short
+id: 8ggoprmy6nzc
+title: Getting Started with Quarkus - QuickStart
 description: |-
   In this track, you will get an introduction to [Quarkus](https://quarkus.io).
 
@@ -44,9 +44,9 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - Quarkus
-- dev
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
-maintenance: true
+maintenance: false
 checksum: "14092497383501482269"
