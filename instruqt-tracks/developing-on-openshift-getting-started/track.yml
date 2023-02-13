@@ -33,6 +33,4 @@ developers:
 - dschenck@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-private: true
-published: false
-checksum: "2401285059573541902"
+checksum: "613776528002472807"
