@@ -1,6 +1,6 @@
 ---
 slug: 01-create-project
-id: epbqwdkqqxa5
+id: asxhadp3qylq
 type: challenge
 title: Topic 1 - Getting started with a Quarkus QuickStart
 teaser: Topic 1 - Getting started with a Quarkus QuickStart
