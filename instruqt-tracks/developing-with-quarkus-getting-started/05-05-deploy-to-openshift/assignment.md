@@ -52,6 +52,10 @@ You'll get output similar to the following:
 [INFO] [SUCCESS] ?  Extension io.quarkus:quarkus-openshift has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.749 s
+[INFO] Finished at: 2022-04-04T15:27:24Z
+[INFO] ------------------------------------------------------------------------
 ```
 
 # Logging to the OpenShift Web Console
@@ -127,17 +131,21 @@ You now have a project to host the application. Next you need to deploy the appl
 ```
 mvn clean package -Pnative -f /root/projects/quarkus/getting-started \
 -Dquarkus.kubernetes-client.trust-certs=true \
+-Dquarkus.container-image.build=true \
 -Dquarkus.kubernetes.deploy=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
--Dquarkus.openshift.expose=true
+-Dquarkus.openshift.expose=true \
+-Dquarkus.openshift.labels.app.openshift.io/runtime=quarkus
 ```
 
 **WHERE:**
 
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that you are using self-signed certificates in this simple example, telling the extension to trust them.
+* `quarkus.container-image.build=true` - Indicates that the extension is to build a container image
 * `quarkus.kubernetes.deploy=true` - Indicates that the extension is to deploy to OpenShift after the container image is built
 * `quarkus.kubernetes.deployment-target=openshift` - Indicates that the extension will generate and create the OpenShift resources such as `DeploymentConfig`s and `Service`s after building the container
 * `quarkus.openshift.expose=true` - Indicates that the extension to generate an OpenShift `Route`.
+* `quarkus.openshift.labels.app.openshift.io/runtime=quarkus` - Adds a nice-looking icon to the app when viewing the OpenShift Developer Topology
 
 This step will take a few minutes to complete because it rebuilds the native executable, generates a container image and pushes it into OpenShift.
 
@@ -149,6 +157,9 @@ You'll see the following output at the end of the process.
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 139662ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:34 min
+[INFO] Finished at: 2022-04-01T23:18:44Z
 [INFO] ------------------------------------------------------------------------
 ```
 

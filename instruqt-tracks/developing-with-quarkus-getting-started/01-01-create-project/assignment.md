@@ -136,7 +136,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output:
 
 ```
-Hello from RESTEasy Reactive
+Hello RESTEasy
 ```
 
 As you can see, the service endpoint is up and running.
@@ -149,7 +149,7 @@ Let's take a look.
 
 ----
 
-You are going to change the output of the **Hello App** API application from `Hello RESTeasy Reactive` to `Hola RESTeasy Reactive` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
+You are going to change the output of the **Hello App** API application from `Hello RESTeasy` to `Hola RESTeasy` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
 
 ----
 
@@ -177,7 +177,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output with the new phrase:
 
 ```
-Hola from RESTEasy Reactive
+Hola RESTEasy
 ```
 
 As you can see, all you did was change a string in a line of code. Quarkus did the rest!
@@ -224,7 +224,7 @@ Entering the character `r` at the testing prompt will run the application's unit
 
 `Step 11:` Click the **Terminal 1** tab and then press the `r` key in the terminal window. (The installation process will still be running in the terminal.)
 
-As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello from RESTEasy Reactive`. The output failed to meet the expectation.
+As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy`. The output failed to meet the expectation.
 
 Let's fix the code and get the tests to pass.
 
@@ -238,7 +238,7 @@ Let's fix the code and get the tests to pass.
 
 ----
 
-`Step 14:` Change `Hola from RESTEasy Reactive` back to `Hello from RESTEasy Reactive` in the editor.
+`Step 14:` Change `Hola RESTEasy` back to `Hello RESTEasy` in the editor.
 
 ----
 

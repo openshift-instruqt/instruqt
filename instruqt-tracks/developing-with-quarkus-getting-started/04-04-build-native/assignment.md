@@ -82,6 +82,9 @@ You'll see a lot of screen output. Finally, you will see output similar to the f
 INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:14 min
+[INFO] Finished at: 2022-04-01T19:13:08Z
+[INFO] ------------------------------------------------------------------------
 ```
 
 |NOTE:|
@@ -126,7 +129,7 @@ Notice that the description shown above indicates that the file is an `ELF 64-bi
 You'll get output similar to the following.
 
 ```console
-INFO  [io.quarkus] (main) Quarkus x.xx.x started in 0.021s. Listening on: http://[::]:8080
+INFO  [io.quarkus] (main) Quarkus x.xx.x started in 0.044s. Listening on: http://[::]:8080
 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
 ```
 Notice in the output shown above is reporting a startup time of 44 milliseconds! That's an amazingly fast startup time.
@@ -150,7 +153,7 @@ You will see output similar to the following.
 
 ```bash
   PID   RSS COMMAND
- 163640 48772 ./target/getting-started-1.0.0-SNAPSHOT-runner
+ 261971 53740 ./target/getting-started-1.0.0-SNAPSHOT-runner
 ```
 
 The output displayed above shows that the process is taking around 53 MB of memory as shown in the RSS ([Resident Set Size](https://en.wikipedia.org/wiki/Resident_set_size) column. 53 MB is a pretty compact use of memory!
