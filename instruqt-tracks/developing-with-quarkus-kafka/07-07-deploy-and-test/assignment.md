@@ -52,9 +52,6 @@ You'll get some screen output and then finally:
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.651 s
-[INFO] Finished at: 2022-04-12T00:23:29Z
-[INFO] ------------------------------------------------------------------------
 ```
 
 ----
@@ -78,7 +75,6 @@ You'll get some screen output and then finally:
 ```java
 # Configure the OpenShift extension options
 quarkus.kubernetes-client.trust-certs=true
-quarkus.container-image.build=true
 quarkus.kubernetes.deploy=true
 quarkus.kubernetes.deployment-target=openshift
 quarkus.openshift.expose=true
@@ -91,7 +87,6 @@ quarkus.openshift.expose=true
 The following list describes the meaning of each key-value entry you just made in `application.properties`:
 
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that self-signed certificates are used by OpenShift and they are to be trusted.
-* `quarkus.container-image.build=true` - Tells the extension to build a container image.
 * `quarkus.kubernetes.deploy=true` - Tells the extension to deploy the container image to OpenShift after the container image is built.
 * `quarkus.kubernetes.deployment-target=openshift` - Tells the OpenShift extension to generate and create the OpenShift resources (such as `DeploymentConfig`s and `Service`s) after building the container.
 * `quarkus.openshift.expose=true` - Tells the extension to generate an OpenShift `Route`.
@@ -162,9 +157,6 @@ Finally, upon success you'll see output similar to the following:
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 183245ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  03:16 min
-[INFO] Finished at: 2022-04-12T00:31:46Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -237,7 +229,7 @@ Once the app gets warmed up in about 5-10 seconds, the web page will display a c
 
 # BONUS SECTION: Open the solution in an IDE in the cloud!
 
-Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+Want to continue exploring this solution on your own in the cloud? You can use the free [Red Hat OpenShift Dev Spaces](hhttps://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running on the free [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
 Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/kafka/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
