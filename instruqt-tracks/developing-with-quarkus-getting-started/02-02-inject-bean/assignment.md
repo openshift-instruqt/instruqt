@@ -1,6 +1,6 @@
 ---
 slug: 02-inject-bean
-id: aczawplcqhqx
+id: 3nogadluvfpa
 type: challenge
 title: Topic 2 - Adding a custom CDI bean to the demonstration application
 teaser: Topic 2 - Adding a custom CDI bean to the demonstration application
