@@ -1,6 +1,6 @@
 ---
 slug: 01-add-extension
-id: jhgqsp24iur9
+id: fvbc8xkh77lx
 type: challenge
 title: Topic 1 - Setting up the track
 teaser: Take the starting steps to get the demonstration project ready
@@ -58,12 +58,12 @@ You'll get output similar to the following:
 
 ```
 Cloning into 'rhoar-getting-started'...
-remote: Enumerating objects: 2572, done.
-remote: Counting objects: 100% (756/756), done.
-remote: Compressing objects: 100% (411/411), done.
-remote: Total 2572 (delta 278), reused 641 (delta 215), pack-reused 1816
-Receiving objects: 100% (2572/2572), 1.16 MiB | 17.16 MiB/s, done.
-Resolving deltas: 100% (855/855), done.
+remote: Enumerating objects: 2603, done.
+remote: Counting objects: 100% (156/156), done.
+remote: Compressing objects: 100% (82/82), done.
+remote: Total 2603 (delta 107), reused 89 (delta 73), pack-reused 2447
+Receiving objects: 100% (2603/2603), 1.15 MiB | 7.43 MiB/s, done.
+Resolving deltas: 100% (907/907), done.
 ```
 
 ----

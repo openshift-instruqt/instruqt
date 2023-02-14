@@ -1,6 +1,6 @@
 ---
 slug: 07-deploy-and-test
-id: t5ap6bc033fc
+id: love24h4mgey
 type: challenge
 title: Topic 7 - Adding the OpenShift extensions to Quarkus
 teaser: Learn how to get a Quarkus application to run under OpenShift
