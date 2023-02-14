@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-kafka
-id: 2wpuz3xbtyb5
-title: Reactive Streaming with Quarkus and Kafka
+slug: developing-with-quarkus-kafka-dev
+id: shxahiemdoy0
+title: DEV - Reactive Streaming with Quarkus and Kafka
 description: |-
   In this track, you will use the Quarkus Kafka extension to build a streaming application using MicroProfile Reactive
   Streams Messaging and [Apache Kafka](https://kafka.apache.org), a distributed streaming platform.
@@ -32,6 +32,7 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
@@ -39,4 +40,5 @@ developers:
 - nvinto@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-checksum: "11053060211124046676"
+maintenance: true
+checksum: "7270601962581618534"

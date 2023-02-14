@@ -1,6 +1,6 @@
 ---
 slug: 05-configure-app
-id: kmahyl8dxl3d
+id: 8tc4x7kdfhck
 type: challenge
 title: Topic 5 - Configuring the Quarkus application to bind to Kafka
 teaser: Learn how to configure an application's properties file to bind to an existing
