@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-getting-started
-id: riixlttwv5ye
-title: Getting Started with Quarkus
+slug: developing-with-quarkus-getting-started-dev
+id: oyjb09jmurh2
+title: DEV - Getting Started with Quarkus
 description: |-
   In this track, you will get an introduction to [Quarkus](https://quarkus.io).
 
@@ -44,6 +44,7 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
@@ -51,6 +52,5 @@ developers:
 - eshortis@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "16417912177902044327"
+maintenance: true
+checksum: "17433582775179178430"
