@@ -36,14 +36,11 @@ When you run the command above you'll see a lot of screen output. You'll get out
 ```console
 INFO] Building jar: /root/projects/quarkus/getting-started/target/getting-started-1.0.0-SNAPSHOT.jar
 [INFO]
-[INFO] --- quarkus-maven-plugin:2.0.0.Final:build (default) @ getting-started ---
+[INFO] --- quarkus-maven-plugin:xx.xx.xx:build (default) @ getting-started ---
 [INFO] [org.jboss.threads] JBoss Threads version 3.4.0.Final
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 2979ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  28.818 s
-[INFO] Finished at: 2022-04-01T16:02:41Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -64,9 +61,9 @@ cd /root/projects/quarkus/getting-started/ && ls -l target/*.jar target/quarkus-
 You see output similar to following:
 
 ```
--rw-r--r--. 1 root root 5817 Apr  1 19:06 target/getting-started-1.0.0-SNAPSHOT.jar
--rw-r--r--. 1 root root 5322 Apr  1 19:01 target/getting-started-dev.jar
--rw-r--r--. 1 root root  619 Apr  1 19:06 target/quarkus-app/quarkus-run.jar
+-rw-r--r--. 1 root root 177431 Feb 14 03:19 target/getting-started-1.0.0-SNAPSHOT.jar
+-rw-r--r--. 1 root root   4929 Feb 14 03:13 target/getting-started-dev.jar
+-rw-r--r--. 1 root root    668 Feb 14 03:19 target/quarkus-app/quarkus-run.jar
 ```
 
 Notice that the output above shows the two `.jar` files just discussed.
