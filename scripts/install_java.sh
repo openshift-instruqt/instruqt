@@ -4,9 +4,9 @@ export MVN_VERSION=3.8.6
 
 mkdir -p /opt/java
 
-curl -LJO https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6+10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz /tmp/openjdk-17_linux-x64_bin.tar.gz
-tar -xzvf /tmp/openjdk-17_linux-x64_bin.tar.gz -C /opt/java/
-rm -f /tmp/openjdk-17_linux-x64_bin.tar.gz
+cd /tmp && curl -LJO https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
+tar -xzvf /tmp/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz -C /opt/java/
+rm -f /tmp/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
 
 curl -s https://archive.apache.org/dist/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 
