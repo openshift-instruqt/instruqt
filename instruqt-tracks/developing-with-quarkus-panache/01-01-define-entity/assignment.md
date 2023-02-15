@@ -44,7 +44,7 @@ tabs:
 difficulty: basic
 timelimit: 300
 ---
-In this topic, you will create a simple RESTful application generated using Quarkus tooling. Then you'll define a new data entity that will be used in the application. The data entity will then be persisted in a relational database through [JDBC](https://access.redhat.com/documentation/en-us/red_hat_amq/6.2/html/configuring_broker_persistence/fusembpersistjdbcstore).
+In this topic, you will create a simple RESTful application generated using Quarkus tooling. Then you'll define a new data entity that will be used in the application. The data entity will then be persisted in a relational database through [JDBC](https://access.redhat.com/documentation/en-us/red_hat_amq/7.7/html-single/configuring_amq_broker/index#jdbc_persistence).
 
 # Inspecting the Java runtime
 
@@ -65,9 +65,9 @@ $JAVA_HOME/bin/java --version
 You'll get output similar to the following:
 
 ```console
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 
 If the command fails, wait a few moments and try again. (The JRE is installed in a background process and might take a few minutes to finish installing depending on system load).
@@ -134,9 +134,6 @@ You will see a lot of screen output and then when the execution is successful, y
 [INFO] [SUCCESS] /?  Extension io.quarkus:quarkus-jdbc-postgresql has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.838 s
-[INFO] Finished at: 2022-04-12T22:29:42Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -336,6 +333,3 @@ In this topic you downloaded the source code from GitHub. You created a Panache 
 ----
 
 **NEXT:** Deploying a database to OpenShift and enabling live coding under Quarkus
-
-
-

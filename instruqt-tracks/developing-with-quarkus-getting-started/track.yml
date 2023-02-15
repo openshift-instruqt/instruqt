@@ -50,7 +50,6 @@ developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - eshortis@redhat.com
-- cclyburn@redhat.com
 - ryanj@redhat.com
-maintenance: false
-checksum: "16787649286565844812"
+- cclyburn@redhat.com
+checksum: "8999125421394163673"

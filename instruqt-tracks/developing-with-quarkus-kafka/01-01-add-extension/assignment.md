@@ -127,7 +127,7 @@ You'll see a lot of screen output as the command executes. Finally, you'll get o
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ```
- 
+
 NOTE: The first time you add the extension, new dependencies may be downloaded as part of Maven. This download should only happen once. After that, things will go even faster.
 
 The command you just executed above in **Terminal 1** will add the necessary entry to the project's `pom.xml` file that bring's the Kafka extension into the runtime environment.
