@@ -209,7 +209,7 @@ mvn quarkus:add-extension -Dextensions="openshift"
 There will be some screen output. Then, at the end of the installation process you'll see screen output similar to the following:
 
 ```console
-INFO] --- quarkus-maven-plugin:xx.xx.xx:add-extension (default-cli) @ people ---
+INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extension (default-cli) @ people ---
 [INFO] [SUCCESS] ?  Extension io.quarkus:quarkus-openshift has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS

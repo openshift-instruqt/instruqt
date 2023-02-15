@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-panache-dev
-id: we9fwxyqibtp
-title: DEV - Effective Data with Hibernate and Panache
+slug: developing-with-quarkus-panache
+id: epiodrxuvz7f
+title: Effective Data with Hibernate and Panache
 description: |-
   In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
 
@@ -29,7 +29,7 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
-- dev
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
@@ -37,5 +37,5 @@ developers:
 - dschenck@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-maintenance: true
+maintenance: false
 checksum: "18036764220909191046"

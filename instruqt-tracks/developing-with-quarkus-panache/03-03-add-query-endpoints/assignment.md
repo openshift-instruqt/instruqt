@@ -44,10 +44,13 @@ Eventually you will see log output in the **Terminal 1** console similar to the 
 
 ```console
 [INFO] Checking for existing resources in: /root/projects/rhoar-getting-started/quarkus/panache/src/main/kubernetes.
-2023-02-15 16:19:44,375 INFO  [io.qua.dep.QuarkusAugmentor] (main) Quarkus augmentation completed in 4006ms
-2023-02-15 16:19:46,325 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending quarkus-run.jar
-2023-02-15 16:19:46,342 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending app/people-1.0-SNAPSHOT.jar
-2023-02-15 16:19:46,349 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Connected to remote server
+2022-04-14 17:30:25,643 INFO  [io.qua.dep.QuarkusAugmentor] (main) Quarkus augmentation completed in 2365ms
+2022-04-14 17:30:27,476 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending lib/deployment/appmodel.dat
+2022-04-14 17:30:27,497 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending quarkus-run.jar
+2022-04-14 17:30:27,501 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending dev/app/META-INF/panache-archive.marker
+2022-04-14 17:30:27,504 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending app/people-1.0-SNAPSHOT.jar
+2022-04-14 17:30:27,509 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending lib/deployment/build-system.properties
+2022-04-14 17:30:27,512 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Connected to remote server
 ```
 
 Your instance of the Quarkus demonstration application running locally is now connected to the remote instance that's running within the OpenShift cluster.
