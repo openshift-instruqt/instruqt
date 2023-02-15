@@ -1,6 +1,6 @@
 ---
 slug: 01-define-entity
-id: musxbpoxa4uh
+id: kiy4ofd3amhq
 type: challenge
 title: Topic 1 - Setting up the demonstration project and implementing data access
   Web UI

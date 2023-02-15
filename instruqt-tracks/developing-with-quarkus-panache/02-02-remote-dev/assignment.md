@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: py7ewigesvvm
+id: iehsyv73x1o9
 type: challenge
 title: Topic 2 - Deploying a database to OpenShift and enabling live coding under
   Quarkus

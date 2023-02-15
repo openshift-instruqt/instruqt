@@ -1,6 +1,6 @@
 ---
 slug: 06-exercise-table
-id: clw4ktpbct8n
+id: rgyfdvxcqaq7
 type: challenge
 title: Topic 6 - Exercising data queries using the demonstration application's Web
   GUI access Web UI
