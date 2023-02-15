@@ -1,6 +1,7 @@
-slug: developing-with-quarkus-panache-reactive
-id: gyon3t6zkpfs
-title: Implementing a reactive application using Quarkus, Hibernate Reactive and Panache
+slug: developing-with-quarkus-panache-reactive-dev
+id: mbbsmjptofxv
+title: DEV - Implementing a reactive application using Quarkus, Hibernate Reactive
+  and Panache
 description: |-
   In this track, you will get an introduction to reactive programming using [**Hibernate Reactive**](http://hibernate.org/reactive) with [**Panache**](https://quarkus.io/guides/hibernate-orm-panache).
 
@@ -47,12 +48,12 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - nvinto@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "7344286018701513195"
+maintenance: true
+checksum: "8997640150752039316"

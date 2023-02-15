@@ -1,6 +1,6 @@
 ---
 slug: 03-add-query-endpoints
-id: odcydrw6l61u
+id: hrbr5kyx0szd
 type: challenge
 title: Topic 3 - Adding reactive queries to the Person entity
 notes:
