@@ -1,6 +1,6 @@
 ---
 slug: 03-add-additional-metrics
-id: lyatqebbjbjh
+id: e7h1dxiubg0f
 type: challenge
 title: Topic 3 - Gathering additional metrics from the demonstration application
 notes:

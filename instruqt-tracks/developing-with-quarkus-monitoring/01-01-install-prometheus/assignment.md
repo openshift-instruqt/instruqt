@@ -1,6 +1,6 @@
 ---
 slug: 01-install-prometheus
-id: tnrqxmvhzrju
+id: yawpkjywxmlc
 type: challenge
 title: Topic 1 - Creating the demonstration project and application
 notes:

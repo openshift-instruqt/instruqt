@@ -1,6 +1,6 @@
 ---
 slug: 07-create-dashboard
-id: jh5zt8sy9jrr
+id: 3xqiqlaohh9b
 type: challenge
 title: Topic 7 - Creating the Grafana Dashboard
 notes:

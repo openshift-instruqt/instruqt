@@ -1,6 +1,6 @@
 ---
 slug: 04-deploy-to-openshift
-id: cbbujrwbalpa
+id: vmjuppnuxkof
 type: challenge
 title: Topic 4 - Integrating Prometheus with OpenShift
 notes:

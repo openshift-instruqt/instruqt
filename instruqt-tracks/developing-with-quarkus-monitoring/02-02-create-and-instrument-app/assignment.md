@@ -1,6 +1,6 @@
 ---
 slug: 02-create-and-instrument-app
-id: ffwexxna8fxa
+id: pa1dzxyz4wzv
 type: challenge
 title: Topic 2 - Adding the Prometheus extension
 notes:

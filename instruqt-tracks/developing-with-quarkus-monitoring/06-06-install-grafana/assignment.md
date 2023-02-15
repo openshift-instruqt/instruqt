@@ -1,6 +1,6 @@
 ---
 slug: 06-install-grafana
-id: pgex6x3fawyd
+id: ugnmm2ewvtpx
 type: challenge
 title: Topic 6 - Integrating Grafana with OpenShift and Prometheus
 notes:
