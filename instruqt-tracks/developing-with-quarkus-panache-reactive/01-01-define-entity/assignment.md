@@ -75,9 +75,9 @@ $JAVA_HOME/bin/java --version
 You will get output similar to the following:
 
 ```
-openjdk 17.0.6 2023-01-17
-OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
-OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
+openjdk 11 2018-09-25
+OpenJDK Runtime Environment 18.9 (build 11+28)
+OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
 ```
 
 |NOTE|
@@ -133,6 +133,9 @@ There will be a good deal of screen output. You'll see output similar to the fol
 [SUCCESS] ✅ Extension io.quarkus:quarkus-reactive-pg-client has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.967 s
+[INFO] Finished at: 2022-05-30T23:17:18Z
 [INFO] ------------------------------------------------------------------------
 ```
 You are now ready to start building out the source code from the demonstration application.

@@ -168,10 +168,13 @@ You'll see the following output:
 [INFO] Building people 1.0-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
-[INFO] --- quarkus-maven-plugin:xx.xx.xx:add-extension (default-cli) @ people ---
+[INFO] --- quarkus-maven-plugin:2.0.1.Final:add-extension (default-cli) @ people ---
 [INFO] [SUCCESS] ✅ Extension io.quarkus:quarkus-openshift has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.522 s
+[INFO] Finished at: 2022-05-31T23:43:31Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -210,6 +213,7 @@ The statement `quarkus.package.type=mutable-jar` shown above in the file `applic
 ```
 mvn clean package -DskipTests \
 -Dquarkus.kubernetes.deploy=true \
+-Dquarkus.container-image.build=true \
 -Dquarkus.kubernetes-client.trust-certs=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
 -Dquarkus.openshift.route.expose=true \
@@ -224,6 +228,9 @@ You will see a good deal of screen output sent to the console window over a minu
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:15 min
+[INFO] Finished at: 2022-05-31T23:52:31Z
+[INFO] ------------------------------------------------------------------------
 ```
 
 **KEY CONCEPTS TO UNDERSTAND**
@@ -231,6 +238,7 @@ You will see a good deal of screen output sent to the console window over a minu
 The following list describes the meaning of the options used in the command `mvn clean package`:
 
 * `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift after the container image is built.
+* `quarkus.container-image.build=true` - Instructs the extension to build a container image.
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certificates and that the application is to trust the certificates.
 * `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension to generate and create the OpenShift resources, such as `DeploymentConfig` and `Service`, after building the container.
 * `quarkus.openshift.route.expose=true` - Instructs the extension to generate an OpenShift [`Route`](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html) making the demonstration application accessible from a browser.
@@ -326,3 +334,4 @@ In the next topic you'll add some more Panache Reactive queries.
 ----
 
 **NEXT:** Adding reactive queries to the `Person` entity
+

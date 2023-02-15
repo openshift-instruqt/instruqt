@@ -74,6 +74,6 @@ There is much more to Quarkus than the concepts and techniques you covered in th
 # Open the solution in an IDE in the cloud
 Want to continue exploring this solution on your own in the cloud?
 
-You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to log in or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to log in or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
 Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/panache-reactive/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
