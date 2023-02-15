@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-monitoring-dev
-id: bcxx4kfygd4a
-title: DEV - Monitoring Quarkus with Micrometer
+slug: developing-with-quarkus-monitoring
+id: husayvyvw0ax
+title: Monitoring Quarkus with Micrometer
 description: |-
   |What you need to know before you start|
   |----|
@@ -25,7 +25,7 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
-- dev
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
@@ -33,5 +33,5 @@ developers:
 - dschenck@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-maintenance: true
+maintenance: false
 checksum: "2793503978393391644"
