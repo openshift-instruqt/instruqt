@@ -95,7 +95,7 @@ Here's how to get started on working on or maintaining an Instruqt OpenShift tra
     gh workflow run "promote" -F "slug=<track-slug>" -r my-new-branch
     ```
 8. Create a pull request by selecting **Pull requests** in the top menu of your repository, followed by **New pull request**. Indicate your new branch, and select **Create pull request**.
-9. Have a colleague review your work, and merge the pull requests. Once merged, the changes will automatically be applied to the production version of your track.
+9. Have a colleague review your work, and merge your pull request. Once merged, the changes will **automatically be applied** to the production version of your track via a github action.  If the action fails, you can manually push the merge to production by running: `git checkout master && git pull origin master && instruqt track push --force` 
 
 ### Creating a new track
 
