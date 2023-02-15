@@ -1,6 +1,6 @@
 ---
 slug: 01-install-prometheus
-id: tnrqxmvhzrju
+id: yawpkjywxmlc
 type: challenge
 title: Topic 1 - Creating the demonstration project and application
 notes:
@@ -74,8 +74,8 @@ You are now authenticated to the OpenShift server.
 
 # Accessing an OpenShift project
 
-OpenShift [projects](https://docs.openshift.com/container-platform/4.9/rest_api/project_apis/project-project-openshift-io-v1.html)
-are a top-level concept for organizing OpenShift [deployments](https://docs.openshift.com/container-platform/4.6/applications/deployments/what-deployments-are.html).
+OpenShift [projects](https://docs.openshift.com/container-platform/latest/rest_api/project_apis/project-project-openshift-io-v1.html)
+are a top-level concept for organizing OpenShift [deployments](https://docs.openshift.com/container-platform/latest/applications/deployments/what-deployments-are.html).
 
 An OpenShift project allows a user or a community of users to organize and manage application content in isolation.
 

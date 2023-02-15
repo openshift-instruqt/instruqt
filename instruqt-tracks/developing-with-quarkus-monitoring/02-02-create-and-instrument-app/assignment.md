@@ -1,6 +1,6 @@
 ---
 slug: 02-create-and-instrument-app
-id: ffwexxna8fxa
+id: pa1dzxyz4wzv
 type: challenge
 title: Topic 2 - Adding the Prometheus extension
 notes:
@@ -36,9 +36,9 @@ $JAVA_HOME/bin/java --version
 You get output similar to the following. The versions and dates displayed may be slightly different:
 
 ```console
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 
 If the command fails, wait a few moments and try again. The JRE is installed in a background process and may take a few seconds to get up and running depending on system load.
@@ -51,11 +51,10 @@ Next, you'll create a basic Quarkus **Hello World** application that includes th
 
 ```
 cd /root/projects/quarkus && \
-mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=primes \
     -DclassName="org.acme.quickstart.GreetingResource" \
-    -Dextensions="micrometer-registry-prometheus" \
     -Dpath="/hello"
 ```
 
@@ -71,9 +70,12 @@ You'll see a lot of screen output. When the installation process completes succe
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.381 s
-[INFO] Finished at: 2022-04-26T19:12:36Z
-[INFO] ------------------------------------------------------------------------
+```
+
+Add the **micrometer-registry-prometheus** extension to enable the Micrometer metric in your Quarkus application. Run the following command:
+
+```
+mvn quarkus:add-extension -Dextensions="micrometer-registry-prometheus" -f primes
 ```
 
 The `mvn` installation process uses the Quarkus Maven Plugin to generate a basic Maven project. The application's files will be stored in the `primes` subdirectory. The `micrometer-registry-prometheus` extension will publish operation metrics at the `/q/metrics` RESTful endpoint.
@@ -109,7 +111,7 @@ __  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-INFO  [io.quarkus] (Quarkus Main Thread) primes 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.xx.x.Final) started in x.xxxs. Listening on: http://localhost:8080
+INFO  [io.quarkus] (Quarkus Main Thread) primes 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.xx.x.) started in x.xxxs. Listening on: http://localhost:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, micrometer, resteasy]
 
@@ -144,7 +146,7 @@ cd /root/projects/quarkus/primes && \
 You will see the following output:
 
 ```console
-Hello RESTEasy
+Hello from RESTEasy Reactive
 ```
 
 # Exercising the metrics endpoint
@@ -161,19 +163,14 @@ curl http://localhost:8080/q/metrics
 You will see output similar to what's shown in the snippet below:
 
 ```console
-# HELP jvm_buffer_total_capacity_bytes An estimate of the total capacity of the buffers in this pool
-# TYPE jvm_buffer_total_capacity_bytes gauge
-jvm_buffer_total_capacity_bytes{id="mapped",} 0.0
-jvm_buffer_total_capacity_bytes{id="direct",} 467006.0
-# HELP jvm_memory_max_bytes The maximum amount of memory in bytes that can be used for memory management
 # TYPE jvm_memory_max_bytes gauge
-jvm_memory_max_bytes{area="heap",id="G1 Survivor Space",} -1.0
-jvm_memory_max_bytes{area="heap",id="G1 Old Gen",} 7.902068736E9
-jvm_memory_max_bytes{area="nonheap",id="Metaspace",} -1.0
-jvm_memory_max_bytes{area="nonheap",id="CodeHeap 'non-nmethods'",} 7553024.0
-jvm_memory_max_bytes{area="heap",id="G1 Eden Space",} -1.0
-jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space",} 1.073741824E9
-jvm_memory_max_bytes{area="nonheap",id="CodeHeap 'non-profiled nmethods'",} 2.44105216E8
+# HELP jvm_memory_max_bytes The maximum amount of memory in bytes that can be used for memory management
+jvm_memory_max_bytes{area="heap",id="G1 Survivor Space"} -1.0
+jvm_memory_max_bytes{area="heap",id="G1 Old Gen"} 8.43055104E9
+jvm_memory_max_bytes{area="nonheap",id="Metaspace"} -1.0
+jvm_memory_max_bytes{area="nonheap",id="CodeCache"} 5.0331648E7
+jvm_memory_max_bytes{area="heap",id="G1 Eden Space"} -1.0
+jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space"} 1.073741824E9
 .
 .
 .

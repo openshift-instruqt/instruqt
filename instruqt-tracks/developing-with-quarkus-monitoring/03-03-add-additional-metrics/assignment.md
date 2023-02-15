@@ -1,6 +1,6 @@
 ---
 slug: 03-add-additional-metrics
-id: lyatqebbjbjh
+id: e7h1dxiubg0f
 type: challenge
 title: Topic 3 - Gathering additional metrics from the demonstration application
 notes:
@@ -183,11 +183,10 @@ You'll see many metrics, for example:
 
 ```
 # HELP prime_number_max
-# TYPE prime_number_max gauge
-prime_number_max 887.0
-# TYPE http_server_requests_seconds summary
-http_server_requests_seconds_count{method="GET",outcome="SUCCESS",status="200",uri="/is-prime/{number}",} 4.0
-http_server_requests_seconds_sum{method="GET",outcome="SUCCESS",status="200",uri="/is-prime/{number}",} 0.082716484
+prime_number_max 1.11111111111111117E18
+# TYPE jvm_gc_memory_allocated_bytes counter
+# HELP jvm_gc_memory_allocated_bytes Incremented for an increase in the size of the (young) heap memory pool after one GC to before the next
+jvm_gc_memory_allocated_bytes_total 0.0
 ```
 
 ----

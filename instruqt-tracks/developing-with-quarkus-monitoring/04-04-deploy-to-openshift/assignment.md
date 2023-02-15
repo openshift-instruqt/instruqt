@@ -1,6 +1,6 @@
 ---
 slug: 04-deploy-to-openshift
-id: cbbujrwbalpa
+id: vmjuppnuxkof
 type: challenge
 title: Topic 4 - Integrating Prometheus with OpenShift
 notes:
@@ -103,9 +103,6 @@ You'll see a lot of screen output. Finally, you'll see the following output when
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  38.868 s
-[INFO] Finished at: 2022-04-25T23:57:41Z
-[INFO] ------------------------------------------------------------------------D
 ```
 
 ----

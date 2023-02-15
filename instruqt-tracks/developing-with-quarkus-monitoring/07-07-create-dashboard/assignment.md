@@ -1,6 +1,6 @@
 ---
 slug: 07-create-dashboard
-id: jh5zt8sy9jrr
+id: 3xqiqlaohh9b
 type: challenge
 title: Topic 7 - Creating the Grafana Dashboard
 notes:
@@ -204,7 +204,7 @@ In addition to gathering metric data, Micrometer, Prometheus and Grafana support
 
 # Learn more using CodeReady Workspaces in the Developer Sandbox for Red Hat OpenShift
 
-Want to continue exploring the concepts and techniques covered in this track? You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running in the [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox), which is also free.
+Want to continue exploring the concepts and techniques covered in this track? You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running in the [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox), which is also free.
 
 [Go here](https://workspaces.openshift.com) to log in or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
