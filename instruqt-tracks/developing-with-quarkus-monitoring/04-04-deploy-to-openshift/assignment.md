@@ -48,9 +48,6 @@ You'll see output similar to the following:
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.320 s
-[INFO] Finished at: 2022-04-25T23:53:20Z
-[INFO] ------------------------------------------------------------------------
 ```
 
 ----
@@ -62,11 +59,9 @@ You'll see output similar to the following:
 ```text
 # Configure the OpenShift extension options
 quarkus.kubernetes-client.trust-certs=true
-quarkus.container-image.build=true
 quarkus.kubernetes.deploy=true
 quarkus.kubernetes.deployment-target=openshift
 quarkus.openshift.expose=true
-quarkus.openshift.labels.app.openshift.io/runtime=quarkus
 ```
 
 `Step 2c:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `application.properties` file.
@@ -74,11 +69,9 @@ quarkus.openshift.labels.app.openshift.io/runtime=quarkus
 **KEY POINTS TO UNDERSTAND**
 
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certificates and that Quarkus should trust them.
-* `quarkus.container-image.build=true` - Indicates that the extension is to build a container image.
 * `quarkus.kubernetes.deploy=true` - Indicates that the extension will deploy the application container to OpenShift after the container image is built.
 * `quarkus.kubernetes.deployment-target=openshift` - Indicates that the extension is to generate and create the OpenShift resources (such as `DeploymentConfig`s and `Service`s) after building the container.
 * `quarkus.openshift.route.expose=true` - Indicates that the extension is to generate an OpenShift `Route`.
-* `quarkus.openshift.labels.app.openshift.io/runtime=quarkus` - Adds a nice-looking icon to the app when viewing the OpenShift Developer Topology.
 
 # Deploying the demonstration application to OpenShift
 
@@ -103,9 +96,6 @@ You'll see a lot of screen output. Finally, you'll see the following output when
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  38.868 s
-[INFO] Finished at: 2022-04-25T23:57:41Z
-[INFO] ------------------------------------------------------------------------D
 ```
 
 ----

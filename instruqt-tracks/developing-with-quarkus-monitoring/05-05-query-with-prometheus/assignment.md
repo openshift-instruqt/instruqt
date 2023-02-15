@@ -38,7 +38,7 @@ cd /root/projects/quarkus/primes && \
 You will see output similar to the following:
 
 ```console
-OpenSSL 1.1.1g FIPS  21 Apr 2020
+OpenSSL 1.1.1k  FIPS 25 Mar 2021
 ```
 
 ----
