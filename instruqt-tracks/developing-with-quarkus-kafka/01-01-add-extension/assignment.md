@@ -58,12 +58,12 @@ You'll get output similar to the following:
 
 ```
 Cloning into 'rhoar-getting-started'...
-remote: Enumerating objects: 2603, done.
-remote: Counting objects: 100% (156/156), done.
-remote: Compressing objects: 100% (82/82), done.
-remote: Total 2603 (delta 107), reused 89 (delta 73), pack-reused 2447
-Receiving objects: 100% (2603/2603), 1.15 MiB | 7.43 MiB/s, done.
-Resolving deltas: 100% (907/907), done.
+remote: Enumerating objects: 2572, done.
+remote: Counting objects: 100% (756/756), done.
+remote: Compressing objects: 100% (411/411), done.
+remote: Total 2572 (delta 278), reused 641 (delta 215), pack-reused 1816
+Receiving objects: 100% (2572/2572), 1.16 MiB | 17.16 MiB/s, done.
+Resolving deltas: 100% (855/855), done.
 ```
 
 ----
@@ -89,9 +89,9 @@ $JAVA_HOME/bin/java --version
 You get output similar to the following:
 
 ```console
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 The versions and dates in the output above may be slightly different than those shown below.
 
@@ -126,11 +126,8 @@ You'll see a lot of screen output as the command executes. Finally, you'll get o
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  10.628 s
-[INFO] Finished at: 2022-04-11T17:16:33Z
-[INFO] ------------------------------------------------------------------------
 ```
-
+ 
 NOTE: The first time you add the extension, new dependencies may be downloaded as part of Maven. This download should only happen once. After that, things will go even faster.
 
 The command you just executed above in **Terminal 1** will add the necessary entry to the project's `pom.xml` file that bring's the Kafka extension into the runtime environment.
