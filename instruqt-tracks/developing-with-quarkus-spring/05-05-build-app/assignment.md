@@ -51,8 +51,8 @@ ls -l /root/projects/quarkus/fruit-taster/target/*.jar /root/projects/quarkus/fr
 You'll see output similar to the following:
 
 ```
--rw-r--r--. 1 root root 185290 Feb 16 20:47 /root/projects/quarkus/fruit-taster/target/fruit-taster-1.0.0-SNAPSHOT.jar
--rw-r--r--. 1 root root    663 Feb 16 20:47 /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
+-rw-r--r--. 1 root root 13412 Apr  6 16:16 /root/projects/quarkus/fruit-taster/target/fruit-taster-1.0.0-SNAPSHOT.jar
+-rw-r--r--. 1 root root   600 Apr  6 16:16 /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
 ```
 
 **WHERE:**
