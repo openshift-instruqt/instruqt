@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-kafka-dev
+slug: developing-with-quarkus-kafka
 id: shxahiemdoy0
-title: DEV - Reactive Streaming with Quarkus and Kafka
+title: Reactive Streaming with Quarkus and Kafka
 description: |-
   In this track, you will use the Quarkus Kafka extension to build a streaming application using MicroProfile Reactive
   Streams Messaging and [Apache Kafka](https://kafka.apache.org), a distributed streaming platform.
