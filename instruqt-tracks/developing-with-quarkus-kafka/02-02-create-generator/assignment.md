@@ -1,6 +1,6 @@
 ---
 slug: 02-create-generator
-id: vdz4hpslubmj
+id: ix22fgjt2c88
 type: challenge
 title: Topic 2 - Binding to a stream
 teaser: Create the code that will bind the Quarkus demonstration application to a

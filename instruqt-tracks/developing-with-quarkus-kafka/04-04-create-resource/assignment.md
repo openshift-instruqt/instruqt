@@ -1,6 +1,6 @@
 ---
 slug: 04-create-resource
-id: qggex3q3n6dv
+id: pdrga57fiukt
 type: challenge
 title: Topic 4 - Binding a stream to a JAX-RS resource
 teaser: Create Java code that exposes data in an internal stream to a RESTful endpoint

@@ -1,6 +1,6 @@
 ---
 slug: 01-add-extension
-id: fvbc8xkh77lx
+id: p47jvc6rboyq
 type: challenge
 title: Topic 1 - Setting up the track
 teaser: Take the starting steps to get the demonstration project ready
