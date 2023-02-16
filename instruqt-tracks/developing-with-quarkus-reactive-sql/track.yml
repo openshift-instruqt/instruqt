@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-reactive-sql-dev
-id: b8odydmyy4hn
-title: DEV - Reactive programming with Quarkus Reactive SQL
+slug: developing-with-quarkus-reactive-sql
+id: zyn7xvmau2y6
+title: Reactive programming with Quarkus Reactive SQL
 description: |-
   In this track, you will get an introduction to the reactive programming model of Quarkus
 
@@ -34,7 +34,7 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
-- dev
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
@@ -43,5 +43,5 @@ developers:
 - nvinto@redhat.com
 - eshortis@redhat.com
 - ryanj@redhat.com
-maintenance: true
+maintenance: false
 checksum: "13369059595546362301"
