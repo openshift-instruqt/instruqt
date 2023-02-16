@@ -1,6 +1,6 @@
 ---
 slug: 04-create-web
-id: phdhbufqrzx6
+id: vk9stlgkbvvb
 type: challenge
 title: Topic 4 - Using Spring Web Annotations in Quarkus
 notes:

@@ -1,6 +1,6 @@
 ---
 slug: 06-deploy-and-test
-id: eduwkrc4nrlu
+id: adco40bcvmrf
 type: challenge
 title: Topic 6 - Creating a Quarkus native app running in OpenShift
 notes:

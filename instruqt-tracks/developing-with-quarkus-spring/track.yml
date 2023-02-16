@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-spring
-id: r5623ypubfbf
-title: Quarkus for Spring Boot Developers
+slug: developing-with-quarkus-spring-dev
+id: 0idweupb20g6
+title: DEV - Quarkus for Spring Boot Developers
 description: |-
   This track demonstrates how Spring and Spring Boot developers can use Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications.
 
@@ -18,6 +18,7 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
@@ -25,6 +26,5 @@ developers:
 - eshortis@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-private: false
-published: true
-checksum: "6628884856410766434"
+maintenance: true
+checksum: "8761626998264619740"
