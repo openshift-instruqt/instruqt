@@ -1,6 +1,6 @@
 ---
 slug: 05-package-and-run
-id: ko4bqhiikyyc
+id: d2ftvo4grjxo
 type: challenge
 title: Topic 5 - Redeploying the demonstration application into OpenShift
 notes:

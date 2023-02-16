@@ -1,6 +1,6 @@
 ---
 slug: 04-add-model
-id: ecxbaczp7e0t
+id: eoygqytz8oqd
 type: challenge
 title: Topic 4 - Modifying the Coffee class
 notes:

@@ -1,6 +1,6 @@
 ---
 slug: 01-add-extension
-id: a4g31p1707dx
+id: lbxarfiq5cyo
 type: challenge
 title: Topic 1 - Initializing the demonstration application
 notes:
