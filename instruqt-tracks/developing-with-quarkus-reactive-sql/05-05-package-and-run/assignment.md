@@ -1,6 +1,6 @@
 ---
 slug: 05-package-and-run
-id: ko4bqhiikyyc
+id: d2ftvo4grjxo
 type: challenge
 title: Topic 5 - Redeploying the demonstration application into OpenShift
 notes:
@@ -27,7 +27,6 @@ In the previous topic you updated the `Coffee` class by adding a new method `fin
 cd /root/projects/rhoar-getting-started/quarkus/reactive-sql && \
   mvn clean package -DskipTests \
   -Dquarkus.kubernetes.deploy=true \
-  -Dquarkus.container-image.build=true \
   -Dquarkus.kubernetes-client.trust-certs=true \
   -Dquarkus.kubernetes.deployment-target=openshift \
   -Dquarkus.openshift.route.expose=true \
@@ -39,9 +38,6 @@ There will be good deal of screen output. Eventually, upon a successful installa
 ```
 INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  48.663 s
-[INFO] Finished at: 2022-05-18T18:20:19Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -104,7 +100,7 @@ This is the last topic in this track. To read more about Quarkus and Reactive SQ
 
 Want to continue exploring this solution on your own in the cloud?
 
-You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox) to get more insight into working with Quarkus and reactive programming.
+You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running on the [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox) to get more insight into working with Quarkus and reactive programming.
 
 [Click here](https://workspaces.openshift.com) to register and log into Red Hat Workspaces. This free service expires after 30 days, but you can always renew a new free 30-day subscription.
 
