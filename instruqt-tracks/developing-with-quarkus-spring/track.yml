@@ -22,9 +22,9 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-- bob@cogarttech.com
 - eshortis@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
+- bob@cogarttech.com
 maintenance: true
-checksum: "8761626998264619740"
+checksum: "15318907561816269248"

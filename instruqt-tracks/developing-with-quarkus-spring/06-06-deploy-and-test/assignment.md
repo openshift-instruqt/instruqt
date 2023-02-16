@@ -45,10 +45,6 @@ You'll see some screen output. When the process ends, you see output similar to 
 
 ```
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.774 s
-[INFO] Finished at: 2022-04-06T18:02:55Z
-[INFO] ------------------------------------------------------------------------
 ```
 
 
@@ -190,7 +186,6 @@ Now let's deploy the application.
 ```
 mvn clean package -f /root/projects/quarkus/fruit-taster \
 -Dquarkus.kubernetes-client.trust-certs=true \
--Dquarkus.container-image.build=true \
 -Dquarkus.kubernetes.deploy=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
 -Dquarkus.openshift.route.expose=true \
@@ -200,7 +195,6 @@ mvn clean package -f /root/projects/quarkus/fruit-taster \
 **WHERE:**
 
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates you're using self-signed certs in this simple example. This option instructs the Quarkus extension to trust the certificates.
-* `quarkus.container-image.build=true` - Instructs the extension to build a container image
 * `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift after the container image is built
 * `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension to generate and create the OpenShift resources (like `DeploymentConfig`s and `Service`s) after building the container
 * `quarkus.openshift.route.expose=true` - Instructs the extension to generate an OpenShift `Route` so you can access the application from outside the OpenShift cluster
@@ -212,9 +206,6 @@ When the `mvn clean package` command finishes you'll see output similar to the f
 ```
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:38 min
-[INFO] Finished at: 2022-04-06T18:10:00Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -409,6 +400,6 @@ This is the last topic in the track.
 
 Want to continue exploring this solution on your own in the cloud?
 
-You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Run here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
 Once logged in, [run here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/spring/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.

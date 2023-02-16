@@ -35,10 +35,8 @@ mvn clean package -DskipTests -f /root/projects/quarkus/fruit-taster
 You'll see a lot of screen output. When `mvn clean package` completes you'll see output similar to the following:
 
 ```
-[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.995 s
-[INFO] Finished at: 2022-04-06T17:41:25Z
+[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -53,8 +51,8 @@ ls -l /root/projects/quarkus/fruit-taster/target/*.jar /root/projects/quarkus/fr
 You'll see output similar to the following:
 
 ```
--rw-r--r--. 1 root root 13412 Apr  6 16:16 /root/projects/quarkus/fruit-taster/target/fruit-taster-1.0.0-SNAPSHOT.jar
--rw-r--r--. 1 root root   600 Apr  6 16:16 /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
+-rw-r--r--. 1 root root 185290 Feb 16 20:47 /root/projects/quarkus/fruit-taster/target/fruit-taster-1.0.0-SNAPSHOT.jar
+-rw-r--r--. 1 root root    663 Feb 16 20:47 /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
 ```
 
 **WHERE:**
@@ -82,7 +80,7 @@ _  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-2022-04-06 17:58:34,814 INFO  [io.quarkus] (main) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus 2.0.0.Final) started in2.428s. Listening on: http://0.0.0.0:8080
+2022-04-06 17:58:34,814 INFO  [io.quarkus] (main) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in2.428s. Listening on: http://0.0.0.0:8080
 2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Profile prod activated.
 2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, resteasy, resteasy-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web]
 ```
