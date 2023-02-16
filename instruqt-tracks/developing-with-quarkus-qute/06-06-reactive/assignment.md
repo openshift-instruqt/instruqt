@@ -1,6 +1,6 @@
 ---
 slug: 06-reactive
-id: yfpikikw7jkx
+id: kvoiqhbcn63y
 type: challenge
 title: Topic 6 - Integrating reactive programming with Qute templates
 notes:
@@ -176,7 +176,7 @@ To learn more about Qute, please refer to the [Qute reference guide](https://qua
 
 You can continue your learning path by working with Quarkus and Qute lessons from within the Red Hat CodeReady Workspaces cloud based IDE.
 
-The [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE runs on a free [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox).
+The [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE runs on a free [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox).
 
 Go [here](https://workspaces.openshift.com) to log in or to register if you're a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
