@@ -77,9 +77,9 @@ $JAVA_HOME/bin/java --version
 You will see output similar to the following:
 
 ```console
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 
 |NOTE:|
@@ -97,7 +97,7 @@ Let's create the basic Quarkus **Hello World** application. The creation process
 
 ```
 cd /root/projects/quarkus &&
- mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+ mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=qute \
     -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"
@@ -122,9 +122,6 @@ You will see a lot of output to the screen, finally when the process finishes yo
 [INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.330 s
-[INFO] Finished at: 2022-04-18T20:14:56Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -153,7 +150,7 @@ __  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-INFO  [io.quarkus] (Quarkus Main Thread) qute 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.xx.x.Final) started in x.xxxs. Listening on: http://0.0.0.0:8080
+INFO  [io.quarkus] (Quarkus Main Thread) qute 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.xx.xx) started in x.xxxs. Listening on: http://0.0.0.0:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, mutiny, qute, resteasy, resteasy-qute, scheduler, smallrye-context-propagation, vertx, vertx-web]
 ```

@@ -288,4 +288,16 @@ In this topic you created a new Qute template that's used to emit data in JSON f
 
 ----
 
-**NEXT:** Integrating reactive programming with Qute templates
+This is the last topic in this track.
+
+To learn more about Qute, please refer to the [Qute reference guide](https://quarkus.io/guides/qute-reference).
+
+# Continue to learn more in Red Hat CodeReady Workspaces
+
+You can continue your learning path by working with Quarkus and Qute lessons from within the Red Hat CodeReady Workspaces cloud based IDE.
+
+The [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE runs on a free [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox).
+
+Go [here](https://workspaces.openshift.com) to log in or to register if you're a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+
+Once logged in, [go here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/qute/devfile.yaml) to open the solution for this project in the cloud IDE. If you're asked to update or install any plugins while loading, you can say no.
