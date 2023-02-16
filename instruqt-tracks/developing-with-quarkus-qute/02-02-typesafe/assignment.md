@@ -1,6 +1,6 @@
 ---
 slug: 02-typesafe
-id: aym5ayrk3lmq
+id: yed1ninr5s4f
 type: challenge
 title: Topic 2 - Extending Qute's templating capabilities.
 notes:

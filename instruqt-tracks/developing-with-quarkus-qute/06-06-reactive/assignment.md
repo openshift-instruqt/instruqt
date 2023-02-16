@@ -1,6 +1,6 @@
 ---
 slug: 06-reactive
-id: yfpikikw7jkx
+id: kvoiqhbcn63y
 type: challenge
 title: Topic 6 - Integrating reactive programming with Qute templates
 notes:

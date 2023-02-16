@@ -1,6 +1,6 @@
-slug: developing-with-quarkus-qute
-id: whkravwkm3hs
-title: Templating with Qute Templating Engine
+slug: developing-with-quarkus-qute-dev
+id: orhmy1xx2azm
+title: DEV - Templating with Qute Templating Engine
 description: |-
   In this scenario, you will get an introduction to **Panache**, one of the many features of [Quarkus](https://quarkus.io).
 
@@ -29,10 +29,12 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-checksum: "14419716264343137359"
+maintenance: true
+checksum: "17047064686337478357"

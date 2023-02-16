@@ -1,6 +1,6 @@
 ---
 slug: 01-basics
-id: 5gxaey9fu8js
+id: 2iqph19vywpk
 type: challenge
 title: Topic 1 - Installing, running and understanding the demonstration application
 notes:
