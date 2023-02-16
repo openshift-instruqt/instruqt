@@ -56,9 +56,9 @@ $JAVA_HOME/bin/java --version
 You get output similar to the following:
 
 ```
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 
 |NOTE:|
@@ -82,12 +82,12 @@ You'll get the following output:
 
 ```
 Cloning into 'rhoar-getting-started'...
-remote: Enumerating objects: 2572, done.
-remote: Counting objects: 100% (122/122), done.
-remote: Compressing objects: 100% (59/59), done.
-remote: Total 2572 (delta 95), reused 63 (delta 63), pack-reused 2450
-Receiving objects: 100% (2572/2572), 1.04 MiB | 16.69 MiB/s, done.
-Resolving deltas: 100% (893/893), done.
+remote: Enumerating objects: 2603, done.
+remote: Counting objects: 100% (156/156), done.
+remote: Compressing objects: 100% (82/82), done.
+remote: Total 2603 (delta 107), reused 89 (delta 73), pack-reused 2447
+Receiving objects: 100% (2603/2603), 1.15 MiB | 7.98 MiB/s, done.
+Resolving deltas: 100% (907/907), done.
 ```
 
 # Understanding the demonstration project
@@ -126,9 +126,6 @@ You will see a good deal of output on the screen. You'll see the following outpu
 ```
 INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.349 s
-[INFO] Finished at: 2022-05-17T18:24:51Z
 [INFO] ------------------------------------------------------------------------
 ```
 
