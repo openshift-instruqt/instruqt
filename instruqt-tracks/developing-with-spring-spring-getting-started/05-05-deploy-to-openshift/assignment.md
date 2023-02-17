@@ -100,4 +100,11 @@ Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.
 
 You have now learned how to deploy a Spring Boot application using a database to OpenShift Container Platform. This concludes the first learning scenario for Spring Boot.
 
-Click Summary for more details and suggested next steps.
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

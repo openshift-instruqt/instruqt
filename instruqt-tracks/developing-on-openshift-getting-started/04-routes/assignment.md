@@ -71,12 +71,11 @@ Clicking the icon opens the application's web page in a browser as shown in th f
 
 This is the final step in this track.
 
-# Next Steps!
+# What's Next?
 
-To continue your journey, here are some handy links:
+Congratulations on completing this lab. Keep learning about OpenShift:
 
-* [Red Hat Developer learning page](https://developers.redhat.com/learn)
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
 * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
 
-Don't forget to finish the lab and rate your experience on the next page. Thanks!
-
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

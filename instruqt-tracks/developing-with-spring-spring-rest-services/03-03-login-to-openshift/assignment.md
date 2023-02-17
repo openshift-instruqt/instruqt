@@ -112,4 +112,11 @@ Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.
 
 You have now learned how to deploy a RESTful Spring Boot application to OpenShift Container Platform.
 
-You'll find additional resources and other suggested scenarios in the next page.
+# What's Next?
+
+Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

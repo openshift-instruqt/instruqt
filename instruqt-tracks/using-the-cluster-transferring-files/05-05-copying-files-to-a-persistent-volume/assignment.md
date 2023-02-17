@@ -362,7 +362,7 @@ data   Bound    pv0023   100Gi      RWO,ROX,RWX                   14m
 
 As you can see, although the dummy application was deleted, the persistent volume claim still exists and can later be mounted against your actual application that needs the data.
 
-# Congratulations!
+## Congratulations!
 
 You've just learned how to use the command `oc set volume` to create a persistent volume and a persistent volume claim automatically.
 
@@ -375,3 +375,12 @@ Then, you learned how to use the `oc set volume` command to unmount and remount 
 ----
 
 This is the final topic is this track.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

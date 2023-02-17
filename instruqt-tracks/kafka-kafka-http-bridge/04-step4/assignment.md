@@ -70,3 +70,12 @@ curl -i -X POST http://$KAFKA_BRIDGE_SERVICE/consumers/my-group/instances/my-con
 If the request is successful, the Kafka Bridge returns a `204` code only.
 
 Congratulations! You were able to deploy the AMQ Streams Kafka Bridge and connect to a Kafka cluster using HTTP. You sent some message to an example topic and then created a consumer to retrieve messages. Finally you committed the offsets the messages.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

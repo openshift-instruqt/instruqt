@@ -211,6 +211,15 @@ challenges:
     Elasticsearch offers replication at per index level to provide some data resilience. Additional data resilience can be provided by deploying Elasticsearch on top of a reliable storage service layer such as OpenShift Container Storage which offers further resilience capabilities. This additional data resilience can enhance Elasticsearch service availability during broader infrastructure failure scenarios. Because of limited system resources available in this lab environment, we could not demonstrate the enhanced resiliency capabilities of Elasticsearch when deployed on OpenShift Container Storage, but you have got the idea :)
 
     Happy Persistency \o
+    
+    # What's Next?
+    
+    Congratulations on completing this lab. Keep learning about OpenShift:
+    
+    * Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+    * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+    
+    Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
   tabs:
   - title: Terminal 1
     type: terminal

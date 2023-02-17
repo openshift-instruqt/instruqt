@@ -132,3 +132,13 @@ The admin console has built in metrics about each cache. Click the _Metrics_ tab
 You can also visit the [Global Metrics](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console/global-stats) screen to see more info about the Data Grid service as a whole, and confirm cluster status and the 2 replicas on the [Cluster Membership](https://my-dg-dgdemo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/console/cluster-membership) screen.
 
 
+
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
