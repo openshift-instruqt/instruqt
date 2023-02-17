@@ -194,3 +194,12 @@ In this track you got a glimpse of the power of Quarkus apps using traditional J
 There is much more to Quarkus than fast startup times and low resource usage. You can use [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) and other resources on Red Ht learn more.
 
 Also, be sure to visit [quarkus.io](https://quarkus.io) to learn even more about the architecture and capabilities of Quarkus, an exciting new framework for Java developers.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

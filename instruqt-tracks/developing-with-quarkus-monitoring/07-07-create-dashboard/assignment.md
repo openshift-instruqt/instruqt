@@ -202,10 +202,11 @@ This track demonstrated how a Quarkus application can utilize the [Micrometer Me
 
 In addition to gathering metric data, Micrometer, Prometheus and Grafana support alerting. Alerts generate immediate notifications when an application starts to reach danger thresholds. Also, alerts can be used with automation scripts so applications can react seamlessly to hazards without the need for human interaction.
 
-# Learn more using CodeReady Workspaces in the Developer Sandbox for Red Hat OpenShift
+# What's Next?
 
-Want to continue exploring the concepts and techniques covered in this track? You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running in the [Developer Sandbox for Red Hat OpenShift](http://red.ht/dev-sandbox), which is also free.
+Congratulations on completing this lab. Keep learning about OpenShift:
 
-[Go here](https://workspaces.openshift.com) to log in or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
 
-Once logged in, [go here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/monitoring/devfile.yaml) to open the CodeReady Workspace dedicated to monitoring Quarkus applications.
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

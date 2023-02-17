@@ -487,6 +487,15 @@ challenges:
     ## Congratulations
 
     In this scenario you got to play with Camel Kafka Connector. You have initiated an AMQ Streams (Kafka) cluster on openshift, created an object store, sftp server. Then started a Kafka Connect with your own build of image including the libraries needed. Then you created a source Camel Kafka connector that loads files from the _AWS2 S3_ like storage, place the file in the kafka topic, and created another Camel Kafka connector that listens to the input from the kafka topic and place the file in the SFTP server.
+    
+    # What's Next?
+    
+    Congratulations on completing this lab. Keep learning about OpenShift:
+    
+    * Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+    * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+    
+    Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
   tabs:
   - title: Terminal 1
     type: terminal

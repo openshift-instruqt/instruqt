@@ -77,3 +77,12 @@ This is the final topic in this track.
 # Extra credit
 
 There are [many other features of DataTables](https://datatables.net/manual/server-side) that could be supported on the server side with Quarkus and Panache. For example, when the endpoint is accessed, the set of columns upon which sorting wil be executed is also passed using the `order` and `columns` arrays. If you have time, try to add additional code to support these incoming parameters and order the resulting records accordingly!
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

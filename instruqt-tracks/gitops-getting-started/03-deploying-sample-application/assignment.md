@@ -152,12 +152,11 @@ Or, as in our case, after the fact by running the following command:
 oc patch application/bgd-app -n openshift-gitops --type=merge -p='{"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true}}}}'
 ```
 
-# Next Steps!
+# What's Next?
 
-Congratulations on completing this self-paced lab and learning about ArgoCD on Red Hat OpenShift. To continue your journey, here's some handy links:
+Congratulations on completing this lab. Keep learning about OpenShift:
 
-* [Red Hat Developer learning page](https://developers.redhat.com/learn)
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
 * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
 
-Don't forget to finish the lab and rate your experience on the next page. Thanks!
-
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

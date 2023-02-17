@@ -105,3 +105,12 @@ You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.co
 [Click here](https://workspaces.openshift.com) to register and log into Red Hat Workspaces. This free service expires after 30 days, but you can always renew a new free 30-day subscription.
 
 Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/reactive-sql/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if the sandbox asks you to update or install any plugins, you can say no.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

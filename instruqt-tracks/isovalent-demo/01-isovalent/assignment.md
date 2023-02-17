@@ -165,11 +165,11 @@ user ID. This can be done by running the command:
 oc adm policy add-scc-to-user anyuid -z default -n myproject --as system:admin
 ```
 
-# Next Steps!
+# What's Next?
 
-Congratulations on completing this self-paced lab and learning about the capabilities of Red Hat OpenShift. To continue your journey, here's some handy links:
+Congratulations on completing this lab. Keep learning about OpenShift:
 
-* [Red Hat Developer learning page](https://developers.redhat.com/learn)
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
 * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
 
-Don't forget to finish the lab and provide your feedback on the next page. Thanks for playing!
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

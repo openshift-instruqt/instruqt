@@ -301,3 +301,12 @@ The [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/opensh
 Go [here](https://workspaces.openshift.com) to log in or to register if you're a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
 Once logged in, [go here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/qute/devfile.yaml) to open the solution for this project in the cloud IDE. If you're asked to update or install any plugins while loading, you can say no.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

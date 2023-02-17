@@ -130,10 +130,19 @@ However, as you can see in the figure below, the URL that was generated for this
 
 ![Command Line URL](../assets/command-line-url.png)
 
-# Congratulations!
+## Congratulations!
 
 You've just learned to how to deploy an OpenShift application from the command line using the `oc` CLI tool.
 
 ----
 
 This is the final topic in this track.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
