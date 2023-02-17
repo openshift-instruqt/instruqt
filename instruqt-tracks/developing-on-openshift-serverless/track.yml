@@ -1,6 +1,6 @@
-slug: developing-on-openshift-serverless
-id: inqukbuabjas
-title: Getting Started with OpenShift Serverless
+slug: developing-on-openshift-serverless-dev
+id: czbdcxjlqzvx
+title: DEV - Getting Started with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
   [amq-docs]: https://developers.redhat.com/products/amq/overview
@@ -50,9 +50,11 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - nvinto@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-checksum: "12921271077930684310"
+maintenance: true
+checksum: "15437696371432403525"
