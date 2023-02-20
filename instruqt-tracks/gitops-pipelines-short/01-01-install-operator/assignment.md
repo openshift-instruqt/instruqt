@@ -37,17 +37,6 @@ Click the **Web Console** tab over the terminal area to open the OpenShift web c
 * **Username:** `admin`
 * **Password:** `admin`
 
-👀 Changing perspectives
-========================
-
-Upon logging in, you'll notice in the top left that you're in the **Administrator** perspective:
-
-![Admin Perspective](../assets/admin-perspective.png)
-
-Change the to the **Developer** perspective by selecting **Administrator** and opening the following drop down menu:
-
-![Switch to Developer](../assets/change-to-developer.png)
-
 💾 Installing the OpenShift Pipelines Operator
 ===============================
 In the _Administrator_ perspective of the web console, navigate to **Operators → OperatorHub**. You can see the list of available operators for OpenShift provided by Red Hat as well as a community of partners and open-source projects.
