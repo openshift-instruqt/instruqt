@@ -120,7 +120,7 @@ There's also no references to the git repository or the image registry it will b
 Create the pipeline by running the following:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/pipeline/pipeline.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/pipeline.yaml
 ```
 
 😄 Triggering our Pipeline
@@ -155,15 +155,15 @@ To view the `PipelineRun` visually, visit the Pipelines section of the developer
 
 ![Web Console Pipelines](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-developer.png)
 
-Now, click on the Topology tab on the left side of the web console. You should see something similar to what is shown in the screenshot below:
+Now, click on the Topology tab on the left side of the web console. You should see something similar to what is shown in the screenshot:
 
-![Web Console Deployed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/application-deployed.png)
+![Web Console Deployed](../assets/admin-perspective-topology.png)
 
-By clicking on the arrow icon as shown below, you can open the URL for _ui_ in a new tab and see the application running.
+By clicking on the URL icon as shown above, application in a new tab and see the application running.
 
-![Web Console URL Icon](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/url-icon.png)
+![Web Console Deployed](../assets/application-running.png)
 
-After clicking on the icon, you should see the application running in a new tab. Congratulations! You have successfully deployed your first application using [OpenShift Pipelines](https://cloud.redhat.com/blog/introducing-openshift-pipelines).
+Congratulations! You have successfully deployed your first application using [OpenShift Pipelines](https://cloud.redhat.com/blog/introducing-openshift-pipelines).
 
 ⏭️ What's next
 ===============================

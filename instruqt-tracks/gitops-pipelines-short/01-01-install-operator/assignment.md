@@ -51,4 +51,6 @@ In the _Administrator_ perspective of the web console, navigate to **Operators �
 
 3. The installation may take a minute or two, but once complete, you'll now have installed the *OpenShift Pipelines Operator* to your OpenShift Cluster!
 
+![Operator Installed](../assets/operator-installed.png)
+
 Now, let's start the workshop. In the next section, you'll learn about how to run tasks ⬇️

@@ -49,10 +49,10 @@ spec:
       args: ['-c', 'echo Hello World']
 ```
 
-Apply this  [`Task`](https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml) to your cluster just like any other Kubernetes object. Then run it using `tkn`, the CLI tool for Tekton.
+Apply this  [`Task`](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/hello.yaml) to your cluster just like any other Kubernetes object. Then run it using `tkn`, the CLI tool for Tekton.
 
 ```
-oc apply -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml
+oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/hello.yaml
 ```
 
 ```
@@ -100,19 +100,19 @@ spec:
 1. Create the `apply-manifests` task:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/apply_manifest_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/apply_manifest_task.yaml
 ```
 
 2. We'll also create a `update-deployment` task, which can be seen with a `cat` command:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/update_deployment_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/update_deployment_task.yaml
 ```
 
 3. Finally, we can create a PersistentVolumeClaim to provide the filesystem for our pipeline execution, explained more in the next step:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/resources/persistent_volume_claim.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/persistent_volume_claim.yaml
 ```
 
 4. You can take a look at the tasks you created using the [Tekton CLI](https://github.com/tektoncd/cli/releases):
