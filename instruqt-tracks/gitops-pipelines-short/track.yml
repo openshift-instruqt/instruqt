@@ -1,0 +1,38 @@
+slug: gitops-pipelines-short
+id: atrrxt0dxhxj
+title: Getting Started with OpenShift Pipelines
+teaser: Learn how to use Red Hat OpenShift Pipelines to automate application deployment.
+description: |-
+  ## Goal
+
+  The goal of this track is to get you started with OpenShift Pipelines to automate the deployment of your applications.
+
+
+  |What you need to know before you start|
+  |----|
+  |In order to get full benefit from taking this track you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform)|
+
+  ## Concepts and techniques you'll cover
+
+  * Install the OpenShift Pipelines Operator
+  * Create a Hello World `Task`
+  * Install task resource definitions
+  * Create a Tekton `Pipeline`
+  * Trigger the created pipeline to finish your application deployment.
+
+  ## OpenShift Pipelines
+
+  OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/CD)
+  solution for building pipelines using [Tekton](https://tekton.dev). Tekton is
+  a flexible, Kubernetes-native, open-source CI/CD framework that enables automating
+  deployments across multiple platforms (e.g. Kubernetes, serverless, VMs, and so forth) by
+  abstracting away the underlying details.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+owner: openshift
+developers:
+- cclyburn@redhat.com
+maintenance: true
+checksum: "11687223171142119708"
