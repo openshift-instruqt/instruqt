@@ -1,6 +1,6 @@
 ---
 slug: 05-configure-app
-id: kmahyl8dxl3d
+id: ffxu11rxk2wj
 type: challenge
 title: Topic 5 - Configuring the Quarkus application to bind to Kafka
 teaser: Learn how to configure an application's properties file to bind to an existing
@@ -115,9 +115,6 @@ Upon success, you will get output similar to the following:
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 2507ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  20.424 s
-[INFO] Finished at: 2022-04-11T23:28:14Z
 [INFO] ------------------------------------------------------------------------
 ```
 

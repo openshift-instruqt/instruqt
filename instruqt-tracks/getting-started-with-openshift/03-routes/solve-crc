@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "Authenticating login credentials using 'oc login'"
+
+oc login -u admin -p admin
+
+echo "switching to project 'myproject': oc project myproject"
+oc project myproject
+
+echo "creating 'parksmap' app from image"
+oc new-app --image=quay.io/openshiftroadshow/parksmap:1.3.0 --name parksmap
+
+echo "exposing http traffic"
+oc expose svc/parksmap

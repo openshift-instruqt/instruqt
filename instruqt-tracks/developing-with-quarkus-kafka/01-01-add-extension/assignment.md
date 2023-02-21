@@ -1,6 +1,6 @@
 ---
 slug: 01-add-extension
-id: jhgqsp24iur9
+id: p47jvc6rboyq
 type: challenge
 title: Topic 1 - Setting up the track
 teaser: Take the starting steps to get the demonstration project ready
@@ -89,9 +89,9 @@ $JAVA_HOME/bin/java --version
 You get output similar to the following:
 
 ```console
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 The versions and dates in the output above may be slightly different than those shown below.
 
@@ -125,9 +125,6 @@ You'll see a lot of screen output as the command executes. Finally, you'll get o
 [INFO] [SUCCESS] ?  Extension io.quarkus:quarkus-smallrye-reactive-messaging-kafka has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  10.628 s
-[INFO] Finished at: 2022-04-11T17:16:33Z
 [INFO] ------------------------------------------------------------------------
 ```
 

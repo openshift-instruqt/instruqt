@@ -33,3 +33,12 @@ To see the other services going down, go to the [Developer Console Topology view
 ## Congratulations
 
 In this scenario you got to play with Camel K and Serverless - Knative Eventing. We use Camel K as a Source to load data into event mesh based on Broker. And create couple of functions using Camel K that subscribe to the events in the mesh. There are much more to Camel K. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to learn even more about the architecture and capabilities of this exciting new framework.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

@@ -32,11 +32,13 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- dev
 owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - nvinto@redhat.com
-- ryanj@redhat.com
 - cclyburn@redhat.com
-checksum: "11053060211124046676"
+- ryanj@redhat.com
+maintenance: true
+checksum: "3578971355487748843"

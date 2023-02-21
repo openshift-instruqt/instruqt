@@ -34,11 +34,11 @@ You'll see continuous screen output in **Terminal 1** as shown below:
 
 ```console
 Listening for transport dt_socket at address: 5005
-2022-06-01 17:51:27,854 INFO  [org.jbo.threads] (main) JBoss Threads version 3.4.0.Final
+2023-02-15 17:51:27,854 INFO  [org.jbo.threads] (main) JBoss Threads version 3.4.0.Final
 [INFO] Checking for existing resources in: /root/projects/rhoar-getting-started/quarkus/panache-reactive/src/main/kubernetes.
-2022-06-01 17:51:30,054 INFO  [io.qua.dep.QuarkusAugmentor] (main) Quarkus augmentation completed in 2745ms
-2022-06-01 17:51:31,903 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending lib/deployment/appmodel.dat
-2022-06-01 17:51:31,929 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending quarkus-run.jar
+2023-02-15 17:51:30,054 INFO  [io.qua.dep.QuarkusAugmentor] (main) Quarkus augmentation completed in 2745ms
+2023-02-15 17:51:31,903 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending lib/deployment/appmodel.dat
+2023-02-15 17:51:31,929 INFO  [io.qua.ver.htt.dep.dev.HttpRemoteDevClient] (Remote dev client thread) Sending quarkus-run.jar
 ```
 The **Terminal 1** console window is now dedicated to running the demonstration application locally in `dev mode`.
 

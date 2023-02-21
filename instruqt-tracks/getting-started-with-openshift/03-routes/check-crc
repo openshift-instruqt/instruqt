@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "Checking for a route to 'parksmap'"
+ROUTE=$(oc get routes -n myproject | grep parksmap | cut -f1 -d ' ')
+
+if [ $ROUTE == "parksmap" ]
+  then
+  echo "route 'parksmap' has been created!"
+else
+  echo "FAIL: Route to 'parksmap' not found"
+  exit 1
+fi

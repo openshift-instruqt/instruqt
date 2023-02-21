@@ -1,6 +1,6 @@
 ---
 slug: 05-query-with-prometheus
-id: p8fzw25iabet
+id: etylywflgt93
 type: challenge
 title: Topic 5 - Monitoring application performance with Prometheus
 notes:

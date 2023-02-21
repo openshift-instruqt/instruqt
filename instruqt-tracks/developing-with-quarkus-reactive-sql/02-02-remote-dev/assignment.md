@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: 89ljgx8unolu
+id: hmmochc1jb76
 type: challenge
 title: Topic 2 - Deploying the demonstration application and backing database into
   Red Hat OpenShift
@@ -175,13 +175,10 @@ You will see output similar to the following:
 [INFO] Building reactive-sql 1.0.0-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
-[INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extension (default-cli) @ reactive-sql ---
+[INFO] --- quarkus-maven-plugin:xx.xx.xx:add-extension (default-cli) @ reactive-sql ---
 [INFO] [SUCCESS] ?  Extension io.quarkus:quarkus-openshift has been installed
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.387 s
-[INFO] Finished at: 2022-05-17T19:49:42Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -232,7 +229,6 @@ quarkus.datasource.password=password
 ```
 mvn clean package -DskipTests -f /root/projects/rhoar-getting-started/quarkus/reactive-sql \
 -Dquarkus.kubernetes.deploy=true \
--Dquarkus.container-image.build=true \
 -Dquarkus.kubernetes-client.trust-certs=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
 -Dquarkus.openshift.route.expose=true \
@@ -249,15 +245,11 @@ Eventually, upon a successful installation, you will get output similar to the f
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:44 min
-[INFO] Finished at: 2022-05-17T21:43:39Z
-[INFO] ------------------------------------------------------------------------
 ```
 
 **KEY POINTS TO UNDERSTAND**
 
 * `quarkus.kubernetes.deploy=true` - Indicates the extension to deploy to OpenShift after the container image is built.
-* `quarkus.container-image.build=true` - Indicates the extension to build a container image.
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certs. Quarkus will trust the certificates by default.
 * `quarkus.kubernetes.deployment-target=openshift` - Indicates the extension to generate and create the OpenShift resources after building the container. Examples of OpenShift resources are `DeploymentConfig`s and `Service`s.
 * `quarkus.openshift.route.expose=true` - Indicates the extension to generate an OpenShift `Route` so that the application is accessible from a browser.
@@ -343,7 +335,7 @@ You will see output similar to the following snippet of code:
 [INFO] Building reactive-sql 1.0.0-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
-[INFO] --- quarkus-maven-plugin:2.0.0.Final:remote-dev (default-cli) @ reactive-sql ---
+[INFO] --- quarkus-maven-plugin:xx.xx.xx:remote-dev (default-cli) @ reactive-sql ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 .
 .
@@ -384,4 +376,3 @@ You've learned how to set up a remote connection to the demonstration applicatio
 ----
 
 **NEXT:** Creating the reactive CoffeeResource endpoints
-

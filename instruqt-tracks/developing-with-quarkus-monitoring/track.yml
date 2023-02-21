@@ -25,6 +25,7 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
@@ -32,6 +33,4 @@ developers:
 - dschenck@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "14737915110798932923"
+checksum: "10092745515615182028"

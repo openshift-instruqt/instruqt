@@ -117,3 +117,13 @@ psql -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "update city set weathertype='r
 Now, reload the weather page for US and check the weather icon in New York. It should now be rainy.
 
 ![Rainy](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/middleware-javaee8/rainy.png)
+
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

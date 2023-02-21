@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: py7ewigesvvm
+id: iehsyv73x1o9
 type: challenge
 title: Topic 2 - Deploying a database to OpenShift and enabling live coding under
   Quarkus
@@ -214,9 +214,6 @@ INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extension (default-cli) @ people 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.756 s
-[INFO] Finished at: 2022-04-12T22:38:50Z
-[INFO] ------------------------------------------------------------------------
 ```
 
 # Configuring Quarkus for remote live coding
@@ -285,7 +282,6 @@ One of the useful features of Live Coding is that you can change the remote live
 ```
 mvn clean package -DskipTests \
 -Dquarkus.kubernetes.deploy=true \
--Dquarkus.container-image.build=true \
 -Dquarkus.kubernetes-client.trust-certs=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
 -Dquarkus.openshift.route.expose=true \
@@ -296,7 +292,6 @@ mvn clean package -DskipTests \
 **WHERE:**
 
 * `quarkus.kubernetes.deploy=true` - Indicates the extension to deploy to OpenShift after the container image is built.
-* `quarkus.container-image.build=true` - Indicates the extension to build a container image.
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certificates and that those certificates can be trusted.
 * `quarkus.kubernetes.deployment-target=openshift` - Indicates that the extension will create the OpenShift resources such as `DeploymentConfig`s and `Service`s after building the deployment container in the OpenShift cluster.
 * `quarkus.openshift.route.expose=true` - Indicates the extension will generate an OpenShift `Route` so you can access the application from a browser.
@@ -310,9 +305,6 @@ There will be a good deal of screen output. When the `mvn clean package` command
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 91102ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:51 min
-[INFO] Finished at: 2022-04-14T16:44:33Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -426,4 +418,3 @@ In the next step we'll create additional Panache queries.
 ----
 
 **NEXT:** Adding queries to the demonstration project's source code.
-

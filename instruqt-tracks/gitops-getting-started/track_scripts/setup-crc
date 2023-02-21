@@ -187,6 +187,22 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
+## Install OpenShift GitOps
+cat <<EOF | oc create -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/openshift-gitops-operator.openshift-operators: ""
+  name: openshift-gitops-operator
+  namespace: openshift-operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
 
 ## Installs the argocd CLI tool.
 curl -kL https://github.com/argoproj/argo-cd/releases/download/v2.0.1/argocd-linux-amd64 -o /usr/local/bin/argocd
@@ -254,6 +270,12 @@ done
 while [ "$(curl -k -I https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io -o /dev/null -w '%{http_code}\n' -s 2>/dev/null)" != "200" ]
 do
     echo "Waiting for web console - unavailable via curl"
+    sleep 5
+done
+
+while [ "$(oc rollout status deploy apiserver -n openshift-oauth-apiserver)" != "deployment \"apiserver\" successfully rolled out" ]
+do
+    echo "Waiting for oauth API - rollout incomplete"
     sleep 5
 done
 

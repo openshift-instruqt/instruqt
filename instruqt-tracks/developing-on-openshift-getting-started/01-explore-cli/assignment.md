@@ -1,5 +1,5 @@
 ---
-slug: 1explore-cli
+slug: explore-cli
 id: sy3mg3yzxbjl
 type: challenge
 title: Step 1 - Getting started with OpenShift

@@ -44,7 +44,8 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - Quarkus
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
-checksum: "13390719155902234442"
+checksum: "6996442897705959574"

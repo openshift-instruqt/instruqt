@@ -1,6 +1,6 @@
 ---
 slug: 01-create-project
-id: eesyfulnld5v
+id: ovdb6oakisqr
 type: challenge
 title: Topic 1 - Getting Quarkus up and running
 notes:
@@ -45,9 +45,9 @@ java --version
 You'll get output similar to the following:
 
 ```
-openjdk 11 2018-09-25
-OpenJDK Runtime Environment 18.9 (build 11+28)
-OpenJDK 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+openjdk 17.0.6 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode, sharing)
 ```
 
 If the command fails, wait a few moments and try again. (The Java Runtime is installed in a background process and make take a few moments depending on system load).
@@ -76,7 +76,7 @@ You'll see the following ouput:
 `Step 3:` Run the following command in **Terminal 1** to create the demonstration project named **Fruit Taster**.
 
 ```
- mvn io.quarkus:quarkus-maven-plugin:2.0.0.Final:create \
+ mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=fruit-taster \
     -Dextensions="spring-data-jpa,spring-web,spring-di,jdbc-postgres, jdbc-h2"
@@ -87,9 +87,6 @@ You will see a lot of output to the screen. At the end of the application creati
 ```
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  21.113 s
-[INFO] Finished at: 2022-04-04T17:41:26Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -121,7 +118,7 @@ __  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-INFO  [io.quarkus] (Quarkus Main Thread) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx.Final) started in xxxs. Listening on: http://0.0.0.0:8080
+INFO  [io.quarkus] (Quarkus Main Thread) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in xxxs. Listening on: http://0.0.0.0:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, resteasy, resteasy-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web]
 

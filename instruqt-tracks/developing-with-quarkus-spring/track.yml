@@ -18,13 +18,13 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
-- bob@cogarttech.com
 - eshortis@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-private: false
-published: true
-checksum: "6628884856410766434"
+- bob@cogarttech.com
+maintenance: false
+checksum: "15318907561816269248"

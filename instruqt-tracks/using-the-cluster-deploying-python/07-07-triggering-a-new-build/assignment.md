@@ -270,8 +270,17 @@ Notice that the build `blog-django-py-5` as shown above has been cancelled.
 
 ----
 
-# Congratulations!
+## Congratulations!
 
  You've completed this topic. You triggered a build from the command line. Then, you triggered a build using the OpenShift web console. Also, you updated source code locally and did a build using the updated code. You ran a build that reset the demonstration application's web site back to its original state. Finally, you started and cancelled a build.
 
 This is the final topic in this track.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

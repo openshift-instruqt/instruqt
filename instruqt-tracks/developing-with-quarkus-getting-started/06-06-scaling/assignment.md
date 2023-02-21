@@ -1,6 +1,6 @@
 ---
 slug: 06-scaling
-id: wcjjfggicfnv
+id: imwwvqx2yk3u
 type: challenge
 title: Topic 6 - Scaling Quarkus
 teaser: Topic 6 - Scaling Quarkus
@@ -181,7 +181,7 @@ It may take a bit of time for all 100 pods to spin up given this limited resourc
 # Working with the solution in an IDE in the Cloud!
 Want to continue exploring this solution on your own in the cloud?
 
-You can use the free [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
+You can use the free [Red Hat OpenShift Dev Spaces](https://developers.redhat.com/products/openshift-dev-spaces/overview) IDE running on the free [Red Hat Developer Sandbox](http://red.ht/dev-sandbox). [Click here](https://workspaces.openshift.com) to login or to register if you are a new user. This free service expires after 30 days, but you can always enable a new free 30-day subscription.
 
 Once logged in, [click here](https://workspaces.openshift.com/f?url=https://raw.githubusercontent.com/openshift-katacoda/rhoar-getting-started/solution/quarkus/getting-started/devfile.yaml) to open the solution for this project in the cloud IDE. While loading, if it asks you to update or install any plugins, you can say no.
 
@@ -194,3 +194,12 @@ In this track you got a glimpse of the power of Quarkus apps using traditional J
 There is much more to Quarkus than fast startup times and low resource usage. You can use [Red Hat CodeReady Workspaces](https://developers.redhat.com/products/codeready-workspaces/overview) and other resources on Red Ht learn more.
 
 Also, be sure to visit [quarkus.io](https://quarkus.io) to learn even more about the architecture and capabilities of Quarkus, an exciting new framework for Java developers.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

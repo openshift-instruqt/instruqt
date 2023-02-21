@@ -36,3 +36,12 @@ You will see a message every 10 seconds with the following text:
 ``Message received: {"id":1,"text":"Hello World!","timestamp":1605814628546}``
 
 This message is been sent and received to the ``example`` queue by the application you just deployed.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!

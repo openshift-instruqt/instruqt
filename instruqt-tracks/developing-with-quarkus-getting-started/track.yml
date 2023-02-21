@@ -44,13 +44,12 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - eshortis@redhat.com
-- cclyburn@redhat.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "16417912177902044327"
+- cclyburn@redhat.com
+checksum: "8999125421394163673"
