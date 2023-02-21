@@ -1,6 +1,6 @@
 ---
 slug: playground
-id: 3umarqw32zgd
+id: s2rsh9tgkykp
 type: challenge
 title: OpenShift Playground
 notes:
@@ -8,7 +8,7 @@ notes:
   contents: |
     ## Goal
 
-    Explore OpenShift version 4.11
+    Explore OpenShift version 4.12.
 
     ## Concepts
 
@@ -26,7 +26,7 @@ tabs:
   hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Editor
   type: code

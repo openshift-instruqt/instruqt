@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "Checking user login status..."
+WHOAMI=$(oc whoami)
+
+if [ $WHOAMI == "developer" -o $WHOAMI == "admin" ]
+then
+  echo "login successful!"
+else
+  echo "FAIL: User authentication cannot be confirmed.  Have you logged in yet?"
+  exit 1
+fi
