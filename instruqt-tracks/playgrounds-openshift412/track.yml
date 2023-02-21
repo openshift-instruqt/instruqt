@@ -1,12 +1,12 @@
-slug: playgrounds-openshift411
-id: hlujba8rmi8j
-title: Red Hat OpenShift Playground
+slug: playgrounds-openshift412
+id: 2kymsx9arp7j
+title: Red Hat OpenShift Playground 4-12
 teaser: Quick access to the web console or the command-line interface to explore Red
   Hat OpenShift
 description: |
   ## Goal
 
-  Explore OpenShift version 4.11.
+  Explore OpenShift version 4.12.
 
   ## Concepts
 
@@ -30,4 +30,4 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-checksum: "11176714671072827926"
+checksum: "12712030005598109828"
