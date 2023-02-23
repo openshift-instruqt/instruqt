@@ -6,7 +6,7 @@ title: Scaling
 tabs:
 - title: Terminal 1
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -28,7 +28,7 @@ At the end of this chapter you will be able to:
 ## In depth: Scaling to Zero
 As you might recall from the `Deploying your Service` section of the tutorial, Scale-to-zero is one of the main properties of Serverless. After a defined time of idleness *(called the `stable-window`)* a revision is considered inactive, which causes a few things to happen.  First off, all routes pointing to the now inactive revision will be pointed to the so-called **activator**.
 
-![serving-flow](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/05-scaling/serving-flow.png)
+![serving-flow](../assets/serving-flow.png)
 
 The name `activator` is somewhat misleading these days.  Originally it used to activate inactive revisions, hence the name.  Today its primary responsibilites are to receive and buffer requests for revisions that are inactive as well as report metrics to the autoscaler.
 
@@ -41,7 +41,7 @@ If we try to access the service while it is scaled to zero the activator will pi
 First login as an administrator for the cluster:
 
 ```
-oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u admin -p admin
 ```
 
 It is possible to see the default configurations of the autoscaler by executing:
@@ -70,14 +70,7 @@ scale-to-zero-grace-period: "30s"
 
 In this tutorial leave the configuration as-is, but if there were reasons to change them it is possible to edit this configmap as needed.
 
-> **Tip:** Another, possibly better, way to make those changes would be to add configuration to the `KnativeServing` instance that was applied in the `Prepare for Exercises` section early in this tutorial.
->
-> Open and inspect that yaml by executing:
-```
-cat 01-prepare/serving.yaml
-```
->
-> There are other settings of Serverless available.  It is possible to describe other configmaps in the `knative-serving` project to find them.
+> **Tip:** There are other settings of Serverless available.  It is possible to describe other configmaps in the `knative-serving` project to find them.
 >
 > Explore what all is available by running:
 
@@ -88,7 +81,7 @@ oc get cm -n knative-serving
 Now, log back in as the developer as we do not need elevated privileges to continue:
 
 ```
-oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u developer -p developer
 ```
 
 ## Minimum Scale
@@ -142,6 +135,7 @@ Deploy the service by executing:
 ```bash
 kn service create prime-generator \
    --namespace serverless-tutorial \
+   --concurrency-target=10 \
    --annotation autoscaling.knative.dev/minScale=2 \
    --annotation autoscaling.knative.dev/maxScale=5 \
    --image quay.io/rhdevelopers/prime-generator:v27-quarkus
@@ -154,12 +148,11 @@ oc get pods -n serverless-tutorial
 
 This now guarantee that there will always be at least two instances available at all times to provide the service with no initial lag at the cost of consuming additional resources.  Next, test the service won't scale past 5.
 
-To load the service we will use [apachebench (ab)][apachebench].  We will configure `ab` to send 2550 total requests `-n 2550`, of which 850 will be performed concurrently each time `-c 850`.  Immediatly after we will show the deployments in the project to be able to see the number of pods running.
+To load the service we will use [hey](https://github.com/rakyll/hey) - HTTP load generator tool. The command below sends **850** concurrent requests (`-c 850`) for the next 10s (`-z 10s`). Immediatly after we will show the deployments in the project to be able to see the number of pods running.
 
 ```
 export APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
-
-ab -n 2550 -c 850 -t 60 "$APP_ROUTE/?sleep=3&upto=10000&memload=100" && oc get deployment -n serverless-tutorial
+hey -c 850 -z 10s "$APP_ROUTE/?sleep=3&upto=10000&memload=100" && oc get deployment -n serverless-tutorial
 ```
 
 > **Note:** *This might take a few moments!*
@@ -177,20 +170,19 @@ kn service update prime-generator \
    --annotation autoscaling.knative.dev/target=50
 ```
 
-
-> **Note:** *The equivalent yaml for the service above can be seen by executing:
+> **Note:** *The equivalent yaml for the service above can be seen by executing:*
 
 ```
 cat /root/05-scaling/service-50.yaml
 ```
 
-Again test the scaling by loading the service.  This time send 275 concurrent requests totaling 1100.
+Again test the scaling by loading the service. This time send **275** concurrent requests.
 
 ```
-ab -n 1100 -c 275 -t 60 "$APP_ROUTE/?sleep=3&upto=10000&memload=100" && oc get deployment -n serverless-tutorial
+hey -c 850 -z 10s "$APP_ROUTE/?sleep=3&upto=10000&memload=100" && oc get deployment -n serverless-tutorial
 ```
 
-Notice that at least 6 pods should be up and running.  There might be more than 6 as `ab` could be overloading the amount of concurrent workers at one time.
+Notice that at least 6 pods should be up and running.  There might be more than 6 as `hey` could be overloading the amount of concurrent workers at one time.
 
 This will work well, but given that this application is CPU-bound instead of request bound we might want to choose a different autoscaling class that is based on CPU load to be able to manage scaling more effectively.
 
@@ -200,6 +192,7 @@ CPU based autoscaling metrics are achieved using something called a Horizontal P
 Update the prime-generator service by executing:
 ```bash
 kn service update prime-generator \
+   --concurrency-target=10 \
    --annotation autoscaling.knative.dev/minScale- \
    --annotation autoscaling.knative.dev/maxScale- \
    --annotation autoscaling.knative.dev/target=70 \

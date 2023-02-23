@@ -56,5 +56,5 @@ developers:
 - nvinto@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-maintenance: true
-checksum: "15437696371432403525"
+- doh@redhat.com
+checksum: "1056257218512953388"

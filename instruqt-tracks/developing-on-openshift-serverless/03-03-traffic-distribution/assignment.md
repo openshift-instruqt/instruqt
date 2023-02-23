@@ -6,7 +6,7 @@ title: Traffic Distribution
 tabs:
 - title: Terminal 1
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -34,7 +34,7 @@ kn service create greeter \
    --revision-name greeter-v1
 ```
 
-> **Note:** *The equivalent yaml for the service above can be seen by executing:
+> **Note:** *The equivalent yaml for the service above can be seen by executing:*
 
 ```
 cat /root/03-traffic-distribution/greeter-v1-service.yaml
@@ -50,7 +50,7 @@ kn service update greeter \
    --env MESSAGE_PREFIX=GreeterV2
 ```
 
-> **Note:** *The equivalent yaml for the service above can be seen by executing:
+> **Note:** The equivalent yaml for the service above can be seen by executing:
 
 ```
 cat /root/03-traffic-distribution/greeter-v2-service.yaml
@@ -108,22 +108,23 @@ The output should be similar to:
 Name:       greeter
 Namespace:  serverless-tutorial
 Age:        1m
-URL:        url
+URL:        https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
 Service:    greeter
 
 Traffic Targets:
     0%  @latest (greeter-v2) #latest
-        URL:  url
+        URL:  https://latest-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
   100%  greeter-v1 #current
-        URL:  url
+        URL:  https://current-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
     0%  greeter-v2 #prev
-        URL:  url
+        URL:  https://prev-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
 
 Conditions:
-  OK TYPE                  AGE REASON
-  ++ Ready                 23s
-  ++ AllTrafficAssigned     1m
-  ++ IngressReady          23s
+  OK TYPE                      AGE REASON
+  ++ Ready                      8s
+  ++ AllTrafficAssigned         1m
+  ++ CertificateProvisioned     1m TLSNotEnabled
+  ++ IngressReady               8s
 ```
 
 > **Note:** *The equivalent yaml for the service above can be seen by executing:
