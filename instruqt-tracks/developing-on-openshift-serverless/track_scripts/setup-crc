@@ -2,14 +2,11 @@
 set -x
 
 # setup vars
-export HOME=/root
 export TERM=xterm-color
 export KUBECONFIG=/opt/kubeconfig
 echo "export TERM=xterm-color" >> /root/.bashrc
 echo "export KUBECONFIG=/opt/kubeconfig" >> /root/.bashrc
-echo "export HOME=/root" > /tmp/.bashrc
-cat /root/.bashrc >> /tmp/.bashrc
-mv /tmp/.bashrc /root/.bashrc
+echo "export HOME=/root" >> /root/.bashrc
 
 ENS4IP=$(ip -4 -o addr show ens4 | awk '{print $4}' | cut -d "/" -f 1)
 
@@ -187,6 +184,39 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
+export KN_VERSION=1.6.1
+
+curl -kL https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64 -o /root/hey
+mv /root/hey /usr/local/bin/
+chmod +x /usr/local/bin/hey
+
+curl -kL https:/mirror.openshift.com/pub/openshift-v4/x86_64/clients/serverless/${KN_VERSION}/kn-linux-amd64.tar.gz -o /usr/local/bin/kn.tar.gz
+tar -xvzf /usr/local/bin/kn.tar.gz -C /usr/local/bin
+mv /usr/local/bin/kn-linux-amd64 /usr/local/bin/kn
+chmod +x /usr/local/bin/kn
+
+mkdir -p /root/02-serving
+
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/02-serving/service.yaml -o /root/02-serving/service.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/02-serving/watch-service.bash -o /root/02-serving/watch-service.bash
+
+mkdir -p /root/03-traffic-distribution
+
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/03-traffic-distribution/greeter-v1-service.yaml -o /root/03-traffic-distribution/greeter-v1-service.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/03-traffic-distribution/greeter-v2-service.yaml -o /root/03-traffic-distribution/greeter-v2-service.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/03-traffic-distribution/service-pinned.yaml -o /root/03-traffic-distribution/service-pinned.yaml
+
+mkdir -p /root/04-canary-releases
+
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/04-canary-releases/greeter-canary-service.yaml -o /root/04-canary-releases/greeter-canary-service.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/04-canary-releases/poll-svc-10.bash -o /root/04-canary-releases/poll-svc-10.bash
+
+mkdir -p /root/05-scaling
+
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/05-scaling/service-50.yaml -o /root/05-scaling/service-50.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/05-scaling/service-hpa.yaml -o /root/05-scaling/service-hpa.yaml
+curl -s https:/raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-serverless/scripts/05-scaling/service-min-max-scale.yaml -o /root/05-scaling/service-min-max-scale.yaml
+
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do
@@ -226,22 +256,10 @@ do
 done
 
 # Wait until web console is available
-while [ "$(oc rollout status deploy console -n openshift-console)" != "deployment \"console\" successfully rolled out" ]
+until curl -k https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io > /dev/null 2>/dev/null
 do
-    echo "Waiting for web console - rollout incomplete"
-    sleep 5
-done
-
-while [ "$(curl -k -I https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io -o /dev/null -w '%{http_code}\n' -s 2>/dev/null)" != "200" ]
-do
-    echo "Waiting for web console - unavailable via curl"
-    sleep 5
-done
-
-while [ "$(oc rollout status deploy apiserver -n openshift-oauth-apiserver)" != "deployment \"apiserver\" successfully rolled out" ]
-do
-    echo "Waiting for oauth API - rollout incomplete"
-    sleep 5
+    echo "Waiting for web console - not available yet"
+    sleep 6
 done
 
 echo $(date)

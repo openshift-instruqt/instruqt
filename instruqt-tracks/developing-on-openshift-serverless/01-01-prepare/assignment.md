@@ -1,6 +1,6 @@
 ---
 slug: 01-prepare
-id: mqke0cdpjcqr
+id: 3ydwhkuopsis
 type: challenge
 title: Prepare for Exercises
 notes:
@@ -31,11 +31,11 @@ notes:
 
     In this chapter we introduce you to one such platform -- [OpenShift Serverless][serverless-main].  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere.  This is known as `Serving`.
 
-    ![OpenShift Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
+    ![OpenShift Serving](../assets/knative-serving-diagram.png)
 
     Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]).  This is known as `Eventing`.
 
-    ![OpenShift Eventing](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
+    ![OpenShift Eventing](../assets/knative-eventing-diagram.png)
 
     OpenShift Serverless applications can be integrated with other OpenShift services, such as OpenShift [Pipelines][pipelines-main], and [Service Mesh][service-mesh-main], delivering a complete serverless application development and deployment experience.
 
@@ -53,7 +53,7 @@ notes:
 tabs:
 - title: Terminal 1
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -61,7 +61,7 @@ tabs:
 difficulty: intermediate
 timelimit: 360
 ---
-[serverless-install-script]: https://github.com/openshift-labs/learn-katacoda/blob/master/developing-on-openshift/serverless/assets/01-prepare/install-serverless.bash
+[serverless-install-script]: https://github.com/openshift-labs/learn-katacoda/blob/master/assets/01-prepare/install-serverless.bash
 [olm-docs]: https://docs.openshift.com/container-platform/latest/operators/understanding/olm/olm-understanding-olm.html
 [serving-docs]: https://github.com/knative/serving-operator#the-knativeserving-custom-resource
 
@@ -82,24 +82,24 @@ Since the install will take some time, let's take a moment to review the install
 To log in to the cluster as an administrator from the terminal:
 
 ```
-oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u admin -p admin
 ```
 
 You can login to the Web Console using the **Web Console** Tab with this credentials:
 
 You will then be able to login with admin permissions with:
 
-* **Username:** ``admin``
-* **Password:** ``admin``
+* **Username:** `admin`
+* **Password:** `admin`
 
 
 ### Install Serverless Operator
 
-![01-login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/01-login.png)
+![01-login](../assets/01-login.png)
 
 Cluster administrators can install the `OpenShift Serverless` operator via *Operator Hub*
 
-![02-operatorhub](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/02-operatorhub.png)
+![02-operatorhub](../assets/02-operatorhub.png)
 
 > **Note:** *We can inspect the details of the `serverless-operator` packagemanifest within the CLI via `oc describe packagemanifest serverless-operator -n openshift-marketplace`.*
 >
@@ -107,11 +107,15 @@ Cluster administrators can install the `OpenShift Serverless` operator via *Oper
 
 Next, our scripts will install the Serverless Operator into the `openshift-operators` project using the `stable` update channel.
 
-![03-serverlessoperator](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/03-serverlessoperator.png)
+![03-serverlessoperator](../assets/03-serverlessoperator.png)
+
+![03-serverlessoperator-detail](../assets/03-serverlessoperator-detail.png)
+
+> **Note:** In case you see the warning message (`Danger alert:A Subscription for this Operator already exists in Namespace "openshift-serverless"`), please ignore it and click on `Cancel` button.
 
 Open the **Installed Operators** tab and watch the **OpenShift Serverless Operator**.  The operator is installed and ready when the `Status=Succeeded`.
 
-![05-succeeded](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/05-succeeded.png)
+![05-succeeded](../assets/05-succeeded.png)
 
 > **Note:** *We can inspect the additional api resouces that the serverless operator added to the cluster via the CLI command `oc api-resources | egrep 'Knative|KIND'`*.
 
@@ -122,27 +126,19 @@ As per the [Knative Serving Operator documentation][serving-docs] you must creat
 
 > **Note:** *Remember, these steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
-First we create the `knative-serving` project.
+Move to the `knative-serving` project. Open the **Installed Operators** tab and the **OpenShift Serverless Operator**.  Then click on the **Knative Serving**.
 
-![06-kservingproject](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/06-kservingproject.png)
+![07-kservinginstance](../assets/07-kservinginstance.png)
 
-Within the `knative-serving` project open the **Installed Operators** tab and the **OpenShift Serverless Operator**.  Then create an instance of **Knative Serving**.
+Click on `Create KnativeServing` button. Leave all values by default and click on `Create` button.
 
-![07-kservinginstance](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/07-kservinginstance.png)
+![08-kservinginstance](../assets/08-kservinginstance.png)
 
-![08-kservinginstance](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/08-kservinginstance.png)
+Let's go to the `Toplogy view` in the *Developer perspective*, you will see the deployed pods as below:
 
-Open the Knative Serving instance.  It is deployed when the **Condition** `Ready=True`.
-
-![09-kservingready](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/01-prepare/09-kservingready.png)
+![09-knative-serving-topology](../assets/09-knative-serving-topology.png)
 
 OpenShift Serverless should now be installed!
-
-> NOTE: If you want to install Serverless manually instead, you can run this script:
-
-```
-bash /root/01-prepare/install-serverless.bash
-```
 
 ## Login as a Developer and Create a Project
 Before beginning we should change to the non-privileged user `developer` and create a new `project` for the tutorial.
@@ -152,7 +148,7 @@ Before beginning we should change to the non-privileged user `developer` and cre
 To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
 ```
-oc login -u developer -p developer https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u developer -p developer
 ```
 
 Create a project from the terminal:

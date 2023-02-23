@@ -1,6 +1,6 @@
 ---
 slug: 03-create-beans
-id: z6t6a4satiim
+id: t6evb7iomu56
 type: challenge
 title: Topic 3 - Implementing Spring dependency injection in Quarkus
 notes:

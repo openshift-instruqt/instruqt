@@ -1,12 +1,12 @@
 ---
 slug: 02-serving
-id: rryylofzwwmu
+id: x5cjhiqamqfu
 type: challenge
 title: Deploying your service
 tabs:
 - title: Terminal 1
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -47,7 +47,7 @@ services          kservice,ksvc   serving.knative.dev   true         Service
 
 The diagram below shows how each of the components of the Serving module fit together.
 
-![Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/02-serving/serving.png)
+![Serving](../assets/serving.png)
 
 We will discuss what each one of these new resources are used for in the coming sections.  Let's start with `services`.
 
@@ -127,10 +127,10 @@ The output should be similar to:
 
 ```
 NAME      URL  LATEST            AGE     CONDITIONS   READY   REASON
-greeter   url  greeter-fyrxn-1   6m28s   3 OK / 3     True
+greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io   greeter-00001   52s   3 OK / 3   True
 ```
 
-> **Note:** *It also is possible to use the `oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
+> **Note:** It also is possible to use the `oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
 
 The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
@@ -145,18 +145,17 @@ The output should be similar to:
 ```
 Name:       greeter
 Namespace:  serverless-tutorial
-Age:        15m
-URL:        url
+Age:        2m
+URL:        https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io
 
 Revisions:
-  100%  @latest (greeter-fyrxn-1) [1] (15m)
-        Image:  quay.io/rhdevelopers/knative-tutorial-greeter:quarkus (pinned to 767e2f)
-
+  100%  @latest (greeter-00001) [1] (2m)
+        Image:     quay.io/rhdevelopers/knative-tutorial-greeter:quarkus (pinned to 767e2f)
+        Replicas:  0/0
 Conditions:
-  OK TYPE                   AGE REASON
-  ++ Ready                  14m
-  ++ ConfigurationsReady    14m
-  ++ RoutesReady            14m
+  OK TYPE                   AGE REASON  ++ Ready                   2m
+  ++ ConfigurationsReady     2m
+  ++ RoutesReady             2m
 ```
 
 > **Note:** *Most resources can be `described` via the `kn` tool.  Be sure to check them out while continuing along the tutorial.*
@@ -177,8 +176,8 @@ kn route list
 
 See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
 ```bash
-NAME      URL                                                                                  READY
-greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.2rtmqs1ojyed.instruqt.io  True
+NAME      URL                                                                                   READY
+greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io   True
 ```
 
 ### Revision
@@ -200,9 +199,9 @@ kn revision list
 
 The output should be similar to:
 ```bash
-NAME              SERVICE   TRAFFIC   TAGS   GENERATION   AGE     CONDITIONS   READY   REASON
-greeter-qxcrc-2   greeter   100%             2            6m35s   3 OK / 4     True
-greeter-fyrxn-1   greeter                    1            33m     3 OK / 4     True
+NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE     CONDITIONS   READY   REASON
+greeter-00002   greeter   100%             2            6s      4 OK / 4     True
+greeter-00001   greeter                    1            3m17s   3 OK / 4     True
 ```
 
 Here we can see each revision and details including the percantage of `TRAFFIC` it is receiving.  We can also see the generational number of this revision, **which is incremented on each update of the service**.
@@ -220,7 +219,7 @@ The service will return a response like **Hi  greeter => '6fee83923a9f' : 1**
 > **NOTE:** *You can also open this in your own local browser to test the service!*
 
 ### Scale to Zero
-The `greeter` service will automatically scale down to zero if it does not get request for approximately 90 seconds.  Try watching the service scaling down by executing
+The `greeter` service will automatically scale down to zero if it does not get request for approximately `90` seconds.  Try watching the service scaling down by executing
 
 ```
 oc get pods -n serverless-tutorial -w

@@ -21,10 +21,9 @@ tags:
 - prod
 owner: openshift
 developers:
-- doh@redhat.com
-- eshortis@redhat.com
+- bob@cogarttech.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-- bob@cogarttech.com
-maintenance: false
-checksum: "15318907561816269248"
+- doh@redhat.com
+- eshortis@redhat.com
+checksum: "16426600082753254971"

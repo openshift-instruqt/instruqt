@@ -1,5 +1,5 @@
 slug: developing-on-openshift-serverless
-id: inqukbuabjas
+id: 
 title: Getting Started with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
@@ -50,9 +50,11 @@ icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
 - openshift
+- prod
 owner: openshift
 developers:
 - nvinto@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-checksum: "12921271077930684310"
+- doh@redhat.com
+checksum: "1056257218512953388"
