@@ -1,6 +1,6 @@
-slug: developing-on-openshift-serverless-short-dev
-id: od1odrsbimhj
-title: DEV - QuickStart with OpenShift Serverless
+slug: developing-on-openshift-serverless-short
+id: 
+title: QuickStart with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
   [amq-docs]: https://developers.redhat.com/products/amq/overview
@@ -42,9 +42,9 @@ icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
 - openshift
-- dev
+- prod
 owner: openshift
 developers:
 - doh@redhat.com
-maintenance: true
+maintenance: false
 checksum: "10445722806130335376"
