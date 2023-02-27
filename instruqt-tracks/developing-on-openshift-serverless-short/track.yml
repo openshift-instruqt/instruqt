@@ -1,21 +1,13 @@
-slug: developing-on-openshift-serverless
-id: inqukbuabjas
-title: Getting Started with OpenShift Serverless
+slug: 01-developing-on-openshift-serverless-short
+id: mmgy1lfcf927
+title: QuickStart with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
   [amq-docs]: https://developers.redhat.com/products/amq/overview
   [pipelines-main]: https://www.openshift.com/learn/topics/pipelines
   [service-mesh-main]: https://www.openshift.com/learn/topics/service-mesh
 
-  In this self-paced tutorial, you will learn the basics of how to use OpenShift Serverless, which provides a development model to remove the overhead of server provisioning and maintenance from the developer.
-
-  In this tutorial, you will:
-  * Deploy an OpenShift Serverless `service`.
-  * Deploy multiple `revisions` of a service.
-  * Understand the `underlying compents` of a serverless service.
-  * Understand how Serverless is able to `scale-to-zero`.
-  * Run different revisions of a service via `canary` and `blue-green` deployments.
-  * Utilize the `knative client`.
+  In this self-paced tutorial, you will learn how to deploy an OpenShift Serverless, which provides a development model to remove the overhead of server provisioning and maintenance from the developer.
 
   ## Why Serverless?
 
@@ -27,11 +19,11 @@ description: |
 
   In this chapter we introduce you to one such platform -- [OpenShift Serverless][serverless-main].  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere.  This is known as `Serving`.
 
-  ![OpenShift Serving](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-serving-diagram.png)
+  ![OpenShift Serving](./assets/knative-serving-diagram.png)
 
   Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]).  This is known as `Eventing`.
 
-  ![OpenShift Eventing](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/developing-on-openshift/serverless/00-intro/knative-eventing-diagram.png)
+  ![OpenShift Eventing](./assets/knative-eventing-diagram.png)
 
   OpenShift Serverless applications can be integrated with other OpenShift services, such as OpenShift [Pipelines][pipelines-main], and [Service Mesh][service-mesh-main], delivering a complete serverless application development and deployment experience.
 
@@ -39,7 +31,7 @@ description: |
 
   ## The Environment
 
-  The OpenShift environment created for you is running version 4.11 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
+  The OpenShift environment created for you is running version 4.9 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
 
   > **Note:** *It is possible to skip around in this tutorial.  The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
   >
@@ -47,14 +39,11 @@ description: |
 
   Now, let's get started!
 icon: https://logodix.com/logo/1910931.png
-level: intermediate
+level: beginner
 tags:
 - openshift
 - prod
 owner: openshift
 developers:
 - doh@redhat.com
-- nvinto@redhat.com
-- cclyburn@redhat.com
-- ryanj@redhat.com
-checksum: "15437759720878436155"
+checksum: "9617939061209904007"

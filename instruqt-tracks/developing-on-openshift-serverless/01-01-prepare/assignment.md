@@ -1,6 +1,6 @@
 ---
 slug: 01-prepare
-id: 3ydwhkuopsis
+id: slolamylqdzl
 type: challenge
 title: Prepare for Exercises
 notes:
@@ -43,7 +43,7 @@ notes:
 
     ## The Environment
 
-    The OpenShift environment created for you is running version 4.9 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
+    The OpenShift environment created for you is running version 4.11 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
 
     > **Note:** *It is possible to skip around in this tutorial.  The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
     >
