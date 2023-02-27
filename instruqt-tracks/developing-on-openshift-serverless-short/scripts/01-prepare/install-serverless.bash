@@ -20,9 +20,4 @@ echo "Waiting for completing the Knative Serving..."
 bash 01-prepare/watch-knative-serving.bash
 sleep 3
 
-echo "Setting up developer env..."
-oc login -u developer -p developer
-oc new-project serverless-tutorial
-
-sleep 3
 echo "Serverless Tutorial Ready!"
