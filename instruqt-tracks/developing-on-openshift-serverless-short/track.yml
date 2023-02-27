@@ -1,5 +1,5 @@
-slug: 01-developing-on-openshift-serverless-short
-id: mmgy1lfcf927
+slug: developing-on-openshift-serverless-short
+id: 
 title: QuickStart with OpenShift Serverless
 description: |
   [serverless-main]: https://www.openshift.com/learn/topics/serverless
@@ -46,4 +46,5 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-checksum: "9617939061209904007"
+maintenance: false
+checksum: "10445722806130335376"
