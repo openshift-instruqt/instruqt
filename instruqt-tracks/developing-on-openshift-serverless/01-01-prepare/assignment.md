@@ -1,6 +1,6 @@
 ---
 slug: 01-prepare
-id: slolamylqdzl
+id: 31vz439uzxp0
 type: challenge
 title: Prepare for Exercises
 notes:

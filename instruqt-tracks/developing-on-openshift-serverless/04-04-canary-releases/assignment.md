@@ -1,6 +1,6 @@
 ---
 slug: 04-canary-releases
-id: 8pvrqttga5wa
+id: woso87e6hfx2
 type: challenge
 title: Canary Releases
 tabs:
