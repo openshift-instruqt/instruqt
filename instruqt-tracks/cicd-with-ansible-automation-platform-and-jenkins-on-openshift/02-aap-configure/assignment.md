@@ -96,24 +96,26 @@ The endpoint you will get from openshift console. On the top right corner click 
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/oc_endpoint.png?raw=true)
 
-Now collect tokens & certificates.
+You need to extract the token & Certificates by using following commands.
 
+The token is collected in `containergroup-sa.token` file you have to copy the context and paste it in AAP credentials page in `API authentication bearer token` block.
 
 ```
 dnf install jq -y && oc project dev-game-app && cd backend
 ```
-
 ```
 oc get secret cicd -o json | jq '.data.token' | xargs | base64 --decode > containergroup-sa.token
 ```
+The Certificate is collected in `containergroup-ca.crt` file you have to copy the context and paste it in  AAP credentials page in `Certificate Authority data` block.
 ```
 oc get secret cicd -o json | jq '.data["ca.crt"]' | xargs | base64 --decode > containergroup-ca.crt
 ```
 
-- Switch to the visual-editor tab to collect the `Token` and `Certificate`. paste in AAP console.
+OR
 
-Open the  Ansible Automation Platform console and from the left menu select the credentials.
-In credentials select credentials type as **Openshift and Kubernetes API Endpoint** and fill the boxes with Endpoint, Token and Certificate.
+Switch to the visual-editor tab to collect the `Token` and `Certificate`.
+
+
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_cred_filled.png?raw=true)
 
 **Instance Group**:

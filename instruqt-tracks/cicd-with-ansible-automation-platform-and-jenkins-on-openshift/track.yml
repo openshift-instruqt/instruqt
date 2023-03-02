@@ -24,8 +24,9 @@ tags:
 - jenkins
 - ci/cd
 - ci-cd
+- Automation
 owner: openshift
 developers:
 - narathod@redhat.com
-checksum: "1223874216387212126"
+checksum: "12376936184005582648"
 timelimit: 6000
