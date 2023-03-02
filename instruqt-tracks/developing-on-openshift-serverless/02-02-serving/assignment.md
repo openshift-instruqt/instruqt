@@ -1,6 +1,6 @@
 ---
 slug: 02-serving
-id: dsp0gb8nvwfv
+id: prly3msw7dw0
 type: challenge
 title: Deploying your service
 tabs:
