@@ -1,6 +1,6 @@
 ---
 slug: 05-scaling
-id: 1zkcesidlmdx
+id: 6z1mh3yhhx7y
 type: challenge
 title: Scaling
 tabs:
