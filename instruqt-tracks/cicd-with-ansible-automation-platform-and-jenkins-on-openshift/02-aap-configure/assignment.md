@@ -82,8 +82,10 @@ metadata:
 EOF
 ```
 
-You successfully created New Namespace for your project “dev-game-app”, a one Sevice account so we can interact with cluster, Role & RoleBindingCluster.
-For credentials select credentials type “OpenShift or Kubernetes API Bearer Token”
+You successfully created New Namespace for your project “dev-game-app”, Sevice account & RoleBindingCluster.
+
+Login to Ansible Automation platform console and From left menu click on **credentials** select credentials type as “OpenShift or Kubernetes API Bearer Token”.
+
 We need 3 component to require to fill in the credentials.
 1.  The OpenShift or Kubernetes API Endpoint of a cluster.
 2.  API authentication bearer token of the service account.
