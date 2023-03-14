@@ -187,24 +187,6 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
-## Installs the argocd CLI tool.
-curl -kL https://github.com/argoproj/argo-cd/releases/download/v2.0.1/argocd-linux-amd64 -o /usr/local/bin/argocd
-chmod +x /usr/local/bin/argocd
-
-## Installs the kustomize cli
-curl -kL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.4.0/kustomize_v4.4.0_linux_amd64.tar.gz -o /usr/local/bin/kustomize.tar.gz
-tar -xvf /usr/local/bin/kustomize.tar.gz -C /usr/local/bin
-rm -rf /usr/local/bin/kustomize.tar.gz
-chmod +x /usr/local/bin/kustomize
-
-## Installs the Helm cli
-
-curl -kL https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz -o /usr/local/bin/helm.tar.gz
-tar -xvf /usr/local/bin/helm.tar.gz -C /usr/local/bin
-mv /usr/local/bin/linux-amd64/helm /usr/local/bin/helm
-rm -rf /usr/local/bin/linux-amd64
-chmod +x /usr/local/bin/helm
-
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do
@@ -246,7 +228,7 @@ done
 # Wait until web console is available
 while [ "$(oc rollout status deploy console -n openshift-console)" != "deployment \"console\" successfully rolled out" ]
 do
-    echo "Waiting for web console - not available yet"
+    echo "Waiting for web console - rollout incomplete"
     sleep 5
 done
 
@@ -261,23 +243,6 @@ do
     echo "Waiting for oauth API - rollout incomplete"
     sleep 5
 done
-
-## Install OpenShift GitOps
-cat <<EOF | oc create -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  labels:
-    operators.coreos.com/openshift-gitops-operator.openshift-operators: ""
-  name: openshift-gitops-operator
-  namespace: openshift-operators
-spec:
-  channel: stable
-  installPlanApproval: Automatic
-  name: openshift-gitops-operator
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-EOF
 
 echo $(date)
 echo "### Boostrap END ###"
