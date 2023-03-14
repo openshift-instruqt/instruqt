@@ -58,4 +58,8 @@ developers:
 - chernand@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-checksum: "11167545268845215399"
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "5969400823002062617"
