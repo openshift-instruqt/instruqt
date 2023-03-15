@@ -26,4 +26,8 @@ developers:
 - cclyburn@redhat.com
 - doh@redhat.com
 - eshortis@redhat.com
-checksum: "16426600082753254971"
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "12639428468379033496"
