@@ -42,4 +42,8 @@ developers:
 - hguerrero@redhat.com
 - nvinto@redhat.com
 - ryanj@redhat.com
-checksum: "3451154834040064252"
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "2673641639942661914"
