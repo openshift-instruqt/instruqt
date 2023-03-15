@@ -1,0 +1,26 @@
+#!/bin/bash
+
+export OPENSHIFT_RELEASE_VERSION="4.11.7"
+
+dnf install -y procps-ng iputils bind-utils git java-11-openjdk-devel.x86_64 maven
+
+crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
+
+echo "$crc api.crc.testing" >> /etc/hosts
+
+curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/$OPENSHIFT_RELEASE_VERSION/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -o /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz
+tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/bin/
+chmod +x /usr/bin/oc
+chmod +x /usr/bin/kubectl
+
+export ODO_INSTALL="v2.5.1"
+export ODO_RESPONSE=$(odo version 2> /dev/null)
+export ODO_VERSION=${ODO_RESPONSE:0:10}
+
+curl -o odo.tar.gz -L https://mirror.openshift.com/pub/openshift-v4/clients/odo/$ODO_INSTALL/odo-linux-amd64.tar.gz && \
+tar -xvf odo.tar.gz && \
+rm -f odo.tar.gz && \
+mv -f odo /usr/bin/odo && \
+chmod +x /usr/bin/odo && \
+odo preference set -f ConsentTelemetry false > /dev/null 2>&1
+odo preference set UpdateNotification false > /dev/null 2>&1

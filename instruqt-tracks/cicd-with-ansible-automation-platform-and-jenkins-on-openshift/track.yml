@@ -1,0 +1,32 @@
+slug: cicd-with-ansible-automation-platform-and-jenkins-on-openshift
+id: lw6u5gl5wva1
+title: CI/CD with Ansible Automation Platform and Jenkins on OpenShift
+description: |+
+  # Goal
+
+    CI/CD with Ansible Automation Platform and jenkins on OpenShift
+
+    ![architecturediagram](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/ansible_final1.jpg?raw=true)
+
+  A subset of application deployment, continuous deployment pipelines help developers release new software features and update more frequently to support modern business demands. Red Hat Ansible Automation Platform provides the multi-tier, multi-step application orchestration needed for fast, reliable deployment of new features, bug fixes, and code changes while reducing the need for human intervention throughout the release process.
+
+  This Instruqt track provides hands-on experience in deploying CI/CD pipeline using Ansible Automation Platform and Jenkins on openshift.
+
+  Let's get started!
+
+
+
+icon: https://logodix.com/logo/1910931.png
+tags:
+- openshift
+- ansible
+- AAP
+- jenkins
+- ci/cd
+- ci-cd
+- Automation
+owner: openshift
+developers:
+- narathod@redhat.com
+checksum: "12376936184005582648"
+timelimit: 6000
