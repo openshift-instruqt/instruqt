@@ -48,4 +48,9 @@ tags:
 owner: openshift
 developers:
 - doh@redhat.com
-checksum: "6996442897705959574"
+- ryanj@redhat.com
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "8139498506585746495"
