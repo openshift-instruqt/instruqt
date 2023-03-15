@@ -11,3 +11,7 @@ mv -f odo /usr/bin/odo && \
 chmod +x /usr/bin/odo && \
 odo preference set -f ConsentTelemetry false > /dev/null 2>&1
 odo preference set UpdateNotification false > /dev/null 2>&1
+
+
+git clone https://github.com/openshift-evangelists/Wild-West-Backend.git ~/backend 
+git clone https://github.com/openshift-evangelists/Wild-West-Frontend.git ~/frontend
