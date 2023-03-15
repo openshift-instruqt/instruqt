@@ -76,3 +76,12 @@ Click on the route icon to play the Game.
 
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/playing_game.png?raw=true)
+
+# What's Next?
+
+Congratulations on completing this lab. Ready to continue learning?
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
