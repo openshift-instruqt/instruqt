@@ -30,4 +30,9 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-checksum: "11176714671072827926"
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "8916537136787514696"
