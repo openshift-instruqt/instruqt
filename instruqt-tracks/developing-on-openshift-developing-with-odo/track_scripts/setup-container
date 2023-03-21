@@ -12,15 +12,3 @@ curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/$OPENSHIFT_REL
 tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/bin/
 chmod +x /usr/bin/oc
 chmod +x /usr/bin/kubectl
-
-export ODO_INSTALL="v2.5.1"
-export ODO_RESPONSE=$(odo version 2> /dev/null)
-export ODO_VERSION=${ODO_RESPONSE:0:10}
-
-curl -o odo.tar.gz -L https://mirror.openshift.com/pub/openshift-v4/clients/odo/$ODO_INSTALL/odo-linux-amd64.tar.gz && \
-tar -xvf odo.tar.gz && \
-rm -f odo.tar.gz && \
-mv -f odo /usr/bin/odo && \
-chmod +x /usr/bin/odo && \
-odo preference set -f ConsentTelemetry false > /dev/null 2>&1
-odo preference set UpdateNotification false > /dev/null 2>&1

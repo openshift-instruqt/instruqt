@@ -187,15 +187,6 @@ done
 # In this way we try to optimize the flow while we wait for oauth and routes to be finally OK
 # https://bugzilla.redhat.com/show_bug.cgi?id=2082539
 
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/scripts/install_java.sh | bash
-
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-quarkus/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-quarkus/scripts/operator-install.yaml -o /opt/operator-install.yaml
-
-curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-quarkus/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml 
-
 ###
 
 until [[ `oc get routes -A | awk '!/^(NAME|openshift-ingress-canary)/{print$3}' |grep $HOSTNAME` ]]; do
