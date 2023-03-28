@@ -2,7 +2,7 @@
 slug: aap-configure
 id: b4l1xusyizyt
 type: challenge
-title: Ansible Automation Platform Configuration
+title: Step 2 - Ansible Automation Platform Configuration
 tabs:
 - title: Terminal 1
   type: terminal
@@ -21,14 +21,13 @@ timelimit: 600
 
 ## Ansible Automation Platform Configuration Setup
 
-After successful installation & login to the Ansible Automation platform. We need to configure the Ansible Automation platform as per our requirements. That requirement will be anything like multi-cloud deployment, Multi-Cluster deployment, Use as continuous delivery, etc.,
+After a successful installation and login to the Ansible Automation platform, we need to configure it according to our requirements. These requirements could be anything, such as multi-cloud deployment, multi-cluster deployment, or using it for continuous delivery.
 
-We are considering one scenario here of Ansible Automation platform like **Continues Deployment/Delivery**. For that, you need to follow the below steps carefully.
-First, let's create Credentials for you need to follow the steps carefully.
+In this scenario, we will consider the Ansible Automation platform for continuous deployment/delivery. To do so, you need to follow the steps below carefully.
 
-**Credentials**:
+**Credentials:**
 
-1 . Create a service account with enough permission so we can interact with the cluster seamlessly.
+1. Create a service account with sufficient permissions so that we can interact with the cluster seamlessly.
 ```
 
 cat <<EOF | oc apply -f -
@@ -82,23 +81,24 @@ metadata:
 EOF
 ```
 
-You successfully created New Namespace for your project “dev-game-app”, Sevice account & RoleBindingCluster.
+You have successfully created a new namespace for your project "dev-game-app", service account, and RoleBindingCluster.
 
-Login to Ansible Automation platform console and From left menu click on **credentials** select credentials type as “OpenShift or Kubernetes API Bearer Token”.
+To log in to the Ansible Automation platform console, click on "credentials" from the left menu and select the credentials type as "OpenShift or Kubernetes API Bearer Token".
 
-We need 3 component to require to fill in the credentials.
-1.  The OpenShift or Kubernetes API Endpoint of a cluster.
-2.  API authentication bearer token of the service account.
-3.  Certificate Authority data of the service account.
-The endpoint you will get from openshift console. On the top right corner click on “admin” & select “copy login command”.Click on “display”. Login again.
+We need three components to fill in the credentials:
+1. The OpenShift or Kubernetes API Endpoint of a cluster.
+2. The API authentication bearer token of the service account.
+3. The Certificate Authority data of the service account.
 
-- This API endpoint``` https://api.crc.testing:6443``` will work. Paste it in AAP credentials.
+You can get the endpoint from the OpenShift console by clicking on "admin" in the top right corner and selecting "copy login command". Then click on "display" and log in again.
+
+This API endpoint `https://api.crc.testing:6443` will work. Paste it into AAP credentials.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/oc_endpoint.png?raw=true)
 
-You need to extract the token & Certificates by using following commands.
+You need to extract the token and certificates using the following commands.
 
-The token is collected in `containergroup-sa.token` file you have to copy the context and paste it in AAP credentials page in `API authentication bearer token` block.
+The token is collected in `containergroup-sa.token` file. You have to copy the context and paste it into AAP credentials page in `API authentication bearer token` block.
 
 ```
 dnf install jq -y && oc project dev-game-app && cd backend
@@ -106,33 +106,30 @@ dnf install jq -y && oc project dev-game-app && cd backend
 ```
 oc get secret cicd -o json | jq '.data.token' | xargs | base64 --decode > containergroup-sa.token
 ```
-The Certificate is collected in `containergroup-ca.crt` file you have to copy the context and paste it in  AAP credentials page in `Certificate Authority data` block.
+The certificate is collected in the `containergroup-ca.crt` file. You have to copy the context and paste it in the AAP credentials page in the `Certificate Authority data` block.
+
 ```
 oc get secret cicd -o json | jq '.data["ca.crt"]' | xargs | base64 --decode > containergroup-ca.crt
 ```
 
-OR
-
-Switch to the visual-editor tab to collect the `Token` and `Certificate`.
-
+Alternatively, switch to the visual-editor tab to collect the `Token` and `Certificate`.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_cred_filled.png?raw=true)
 
-**Instance Group**:
+**Instance Group:**
 
-Now create an instance Group.
-From the left side, menu selects Instance Group. Click on Add to create a new `Container Group`.
-
+Now create an instance group. From the left-side menu, select Instance Group. Click on Add to create a new `Container Group`.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_instancegroup.png?raw=true)
 
-Select the credentials which you have created and check the empty box of Custom pod spec.
-Update namespace with `dev-game-app` and the service account name will be `containergroup-service-account` here.
+Select the credentials you have created and check the empty box of Custom pod spec. Update namespace with `dev-game-app`, and the service account name will be `containergroup-service-account` here.
 
-**Inventory**:
+**Inventory:**
 
-Now we have to create an inventory. select inventories click on **Add inventory**. And in the fill in the details. First, add the `Instance group` that you just made. You have to create `Hosts` here. For that select Add & give a name to the host.
-On variables
+Now we have to create an inventory. Select inventories, click on **Add inventory**, and fill in the details. First, add the `Instance group` that you just made. You have to create `Hosts` here. For that, select Add & give a name to the host.
+
+On variables:
+
 ```
 ---
 {'ansible_host': '127.0.0.1', 'ansible_connection': 'local'}
@@ -140,39 +137,38 @@ On variables
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_inventory.png?raw=true)
 
-After adding you can able to check the connectivity with openshift cluster.
-For that click on “Run Command”
+After adding, you can check connectivity with OpenShift cluster by clicking on “Run Command”.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_inventory_run_command.png?raw=true)
 
-1.  Details: Select “ping” Module. NEXT
-2.  Executive Environment: leave the default
-3.  Machine Credentials: Demo Credentials
-4.  Preview: Launch
-
+1. Details: Select the "ping" module. NEXT.
+2. Executive Environment: Leave the default.
+3. Machine Credentials: Demo Credentials.
+4. Preview: Launch.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_ping_op.png?raw=true)
 
-**Project** :
+**Project**:
 
-The project is nothing but an SCM of project where all playbooks & manifests are available. With the help of the project, we need to fetch her. From the left menu select a project and click on Add. give a name to the project.
-The Source Control Type is Git. In the Source Control URL fill GitHub URL
+The project is an SCM of the project where all playbooks and manifests are available. With the help of the project, we need to fetch it. From the left menu, select a project and click on Add, then give a name to the project.
+The Source Control Type is Git. In the Source Control URL, fill in the GitHub URL:
 ```
 https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo.git
 ```
-Source Control Branch/Tag/Commit is “main”. And check the empty box of “Update Revision on Launch ”. SAVE it.
-
+Source Control Branch/Tag/Commit is "main". Check the empty box of "Update Revision on Launch". Now, save it.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_project.png?raw=true)
 
 **Templates**:
 
-Templates are nothing but a blueprint for your job. Which runs the job by using all dependencies we created.
+Templates are a blueprint for your job that runs by using all dependencies we created.
 
-Add job template. Select inventory, project, and credentials & select the playbook that you want to run. Save & Launch the template
+Add a job template. Select inventory, project, and credentials, then select the playbook that you want to run. Save and launch the template.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_templte.png?raw=true)
 
- Check the Jobs.
+Check the jobs.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_templete_op.png?raw=true)
+
+Now, we'll take a look at Jenkins setup.

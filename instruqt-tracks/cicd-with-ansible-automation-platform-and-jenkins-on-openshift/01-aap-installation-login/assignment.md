@@ -2,21 +2,21 @@
 slug: aap-installation-login
 id: i2r2g73o7xga
 type: challenge
-title: Ansible Automation platform Installation & Login
+title: Step 1 - Ansible Automation platform Installation & Login
 notes:
 - type: text
   contents: |+
-    # Goal
+    ## Goal
 
-    CI/CD with Ansible Automation Platform and jenkins on Openshift
+    CI/CD with the Ansible Automation Platform and Jenkins on OpenShift
 
-    ![architecturediagram](https://raw.githubusercontent.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/main/assets/ansible_final1.jpg)
+![Architecture Diagram](https://raw.githubusercontent.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/main/assets/ansible_final1.jpg)
 
-    A subset of application deployment, continuous deployment pipelines help developers release new software features and updates more frequently to support modern business demands. Red Hat Ansible Automation Platform provides the multitier, multistep application orchestration needed for fast, reliable deployment of new features, bug fixes, and code changes, while reducing the need for human intervention throughout the release process.
+A subset of application deployment, continuous deployment pipelines help developers release new software features and updates more frequently to support modern business demands. Red Hat Ansible Automation Platform provides the multi-tier, multi-step application orchestration needed for fast, reliable deployment of new features, bug fixes, and code changes while reducing the need for human intervention throughout the release process.
 
-    This Instruqt track provides hands-on experince of deploying CI/CD pipeline using Ansible Automation Platform and Jenkins on openshift.
+This Instruqt track provides hands-on experience in deploying a CI/CD pipeline using Ansible Automation Platform and Jenkins on OpenShift.
 
-    Let's get started!
+Let's get started!
 
 
 
@@ -38,12 +38,11 @@ timelimit: 1000
 
 # CI/CD with Ansible Automation Platform and Jenkins
 
-[Continuous integration/continuous deployment (CI/CD) approaches](https://www.redhat.com/en/topics/devops/what-is-ci-cd) can help developers rapidly build, test, and deliver high-quality applications. CI/CD applies automation throughout the application life cycle, from the integration and testing phases to delivery and deployment, to quickly produce tested, verified applications. Let us understand the two phases:
+[Continuous integration/continuous deployment (CI/CD) approaches](https://www.redhat.com/en/topics/devops/what-is-ci-cd) can help developers rapidly build, test, and deliver high-quality applications. CI/CD applies automation throughout the application lifecycle, from the integration and testing phases to delivery and deployment, to quickly produce tested, verified applications. Let us understand the two phases:
 
 -   Continuous integration (CI) helps developers rapidly verify functionality and merge their code changes back to a shared branch more frequently. Merged code changes are validated by automatically building the application and running different levels of automated testing, typically unit and integration tests, to ensure the changes work. If testing discovers a conflict between new and existing code, CI makes it easier and faster to fix those bugs.
 
 -   Continuous deployment (CD) automates the process of releasing an application to production. There are few manual gates in the development pipeline stage just before production, so CD relies heavily on well-designed test automation. As a result, a developer’s change to a cloud application could go live within minutes of writing it if it passes all automated tests. CD makes it much easier to continuously receive and incorporate user feedback.
-
 
 Together, CI and CD practices allow developers to release changes to applications in smaller pieces, making application deployment more reliable. By definition, CI/CD pipelines require automation, and [Red Hat Ansible Automation Platform](https://developers.redhat.com/products/ansible/overview) is a foundation for building and operating automation across an organization. The platform includes all the tools needed to implement enterprise-wide automation, including CI/CD pipelines.
 
@@ -77,7 +76,7 @@ oc new-project dev-game-app
 
 This can be done by clicking the *Web Console* tab near the top of your screen.
 
-You can login as `admin` user. Use the following credentials:
+You can login as the `admin` user. Use the following credentials:
 
 * Username:
 ```
@@ -94,32 +93,36 @@ admin
 
 ## **Installing Ansible Automation Platform**
 
-Login to OpenShift Web Console using admin account.
+Log in to the OpenShift Web Console using the admin account.
 
 - Go to the OperatorHub and search for the "Ansible Automation Platform" operator.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_search.png?raw=true)
 
-- Click on Install
+- Click on "Install."
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_install_button2.png?raw=true)
 
-Once Ansible Automation Platform Operator is installed, you can optionally verify that from CLI by running the command
+Once the Ansible Automation Platform Operator is installed, you can optionally verify so from the CLI by running the command:
+
 ```
 oc get operators
 ```
-This should have the following output.
+
+This should produce the following output:
 
 ```
 NAME                                                                     AGE
 ansible-automation-platform-operator.ansible-automation-platform         25m
 ```
-Finally, you can verify the installation by running
+
+Finally, you can verify the installation by running:
 
 ```
 oc get pods -n aap
 ```
-You will get something similar to the following output.
+
+You will receive something similar to the following output:
 
 ```
 NAME                                                              READY   STATUS    RESTARTS        AGE
@@ -128,17 +131,17 @@ automation-hub-operator-controller-manager-668769dc9-2tmsc        2/2     Runnin
 resource-operator-controller-manager-57b5b58667-phmlh             2/2     Running   0               12m
 ```
 
-Next to configure Ansible Automation Platform create an instance of **Automation controller** from the installed operator.
+Next, to configure Ansible Automation Platform, create an instance of **Automation Controller** from the installed operator.
 
-Go to installed operators you will get Ansible Automation Platform there click on it. A couple of options will appear from that select the  **Automation Controller** click on & create Automation Controller. Give a name to the automation controller. change example to  **cd-ansible**
+Go to installed operators; you will find Ansible Automation Platform there. Click on it. A couple of options will appear; select **Automation Controller**, click on it, and create an Automation Controller. Give a name to the automation controller. Change "example" to **cd-ansible**.
 
 Leave everything default & click on create.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_controller_install.png?raw=true)
 
-[NOTE: Installation may take some time 5-10 Min.]
+[NOTE: Installation may take some time, approx. 5-10 Min.]
 
-- verify automation controller pods running.
+Now, verify the automation controller pods are running:
 ```
 oc get pods -n aap
 ```
@@ -153,54 +156,59 @@ cd-ansible-postgres-13-0                                          1/1     Runnin
 resource-operator-controller-manager-57b5b58667-phmlh             2/2     Running   0               12m
 ```
 
-To get UI of Ansible Automation Platform. We need to run a few commands.
+To access the UI of the Ansible Automation Platform, we need to run a few commands:
 
 ```
 export SA_SECRET=cd-ansible
 ```
-here my automation controller name id **cd-ansible**. Please replace the name with your automation controller name.
+Here, my automation controller name is **cd-ansible**. Please replace the name with your automation controller name.
 
 ```
-oc get route  -n aap | grep $(echo ${SA_SECRET}) | awk '{print$2}'
+oc get route -n aap | grep $(echo ${SA_SECRET}) | awk '{print$2}'
 ```
-After running this command you get a result like below
+After running this command, you will get a result like the one below:
 
 ```
 cd-ansible-ansible-automation-platform.apps.xdv2l3h5.centralindia.aroapp.io
 ```
-Copy the HOST endpoint & paste in the browser.
+Copy the HOST endpoint and paste it in your browser.
 
-This may take some time to start about 5-10 min.
+This may take some time to start, about 5-10 minutes.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_login.png?raw=true)
 
-You will then be able to login with admin permissions with the:
+You will then be able to log in with admin permissions using:
 
  - Username: ```admin```
  - Password:
 
 
-To grab the password of Ansible Automation Platform, from Terminal we need to extract the password from secret.
+To retrieve the password for Ansible Automation Platform from Terminal, we need to extract it from the secret.
 
 ```
-oc  get secret $SA_SECRET-admin-password  -o jsonpath='{.data.password}' -n aap | base64 --decode
+oc get secret $SA_SECRET-admin-password -o jsonpath='{.data.password}' -n aap | base64 --decode
 ```
-You will get the password.
+You will receive the password.
 
-Paste it on the ansible automation platform login page.
+Paste it on the Ansible Automation Platform login page.
 
-Here you have to select the username/password option to fill in your details.
-Add your redhat account to get subscription to Ansible Automation platform.
+Here, you have to select the username/password option and fill in your details.
+Add your Red Hat account to subscribe to Ansible Automation Platform.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_redhat_login.png?raw=true)
 
-Click on  **Get Subscription**
+Click on **Get Subscription**
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_subcription_select.png?raw=true)
-Select the subscription of `16` node.
+
+Select the subscription of a `16` node.
+
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_submit_button_dash.png?raw=true)
-Now click on submit button.
+
+Now, click on submit button.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_after_login.png?raw=true)
+
+On the next step, we'll take a look at configuration of the Ansible Automation Platform.
 
 

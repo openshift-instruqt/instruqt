@@ -2,7 +2,7 @@
 slug: jenkins-install
 id: nztpivixukj5
 type: challenge
-title: Jenkins Installation
+title: Step 3 - Jenkins Installation
 tabs:
 - title: Terminal 1
   type: terminal
@@ -18,38 +18,38 @@ tabs:
 difficulty: basic
 timelimit: 1000
 ---
-**JENKINS SETUP**
+**Jenkins Setup**
 
-Login to the openshift dashboard. Select Developer perspective & right-click Add to Project select From Catalog and search for “Jenkins”.
+Log in to the OpenShift dashboard. Select the Developer perspective and right-click "Add to Project." Select "From Catalog" and search for "Jenkins."
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_catalog_add.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_catalog_add.png?raw=true)
 
-Select  Jenkins which has extra permission because for this task RBAC permission is required.
+Select Jenkins, which has extra permissions because RBAC permission is required for this task.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_catalog_search1.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_catalog_search1.png?raw=true)
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_install2nd.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_install2nd.png?raw=true)
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_install3nd.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_install3nd.png?raw=true)
 
-Installation may take some time. After Installation of Jenkins pod appears in the topology view in the **dev-game-app** project. click on the arrow mark to access the dashboard of Jenkins
+Installation may take some time. After installation of the Jenkins pod appears in the topology view in the **dev-game-app** project, click on the arrow mark to access the dashboard of Jenkins.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_extra_permission_allow.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_extra_permission_allow.png?raw=true)
 
-Click on `Allow selected permission` to proceed.
+Click on "Allow selected permission" to proceed.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_loginwith_admin.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_loginwith_admin.png?raw=true)
 
-Select login with openshift & fill in admin/admin credentials.
+Select "Login with OpenShift" and fill in admin/admin credentials.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_dashboard.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_dashboard.png?raw=true)
 
-For continuous build & push. We need to create the Build config here by using a config file.
+To enable continuous build and push, we need to create a build config here using a config file.
 
 ```
 oc project dev-game-app
 ```
-Before executing the following command make sure you replace the image name with your container registry.
+Before executing the following command, make sure you replace the image name with your container registry.
 ```
  cat <<EOF | oc create -f -
 apiVersion: build.openshift.io/v1
@@ -74,25 +74,26 @@ spec:
       dockerfilePath: Dockerfile
 EOF
 ```
-Now create a secret for image building. This secret will help the image to push on the quay container registry. If you don't have a Quay.io container registry account check [**here**](https://docs.quay.io/guides/create-repo.html#:~:text=via%20the%20UI-,To%20create%20a%20repository%20in%20the%20Quay.io%20UI%2C%20click,the%20'Create%20Repository'%20button.). Replace the credentials as per your container registry account in following command.
+Now, create a secret for image building. This secret will help the image to push to the Quay container registry. If you don't have a Quay.io container registry account, check [**here**](https://docs.quay.io/guides/create-repo.html#:~:text=via%20the%20UI-,To%20create%20a%20repository%20in%20the%20Quay.io%20UI%2C%20click,the%20'Create%20Repository'%20button.). Replace the credentials with your container registry account in the following command:
 
 ```
 oc create secret docker-registry my-secret --docker-server=quay.io --docker-username=<your-container-registry-id>  --docker-password=xxx
 ```
+
 ```
 oc secrets link builder my-secret --for=mount
 ```
 
-Let’s create Continues Integration pipeline. For that, you need to login first to jenkins console with help of openshift credentials you can login to Jenkins Dashboard.
+Let’s create a Continuous Integration pipeline. To do that, you need to log in first to the Jenkins console with the help of OpenShift credentials so that you can log in to the Jenkins Dashboard.
 
-For pipeline, creation go to New Item select Pipeline & give a name to that Pipeline
+For pipeline creation, go to New Item, select Pipeline, and give a name to that Pipeline.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_pipeline.png?raw=true)
 
-Let’s configure the Continous-integration pipeline.
+Let’s configure the Continuous Integration pipeline.
 Scroll down in the pipeline section and select the Pipeline script from SCM.
 
-SCM : Git
+SCM: Git
 
 Repository URL:
 ```
@@ -100,7 +101,7 @@ https://github.com/redhat-developer-demos/ansible-automation-platform-continous-
 ```
 
 
-Branch : `*/main`
+Branch: `*/main`
 
 
 Script Path: `Jenkinsfile`
@@ -108,12 +109,13 @@ Script Path: `Jenkinsfile`
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_filled_pipe.png?raw=true)
 
-When the Developer commits the code in a repo we need something in place which can detect the changes & start the pipeline for that we have to enable the triggers & polling for every minute.
+When the developer commits the code in a repo, we need something in place that can detect the changes and start the pipeline. For that, we have to enable the triggers and polling for every minute.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_build_trigger.png?raw=true)
 
-Let’s run the pipeline now from the left menu click on Build Now.
+Let’s run the pipeline now. From the left menu, click on Build Now.
 
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_ci_op.png?raw=true)
 
+In the next and final step, we'll integrate the Ansible Automation Platform & Jenkins.
