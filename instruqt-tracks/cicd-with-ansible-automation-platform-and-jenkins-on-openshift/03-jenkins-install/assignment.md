@@ -18,7 +18,7 @@ tabs:
 difficulty: basic
 timelimit: 1000
 ---
-**Jenkins Setup**
+## Jenkins Setup
 
 Log in to the OpenShift dashboard. Select the Developer perspective and right-click "Add to Project." Select "From Catalog" and search for "Jenkins."
 
