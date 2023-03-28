@@ -22,7 +22,7 @@ timelimit: 1000
 
 Log in to the OpenShift dashboard. Select the Developer perspective and right-click "Add to Project." Select "From Catalog" and search for "Jenkins."
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_catalog_add.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_catalog_add.png?raw=true)
 
 Select Jenkins, which has extra permissions because RBAC permission is required for this task.
 
@@ -30,19 +30,19 @@ Select Jenkins, which has extra permissions because RBAC permission is required 
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_install2nd.png?raw=true)
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_install3nd.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_install3nd.png?raw=true)
 
 Installation may take some time. After installation of the Jenkins pod appears in the topology view in the **dev-game-app** project, click on the arrow mark to access the dashboard of Jenkins.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_extra_permission_allow.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_extra_permission_allow.png?raw=true)
 
 Click on "Allow selected permission" to proceed.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_loginwith_admin.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_loginwith_admin.png?raw=true)
 
 Select "Login with OpenShift" and fill in admin/admin credentials.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_dashboard.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_dashboard.png?raw=true)
 
 To enable continuous build and push, we need to create a build config here using a config file.
 

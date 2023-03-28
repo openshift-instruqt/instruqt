@@ -30,11 +30,11 @@ In the pipeline from the build section, select Ansible Tower.
 
 After that, fill in the details as shown below.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_tower_pipeline_filled.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_tower_pipeline_filled.png?raw=true)
 
 Select the build triggers as "Build after other projects are built."
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_ci_trigger_in_cd.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_ci_trigger_in_cd.png?raw=true)
 
 In Build Triggers, check the "Build after other projects are built" option and add the continuous integration pipeline name.
 
@@ -62,7 +62,7 @@ After pushing, check the Jenkins dashboard. The Continuous Integration pipeline 
 
 Check the OpenShift cluster from a developer's perspective.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/openshift_game_deployed.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/openshift_game_dployed.png?raw=true)
 
 Click on the route icon to play the game.
 
