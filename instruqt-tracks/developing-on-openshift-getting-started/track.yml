@@ -33,4 +33,9 @@ developers:
 - dschenck@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-checksum: "613776528002472807"
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "5961846240328430465"

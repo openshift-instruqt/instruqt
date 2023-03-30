@@ -49,8 +49,9 @@ owner: openshift
 developers:
 - doh@redhat.com
 - ryanj@redhat.com
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "8139498506585746495"
+checksum: "5918425531514972469"

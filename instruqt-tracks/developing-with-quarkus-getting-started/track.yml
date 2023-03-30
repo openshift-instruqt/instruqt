@@ -52,8 +52,9 @@ developers:
 - eshortis@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "12256582685278091631"
+checksum: "9858123871514066021"
