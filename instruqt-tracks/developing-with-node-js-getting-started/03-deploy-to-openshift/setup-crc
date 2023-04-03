@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails.
+#
+
+# Download a Dockerfile and a .dockerignore
+# IF JUST SHOWING THE NODESHIFT CLI, NO NEED FOR THE DOCKERFILE STUFF
+# curl -fsSL -o /root/projects/nodejs/nodeserver/Dockerfile https://raw.githubusercontent.com/NodeShift/docker/main/Dockerfile
+
+# curl -fsSL -o /root/projects/nodejs/nodeserver/.dockerignore https://raw.githubusercontent.com/NodeShift/docker/main/.dockerignore
+
+
+echo "-w \"\n\"" >> ~/.curlrc
