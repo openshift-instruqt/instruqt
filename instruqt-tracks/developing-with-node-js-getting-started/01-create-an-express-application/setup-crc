@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails.
+#
+
+curl https://gist.githubusercontent.com/lholmquist/91923f871f63a0e55203ce15f5c736fd/raw/412dcc0a58122aa01dbc1a070946ad0e5ebcd76d/install_node_for_instruqt.sh | bash
+
+mkdir -p /root/projects/nodejs/nodeserver
+
+echo "-w \"\n\"" >> ~/.curlrc

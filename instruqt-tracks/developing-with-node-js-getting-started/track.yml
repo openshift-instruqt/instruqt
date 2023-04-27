@@ -1,0 +1,39 @@
+slug: developing-with-node-js-getting-started
+id: 3der0ceay852
+title: Developing with Node.js
+description: |
+  # What is Node.js
+
+  Node.js is a cross-platform JavaScript runtime built on Chrome's V8 JavaScript Engine for building fast and scaleable server-side applications.  It uses an event-driven, non-blocking I/O architecture, which makes it a efficient and suitable choice for applications running in a Kubernetes environment
+
+  ## Goal
+
+  This track provides an introduction to cloud-native development with Node.js by walking you through how to extend an Express.js-based application to leverage cloud capabilities.
+
+  Target Audience: This track is aimed at developers who are familiar with Node.js but want to gain a base understanding of some of the key concepts of cloud-native development with Node.js.
+
+  ## Concepts
+
+  In this self-paced track you will:
+
+  * Create an Express.js application
+  * Add logging
+  * Add health checks
+  * Deploy your application to Openshift
+
+
+  The content of this track is based on recommendations from the [NodeShift Reference Architecture for Node.js.](https://github.com/nodeshift/nodejs-reference-architecture)
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- openshift
+- prod
+owner: openshift
+developers:
+- lholmqui@redhat.com
+maintenance: true
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+checksum: "1979886268731430364"
