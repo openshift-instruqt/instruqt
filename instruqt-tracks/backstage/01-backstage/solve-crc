@@ -1,6 +1,0 @@
-#!/bin/bash
-set -euxo pipefail
-
-echo "Authenticating login credentials using 'oc login'"
-
-oc login -u developer -p developer
