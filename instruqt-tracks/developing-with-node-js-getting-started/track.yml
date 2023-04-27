@@ -32,6 +32,7 @@ owner: openshift
 developers:
 - lholmqui@redhat.com
 maintenance: true
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 33
