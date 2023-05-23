@@ -52,7 +52,7 @@ spec:
 Apply this  [`Task`](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/hello.yaml) to your cluster just like any other Kubernetes object. Then run it using `tkn`, the CLI tool for Tekton.
 
 ```
-oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/hello.yaml
+oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/hello.yml
 ```
 
 ```
