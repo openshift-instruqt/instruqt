@@ -31,9 +31,12 @@ tags:
 owner: openshift
 developers:
 - smccarty@redhat.com
-- nvinto@redhat.com
 - bob@cogarttech.com
 - ryanj@redhat.com
-private: false
-published: true
-checksum: "15387240835077093526"
+- nvinto@redhat.com
+- cclyburn@redhat.com
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "1909999030288858745"
