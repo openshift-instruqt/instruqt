@@ -53,37 +53,24 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
-  type: code
-  hostname: crc
-  path: /root
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 257
+timelimit: 500
 ---
-OpenShift Pipelines are an OpenShift add-on that can be installed via an operator that is available in the OpenShift OperatorHub.
+[OpenShift Pipelines](https://docs.openshift.com/container-platform/latest/cicd/pipelines/understanding-openshift-pipelines.html) are an OpenShift add-on that can be installed via an operator that is available in the OpenShift OperatorHub. It allows for cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using [Tekton](https://tekton.dev/).
 
-You can either install the operator using the OpenShift Pipelines Operator in the web console or by using the CLI tool `oc`. Let's log in to our cluster to make changes and install the operator.
+Let's install the operator using the OpenShift Pipelines Operator in the OpenShift Web Console!
+Click the **Web Console** tab over the terminal area to open the OpenShift web console in a new tab.
 
-At first, check that the pod responsible for OpenShift Web Console to be ready:
+![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
-```
-oc get pods -n openshift-console | grep console
-```
+Use the following credentials to log in:
 
-You might have to wait a minute for the pod to be ready.
-
-When the pod is ready, execute the following command to find the route to the OpenShift Web Console:
-
-```
-oc get routes console -n openshift-console
-```
-
-Copy the link under `HOST/PORT` column and navigate there from a web browser.
-
-You will then be able to login with admin permissions with:
-
-* **Username:** ``admin``
-* **Password:** ``admin``
+* **Username:** `admin`
+* **Password:** `admin`
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
@@ -103,49 +90,8 @@ Select _All namespaces on the cluster (default)_ for installation mode & _Automa
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-settings.png)
 
-Be sure to verify that the OpenShift Pipelines Operator has installed through the Operators → Installed Operators page.
+The installation may take a minute or two, but once complete, you'll now have installed the *OpenShift Pipelines Operator* to your OpenShift Cluster!
 
-## Installing the OpenShift Pipelines Operator using the CLI
+![Operator Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/operator-installed.png)
 
-You can install OpenShift Pipelines Operator from the OperatorHub using the CLI.
-
-First, you'll want to create a Subscription object YAML file to subscribe a namespace to the OpenShift Pipelines Operator, for example, `subscription.yaml` as shown below:
-
-```
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: openshift-pipelines-operator
-  namespace: openshift-operators
-spec:
-  channel: stable
-  name: openshift-pipelines-operator-rh
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-```
-
-This YAML file defines various components, such as the `channel` specifying the channel name where we want to subscribe, `name` being the name of our Operator, and `source` being the CatalogSource that provides the operator.
-
-Create and save this file under `opt/operator` local folder as `subscription.yaml`.
-
-You can now create the Subscription object similar to any OpenShift object.
-
-```
-oc apply -f /opt/operator/subscription.yaml
-```
-
-## Verify installation
-
-The OpenShift Pipelines Operator provides all its resources under a single API group: tekton.dev. This operation can take a few seconds; you can run the following script to monitor the progress of the installation.
-
-```
-until oc api-resources --api-group=tekton.dev | grep tekton.dev &> /dev/null
-do
- echo "Operator installation in progress..."
- sleep 5
-done
-
-echo "Operator ready"
-```
-
-Great! The OpenShift Pipelines Operator is now installed. Now, let's start the workshop.
+Now, let's start the workshop. In the next section, we'll create the project that we'll be using for the workshop.

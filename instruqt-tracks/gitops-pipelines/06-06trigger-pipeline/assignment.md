@@ -7,12 +7,12 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
-  type: code
-  hostname: crc
-  path: /root
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 257
+timelimit: 500
 ---
 Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline. This is done by creating a `PipelineRun` via `tkn`.
 

@@ -7,14 +7,14 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
-  type: code
-  hostname: crc
-  path: /root
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 257
+timelimit: 500
 ---
-A [`Task`](https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml) defines a series of `steps` that run in a desired order and complete a set amount of build work. Every `Task` runs as a Pod on your Kubernetes cluster with each `step` as its own container. For example, the following `Task` outputs "Hello World":
+A [`Task`](https://tekton.dev/docs/getting-started/tasks/) defines a series of `steps` that run in a desired order and complete a set amount of build work. Every `Task` runs as a Pod on your Kubernetes cluster with each `step` as its own container. For example, the following `Task` outputs "Hello World":
 
 ```
 apiVersion: tekton.dev/v1beta1
@@ -33,7 +33,7 @@ spec:
 Apply this Task to your cluster just like any other Kubernetes object. Then run it using `tkn`, the CLI tool for Tekton.
 
 ```
-oc apply -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/hello.yaml
+oc apply -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines/scripts/tasks/hello.yaml
 ```
 
 ```

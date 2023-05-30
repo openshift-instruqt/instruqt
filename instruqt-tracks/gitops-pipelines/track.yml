@@ -23,7 +23,7 @@ description: |-
   OpenShift Pipelines features:
 
   * Standard CI/CD pipeline definition based on Tekton
-  * Build container images with tools such as [Source-to-Image (S2I)](https://docs.openshift.com/container-platform/latest/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds) and [Buildah](https://buildah.io/)
+  * Build container images with tools such as [Source-to-Image (S2I)](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/builds/understanding-image-builds) and [Buildah](https://buildah.io/)
   * Deploy applications to multiple platforms such as Kubernetes, serverless, and VMs
   * Easy to extend and integrate with existing tools
   * Scale pipelines on-demand
@@ -44,7 +44,7 @@ description: |-
   * `TaskRun`: the execution and result of running an instance of a task
   * `PipelineRun`: the execution and result of running an instance of a pipeline, which includes a number of `TaskRuns`
 
-  For further details on pipeline concepts, refer to the [Tekton documentation](https://github.com/tektoncd/pipeline/tree/master/docs#learn-more) that provides
+  For further details on pipeline concepts, refer to the [Tekton documentation](https://tekton.dev/docs) that provides
   an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
   In the following sections, you will go through each of the above steps to define and invoke a pipeline. Let's get started!

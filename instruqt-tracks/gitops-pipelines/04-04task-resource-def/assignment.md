@@ -7,12 +7,12 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
-  type: code
-  hostname: crc
-  path: /root
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 257
+timelimit: 500
 ---
 Tasks can also take parameters. This way, you can pass various flags to be used in this Task. These `params` can be instrumental in making your Tasks more generic and reusable across Pipelines. For example, a `Task` could apply a custom Kubernetes manifest, like the example below. This will be needed for deploying an image on OpenShift in our next section. In addition, we'll cover the `workspaces` during our `Pipeline` step.
 
@@ -44,22 +44,22 @@ spec:
 Create the `apply-manifests` task:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/apply_manifest_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/apply_manifest_task.yaml
 ```
 
 We'll also create a `update-deployment` task, which can be seen with a `cat` command:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/tasks/update_deployment_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/update_deployment_task.yaml
 ```
 
 Finally, we can create a PersistentVolumeClaim to provide the filesystem for our pipeline execution, explained more in the next step:
 
 ```
-oc create -f https://raw.githubusercontent.com/openshift-labs/learn-katacoda/master/middleware/pipelines/assets/resources/persistent_volume_claim.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/gitops-pipelines-short/assets/persistent_volume_claim.yaml
 ```
 
-You can take a look at the tasks you created using the [Tekton CLI](https://github.com/tektoncd/cli/releases):
+You can take a look at the tasks you created using the [Tekton CLI](https://github.com/tektoncd/cli):
 
 ```
 tkn task ls

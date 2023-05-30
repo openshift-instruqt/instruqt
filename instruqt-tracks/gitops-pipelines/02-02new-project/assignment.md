@@ -7,12 +7,12 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
-  type: code
-  hostname: crc
-  path: /root
+- title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 257
+timelimit: 500
 ---
 For this tutorial, you're going to create a simple application that involves a [frontend](https://github.com/openshift/pipelines-vote-ui) and [backend](https://github.com/openshift/pipelines-vote-api). This application needs to deploy in a new project (i.e. Kubernetes namespace). You can start by creating the project with:
 
@@ -32,4 +32,4 @@ Make sure you are on the `pipelines-tutorial` project by selecting it from the *
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-project.png)
 
-Next, we'll work on creating a sample `Task` that outputs to the console!
+You can also select the *Pipelines* tab in the left navigation menu to see the pipeline once we apply it in a later step. Next, we'll work on creating a sample `Task` that outputs to the console!
