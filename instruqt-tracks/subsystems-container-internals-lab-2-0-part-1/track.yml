@@ -20,10 +20,10 @@ description: |
 
   ## Other Material
   - [Presentation](http://bit.ly/2V18QCg)
-  - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+  - [Lab GitHub Repository](https://github.com/openshift-instruqt/instruqt/tree/8fb88fc749c4137cd16602c9486bcc56e1908a0f/instruqt-tracks/subsystems-container-internals-lab-2-0-part-1)
 
   ## Start Scenario
-  Once you have watched the background video or went throught the presentation, continue to the exercises
+  Once you have gone through the presentation, continue to the exercises
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
