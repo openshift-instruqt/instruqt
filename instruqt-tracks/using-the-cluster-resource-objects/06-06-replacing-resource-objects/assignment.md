@@ -103,7 +103,7 @@ oc apply -f <JSON_OR_YAML_FILE>
 
 # Congratulations!
 
- You've just learned how to replace an existing OpenShift resource object using `oc replace` or `oc path`.
+ You've just learned how to replace an existing OpenShift resource object using `oc replace` or `oc patch`.
 
 ----
 
