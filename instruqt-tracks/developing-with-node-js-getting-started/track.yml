@@ -4,7 +4,7 @@ title: Developing with Node.js
 description: |
   # What is Node.js
 
-  Node.js is a cross-platform JavaScript runtime built on Chrome's V8 JavaScript Engine for building fast and scaleable server-side applications.  It uses an event-driven, non-blocking I/O architecture, which makes it a efficient and suitable choice for applications running in a Kubernetes environment
+  Node.js is a cross-platform JavaScript runtime built on Chrome's V8 JavaScript Engine for building fast and scaleable server-side applications.  It uses an event-driven, non-blocking I/O architecture, which makes it an efficient and suitable choice for applications running in a Kubernetes environment.
 
   ## Goal
 
@@ -14,7 +14,7 @@ description: |
 
   ## Concepts
 
-  In this self-paced track you will:
+  In this self-paced track, you will:
 
   * Create an Express.js application
   * Add logging

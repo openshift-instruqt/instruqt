@@ -18,11 +18,11 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will use the OpenShift `oc` command line to tool to delete the application you created using the web console in previous topics. Then you will recreate the application from the command line using `oc`.
+In this topic, you will use the OpenShift `oc` command line tool to delete the application you created using the web console in previous topics. Then you will recreate the application from the command line using `oc`.
 
 # Deleting the application
 
-First, get a list of all of the underling Kubernetes resources running in the OpenShift cluster. (You can think of OpenShift as an architectural layer that runs over a Kubernetes cluster. OpenShift components such as deployments, routes, and service accounts correspond to resource objects in Kubernetes.)
+First, get a list of all of the underlying Kubernetes resources running in the OpenShift cluster. (You can think of OpenShift as an architectural layer that runs over a Kubernetes cluster. OpenShift components such as deployments, routes, and service accounts correspond to resource objects in Kubernetes.)
 
 `Step 1:` Run the following command to list the underlying Kubernetes resources running in the OpenShift cluster:
 
@@ -47,9 +47,9 @@ route.route.openshift.io/blog-django-py
 
 Since you have only created one application, all of the resources listed above will relate to that application. When you have multiple applications deployed, you need a way to identify those resources according to a specific application so that you only delete components that correspond to the given application.
 
-The way that OpenShift allows you associate resources to a given application is by using labels. You retrieve components according to a label by using a *label selector*.
+The way that OpenShift allows you to associate resources to a given application is by using labels. You retrieve components according to a label by using a *label selector*.
 
-A resource can none, one or many labels.
+A resource can have none, one, or many labels.
 
 You use the `oc describe` command to inspect a resource to view its labels.
 
@@ -87,7 +87,7 @@ Weight:         100 (100%)
 Endpoints:      10.128.0.65:8080
 ```
 
- Notice the `Labels:` attribute on the fourth line of the output displayed above. You will see 7 labels described as `key-value` pairs like so:
+Notice the `Labels:` attribute on the fourth line of the output displayed above. You will see 7 labels described as `key-value` pairs like so:
 
 ```
 app=blog-django-py
@@ -105,10 +105,10 @@ Each line in the output above describes a label. The structure is `labelName=lab
 app=blog-django-py
 ```
 
-the name of the label is `app` and the value is `app=blog-django-py`.
+The name of the label is `app` and the value is `app=blog-django-py`.
 
 
-You can use the `oc` command line tool retrieve resources according to their labels.
+You can use the `oc` command line tool to retrieve resources according to their labels.
 
 ----
 

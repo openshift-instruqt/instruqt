@@ -15,7 +15,7 @@ notes:
 
     ## Concepts
 
-    In this self-paced track you will:
+    In this self-paced track, you will:
 
     * Create an Express.js application
     * Add logging and health checks
@@ -61,7 +61,7 @@ You'll get the following output.
 npm init -y
 ```
 
-`npm init` is a built in command for the npm cli that allows a user to quickly scaffold a new Node.js application.  Using the `-y` flag will accept the sensible defaults.  To learn more about this command, see the [official npm documentation](https://docs.npmjs.com/cli/v8/commands/npm-init).
+`npm init` is a built-in command for the npm cli that allows a user to quickly scaffold a new Node.js application. Using the `-y` flag will accept the sensible defaults. To learn more about this command, see the [official npm documentation](https://docs.npmjs.com/cli/v8/commands/npm-init).
 
 `Step 3:` Run the following command in the **Terminal 1** window to install the Express.js node module
 

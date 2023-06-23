@@ -23,7 +23,7 @@ timelimit: 600
 ---
 Kubernetes, and a number of other cloud deployment technologies, provide "Health Checking" as a system that allows the cloud deployment technology to monitor the deployed application and to take action should the application fail or report itself as "unhealthy".
 
-The simplest form of Health Check is process-level health checking, where Kubernetes checks to see if the application process still exists and restarts the container (and therefore the application process) if it is not. This provides a basic restart capability but does not handle scenarios where the application exists but is unresponsive, or where it would be desirable to restart the application for other reasons.a
+The simplest form of Health Check is process-level health checking, where Kubernetes checks to see if the application process still exists and restarts the container (and therefore the application process) if it is not. This provides a basic restart capability but does not handle scenarios where the application exists but is unresponsive, or where it would be desirable to restart the application for other reasons.
 
 The next level of Health Check is HTTP-based, where the application exposes a "livenessProbe" URL endpoint that Kubernetes can make requests to determine whether the application is running and responsive. Additionally, the request can be used to drive self-checking capabilities in the application.
 

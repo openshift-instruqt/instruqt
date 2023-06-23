@@ -22,7 +22,7 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will add new components to the OpenShift project you created in the previous topic. The components make up the **Wild West** application, which is the demonstration application for this project. Also, once the application is installed you'll view it in the OpenShift web console. In addition, you'll learn how to view logging activity within OpenShift.
+In this topic, you will add new components to the OpenShift project you created in the previous topic. The components make up the **Wild West** application, which is the demonstration application for this project. Also, once the application is installed, you'll view it in the OpenShift web console. In addition, you'll learn how to view logging activity within OpenShift.
 
 As mentioned previously, applications often consist of two or more components that work together to implement the overall application. OpenShift helps organize these modular applications with a concept called, appropriately enough, *the application*. An OpenShift application represents all of an app's components in a logical management unit. The `odo` tool helps you manage that group of components and link them together as an application.
 
@@ -36,7 +36,7 @@ A selection of runtimes, frameworks, and other components are available to an Op
 odo catalog list components
 ```
 
-You'll get out  put similar to the list snippet shown below:
+You'll get output similar to the list snippet shown below:
 
 ```
 Odo Devfile Components:
@@ -70,7 +70,7 @@ cd /root/backend
 
 ----
 
-`Step 3:` Run the following to view the files in the the `backend` directory
+`Step 3:` Run the following to view the files in the `backend` directory
 
 ```
 ls -lh
@@ -124,7 +124,7 @@ The name of the jar file created by running the `mvn` command is `wildwest-1.0.j
 
 Now that the backend's `.jar` file has been built, we can use `odo` to deploy and run it on top of the Java application server we saw earlier in the catalog.
 
-# Deploying the .jar file to container
+# Deploying the .jar file to a container
 
 `Step 5:` Run the command below to create a *component* configuration of *component-type* `java` named `backend`:
 
@@ -232,7 +232,7 @@ When a dark blue circle appears around the back-end component as shown below, th
 
 # Viewing log output in the terminal window
 
-You can check on the status of an action in `odo` by using the `odo log` command when `odo push` is finished
+You can check on the status of an action in `odo` by using the `odo log` command when `odo push` is finished.
 
 ----
 

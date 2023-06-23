@@ -36,7 +36,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-The application you will be deploying in this track is a wild west shooter style game.
+The application you will be deploying in this track is a wild west shooter-style game.
 
 Applications are often divided into components based on a logical division of labor. For example, an application might consist of a data storage back-end component that performs the application's primary work and stores the results. The back-end component is paired with a front-end component that publishes the application's web pages. The front end accesses the back end to retrieve data that is displayed to a user.
 
@@ -46,7 +46,7 @@ The application deployed in this tutorial consists of two such components, the b
 
 # Understanding the Back-end
 
-The back-end component is a Java Spring Boot application. It performs queries against the Kubernetes and OpenShift REST APIs to retrieve a list of the resource objects that were created when you deployed the application. Then, the application returns to the front end details about these resource objects.
+The back-end component is a Java Spring Boot application. It performs queries against the Kubernetes and OpenShift REST APIs to retrieve a list of the resource objects that were created when you deployed the application. Then, the application returns to the front-end details about these resource objects.
 
 # Understanding the Front-end
 

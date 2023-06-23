@@ -21,7 +21,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will learn how to delete an OpenShift application from the command line using the `oc delete` command.
+In this topic, you will learn how to delete an OpenShift application from the command line using the `oc delete` command.
 
 In order to delete the ParksMap application, you need to delete all of the resource objects that it uses. The way you identify resources bound to the application is according to the label `app=parkman`.
 
@@ -62,7 +62,7 @@ Weight:         100 (100%)
 Endpoints:      10.217.0.118:8080, 10.217.0.140:8080
 ```
 
-As you can see there are many labels assigned to the `route` resource object. Notice the fourth line shown above:
+As you can see, there are many labels assigned to the `route` resource object. Notice the fourth line shown above:
 
 ```
 Labels:                 app=parksmap
@@ -115,7 +115,7 @@ route.route.openshift.io "parksmap" deleted
 
 You have now deleted the ParksMap application.
 
-Be advised that under certain conditions it can take seconds, sometimes even a minute or two to delete the application's resource objects.
+Be advised that under certain conditions, it can take seconds, sometimes even a minute or two, to delete the application's resource objects.
 
 Remember, you are asking OpenShift to delete the resource. You are not doing the actual delete. Rather, OpenShift scheduled deletion for the particular resource objects. OpenShift tries to shut down applications gracefully. This can take time.
 
@@ -123,7 +123,7 @@ Let's confirm that ParksMap has been deleted.
 
 ----
 
-`Step 4` Run the following command to confirm that the all of the resource objects associated with the ParksMap application have been deleted:
+`Step 4` Run the following command to confirm that all of the resource objects associated with the ParksMap application have been deleted:
 
 ```
 oc get all -o name
@@ -135,13 +135,13 @@ If you do still see any resources listed in the output, keep running `oc delete`
 
 Be aware that applying the label `app=<app_name>` to resource objects upon application creation is conventional. Another label might be used.
 
-For example, when an application is created from a template, the label's key-value pair is dictated by the template. As a result, a template may use a different labelling convention.
+For example, when an application is created from a template, the label's key-value pair is dictated by the template. As a result, a template may use a different labeling convention.
 
 Always use `oc describe` to verify the labels that have been applied and use `oc get all --selector` to verify the matching resources before deleting any resource objects.
 
 # Congratulations!
 
-You've just learned how to delete an application from OpenShift using `oc delete` at the command line
+You've just learned how to delete an application from OpenShift using `oc delete` at the command line.
 
 ----
 

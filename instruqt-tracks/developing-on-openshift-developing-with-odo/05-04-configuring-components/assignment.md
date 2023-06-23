@@ -17,7 +17,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will learn how to configure the `frontend` and `backend` components you installed previously.
+In this topic, you will learn how to configure the `frontend` and `backend` components you installed previously.
 
 ----
 
@@ -40,7 +40,7 @@ You'll see the following output:
 ```
  ✓  Environment variables were successfully updated
 
-Run `odo push` command to apply changes to the cluste
+Run `odo push` command to apply changes to the cluster
 ```
 
 Executing the `odo config set` command above uses environment variables to inject configuration information about the `backend` into the `frontend`.
@@ -53,7 +53,7 @@ Executing the `odo config set` command above uses environment variables to injec
 odo push
 ```
 
-Eventually you'll see output as shown in the following snippet:
+Eventually, you'll see output as shown in the following snippet:
 
 ```
 .
@@ -88,7 +88,7 @@ Proxying "/ws/*" to 'backend-app:8080'
 
 # Congratulations!
 
-  You connected to the `frontend` component to the `backend` component
+ You connected to the `frontend` component to the `backend` component.
 
 ----
 

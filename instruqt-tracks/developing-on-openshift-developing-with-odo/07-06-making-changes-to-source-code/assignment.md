@@ -21,7 +21,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will alter the source code for the demonstration application and redeploy it automatically with the help of `odo`.
+In this topic, you will alter the source code for the demonstration application and redeploy it automatically with the help of `odo`.
 
 Previously you deployed the first version of the Wild West demonstration application and viewed it in a browser. Let's look at how OpenShift and `odo` help make it easier to make changes to an app once it's running.
 
@@ -42,7 +42,7 @@ cd /root/frontend
 odo watch &
 ```
 
-Notice that the `&` is included to run `odo watch` in the background for this tutorial. Typically in the real world you'd open an separate terminal window and run the command there.
+Notice that the `&` is included to run `odo watch` in the background for this tutorial. Typically in the real world, you'd open a separate terminal window and run the command there.
 
 You'll see output similar to the following:
 

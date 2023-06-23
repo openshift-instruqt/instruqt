@@ -23,7 +23,7 @@ timelimit: 500
 ---
 # Logging in to OpenShift
 
-In this topic you will create a project in the OpenShift cluster and create a RoleBinding resource for that project.
+In this topic, you will create a project in the OpenShift cluster and create a RoleBinding resource for that project.
 
 To begin, let's log into our cluster.
 
@@ -93,7 +93,27 @@ You will see the following output confirming that `myproject` was created. Be ad
 
 The back end of your application needs to use the OpenShift REST API in order to get communication from the front end. Thus, you need to grant the project's [service account](https://docs.openshift.com/container-platform/4.8/authentication/understanding-and-creating-service-accounts.html) view access to the OpenShift REST API.
 
-You'll grant access by creating a [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for the project's service account. This RoleBinding will have view access to the OpenShift REST API. You'll do this task using the OpenShift web console.
+You'll grant access by creating a [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for the project's service account. This RoleBinding will have view access to the OpenShift REST API. 
+
+The process described above can be completed via the command line by running:
+
+```
+oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default
+```
+
+The result of creating the role using the `oc` command line tool will be:
+
+```
+clusterrole.rbac.authorization.k8s.io/view added: "default"
+```
+
+The default service account provided to the back-end container will now have **view** access. This means that the service account can retrieve OpenShift objects via the API.
+
+Note that you could choose to grant access to the **edit** role instead. Providing **edit** access allows the backend to view, modify, or delete objects. The danger of giving the Service Account **edit** permissions is that a mistake in configuration could break the user experience for `wild west` app users. Thus, in this case, it's safer to set the service account permissions to **view**.
+
+# Creating a RoleBinding from the Web Console
+
+Alternatively, you can do this task using the OpenShift web console.
 
 ----
 
@@ -106,11 +126,11 @@ The **Administrator** perspective is a view of the console for handling operatio
 
 ----
 
-The figure below illustrates the steps you will take to work with the OpenShift web site in order to create a RoleBinding. The instructions will follow.
+The figure below illustrates the steps you will take to work with the OpenShift website in order to create a RoleBinding. The instructions will follow.
 
 ![Create Rolebinding](../assets/create-rolebinding.png)
 
-`Step 7a:` In the OpenShift web console, select the project you just created using `odo` (i.e. `myproject`) by clicking on `myproject` on the **Projects** tab on the left hand menu item. The Project Details page will appear.
+`Step 7a:` In the OpenShift web console, select the project you just created using `odo` (i.e. `myproject`) by clicking on `myproject` on the **Projects** tab on the left-hand menu item. The Project Details page will appear.
 
 `Step 7b:` Select `myproject` from the list. This will take you to the web page dedicated to `myproject`.
 
@@ -120,7 +140,7 @@ In the lower left corner of the RoleBinding page you will see a button with the 
 
 `Step 7d:` Click the **Create binding** button.
 
-Now you're going to configure the RoleBinding
+Now you're going to configure the RoleBinding.
 
 # Creating the RoleBinding
 
@@ -148,24 +168,7 @@ default
 
 `Step 8e:` Now click the button labeled **Create** at the bottom of the form.
 
-
-# Creating a RoleBinding from the command line
-
-Alternatively, the process described above can be completed via the command line by running:
-
-```
-oc adm policy add-role-to-user view --rolebinding-name=defaultview -z default
-```
-
-The result of creating the role using the `oc` command line tool will be:
-
-```
-clusterrole.rbac.authorization.k8s.io/view added: "default"
-```
-
-The default service account provided to the back-end container will now have **view** access. This means that the service account can retrieve OpenShift objects via the API.
-
-Note that you could choose to grant access to the **edit** role instead. Providing **edit** access allows the backend to view, modify, or delete objects. The danger of giving the Service Account **edit** permissions is that a mistake in configuration could break the user experience for `wild west` app users. Thus, in this case it's safer to set the service account permissions to **view**.
+Alternatively, 
 
 # Congratulations!
 You've just set up a project in OpenShift and created a RoleBinding for that project.

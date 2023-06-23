@@ -21,7 +21,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will learn how to bring up the `frontend` component for the Wild West demonstration application and connect it to the `backend` component. The source code for the component is already available in the command line environment.
+In this topic, you will learn how to bring up the `frontend` component for the Wild West demonstration application and connect it to the `backend` component. The source code for the component is already available in the command line environment.
 
 ----
 
@@ -63,7 +63,7 @@ The source code for the `frontend` component shown above are the files for a typ
 
 Since `frontend` is written in Node.js which is an interpreted language, there is no build step analogous to the Maven build you performed previously for the `backend` component.
 
-You can proceed directly to specifying the `nodejs` environment from the cluster's catalog.
+You can proceed directly to specify the `nodejs` environment from the cluster's catalog.
 
 ----
 
@@ -100,7 +100,7 @@ Now that you have the component named and the config file created, you can do as
 odo push
 ```
 
-When `odo push` completes, you'll see output the looks similar to following snippet:
+When `odo push` completes, you'll see output that looks similar to the following snippet:
 
 ```
 .

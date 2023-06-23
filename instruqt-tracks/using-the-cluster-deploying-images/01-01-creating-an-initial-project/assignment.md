@@ -36,7 +36,7 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will learn how to log into an OpenShift cluster from the command line, and also by using the web console.
+In this topic, you will learn how to log into an OpenShift cluster from the command line, and also by using the web console.
 
 ----
 
@@ -90,7 +90,7 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 
 ![login dialog](../assets/web-console-login.png)
 
-You will see the list of projects you have access to. Since you only created the one project previously, you will see that project, as shown in the figure below.
+You will see the list of projects you have access to. Since you only created one project previously, you will see that project as shown in the figure below.
 
 ![Project list](../assets/select-project.png)
 
