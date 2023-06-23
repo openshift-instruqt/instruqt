@@ -23,7 +23,7 @@ notes:
     ## Other Material
     This presentation will give you a background to all of the concepts in this lab.
     - [Presentation](https://goo.gl/wnB7JK)
-    - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+    - [Lab GitHub Repository](https://github.com/openshift-instruqt/instruqt/tree/874d2aa4decef440b36a79de881a39df12211c7c/instruqt-tracks/subsystems-container-internals-lab-2-0-part-2)
 
     ## Start Scenario
     Once you have watched the background video or went throught the presentation, continue to the exercises
