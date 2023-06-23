@@ -17,7 +17,7 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will learn how to use the command line to rebuild an app that's already running in OpenShift. Also, you will learn how to execute a rebuild in OpenShift when code changes in source control.
+In this topic, you will learn how to use the command line to rebuild an app that's already running in OpenShift. Also, you will learn how to execute a rebuild in OpenShift when code changes in source control.
 
 ----
 
@@ -72,7 +72,7 @@ blog-django-py-3   Source   Git
 
 ----
 
-`Step 4 :` Press the `CTRL+C` keys in the terminal window to exit watching the builds.
+`Step 4 :` Press the `CTRL+C` keys in the terminal window to exit watching the builds.
 
 ----
 
@@ -121,13 +121,13 @@ Events: <none>
 
 Here you see details of the git repository that hosts the source code within the `describe` output.
 
-Notice that in the `describe` output above there's a list of GitHub webhook URLs. You can configure these URLS with a git hosting service to trigger a new build automatically when changes are committed and pushed up to a git repository. However, be advised--you need ownership permission in the particular repository or a fork of the repository in order to trigger builds automatically.
+Notice that the `describe` output above lists a list of GitHub webhook URLs. You can configure these URLs with a git hosting service to automatically trigger a new build when changes are committed and pushed to a git repository. However, be advised that you need ownership permission in the particular repository or a fork of the repository to trigger builds automatically.
 
 # Triggering a binary input build using local code
 
-A typical workflow to follow when developing an application is to create and update code in the application source code on your own local machine. Then, when you are ready to make the changes live, you commit the updated code locally and push the updates to the git repository linked to the build configuration. If a webhook has been configured, a new build and deployment will be triggered automatically when the commit is made. Also you can trigger a new build manually.
+A typical workflow to follow when developing an application is to create and update code in the application source code on your own local machine. Then, when you are ready to make the changes live, you commit the updated code locally and push the updates to the git repository linked to the build configuration. If a webhook has been configured, a new build and deployment will be triggered automatically when the commit is made. Also, you can trigger a new build manually.
 
-OpenShift allows you to trigger a build against changed code stored in the local filesystem. You don't need to go through the effort of committing the changes to git. Building code that's stored locally in OpenShift is called a binary input build.
+OpenShift allows you to trigger a build against changed code stored in the local filesystem. You don't need to go through the effort of committing the changes to Git. Building code that's stored locally in OpenShift is called a binary input build.
 
 Let's trigger a binary input build now.
 
@@ -137,7 +137,7 @@ Let's trigger a binary input build now.
 git clone https://github.com/openshift-instruqt/blog-django-py
 ```
 
-You'll get output as follows:
+You'll get the output as follows:
 
 ```
 Cloning into 'blog-django-py'...
@@ -190,11 +190,11 @@ This version of running `oc start-build` is similar to what you ran before, exce
 
 The option setting `--from-dir=.` indicates that the local source code should be uploaded from the directory on the host where you are running the command. Building using the local code avoids the source code down from the hosted git repository.
 
-The ``--wait`` option is supplied to indicate that the command should only return control when the build has completed. This option can be useful if integrating the build command into a script, and you need to ensure that the build has completed before running a subsequent command.
+The ``--wait`` option is supplied to indicate that the command should only return control when the build has been completed. This option can be helpful if integrating the build command into a script, and you need to ensure that the build has been completed before running a subsequent command.
 
 ----
 
-`Step 9:` Go to the web page in which the example code is running. You will see that the color of the header section in the web page has changed to blue as shown in the figure below.
+`Step 9:` Go to the web page where the example code is running. You will see that the color of the header section on the web page has changed to blue, as shown in the figure below.
 
 ![Blue Build](../assets/blue-build.png)
 
@@ -222,13 +222,13 @@ You can also run a build from the OpenShift web console.
 
 `Step 11a:` Switch to the web console to monitor progress by viewing the log from the application detail.
 
-`Step 11b:` Select **Build** from the left hand side menu.
+`Step 11b:` Select **Build** from the left-hand side menu.
 
 `Step 11c:` Select the build configuration for `blog-django-py` by selecting the **Builds** tab and then clicking on `blog-django-py-3`.
 
 # Cancelling a build
 
-If for some reason a build was started by accident or you realize it would fail anyway, you can cancel the build by running `oc cancel-build` and supplying the name of the build.
+If, for some reason, a build was started by accident or you realize it would fail anyway, you can cancel the build by running `oc cancel-build` and supplying the name of the build.
 
 `Step 11:` Run the following command to cancel the build with the name `blog-django-py-5`:
 
@@ -236,7 +236,7 @@ If for some reason a build was started by accident or you realize it would fail 
 oc cancel-build blog-django-py-5
 ```
 
-You will see output indicating that the build has been cancelled.
+You will see output indicating that the build has been canceled.
 
 ```
 build.build.openshift.io/blog-django-py-5 marked for cancellation, waiting to be cancelled
@@ -245,7 +245,7 @@ build.build.openshift.io/blog-django-py-5 cancelled
 
 ----
 
-`Step 12:` Run the following command to confirm that the build has been cancelled:
+`Step 12:` Run the following command to confirm that the build has been canceled:
 
 ```
 oc get builds
@@ -262,7 +262,7 @@ blog-django-py-4   Source   Binary@9c4f338   Complete                     4 minu
 blog-django-py-5   Source   Git@9c4f338      Cancelled (CancelledBuild)   About a minute ago   50s
 ```
 
-Notice that the build `blog-django-py-5` as shown above has been cancelled.
+Notice that the build `blog-django-py-5`, as shown above, has been canceled.
 
 |NOTE:|
 |----|
@@ -272,7 +272,7 @@ Notice that the build `blog-django-py-5` as shown above has been cancelled.
 
 ## Congratulations!
 
- You've completed this topic. You triggered a build from the command line. Then, you triggered a build using the OpenShift web console. Also, you updated source code locally and did a build using the updated code. You ran a build that reset the demonstration application's web site back to its original state. Finally, you started and cancelled a build.
+ You've completed this topic. You triggered a build from the command line. Then, you triggered a build using the OpenShift web console. Also, you updated the source code locally and did a build using the updated code. You ran a build that reset the demonstration application's website back to its original state. Finally, you started and canceled a build.
 
 This is the final topic in this track.
 

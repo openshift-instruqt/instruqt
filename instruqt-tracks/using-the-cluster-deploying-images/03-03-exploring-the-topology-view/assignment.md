@@ -22,17 +22,17 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will learn about different aspects of working with an application in OpenShift's Topology view. You'll learn how access the application on the Internet from within the **Topology** view. You'll also learn how to view the details of an application. Then, you'll learn how to scale ParksMap up by increasing the number of underlying `pod` resource objects.
+In this topic, you will learn about different aspects of working with an application in OpenShift's Topology view. You'll learn how to access the application on the Internet from within the **Topology** view. You'll also learn how to view the details of an application. Then, you'll learn how to scale ParksMap up by increasing the number of underlying `pod` resource objects.
 
 # Accessing an application on the Internet using the Topology view
 
-`Step 1:` Go to the web console and click the **Topology** menu item on the the left side of the page as shown in the figure below.
+`Step 1:` Go to the web console and click the **Topology** menu item on the left side of the page, as shown in the figure below.
 
 ![Topology View](../assets/topology-view-with-app.png)
 
 The **Topology** page with a circular graphic will appear as shown in the figure below. As mentioned in the previous topic, this circular graphic represents the ParksMap application.
 
-Notice the the circular graphic has an icon at the upper right as highlighted by a red box shown in the figure below.
+Notice that the circular graphic has an icon at the upper right, as highlighted by a red box shown in the figure below.
 
 ![Open in URL](../assets/access-parksmap.png)
 
@@ -40,7 +40,7 @@ The icon represents the `route` to the ParksMap application.
 
 ----
 
-`Step 2:` Click on the `route` icon to open the ParksMap application in a new browser tab as shown in the figure below.
+`Step 2:` Click on the `route` icon to open the ParksMap application in a new browser tab, as shown in the figure below.
 
 ![Show ParksMap](../assets/show-parksmap.png)
 
@@ -52,7 +52,7 @@ Now, let's scale up the number of `pod` resource objects that support the applic
 
 ![Select App](../assets/select-app.png)
 
-The information page for the application will slide out on the right hand side.
+The information page for the application will slide out on the right-hand side.
 
 ----
 
@@ -68,12 +68,12 @@ The **Details** tab reveals a circular graphic. This graphic describes the numbe
 
 Take a look at the figure above to see the visuals of this action. You now have 2 pods supporting the ParksMap application.
 
-Increasing the number pods in ParksMap gives the application more capacity to handle traffic coming in from the Internet. You can use the web console to increase or decrease the number of pods in order to meet performance demands.
+Increasing the number of pods in ParksMap gives the application more capacity to handle traffic coming in from the Internet. You can use the web console to increase or decrease the number of pods in order to meet performance demands.
 
 
 # Congratulations!
 
-You've just learned to how to use the web console to view the details of an application in **Topology** view. You learned how to access the ParksMap application from the Internet by using its `route` URL. Also, you learned how to scale up an application using the graphical features available in the **Topology** view.
+You've just learned how to use the web console to view the details of an application in **Topology** view. You learned how to access the ParksMap application from the Internet by using its `route` URL. Also, you learned how to scale up an application using the graphical features available in the **Topology** view.
 
 ----
 

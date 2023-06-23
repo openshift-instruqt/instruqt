@@ -17,13 +17,13 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In the previous topics, you built and deployed the Python application. In this topic you will open the application in a web browser from the Topology page using the **Route** assigned by OpenShift.
+In the previous topics, you built and deployed the Python application. In this topic, you will open the application in a web browser from the Topology page using the **Route** assigned by OpenShift.
 
 ----
 
 `Step 1:`Click the **Web Console** tab from the horizontal menu bar over the terminal to the left to open the OpenShift web console.
 
-Click on **Topology** button in the left hand menu bar to return to the topology view for the project.
+Click on **Topology** button in the left-hand menu bar to return to the topology view for the project.
 
 ![Topology View](../assets/topology.png)
 
@@ -31,7 +31,7 @@ As you read in a previous topic, when you created the application using the web 
 
 ----
 
-`Step 2a:` Click on the icon at the top right of the ring in the application visualization as shown in the figure below to quickly access the URL for the deployed application in the Topology view.
+`Step 2a:` Click on the icon at the top right of the ring in the application visualization, as shown in the figure below, to quickly access the URL for the deployed application in the Topology view.
 
 ![App Running](../assets/app-running.png)
 
@@ -39,11 +39,11 @@ Make sure the ring surrounding the Python logo is dark blue.
 
 `Step 2b:` Click on the Open URL icon as shown in the figure above.
 
-Clicking the icon will open a new tab in your browser that displays a blog web site page as shown in the figure below.
+Clicking the icon will open a new tab in your browser that displays a blog website page, as shown in the figure below.
 
 ![Blog Web Site](../assets/blog-web-page.png)
 
-This web site is driven by the Python application you built from the source code in GitHub and deployed using the OpenShift web console.
+This website is driven by the Python application you built from the source code in GitHub and deployed using the OpenShift web console.
 
 # Congratulations!
 
@@ -51,4 +51,3 @@ You've successfully built and deployed an application from source code using the
 
 ----
 **NEXT:** Deleting the deployment from the command line using the OpenShift CLI Tool
-

@@ -16,13 +16,13 @@ timelimit: 800
 ---
 In this step you will explore **routes**.
 
-In Red Hat OpenShift, the **service** resource provides the internal abstraction that binds access to an application to its logic, which is represented in an application's pods. Also, a **service** provides load balancing capabilities within an OpenShift environment.
+In Red Hat OpenShift, the **service** resource provides the internal abstraction that binds access to an application to its logic, which is represented in an application's pods. Also, a **service** provides load-balancing capabilities within an OpenShift environment.
 
 The binding of a **service** to an application's pods is internal to an OpenShift cluster. The way that external clients access applications running in OpenShift is through the OpenShift routing layer.
 
 The formal name for the resource which represents the routing layer is called a **route**.
 
-As mentioned earlier in the tutorial, When you create an application from a **container image**, OpenShift creates a **route** for the application automatically. Let's take a look at where the **route** is published. Then, let's access the application's web site from a browser using its route URL.
+As mentioned earlier in the tutorial, When you create an application from a **container image**, OpenShift creates a **route** for the application automatically. Let's take a look at where the **route** is published. Then, let's access the application's website from a browser using its route URL.
 
 # Viewing a route's URL
 
@@ -31,7 +31,7 @@ As mentioned earlier in the tutorial, When you create an application from a **co
 
 ![Select App](../assets/select-app.png)
 
-The information page for the pods will slide out as a panel on the right hand side of the page.
+The information page for the pods will slide out as a panel on the right-hand side of the page.
 
 ----
 
@@ -67,7 +67,7 @@ Clicking the icon opens the application's web page in a browser as shown in th f
 
 # Congratulations!
 
- You have now located the application's **route** URL in the OpenShift web console. Also, you've learned how to open the application in a web page from the **Resource** tab in the application detail, and also directly from application's circular graphic in the **Topology** view.
+ You have now located the application's **route** URL in the OpenShift web console. Also, you've learned how to open the application in a web page from the **Resource** tab in the application detail, and also directly from the application's circular graphic in the **Topology** view.
 
 This is the final step in this track.
 

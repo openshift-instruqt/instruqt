@@ -18,9 +18,9 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will use the OpenShift web console to create and deploy an application from source code that is stored in GitHub.
+In this topic, you will use the OpenShift web console to create and deploy an application from source code that is stored in GitHub.
 
-First we need to select the type of application you're deploying. The first thing you need to do is select a service from the **Developer Catalog**. In this case, you can think of a service as an application configuration template. For demonstration purposes you will create and deploy a Python application.
+First, we need to select the type of application you're deploying. The first thing you need to do is select a service from the **Developer Catalog**. In this case, you can think of a service as an application configuration template. For demonstration purposes, you will create and deploy a Python application.
 
 # Selecting a service
 
@@ -46,17 +46,17 @@ You'll be presented with a web page that is particular to the Python service you
 
 ----
 
-`Step 3:` Click the Create Application button as shown in the figure below.
+`Step 3:` Click the Create button as shown in the figure below.
 
 ![Create app](../assets/app-create.png)
 
-You'll be presented with a web page titled **Create to Source-To-Image Application**.
+You'll be presented with a web page titled **Create to Source-To-Image application**.
 
 You'll use this web page to import source code into OpenShift that's stored in GitHub. You'll use OpenShift's Source-To-Image capabilities to create a Linux container based on the source code in the GitHub repository.
 
 ----
 
-`Step 4:`  At the **Git** section of the **Create to Source-To-Image Application** web page you'll see a textbox labeled **Git Repo URL**.
+`Step 4:`  At the **Git Repo URL** section of the **Create to Source-To-Image Application** web page you'll see a textbox labeled **Git Repo URL**.
 
 Enter the text:
 
@@ -64,7 +64,7 @@ Enter the text:
 https://github.com/openshift-instruqt/blog-django-py
 ```
 
-into the **Git Repo URL** text box as shown in the figure below.
+Into the **Git Repo URL** text box, as shown in the figure below.
 
 ![Bind Source Code](../assets/app-git.png)
 
@@ -83,7 +83,7 @@ Notice in the **Advanced options** section, as shown in the figure below, that *
 
 `Step 5b:` Finally, click the **Create** button, as shown in the figure above. This action will save the source code data and start the build process for the application.
 
-You will be presented wth the Topology overview page in the OpenShift web console while the build is in progress, as shown in the figure below.
+You will be presented with the Topology overview page in the OpenShift web console while the build is in progress, as shown in the figure below.
 
 ![Topology page](../assets/topology.png)
 
@@ -99,11 +99,11 @@ The color of the circle and the icons surrounding the circle have special meanin
 
 The Git icon shown to the lower right of the ring can be clicked on to take you to the hosted Git repository from which the source code for the application was built.
 
-The icon shown to the lower left represents the application's build status. The icon will change from showing an hourglass, indicating that the build is starting, to a sync icon indicating the build is in progress, and finally to a tick or cross depending on whether the build was successful or failed. Clicking on this icon will take you to the details of the current build.
+The icon shown in the lower left represents the application's build status. The icon will change from showing an hourglass, indicating that the build is starting, to a sync icon indicating the build is in progress, and finally to a tick or cross depending on whether the build was successful or failed. Clicking on this icon will take you to the details of the current build.
 
 Once the application is running, the icon shown on the upper right can be clicked to open the URL for the application route which was created.
 
-The ring itself will progress from being white, indicating the deployment is pending, to light blue indicating the deployment is starting, and blue to indicate the application is running. The ring can also turn dark blue if the application is stopping.
+The ring itself will progress from white, indicating the deployment is pending, to light blue indicating the deployment is starting, and blue indicating the application is running. The ring can also turn dark blue if the application is stopping.
 
 Clicking anywhere on the area enclosed by the ring will bring up a panel giving details of the resources for the application as shown in the figure below.
 

@@ -18,7 +18,7 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will use the `oc` command line tool to deploy the application that was previously deployed using the web console.
+In this topic, you will use the `oc` command line tool to deploy the previously deployed application using the web console.
 
 # Deploying the application using the command line tool
 
@@ -28,7 +28,7 @@ In this topic you will use the `oc` command line tool to deploy the application 
 oc new-app python:latest~https://github.com/openshift-instruqt/blog-django-py
 ```
 
-You'll get output similar to the following
+You'll get output similar to the following:
 
 ```
 --> Found image f813306 (5 months old) in image stream "openshift/python" under tag "latest" for "python:latest"
@@ -55,9 +55,9 @@ You'll get output similar to the following
     Run 'oc status' to view your app.
 ```
 
-OpenShift will assign a default name for the application created based on the name of the git repository that hosts the source code form the application.
+OpenShift will assign a default name for the application created based on the name of the git repository that hosts the source code from the application. You may see a PodSecurity warning message in the output. This is because the application is being deployed using the default restrictive security context constraints (SCC) for the project.
 
-As you might recall the URL of the Git repository containing the web application is: `https://github.com/openshift-instruqt/blog-django-py`
+As you might recall, the URL of the Git repository containing the web application is: `https://github.com/openshift-instruqt/blog-django-py`
 
 In this case, the application is named `blog-django-py`. If you wanted to change the name, you could have supplied the ``--name`` option along with the name you wish to use as an argument.
 
@@ -69,7 +69,7 @@ In this case, the application is named `blog-django-py`. If you wanted to change
 oc logs bc/blog-django-py --follow
 ```
 
-This command will exit once the build has completed. You can also interrupt the command by typing `CTRL+C` in the terminal window.
+This command will exit once the build has been completed. You can also interrupt the command by typing `CTRL+C` in the terminal window.
 
 ----
 
@@ -79,7 +79,7 @@ This command will exit once the build has completed. You can also interrupt the 
 oc status
 ```
 
-Once the build and deployment of the application have completed, you will see output similar to the following
+Once the build and deployment of the application have been completed, you will see output similar to the following:
 
 ```
 root@container:/# oc status
@@ -115,9 +115,9 @@ route.route.openshift.io/blog-django-py exposed
 
 `Step 5:` To verify that the application has been deployed and is accessible via the Internet, switch to the OpenShift web console by selecting the **Web Console** tab above the terminal windows to the left. Then click the **Topology** tab on the vertical menu on the left of the web page.
 
-You will see the circular graphic the represents the Python application.
+You will see the circular graphic that represents the Python application.
 
-You will note though that the visualization in the Topology view doesn't show the icons that correspond to the build and source code repository. This is because they rely on special annotations and labels added to the deployment when creating an application from the web console. These annotations are not added automatically when creating the application from the command line. You can add the annotations later if you want.
+You will note that the visualization in the Topology view doesn't show the icons corresponding to the build and source code repository. This is because they rely on special annotations and labels added to the deployment when creating an application from the web console. These annotations are not added automatically when creating the application from the command line. You can add the annotations later if you want.
 
 The icon for accessing the URL is still present on the visualization. Alternatively, to view the hostname assigned to the route created from the command line, you can run the command:
 

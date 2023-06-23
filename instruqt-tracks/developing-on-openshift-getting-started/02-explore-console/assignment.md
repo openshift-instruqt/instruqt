@@ -32,11 +32,11 @@ You will be presented with the OpenShift login screen. Use the following credent
 * **Username:** `admin`
 * **Password:** `admin`
 
-Log into the OpenShift web console as shown in the figure below.
+Log into the OpenShift web console, as shown in the figure below.
 
 ![Web Console Login](../assets/web-console-login.png)
 
-After logging into the web console, take a look a the menu on the left. Notice that you're in the **Administrator** perspective as shown in the figure below:
+After logging into the web console, take a look a the menu on the left. Notice that you're in the **Administrator** perspective, as shown in the figure below:
 
 ![Admin Perspective](../assets/admin-perspective.png)
 
@@ -48,7 +48,7 @@ You need to change the perspective from **Administrator** to **Developer**.
 
 ![Switch to Developer](../assets/change-to-developer.png)
 
-Now that you're in the **Developer** perspective let's take a moment to discuss the concept of a **project** in OpenShift.
+Now that you're in the **Developer** perspective, let's take a moment to discuss the concept of a **project** in OpenShift.
 
 # Understanding projects in OpenShift
 

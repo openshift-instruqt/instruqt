@@ -107,15 +107,15 @@ IF JUST SHOWING THE NODESHIFT CLI, NO NEED FOR THE DOCKERFILE STUFF
 
 `Step 6:`  Click the **Visual Editor** tab in the horizontal menu bar over the terminal window to the left. You'll see the code editor that is part of the interactive learning environment.
 
-You will notice that a **Dockerfile** and a **.dockerignore** file is now part of the project.  This is a very basic and generic Dockerfile to containerize Node.js applications.  Feel free to take a minute and view the newly added files.
+You will notice that a **Dockerfile** and a **.dockerignore** file is now part of the project. This is a very basic and generic Dockerfile to containerize Node.js applications. Feel free to take a minute and view the newly added files.
 
 Once you are done inspecting those files, it is time to deploy this application to Openshift.  While there are multiple ways to do this,  we are going to use the nodeshift cli. -->
 
 `Step 7:` Run the following commands in **Terminal 1** to deploy your Node.js application:
 
-To deploy the application, we are going to use a tool called the [Nodeshift CLI](https://www.npmjs.com/package/nodeshift).  The Nodeshift CLI is an opinionated command line application and programmable API that you can use in development to deploy Node.js projects to OpenShift.
+To deploy the application, we are going to use a tool called the [Nodeshift CLI](https://www.npmjs.com/package/nodeshift). The Nodeshift CLI is an opinionated command line application and programmable API that you can use in development to deploy Node.js projects to OpenShift.
 
-We will use the `npx` command to run the CLI tool without having to install it globally.  To learn more about `npx` and `npm`, [check out their official docs](https://docs.npmjs.com/cli/v9/commands/npx).
+We will use the `npx` command to run the CLI tool without having to install it globally. To learn more about `npx` and `npm`, [check out their official docs](https://docs.npmjs.com/cli/v9/commands/npx).
 
 ```
 npx nodeshift --expose
@@ -131,7 +131,7 @@ Need to install the following packages:
 Ok to proceed? (y) y
 ```
 
-The Nodeshift CLI will take the application code that you just wrote and deploy it as a binary build to the Openshift Cluster.  You should see similar output in your console:
+The Nodeshift CLI will take the application code that you just wrote and deploy it as a binary build to the Openshift Cluster. You should see similar output in your console:
 
 ```
 2023-04-25T15:22:20.883Z INFO loading configuration
@@ -203,9 +203,9 @@ This is the final topic in this track.
 
 This track provided an introduction to cloud-native development with Node.js by walking you through how to extend an Express.js-based application to leverage cloud capabilities.
 
-To learn more about Node.js at Red Hat checkout the [Node.js Topic page on Red Hat Developers](https://developers.redhat.com/topics/nodejs)
+To learn more about Node.js at Red Hat, checkout the [Node.js Topic page on Red Hat Developers](https://developers.redhat.com/topics/nodejs)
 
-Also be sure to check out the [Red Hat/IBM Node.js Reference Architecture](https://github.com/nodeshift/nodejs-reference-architecture) the teams 'opinion' on what components our customers and internal teams should use when building Node.js applications and guidance for how to be successful in production with those components.
+Also, be sure to check out the [Red Hat/IBM Node.js Reference Architecture](https://github.com/nodeshift/nodejs-reference-architecture) the teams 'opinion' on what components our customers and internal teams should use when building Node.js applications and guidance for how to be successful in production with those components.
 
 
 # What's Next?

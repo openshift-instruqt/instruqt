@@ -12,7 +12,7 @@ notes:
 
     |What you need to know before you start|
     |----|
-    |In order to get full benefit from taking this track you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform)|
+    |In order to get full benefit from taking this track, you should...<br>• Be comfortable working at the command line in a terminal window.<br>• Have a general understanding about the purpose and use of [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform)|
 
     ## Concepts and techniques you'll cover
 
@@ -35,13 +35,13 @@ tabs:
 difficulty: basic
 timelimit: 800
 ---
-# Working with the Command Line Interface (CLI)
+# Working with the Command Line Interface (CLI)
 
 You can access the Red Hat OpenShift CLI with the command `oc`. Using the `oc` command lets you work with the entire OpenShift cluster and deploy new applications.
 
 The CLI exposes the underlying Kubernetes orchestration system with the enhancements made by OpenShift. Users familiar with Kubernetes will be able to adapt to OpenShift quickly.
 
-`oc` provides all of the functionality of the Kubernetes `kubectl` CLI tool.  In addition, `oc` makes it easier to work with OpenShift. The CLI is ideal in situations where you are:
+`oc` provides all of the functionality of the Kubernetes `kubectl` CLI tool. In addition, `oc` makes it easier to work with OpenShift. The CLI is ideal in situations where you are:
 
 * Working directly with project source code
 * Scripting OpenShift operations
@@ -60,7 +60,7 @@ You log into OpenShift from the command line using the `oc login` command.
 oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
 ```
 
-Upon a successful login, you'll get results similar to the following:
+Upon successful login, you'll get results similar to the following:
 
 ```
 Login successful.

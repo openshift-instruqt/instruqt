@@ -22,11 +22,11 @@ tabs:
 difficulty: basic
 timelimit: 500
 ---
-In this topic you will create a `route` in OpenShift to make the demonstration application accessible to the public on the Internet.
+In this topic, you will create a `route` in OpenShift to make the demonstration application accessible to the public on the Internet.
 
 ----
 
-`Step 1:` Run the following command to navigate to the the `frontend` directory:
+`Step 1:` Run the following command to navigate to the `frontend` directory:
 
 ```
 cd /root/frontend
@@ -99,7 +99,7 @@ http://frontend-app-myproject.crc-lgph7-master-0.crc.ghds3bg5bjox.instruqt.io/
 
 ----
 
-`Step 4:`  Copy that link  from the  `odo` response into your web browser's address bar. If all is well, you'll see a web page as shown in the illustration below:
+`Step 4:`  Copy that link from the  `odo` response into your web browser's address bar. If all is well, you'll see a web page as shown in the illustration below:
 
 ![Wild West UI](../assets/wild-west.png)
 

@@ -14,15 +14,15 @@ notes:
 
     * How to create an application with OpenShift using source code from a GitHub source code repository
     * How to create an application using the OpenShift Web Console
-    * How to create an application in automated manner using OpenShift from the command line
+    * How to create an application in an automated manner using OpenShift from the command line
     * Understanding the various aspects of working with an application rendered in a project's Topology page in the OpenShift Web Console
-    * How determine an application's build status by viewing an application's logs from a project's Topology page
+    * How to determine an application's build status by viewing an application's logs from a project's Topology page
     * How to create and delete an application in OpenShift from a command line in a terminal window
-    * How to start new application builds in OpenShift from a command line in a terminal window and in the OpenShift Web Console
+    * How to start new application builds in OpenShift from a command line in a terminal window and the OpenShift Web Console
 
     ## Use case
 
-    You'll use the concepts and techniques presented in this track when you want to create and deploy applications from source code using OpenShift automation and thus avoiding doing the work manually.
+    You'll use the concepts and techniques presented in this track when you want to create and deploy applications from source code using OpenShift automation and thus avoid doing the work manually.
 tabs:
 - title: Terminal 1
   type: terminal
@@ -37,9 +37,9 @@ timelimit: 500
 
 ## Logging into OpenShift from the command line
 
-In this topic you will learn how to log into an OpenShift cluster from the command line. You'll create a project named `myproject`. Then you'll view that project in the OpenShift web console.
+In this topic, you will learn how to log into an OpenShift cluster from the command line. You'll create a project named `myproject`. Then you'll view that project in the OpenShift web console.
 
-Let's get started by logging in. You log into OpenShift from the command line by running the following in the terminal window on left. (Directly clicking the command line below copies the command to your computer's clipboard.)
+Let's get started by logging in. You log into OpenShift from the command line by running the following in the terminal window on the left. (Directly clicking the command line below copies the command to your computer's clipboard.)
 
 ----
 
@@ -70,7 +70,7 @@ The command shown above will log you in using the credentials:
 
 # Creating a new project
 
-Next you'll create a new project named `myproject` using the `oc` command line tool.
+Next, you'll create a new project named `myproject` using the `oc` command line tool.
 
 ----
 
@@ -96,7 +96,7 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
 # Logging into the OpenShift web console
 
-You can now log into OpenShift web console using the `admin/admin` username/password pair login credentials.
+You can now log into the OpenShift web console using the `admin/admin` username/password pair login credentials.
 
 ----
 
@@ -120,7 +120,7 @@ Next you'll change to the **Developer** perspective.
 
 ![Change to Developer](../assets/change-to-developer.png)
 
-Next you'll select the project you created previously in the OpenShift web console.
+Next, you'll select the project you created previously in the OpenShift web console.
 
 # Selecting the project
 

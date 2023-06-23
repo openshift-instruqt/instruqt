@@ -23,15 +23,15 @@ difficulty: basic
 timelimit: 500
 ---
 
-In this topic you will deploy an application into OpenShift from the command line.
+In this topic, you will deploy an application into OpenShift from the command line.
 
-In the previous topic you deleted the ParksMap application. Now, let's reinstall it using the `oc` command line tool.
+In the previous topic, you deleted the ParksMap application. Now, let's reinstall it using the `oc` command line tool.
 
-Remember, previously the container image for the ParksMap application was stored in the Quay.io Container Repository at `quay.io/openshiftroadshow/parksmap:latest`.
+Remember, previously, the container image for the ParksMap application was stored in the Quay.io Container Repository at `quay.io/openshiftroadshow/parksmap:latest`.
 
 You'll use the container image again when installing the application from the command line.
 
-# Confirming the the application's container image on the Quay.io container repository
+# Confirming the application's container image on the Quay.io container repository
 
 `Step 1:` Run the following command to search the Quay.io container repository to confirm that the ParksMap container image is indeed stored there:
 
@@ -78,9 +78,9 @@ You will get output similar to the following:
 
 OpenShift assigns a default name to the application based on the name of the image, in this case `parksmap`.
 
-You can specify a different name to be given to the application, and the resources created, by using the `--name` option with `oc new-app`.
+You can specify a different name to be given to the application and the resources created by using the `--name` option with `oc new-app`.
 
-For example this command will create a version of the ParksMap application with the name, `myparksmap`:
+For example, this command will create a version of the ParksMap application with the name, `myparksmap`:
 ```
 oc new-app quay.io/openshiftroadshow/parksmap --name myparksmap
 ```
@@ -113,7 +113,7 @@ Once you've exposed the application, you need to get the actual URL published by
 oc get route/parksmap
 ```
 
-You'll get output similar to the following
+You'll get output similar to the following:
 
 ```
 NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
@@ -122,7 +122,7 @@ parksmap   parksmap-myproject.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io   
 
 Notice the output above has the URL `parksmap-myproject.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io`.
 
-This is the `route` to the new instance of the ParkMap application that was just installed. You can copy into a browser window to access the ParksMap application.
+This is the `route` to the new instance of the ParkMap application that was just installed. You can copy it into a browser window to access the ParksMap application.
 
 The URL you'll get when you run `oc get route/parksmap` will be different than the one shown above because the URL that OpenShift creates depends on unique information that is only available after the application was created.
 
@@ -132,7 +132,7 @@ However, as you can see in the figure below, the URL that was generated for this
 
 ## Congratulations!
 
-You've just learned to how to deploy an OpenShift application from the command line using the `oc` CLI tool.
+You've just learned how to deploy an OpenShift application from the command line using the `oc` CLI tool.
 
 ----
 

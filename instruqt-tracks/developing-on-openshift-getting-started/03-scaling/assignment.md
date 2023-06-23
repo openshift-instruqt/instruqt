@@ -17,13 +17,13 @@ tabs:
 difficulty: basic
 timelimit: 800
 ---
-In this step you will learn how to scale your application up by creating multiple replicas of the pod that represents the application in the cluster. Red Hat OpenShift will make it look like all of the replicas are a single application. But, behind the scenes, OpenShift routes traffic among the replicas automatically.
+In this step, you will learn how to scale your application up by creating multiple replicas of the pod that represents the application in the cluster. Red Hat OpenShift will make it look like all of the replicas are a single application. But, behind the scenes, OpenShift routes traffic among the replicas automatically.
 
 The benefit of replicating a pod is that it increases the amount of Internet traffic the application can accommodate. The result is better overall performance.
 
 # Scaling up the application
 
-You will scale up application up to 2 replicas.
+You will scale up the application up to 2 replicas.
 
 ----
 
@@ -33,7 +33,7 @@ You will scale up application up to 2 replicas.
 
 ----
 
-`Step 2:` In the side panel, click the **Details** tab, and then click the up arrow next to the pod to increase the number of pods to 2. (The word [`pod` is a Kubernetes term](https://kubernetes.io/docs/concepts/workloads/pods/). In this case a `pod` refers to an instance of the application.)
+`Step 2:` In the side panel, click the **Details** tab, and then click the up arrow next to the pod to increase the number of pods to 2. (The word [`pod` is a Kubernetes term](https://kubernetes.io/docs/concepts/workloads/pods/). In this case, a `pod` refers to an instance of the application.)
 
 The figure below illustrates selecting the **Details** and increasing the number of pods to 2.
 
@@ -49,7 +49,7 @@ You are now running two replicas of the application.
 
 ![View Pods](../assets/view-pods.jpg)
 
-You can see that we now have 2 replicas. Now, let's take a look at OpenShift's self healing feature. Self Healing ensures that the number of pods you declare for your application are always running.
+You can see that we now have 2 replicas. Now, let's take a look at OpenShift's self-healing feature. Self Healing ensures that the number of pods you declare for your application is always running.
 
 # Understanding application "self healing"
 
@@ -69,7 +69,7 @@ Now you will kill one of the pods to see if OpenShift will bring it back to life
 
 ![Delete Pod](../assets//delete-pod.png)
 
-After deleting the pod, you will be taken to a page listing pods. Notice that even though you deleted one of the pods, there are still two pods running as shown in the figure below.
+After deleting the pod, you will be taken to a page listing pods. Notice that even though you deleted one pod, two pods are still running, as shown in the figure below.
 
 ![Replenish Pod](../assets/replenish-pod.jpg)
 
