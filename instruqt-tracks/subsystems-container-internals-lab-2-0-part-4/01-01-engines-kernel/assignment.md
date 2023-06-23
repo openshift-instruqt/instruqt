@@ -30,12 +30,12 @@ notes:
     - Cluster Networking: How clusters of hosts manage the connections of containerized processes
 
     ## Other Material
-    This video will give you a background to all of the concepts in this lab
+    These materials will give you a background to all of the concepts in this lab
     - [Presentation](https://goo.gl/UNnLkH)
-    - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+    - [Lab GitHub Repository](https://github.com/openshift-instruqt/instruqt/tree/b18c330172f3b38042eb22ffca8b24ab32ab3490/instruqt-tracks/subsystems-container-internals-lab-2-0-part-4)
 
     ## Start Scenario
-    Once you have watched the background video or went throught the presentation, continue to the exercises
+    Once you have gone through the presentation, continue to the exercises
 tabs:
 - title: Terminal 1
   type: terminal
@@ -53,9 +53,8 @@ If you just do a quick Google search, you will find tons of architectural drawin
 
 How do people get it wrong? In two main ways:
 
-First, most of the architectural drawings above show the podman daemon as a wide blue box stretched out over the [Container Host](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.8tyd9p17othl). The [Containers](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.j2uq93kgxe0e) are shown as if they are running on top of the podman daemon. This is incorrect - [containers don't run on podman](http://crunchtools.com/containers-dont-run-on-podman/). The podman engine is an example of a general purpose [Container Engine](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo3l). Humans talk to container engines and container engines talk to the kernel - the containers are actually created and run by the Linux kernel. Even when drawings do actually show the right architecture between the container engine and the kernel, they never show containers running side by side:
+First, most of the architectural drawings above show the podman daemon as a wide blue box stretched out over the [Container Host](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.8tyd9p17othl). The [Containers](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.j2uq93kgxe0e) are shown as if they are running on top of the podman daemon. This is incorrect - [containers don't run on podman](https://crunchtools.com/so-what-does-a-container-engine-really-do-anyway/). The podman engine is an example of a general purpose [Container Engine](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/#h.6yt1ex5wfo3l). Humans talk to container engines and container engines talk to the kernel - the containers are actually created and run by the Linux kernel. Even when drawings do actually show the right architecture between the container engine and the kernel, they never show containers running side by side:
 
-![Containers Are Linux](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/subsystems/container-internals-lab-2-0-part-4/01-not-on-podman.png)
 
 Second, when drawings show containers are Linux processes, they never show the container engine side by side. This leads people to never think about these two things together, hence users are left confused with only part of the story:
 
