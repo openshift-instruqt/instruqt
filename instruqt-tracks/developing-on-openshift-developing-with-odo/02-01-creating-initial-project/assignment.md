@@ -93,7 +93,7 @@ You will see the following output confirming that `myproject` was created. Be ad
 
 The back end of your application needs to use the OpenShift REST API in order to get communication from the front end. Thus, you need to grant the project's [service account](https://docs.openshift.com/container-platform/4.8/authentication/understanding-and-creating-service-accounts.html) view access to the OpenShift REST API.
 
-You'll grant access by creating a [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for the project's service account. This RoleBinding will have view access to the OpenShift REST API. 
+You'll grant access by creating a [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for the project's service account. This RoleBinding will have view access to the OpenShift REST API.
 
 The process described above can be completed via the command line by running:
 
@@ -168,7 +168,7 @@ default
 
 `Step 8e:` Now click the button labeled **Create** at the bottom of the form.
 
-Alternatively, 
+Alternatively,
 
 # Congratulations!
 You've just set up a project in OpenShift and created a RoleBinding for that project.

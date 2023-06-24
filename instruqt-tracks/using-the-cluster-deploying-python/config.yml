@@ -1,8 +1,4 @@
 version: "3"
-containers:
-- name: container
-  image: fedora
-  shell: /bin/bash
 virtualmachines:
 - name: crc
   image: rhd-devx-instruqt/openshift-4-11-7-lgph7

@@ -32,10 +32,11 @@ owner: openshift
 developers:
 - lholmqui@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
 maintenance: true
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 33
   position: right
-checksum: "7409726710271978098"
+checksum: "4898804184842587423"
