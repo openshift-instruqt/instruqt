@@ -2,7 +2,7 @@
 slug: deploy-to-openshift
 id: 22ge2g71jjvz
 type: challenge
-title: Deploy to Openshift
+title: Topic 3 - Deploy to Openshift
 teaser: Deploy to Openshift
 notes:
 - type: text
