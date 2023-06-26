@@ -13,7 +13,7 @@ notes:
     ## Concepts and techniques you'll cover
 
     * Creating OpenShift projects and applications from the command line using the `oc` command
-    * Copying files from a container and into a local machine using the `oc resync` command
+    * Copying files from a container and into a local machine using the `oc rsync` command
     * Using the implicit automation available in OpenShift to copy changed files on a local machine to a container's file system.
     * Work with a Persistent Volume and Persistent Volume claim independent of a container
 
