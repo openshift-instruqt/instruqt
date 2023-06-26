@@ -80,6 +80,12 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 
 `Step 3:`  Switch to the OpenShift web console by clicking the **Web Console** tab, which is the second tab in the horizontal menu bar at the top of the terminal window to the left.
 
+|NOTE:|
+|----|
+|You might see the following warning notification due to using an untrusted security certificate.
+![Security warning](../assets/security_warning.png)
+If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
+
 ----
 
 `Step 4:`  Enter the **Username:** `developer` and **Password:** `developer` pair shown in the figure below.

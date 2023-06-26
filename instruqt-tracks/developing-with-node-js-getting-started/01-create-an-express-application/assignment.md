@@ -2,7 +2,7 @@
 slug: create-an-express-application
 id: 5kqsejqxs4qv
 type: challenge
-title: Create an Express Application
+title: Topic 1 - Create an Express Application
 teaser: A short description of the challenge.
 notes:
 - type: text

@@ -106,6 +106,12 @@ You'll be presented with a login page as shown in the figure below.
 
 ![Login](../assets/web-console-login.png)
 
+|NOTE:|
+|----|
+|You might see the following warning notification due to using an untrusted security certificate.
+![Security warning](../assets/security_warning.png)
+If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
+
 Use the `admin/admin` username/password pair to login.
 
 Once logged in, you will be in the **Administrator** perspective. Notice that the first item in the vertical menu bar of the OpenShift console has the label **Administrator** as shown in the figure below:

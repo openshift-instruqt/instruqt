@@ -12,9 +12,7 @@ description: |
 
   Target Audience: This track is aimed at developers who are familiar with Node.js but want to gain a base understanding of some of the key concepts of cloud-native development with Node.js.
 
-  ## Concepts
-
-  In this self-paced track, you will:
+  ## Concepts and techniques you'll cover
 
   * Create an Express.js application
   * Add logging
@@ -39,4 +37,4 @@ lab_config:
   overlay: false
   width: 33
   position: right
-checksum: "4898804184842587423"
+checksum: "14686330274448511495"

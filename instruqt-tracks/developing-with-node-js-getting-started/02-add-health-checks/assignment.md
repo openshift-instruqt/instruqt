@@ -2,7 +2,7 @@
 slug: add-health-checks
 id: mm7tleaaxg0z
 type: challenge
-title: Add Health Checks to your Application
+title: Topic 2 - Add Health Checks to your Application
 teaser: Add Health Checks to your Application
 notes:
 - type: text
