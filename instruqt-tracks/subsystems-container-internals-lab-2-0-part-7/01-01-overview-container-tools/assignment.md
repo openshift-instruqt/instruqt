@@ -26,10 +26,10 @@ notes:
 
     ## Other Material
     - [Presentation](https://goo.gl/h4VK7j)
-    - [Lab GitHub Repository](https://github.com/openshift-labs/learn-katacoda)
+    - [Lab GitHub Repository](https://github.com/openshift-instruqt/instruqt/tree/3ccc0f45269f895a19406e833392dc9fbc7948d8/instruqt-tracks/subsystems-container-internals-lab-2-0-part-7)
 
     ## Start Scenario
-    Once you have watched the background video or went throught the presentation, continue to the exercises
+    Once you have gone through the presentation, continue to the exercises
 tabs:
 - title: Terminal 1
   type: terminal
