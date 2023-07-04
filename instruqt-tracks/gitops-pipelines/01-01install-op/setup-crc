@@ -1,6 +1,8 @@
 #!/bin/bash
-
+#
 # Get the tar.xz
-curl -LO https://github.com/tektoncd/cli/releases/download/v0.29.0/tkn_0.29.0_Linux_x86_64.tar.gz
+curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Linux_x86_64.tar.gz
 # Extract tkn to your PATH (e.g. /usr/local/bin)
-sudo tar xvzf tkn_0.29.0_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
+tar xvzf tkn_0.30.1_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
+# Fix the permissions issue when running the pipeline
+chmod -R 777 /mnt/pv-data/* 

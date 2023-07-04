@@ -35,9 +35,10 @@ owner: openshift
 developers:
 - cclyburn@redhat.com
 - ryanj@redhat.com
+- nvinto@redhat.com
 maintenance: true
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "8024772692216704147"
+checksum: "6296251003776834860"
