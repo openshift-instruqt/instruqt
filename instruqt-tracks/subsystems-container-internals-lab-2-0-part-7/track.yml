@@ -34,6 +34,9 @@ owner: openshift
 developers:
 - smccarty@redhat.com
 - nvinto@redhat.com
-private: false
-published: true
-checksum: "9772737679363162606"
+- akeenan@redhat.com
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "14850188616845422627"

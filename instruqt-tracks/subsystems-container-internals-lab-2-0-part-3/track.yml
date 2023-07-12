@@ -31,9 +31,10 @@ developers:
 - smccarty@redhat.com
 - nvinto@redhat.com
 - ryanj@redhat.com
+- akeenan@redhat.com
 - cclyburn@redhat.com
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "14427112278038645467"
+checksum: "941739691201846398"

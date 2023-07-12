@@ -32,6 +32,7 @@ developers:
 - nvinto@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
+- akeenan@redhat.com
 lab_config:
   overlay: false
   width: 25

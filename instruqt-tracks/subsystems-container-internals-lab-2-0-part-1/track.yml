@@ -34,9 +34,10 @@ developers:
 - bob@cogarttech.com
 - ryanj@redhat.com
 - nvinto@redhat.com
+- akeenan@redhat.com
 - cclyburn@redhat.com
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "410576806050453793"
+checksum: "4417021629771492099"
