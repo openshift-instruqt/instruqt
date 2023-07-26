@@ -21,10 +21,14 @@ description: |
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
-- openshift
 - prod
+- openshift
 owner: openshift
 developers:
-- ryanj@redhat.com
 - cclyburn@redhat.com
-checksum: "16585047754995432760"
+- ryanj@redhat.com
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+checksum: "11055124911700863286"
