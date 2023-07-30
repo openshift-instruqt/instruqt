@@ -12,7 +12,7 @@ tabs:
   hostname: rhel
   path: /root
 difficulty: intermediate
-timelimit: 300
+timelimit: 500
 ---
 With some help from a program called CRIU, Podman can checkpoint and restore containers on the same host. This can be useful with workloads that have a long startup period or require a long time to warm up caches. For example, large memcached servers, database, or even Java workloads can take several minutes or even hours to reach maximum throughput performance. This is often referred to as cache warming.
 

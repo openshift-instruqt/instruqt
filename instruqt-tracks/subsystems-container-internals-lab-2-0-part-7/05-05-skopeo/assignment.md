@@ -12,7 +12,7 @@ tabs:
   hostname: rhel
   path: /root
 difficulty: intermediate
-timelimit: 300
+timelimit: 500
 ---
 In this step, we are going to do a couple of simple exercises with Skopeo to give you a feel for what it can do. Skopeo doesn't need to interact with the local container storage (.local/share/containers), it can move directly between registries, between container engine storage, or even directories.
 

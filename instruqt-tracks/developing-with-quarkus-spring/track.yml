@@ -26,6 +26,7 @@ developers:
 - cclyburn@redhat.com
 - doh@redhat.com
 - eshortis@redhat.com
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25

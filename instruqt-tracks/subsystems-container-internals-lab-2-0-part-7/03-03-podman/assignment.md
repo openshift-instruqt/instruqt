@@ -12,7 +12,7 @@ tabs:
   hostname: rhel
   path: /root
 difficulty: intermediate
-timelimit: 300
+timelimit: 500
 ---
 The goal of this lab is to introduce you to Podman and some of the features that make it interesting. If you have ever used Docker, the basics should be pretty familiar. Lets start with some simple commands.
 

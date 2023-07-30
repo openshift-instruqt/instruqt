@@ -39,7 +39,7 @@ tabs:
   hostname: rhel
   path: /root
 difficulty: intermediate
-timelimit: 300
+timelimit: 500
 ---
 In this lab we're going to cover a plethora of container tools available in Red Hat Enterprise Linux (RHEL), including Podman, Buildah, Skopeo, CRIU and Udica. Before we get into the specific tools, it's important to understand how these are tools are provided to the end user in the Red Hat ecosystem.
 

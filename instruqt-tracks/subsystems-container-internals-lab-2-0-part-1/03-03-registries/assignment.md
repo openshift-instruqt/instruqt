@@ -12,7 +12,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 200
+timelimit: 500
 ---
 Registries are really just fancy file servers that help users share container images with each other. The magic of containers is really the ability to find, run, build, share and collaborate with a new packaging format that groups applications and all of their dependencies together.
 

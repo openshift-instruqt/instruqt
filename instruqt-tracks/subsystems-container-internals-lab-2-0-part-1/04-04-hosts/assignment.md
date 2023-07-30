@@ -12,7 +12,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 200
+timelimit: 500
 ---
 To understand the Container Host, we must analyze the layers that work together to create a container. They include:
 

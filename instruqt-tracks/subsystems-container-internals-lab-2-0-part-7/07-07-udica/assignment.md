@@ -12,7 +12,7 @@ tabs:
   hostname: rhel
   path: /root
 difficulty: intermediate
-timelimit: 300
+timelimit: 500
 ---
 The default Containers SELinux policy does a really good job Podman in RHEL 8. Most containers "just work" but like any security tool, every now and then we need to make some customizations. Sometimes, especially as we expand the types of workloads that we run in containers, we bump into places where SELinux blocks us. Udica allows an administrator to customize the SELinux policy specifically for a workload for without being an SELinux expert.
 

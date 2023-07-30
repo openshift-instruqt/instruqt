@@ -12,7 +12,7 @@ tabs:
   hostname: crc
   path: /root
 difficulty: basic
-timelimit: 200
+timelimit: 500
 ---
 Container images are really just tar files. Seriously, they are tar files, with an associated JSON file. Together we call these an Image Bundle. The on-disk format of this bundle is defined by the [OCI Image Specification](https://github.com/opencontainers/image-spec). All major container engines including Podman, Docker, RKT, CRI-O and containerd build and consume these bundles.
 

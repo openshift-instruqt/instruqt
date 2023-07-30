@@ -22,7 +22,7 @@ tabs:
   path: /ubi-latest-report.html
   port: 80
 difficulty: intermediate
-timelimit: 300
+timelimit: 600
 ---
 In this lab we're going to demonstrate using the [oscap-podman](https://github.com/OpenSCAP/openscap/blob/master/utils/oscap-podman) command to verify the security of the [Red Hat Universal Base Image](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image). Red Hat UBI is a rock solid, freely distributable container base image created by Red Hat and build on RHEL bits (see also: [Comparison of Container Images](http://crunchtools.com/comparison-linux-container-images/). UBI is rebuilt every six weeks or every time there is a Critical or Important [CVE](https://www.redhat.com/en/topics/security/what-is-cve)(Common Vulnerabilities and Exposures) patched and is the foundation for all containerized products at Red Hat. See also [UBI FAQ](https://developers.redhat.com/articles/ubi-faq).
 
