@@ -32,6 +32,7 @@ developers:
 - nvinto@redhat.com
 - ryanj@redhat.com
 - akeenan@redhat.com
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
