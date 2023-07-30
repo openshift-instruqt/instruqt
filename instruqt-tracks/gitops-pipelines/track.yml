@@ -54,12 +54,13 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nvinto@redhat.com
-- chernand@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
+- nvinto@redhat.com
+- chernand@redhat.com
+sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "5334247045683896260"
+checksum: "7552601449163299534"

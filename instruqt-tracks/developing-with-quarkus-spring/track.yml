@@ -17,8 +17,8 @@ description: |-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
-- openshift
 - prod
+- openshift
 owner: openshift
 developers:
 - bob@cogarttech.com
@@ -31,4 +31,4 @@ lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "12639428468379033496"
+checksum: "10214009284797258386"

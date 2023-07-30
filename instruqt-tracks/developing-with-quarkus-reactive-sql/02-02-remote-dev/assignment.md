@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: hmmochc1jb76
+id: x77axevyzlyd
 type: challenge
 title: Topic 2 - Deploying the demonstration application and backing database into
   Red Hat OpenShift

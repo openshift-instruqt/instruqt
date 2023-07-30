@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+mkdir -p /root/projects

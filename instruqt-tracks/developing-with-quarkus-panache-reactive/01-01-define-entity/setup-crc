@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export HOME="/root"
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/scripts/install_java.sh | bash
+
+mkdir -p /root/projects/quarkus
+echo "-w \"\n\"" >> ~/.curlrc

@@ -1,6 +1,6 @@
 ---
 slug: 02-remote-dev
-id: iehsyv73x1o9
+id: 4m9o1plkydcx
 type: challenge
 title: Topic 2 - Deploying a database to OpenShift and enabling live coding under
   Quarkus

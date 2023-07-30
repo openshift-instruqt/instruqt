@@ -28,13 +28,17 @@ description: |-
 icon: https://logodix.com/logo/1910931.png
 level: intermediate
 tags:
-- openshift
 - prod
+- openshift
 owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-maintenance: false
-checksum: "4997747724690688619"
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "17298206045261677602"

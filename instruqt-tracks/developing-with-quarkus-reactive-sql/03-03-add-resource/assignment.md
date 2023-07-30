@@ -1,6 +1,6 @@
 ---
 slug: 03-add-resource
-id: hnhlhhwofh2d
+id: jkic6vwct0mz
 type: challenge
 title: Topic 3 - Creating the reactive CoffeeResource endpoints
 notes:

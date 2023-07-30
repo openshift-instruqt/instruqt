@@ -1,6 +1,6 @@
 ---
 slug: 03-add-query-endpoints
-id: ulgrpbliyx9q
+id: 0jyxdxtijzdq
 type: challenge
 title: Topic 3 - Adding queries to the source code of the demonstration project
 teaser: Learn how to add database queries to Java data entities in the demonstration

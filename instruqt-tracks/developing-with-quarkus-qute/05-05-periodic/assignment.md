@@ -1,6 +1,6 @@
 ---
 slug: 05-periodic
-id: g725ukii9wz6
+id: p5jxpjpeqwaf
 type: challenge
 title: Topic 5 - Working with templates to render periodic reports
 notes:

@@ -1,6 +1,6 @@
 ---
 slug: 03-parameters
-id: bkzyjoloaaxj
+id: tleenrk5chw8
 type: challenge
 title: Topic 3  - Working with type-safe templates in Qute
 notes:
