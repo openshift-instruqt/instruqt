@@ -5,4 +5,4 @@ virtualmachines:
   shell: /bin/bash
   environment:
     TERM: xterm
-  machine_type: n1-standard-2
+  machine_type: n1-highmem-4
