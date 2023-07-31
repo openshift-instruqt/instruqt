@@ -31,17 +31,18 @@ description: |2
   Let's get started!
 icon: https://logodix.com/logo/1910931.png
 tags:
-- openshift
 - skupper
 - serviceinterconnect
 - connectivity
+- openshift
 owner: openshift
 developers:
 - narathod@redhat.com
 - codingsaduvu@gmail.com
-timelimit: 5000
+- cclyburn@redhat.com
+timelimit: 4000
 lab_config:
   overlay: false
   width: 33
   position: right
-checksum: "10970450312752311285"
+checksum: "8933599665393916765"
