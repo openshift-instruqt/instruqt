@@ -41,7 +41,7 @@ echo
 echo "# Looking up the latest release for your environment"
 echo
 
-RELEASE_URL=https://github.com/skupperproject/skupper/releases/download/1.2.6/skupper-cli-1.2.6-linux-amd64.tgz
+RELEASE_URL=https://github.com/skupperproject/skupper/releases/download/1.3.0/skupper-cli-1.3.0-linux-amd64.tgz
 
 echo "  $RELEASE_URL"
 echo
