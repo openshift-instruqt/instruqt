@@ -236,15 +236,11 @@ oc project private
 
 # installing skupper cli
 
-curl https://skupper.io/install.sh |sh
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/service-interconnect/assets/install.sh |sh
 cp  /root/.local/bin/skupper /usr/local/bin/
 skupper
 
 cd /home/ && touch secret.token
-
-curl -LO https://github.com/skupperproject/skupper/releases/download/1.4.2/skupper-cli-1.4.2-linux-amd64.tgz
-
-
 
 echo $(date)
 echo "### Boostrap END ###"
