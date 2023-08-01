@@ -7,8 +7,8 @@ virtualmachines:
   - http
   - https
   - high-ports
-- name: rhel
-  image: instruqt-redhat/rhel-latest
+- name: crc-1
+  image: rhd-devx-instruqt/openshift-4-12-1-rwwzd
   machine_type: n1-highmem-4
   allow_external_ingress:
   - http

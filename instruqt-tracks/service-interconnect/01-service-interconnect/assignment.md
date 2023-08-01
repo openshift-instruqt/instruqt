@@ -39,7 +39,7 @@ tabs:
   hostname: crc
 - title: Terminal-private
   type: terminal
-  hostname: rhel
+  hostname: crc-1
 - title: Patient Portal
   type: website
   url: https://patient-portal-frontend-public.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -50,7 +50,7 @@ tabs:
   new_window: true
 - title: Visual Edit Private
   type: code
-  hostname: rhel
+  hostname: crc-1
   path: /home/
 difficulty: basic
 timelimit: 1800
