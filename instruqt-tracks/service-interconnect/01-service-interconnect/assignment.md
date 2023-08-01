@@ -39,18 +39,18 @@ tabs:
   hostname: crc
 - title: Terminal-private
   type: terminal
-  hostname: crc-1
+  hostname: rhel
 - title: Patient Portal
   type: website
-  url: https://patient-portal-frontend-public.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://patient-portal-frontend-public.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Skupper Console
   type: website
-  url: https://skupper-public.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://skupper-public.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 - title: Visual Edit Private
   type: code
-  hostname: crc-1
+  hostname: rhel
   path: /home/
 difficulty: basic
 timelimit: 1800
@@ -81,8 +81,6 @@ We are already remotely logged into the Public OpenShift cluster from the **Term
 	oc expose deployment patient-portal-frontend --port=8080
 	oc create route edge --service=patient-portal-frontend --insecure-policy=Redirect
 	oc set env deployment/patient-portal-frontend DATABASE_SERVICE_HOST=database
-
-
 	```
 - Wait for a minute and check if the frontend pods are running on the Public OpenShift Cluster
 	```
@@ -122,8 +120,6 @@ We are already remotely logged into the Private OpenShift cluster from the **Ter
 	```
 	oc new-app quay.io/redhatintegration/patient-portal-payment-processor
 	oc expose deployment patient-portal-payment-processor --name=payment-processor --port=8080
-
-
 	```
 
 - Wait for a minute and then check if the database and payment processor pods are running on the Private OpenShift Cluster
@@ -220,7 +216,7 @@ Creating a link between Service Interconnect enabled namespaces requires a secre
 		annotations:
 			skupper.io/generated-by: 76c142fb-7fa0-4218-8427-021c0ce29fb0
 			skupper.io/site-version: 1.3.0
-			skupper.io/url: https://claims-public.crc-lgph7-master-0.crc.gcpjpffoqwu0.instruqt.io:443/ba863cd9-f14a-11ed-ad52-42010a050005
+			skupper.io/url: https://claims-public.crc-rwwzd-master-0.crc.gcpjpffoqwu0.instruqt.io:443/ba863cd9-f14a-11ed-ad52-42010a050005
 		creationTimestamp: null
 		labels:
 			skupper.io/type: token-claim
@@ -253,7 +249,7 @@ Creating a link between Service Interconnect enabled namespaces requires a secre
 	```
 - Output
 	```,nocopy
-	Site configured to link to https://claims-public.crc-lgph7-master-0.crc.uxi09xzkszec.instruqt.io:443/5e52022f-f13e-11ed-ac35-42010a050034 (name=link1)
+	Site configured to link to https://claims-public.crc-rwwzd-master-0.crc.uxi09xzkszec.instruqt.io:443/5e52022f-f13e-11ed-ac35-42010a050034 (name=link1)
 	Check the status of the link using 'skupper link status'.
 	```
 - Check the status of the link after a few seconds:
