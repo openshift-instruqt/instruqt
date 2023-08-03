@@ -131,10 +131,10 @@ OpenShift allows you to trigger a build against changed code stored in the local
 
 Let's trigger a binary input build now.
 
-`Step 6:` Run the following command in the terminal window to the left to clone the git repository that has the source code for the demonstration application:
+`Step 6:` Run the following commands in the terminal window to the left to move into a new directory and clone the git repository that has the source code for the demonstration application:
 
 ```
-git clone https://github.com/openshift-instruqt/blog-django-py
+cd /usr/tmp && git clone https://github.com/openshift-instruqt/blog-django-py
 ```
 
 You'll get the output as follows:
