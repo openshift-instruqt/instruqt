@@ -37,6 +37,7 @@ level: beginner
 tags:
 - openshift
 owner: openshift
+sandbox_preset: openshift-411
 developers:
 - hguerrero@redhat.com
 - nvinto@redhat.com

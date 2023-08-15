@@ -1,0 +1,7 @@
+#!/bin/bash
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-basic/scripts/kafka-cluster.yaml -o /opt/kafka-cluster.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-basic/scripts/kafka-topic.yaml -o /opt/kafka-topic.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
