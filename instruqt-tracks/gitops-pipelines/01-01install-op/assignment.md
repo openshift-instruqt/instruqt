@@ -84,11 +84,11 @@ Use the _Filter by keyword_ box to search for `Red Hat OpenShift Pipelines` in t
 
 Read the brief description of the Operator on the _Red Hat OpenShift Pipelines_ page. Click _Install_.
 
-Select _All namespaces on the cluster (default)_ for installation mode & _Automatic_ for the approval strategy. Click Subscribe!
+Select _pipelines-1.9_ for the Update channel, _All namespaces on the cluster (default)_ for installation mode, & _Automatic_ for the approval strategy. Click Install!
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-settings.png)
 
-The installation may take a minute or two, but once complete, you'll now have installed the *OpenShift Pipelines Operator* to your OpenShift Cluster!
+The installation may take a minute, but once complete, you'll now have installed the *OpenShift Pipelines Operator* to your OpenShift Cluster!
 
 ![Operator Installed](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/operator-installed.png)
 
