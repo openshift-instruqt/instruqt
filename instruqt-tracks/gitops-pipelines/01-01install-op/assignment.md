@@ -72,8 +72,6 @@ Use the following credentials to log in:
 * **Username:** `admin`
 * **Password:** `admin`
 
-![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
-
 ## Installing the OpenShift Pipelines Operator in Web Console
 
 You can install OpenShift Pipelines using the Operator listed in the OpenShift Container Platform OperatorHub. When you install the OpenShift Pipelines Operator, the Custom Resources (CRs) required for the Pipelines configuration are automatically installed along with the Operator.
