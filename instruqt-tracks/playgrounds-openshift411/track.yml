@@ -21,18 +21,20 @@ description: |
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
-- openshift
 - prod
+- openshift
 owner: openshift
 developers:
 - ryanj@redhat.com
+- nvinto@redhat.com
 - cclyburn@redhat.com
 - bob@cogarttech.com
-- nvinto@redhat.com
 - rjarvine@redhat.com
+idle_timeout: 400
+timelimit: 3600
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "8916537136787514696"
+checksum: "3164322334504833803"

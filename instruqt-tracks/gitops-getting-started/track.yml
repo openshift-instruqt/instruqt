@@ -48,10 +48,12 @@ developers:
 - nvinto@redhat.com
 - dahmed@redhat.com
 - chernand@redhat.com
-- cclyburn@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
+idle_timeout: 400
+timelimit: 3600
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "12106461335281950802"
+checksum: "17894704971292202513"

@@ -27,15 +27,17 @@ tags:
 owner: openshift
 developers:
 - nvinto@redhat.com
+- ryanj@redhat.com
 - bob@cogarttech.com
 - bclayton@redhat.com
 - dleblanc@redhat.com
 - dschenck@redhat.com
-- ryanj@redhat.com
 - cclyburn@redhat.com
+idle_timeout: 400
+timelimit: 3600
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "9014317366276448865"
+checksum: "3264336563180950562"

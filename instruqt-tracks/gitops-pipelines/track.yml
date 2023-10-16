@@ -58,9 +58,11 @@ developers:
 - ryanj@redhat.com
 - nvinto@redhat.com
 - chernand@redhat.com
+idle_timeout: 400
+timelimit: 3600
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "7552601449163299534"
+checksum: "6666464512306908189"
