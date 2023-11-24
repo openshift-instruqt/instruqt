@@ -60,7 +60,7 @@ developers:
 - chernand@redhat.com
 idle_timeout: 400
 timelimit: 3600
-sandbox_preset: openshift-411
+sandbox_preset: openshift-4-12
 lab_config:
   overlay: false
   width: 25
