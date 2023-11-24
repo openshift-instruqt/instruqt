@@ -38,3 +38,6 @@ lab_config:
   width: 33
   position: right
 checksum: "14686330274448511495"
+sandbox_preset: openshift-4-12
+idle_timeout: 400
+timelimit: 3600
