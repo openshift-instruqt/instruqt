@@ -1,0 +1,12 @@
+git clone --quiet --depth 1 https://github.com/fatherlinux/container-internals-lab.git /root/labs
+
+podman pull registry.access.redhat.com/ubi7/ubi
+podman pull quay.io/fatherlinux/wordpress:csc
+podman pull quay.io/fatherlinux/httpd-php
+podman pull registry.access.redhat.com/openshift3/mysql-55-rhel7:latest
+git clone --quiet --depth 1 --single-branch --branch master https://github.com/fatherlinux/wordpress-demo.git /root/labs/wordpress-demo
+
+/root/labs/wordpress-demo/create.sh
+
+sed -i s/wpfrontend-wordpress.apps.example.com/wpfrontend-myproject.apps.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io/ ~/labs/wordpress-demo/wordpress-objects.yaml
+git clone --quiet --depth 1 --single-branch --branch centos7 https://github.com/fatherlinux/container-supply-chain.git ~/labs/container-supply-chain/
