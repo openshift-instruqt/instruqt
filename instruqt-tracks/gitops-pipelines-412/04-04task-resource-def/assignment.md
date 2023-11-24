@@ -1,6 +1,6 @@
 ---
 slug: 04task-resource-def
-id: viic6rx0wuhd
+id: m1ynwceuy31f
 type: challenge
 title: Step 4 - Task Resource Definitions
 tabs:

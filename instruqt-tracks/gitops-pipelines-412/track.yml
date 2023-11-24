@@ -1,5 +1,5 @@
 slug: gitops-pipelines-412
-id: lqsxxbn4a6qy
+id: o5xlfecsl87j
 title: Use Red Hat OpenShift Pipelines
 teaser: Learn how to use Red Hat OpenShift Pipelines to automate application deployment.
 description: |-
@@ -65,4 +65,5 @@ lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "6666464512306908189"
+  loadingMessages: true
+checksum: "18269492097076497401"

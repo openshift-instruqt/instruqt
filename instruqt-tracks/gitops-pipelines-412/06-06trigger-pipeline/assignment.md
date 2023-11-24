@@ -1,6 +1,6 @@
 ---
 slug: 06trigger-pipeline
-id: ksdabc6vxkfr
+id: 14lljsplczgk
 type: challenge
 title: Step 6 - Trigger a Pipeline
 tabs:

@@ -1,6 +1,6 @@
 ---
 slug: 02new-project
-id: udjs69gtevfb
+id: in0bozrzd946
 type: challenge
 title: Step 2 - Create a New Project
 tabs:

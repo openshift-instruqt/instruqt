@@ -1,6 +1,6 @@
 ---
 slug: 07verify-deployment
-id: lmomvnxbwzbu
+id: pjungfyyvrcu
 type: challenge
 title: Step 7 - Verify Deployment
 tabs:
