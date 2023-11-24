@@ -1,4 +1,4 @@
-slug: gitops-pipelines
+slug: gitops-pipelines-412
 id: lqsxxbn4a6qy
 title: Use Red Hat OpenShift Pipelines
 teaser: Learn how to use Red Hat OpenShift Pipelines to automate application deployment.
@@ -60,7 +60,7 @@ developers:
 - chernand@redhat.com
 idle_timeout: 400
 timelimit: 3600
-sandbox_preset: openshift-411
+sandbox_preset: openshift-4-12
 lab_config:
   overlay: false
   width: 25
