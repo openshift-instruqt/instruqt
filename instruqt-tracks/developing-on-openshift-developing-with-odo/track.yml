@@ -32,14 +32,15 @@ developers:
 - bob@cogarttech.com
 - bclayton@redhat.com
 - dleblanc@redhat.com
-- dschenck@redhat.com
+- null
 - doh@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
+idle_timeout: 400
+timelimit: 3600
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "5342160673686077669"
-idle_timeout: 400
-timelimit: 3600
+  loadingMessages: true
+checksum: "3091578703564048985"

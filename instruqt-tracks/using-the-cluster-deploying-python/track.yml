@@ -33,12 +33,15 @@ developers:
 - bob@cogarttech.com
 - dleblanc@redhat.com
 - bclayton@redhat.com
-- dschenck@redhat.com
+- null
 - ryanj@redhat.com
 - cclyburn@redhat.com
-sandbox_preset: openshift-411
+idle_timeout: 400
+timelimit: 3600
+sandbox_preset: openshift-4-12
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "7981635441488609735"
+  loadingMessages: true
+checksum: "14080255975708287829"
