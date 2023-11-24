@@ -30,7 +30,6 @@ developers:
 - bob@cogarttech.com
 - nvinto@redhat.com
 - rjarvine@redhat.com
-sandbox_preset: openshift-4-12
 lab_config:
   overlay: false
   width: 25
@@ -38,3 +37,4 @@ lab_config:
 checksum: "13368562192537290019"
 idle_timeout: 400
 timelimit: 3600
+sandbox_preset: openshift-4-12
