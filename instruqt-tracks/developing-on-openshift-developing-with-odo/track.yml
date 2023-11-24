@@ -41,3 +41,5 @@ lab_config:
   width: 25
   position: right
 checksum: "5342160673686077669"
+idle_timeout: 400
+timelimit: 3600
