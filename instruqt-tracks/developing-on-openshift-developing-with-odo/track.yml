@@ -32,7 +32,6 @@ developers:
 - bob@cogarttech.com
 - bclayton@redhat.com
 - dleblanc@redhat.com
-- null
 - doh@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
@@ -43,4 +42,4 @@ lab_config:
   width: 25
   position: right
   loadingMessages: true
-checksum: "3091578703564048985"
+checksum: "1211879762111059646"

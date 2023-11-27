@@ -10,3 +10,5 @@ git clone --quiet --depth 1 --single-branch --branch master https://github.com/f
 
 sed -i s/wpfrontend-wordpress.apps.example.com/wpfrontend-myproject.apps.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io/ ~/labs/wordpress-demo/wordpress-objects.yaml
 git clone --quiet --depth 1 --single-branch --branch centos7 https://github.com/fatherlinux/container-supply-chain.git ~/labs/container-supply-chain/
+
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json

@@ -1,0 +1,1 @@
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
