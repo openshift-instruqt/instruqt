@@ -62,7 +62,30 @@ timelimit: 500
 ---
 [OpenShift Pipelines](https://docs.openshift.com/container-platform/latest/cicd/pipelines/understanding-openshift-pipelines.html) are an OpenShift add-on that can be installed via an operator that is available in the OpenShift OperatorHub. It allows for cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using [Tekton](https://tekton.dev/).
 
-Let's install the operator using the OpenShift Pipelines Operator in the OpenShift Web Console!
+🔒 Logging in with the CLI
+=======================
+
+Log into OpenShift from the command line on the left using the `oc login` command:
+
+```
+oc login -u admin -p admin
+```
+
+✅ Login Confirmation
+==================
+
+Verify you succesfully logged in as the `admin` user with the `oc whoami` command:
+
+```
+oc whoami
+```
+
+🔒 Logging in with the web console and install the OpenShift Pipelines Operator
+===============================
+
+
+Now, let's install the operator using the OpenShift Pipelines Operator in the OpenShift Web Console!
+
 Click the **Web Console** tab over the terminal area to open the OpenShift web console in a new tab.
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
