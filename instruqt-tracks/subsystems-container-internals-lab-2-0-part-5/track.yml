@@ -33,11 +33,12 @@ developers:
 - nvinto@redhat.com
 - akeenan@redhat.com
 - cclyburn@redhat.com
-sandbox_preset: openshift-4-12
 idle_timeout: 400
 timelimit: 3600
+sandbox_preset: openshift-4-12
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "16570476047290587053"
+  loadingMessages: true
+checksum: "12957364313476187864"

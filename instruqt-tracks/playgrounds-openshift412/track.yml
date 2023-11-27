@@ -29,7 +29,6 @@ developers:
 - cclyburn@redhat.com
 - bob@cogarttech.com
 - nvinto@redhat.com
-- null
 idle_timeout: 400
 timelimit: 3600
 sandbox_preset: openshift-4-12
@@ -38,4 +37,4 @@ lab_config:
   width: 25
   position: right
   loadingMessages: true
-checksum: "149453162607953098"
+checksum: "17216244387342757504"

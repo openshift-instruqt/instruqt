@@ -11,3 +11,5 @@ curl https://gist.githubusercontent.com/lholmquist/91923f871f63a0e55203ce15f5c73
 mkdir -p /root/projects/nodejs/nodeserver
 
 echo "-w \"\n\"" >> ~/.curlrc
+
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json

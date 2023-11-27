@@ -31,10 +31,9 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - bob@cogarttech.com
+- ryanj@redhat.com
 - dleblanc@redhat.com
 - bclayton@redhat.com
-- null
-- ryanj@redhat.com
 - cclyburn@redhat.com
 idle_timeout: 400
 timelimit: 3600
@@ -44,4 +43,4 @@ lab_config:
   width: 25
   position: right
   loadingMessages: true
-checksum: "14080255975708287829"
+checksum: "6210006690115528842"

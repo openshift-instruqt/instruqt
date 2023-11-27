@@ -28,7 +28,6 @@ tags:
 owner: openshift
 developers:
 - bob@cogarttech.com
-- null
 - nvinto@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
@@ -40,4 +39,4 @@ lab_config:
   width: 25
   position: right
   loadingMessages: true
-checksum: "4908402324369173752"
+checksum: "7689949945208204260"
