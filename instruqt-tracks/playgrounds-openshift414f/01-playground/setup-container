@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euxo pipefail
+
+oc login api.crc.testing:6443 --insecure-skip-tls-verify=true -u developer -p developer

@@ -1,0 +1,35 @@
+slug: playgrounds-openshift414f
+id: e8j8lu0luwil
+title: OpenShift Playground 4.14
+teaser: Quick access to the web console or the command-line interface to explore Red
+  Hat OpenShift
+description: |
+  ## Goal
+
+  Explore OpenShift version 4.14.
+
+  ## Concepts
+
+  * OpenShift Web Console
+  * `oc` command line tool
+
+  ## Use case
+
+  You control an OpenShift cluster for one hour. You can test and deploy your own container image, or set up a pipeline to build your application from source, then monitor it with Prometheus as it runs.
+
+  This OpenShift cluster will self-destruct in one hour.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- prod
+- openshift
+owner: openshift
+developers:
+- ryanj@redhat.com
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "8740417447710707103"
