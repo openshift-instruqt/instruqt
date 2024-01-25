@@ -21,10 +21,7 @@ notes:
 
     This OpenShift cluster will self-destruct in one hour.
 tabs:
-- title: Terminal 1
-  type: terminal
-  hostname: container
-- title: Terminal 2
+- title: Terminal
   type: terminal
   hostname: crc
 - title: Web Console
