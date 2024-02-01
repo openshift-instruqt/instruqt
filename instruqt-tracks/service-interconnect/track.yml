@@ -13,17 +13,17 @@ description: |2
   **It contains three services:**
 
   - A web frontend service running on Kubernetes in the public cloud. It uses the PostgreSQL database and the payment-processing service.
-  - A PostgreSQL database running on Kubernetes in a private data center.
-  - A payment-processing service running on Kubernetes in a private data center.
+  - A PostgreSQL database running on a RHEL VM in a private data center.
+  - A payment-processing service running on on a RHEL VM in a private data center.
 
-   The challenge for us is now to enable the patient portal frontend to connect to the database and payment processor. For obvious reasons, we **do not want to expose the database and payment processor** over the public internet, so a private, secure link needs to be setup between the OpenShift instance on the public cloud and the data centre.
+   The challenge for us is now to enable the patient portal frontend to connect to the database and payment processor. For obvious reasons, we **do not want to expose the database and payment processor** over the public internet, so a private, secure link needs to be setup between the OpenShift instance  and RHEL machine in the data centre.
 
   This can be accomplished with a VPN between the public cloud and the private data center. However, a **VPN can be hard to set up**, and **requires deep networking expertise**. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. **Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up**. It allows application Developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
 
   ## Lab architecture
-  ![Architecute-router.png](./assets/Architecute-router.png)
+  ![lab-arch.png](./assets/Screenshot%202023-08-22%20at%2011.07.25%20PM.png)
   > **Note:**
-  > Red Hat Service Interconnect is not limited to service networks between instances of OpenShift, but can equally well be leveraged to connect deployments running on premise (deployed on OpenShift or Kubernetes, on virtual machines or on bare metal) with services running in the cloud.
+  > Red Hat Service Interconnect is not limited to service networks between instances of OpenShift and RHEL, but can equally well be leveraged to connect deployments across OpenShift or other Kubernetes,  virtual machines or on bare metal environments
 
 
   In the next screen, you will be guided through setting up a service network between all these services across different environments to make the patient portal functional.
@@ -31,9 +31,9 @@ description: |2
   Let's get started!
 icon: https://logodix.com/logo/1910931.png
 tags:
+- service-interconnect
 - skupper
-- serviceinterconnect
-- connectivity
+- kubernetes
 - openshift
 owner: openshift
 developers:
@@ -45,4 +45,6 @@ lab_config:
   overlay: false
   width: 33
   position: right
-checksum: "3247020725238521907"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "9556025054795558048"

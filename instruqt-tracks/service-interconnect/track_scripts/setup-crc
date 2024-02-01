@@ -236,7 +236,7 @@ oc project public
 
 # installing skupper cli
 
-curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/service-interconnect/assets/install.sh |sh
+curl https://skupper.io/install.sh |sh
 cp  /root/.local/bin/skupper /usr/local/bin/
 skupper
 
