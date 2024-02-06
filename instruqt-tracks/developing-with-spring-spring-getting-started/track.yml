@@ -18,6 +18,14 @@ tags:
 - openshift
 owner: openshift
 developers:
-- doh@redhat.com
 - ryanj@redhat.com
-checksum: "15505193514804782304"
+- doh@redhat.com
+- cclyburn@redhat.com
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "552980649440493121"

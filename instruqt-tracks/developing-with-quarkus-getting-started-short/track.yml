@@ -43,15 +43,18 @@ description: |-
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
-- Quarkus
+- quarkus
 - prod
 owner: openshift
 developers:
 - doh@redhat.com
 - ryanj@redhat.com
+- cclyburn@redhat.com
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "5918425531514972469"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "18340986562431095340"
