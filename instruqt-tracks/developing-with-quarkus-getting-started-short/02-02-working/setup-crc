@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Set the path to the application.properties file
+properties_file="/root/projects/quarkus/getting-started/src/main/resources/application.properties"
+
+# Set the annotation to add
+new_annotation="%dev.quarkus.dev-ui.cors.enabled=false"
+
+# Check if the annotation already exists in the file
+if grep -q "$new_annotation" "$properties_file"; then
+    echo "Annotation already exists. No changes made."
+else
+    # Add the annotation to the end of the file
+    echo -e "\n$new_annotation" >> "$properties_file"
+    echo "Annotation added successfully."
+fi
