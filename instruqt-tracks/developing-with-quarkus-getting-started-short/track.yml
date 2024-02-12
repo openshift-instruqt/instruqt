@@ -47,14 +47,13 @@ tags:
 - prod
 owner: openshift
 developers:
-- doh@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-sandbox_preset: openshift-414
+- doh@redhat.com
 lab_config:
   overlay: false
   width: 25
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "16981658001402157426"
+checksum: "1504053379928172993"
