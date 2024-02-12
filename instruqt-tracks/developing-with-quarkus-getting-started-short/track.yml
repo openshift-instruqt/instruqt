@@ -50,11 +50,11 @@ developers:
 - doh@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-sandbox_preset: openshift-411
+sandbox_preset: openshift-414
 lab_config:
   overlay: false
   width: 25
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "18340986562431095340"
+checksum: "16981658001402157426"

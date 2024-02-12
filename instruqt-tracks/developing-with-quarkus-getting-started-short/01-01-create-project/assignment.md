@@ -32,6 +32,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -39,6 +40,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Dev UI
   type: service
   hostname: crc
@@ -76,11 +78,11 @@ You'll get the following output.
 `Step 2:` Run the following command in the **Terminal 1** window to create the basic Maven project.
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
+mvn io.quarkus.platform:quarkus-maven-plugin:3.7.2:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=getting-started \
-    -DclassName="org.acme.quickstart.GreetingResource" \
-    -Dpath="/hello"
+    -Dextensions='resteasy-reactive'
+cd getting-started
 ```
 
 The `mvn` command shown above invokes the installation process that creates all the files and artifacts needed to get the application up and running.
@@ -92,6 +94,18 @@ The snippet of code below shows you the output you'll get at the end of the inst
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ```
+
+Before you start the Quarkus application, you need to disable the CORS filter to access the Quarkus DEV UI since the Quarkus application will run on the container rather than a local environment.
+
+Click the **Visual Editor** tab in the horizontal menu bar over the terminal window to the left. You'll see the code editor that is part of the interactive learning environment. Open the `application.properties` file in the *src/main/resources* directory. Then, add the following key and values. Note that the changes will be save automacticatlly.
+
+In case you don't see the subdirectories under the */root/projects/quarkus* directory, click on the reload icon.
+
+```
+%dev.quarkus.dev-ui.cors.enabled=false
+```
+
+![add-to-cors](../assets/add-to-cors.png)
 
 # Running the Application
 
@@ -106,15 +120,18 @@ mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-st
 There will be a lot of output to the screen. When the process is finished running, you will see the following:
 
 ```
+Listening for transport dt_socket at address: 5005
 __  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-INFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.x.x.Final) started in 1.194s. Listening on: http://0.0.0.0:8080
+INFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.x.x) started in 3.618s.Listening on: http://0.0.0.0:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, resteasy]
+INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, resteasy-reactive, smallrye-context-propagation, vertx]
+
 --
-Tests paused, press [r] to resume, [h] for more options>
+Tests paused
+Press [e] to edit command line args (currently ''), [r] to resume testing, [o] Toggle test output, [:] for the terminal, [h] for more options>
 ```
 
 ----
@@ -160,9 +177,9 @@ You are going to change the output of the **Hello App** API application from `He
 
 `Step 7b:`  Change the word `Hello` to `Hola` at Line 14 in the file `GreetingResource.java` as shown in the figure below at Callout 2.
 
-![Change to Hola](../assets/change-to-hola-01.png)
+![Change to Hola](../assets/change-to-hola.png)
 
-`Step 7c:`  Click the save icon to save your changes, as shown in the figure above at Callout 3.
+`Step 7c:`  The change will be saved automatically, as shown in the figure above at Callout 3.
 
 ----
 
@@ -190,21 +207,17 @@ Also, you can see an extension's status and go directly to its documentation.
 
 ----
 
-`Step 9:` Click the tab `Dev UI` on the horizontal menu bar over the interactive learning window on the left.
+`Step 9:` Click the tab `Dev UI` on the horizontal menu bar over the interactive learning window on the left. In case you don't see the Dev UI properly, click on the reload icon.
 
 You'll see the Dev UI for your running application as shown in the figure below.
 
-![Dev UI](../assets/config-editor-00.png)
+![Dev UI](../assets/dev-ui.png)
 
 ----
 
-`Step 10:`  Click on the `Config Editor` link within the `Configuration` file to see and make updates to the configuration as shown in the figure below.
+`Step 10:`  Click on the `Configuration` in the left menu which allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
 
-![Config Editor](../assets/config-editor-01.png)
-
-As you can see in the figure below, the `Config Editor` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
-
-![Config Editor Detail](../assets/config-editor-02.png)
+![Config Editor Detail](../assets/configuration.png)
 
 |NOTE:|
 |----|
@@ -216,13 +229,15 @@ Quarkus enables you to automatically and continuously run your application's uni
 
 As you might recall, when you ran `mvn quarkus:dev` you were presented with the prompt  `Tests paused, press [r] to resume, [h] for more options>` as the end of installation process.
 
-Entering the character `r` at the testing prompt will run the application's unit test.
-
 ----
 
-`Step 11:` Click the **Terminal 1** tab and then press the `r` key in the terminal window. (The installation process will still be running in the terminal.)
+`Step 11:` Click on the `Continuous Testing` menu and then click on the `Start` button. (You can also press `r` at the testing prompt will run the application's unit test.)
 
-As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy Reactive`. The output failed to meet the expectation.
+![CT start](../assets/ct-start.png)
+
+As you will see from all the red test class which means the unit test is failed. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy Reactive`. The output failed to meet the expectation.
+
+![CT failure](../assets/ct-failure.png)
 
 Let's fix the code and get the tests to pass.
 
@@ -240,18 +255,19 @@ Let's fix the code and get the tests to pass.
 
 ----
 
-`Step 15:` Click the **Save File** icon on the top of the **Visual Editor** as shown above at `Step 7c`.
-
-
 As soon as your reset the code, Quarkus automatically re-runs the test.
 
 ----
 
-`Step 16:` Click the **Terminal 1** tab to go back a review the output from the continuous testing output.
+`Step 15:` Go back to the `Continuous Testing` in the *Dev UI*.
 
 ----
 
-`Step 17:` Look at the output at the bottom of the **Terminal 1** window. You'll see output similar to the following.
+`Step 16:` Look at the test result. You'll see that the test case has succeeded (green color).
+
+![CT success](../assets/ct-success.png)
+
+Note that you can find the following test result in the terminal 1.
 
 ```
 All 1 test is passing (0 skipped), 1 test was run in 618ms. Tests completed at 03:33:55 due to changes to GreetingResource.class.
