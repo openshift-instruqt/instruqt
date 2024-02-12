@@ -38,6 +38,7 @@ address=/$HOSTNAME.crc.testing/192.168.126.11
 EOF
 
 sed -i '/^search.*/a nameserver 10.88.0.8' /etc/resolv.conf
+systemctl reset-failed
 
 # start openshift
 systemctl start crc-dnsmasq.service
