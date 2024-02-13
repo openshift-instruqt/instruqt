@@ -22,13 +22,14 @@ tags:
 owner: openshift
 developers:
 - bob@cogarttech.com
-- ryanj@redhat.com
 - cclyburn@redhat.com
 - doh@redhat.com
 - eshortis@redhat.com
-sandbox_preset: openshift-411
+- ryanj@redhat.com
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "10214009284797258386"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "16311929301660290970"

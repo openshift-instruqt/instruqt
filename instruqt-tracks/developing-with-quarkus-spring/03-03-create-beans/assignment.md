@@ -10,6 +10,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -17,6 +18,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 difficulty: intermediate
 timelimit: 800
 ---
@@ -64,9 +66,7 @@ public interface StringFunction extends Function<String, String> {
 
 ----
 
-`Step 4:` Save the file `StringFunction.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-Next you will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean.
+`Step 4:` Next you will add an `AppConfiguration` class which will use the Spring’s Java Config style for defining a bean.
 
 The class `AppConfiguration` will be used to create a `StringFunction` bean. The behavior you'll implement in the `StringFunction` bean will convert all text passed as parameter to upper case characters.
 
@@ -96,19 +96,17 @@ public class AppConfiguration {
 
 ----
 
-`Step 6:` Save the file `AppConfiguration.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
 ## Implementing behavior for a functional interface
 
 Now you'll define another bean that will implement behavior for the functional interface `StringFunction` using Spring’s `Stereotype Annotation` style. This bean will implement no-op behavior that simply returns the value of the parameter input as is.
 
 ----
 
-`Step 7:` In the **Visual Editor** navigate to the directory `fruit-taster/src/main/java/org/acme/`
+`Step 6:` In the **Visual Editor** navigate to the directory `fruit-taster/src/main/java/org/acme/`
 
 ----
 
-`Step 8:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `NoOpSingleStringFunction.java`.
+`Step 7:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `NoOpSingleStringFunction.java`.
 
 ----
 
@@ -131,8 +129,6 @@ public class NoOpSingleStringFunction implements StringFunction {
 
 ----
 
-`Step 9:` Save the file `NoOpSingleStringFunction.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
 ## Adding injectable configuration
 
 Quarkus provides support for injecting configuration values from a resource file using Spring’s `@Value` annotation.
@@ -141,11 +137,11 @@ You're now going to see this injection process in action.
 
 ----
 
-`Step 10:` Go to the **Visual Editor** tab and open the file `fruit-taster/src/main/resources/application.properties` by clicking on the filename in the editor's directory tree.
+`Step 9:` Go to the **Visual Editor** tab and open the file `fruit-taster/src/main/resources/application.properties` by clicking on the filename in the editor's directory tree.
 
 ----
 
-`Step 11:` Add the text below as a new line in the file `application.properties`. (Be careful not to overwrite the text that's already in the file.)
+`Step 10:` Add the text below as a new line in the file `application.properties`. (Be careful not to overwrite the text that's already in the file.)
 
 ```text
 taste.message = tastes great
@@ -153,18 +149,16 @@ taste.message = tastes great
 
 ----
 
-`Step 12:` Save the file `application.properties` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-Next you'll create a new Spring Bean to use the `taste.message = tastes great` configuration value.
+`Step 11:` Next you'll create a new Spring Bean to use the `taste.message = tastes great` configuration value.
 
 
 ----
 
-`Step 13:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `MessageProducer.java`.
+`Step 12:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `MessageProducer.java`.
 
 ----
 
-`Step 14:` Open the file `MessageProducer.java` and add the following code:
+`Step 13:` Open the file `MessageProducer.java` and add the following code:
 
 
 ```java
@@ -189,9 +183,6 @@ Notice that the code uses the ` @Value` annotation to automatically inject the v
 
 ----
 
-`Step 15:` Save the file `MessageProducer.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-
 ## Tying them all together
 
 The final bean you are going create will tie together all the work you've done with the previous beans.
@@ -202,16 +193,16 @@ Let's create `TasterBean`
 
 ----
 
-`Step 16:` In the **Visual Editor** navigate to the directory `fruit-taster/src/main/java/org/acme/`
+`Step 14:` In the **Visual Editor** navigate to the directory `fruit-taster/src/main/java/org/acme/`
 
 ----
 
-`Step 17:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `TasterBean.java`.
+`Step 15:` Click the `Create File` icon at the directory `fruit-taster/src/main/java/org/acme/` in the **Visual Editor** filesystem and create a file named `TasterBean.java`.
 
 ----
 
 
-`Step 18:` Click the file named `TasterBean.java` and add the following code to the file
+`Step 16:` Click the file named `TasterBean.java` and add the following code to the file
 
 ```java
 package org.acme;
@@ -248,9 +239,7 @@ public class TasterBean {
 }
 ```
 
-`Step 19:` Save the file `TasterBean.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-Although the `TasterBean` has only about 30 lines of code, but those lines of code are doing a lot of work, most of which is leveraging the power provided by Spring annotations.
+`Step 17:` Although the `TasterBean` has only about 30 lines of code, but those lines of code are doing a lot of work, most of which is leveraging the power provided by Spring annotations.
 
 Let's do a brief analysis of the code.
 

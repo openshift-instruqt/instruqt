@@ -10,6 +10,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -17,6 +18,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 difficulty: intermediate
 timelimit: 800
 ---
@@ -53,9 +55,9 @@ First, you need a data model.
 ```java
 package org.acme;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Fruit {
@@ -104,9 +106,7 @@ public class Fruit {
 ```
 ----
 
-`Step 6:` Click on the `Disk` icon or press `CTRL+S` to save the file as shown in the figure below
-
-![Save fruit.java](../assets/save-fruit-java.png)
+`Step 6:` The changes will be automatically saved.
 
 You have created a simple POJO (Plain Old Java Object) that describes a Fruit. Notice that the POJO has private instance variables named `id`, `name` and `color`. The POJO also has getters and setters for those instance variables
 
@@ -137,9 +137,7 @@ public interface FruitRepository extends CrudRepository<Fruit, Long> {
 
 ----
 
-`Step 9:` Save the file `FruitRepository.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did previously in an earlier step.
-
-Notice in the code above that the interface `FruitRepository` extends the interface `org.springframework.data.repository.CrudRepository`.
+`Step 9:` Notice in the code above that the interface `FruitRepository` extends the interface `org.springframework.data.repository.CrudRepository`.
 
 When you extend Spring's `CrudRepository` interface you'll automatically get a complete set of methods, e.g. `count()`, `findAll()`, `delete()` that you will use to manipulate data access in the `FruitRepository`. In this case you also added a method `findByColor(String color)` which is special to `FruitRepository`
 
@@ -162,18 +160,17 @@ Now you're going to create some data that will be stored in the database bound t
 `Step 13:` Copy the follow SQL statements into the file `import.sql`.
 
 ```sql
-INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'cherry', 'red');
-INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'orange', 'orange');
-INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'banana', 'yellow');
-INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'avocado', 'green');
-INSERT INTO fruit(id, name, color) VALUES (nextval('hibernate_sequence'), 'strawberry', 'red');
+INSERT INTO fruit(id, name, color) VALUES (1, 'cherry', 'red');
+INSERT INTO fruit(id, name, color) VALUES (2, 'orange', 'orange');
+INSERT INTO fruit(id, name, color) VALUES (3, 'banana', 'yellow');
+INSERT INTO fruit(id, name, color) VALUES (4, 'avocado', 'green');
+INSERT INTO fruit(id, name, color) VALUES (5, 'strawberry', 'red');
+ALTER SEQUENCE fruit_seq RESTART WITH 6;
 ```
 
 ----
 
-`Step 14:` Save the file `import.sql` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did previously in an earlier step.
-
-The `import.sql` file will inject information about fruit with the names, `cherry`, `orange`, `banana`, `avocado` and `strawberry` into the database represented by the `FruitRepository`.
+`Step 14:` The `import.sql` file will inject information about fruit with the names, `cherry`, `orange`, `banana`, `avocado` and `strawberry` into the database represented by the `FruitRepository`.
 
 ## Configuring a database connection in Quarkus
 
@@ -196,9 +193,7 @@ quarkus.hibernate-orm.sql-load-script=import.sql
 ```
 ----
 
-`Step 17:` Save the file `application.properties` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did previously in an earlier step.
-
-The file `application.properties` contains configuration settings that will bind a database to Quarkus.
+`Step 17:` The file `application.properties` contains configuration settings that will bind a database to Quarkus.
 
 That’s it! You're now have all you need to work with data in a Spring Repository using Quarkus
 
