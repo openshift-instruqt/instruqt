@@ -21,6 +21,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -28,6 +29,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 difficulty: intermediate
 timelimit: 800
 ---
@@ -76,7 +78,7 @@ You'll see the following ouput:
 `Step 3:` Run the following command in **Terminal 1** to create the demonstration project named **Fruit Taster**.
 
 ```
- mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
+ mvn io.quarkus:quarkus-maven-plugin:3.7.2:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=fruit-taster \
     -Dextensions="spring-data-jpa,spring-web,spring-di,jdbc-postgres, jdbc-h2"

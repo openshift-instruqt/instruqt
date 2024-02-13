@@ -10,6 +10,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -17,6 +18,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
@@ -171,17 +173,13 @@ taste.message = tastes great
 taste.suffix = (if you like fruit!)
 ```
 
-----
-
-`Step 8:` Save the file `application.properties` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
 ## Deploying the application to OpenShift
 
 Now let's deploy the application.
 
 ----
 
-`Step 9:` Run the following command in **Terminal 1** to build and deploy the Quarkus app in OpenShift:
+`Step 8:` Run the following command in **Terminal 1** to build and deploy the Quarkus app in OpenShift:
 
 ```
 mvn clean package -f /root/projects/quarkus/fruit-taster \
@@ -211,16 +209,16 @@ When the `mvn clean package` command finishes you'll see output similar to the f
 
 ----
 
-`Step 10:` Run the following command in **Terminal 1** to verify that the deployment rollout has completed:
+`Step 9:` Run the following command in **Terminal 1** to verify that the deployment rollout has completed:
 
 ```
-oc rollout status -w dc/fruit-taster
+oc rollout status -w deployment/fruit-taster
 ```
 
 You'll see the following output when the rollout is complete.
 
 ```
-replication controller "fruit-taster-1" successfully rolled out
+deployment "fruit-taster" successfully rolled out
 ```
 
 |NOTE:|
@@ -235,7 +233,7 @@ As mentioned previously, OpenShift ships with a web-based console that will allo
 
 ----
 
-`Step 11:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the terminal window to the left. You'll be presented with a login dialog as shown in the figure below.
+`Step 10:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the terminal window to the left. You'll be presented with a login dialog as shown in the figure below.
 
 ![Login](../assets/web-console-login.png)
 
@@ -248,7 +246,7 @@ If you do get the warning, click the **Advanced** button to grant permission to 
 
 ----
 
-`Step 12:` Log in to OpenShift using the following credentials:
+`Step 11:` Log in to OpenShift using the following credentials:
 
 * Username: `developer`
 * Password: `developer`
@@ -257,15 +255,15 @@ You'll be presented with the Developer perspective when you login.
 
 ----
 
-`Step 13:` Click the **Skip Tour** option to avoid the new user introduction.
+`Step 12:` Click the **Skip Tour** option to avoid the new user introduction.
 
 ----
 
-`Step 14:` Select the **Topology** menu item on the left side of the web console. You'll be presented the Topology page.
+`Step 13:` Select the **Topology** menu item on the left side of the web console. You'll be presented the Topology page.
 
 ----
 
-`Step 15:` Click the `quarkus-spring` project link as shown in the figure below.
+`Step 14:` Click the `quarkus-spring` project link as shown in the figure below.
 
 ![Topology View 1](../assets/topology-view-01.png)
 
@@ -297,25 +295,25 @@ Now let's work at the command line to use the `oc` tool to scale up the app and 
 
 ----
 
-`Step 16:` Run the following command in the **Terminal 1** window to scale up the Fruit Taster app to 10 replicas
+`Step 15:` Run the following command in the **Terminal 1** window to scale up the Fruit Taster app to 10 replicas
 
 ```
-oc scale --replicas=10 dc/fruit-taster
+oc scale --replicas=10 deployment/fruit-taster
 ```
 
 You'll get the following result:
 
 ```
-deploymentconfig.apps.openshift.io/fruit-taster scaled
+deployment.apps/fruit-taster scaled
 ```
 
 ----
 
-`Step 17:` Click on the **Web Console** tab in the horizontal menu bar over the terminal window to return to the web console web page.
+`Step 16:` Click on the **Web Console** tab in the horizontal menu bar over the terminal window to return to the web console web page.
 
 ----
 
-`Step 18:` Click the center of the circular graphic for the Fruit Taster in the **Topology** view of the web console as shown in the figure below.
+`Step 17:` Click the center of the circular graphic for the Fruit Taster in the **Topology** view of the web console as shown in the figure below.
 
 ![Scaling Up 1](../assets/scaling-up-01.png)
 
@@ -324,7 +322,7 @@ The information page for the Fruit Taster app will slide out from the right side
 
 ----
 
-`Step 19:` Click the **Details** tab in the horizontal menu bar of the Fruit Taster information page as shown in figure below.
+`Step 18:` Click the **Details** tab in the horizontal menu bar of the Fruit Taster information page as shown in figure below.
 
 ![Scaling Up 2](../assets/scaling-up-02.png)
 
@@ -336,22 +334,22 @@ More instances translates into better performance.
 
 Do you think that 10 instances might not be enough? Try scaling the app up to 50 instances.
 
-`Step 20:` Run the command at the command line in **Terminal 1** to scale the demonstration app to 50 instances:
+`Step 19:` Run the command at the command line in **Terminal 1** to scale the demonstration app to 50 instances:
 
 ```
-oc scale --replicas=50 dc/fruit-taster
+oc scale --replicas=50 deployment/fruit-taster
 ```
 
 You get output similar to the following:
 
 ```
-deploymentconfig.apps.openshift.io/fruit-taster scaled
+deployment.apps/fruit-taster scaled
 ```
 
 
 ----
 
-`Step 21:` Run the following command at the command line in **Terminal 1** to watch the 50 pods spinning up:
+`Step 20:` Run the following command at the command line in **Terminal 1** to watch the 50 pods spinning up:
 
 ```
 oc get pods -w -l app.kubernetes.io/name=fruit-taster
@@ -359,19 +357,19 @@ oc get pods -w -l app.kubernetes.io/name=fruit-taster
 
 ----
 
-`Step 22:` Watch as long as you like, then enter the `CTRL+C` keys in **Terminal 1** to stop watching the pods.
+`Step 21:` Watch as long as you like, then enter the `CTRL+C` keys in **Terminal 1** to stop watching the pods.
 
 ----
 
-`Step 23:`Finally, Run the following command at the command line in **Terminal 1** to scale the demonstration application back down to a single pod.:
+`Step 22:`Finally, Run the following command at the command line in **Terminal 1** to scale the demonstration application back down to a single pod.:
 
 ```
-oc scale --replicas=1 dc/fruit-taster
+oc scale --replicas=1 deployment/fruit-taster
 ```
 
 ----
 
-`Step 24:` Run the following `oc` command at the command line in **Terminal 1** to view the number of pods running:
+`Step 23:` Run the following `oc` command at the command line in **Terminal 1** to view the number of pods running:
 
 ```
 oc get pods  -l app.kubernetes.io/name=fruit-taster
@@ -381,7 +379,7 @@ Notice that the pods are terminating.
 
 ----
 
-`Step 25:` Run the previous `oc` command in **Terminal 1** again. Notice that only one pod is running in the deployment:
+`Step 24:` Run the previous `oc` command in **Terminal 1** again. Notice that only one pod is running in the deployment:
 
 ```
 NAME                   READY   STATUS    RESTARTS   AGE

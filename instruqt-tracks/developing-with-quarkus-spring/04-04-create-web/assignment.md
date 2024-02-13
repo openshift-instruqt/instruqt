@@ -10,6 +10,7 @@ tabs:
 - title: Terminal 1
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 - title: Visual Editor
   type: code
   hostname: crc
@@ -17,6 +18,7 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: crc
+  cmd: /bin/bash
 difficulty: intermediate
 timelimit: 800
 ---
@@ -98,10 +100,7 @@ public class FruitController {
 
 ----
 
-`Step 3:` Save the file `FruitController.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-
-Take a look at the code you just added to `FruitController.java`
+`Step 3:` Take a look at the code you just added to `FruitController.java`
 
 Notice the use of the Spring annotations `@GetMapping`, `@DeleteMapping`,  `@PutMapping`, and `@PathVariable`. These annotations expose a set of RESTful API endpoints like so:
 
@@ -325,9 +324,7 @@ public class TasterController {
 ```
 ---
 
-`Step 12:` Save the file `TasterController.java` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-Again, we're using Spring Rest annotations such as `@GetMapping` but we're also injecting the `FruitRepository` and `TasterBean`  created previoulsy in the constructor of `TasterController` like so:
+`Step 12:` Again, we're using Spring Rest annotations such as `@GetMapping` but we're also injecting the `FruitRepository` and `TasterBean`  created previoulsy in the constructor of `TasterController` like so:
 
 ```java
     public TasterController(FruitRepository fruitRepository, TasterBean tasterBean) {
@@ -447,11 +444,7 @@ taste.suffix = (if you like fruit!)
 
 ----
 
-`Step 18:` Save the file `application.properties` by clicking the `Disk` icon or striking the `CTRL+S` keys as you did in previous steps.
-
-----
-
-`Step 19:` Run the following command in the **Terminal 1** window to taste yellow fruits:
+`Step 18:` Run the following command in the **Terminal 1** window to taste yellow fruits:
 
 ```
 curl -s http://localhost:8080/taster/yellow | jq
