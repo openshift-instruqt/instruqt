@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export OPENSHIFT_RELEASE_VERSION="4.11.7"
+export OPENSHIFT_RELEASE_VERSION="4.14.7"
 
 dnf install -y procps-ng iputils bind-utils git java-11-openjdk-devel.x86_64 maven openssl jq
 
