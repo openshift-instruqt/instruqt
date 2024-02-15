@@ -28,10 +28,11 @@ developers:
 - ryanj@redhat.com
 idle_timeout: 1200
 timelimit: 3600
+sandbox_preset: openshift-4-14
 lab_config:
   overlay: false
   width: 33
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "5262642406673218842"
+checksum: "7636456129933095402"
