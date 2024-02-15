@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euxo pipefail
+
+crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
+echo "$crc crc api.crc.testing oauth-openshift.apps-crc.testing" >> /etc/hosts
+
+oc login api.crc.testing:6443 --insecure-skip-tls-verify=true -u admin -p admin
+
+oc new-project rhdh
+
+helm repo add openshift-helm-charts https://charts.openshift.io/
+
+helm show values openshift-helm-charts/redhat-developer-hub > values.yaml
+
+sed -e 's/^      registry: quay.io/      registry: registry.redhat.io/' -i values.yaml
+sed -e "s/^  host: \"\"/  host: \"rhdh.crc-97g8f-master-0.crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
+sed -e "s/^  clusterRouterBase: apps.example.com/  clusterRouterBase: \"crc-97g8f-master-0.crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
+
+helm upgrade -i rhdh -f values.yaml openshift-helm-charts/redhat-developer-hub
+
+while [ "$(oc rollout status deploy rhdh-developer-hub -n rhdh)" != "deployment \"rhdh-developer-hub\" successfully rolled out" ]
+do
+    echo "Waiting for Developer Hub - rollout incomplete"
+    sleep 5
+done
+

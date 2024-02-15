@@ -1,0 +1,38 @@
+slug: rhdh
+id: pc886jtx57ro
+title: Red Hat Developer Hub - Public Demo
+teaser: Quick access to the web console or the command-line interface to explore Red
+  Hat OpenShift and RHDH
+description: |
+  ## Goal
+
+  Explore Red Hat Developer Hub Basics
+
+  ## Concepts
+
+  * Red Hat Developer Hub
+  * OpenShift Web Console
+  * `oc` command line tool
+
+  ## Use case
+
+  You control an OpenShift cluster for one hour. You can test and deploy your own container image, or set up a pipeline to build your application from source, then monitor it with Prometheus as it runs.
+
+  This OpenShift cluster will self-destruct in two hours.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- prod
+- openshift
+owner: openshift
+developers:
+- ryanj@redhat.com
+idle_timeout: 7200
+timelimit: 16800
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "6358281917163741859"
