@@ -1,0 +1,27 @@
+slug: red-hat-insights-ansible-remediation
+id: paiovjyd3xgd
+title: Red Hat Insights with Ansible Remediation
+teaser: Using Red Hat Insights to find patch updates and using Ansible to remediate
+  remotely.
+description: |-
+  In this lab, we will use Red Hat Insights to view vulnerabilties, package updates and compliance status for RHEL systems remotely.
+
+  In addition, we will use Red Hat Insights remediation capability powered by Ansible to remotely update a package on the system.
+icon: ""
+tags:
+- remediation
+- ansible
+- automation
+- rhel
+owner: openshift
+developers:
+- narathod@redhat.com
+- nityadav@redhat.com
+timelimit: 6000
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "6010192521243512445"

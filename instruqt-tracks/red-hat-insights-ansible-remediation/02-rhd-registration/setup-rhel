@@ -1,0 +1,21 @@
+#!/bin/bash
+
+generate_random_string() {
+  local length="$1"
+  tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c "$length"
+}
+
+random_string=$(generate_random_string 6)
+
+hostname_prefix="rhel-"
+
+new_hostname="$hostname_prefix$random_string"
+
+echo "Setting hostname to $new_hostname"
+hostnamectl set-hostname "$new_hostname"
+
+echo "$new_hostname" > /etc/hostname
+
+echo "New hostname: $new_hostname"
+
+sudo setenforce Permissive

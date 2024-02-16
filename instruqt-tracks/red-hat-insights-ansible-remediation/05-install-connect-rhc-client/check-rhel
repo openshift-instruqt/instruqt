@@ -1,0 +1,12 @@
+#!/bin/bash
+
+output=$(rhc status)
+
+search_string="Not connected"
+
+if echo "$output" | grep -q "$search_string"; then
+  FAIL "Host is not connected using rhc. Please redo the steps for rhc connection."
+  exit -1
+else
+  exit 0
+fi

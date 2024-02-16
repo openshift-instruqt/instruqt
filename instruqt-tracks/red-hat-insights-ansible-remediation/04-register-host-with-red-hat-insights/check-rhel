@@ -1,0 +1,12 @@
+#!/bin/bash
+
+output=$(insights-client --status)
+
+search_string="NOT registered"
+
+if echo "$output" | grep -q "$search_string"; then
+  FAIL "Host is not registered using insights-clientmanager. Please redo the steps for registration."
+  exit -1
+else
+  exit 0
+fi
