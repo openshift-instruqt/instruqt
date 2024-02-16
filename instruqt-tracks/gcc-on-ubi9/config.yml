@@ -1,0 +1,11 @@
+version: "3"
+containers:
+- name: ubi9
+  image: registry.access.redhat.com/ubi9/ubi:latest
+  shell: /bin/bash
+  memory: 2000
+virtualbrowsers:
+- name: console
+  url: https://developers.redhat.com/content-gateway/link/3881693
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882357
