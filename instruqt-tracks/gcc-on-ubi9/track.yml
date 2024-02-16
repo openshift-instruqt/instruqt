@@ -1,0 +1,23 @@
+slug: gcc-on-ubi9
+id: enbygnza4tye
+title: GCC Toolset on UBI9
+description: ' In this lab, where we will delve into the installation of the GCC toolset
+  on UBI9 and demonstrate the compilation of a C++ sample app using the GCC command-line
+  interface. This feature in UBI 9 is invaluable for streamlining repository management
+  and enhancing overall development experience.'
+icon: .\assets\rhel.webp
+tags:
+- rhel
+- ubi
+owner: openshift
+developers:
+- nityadav@redhat.com
+- narathod@redhat.com
+timelimit: 1200
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "16301492881940289186"

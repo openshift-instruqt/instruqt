@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check if GCC is installed
+if command -v g++ >/dev/null 2>&1; then
+    echo "GCC is installed on this system."
+    # Check GCC version
+    gcc_version=$(g++ --version | grep -oP '(?<=gcc \(GCC\) )\d+\.\d+\.\d+')
+    echo "GCC version: $gcc_version"
+else
+    FAIL "GCC is not installed on this system."
+fi
+
