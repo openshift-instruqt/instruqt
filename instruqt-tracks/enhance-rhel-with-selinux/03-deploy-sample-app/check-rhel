@@ -1,0 +1,26 @@
+#!/bin/bash
+
+output=$(http://localhost:80)
+
+search_string="Red Hat Developers"
+
+if echo "$output" | grep -q "$search_string"; then
+  FAIL "The website is running Red Hat Developers."
+  exit 1
+else
+  exit 0
+fi
+
+
+# #!/bin/bash
+# # check
+
+# output=$(http://localhost:80)
+
+# search_string="Red Hat Developers"
+
+# echo "Checking the solution of the challenge"
+# if [ echo "$output" | grep -q "$search_string" ]; then
+#   echo "FAIL: Your challenge failed because of [The website is running Red Hat Developers clone.]"
+#   exit 1
+# fi
