@@ -1,0 +1,46 @@
+slug: subsystems-container-internals-lab-2-0-part-7
+id: 3z5olqcchrwx
+title: Container Tools Ecosystem
+description: |
+  ## Background
+  This lab will help give you a basic understanding of how to use some other OCI compliant tools such as Podman, Buildah, and Skopeo.
+
+  By the end of this lab you should be able to:
+  - FIND, RUN, BUILD, and SHARE containers using OCI compliant tools
+  - Solve real technical problems by using a small set of daemonless tools
+  - Be comfortable using with the basics of an alternative set of tools to Docker
+
+  ## Outline
+  - Understanding the difference between RHEL Server and CoreOS, as well as the difference between the fast and stable streams provided in RHEL Server
+  - Understanding how to install the fast and stable streams
+  - Podman: Familiar Territory: Learning the basics of how to use podman
+  - Buildah: Granularity & Control: Understanding how a container image is really built
+  - Skopeo: Moving & Sharing: Simplicity in inspecting, and moving container images around
+  - CRIU: Checkpoint and restore the memory contents of containers
+  - Udica: Build and deploy custom SELinux policies for containers
+  - OSCAP-Podman: verify patched or unpatched vulnerabilities in container images produced by Red Hat
+
+  ## Other Material
+  - [Presentation](https://goo.gl/h4VK7j)
+  - [Lab GitHub Repository](https://github.com/openshift-instruqt/instruqt/tree/3ccc0f45269f895a19406e833392dc9fbc7948d8/instruqt-tracks/subsystems-container-internals-lab-2-0-part-7)
+
+  ## Start Scenario
+  Once you have gone through the presentation, continue to the exercises
+icon: https://logodix.com/logo/1910931.png
+level: intermediate
+tags:
+- openshift
+owner: openshift
+developers:
+- smccarty@redhat.com
+- nvinto@redhat.com
+- akeenan@redhat.com
+- cclyburn@redhat.com
+maintenance: true
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "1631815228435239697"
