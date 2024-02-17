@@ -1,6 +1,7 @@
 slug: building-quarkus-app-consuming-microsoftsql-server-running-on-redhat-enterprise-linux
 id: b3dmslfwtbit
-title: Building Quarkus App consuming Microsoft SQL Server running on Red Hat Enterprise Linux
+title: Building Quarkus App consuming Microsoft SQL Server running on Red Hat Enterprise
+  Linux
 description: |2+
 
   # What is Quarkus?
@@ -15,13 +16,21 @@ description: |2+
 icon: https://logodix.com/logo/1910931.png
 level: beginner
 tags:
+- quarkus
+- crud_app
+- podman
+- rhel
 - openshift
-- ' quarkus'
-- ' podman'
-- ' microsoftsql'
-- ' rhel '
-- 'crud_app '
+- microsoftsql
 owner: openshift
 developers:
 - narathod@redhat.com
-checksum: "11483997414110959927"
+- ryanj@redhat.com
+- nityadav@redhat.com
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "1543719117577499336"
