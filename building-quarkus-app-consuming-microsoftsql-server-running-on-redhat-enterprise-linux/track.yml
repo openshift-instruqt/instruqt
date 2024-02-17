@@ -1,0 +1,36 @@
+slug: building-quarkus-app-consuming-microsoftsql-server-running-on-redhat-enterprise-linux
+id: b3dmslfwtbit
+title: Building Quarkus App consuming Microsoft SQL Server running on Red Hat Enterprise
+  Linux
+description: |2+
+
+  # What is Quarkus?
+
+    Quarkus has been designed with this new world in mind. The Quarkus development model morphs to adapt itself to these new types of applications that you are developing. Quarkus provides first-class support for these different paradigms.
+
+  Modern businesses need a solid data platform to quickly process large volumes of data and meet growing operational and analytical workloads. Microsoft SQL Server on Red Hat Enterprise Linux offers businesses additional flexibility, superior performance, enhanced security, and ultra-high availability. This combination provides a scalable foundation with a consistent application experience, whether deployed across bare-metal, virtual machine, container, or cloud environments.
+
+  In this blog post, you will be learning how to implement Quarkus application running on RHEL Podman container engine which implements CRUD API functionality by connecting to Microsoft SQL Server database running on Red Hat Enterprise Linux.
+
+
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- quarkus
+- crud_app
+- podman
+- rhel
+- openshift
+- microsoftsql
+owner: openshift
+developers:
+- narathod@redhat.com
+- ryanj@redhat.com
+- nityadav@redhat.com
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "1543719117577499336"

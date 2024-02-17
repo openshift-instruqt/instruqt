@@ -1,0 +1,3 @@
+#!/bin/bash
+yum install git -y
+pip3 install httpie
