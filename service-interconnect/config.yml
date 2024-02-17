@@ -1,0 +1,20 @@
+version: "3"
+virtualbrowsers:
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882354
+virtualmachines:
+- name: crc
+  image: rhd-devx-instruqt/openshift-4-14-7-97g8f
+  machine_type: n1-highmem-4
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports
+- name: rhel
+  image: rhel-cloud/rhel-9
+  shell: /bin/bash
+  machine_type: n1-highmem-4
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports

@@ -1,0 +1,51 @@
+slug: service-interconnect
+id: nrxvnbrjrvsz
+title: Build a service network with Red Hat Service Interconnect
+description: |2
+
+  In this lab you will discover how to build a service network to connect disparate services across different environments using [Red Hat Service Interconnect](https://developers.redhat.com/products/service-interconnect/overview).
+
+  ## What is Red Hat Service Interconnect?
+  [Red Hat Service Interconnect](https://developers.redhat.com/products/service-interconnect/overview) enables application and service connectivity across different environments through layer 7 addressing and routing. Using a simple command line interface, interconnections are created in a matter of minutes, avoiding extensive networking planning, and overhead. All interconnections between environments use mutual TLS(**mTLS**) to keep your organization’s infrastructure and data protected. Red Hat Service Interconnect is based on the open source [Skupper](https://skupper.io/index.html) project.
+
+  ## Lab Scenario
+  In this lab we will go through the example of a patient portal application
+  **It contains three services:**
+
+  - A web frontend service running on Kubernetes in the public cloud. It uses the PostgreSQL database and the payment-processing service.
+  - A PostgreSQL database running on a RHEL VM in a private data center.
+  - A payment-processing service running on on a RHEL VM in a private data center.
+
+   The challenge for us is now to enable the patient portal frontend to connect to the database and payment processor. For obvious reasons, we **do not want to expose the database and payment processor** over the public internet, so a private, secure link needs to be setup between the OpenShift instance  and RHEL machine in the data centre.
+
+  This can be accomplished with a VPN between the public cloud and the private data center. However, a **VPN can be hard to set up**, and **requires deep networking expertise**. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. **Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up**. It allows application Developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
+
+  ## Lab architecture
+  ![lab-arch.png](.\assets\Screenshot%202023-08-22%20at%2011.07.25%20PM.png)
+  > **Note:**
+  > Red Hat Service Interconnect is not limited to service networks between instances of OpenShift and RHEL, but can equally well be leveraged to connect deployments across OpenShift or other Kubernetes,  virtual machines or on bare metal environments
+
+
+  In the next screen, you will be guided through setting up a service network between all these services across different environments to make the patient portal functional.
+
+  Let's get started!
+icon: https://logodix.com/logo/1910931.png
+tags:
+- service-interconnect
+- skupper
+- kubernetes
+- openshift
+owner: openshift
+developers:
+- nityadav@redhat.com
+- narathod@redhat.com
+- codingsaduvu@gmail.com
+- cclyburn@redhat.com
+timelimit: 4000
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "150358785019515107"

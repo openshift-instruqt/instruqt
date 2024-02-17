@@ -1,0 +1,10 @@
+# public frontend deploy
+
+oc create ns public
+oc project public
+
+# installing skupper cli
+
+curl https://skupper.io/install.sh |sh
+cp  /root/.local/bin/skupper /usr/local/bin/
+skupper

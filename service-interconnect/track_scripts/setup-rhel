@@ -1,0 +1,9 @@
+#!/bin/bash
+dnf install -y container-tools
+sudo useradd user1 && echo 'user1:skupper' | sudo chpasswd
+whoami
+su user1 -c 'echo "skupper" | curl https://skupper.io/install.sh | sh'
+cat >> /root/.bashrc <<-EOF
+su - user1 -c 'systemctl --user enable podman.socket --now' >/dev/null 2>&1
+EOF
+su - user1
