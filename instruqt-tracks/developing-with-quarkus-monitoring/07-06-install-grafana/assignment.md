@@ -109,7 +109,7 @@ http://origin-grafana-quarkus.crc-lgph7-master-0.crc.ihd2pmeddknj.instruqt.io
   - Username: `admin`
   - Password: `admin`
 
-![Grafana UI](../assets/login-grafana.png)
+![Grafana UI](..\assets\login-grafana.png)
 
 Once logged into Grafana you are required to provide a new password.
 
@@ -117,7 +117,7 @@ Once logged into Grafana you are required to provide a new password.
 
 `Step 7:` At the change password prompt, enter and confirm a new password as shown in the figure below.
 
-![Grafana UI](../assets/change-grafana-password.png)
+![Grafana UI](..\assets\change-grafana-password.png)
 
 The next task is to add Prometheus to Grafana as a data source.
 
@@ -125,13 +125,13 @@ The next task is to add Prometheus to Grafana as a data source.
 
 Upon your successful login, you’ll land on the Welcome to Grafana page as shown in the figure below.
 
-![Grafana UI](../assets/welcome-to-grafana-01.png)
+![Grafana UI](..\assets\welcome-to-grafana-01.png)
 
 ----
 
 `Step 8:` From within the Welcome to Grafana page, click the **Add your first data source** text block as shown in the figure below.
 
-![Grafana UI](../assets/welcome-to-grafana-02.png)
+![Grafana UI](..\assets\welcome-to-grafana-02.png)
 
 A searchable list of common data sources will appear.
 
@@ -139,7 +139,7 @@ A searchable list of common data sources will appear.
 
 `Step 9a:` Type the text `Prometheus` in the search text box as shown in the figure below:
 
-![Grafana UI](../assets/select-prometheus.png)
+![Grafana UI](..\assets\select-prometheus.png)
 
 The Prometheus text block will appear.
 
@@ -155,7 +155,7 @@ The Prometheus configuration page will appear.
 http://prometheus:9090
 ```
 
-![Configure Prometheus UI](../assets/configure-prometheus-in-grafana.png)
+![Configure Prometheus UI](..\assets\configure-prometheus-in-grafana.png)
 
 The URL `http://prometheus:9090` is the host name and port of running Prometheus in the OpenShift application namespace.
 
@@ -168,7 +168,7 @@ The URL `http://prometheus:9090` is the host name and port of running Prometheus
 
 When Prometheus is correctly confirmed in the web page, you'll see a success message `Data source is working` after you click the `Save & test` as shown below.
 
-![Data source is working](../assets/datasource-is-working.png)
+![Data source is working](..\assets\datasource-is-working.png)
 
 # Congratulations!
 

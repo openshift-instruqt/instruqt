@@ -46,7 +46,7 @@ In this topic, you will create a demonstration project in OpenShift and then con
 
 Be advised that there are a lot of detailed figures in this topic, as well as the other topics in this track. **Remember** that you can enlarge a figure for better viewing by sliding the content window to the left, as shown in the figure below.
 
-![Expand window](../assets/expand-instruqt-window.png)
+![Expand window](..\assets\expand-instruqt-window.png)
 
 # Logging into OpenShift
 

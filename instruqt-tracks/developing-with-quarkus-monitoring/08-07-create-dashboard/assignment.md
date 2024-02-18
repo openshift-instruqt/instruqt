@@ -24,7 +24,7 @@ In this topic, you will create a Grafana dashboard that uses metric data capture
 
 Be advised there are a lot of detailed figures in this topic. **Remember**: You can enlarge a figure for better viewing by sliding the content window to the left, as shown in the figure below.
 
-![Expand window](../assets/expand-instruqt-window.png)
+![Expand window](..\assets\expand-instruqt-window.png)
 
 # Generating data for the new Grafana dashboard
 
@@ -46,7 +46,7 @@ done
 
 `Step 2:` Go to the upper left of the Grafana web page, hover over the `+` button on the left, and then select **Dashboard** as shown in the figure below.
 
-![Add dashboard](../assets/add-dashboard-02.png)
+![Add dashboard](..\assets\add-dashboard-02.png)
 
 The `New dashboard` page will appear.
 
@@ -54,11 +54,11 @@ The `New dashboard` page will appear.
 
 `Step 3:` Click the text block labeled `Add a new panel` as shown in the figure below.
 
-![Add panel](../assets/add-panel.png)
+![Add panel](..\assets\add-panel.png)
 
 The panel configuration page will appear as shown in the figure below.
 
-![Panel configuration](../assets/panel-configuration.png)
+![Panel configuration](..\assets\panel-configuration.png)
 
 Each panel in a Grafana dashboard visualizes a computed metric. The metric can be either a single metric or a more complex query.
 
@@ -68,7 +68,7 @@ You will start by configuring the panel to display the data for the `prime_numbe
 
 `Step 4a:` In the configuration page for the new Grafana panel, scroll to the bottom of the page and press the client arrow to the right of the label **Metrics browser**, as shown in the figure below. You'll then see the text box labeled `1. Select a metric`.
 
-![Select prime metric](../assets/config-grafana-01.png)
+![Select prime metric](..\assets\config-grafana-01.png)
 
 `Step 4b:` Enter the string `prime` in the `Select a metric` textbox. You'll be presented with a list of metrics that have the term `prime`.
 
@@ -87,7 +87,7 @@ You will start by configuring the panel to display the data for the `prime_numbe
 
 The completed panel will be added to the Grafana dashboard as shown in the figure below.
 
-![Completed dashboard](../assets/completed-panel.png)
+![Completed dashboard](..\assets\completed-panel.png)
 
 |NOTE|
 |----|
@@ -101,7 +101,7 @@ You just created a panel that displays the `prime_number_test_seconds_max` metri
 ----
 `Step 5a:` Hover your mouse to the right of the `Panel Title` caption in the Dashboard page where the new panel you just created is displayed, as shown in the figure below. A down arrow will appear. Click it and select the `Edit Item` as shown in the figure below.
 
-![Edit Panel](../assets/edit-panel.png)
+![Edit Panel](..\assets\edit-panel.png)
 
 
 `Step 5b:` Click the Edit option from the dropdown that appears, as shown in the figure above.
@@ -115,7 +115,7 @@ The Edit panel lets you fine tune the display. Next you'll edit the **Title** an
 `Step 6a:` In the Edit panel page, go to the **Panel options** section and add the string `Prime Numbers - Max # of Seconds To Complete` to the **Title** text box as shown in the figure below.
 
 
-![Add data to edit](../assets/add-data-to-edit.png)
+![Add data to edit](..\assets\add-data-to-edit.png)
 
 `Step 6b:` Then, add the text `Reports the maximum number of seconds taken to calculate a prime number.` to the **Description** text box as shown in the figure above.
 
@@ -129,7 +129,7 @@ The next task is to name the dashboard.
 
 `Step 7a:` Click the disk icon at the upper right of the Dashboard page as shown in the figure below.
 
-![Save Dashboard](../assets/save-dashboard.png)
+![Save Dashboard](..\assets\save-dashboard.png)
 
 `Step 7b:` In the **Dashboard name** text box, enter the title `Prime Numbers Dashboard`.
 
@@ -147,7 +147,7 @@ The steps that follow describe how to add a new panel to a dashboard.
 
 `Step 8a:` In the current dashboard page click the **Add panel** icon as shown in the figure below:
 
-![Add more panels](../assets/add-more-panels.png)
+![Add more panels](..\assets\add-more-panels.png)
 
 The **Select panel** page will appear.
 
@@ -165,7 +165,7 @@ The follow steps demonstrate how to set a custom time range from a time you deci
 
 `Step 9a:` In the Prime Numbers Dashboard, select the date-time range drop down in the upper right of the web page as shown in the figure below. (By default, Grafana displays metric data collected during the last six hours.)
 
-![Adjust time](../assets/adjust-time.png)
+![Adjust time](..\assets\adjust-time.png)
 
 A dialog will appear. You can select predefined date-time ranges from the dialog, for example **Last 5 minutes**, **Last 15 minutes**, **Last 30 minutes**, etc.
 
@@ -189,7 +189,7 @@ You might want to take the time to exercise what you've just learned. Try adding
   - The RSS Memory using the `process_resident_memory_bytes` metric. (Set the panel title to `RSS Memory`.)
   - To see the quantile metrics, create another panel using the `prime_number_test_seconds_bucket` metric. When you select that metric, Grafana will notice that you want a histogram panel. You'll be presented with helpful tips demonstrating how to show the 95% quantile. The histogram graph will update to show the 95% quantile of the time it takes to evaluate whether a number is prime or not.
 
-![Histrogram](../assets/histrogram-panel.png)
+![Histrogram](..\assets\histrogram-panel.png)
 
 
 # Congratulations!
