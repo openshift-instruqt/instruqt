@@ -1,0 +1,5 @@
+#!/bin/bash
+podman stop --all
+podman rm --all
+podman run --name ubi9 -it registry.access.redhat.com/ubi9/ubi bash
+podman image list
