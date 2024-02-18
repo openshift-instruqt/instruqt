@@ -43,7 +43,7 @@ First, you need a data model.
 
 `Step 3:` Click the `Create File` icon in the **Visual Editor** at directory `fruit-taster/src/main/java/org/acme/` and create a new file named `Fruit.java`  as shown in the figure below.
 
-![Create fruit.java](../assets/create-fruit-java.png)
+![Create fruit.java](..\assets\create-fruit-java.png)
 
 ----
 

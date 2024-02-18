@@ -235,13 +235,13 @@ As mentioned previously, OpenShift ships with a web-based console that will allo
 
 `Step 10:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the terminal window to the left. You'll be presented with a login dialog as shown in the figure below.
 
-![Login](../assets/web-console-login.png)
+![Login](..\assets\web-console-login.png)
 
 
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to grant permission to access the OpenShift Web Console.|
 
 ----
@@ -265,7 +265,7 @@ You'll be presented with the Developer perspective when you login.
 
 `Step 14:` Click the `quarkus-spring` project link as shown in the figure below.
 
-![Topology View 1](../assets/topology-view-01.png)
+![Topology View 1](..\assets\topology-view-01.png)
 
 You'll be presented with the Topology page for the `quarkus-spring`.
 
@@ -273,7 +273,7 @@ You'll be presented with the Topology page for the `quarkus-spring`.
 
 The Topology page for the `quarkus-spring` has two circular graphics as shown in the figure below.
 
-![Openshift UI](../assets/open-shift-ui.png)
+![Openshift UI](..\assets\open-shift-ui.png)
 
 
 One graphic represents to the Fruit Taster demonstration application. The other circular graphic represents the Postgres database that's storing the fruit data. When you click on the center of the Fruit Taster graphic an information page will slide out from the right side of the web console.
@@ -315,7 +315,7 @@ deployment.apps/fruit-taster scaled
 
 `Step 17:` Click the center of the circular graphic for the Fruit Taster in the **Topology** view of the web console as shown in the figure below.
 
-![Scaling Up 1](../assets/scaling-up-01.png)
+![Scaling Up 1](..\assets\scaling-up-01.png)
 
 
 The information page for the Fruit Taster app will slide out from the right side.
@@ -324,7 +324,7 @@ The information page for the Fruit Taster app will slide out from the right side
 
 `Step 18:` Click the **Details** tab in the horizontal menu bar of the Fruit Taster information page as shown in figure below.
 
-![Scaling Up 2](../assets/scaling-up-02.png)
+![Scaling Up 2](..\assets\scaling-up-02.png)
 
 Notice that the there is another circular graphic indicating that 10 instances of the Fruit Taster app are running as shown in the figure above.
 
