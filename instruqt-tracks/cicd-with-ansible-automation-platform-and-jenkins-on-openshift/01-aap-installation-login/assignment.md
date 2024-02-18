@@ -21,17 +21,13 @@ notes:
 
 
 tabs:
-- title: Terminal 1
+- title: Terminal
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
-  type: code
-  hostname: container
-  path: /root/backend
 difficulty: basic
 timelimit: 1000
 ---
@@ -99,7 +95,9 @@ Log in to the OpenShift Web Console using the admin account.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_search.png?raw=true)
 
-- Click on "Install."
+- Click on **Install**. Later on choose the version of AAP from cluster-scoped or stable.
+> [!NOTE]
+> For better compatibility choose new version of AAP
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_install_button2.png?raw=true)
 
@@ -133,7 +131,7 @@ resource-operator-controller-manager-57b5b58667-phmlh             2/2     Runnin
 
 Next, to configure Ansible Automation Platform, create an instance of **Automation Controller** from the installed operator.
 
-Go to installed operators; you will find Ansible Automation Platform there. Click on it. A couple of options will appear; select **Automation Controller**, click on it, and create an Automation Controller. Give a name to the automation controller. Change "example" to **cd-ansible**.
+Go to installed operators; you will find Ansible Automation Platform there. Click on it. A couple of options will appear; select **Automation Controller**, click on it, and create an Automation Controller. Give a name to the automation controller. Change "example" to **ansible**.
 
 Leave everything default & click on create.
 
@@ -159,9 +157,9 @@ resource-operator-controller-manager-57b5b58667-phmlh             2/2     Runnin
 To access the UI of the Ansible Automation Platform, we need to run a few commands:
 
 ```
-export SA_SECRET=cd-ansible
+export SA_SECRET=ansible
 ```
-Here, my automation controller name is **cd-ansible**. Please replace the name with your automation controller name.
+Here, my automation controller name is **ansible**. Please replace the name with your automation controller name.
 
 ```
 oc get route -n aap | grep $(echo ${SA_SECRET}) | awk '{print$2}'

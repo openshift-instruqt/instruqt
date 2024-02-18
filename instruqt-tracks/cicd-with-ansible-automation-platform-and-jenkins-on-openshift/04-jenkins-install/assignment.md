@@ -3,18 +3,19 @@ slug: jenkins-install
 id: nztpivixukj5
 type: challenge
 title: Step 3 - Jenkins Installation
+notes:
+- type: text
+  contents: |-
+    # Jenkins Setup
+    In this challenge, we'll delve into the process of setting up the Jenkins pod from the developers catalog.
 tabs:
-- title: Terminal 1
+- title: Terminal
   type: terminal
-  hostname: container
+  hostname: crc
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
-  type: code
-  hostname: container
-  path: /root/backend
 difficulty: basic
 timelimit: 1000
 ---
@@ -26,9 +27,9 @@ Log in to the OpenShift dashboard. Select the Developer perspective and right-cl
 
 Select Jenkins, which has extra permissions because RBAC permission is required for this task.
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_catalog_search1.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_catalog_search1.png?raw=true)
 
-![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continuous-delivery-demo/blob/main/assets/jenkins_install2nd.png?raw=true)
+![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_install2nd.png?raw=true)
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_install3nd.png?raw=true)
 
@@ -49,7 +50,13 @@ To enable continuous build and push, we need to create a build config here using
 ```
 oc project dev-game-app
 ```
-Before executing the following command, make sure you replace the image name with your container registry.
+> [!IMPORTANT]
+> If you already have an account of container registry such as Quay.io or Dockerhub, use the credentials in the following steps.
+> If you don't have one, kindly visit [quay.io](https://quay.io/) and create an account.
+
+Before executing the following command, ensure that you replace the image with your container registry.
+
+Example :  `name: quay.io/nagesh-redhat/cd:latest`
 ```
  cat <<EOF | oc create -f -
 apiVersion: build.openshift.io/v1
@@ -74,7 +81,7 @@ spec:
       dockerfilePath: Dockerfile
 EOF
 ```
-Now, create a secret for image building. This secret will help the image to push to the Quay container registry. If you don't have a Quay.io container registry account, check [**here**](https://docs.quay.io/guides/create-repo.html#:~:text=via%20the%20UI-,To%20create%20a%20repository%20in%20the%20Quay.io%20UI%2C%20click,the%20'Create%20Repository'%20button.). Replace the credentials with your container registry account in the following command:
+Now, create a secret for image building. This secret will help the image to push to the Quay container registry. Replace the credentials with your container registry account in the following command:
 
 ```
 oc create secret docker-registry my-secret --docker-server=quay.io --docker-username=<your-container-registry-id>  --docker-password=xxx
@@ -93,6 +100,9 @@ For pipeline creation, go to New Item, select Pipeline, and give a name to that 
 Let’s configure the Continuous Integration pipeline.
 Scroll down in the pipeline section and select the Pipeline script from SCM.
 
+> [!IMPORTANT]
+> Kindly provide the URL of  your forked GitHub repository here.
+
 SCM: Git
 
 Repository URL:
@@ -105,6 +115,7 @@ Branch: `*/main`
 
 
 Script Path: `Jenkinsfile`
+
 
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_filled_pipe.png?raw=true)
