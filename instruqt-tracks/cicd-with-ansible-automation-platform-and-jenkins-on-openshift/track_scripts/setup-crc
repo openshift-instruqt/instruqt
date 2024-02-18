@@ -229,5 +229,19 @@ do
     sleep 6
 done
 
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
+
+# public frontend deploy
+
+# oc create ns public
+# oc project public
+
+# # installing skupper cli
+
+# curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/service-interconnect/assets/install.sh |sh
+# cp  /root/.local/bin/skupper /usr/local/bin/
+# skupper
+
+
 echo $(date)
 echo "### Boostrap END ###"
