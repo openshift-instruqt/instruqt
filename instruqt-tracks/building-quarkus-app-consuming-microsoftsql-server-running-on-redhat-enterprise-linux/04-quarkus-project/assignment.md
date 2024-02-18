@@ -10,13 +10,6 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: rhel
-- title: Terminal 3
-  type: terminal
-  hostname: rhel
-- title: Visual Editor
-  type: code
-  hostname: rhel
-  path: /root
 difficulty: intermediate
 timelimit: 1000
 ---
@@ -28,7 +21,7 @@ timelimit: 1000
 
 
 
-**### 3.1. CRUD Application Flow Diagram**
+### **3.1. CRUD Application Flow Diagram**
 
 
 
@@ -42,7 +35,7 @@ timelimit: 1000
 
 
 
-**## 3.2. Quarkus App API Connectivity with Database**
+## **3.2. Quarkus App API Connectivity with Database**
 
 
 
@@ -61,17 +54,11 @@ Following is a snapshot of quarkus project directory.
 
 
 
-**### 3.3. Run the application**
+### **3.3. Run the application**
 
 
 
 Clone the following Git repository in the **Terminal 1** window to create the CRUD quarkus project.
-
-Install the git first
-
-```
-yum install git -y
-```
 
 ```
 git clone https://github.com/redhat-developer-demos/quarkus-crud-mssql.git
@@ -83,14 +70,10 @@ To run quarkus application you have to first check out on application folder whi
 
 
 ```
-cd quarkus-crud-mssql
+cd quarkus-crud-mssql && quarkus dev
 ```
 
-After this, you have to run a command with help of quarkus CLI
 
-```
-quarkus dev
-```
 
 ![](https://lh5.googleusercontent.com/FngStSZxP8kiqNz5gUM10eTDYwFjOqXRD17GSQN07UjysAJhOlbzL6-lyEXmoeF4swnWYJ4UvE2jhyiahaEPw4lf0FgqV-GjBvWOrhFw4D04pGwk0ZnrugQsyKBZAMHZ2criS0pjDh5ipz4_9LXS3HAWHucuxTfsFQPtxLwdE7lYr39MNuIcWXZsEufh)
 
@@ -101,15 +84,17 @@ When in the terminal you will get the output like shown above.  You are good to 
 
 **Open Terminal 2**
 
-Let's install http cli
+
+
+1. ### Create a new person
 
 ```
-sudo pip3 install httpie
+http POST :8080/person firstName=Carlos lastName=Santana salutation=Mr
 ```
 
+![](https://lh4.googleusercontent.com/tGIyb5psKftQSsZfvNuNwfAf71nyEzKVJCYBZiQj0GZRNGEoo4s0n3YSUb1YXFdC4t3CLy9WkatIKkD3odYOlLvpeB65eNKCFAWPeK98K5362gP5oZZ0msq65kx_QcnBEvG2U-qHVlDAXo9Qhzk6JsEZ4H0lsL9uzbfMgADyVOJGSfjMc4y90OHbt-ms)
 
-
-### List a new person
+2. ### List a person
 
 
 ```
@@ -125,20 +110,8 @@ http :8080/person
 
 
 
-### Create a new person
 
-```
-http POST :8080/person firstName=Carlos lastName=Santana salutation=Mr
-```
-
-![](https://lh4.googleusercontent.com/tGIyb5psKftQSsZfvNuNwfAf71nyEzKVJCYBZiQj0GZRNGEoo4s0n3YSUb1YXFdC4t3CLy9WkatIKkD3odYOlLvpeB65eNKCFAWPeK98K5362gP5oZZ0msq65kx_QcnBEvG2U-qHVlDAXo9Qhzk6JsEZ4H0lsL9uzbfMgADyVOJGSfjMc4y90OHbt-ms)
-
-
-
-
-
-
-### Updating an existing person
+3. ### Updating an existing person
 
 ```
 http PUT :8080/person/1 firstName=Jimi lastName=Hendrix
@@ -157,7 +130,7 @@ http PUT :8080/person/1 firstName=Jimi lastName=Hendrix
 
 
 
-### Deleting an existing person
+4. ### Deleting an existing person
 
 ```
 http DELETE :8080/person/1
@@ -168,8 +141,6 @@ http DELETE :8080/person/1
 
 ![](https://lh5.googleusercontent.com/GoieZ_esZkVBDnc22SR0uR_kJ_Kbsx6nE90xENZ4LTmvp2aegzT096N78evYVWsKoqv9VQ-lZZyg3hufOpMajHQGmoe_ULB4d05jebdajHLahjlXWnNSAagjTBOOVEMPK6RyQStogjybaLAlEoloEz4Z1gb6ZQvrcQHeqcWZiNF2giKkfEJ9E7jBO2d4)
 
-
-**Open Terminal 3**
 
 
 
