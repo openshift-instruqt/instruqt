@@ -10,13 +10,6 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: rhel
-- title: Terminal 3
-  type: terminal
-  hostname: rhel
-- title: Visual Editor
-  type: code
-  hostname: rhel
-  path: /root
 difficulty: intermediate
 timelimit: 300
 ---
@@ -26,13 +19,9 @@ timelimit: 300
 ### 4. Containerize the Quarkus App using Podman
 
 
-With the help of podman, we will containerize the quarkus application so that it becomes more portable and ready to be deployed on Kubernetes (OpenShift).
+With the help of podman, we will containerize the quarkus application so that it becomes more portable and ready to be deployed on Podman / Kubernetes (OpenShift).
 
-Install podman by using following command
 
-```
-dnf install podman -y
-```
 
 For that, we need to first create an image of it. Before creating a container image, we need to run one maven command which creates all the dependency files we want while creating the image.
 
