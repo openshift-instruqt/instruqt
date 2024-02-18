@@ -134,7 +134,7 @@ You will be presented with the OpenShift Web Console login screen in a new brows
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift web console.|
 
 ----
@@ -148,7 +148,7 @@ If you do get the warning, click the **Advanced** button to complete the process
 
 `Step 7a:` Using the web console, go to the `Topology` view in the **Developer** perspective as shown in the figure below.
 
-![Select Topology](../assets/select-topology.png)
+![Select Topology](..\assets\select-topology.png)
 
 `Step 7b:` Select the `quarkus` listing in the project page that appears, as shown in the figure above.
 
