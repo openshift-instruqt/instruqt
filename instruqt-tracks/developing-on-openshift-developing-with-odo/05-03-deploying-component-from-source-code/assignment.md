@@ -120,19 +120,19 @@ You can also follow the status of your container creation in the OpenShift web c
 
 Depending on how far along your `odo push` is, you might see the pod for the `frontend` component starting up with a light blue ring as shown below.
 
-![Frontend Pending](../assets/frontend-pending.png)
+![Frontend Pending](..\assets\frontend-pending.png)
 
 A light blue ring means the pod is in a pending state and hasn't started yet.
 
 Once the pod becomes available, you'll see the `frontend` component become available with a dark blue ring around it like the `backend` component has. This is shown below:
 
-![Frontend Running](../assets/frontend-running.png)
+![Frontend Running](..\assets\frontend-running.png)
 
 ----
 
 `Step 6a:` Click on the `frontend` component circle. This will bring up the deployment config for `frontend` and present the option to **View Logs** under the **Pods** section. This is shown below:
 
-![Frontend Logs](../assets/frontend-logs.png)
+![Frontend Logs](..\assets\frontend-logs.png)
 
 `Step 6b:` Click on **View logs** where you should eventually see the following logs confirming that the `frontend` is running:
 
