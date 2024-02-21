@@ -34,17 +34,17 @@ You will be presented with the OpenShift login screen. Use the following credent
 
 Log into the OpenShift web console, as shown in the figure below.
 
-![Web Console Login](../assets/web-console-login.png)
+![Web Console Login](..\assets\web-console-login.png)
 
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 After logging into the web console, take a look a the menu on the left. Notice that you're in the **Administrator** perspective, as shown in the figure below:
 
-![Admin Perspective](../assets/admin-perspective.png)
+![Admin Perspective](..\assets\admin-perspective.png)
 
 You need to change the perspective from **Administrator** to **Developer**.
 
@@ -52,7 +52,7 @@ You need to change the perspective from **Administrator** to **Developer**.
 
 `Step 2:` Select the **Developer** perspective from the dropdown on the left side menu in the OpenShift web console as shown in the figure below.
 
-![Switch to Developer](../assets/change-to-developer.png)
+![Switch to Developer](..\assets\change-to-developer.png)
 
 Now that you're in the **Developer** perspective, let's take a moment to discuss the concept of a **project** in OpenShift.
 
@@ -80,7 +80,7 @@ Click the button labeled **+Add** on the menu bar on the left side of the Web Co
 
 `Step 4:` Click the link with the text **Create a project** as shown in the figure below:
 
-![Create project](../assets/add_project.png)
+![Create project](..\assets\add_project.png)
 
 You'll be presented with the **Add Project** dialog for declaring the project.
 
@@ -88,7 +88,7 @@ You'll be presented with the **Add Project** dialog for declaring the project.
 
 `Step 5:` Name the project `myproject` as shown in the figure below:
 
-![Name project](../assets/config-project.png)
+![Name project](..\assets\config-project.png)
 
 ----
 
@@ -96,7 +96,7 @@ You'll be presented with the **Add Project** dialog for declaring the project.
 
 You will be presented with the **Add** page as shown in the figure below.
 
-![Select container](../assets/select-container-with-code.png)
+![Select container](..\assets\select-container-with-code.png)
 
 ----
 
@@ -105,7 +105,7 @@ You will be presented with the **Add** page as shown in the figure below.
 
 You'll be presented with the **Deploy Image** page as shown in the figure below.
 
-![Deploy Image](../assets/deploy-container.png)
+![Deploy Image](..\assets\deploy-container.png)
 
 ----
 
@@ -125,7 +125,7 @@ After you create the application, you will be presented with the **Topology** vi
 
 You will spend most of your time in the remainder of this tutorial in that perspective.
 
-![Topology View with App](../assets/topology-view-with-app.png)
+![Topology View with App](..\assets\topology-view-with-app.png)
 
 You are now ready to scale the application up and down.
 
