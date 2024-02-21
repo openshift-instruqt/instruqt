@@ -26,7 +26,7 @@ In this topic, you will learn how to view a deployment's logs from within the Op
 
 Make sure you are in the Topology overview page in the OpenShift web console. You'll see the graphic for the Python application deployment.
 
-![App Topology](../assets/app-topology-python.png)
+![App Topology](..\assets\app-topology-python.png)
 
 ----
 
@@ -38,11 +38,11 @@ You'll see a button on the lower right with the label, **View logs**.
 
 `Step 3:` Click the **View logs** button as shown in the figure below.
 
-![View Logs 1](../assets/view-logs-01.png)
+![View Logs 1](..\assets\view-logs-01.png)
 
 When you click the **View logs** button, you'll be presented with a panel that displays a continuous stream of log data, as shown in the figure below.
 
-![View Logs 2](../assets/view-logs-02.png)
+![View Logs 2](..\assets\view-logs-02.png)
 
 Viewing the deployment logs allows you to monitor the progress of the build as it runs. When the build completes successfully, you see a final message, "Push successful". This indicates that the container image for the application was pushed to the OpenShift internal image registry, and the application is up and running.
 
