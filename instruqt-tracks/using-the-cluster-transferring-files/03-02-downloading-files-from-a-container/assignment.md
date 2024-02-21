@@ -131,7 +131,7 @@ Remember: The output shown above is special to this running instance of OpenShif
 
 Copy the URL returned in the output above and then copy it into a browser. The URL will take you to the SimpleMessage application's web page as shown in the figure below.
 
-![Original Web Sites](../assets/original-web-output.png)
+![Original Web Sites](..\assets\original-web-output.png)
 
 ----
 
