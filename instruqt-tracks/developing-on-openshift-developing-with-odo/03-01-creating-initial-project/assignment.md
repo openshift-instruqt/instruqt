@@ -39,14 +39,14 @@ You will deploy the OpenShift application as the `developer` user according to t
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 ----
 
 `Step 2:`  Enter the **Username**: `developer` and **Password**: `developer` credentials into the login page as shown in the figure below.
 
-![Web Console Login](../assets/web-console-login.png)
+![Web Console Login](..\assets\web-console-login.png)
 
 ----
 Now let's log into OpenShift from the command line in the terminal window to the left.
@@ -120,7 +120,7 @@ Alternatively, you can do this task using the OpenShift web console.
 `Step 6:` After logging into the web console, select the web console's **Administrator** perspective as shown below.
 
 
-![Select Admim](../assets/select-admin.png)
+![Select Admim](..\assets\select-admin.png)
 
 The **Administrator** perspective is a view of the console for handling operations and administrative tasks associated with your OpenShift cluster.
 
@@ -128,7 +128,7 @@ The **Administrator** perspective is a view of the console for handling operatio
 
 The figure below illustrates the steps you will take to work with the OpenShift website in order to create a RoleBinding. The instructions will follow.
 
-![Create Rolebinding](../assets/create-rolebinding.png)
+![Create Rolebinding](..\assets\create-rolebinding.png)
 
 `Step 7a:` In the OpenShift web console, select the project you just created using `odo` (i.e. `myproject`) by clicking on `myproject` on the **Projects** tab on the left-hand menu item. The Project Details page will appear.
 
@@ -146,7 +146,7 @@ Now you're going to configure the RoleBinding.
 
 The figure below illustrates the steps you will take to configure a RoleBinding. The instructions will follow.
 
-![Configure RoleBinding](../assets/config-rolebinding-01.png)
+![Configure RoleBinding](..\assets\config-rolebinding-01.png)
 
 `Step 8a:` Click the **Create binding** button to display the **Create RoleBinding** web page that you'll use to configure the RoleBinding.
 

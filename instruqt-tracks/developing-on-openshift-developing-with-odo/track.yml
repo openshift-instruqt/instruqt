@@ -35,11 +35,13 @@ developers:
 - doh@redhat.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
+maintenance: true
 idle_timeout: 400
 timelimit: 3600
 lab_config:
   overlay: false
   width: 25
   position: right
+  feedback_recap_enabled: true
   loadingMessages: true
-checksum: "8923808122687983908"
+checksum: "17550340135209974011"
