@@ -46,7 +46,7 @@ The new endpoint will be `/hello/greeting/{name}`. You will substitute a value o
 
 `Step 3:` Create the file `GreetingService.java` by clicking the **New File** icon as shown in the figure below.
 
-![Create Icon](../assets/create-icon.png)
+![Create Icon](..\assets\create-icon.png)
 
 ----
 
@@ -69,7 +69,7 @@ public class GreetingService {
 
 `Step 4b:` Save the `GreetingService.java` file by clicking the **Save File** icon as shown in the figure below:
 
-![Save Service](../assets/save-service.png)
+![Save Service](..\assets\save-service.png)
 
 ----
 
@@ -152,7 +152,7 @@ Let's add another test for Quarkus to run continuously. The new test will exerci
 
 `Step 10:` Click the **New File** icon and create a file named `GreetingServiceTest.java` as shown in the figure below.
 
-![Create Test File](../assets/create-test-file.png)
+![Create Test File](..\assets\create-test-file.png)
 
 ----
 
@@ -214,7 +214,7 @@ The Developer Runtime Console will appear.
 
 `Step 12c:` Click the **Power** icon on the right side of the Developer Runtime Console as shown in the figure below at Callout 2.
 
-![Developer Runtime Console](../assets/run-dev-ui-test.png)
+![Developer Runtime Console](..\assets\run-dev-ui-test.png)
 
 Clicking the **Power** icon will run the unit tests in the Quarkus API application. You'll see an `All tests passed` message in a green font at the right side of the Developer Runtime Console as shown in the figure above at Callout 3.
 

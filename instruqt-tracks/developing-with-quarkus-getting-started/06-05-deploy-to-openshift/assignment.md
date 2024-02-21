@@ -61,7 +61,7 @@ You'll get output similar to the following:
 
 When you go get to the **OpenShift Web Console** you'll be presented with a login page as shown in the figure below.
 
-![Web Console](../assets/web-console-login.png)
+![Web Console](..\assets\web-console-login.png)
 
 ----
 `Step 3:`  Login to the **OpenShift Web Console** using the following credentials.
@@ -72,7 +72,7 @@ When you go get to the **OpenShift Web Console** you'll be presented with a logi
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 ----
@@ -184,7 +184,7 @@ The application is now deployed and running in OpenShift. You can now view it in
 
 `Step 8b:` Click the **Topology** tab on the left side of the web console as shown in the figure below:
 
-![Show Application in Topology view](../assets/show-app-in-topology.png)
+![Show Application in Topology view](..\assets\show-app-in-topology.png)
 
 `Step 8c:` Click the **quarkus** link in the Topology view's Project page as shown in the figure above. A circular graphic will appear. This graphic represents the Getting Started application.
 
