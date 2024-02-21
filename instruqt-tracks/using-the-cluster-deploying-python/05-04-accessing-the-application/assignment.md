@@ -25,7 +25,7 @@ In the previous topics, you built and deployed the Python application. In this t
 
 Click on **Topology** button in the left-hand menu bar to return to the topology view for the project.
 
-![Topology View](../assets/topology.png)
+![Topology View](..\assets\topology.png)
 
 As you read in a previous topic, when you created the application using the web console, an OpenShift `route` was automatically created for the application. The `route` exposed the application outside of the cluster to the Internet. You'll use the `route`'s URL created by OpenShift to access the application from a web browser window.
 
@@ -33,7 +33,7 @@ As you read in a previous topic, when you created the application using the web 
 
 `Step 2a:` Click on the icon at the top right of the ring in the application visualization, as shown in the figure below, to quickly access the URL for the deployed application in the Topology view.
 
-![App Running](../assets/app-running.png)
+![App Running](..\assets\app-running.png)
 
 Make sure the ring surrounding the Python logo is dark blue.
 
@@ -41,7 +41,7 @@ Make sure the ring surrounding the Python logo is dark blue.
 
 Clicking the icon will open a new tab in your browser that displays a blog website page, as shown in the figure below.
 
-![Blog Web Site](../assets/blog-web-page.png)
+![Blog Web Site](..\assets\blog-web-page.png)
 
 This website is driven by the Python application you built from the source code in GitHub and deployed using the OpenShift web console.
 
