@@ -109,7 +109,7 @@ As you can see, there are some files in the project that have already been prepa
 
 For example, under `src/main/resources/META-INF/resources` you'll see the `HTML` file as shown in the figure below.
 
-![File system](../assets/file-system.png)
+![File system](..\assets\file-system.png)
 
 The `HTML` file represents the demonstration application's web site.
 
@@ -153,7 +153,7 @@ You will to create a Person entity that has these fields.
 
 `Step 8:` Go to the **Visual Editor** tab and use the directory tree to navigate to the file `Person.java` in the directory `src/main/java/org/acme/person/model` as shown in the figure below.
 
-![Person Entity](../assets/person-entity.png)
+![Person Entity](..\assets\person-entity.png)
 
 ----
 
@@ -198,7 +198,7 @@ public class Person extends PanacheEntity {
 
 `Step 11:` Click on the `Disk` icon or press `CTRL+S` keys to save the file as shown in the figure below:
 
-![Save File](../assets/save-file.png)
+![Save File](..\assets\save-file.png)
 
 |NOTE:|
 |----|
@@ -218,7 +218,7 @@ However, there is no definition for eye color. You'll need to create the Java fi
 
 `Step 13:` Click the `New File` icon to the right of the `src/main/java/org/acme/person/model/` directory to open a new file. Name the file `EyeColor.java` as shown in the figure below.
 
-![Create file](../assets/create-eye-color.png)
+![Create file](..\assets\create-eye-color.png)
 
 ----
 

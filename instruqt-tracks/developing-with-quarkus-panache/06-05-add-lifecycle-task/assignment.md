@@ -39,7 +39,7 @@ No shut down behavior will be implemented at this time. However, the concept and
 
 `Step 2:` Navigate to the file `src/main/java/org/acme/person/PersonResource.java` in the Visual Editor's directory tree and click the file named `PersonResource.java` to open it for editing as shown in the figure below.
 
-![Select Person Resource](../assets/select-personresource.png)
+![Select Person Resource](..\assets\select-personresource.png)
 
 ----
 `Step 3:` Add the following code to the file `PersonResource.java`, placing the code **after** the comment line: `//TODO: Add lifecycle hook`:

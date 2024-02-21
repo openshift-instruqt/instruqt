@@ -35,11 +35,11 @@ In this topic you will exercise the demonstration application using the front-en
 
 `Step 2:` Click the **Topology** tab on the left side on the OpenShift web console. Then, click on the `Open URL` icon in the circular People graphic as shown in the figure below.
 
-![Topology view](../assets/select-route-url.png)
+![Topology view](..\assets\select-route-url.png)
 
 You'll be taken to the demonstration application's Web UI as shown in the figure below.
 
-![Web Console Overview](../assets/database-gui.png)
+![Web Console Overview](..\assets\database-gui.png)
 
 Notice the total number of records reported at the bottom of the figure shown above.
 
@@ -47,7 +47,7 @@ Notice the total number of records reported at the bottom of the figure shown ab
 
 `Step 3:` Type in the word `Gravel` in the search box of the web UI. You will get a response similar to the one shown in the figure shown below.
 
-![Query result](../assets/gravel-query.png)
+![Query result](..\assets\gravel-query.png)
 
 It's important to remember that rather than having all 10,000 records loaded in the browser, DataTable makes a call back to the `/person/datatable` REST endpoint to fetch only those records that need to be shown, based on page size, the current page being viewed, and any search filters.
 
