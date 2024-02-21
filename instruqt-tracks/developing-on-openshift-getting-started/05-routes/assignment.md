@@ -29,7 +29,7 @@ As mentioned earlier in the tutorial, When you create an application from a **co
 
 `Step 1:` To view the **route** for your application, make sure you are in the **Developer** perspective by selecting **Developer** from the dropdown list on the left side menu bar. Then from within **Topology** view, click the application circle as shown in the figure below.
 
-![Select App](../assets/select-app.png)
+![Select App](..\assets\select-app.png)
 
 The information page for the pods will slide out as a panel on the right-hand side of the page.
 
@@ -41,7 +41,7 @@ The information page for the pods will slide out as a panel on the right-hand si
 
 `Step 3:` Scroll down to the **Routes** section at the bottom of the web page as shown figure below.
 
-![Select Route](../assets//select-route.png)
+![Select Route](..\assets\\select-route.png)
 
 The route URL for your application is shown as a link.
 
@@ -57,11 +57,11 @@ You can also access an application's **route** URL directly within the applicati
 
 `Step 5:` Click the icon in the upper right of the application's circular graphic as shown in the figure below.
 
-![Open from topology](../assets/access-url-from-topology.png)
+![Open from topology](..\assets\access-url-from-topology.png)
 
 Clicking the icon opens the application's web page in a browser as shown in th figure below.
 
-![View map](../assets/view-map.png)
+![View map](..\assets\view-map.png)
 
 ----
 
