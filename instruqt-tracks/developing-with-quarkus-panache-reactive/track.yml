@@ -19,7 +19,7 @@ description: |-
 
   The figure below illustrates the difference between synchronous and asynchronous information exchange in terms of a query-response interaction with a database.
 
-  ![sync vs async](./assets/sync-vs-async.png)
+  ![sync vs async](.\assets\sync-vs-async.png)
 
   Under a reactive asynchronous interaction, there is no waiting around for a response to be returned. Rather, the program that executed the request  "listens" in the background for the response and processes data when the response is received. Many times the data will be received as a series of continuous messages delivered to the listener function intermittently.
 
@@ -59,4 +59,6 @@ lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "3214010280269239127"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "16877277338859105652"

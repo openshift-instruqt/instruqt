@@ -54,7 +54,7 @@ You are now going to add some reactive queries to the `Person` entity. The reaso
 
 `Step 2a:` In the **Visual Editor** tab, navigate to the folder `src/main/java/org/acme/person/model/` and click on the file `Person.java` to open it for editing as shown in the figure below.
 
-![Open person.java](../assets/open-person-java-02.png)
+![Open person.java](..\assets\open-person-java-02.png)
 
 `Step 2b:` Add the following two new queries after the comment `// TODO: Add more queries` beneath `LINE 36` in the `Person.java` file:
 
@@ -85,7 +85,7 @@ Now that the custom entity queries have been implemented in the `Person` entity 
 
 `Step 3a:` In the **Visual Editor** tab, navigate to the folder `src/main/java/org/acme/person/` and click on the file `PersonResource.java` to open it for editing as shown in the figure below.
 
-![Reopen PersonResource](../assets/reopen-personresource-java.png)
+![Reopen PersonResource](..\assets\reopen-personresource-java.png)
 
 `Step 3b:` Add the following code to the file `PersonResource.java` after the comment `// TODO: add basic queries` after `LINE 37`:
 

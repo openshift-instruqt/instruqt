@@ -23,7 +23,7 @@ notes:
 
       The figure below illustrates the difference between synchronous and asynchronous information exchange in terms of a query-response interaction with a database.
 
-      ![sync vs async](../assets/sync-vs-async.png)
+      ![sync vs async](..\assets\sync-vs-async.png)
 
       Under a reactive asynchronous interaction, there is no waiting around for a response to be returned. Rather, the program that executed the request  "listens" in the background for the response and processes data when the response is received. Many times the data will be received as a series of continuous messages delivered to the listener function intermittently.
 
@@ -56,7 +56,7 @@ timelimit: 500
 
 The objective of this topic is to develop a reactive application starting with predefined source code. The application you will develop is illustrated in the figure below.
 
-![Application Architecture](../assets/app-architecture.png)
+![Application Architecture](..\assets\app-architecture.png)
 
 You'll build out the code for a RESTful API. The RESTful API code is stored in a file named `PersonResource.java`. Also, you'll add queries to a data entity that is defined in the file named `Person.java`. `Person.java` extends [`PanacheEntity`](https://javadoc.io/doc/io.quarkus/quarkus-hibernate-orm-panache/latest/io/quarkus/hibernate/orm/panache/PanacheEntity.html). `PanacheEntity` enables asynchronous interaction with the Hibernate ORM which represents the underlying Postgres database in which the application's data is stored.
 
@@ -161,7 +161,7 @@ The first piece of work you'll do is to modify the source code by adding content
 
 `Step 5b:` In the **Visual Editor**, navigate to the file `src/main/java/org/acme/person/model/Person.java` as shown in the figure below.
 
-![open file](../assets/open-person-java.png)
+![open file](..\assets\open-person-java.png)
 
 `Step 5c:` In the **Visual Editor**, **replace** the contents of the file `src/main/java/org/acme/person/model/Person.java` with the following code that redefines the `Person` data entity:
 
@@ -212,7 +212,7 @@ public class Person extends PanacheEntity {
 
 `Step 5d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of the Java file as shown in the figure below.
 
-![Save Person](../assets/save-person-java.png)
+![Save Person](..\assets\save-person-java.png)
 
 # Defining the eye color enum
 
@@ -234,7 +234,7 @@ However, the source code does not yet have the code that defines the enumeration
 
 `Step 6b:` Click the create file icon to create the file named `EyeColor.java` as shown in the figure below.
 
-![create eyecolor](../assets/create-eye-color.png)
+![create eyecolor](..\assets\create-eye-color.png)
 
 `Step 6c:` Click the newly created `EyeColor.java` to open the file for editing and add the following code:
 
@@ -261,7 +261,7 @@ The following steps create the first endpoint for accessing data in the demonstr
 
 `Step 7b:` Click the create file icon to create the file named `PersonResource.java` as shown in the figure below.
 
-![Create person resource](../assets/create-person-resource.png)
+![Create person resource](..\assets\create-person-resource.png)
 
 `Step 7c:` Click the newly created `src/main/java/org/acme/person/PersonResource.java` to open the file for editing and add the following code:
 
@@ -335,7 +335,7 @@ The next step in this topic is to add sample data to the demonstration applicati
 
 `Step 8b:` Click the create file icon to create the file named `import.sql` as shown in the figure below.
 
-![create import.sql](../assets/create-sql.png)
+![create import.sql](..\assets\create-sql.png)
 
 `Step 8c:` Click the file `src/main/resources/import.sql` to open the file for editing and add the following code:
 

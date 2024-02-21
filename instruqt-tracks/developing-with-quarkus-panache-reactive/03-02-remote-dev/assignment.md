@@ -111,7 +111,7 @@ You'll get output similar to the following:
 
 `Step 4:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the console window to the left to access the OpenShift web console web page. You will be presented with the console login page.
 
-![web log in](../assets/web-console-login.png)
+![web log in](..\assets\web-console-login.png)
 
 ----
 
@@ -123,7 +123,7 @@ You'll get output similar to the following:
 |NOTE|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift web console.|
 
 ----
@@ -136,11 +136,11 @@ If you do get the warning, click the **Advanced** button to complete the process
 
 `Step 7b:` Then click the link `quarkus` in the projects list that appears as shown in the figure below.
 
-![Select Quarkus](../assets/select-quarkus.png)
+![Select Quarkus](..\assets\select-quarkus.png)
 
 You'll see a circular graphic that represents the Postgres database as shown in the figure below.
 
-![Postgres](../assets/display-postgres.png)
+![Postgres](..\assets\display-postgres.png)
 
 The presence of the circular graphic indicates that the Postgres database has been added to the OpenShift project.
 
@@ -179,7 +179,7 @@ You'll see the following output:
 
 `Step 9a:` From the **Visual Editor** tab, navigate to the file  `src/main/resources/application.properties` as shown in the figure below.
 
-![Open Application Properties](../assets/open-application-properties.png)
+![Open Application Properties](..\assets\open-application-properties.png)
 
 
 `Step 9b:` Click the file `application.properties` to open it for editing and add the following code:

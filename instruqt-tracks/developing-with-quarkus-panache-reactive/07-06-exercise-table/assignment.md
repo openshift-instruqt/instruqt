@@ -29,13 +29,13 @@ Now that we have the demonstration application running on OpenShift you'll exerc
 
 `Step 2 :` Click the Topology tab on the horizontal menu bar to the left of the web console as shown in the figure below.
 
-![Access Topology](../assets/open-app-in-topology.png)
+![Access Topology](..\assets\open-app-in-topology.png)
 
 ----
 
 `Step 3 :` Click on the `Open URL` icon on the `people` circular graphic in the Topology view as shown in the figure above. A browser window with the demonstration application's web page will appear as shown in the figure below.
 
-![New Web Page](../assets/new-app-web-page.png)
+![New Web Page](..\assets\new-app-web-page.png)
 
 Notice the total number of records reported at the bottom.
 
@@ -43,7 +43,7 @@ Notice the total number of records reported at the bottom.
 
 `Step 4 :` Type in a single letter, e.g. `G`, in the search box in the demonstration application's web page as shown in the figure below to experience how responsive the application is.
 
-![Application Web Page](../assets/app-web-page.png)
+![Application Web Page](..\assets\app-web-page.png)
 
 ----
 
