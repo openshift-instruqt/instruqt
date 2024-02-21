@@ -79,7 +79,7 @@ oc get route reactive-sql -n reactive-sql -o jsonpath='{"http://"}{.spec.host}'
 
 `Step 5:` You will see new functionality added to the demonstration application's web page as shown in the figure below:
 
-![Updated Web Page](../assets/updated-web-page.png)
+![Updated Web Page](..\assets\updated-web-page.png)
 
 
 # Congratulations!
