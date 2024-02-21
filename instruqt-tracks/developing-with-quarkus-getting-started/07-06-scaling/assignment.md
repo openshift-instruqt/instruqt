@@ -86,7 +86,7 @@ deploymentconfig.apps.openshift.io/getting-started scaled
 
 `Step 5:` Click the **quarkus** link in the project list of the web page as shown in the figure below.
 
-![Select Topology](../assets/select-topology.png)
+![Select Topology](..\assets\select-topology.png)
 
 You'll be presented with the application web page. You'll see a circular graphic that represents the Getting Started application running in OpenShift.
 
@@ -94,13 +94,13 @@ You'll be presented with the application web page. You'll see a circular graphic
 
 `Step 6:`  Click the circular graphic in the **quarkus/Sample Quarkus App** web page. The application overview pane will slide out from the right side as shown in the figure below.
 
-![App Topology Information](../assets/app-top-detail-01.png)
+![App Topology Information](..\assets\app-top-detail-01.png)
 
 ----
 
 `Step 7:` Click the **Details** tab application information pane as shown in the figure below.
 
-![App Pod Information](../assets/app-top-detail-02.png)
+![App Pod Information](..\assets\app-top-detail-02.png)
 
 Notice that the **Details** graphic shows see the app scaling dynamically up to 10 pods:
 
@@ -147,7 +147,7 @@ oc scale --replicas=50 dc/getting-started
 
 `Step 9:` Go back to the **OpenShift Web Console and look at the *Details** pane of the Getting Started App as shown in the figure below.
 
-![Scale to 50](../assets/scale-up-to-50.png)
+![Scale to 50](..\assets\scale-up-to-50.png)
 
 You'll see the app scaling dynamically up to 50 pods.
 
@@ -174,7 +174,7 @@ oc scale --replicas=100 dc/getting-started
 
 `Step 12:` Go back to the OpenShift Web Console web page. Notice that OpenShift is dynamically scaling the Getting Started application to 100 pods as shown in the figure below.
 
-![Scale to 100](../assets/scale-up-to-100.png)
+![Scale to 100](..\assets\scale-up-to-100.png)
 
 It may take a bit of time for all 100 pods to spin up given this limited resource environment, but they will eventually!
 

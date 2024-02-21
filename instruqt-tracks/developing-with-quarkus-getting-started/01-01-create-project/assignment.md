@@ -162,7 +162,7 @@ You are going to change the output of the **Hello App** API application from `He
 
 `Step 7b:`  Change the word `Hello` to `Hola` at Line 14 in the file `GreetingResource.java` as shown in the figure below at Callout 2.
 
-![Change to Hola](../assets/change-to-hola-01.png)
+![Change to Hola](..\assets\change-to-hola-01.png)
 
 `Step 7c:`  Click the save icon to save your changes, as shown in the figure above at Callout 3.
 
@@ -196,17 +196,17 @@ Also, you can see an extension's status and go directly to its documentation.
 
 You'll see the Dev UI for your running application as shown in the figure below.
 
-![Dev UI](../assets/config-editor-00.png)
+![Dev UI](..\assets\config-editor-00.png)
 
 ----
 
 `Step 10:`  Click on the `Config Editor` link within the `Configuration` file to see and make updates to the configuration as shown in the figure below.
 
-![Config Editor](../assets/config-editor-01.png)
+![Config Editor](..\assets\config-editor-01.png)
 
 As you can see in the figure below, the `Config Editor` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
 
-![Config Editor Detail](../assets/config-editor-02.png)
+![Config Editor Detail](..\assets\config-editor-02.png)
 
 |NOTE:|
 |----|

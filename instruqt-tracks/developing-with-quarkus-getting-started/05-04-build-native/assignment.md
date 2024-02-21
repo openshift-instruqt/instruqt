@@ -27,7 +27,7 @@ The executable you'll create improves the startup time of the application and pr
 
 The executable will have everything needed to run the application as a standalone binary, including the Java Virtual Machine (JVM) and the application. (The size of the JVM will be shrunk to be just the right size to run the application.)
 
-![Native process](../assets/native-image-process.png)
+![Native process](..\assets\native-image-process.png)
 
 You'll be using [GraalVM](https://en.wikipedia.org/wiki/GraalVM). GraalVM includes a native compiler for producing native images from a number of languages, including Java. GraalVM is installed in the `$GRAALVM_HOME` directory.
 
