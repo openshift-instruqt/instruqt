@@ -91,7 +91,7 @@ mkdir /root/projects/quarkus/qute/src/main/java/org/acme/TemplateExtensions
 
 `Step 3b:` Click the `New File` icon to create the file `TemplateExtensions.java` in the directory `qute/src/main/java/org/acme/TemplateExtensions` as shown in the figure below.
 
-![Create TemplateExtensions](../assets/create-template-extensions.png)
+![Create TemplateExtensions](..\assets\create-template-extensions.png)
 
 `Step 3c:` Click the file name `TemplateExtensions.java` in the Visual Editor to open it for editing.
 
@@ -206,7 +206,7 @@ Apples do not display a discount because they cost less than $100.
 
 `Step 6b:` Click the reload icon in the upper right of the horizontal menu bar as shown in the figure below.
 
-![View Mangos](../assets/view-mango.png)
+![View Mangos](..\assets\view-mango.png)
 
 You'll see the following output with a discount as shown in the figure above.
 
@@ -217,7 +217,7 @@ You'll see the following output with a discount as shown in the figure above.
 
 `Step 7b:` Click the reload icon in the upper right of the horizontal menu bar as shown in the figure below.
 
-![View Apples](../assets/view-apples.png)
+![View Apples](..\assets\view-apples.png)
 
 Notice that there is only a price displayed for apples. No discount is shown. As mentioned above, the web page does not display a discount because Apples cost less than $100.
 
