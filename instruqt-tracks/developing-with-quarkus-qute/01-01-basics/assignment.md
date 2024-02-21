@@ -218,7 +218,7 @@ Now let's look at the rendered HTML in a browser within the interactive learning
 
 `Step 6:` Click the tab labeled **Qute Sample Page** on the horizontal menu bar over the console window on the left. You'll see the HTML code rendered into the internal web browser as shown in the figure below.
 
-![Service 1](../assets/service-01.png)
+![Service 1](..\assets\service-01.png)
 
 Let's examine the server-side code to get an introductory understanding about how Qute templates work.
 
@@ -231,7 +231,7 @@ Let's examine the server-side code to get an introductory understanding about ho
 
 `Step 8:` Using the **Visual Editor**, navigate to the file, `qute/src/main/resources/templates/page.qute.html` as shown in the figure below:
 
-![Template 1](../assets/template-01.png)
+![Template 1](..\assets\template-01.png)
 
 ----
 
@@ -250,7 +250,7 @@ The question to be answered at this point is "how is a value passed to the data 
 
 `Step 10:` Use the **Visual Editor** to navigate to the directory `qute/src/main/java/org/acme/SomePage.java` from the directory as shown in the figure below.
 
-![Some page](../assets/some-page.png)
+![Some page](..\assets\some-page.png)
 
 The file `SomePage.java` represents an endpoint in the demonstration application's RESTful API. In this case `SomePage.java` exposes an endpoint `/some-page` and provides intelligence to process requests to that endpoint. Thus, when you call `curl localhost:8080/some-page`, you are calling the endpoint.
 
@@ -312,7 +312,7 @@ You've just worked with an existing template. Now, let's create a new text-based
 
 `Step 12b:` Click the `New File` icon to create a file named `hello.txt` in the directory `/root/projects/quarkus/qute/src/main/resources/templates/` as shown in the figure below:
 
-![File](../assets/new-hello-txt.png)
+![File](..\assets\new-hello-txt.png)
 
 `Step 12c:` Click the filename `hello.txt` to open the file for editing.
 
@@ -332,7 +332,7 @@ Hello {name}!
 
 `Step 12e:` Click on the `Disk` icon or press `CTRL+S` keys to save the file, as shown in the figure below:
 
-![Save File](../assets/save-file.png)
+![Save File](..\assets\save-file.png)
 
 # Creating REST endpoint to access template
 
@@ -342,7 +342,7 @@ Now let’s create a resource class that defines a RESTful endpoint and binds th
 
 `Step 13a:` Using the **Visual Editor**, go to the directory `qute/src/main/java/org/acme/` and click the `New File` icon to create a file named `HelloResource.java`, as shown in the figure below:
 
-![Create hello resource](../assets/create-hello-resource.png)
+![Create hello resource](..\assets\create-hello-resource.png)
 
 
 `Step 13b:` Click the new file `HelloResource.java` in the Visual Editor directory tree to open it for editing.

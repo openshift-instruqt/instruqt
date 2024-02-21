@@ -269,11 +269,11 @@ You've just viewed the raw HTML via `curl`. Next you'll take a look a the render
 
 |NOTE:|
 |----|
-|Sometimes you will encounter an error page when the browser in the **Qute Item 1** tab loads, like the following: <br>![Load Error](../assets/load-error.png)<br> The cause of this error is that sometimes it can take a few seconds for **Live Code** web pages to render. Should you encounter an error, click between the reload icon in the upper right **Qute Item 1** window to reload the page.|
+|Sometimes you will encounter an error page when the browser in the **Qute Item 1** tab loads, like the following: <br>![Load Error](..\assets\load-error.png)<br> The cause of this error is that sometimes it can take a few seconds for **Live Code** web pages to render. Should you encounter an error, click between the reload icon in the upper right **Qute Item 1** window to reload the page.|
 
 The HTML will be rendered in an internal browser in the interactive learning environment as show in the figure below.
 
-![Apple Item](../assets/apple-item.png)
+![Apple Item](..\assets\apple-item.png)
 
 # Creating a template parameter declaration inside the template
 
@@ -357,7 +357,7 @@ public class ItemResource {
 
 You will see results as shown in the figure  below.
 
-![Apple Item](../assets/apple-item.png)
+![Apple Item](..\assets\apple-item.png)
 
 The rendered HTML is the same, but behind the scenes Qute validates the template and its data. Should there be an error, the Live Coding rebuild will fail and you'll see an error page rendered as output.
 
@@ -375,7 +375,7 @@ But let's see what happens if when there is an error condition.
 
 `Step 10d:` Click on the **Qute Item 1** tab, or reload it to see an error on the web page as shown in figure below.
 
-![Err](../assets/validation-error.png)
+![Err](..\assets\validation-error.png)
 
 Qute checks the syntax and will fail the build because there is no field named `nonSense` in the mock database the template uses.
 
@@ -393,7 +393,7 @@ Now you need to reset the template to its original state.
 
 `Step 11d:` Click on the **Qute Item 1** tab or reload it to see an error on the web page as shown in the figure below.
 
-![Reload Error Page](../assets/load-error.png)
+![Reload Error Page](..\assets\load-error.png)
 
 
 **Congratulations!**

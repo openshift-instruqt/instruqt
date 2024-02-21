@@ -50,13 +50,13 @@ cd /root/projects/quarkus/qute && mkdir -p src/main/resources/templates/HelloRes
 
 `Step 3a:` Using the **Visual Editor**, navigate to the directory `qute/src/main/resources/templates/HelloResource` as shown in the figure below.
 
-![Select HelloResource Dir](../assets/select-helloresource-dir.png)
+![Select HelloResource Dir](..\assets\select-helloresource-dir.png)
 
 Remember, you created the directory `qute/src/main/resources/templates/HelloResource` within **Terminal 1** previously in `Step 1`.
 
 `Step 3b:` Click the `New File` icon to create a new file named `hello.txt` as shown in the figure below.
 
-![Create hello.txt](../assets/create-hello-text-02.png)
+![Create hello.txt](..\assets\create-hello-text-02.png)
 
 
 `Step 3c:` Add the following code to the `hello.txt` file:
@@ -69,7 +69,7 @@ Notice that the template file shown above has text that will render a message th
 
 `Step 3d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `hello.txt` file as shown in the figure below.
 
-![Save hello.txt](../assets/save-hello-txt.png)
+![Save hello.txt](..\assets\save-hello-txt.png)
 
 Next, let's create the Goodbye template.
 
@@ -77,7 +77,7 @@ Next, let's create the Goodbye template.
 
 `Step 4a:` Using the **Visual Editor**, click the `New File` icon to create a new file named `goodbye.txt` in the directory `qute/src/main/resources/templates/HelloResource/` as shown in the figure below.
 
-![Create goodbye.txt](../assets/create-goodbye-txt.png)
+![Create goodbye.txt](..\assets\create-goodbye-txt.png)
 
 `Step 4b:` Using the **Visual Editor**, click the file named `goodbye.txt` in the directory tree to open it for editing.
 
@@ -95,7 +95,7 @@ Now let’s declare and use those templates in the `HelloResource` resource clas
 
 `Step 5a:` Using the **Visual Editor** directory tree, navigate to the file `qute/src/main/java/org/acme/HelloResource.java` and click on the file name to open the file for editing as shown in the figure below.
 
-![Edit HelloResource](../assets/edit-helloresource.png)
+![Edit HelloResource](..\assets\edit-helloresource.png)
 
 ----
 
