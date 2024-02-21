@@ -83,24 +83,24 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 ----
 
 `Step 4:`  Enter the **Username:** `developer` and **Password:** `developer` pair shown in the figure below.
 
-![login dialog](../assets/web-console-login.png)
+![login dialog](..\assets\web-console-login.png)
 
 You will see the list of projects you have access to. Since you only created one project previously, you will see that project as shown in the figure below.
 
-![Project list](../assets/select-project.png)
+![Project list](..\assets\select-project.png)
 
 ----
 
 `Step 5:`  Click on `myproject`. You will be presented with the **Topology** page as shown in the figure below.
 
-![Topology without resource](../assets/topology-no-resources.png)
+![Topology without resource](..\assets\topology-no-resources.png)
 
 Notice that the project has no resources.
 
