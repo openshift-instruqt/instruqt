@@ -93,7 +93,7 @@ The web page for `myproject` will appear.
 
 The **RoleBindings** page will appear. (The entire process just described is shown in the figure below.)
 
-![Role Binding 1](../assets/rolebinding-01.png)
+![Role Binding 1](..\assets\rolebinding-01.png)
 
 ----
 
@@ -123,7 +123,7 @@ Once the **Create RoleBinding** page appears, take the following five steps.
 
 The entire process is illustrated in the figure below.
 
-![Role Binding 2](../assets/rolebinding-02.png)
+![Role Binding 2](..\assets\rolebinding-02.png)
 
 # Viewing `user1`'s projects.
 
@@ -240,7 +240,7 @@ This is evidence that the work you did at the command line has taken affect.
 
 `Step 13:` Select the project dropdown at the top of the web console. You'll see that the project named `yourproject` is in the project list for the user `developer`, as shown in the figure below.
 
-![Adding project ](../assets/adding-project.png)
+![Adding project ](..\assets\adding-project.png)
 
 # Congratulations!
 
