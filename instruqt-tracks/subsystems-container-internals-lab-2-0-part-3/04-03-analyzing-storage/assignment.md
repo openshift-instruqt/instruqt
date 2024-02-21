@@ -22,7 +22,11 @@ Now, let's take a look at Podman container engine. It pulls OCI compliant, docke
 podman info  | grep -A4 graphRoot
 ```
 
-First, you might be asking yourself, [what the heck is d_type?](https://docs.docker.com/storage/storagedriver/overlayfs-driver/). Long story short, it's filesystem option that must be supported for overlay2 to work properly as a backing store for container images and running containers.
+First, you might be asking yourself, [what the heck is d_type?](https://docs.docker.com/storage/storagedriver/overlayfs-driver/). Long story short, it's filesystem option that must be supported for overlay2 to work properly as a backing store for container images and running containers. Now, take a look at the actuall storage being used by Podman:
+
+```
+tree /var/lib/containers/storage
+```
 
 Now, pull an image and verify that the files are just mapped right into the filesystem:
 
