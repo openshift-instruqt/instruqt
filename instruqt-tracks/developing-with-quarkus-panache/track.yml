@@ -36,10 +36,12 @@ developers:
 - bob@cogarttech.com
 - ryanj@redhat.com
 - cclyburn@redhat.com
-- dschenck@redhat.com
+- null
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "5121325703234347595"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "15316959707892924589"

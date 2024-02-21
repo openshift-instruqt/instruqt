@@ -58,7 +58,7 @@ The query parameters tell the server how to sort, filter, and search the backend
 
 `Step 2:` Navigate to the file `src/main/java/org/acme/person/PersonResource.java` using the Visual Editor's directory tree. Click on the file `PersonResource.java` to open it for editing as shown in the figure below:
 
-![Select Person Resource](../assets/select-personresource.png)
+![Select Person Resource](..\assets\select-personresource.png)
 
 ----
 
@@ -158,7 +158,7 @@ On the server-side, the `PersonResource.java` endpoint handler function transfor
 
 The following figure illustrates the Panache/DataTable architecture:
 
-![Panache Architecture](../assets/panache-arch.png)
+![Panache Architecture](..\assets\panache-arch.png)
 
 Let's take a look at the particulars of the code again.
 
