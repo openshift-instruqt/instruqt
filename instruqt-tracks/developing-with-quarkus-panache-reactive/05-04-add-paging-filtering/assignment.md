@@ -56,7 +56,7 @@ You are going to work with the following parameters to enable search and paging 
 
 `Step 1b:` Click on the file `PersonResource.java` to open it for editing as shown in the figure below:
 
-![Edit PersonResource](../assets/reopen-personresource-java.png)
+![Edit PersonResource](..\assets\reopen-personresource-java.png)
 
 `Step 1c:` Add this code to the file `PersonResource.java` after the `// TODO: add datatable query` comment:
 
@@ -85,7 +85,7 @@ The method `Uni<DataTable> datatable((...)` code you just added has a number of 
 
 `Step 2b:` Click on the file `DataTable.java` to open it for viewing as shown in the figure below.
 
-![Open DataTable](../assets/open-datatable-01.png)
+![Open DataTable](..\assets\open-datatable-01.png)
 
 Take a look at the code in general. Also, notice the data fields in `DataTable.java`. A description of each field follows:
 
@@ -107,7 +107,7 @@ This work is done by adding a query to the `PersonResource.java` class.
 
 `Step 3b:` Click on the file `PersonResource.java` to open it for editing as shown in the figure below.
 
-![Edit PersonResource](../assets/reopen-personresource-java.png)
+![Edit PersonResource](..\assets\reopen-personresource-java.png)
 
 `Step 3c:` Add this code to the file `PersonResource.java` after the `// TODO: Construct query` comment:
 

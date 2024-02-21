@@ -31,7 +31,7 @@ Managed beans (like the `PersonResource`) can listen for lifecycle events by usi
 
 `Step 1b:` Click on the file `PersonResource.java` to open it for editing as shown in the figure below.
 
-![Edit PersonResource](../assets/reopen-personresource-java.png)
+![Edit PersonResource](..\assets\reopen-personresource-java.png)
 
 `Step 1c: ` Add the following code after the `// TODO: Add lifecycle hook` comment:
 
