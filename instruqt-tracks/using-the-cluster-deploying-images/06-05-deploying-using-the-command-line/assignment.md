@@ -124,7 +124,7 @@ The URL you'll get when you run `oc get route/parksmap` will be different than t
 
 However, as you can see in the figure below, the URL that was generated for this tutorial does indeed bring up the ParksMap application.
 
-![Command Line URL](../assets/command-line-url.png)
+![Command Line URL](..\assets\command-line-url.png)
 
 ## Congratulations!
 
