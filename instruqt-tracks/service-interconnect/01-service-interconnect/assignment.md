@@ -25,7 +25,7 @@ notes:
     This can be accomplished with a VPN between the public cloud and the private data center. However, a **VPN can be hard to set up**, and **requires deep networking expertise**. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. **Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up**. It allows application Developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
 
     ## Lab architecture
-    ![Architecute-router.png](../assets/Architecute-router.png)
+    ![Architecute-router.png](../assets/Screenshot%202023-08-22%20at%2011.07.25%20PM.png)
     > **Note:**
     > Red Hat Service Interconnect is not limited to service networks between instances of OpenShift, but can equally well be leveraged to connect deployments running on premise (deployed on OpenShift or Kubernetes, on virtual machines or on bare metal) with services running in the cloud.
 
