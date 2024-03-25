@@ -37,6 +37,7 @@ tags:
 - openshift
 owner: openshift
 developers:
+- nityadav@redhat.com
 - narathod@redhat.com
 - codingsaduvu@gmail.com
 - cclyburn@redhat.com
@@ -47,4 +48,4 @@ lab_config:
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "9556025054795558048"
+checksum: "3807240607528714960"
