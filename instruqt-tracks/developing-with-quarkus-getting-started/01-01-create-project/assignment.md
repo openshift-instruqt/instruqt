@@ -114,7 +114,7 @@ __  ____  __  _____   ___  __ ____  ______
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
 INFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.x.x.Final) started in 1.194s. Listening on: http://0.0.0.0:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, resteasy]
+INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, rest, smallrye-context-propagation, vertx]
 --
 Tests paused, press [r] to resume, [h] for more options>
 ```

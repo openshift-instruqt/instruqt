@@ -110,7 +110,7 @@ Once the demonstration project is created using Maven, it needs to be started.
 
 
 ```bash
-mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster
+mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/fruit-taster
 ```
 
 Eventually you'll see output similar to the following:
