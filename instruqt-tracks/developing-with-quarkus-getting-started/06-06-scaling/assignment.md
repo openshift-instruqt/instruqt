@@ -42,7 +42,7 @@ You're going to make 50 MB of memory as an upper memory limit. (For what it's wo
 `Step 1:` Run the following command in **Terminal 1** to set the 50 MB memory limit.
 
 ```
-oc set resources dc/getting-started --limits=memory=50Mi
+oc set resources deployment/getting-started --limits=memory=50Mi
 ```
 
 You'll get the following output:
@@ -60,7 +60,7 @@ Now that the memory limit is set, let's see how fast the app can scale up to 10 
 `Step 2:` Run the following `oc scale` command in **Terminal 1** to scale the demonstration application up to 10 pods.
 
 ```
-oc scale --replicas=10 dc/getting-started
+oc scale --replicas=10 deployment/getting-started
 ```
 
 You'll get output similar to the following:
@@ -140,7 +140,7 @@ hello quarkus-on-openshift
 `Step 8:` Run the following command in **Terminal 1**  to have OpenShift scale up the number of pods running for the Getting Started app to 50.
 
 ```
-oc scale --replicas=50 dc/getting-started
+oc scale --replicas=50 deployment/getting-started
 ```
 
 ----
@@ -169,7 +169,7 @@ This tutorial uses a single node OpenShift cluster, but in practice you'll have 
 `Step 11:` Run the following command in **Terminal 1** to scale the number of pods in the Getting Started app to 100.
 
 ```
-oc scale --replicas=100 dc/getting-started
+oc scale --replicas=100 deployment/getting-started
 ```
 
 `Step 12:` Go back to the OpenShift Web Console web page. Notice that OpenShift is dynamically scaling the Getting Started application to 100 pods as shown in the figure below.

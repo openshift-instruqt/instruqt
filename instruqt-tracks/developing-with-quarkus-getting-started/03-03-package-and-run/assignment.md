@@ -61,9 +61,9 @@ cd /root/projects/quarkus/getting-started/ && ls -l target/*.jar target/quarkus-
 You see output similar to following:
 
 ```
--rw-r--r--. 1 root root 177431 Feb 14 03:19 target/getting-started-1.0.0-SNAPSHOT.jar
--rw-r--r--. 1 root root   4929 Feb 14 03:13 target/getting-started-dev.jar
--rw-r--r--. 1 root root    668 Feb 14 03:19 target/quarkus-app/quarkus-run.jar
+-rw-r--r--. 1 root root 3837 Apr  4 20:41 target/getting-started-1.0.0-SNAPSHOT.jar
+-rw-r--r--. 1 root root 5339 Apr  4 20:24 target/getting-started-dev.jar
+-rw-r--r--. 1 root root  679 Apr  4 20:41 target/quarkus-app/quarkus-run.jar
 ```
 
 Notice that the output above shows the two `.jar` files just discussed.
@@ -95,7 +95,7 @@ curl -w "\n" localhost:8080/hello/
 You will see the following output
 
 ```
-Hello RESTEasy
+Hello from Quarkus REST
 ```
 Note that the endpoint uses the same hostname as before. Also note that since you're running the application as a fast-jar, Quarkus runs in production mode and does not enable continuous testing or other developer features.
 

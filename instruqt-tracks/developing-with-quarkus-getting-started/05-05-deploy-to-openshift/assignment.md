@@ -123,14 +123,14 @@ You now have a project to host the application. Next you need to deploy the appl
 # Deploying the application to OpenShift
 
 
-`Step 6:` Run the following command in **Terminal 1** to build and deploy a Quarkus native application:
+`Step 6:` Run the following command in **Terminal 1** to build and deploy a Quarkus application:
 
 ```
-mvn clean package -Pnative -f /root/projects/quarkus/getting-started \
+mvn clean package -f /root/projects/quarkus/getting-started \
 -Dquarkus.kubernetes-client.trust-certs=true \
 -Dquarkus.kubernetes.deploy=true \
 -Dquarkus.kubernetes.deployment-target=openshift \
--Dquarkus.openshift.expose=true
+-Dquarkus.openshift.route.expose -DskipTests
 ```
 
 **WHERE:**
@@ -140,7 +140,7 @@ mvn clean package -Pnative -f /root/projects/quarkus/getting-started \
 * `quarkus.kubernetes.deployment-target=openshift` - Indicates that the extension will generate and create the OpenShift resources such as `DeploymentConfig`s and `Service`s after building the container
 * `quarkus.openshift.expose=true` - Indicates that the extension to generate an OpenShift `Route`.
 
-This step will take a few minutes to complete because it rebuilds the native executable, generates a container image and pushes it into OpenShift.
+This step will take a few minutes to complete because it rebuilds the jar file, generates a container image and pushes it into OpenShift.
 
 You get a lot of screen output during the execution of the step.
 
@@ -158,7 +158,7 @@ You'll see the following output at the end of the process.
 `Step 7:` Run the following command in **Terminal 1** to ensure that the application is actually done rolling out.
 
 ```
-oc rollout status -w dc/getting-started
+oc rollout status -w deployment/getting-started
 ```
 
 You'll get output similar to the following:

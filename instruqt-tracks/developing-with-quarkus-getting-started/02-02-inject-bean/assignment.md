@@ -40,7 +40,7 @@ The new endpoint will be `/hello/greeting/{name}`. You will substitute a value o
 
 ----
 
-`Step 2:` Once the editor is open, go to the directory tree on the left side of the editor and navigate the directory `./getting-started/src/main/java/org/acme/quickstart/`
+`Step 2:` Once the editor is open, go to the directory tree on the left side of the editor and navigate the directory `./getting-started/src/main/java/org/acme/`
 
 ----
 
@@ -50,12 +50,12 @@ The new endpoint will be `/hello/greeting/{name}`. You will substitute a value o
 
 ----
 
-`Step 4a:` And the following code to the newly created file `GreetingService.java`.
+`Step 4:` And the following code to the newly created file `GreetingService.java`.
 
 ```java
-package org.acme.quickstart;
+package org.acme;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class GreetingService {
@@ -67,21 +67,17 @@ public class GreetingService {
 }
 ```
 
-`Step 4b:` Save the `GreetingService.java` file by clicking the **Save File** icon as shown in the figure below:
-
-![Save Service](../assets/save-service.png)
-
 ----
 
-`Step 5a:`  Reopen the file `GreetingResource.java` and replace all the code in that file with the code shown below.
+`Step 5:`  Reopen the file `GreetingResource.java` and replace all the code in that file with the code shown below.
 
 ```java
-package org.acme.quickstart;
+package org.acme;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 
 @Path("/hello")
 public class GreetingResource {
@@ -97,12 +93,10 @@ public class GreetingResource {
 
     @GET
     public String hello() {
-        return "Hello from RESTEasy Reactive";
+        return "Hello from Quarkus REST";
     }
 }
 ```
-
-`Step 5b:` Save the file `GreetingResource.java` by clicking the **Save File** icon
 
 ----
 
@@ -146,48 +140,53 @@ Let's add another test for Quarkus to run continuously. The new test will exerci
 
 ----
 
-`Step 9:` Navigate to the testing directory `getting-started/src/test/java/org/acme/quickstart/`
+`Step 9:` Navigate to the testing directory `getting-started/src/test/java/org/acme/`
 
 ----
 
-`Step 10:` Click the **New File** icon and create a file named `GreetingServiceTest.java` as shown in the figure below.
-
-![Create Test File](../assets/create-test-file.png)
+`Step 10:` Open `GreetingResourceTest.java`.
 
 ----
 
-`Step 11a:` Add the following code to the file `GreetingServiceTest.java`:
+`Step 11a:` Replace the existing code with the following code:
 
 ```java
-package org.acme.quickstart;
+package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.startsWith;
 
+import java.util.UUID;
+
 @QuarkusTest
-public class GreetingServiceTest {
+class GreetingResourceTest {
+    @Test
+    void testHelloEndpoint() {
+        given()
+                .when().get("/hello")
+                .then()
+                .statusCode(200)
+                .body(is("Hello from Quarkus REST"));
+    }
 
     @Test
     public void testGreetingEndpoint() {
         String uuid = UUID.randomUUID().toString();
         given()
-          .pathParam("name", uuid)
-          .when().get("/hello/greeting/{name}")
-          .then()
-            .statusCode(200)
-            .body(startsWith("hello " + uuid));
+                .pathParam("name", uuid)
+                .when().get("/hello/greeting/{name}")
+                .then()
+                .statusCode(200)
+                .body(startsWith("hello " + uuid));
     }
+
 
 }
 ```
-
-`Step 11b:`  Click the **Save File** icon to save `GreetingServiceTest.java`.
-
 
 You have created a new unit test named `testGreetingEndpoint`
 
@@ -204,20 +203,15 @@ The unit test calls the actual endpoint using the applied UUID. The unit test in
 
 ----
 
-You see a label with the caption `Open` on the lower left side of the Developer UI pane.
-
-`Step 12b:` Click the `Open` on the lower left side of the Developer UI pane.
-
-The Developer Runtime Console will appear.
-
-----
-
-`Step 12c:` Click the **Power** icon on the right side of the Developer Runtime Console as shown in the figure below at Callout 2.
+`Step 12b:` Click the `Continuous Testion` on the left menu. Hit the `Start` button.
 
 ![Developer Runtime Console](../assets/run-dev-ui-test.png)
 
-Clicking the **Power** icon will run the unit tests in the Quarkus API application. You'll see an `All tests passed` message in a green font at the right side of the Developer Runtime Console as shown in the figure above at Callout 3.
+----
 
+`Step 12c:` You'll see an `All tests passed` message in a green font at the right side of the Developer Runtime Console as shown in the figure above at Callout 3.
+
+![Developer Runtime Console](../assets/run-dev-ui-test-passed.png)
 
 # Congratulations!
 
