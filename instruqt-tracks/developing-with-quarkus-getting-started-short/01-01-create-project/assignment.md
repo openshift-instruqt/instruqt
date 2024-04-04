@@ -117,7 +117,7 @@ You are ready to run the Quarkus application
 mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/getting-started
 ```
 
-There will be a lot of output to the screen. When the process is finished running, you will see the following:
+There will be a lot of output to the screen. When the process is finished running, you will see the following: 
 
 ```
 Listening for transport dt_socket at address: 5005
