@@ -114,7 +114,7 @@ You are ready to run the Quarkus application
 `Step 3` Run the following command in Terminal 1 to the left to compile and run the demonstration project.
 
 ```
-mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started
+mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/getting-started
 ```
 
 There will be a lot of output to the screen. When the process is finished running, you will see the following:
@@ -127,7 +127,7 @@ __  ____  __  _____   ___  __ ____  ______
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
 INFO  [io.quarkus] (Quarkus Main Thread) getting-started 1.0.0-SNAPSHOT on JVM (powered by Quarkus x.x.x) started in 3.618s.Listening on: http://0.0.0.0:8080
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, resteasy-reactive, smallrye-context-propagation, vertx]
+INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, rest, smallrye-context-propagation, vertx]
 
 --
 Tests paused
@@ -151,7 +151,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output:
 
 ```
-Hello from RESTEasy Reactive
+Hello from Quarkus REST
 ```
 
 As you can see, the service endpoint is up and running.
@@ -164,7 +164,7 @@ Let's take a look.
 
 ----
 
-You are going to change the output of the **Hello App** API application from `Hello RESTeasy Reactive` to `Hola RESTeasy Reactive` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
+You are going to change the output of the **Hello App** API application from `Hello from Quarkus REST` to `Hola from Quarkus RESTe` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
 
 ----
 
@@ -192,7 +192,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output with the new phrase:
 
 ```
-Hola from RESTEasy Reactive
+Hola from Quarkus REST
 ```
 
 As you can see, all you did was change a string in a line of code. Quarkus did the rest!
@@ -235,7 +235,7 @@ As you might recall, when you ran `mvn quarkus:dev` you were presented with the 
 
 ![CT start](../assets/ct-start.png)
 
-As you will see from all the red test class which means the unit test is failed. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello RESTEasy Reactive`. The output failed to meet the expectation.
+As you will see from all the red test class which means the unit test is failed. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello from Quarkus REST`. The output failed to meet the expectation.
 
 ![CT failure](../assets/ct-failure.png)
 
@@ -251,7 +251,7 @@ Let's fix the code and get the tests to pass.
 
 ----
 
-`Step 14:` Change `Hola RESTEasy Reactive` back to `Hello RESTEasy Reactive` in the editor.
+`Step 14:` Change `Hola from Quarkus REST` back to `Hello from Quarkus REST` in the editor.
 
 ----
 
