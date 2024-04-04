@@ -78,10 +78,10 @@ You'll get the following output.
 `Step 2:` Run the following command in the **Terminal 1** window to create the basic Maven project.
 
 ```
-mvn io.quarkus.platform:quarkus-maven-plugin:3.7.3:create \
+mvn io.quarkus.platform:quarkus-maven-plugin:3.9.2:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=getting-started \
-    -Dextensions='resteasy-reactive'
+    -Dextensions='rest'
 cd getting-started
 ```
 
