@@ -78,11 +78,11 @@ You'll get the following output.
 `Step 2:` Run the following command in the **Terminal 1** window to create the basic Maven project.
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
+mvn io.quarkus.platform:quarkus-maven-plugin:3.9.2:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=getting-started \
-    -DclassName="org.acme.quickstart.GreetingResource" \
-    -Dpath="/hello"
+    -Dextensions='rest'
+cd getting-started
 ```
 
 The `mvn` command shown above invokes the installation process that creates all the files and artifacts needed to get the application up and running.
@@ -102,7 +102,7 @@ You are ready to run the Quarkus application
 `Step 3` Run the following command in Terminal 1 to the left to compile and run the demonstration project.
 
 ```
-mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/getting-started
+mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/getting-started
 ```
 
 There will be a lot of output to the screen. When the process is finished running, you will see the following:
@@ -136,7 +136,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output:
 
 ```
-Hello from RESTEasy Reactive
+Hello from Quarkus REST
 ```
 
 As you can see, the service endpoint is up and running.
@@ -149,7 +149,7 @@ Let's take a look.
 
 ----
 
-You are going to change the output of the **Hello App** API application from `Hello RESTeasy Reactive` to `Hola RESTeasy Reactive` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
+You are going to change the output of the **Hello App** API application from `Hello from Quarkus REST` to `Hola from Quarkus REST` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
 
 ----
 
@@ -157,16 +157,16 @@ You are going to change the output of the **Hello App** API application from `He
 
 ----
 
-`Step 7a:`  Scroll through the file tree on the left side of the editor until you get to the file `/root/projects/quarkus/getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`. Then click on the filename in the tree.
+`Step 7a:`  Scroll through the file tree on the left side of the editor until you get to the file `/root/projects/quarkus/getting-started/src/main/java/org/acme/GreetingResource.java`. Then click on the filename in the tree.
 
 
-`Step 7b:`  Change the word `Hello` to `Hola` at Line 14 in the file `GreetingResource.java` as shown in the figure below at Callout 2.
+`Step 7b:`  Change the word `Hello` to `Hola` in the file `GreetingResource.java` as shown in the figure below at Callout 2.
 
 ![Change to Hola](../assets/change-to-hola-01.png)
 
-`Step 7c:`  Click the save icon to save your changes, as shown in the figure above at Callout 3.
-
 ----
+
+The code changes will be saved automatically.
 
 `Step 8:` Return to **Terminal 2** and tun the following command in the terminal window:
 
@@ -177,7 +177,7 @@ curl -w "\n" localhost:8080/hello/
 You'll get the following output with the new phrase:
 
 ```
-Hola from RESTEasy Reactive
+Hola from Quarkus REST
 ```
 
 As you can see, all you did was change a string in a line of code. Quarkus did the rest!
@@ -190,6 +190,16 @@ You can see all the extensions currently loaded. You can see and edit their conf
 
 Also, you can see an extension's status and go directly to its documentation.
 
+Before you access the Quarkus DEV UI, you need to disable the CORS filter to access the Quarkus DEV UI since the Quarkus application will run on the container rather than a local environment.
+
+Click the **Visual Editor** tab in the horizontal menu bar over the terminal window to the left. You'll see the code editor that is part of the interactive learning environment. Open the `application.properties` file in the *src/main/resources* directory. Then, add the following key and values. Note that the changes will be save automacticatlly.
+
+In case you don't see the subdirectories under the */root/projects/quarkus* directory, click on the reload icon.
+
+```
+%dev.quarkus.dev-ui.cors.enabled=false
+```
+
 ----
 
 `Step 9:` Click the tab `Dev UI` on the horizontal menu bar over the interactive learning window on the left.
@@ -200,13 +210,11 @@ You'll see the Dev UI for your running application as shown in the figure below.
 
 ----
 
-`Step 10:`  Click on the `Config Editor` link within the `Configuration` file to see and make updates to the configuration as shown in the figure below.
+`Step 10:`  Click on the `Configuration` on the left menu to see and make updates to the configuration as shown in the figure below.
 
 ![Config Editor](../assets/config-editor-01.png)
 
-As you can see in the figure below, the `Config Editor` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
-
-![Config Editor Detail](../assets/config-editor-02.png)
+The `Configuration` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
 
 |NOTE:|
 |----|
@@ -224,7 +232,7 @@ Entering the character `r` at the testing prompt will run the application's unit
 
 `Step 11:` Click the **Terminal 1** tab and then press the `r` key in the terminal window. (The installation process will still be running in the terminal.)
 
-As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello from RESTEasy Reactive`. The output failed to meet the expectation.
+As you will see from all the red error text in Terminal 1 on the left, the unit tests are failing. The reason for the failure is that previously you changed the word `Hello` to `Hola`. The unit test expects the output `Hello from Quarkus REST`. The output failed to meet the expectation.
 
 Let's fix the code and get the tests to pass.
 
@@ -234,29 +242,27 @@ Let's fix the code and get the tests to pass.
 
 ----
 
-`Step 13:` Navigate to the file `/root/projects/quarkus/getting-started/src/main/java/org/acme/quickstart/GreetingResource.java`.
+`Step 13:` Navigate to the file `/root/projects/quarkus/getting-started/src/main/java/org/acme/GreetingResource.java`.
 
 ----
 
-`Step 14:` Change `Hola from RESTEasy Reactive` back to `Hello from RESTEasy Reactive` in the editor.
+`Step 14:` Change `Hola from Quarkus Rest` back to `Hello from Quarkus Rest` in the editor.
 
 ----
-
-`Step 15:` Click the **Save File** icon on the top of the **Visual Editor** as shown above at `Step 7c`.
 
 
 As soon as your reset the code, Quarkus automatically re-runs the test.
 
 ----
 
-`Step 16:` Click the **Terminal 1** tab to go back a review the output from the continuous testing output.
+`Step 15:` Click the **Terminal 1** tab to go back a review the output from the continuous testing output.
 
 ----
 
-`Step 17:` Look at the output at the bottom of the **Terminal 1** window. You'll see output similar to the following.
+`Step 16:` Look at the output at the bottom of the **Terminal 1** window. You'll see output similar to the following.
 
 ```
-All 1 tests are passing (0 skipped), 1 tests were run in 389ms. Tests completed at 12:25:40 due to changes to GreetingResource.class.
+All 1 test is passing (0 skipped), 1 test was run in 615ms. Tests completed at 20:22:23 due to changes to GreetingResource.class.
 ```
 
 Quarkus was smart enough to detect that you made a change to the code and ran the relevant test automatically.
