@@ -106,9 +106,9 @@ public class Fruit {
 ```
 ----
 
-`Step 6:` The changes will be automatically saved.
+The changes will be automatically saved.
 
-You have created a simple POJO (Plain Old Java Object) that describes a Fruit. Notice that the POJO has private instance variables named `id`, `name` and `color`. The POJO also has getters and setters for those instance variables
+`Step 6:` You have created a simple POJO (Plain Old Java Object) that describes a Fruit. Notice that the POJO has private instance variables named `id`, `name` and `color`. The POJO also has getters and setters for those instance variables
 
 Next, you need to declare the data repository that represents the database where the application's data is stored.
 
