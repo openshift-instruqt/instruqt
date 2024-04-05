@@ -84,7 +84,7 @@ _  ____  __  _____   ___  __ ____  ______
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
 2022-04-06 17:58:34,814 INFO  [io.quarkus] (main) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in2.428s. Listening on: http://0.0.0.0:8080
 2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Profile prod activated.
-2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, resteasy, resteasy-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web]
+2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, rest, rest-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web, vertx]
 ```
 
 You've just started the Fruit Tasting demonstration application from a JAR file that has the Quarkus extensions.

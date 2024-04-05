@@ -164,9 +164,7 @@ oc rollout status -w deployment/getting-started
 You'll get output similar to the following:
 
 ```
-Waiting for rollout to finish: 0 of 1 updated replicas are available...
-Waiting for latest deployment config spec to be observed by the controller loop...
-replication controller "getting-started-1" successfully rolled out
+deployment "getting-started" successfully rolled out
 ```
 
 Wait for that command to report the following before continuing.
