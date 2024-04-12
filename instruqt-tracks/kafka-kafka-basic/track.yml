@@ -37,9 +37,16 @@ level: beginner
 tags:
 - openshift
 owner: openshift
-sandbox_preset: openshift-411
 developers:
 - hguerrero@redhat.com
 - nvinto@redhat.com
 - ryanj@redhat.com
-checksum: "3240448743530947636"
+- cclyburn@redhat.com
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "10367968562367480389"
