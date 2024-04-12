@@ -42,4 +42,12 @@ developers:
 - hguerrero@redhat.com
 - nvinto@redhat.com
 - ryanj@redhat.com
-checksum: "7823442304206509764"
+- cclyburn@redhat.com
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "4111703307765593050"

@@ -1,0 +1,13 @@
+mkdir -p /root/projects/debezium/
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/kafka-connect.yaml -o /root/projects/debezium/kafka-connect.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/kafka-cluster.yaml -o /root/projects/debezium/kafka-cluster.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/kafka-connector.yaml -o /root/projects/debezium/kafka-connector.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/operator-install.yaml -o /opt/operator-install.yaml
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/register.json -o /opt/register.json
+
+curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml
