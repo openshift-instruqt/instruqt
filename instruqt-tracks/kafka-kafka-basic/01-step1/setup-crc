@@ -5,3 +5,5 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kaf
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-basic/scripts/kafka-topic.yaml -o /opt/kafka-topic.yaml
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
+
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
