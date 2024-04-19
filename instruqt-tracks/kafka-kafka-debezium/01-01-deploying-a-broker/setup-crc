@@ -11,3 +11,5 @@ curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kaf
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/register.json -o /opt/register.json
 
 curl -s https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/kafka/kafka-debezium/scripts/strimzi-admin.yaml -o /opt/strimzi-admin.yaml
+
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
