@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# workaround for OpenShift 4.11 log accessibility issue:
+sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json

@@ -8,7 +8,7 @@ description: |2
   ## What is Camel K?
 
 
-  ![Logo](assets/logo-camel.png)
+  ![Logo](assets/images/logo-camel.png)
 
 
   ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
@@ -19,13 +19,19 @@ description: |2
 
   Camel K integrate seamlessly with Knative making it the best serverless technology for integration. This scenario will get you started and hands on Camel K.
 icon: https://logodix.com/logo/1910931.png
-level: beginner
 tags:
 - openshift
 owner: openshift
 developers:
 - nvinto@redhat.com
 - bmesegue@redhat.com
-- rjarvine@redhat.com
 - ryanj@redhat.com
-checksum: "12567578228157292385"
+timelimit: 3600
+sandbox_preset: openshift-411
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "16291105245519277272"
