@@ -27,11 +27,10 @@ developers:
 - bmesegue@redhat.com
 - ryanj@redhat.com
 timelimit: 3600
-sandbox_preset: openshift-411
 lab_config:
   overlay: false
   width: 33
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "16291105245519277272"
+checksum: "16167226945418464627"
