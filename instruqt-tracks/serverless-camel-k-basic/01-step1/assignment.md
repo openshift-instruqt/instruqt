@@ -11,7 +11,7 @@ notes:
 
     ## What is Camel K?
 
-    ![Logo](../assets/logo-camel.png)
+    ![Logo](../assets/images/logo-camel.png)
 
     ### Your Integration Swiss-Army-Knife native on Kubernetes with Camel K
 
