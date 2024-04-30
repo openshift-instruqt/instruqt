@@ -194,7 +194,56 @@ CAMELK_VERSION=1.10.6
 curl -sL https://mirror.openshift.com/pub/openshift-v4/clients/camel-k/$CAMELK_VERSION/camel-k-client-$CAMELK_VERSION-linux-64bit.tar.gz | tar -xz -C /usr/local/bin
 chmod +x /usr/local/bin/kamel
 
+oc new-project camel-basic
+
 mkdir -p /root/camel-basic
+
+# cp -r /var/roothome/.kube /var/roothome/camel-basic
+cd /var/roothome/camel-basic
+
+
+
+oc apply -f /opt/operator-install.yaml -n camel-basic
+
+until [[ `oc get csv -n camel-basic -oname` != '' ]]; do
+    echo "waiting for Camel K subscription";
+    sleep 5;
+done
+
+CSV=`oc get csv -n camel-basic -oname`
+echo "CSV is: $CSV"
+
+echo "Wait for installation to finish."
+until [[ `oc get $CSV -n camel-basic -o jsonpath='{.status.phase}'` == 'Succeeded' ]]; do
+    echo "waiting for Camel K operator installation...";
+    sleep 5;
+done
+
+kamel init hello.java
+kamel run hello.java -n camel-basic
+
+until [[ `oc get it -n camel-basic -oname` != '' ]]; do
+    echo "waiting for Camel K integration creation";
+    sleep 5;
+done
+
+echo "Integration created."
+echo "Wait for integration to run."
+until [[ `oc get it hello -n camel-basic -o jsonpath="{.status.phase}"` == 'Running' ]]; do
+    echo "waiting for Camel K instegration to run...";
+    sleep 5;
+done
+
+echo "Integration now running."
+echo "Deleting integration."
+
+oc delete it hello -n camel-basic
+rm hello.java
+
+
+echo "Installation of Camel K operator completed."
+
+
 
 ###
 
