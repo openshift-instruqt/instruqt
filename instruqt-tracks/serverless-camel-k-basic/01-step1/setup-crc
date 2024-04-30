@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# workaround for OpenShift 4.11 log accessibility issue:
-sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
+# # workaround for OpenShift 4.11 log accessibility issue:
+# sudo cp /etc/machine-config-daemon/orig/var/lib/kubelet/config.json.mcdorig /var/lib/kubelet/config.json
 
-curl -sL https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/serverless/camel-k-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
+# curl -sL https://raw.githubusercontent.com/openshift-instruqt/instruqt/v0.0.4/serverless/camel-k-basic/scripts/operator-install.yaml -o /opt/operator-install.yaml
 
-CAMELK_VERSION=1.6.7
+# CAMELK_VERSION=1.6.7
 
-curl -sL https://mirror.openshift.com/pub/openshift-v4/clients/camel-k/$CAMELK_VERSION/camel-k-client-$CAMELK_VERSION-linux-64bit.tar.gz | tar -xz -C /usr/local/bin
-chmod +x /usr/local/bin/kamel
+# curl -sL https://mirror.openshift.com/pub/openshift-v4/clients/camel-k/$CAMELK_VERSION/camel-k-client-$CAMELK_VERSION-linux-64bit.tar.gz | tar -xz -C /usr/local/bin
+# chmod +x /usr/local/bin/kamel
 
-mkdir -p /root/camel-basic
+# mkdir -p /root/camel-basic
