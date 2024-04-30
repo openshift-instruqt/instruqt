@@ -14,7 +14,7 @@ tabs:
   path: /root/camel-basic
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io/topology/ns/camel-basic?view=graph
   new_window: true
 difficulty: basic
 timelimit: 375
@@ -92,9 +92,11 @@ public class Routing extends RouteBuilder {
 }
 ```
 
-Note in code above how the annotation `@PropertyInject` is used to inject configured properties into variables. Also note how curly brackets `{{...}}` are used inside Camel routes to fetch configured properties (known as *Property Placeholders*).
+Note in code above how the annotation `@PropertyInject` is used to inject configured properties into variables.
 
-Look at the routing logic to see how *Camel* routes delivery items to different queues depending on their priority.
+Also note how curly brackets `{{...}}` are used inside Camel routes to fetch configured properties (known as *Property Placeholders*).
+
+Look at the routing logic to see how *Camel* delivers items to different queues depending on their priority.
 
 <br/>
 
@@ -155,7 +157,9 @@ From the editor, select the `SupportRoutes.xml` file and paste the contents from
 
 Go back to your [button label="Terminal" background="#6c5ce7" ](tab-0) view.
 
-The execution command must include the flag `--property file:<your-file>` to link the configuration file with the integration. To run it, use the command below:
+The execution command must include the flag `--property file:<your-file>` to link the configuration file with the integration.
+
+To run it, use the command below:
 
 ```
 kamel run \
@@ -165,7 +169,12 @@ kamel run \
 Routing.java \
 SupportRoutes.xml
 ```
-Once it started. You can find the pod running this Routing application in the terminal.
+> [!NOTE]
+> Camel K will spend 2-3 minutes downloading extra dependencies from the source code above.
+>
+> Be patient, the logs will start showing once the application starts executing.
+
+Once started, you'll see in the terminal the application logs obtained from its running pod.
 
 ```nocopy
 [1] ... Standard delivery: publicity
@@ -181,11 +190,13 @@ Once it started. You can find the pod running this Routing application in the te
 
 Now make some changes to the property file and see the integration redeployed.
 
-For example, switch delivery priorities by changing in the configuration:
+Open the [button label="Visual Editor" background="#6c5ce7" ](tab-1).
+
+Now, for example, switch delivery priorities by changing in the configuration:
  - from: `postcard`
  - to: `*postcard` (prepend \*)
 
-Observe how the behaviour of the application changes and now `postcard` is sent to the priority queue.
+Get back to the [button label="Terminal" background="#6c5ce7" ](tab-0) and observe how the behaviour of the application changes and now `postcard` is sent to the priority queue.
 
 Hit `ctrl`+`C` on the terminal window. This will also terminate the execution of the integration.
 
