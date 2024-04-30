@@ -26,11 +26,11 @@ developers:
 - nvinto@redhat.com
 - bmesegue@redhat.com
 - ryanj@redhat.com
-timelimit: 3600
+timelimit: 1500
 lab_config:
   overlay: false
   width: 33
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "13703363750775898540"
+checksum: "14063942816179519712"
