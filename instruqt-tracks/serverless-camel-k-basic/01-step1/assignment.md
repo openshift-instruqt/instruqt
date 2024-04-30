@@ -63,11 +63,8 @@ To create the Camel source file using the Java language, run the following comma
 ```
 kamel init hello.java
 ```
-
-Go to the **Visual Editor** tab, under the folder:
+Click [button label="Visual Editor" background="#6c5ce7" ](tab-1) to look at the source code generated, and find the file under the folder:
  - `/root/camel-basic`
-
-Inspect the contents of source code generated.
 
 > [!IMPORTANT]
 > Click the circle arrow `↻` in the visual editor tab to refresh the view if you don't see the newly created file listed.
@@ -75,7 +72,7 @@ Inspect the contents of source code generated.
 > [!NOTE]
 > Notice you don't need to specify ANY dependency specification in the folder, Camel K will figure it out, and inject it during the build. So all you need is to JUST write your application. In this case, the `kamel` client will push it to the cluster and the operator will do all the tedious footworks for you.
 
-To run it, from the terminal, execute the following command:
+Click [button label="Terminal" background="#6c5ce7" ](tab-0) and run it by executing the following command:
 
 ```
 kamel run hello.java --dev
@@ -128,11 +125,17 @@ You can also view the logs from OpenShift's web console
  - Click the [button label="Web Console" background="#6c5ce7" ](tab-2) tab.
  - To login, use the credentials `admin`/`admin`
 
+> [!NOTE]
+> You'll need to accept the private securty certificates in your browser to proceed.
+
 <br/>
 
 Then follow these steps:
-1. Click the round `hello` deployment
-1. Find and click the `Resources` tab in the right panel
+1. Select the *Developer* view from the left menu.
+1. Select *Topology* from the left menu.
+1. Choose the `camel-basic` project (namespace).
+1. Click the round `hello` deployment.
+1. Find and click the `Resources` tab in the right panel.
 1. Click the *View logs* link.
 
 The output in the console should be the same as in the terminal.
@@ -143,10 +146,11 @@ The output in the console should be the same as in the terminal.
 > Camel K's developer mode (enabled with flag `--dev`) hooks the client with the environment, and inmediately pushes any code changes. The code update triggers a new pod instance running the new code and your terminal will start streaming the new logs.
 
 Let's trigger a code update. \
-Go back to the editor, find the `simple` expression, and change its value:
+Go back to the [button label="Visual Editor" background="#6c5ce7" ](tab-1), find in the source the `simple` expression, and change its value:
  - from `Hello`
  - to  `Riding`.
 
+Go back to the [button label="Terminal" background="#6c5ce7" ](tab-0). \
 You should see the execution's output now showing:
 
 ```nocopy
@@ -176,7 +180,7 @@ kamel init hello.yaml
 
 ```
 
-Go to the **Visual Editor** tab, under the folder:
+Go to the [button label="Visual Editor" background="#6c5ce7" ](tab-1), under the folder:
   - `/root/camel-basic`
 
 Click the button `↻` (refresh) and inspect the contents of the XML and YAML files generated.
@@ -185,6 +189,6 @@ Click the button `↻` (refresh) and inspect the contents of the XML and YAML fi
 > Observe how all 3 source types have equivalent definitions using different DSLs.
 
 There's no need to execute the new XML/YAML files. \
-If you did they, they would produce a similar result as the Java version you ran.
+If you did, they would produce a similar result as the Java version you previously ran.
 
 Click *Next* to continue with step 2.

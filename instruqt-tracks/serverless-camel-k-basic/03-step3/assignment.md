@@ -14,7 +14,7 @@ tabs:
   path: /root/camel-basic
 - title: Web Console
   type: website
-  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io/topology/ns/camel-basic?view=graph
   new_window: true
 difficulty: basic
 timelimit: 375
@@ -33,7 +33,7 @@ cd /root/camel-basic/
 
 Next, click [button label="Visual Editor" background="#6c5ce7" ](tab-1).
 
-Now, for example, edit the first endpoint (in *Routing.java*):
+Now, for example, edit the first endpoint (in ***Routing.java***):
 - from:
   - `timer:java?period=3000`
 - to:
@@ -67,15 +67,19 @@ NAME      SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 routing   0/1 * * * ?   False     0        39s             51s
 ```
 
-The running behavior changes, because now there's not always a pod running (beware you should not store data in memory when using the cronJob strategy).
+The running behavior has changed because now there is more time between executions and the pod scales down until the next scheduled execution.
 
-You can see the pods starting and being destroyed by watching the namespace:
+> [!WARNING]
+> When using the cronJob strategy you need to design your application knowing that scheduled jobs do not allow keeping the memory state between runs.
+
+You can see pod starts/stops by watching the namespace by issuing the command:
 
 ```
 oc get pod -w
 ```
 
 Hit `ctrl`+`C` on the terminal window.
+
 To see the logs of each integration starting up, you can use the `kamel log` command:
 
 ```
@@ -117,7 +121,11 @@ In this scenario you got to play with Camel K. Focusing on the code, and see the
 
 # What's Next?
 
-Congratulations on completing this lab. Keep learning about OpenShift:
+Congratulations on completing this lab. Keep learning about Apache Camel and OpenShift:
+
+* Read the [Apache Camel page in Red Hat Developers](https://developers.redhat.com/products/redhat-build-of-apache-camel/overview) to learn more about the capabilities of Apache Camel.
+
+* Find more [*Apache Camel* hands-on tutorials](https://developers.redhat.com/products/redhat-build-of-apache-camel/getting-started) you can try for free in the *Developer Sandbox*.
 
 * Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
 * [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
