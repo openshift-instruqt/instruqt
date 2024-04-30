@@ -1,8 +1,8 @@
 ---
 slug: step3
-id: pvfkyaueoty3
+id: rc9brkyvdmxi
 type: challenge
-title: Step 3 - Externalising configuration
+title: Step 3 - Using Camel K traits
 tabs:
 - title: Terminal 1
   type: terminal
@@ -19,155 +19,107 @@ tabs:
 difficulty: basic
 timelimit: 375
 ---
-## Applying configuration and routing
+## Running integrations as Kubernetes CronJobs
 
-One of the most common integration patterns (*EIP*s) is the content-based router. This step shows how to implement the Routing EIP and how to configure it using external properties.
+In Camel K, [*Traits*](https://camel.apache.org/camel-k/latest/traits/traits.html) are high level named features that can be enabled/disabled or configured to customize the behavior of the final integration. For this step, we will rely on Camel K's [**Cron Trait**](https://camel.apache.org/camel-k/latest/traits/cron.html) to run the integration as a CronJob.
 
-Let's first create the source files needed for this step. Run the following set of commands:
+Because our Camel route in our previous step is triggered by the `timer` component, Camel K applies by default the Cron trait, ideal for periodic batch processing. As long as the timer's period parameter can be written as a cron expression, the integration can automatically be deployed as a Kubernetes CronJob.
+
+First, let's switch to the working folder by running:
 
 ```
 cd /root/camel-basic/
-touch routing.properties
-touch Routing.java
-touch SupportRoutes.xml
-
 ```
 
-> **Note:** we are defining 2 Camel source files, using the Java and XML DSLs (*Domain Specific Language*). Camel supports multiple languages. This example shows how you can load multiple Camel source files irrespectively of their DSL language.
+Next, click [button label="Visual Editor" background="#6c5ce7" ](tab-1).
 
-### 1. Define the configuration.
+Now, for example, edit the first endpoint (in *Routing.java*):
+- from:
+  - `timer:java?period=3000`
+- to:
+  - `timer:java?period=60000` (1 minute between executions).
 
-Go to the **Visual Editor** tab (top left), select the `routing.properties` file, then copy the contents below, and make sure you save it:
+<br/>
 
-```properties
-# Marker to identify priority items
-priority-marker=*
-
-# List of delivery items for random generation
-items=*shopping,postcard,letter,*payslip,publicity,*taxes
-```
-
-Items marked with a star in the configuration will have high priority. The *Routing* definition that follows will route items by their priority.
-
-
-### 2. Define the main routing logic.
-
-Select the `Routing.java` file in the editor's file tree and paste the contents from the code below, and ensure you save the changes:
-
-```java
-// camel-k: language=java
-
-import org.apache.camel.PropertyInject;
-import org.apache.camel.builder.RouteBuilder;
-
-public class Routing extends RouteBuilder {
-
-  @PropertyInject("priority-marker")
-  private String priorityMarker;
-
-  @Override
-  public void configure() throws Exception {
-      //Main Route:
-      // 1) generates random item
-      // 2) Choose priority pipeline (Content Based Router EIP)
-      from("timer:java?period=3000").id("main")
-        .to("direct:random-item-generator")
-        .choice()
-          .when().simple("${body.startsWith('{{priority-marker}}')}")
-             //this transformation discards the star character
-            .transform().body(String.class, item -> item.substring(priorityMarker.length()))
-            .to("direct:priorityQueue")
-          .otherwise()
-            .to("direct:standardQueue");
-  }
-}
-```
-
-Note in code above how the annotation `@PropertyInject` is used to inject configured properties into variables. Also note how curly brackets `{{...}}` are used inside Camel routes to fetch configured properties (known as *Property Placeholders*).
-
-Look at the routing logic to see how *Camel* routes delivery items to different queues depending on their priority.
-
-### 3. Define the additional routes to support the main Route.
-
-The java file previously defined contains the main routing logic. To showcase a declarative language we're now using the XML DSL that will define extra Camel routes necessary to run the example (Item generator and simulated priority queues).
-
-From the editor, select the `SupportRoutes.xml` file and paste the contents from the XML code below, and ensure you save the changes:
-
-```xml
-<!-- camel-k: dependency=camel-csv -->
-<routes id="camel" xmlns="http://camel.apache.org/schema/spring">
-
-  <!-- Priority processing Route -->
-  <route id="priority">
-    <from uri="direct:priorityQueue"/>
-    <log message="!!Priority delivery: ${body}"/>
-  </route>
-
-  <!-- Standard processing Route -->
-  <route id="standard">
-    <from uri="direct:standardQueue"/>
-    <log message="Standard delivery: ${body}"/>
-  </route>
-
-
-  <!-- Randomly pick an item  from the configuration list -->
-  <route id="random">
-    <from uri="direct:random-item-generator"/>
-
-    <!-- load the list of items from configuration-->
-    <setBody>
-      <simple>{{items}}</simple>
-    </setBody>
-
-    <!-- unmarshal CSV to a Java Map -->
-    <unmarshal>
-        <csv/>
-    </unmarshal>
-
-    <!-- select 1st line (it's a CSV value with a single line) -->
-    <setBody>
-      <simple>${body[0]}</simple>
-    </setBody>
-
-    <!-- pick a random item -->
-    <setBody>
-      <simple>${body[${random(0,${body.size})}]}</simple>
-    </setBody>
-  </route>
-
-</routes>
-```
-
-
-### 4. Run the integration
-
-The execution command must include the flag `--property file:<your-file>` to link the configuration file with the integration. To run it, use the command below:
+Return to your [button label="Terminal" background="#6c5ce7" ](tab-0) and re-run the integration with:
 
 ```
 kamel run \
---dev \
 --name routing \
 --property file:routing.properties \
 Routing.java \
 SupportRoutes.xml
 ```
-Once it started. You can find the pod running this Routing application in the terminal.
+
+You'll see that Camel K has materialized a cron job using the command below:
+
+> [!NOTE]
+> You may need to wait around 1 minute until a job kicks off and you see the results below.
 
 ```
-[1] ... Standard delivery: publicity
-[1] ... Standard delivery: postcard
-[1] ... !!Priority delivery: taxes
-[1] ... Standard delivery: letter
-[1] ... !!Priority delivery: taxes
-[1] ... Standard delivery: letter
-[1] ... !!Priority delivery: shopping
-[1] ... Standard delivery: postcard
-[1] ... Standard delivery: letter
+oc get cronjob -w
 ```
 
-Now make some changes to the property file and see the integration redeployed.
-For example, change the word `postcard` with `*postcard` to see it sent to the priority queue.
+You'll find a Kubernetes CronJob named "routing".
 
-Hit `ctrl`+`C` on the terminal window. This will also terminate the execution of the integration.
+```nocopy
+NAME      SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+routing   0/1 * * * ?   False     0        39s             51s
+```
 
-Click *Next* to continue with step 4.
+The running behavior changes, because now there's not always a pod running (beware you should not store data in memory when using the cronJob strategy).
+
+You can see the pods starting and being destroyed by watching the namespace:
+
+```
+oc get pod -w
+```
+
+Hit `ctrl`+`C` on the terminal window.
+To see the logs of each integration starting up, you can use the `kamel log` command:
+
+```
+kamel log routing
+```
+
+You should see every minute a JVM starting, executing a single operation and terminating.
+
+
+The CronJob behavior is controlled via a Trait called `cron`. Traits are the main way to configure high level Camel K features, to customize how integrations are rendered.
+
+To disable the cron feature and use the deployment strategy, you can run the integration with:
+
+```
+kamel run \
+--name routing \
+--property file:routing.properties \
+--trait cron.enabled=false \
+Routing.java \
+SupportRoutes.xml
+```
+
+
+This will disable the cron trait and restore the classic behavior (always running pod).
+
+You should see it reflected in the logs (which will be printed every minute by the same JVM):
+
+```
+kamel log routing
+```
+
+Hit `ctrl`+`C` on the terminal window.
+
+<br/>
+
+## Congratulations
+
+In this scenario you got to play with Camel K. Focusing on the code, and see the power of how Camel K can enhance your experience when working on Kubernetes/OpenShift. There is much more to Camel K than realtime development and developer joy. Be sure to visit [Camel K](https://camel.apache.org/camel-k/latest/index.html) to learn even more about the architecture and capabilities of this exciting new framework.
+
+# What's Next?
+
+Congratulations on completing this lab. Keep learning about OpenShift:
+
+* Visit the [Red Hat Developer learning page](https://developers.redhat.com/learn) for more labs and resources
+* [Want to try a free, instant 30-day OpenShift cluster? Get started with the Developer Sandbox for Red Hat OpenShift](https://developers.redhat.com/developer-sandbox)
+
+Don't forget to finish the lab and rate your experience on the next page. Thanks for playing!
