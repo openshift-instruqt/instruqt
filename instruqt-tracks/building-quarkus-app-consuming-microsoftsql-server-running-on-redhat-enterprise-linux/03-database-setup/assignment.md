@@ -10,13 +10,6 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: rhel
-- title: Terminal 3
-  type: terminal
-  hostname: rhel
-- title: Visual Editor
-  type: code
-  hostname: rhel
-  path: /root
 difficulty: intermediate
 timelimit: 600
 ---
@@ -79,12 +72,6 @@ systemctl status mssql-server
 
 
 
-open the SQL Server port on the RHEL firewall. The default SQL Server port is TCP 1433. If you're using FirewallD for your firewall.
-
-```
-sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent
-sudo firewall-cmd --reload
-```
 
 SQL Server is now running on your RHEL machine and is ready to use!
 
@@ -113,7 +100,7 @@ sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/
 sudo yum install -y mssql-tools unixODBC-devel
 ```
 
-
+To accept the license terms kindly type **yes**
 
 3. add /opt/mssql-tools/bin/ to your PATH environment variable, to make sqlcmd or bcp accessible from the bash shell. Modify the PATH environment variable in your ~/.bash_profile file with the following command:
 

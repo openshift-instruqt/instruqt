@@ -15,13 +15,6 @@ tabs:
 - title: Terminal 2
   type: terminal
   hostname: rhel
-- title: Terminal 3
-  type: terminal
-  hostname: rhel
-- title: Visual Editor
-  type: code
-  hostname: rhel
-  path: /root
 difficulty: intermediate
 timelimit: 1000
 ---
