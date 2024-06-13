@@ -3,6 +3,9 @@ containers:
 - name: container
   image: fedora
   shell: /bin/bash
+virtualbrowsers:
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882384
 virtualmachines:
 - name: crc
   image: rhd-devx-instruqt/openshift-4-11-7-lgph7
