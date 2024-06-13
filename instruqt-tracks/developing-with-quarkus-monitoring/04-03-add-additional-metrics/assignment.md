@@ -25,7 +25,7 @@ In this topic you will add a new endpoint named `/is-prime` to the demonstration
 
 `Step 1b:` Click the `New File` icon to create the file named `PrimeNumberResource.java` in the directory `primes/src/main/java/org/acme/quickstart` as shown in the figure below.
 
-![Create Prime Resource](../assets/create-prime-resource.png)
+![Create Prime Resource](..\assets\create-prime-resource.png)
 
 `Step 1c:` Click the `PrimeNumberResource.java` file to open it for editing and add the following code:
 
@@ -99,7 +99,7 @@ public class PrimeNumberResource {
 
 `Step 1d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `PrimeNumberResource.java` file as shown in the figure below.
 
-![Save Prime Resource](../assets/save-prime-resource.png)
+![Save Prime Resource](..\assets\save-prime-resource.png)
 
 **KEY POINTS TO UNDERSTAND**
 
@@ -247,7 +247,7 @@ Let's add some MeterFilters using Java code.
 
 `Step 10b:` Click the `New File` icon to create the file named `CustomConfiguration.java` in the directory `primes/src/main/java/org/acme/quickstart`, as shown in the figure below.
 
-![Create Configuration Resource](../assets/create-configuration-resource.png)
+![Create Configuration Resource](..\assets\create-configuration-resource.png)
 
 `Step 10c:` Click the `CustomConfiguration.java` file to open it for editing and add the following code:
 

@@ -53,7 +53,7 @@ oc get route prometheus -n quarkus -o jsonpath='{"http://"}{.spec.host}'
 
 `Step 3:` Copy the URL into a new browser window's address bar in order to access the Prometheus GUI as shown in the figure below.
 
-![Prometheus GUI](../assets/prometheus-dashboard-01.png)
+![Prometheus GUI](..\assets\prometheus-dashboard-01.png)
 
 |NOTE|
 |----|
@@ -109,13 +109,13 @@ Prometheus should start scraping the metrics from the demonstration application 
 `Step 6:` Using the Prometheus GUI, type the string `prime`, and then select the term `prime_number_max` from the dropdown as shown in the figure below.
 
 
-![Prometheus GUI](../assets/prometheus-filter-on-prime-01.png)
+![Prometheus GUI](..\assets\prometheus-filter-on-prime-01.png)
 
 ----
 
 `Step 7:` Using the Prometheus GUI, click the **Execute** button as shown in the figure below.
 
-![Prometheus GUI](../assets/prometheus-filter-on-prime-02.png)
+![Prometheus GUI](..\assets\prometheus-filter-on-prime-02.png)
 
 Running **Execute** will fetch the metric that reports the largest prime number found so far, as shown in the figure above.
 
@@ -125,7 +125,7 @@ Let's view another metric.
 
 `Step 8:`  Using the Prometheus GUI, type or copy/paste the string `http_server_requests_seconds_count` in the search text box, and then click the **Execute** button as shown in the figure below.
 
-![Prometheus GUI](../assets/search-seconds-count.png)
+![Prometheus GUI](..\assets\search-seconds-count.png)
 
 Notice that in the illustrated instance shown above there were four requests made to the application. Also, a variety of attributes about reach requests are reported. Among them are status codes, and the time it took for each request to execute is also displayed.
 
@@ -135,7 +135,7 @@ Prometheus also has a graphing feature which you'll look at next.
 
 `Step 9:`  Click the **Graph** button in the results section of the Prometheus GUI as shown in the figure below.
 
-![Prometheus Graph](../assets/prometheus-graphs-01.png)
+![Prometheus Graph](..\assets\prometheus-graphs-01.png)
 
 A graph of the metrics output is displayed. The illustration shown above displays the endpoints with different colors, one for each endpoint: `/is-prime/{number}`, `/q/metrics`, and the `404 not-found`.
 
