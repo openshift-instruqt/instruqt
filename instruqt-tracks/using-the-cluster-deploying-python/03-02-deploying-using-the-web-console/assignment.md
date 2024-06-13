@@ -28,7 +28,7 @@ First, we need to select the type of application you're deploying. The first thi
 
 `Step 1b:` Scroll down a bit and click the **All services** text in the **Developer Catalog** text block as shown in the figure below.
 
-![All Services](../assets/all-services.png)
+![All Services](..\assets\all-services.png)
 
 ----
 
@@ -40,7 +40,7 @@ This action filters out all text blocks except those that are relevant to Python
 
 `Step 2b:` Select the text block labeled **Python** as shown in the figure below.
 
-![Select Python](../assets/select-python.png)
+![Select Python](..\assets\select-python.png)
 
 You'll be presented with a web page that is particular to the Python service you've just selected.
 
@@ -48,7 +48,7 @@ You'll be presented with a web page that is particular to the Python service you
 
 `Step 3:` Click the Create button as shown in the figure below.
 
-![Create app](../assets/app-create.png)
+![Create app](..\assets\app-create.png)
 
 You'll be presented with a web page titled **Create to Source-To-Image application**.
 
@@ -66,26 +66,26 @@ https://github.com/openshift-instruqt/blog-django-py
 
 Into the **Git Repo URL** text box, as shown in the figure below.
 
-![Bind Source Code](../assets/app-git.png)
+![Bind Source Code](..\assets\app-git.png)
 
 ----
 
 `Step 5a:` Scroll down the page. Notice that the **Create to Source-To-Image Application** web page has automatically filled in values in the **Application** and **Name** text boxes in the **General** section as shown in the figure below:
 
-![General](../assets/app-general.png)
+![General](..\assets\app-general.png)
 
 Keep scrolling.
 
 Notice in the **Advanced options** section, as shown in the figure below, that **Create a route to the Application** checkbox is selected. This means that OpenShift will automatically create a URL that allows access to the application from the Internet.
 
-![Advanced](../assets/app-advanced.png)
+![Advanced](..\assets\app-advanced.png)
 
 
 `Step 5b:` Finally, click the **Create** button, as shown in the figure above. This action will save the source code data and start the build process for the application.
 
 You will be presented with the Topology overview page in the OpenShift web console while the build is in progress, as shown in the figure below.
 
-![Topology page](../assets/topology.png)
+![Topology page](..\assets\topology.png)
 
 # Anatomy of an application graphic in the Topology overview
 
@@ -95,7 +95,7 @@ Notice that the graphic for the Python application shown above has a blue circle
 
 The color of the circle and the icons surrounding the circle have special meanings. The figure below describes the meaning of each of these graphical elements.
 
-![Anatomy of an App](../assets/anatomy-of-app.png)
+![Anatomy of an App](..\assets\anatomy-of-app.png)
 
 The Git icon shown to the lower right of the ring can be clicked on to take you to the hosted Git repository from which the source code for the application was built.
 
@@ -107,7 +107,7 @@ The ring itself will progress from white, indicating the deployment is pending, 
 
 Clicking anywhere on the area enclosed by the ring will bring up a panel giving details of the resources for the application as shown in the figure below.
 
-![Deployment details](../assets/graphic-n-data.png)
+![Deployment details](..\assets\graphic-n-data.png)
 
 # Congratulations!
 
