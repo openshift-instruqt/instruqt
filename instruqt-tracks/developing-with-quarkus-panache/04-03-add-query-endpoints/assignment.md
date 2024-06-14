@@ -69,7 +69,7 @@ Much like the best practice in object-oriented programming, Panache and Quarkus 
 
 `Step 2a:` Go to **Visual Editor** tab and navigate to the directory, `src/main/java/org/acme/person/model/` as shown in the figure below.
 
-![Select Person](../assets/selected-person-model.png)
+![Select Person](..\assets\selected-person-model.png)
 
 `Step 2b:` Click on the file named `Person.java` to open it for editing.
 

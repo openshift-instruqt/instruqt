@@ -42,7 +42,7 @@ OpenShift ships with a web-based console that allows users to perform various ta
 
 `Step 1:` Click on **Web Console** tab on the horizontal menu bar over the terminal window to the left. You will be presented with a login page as shown in the figure below.
 
-![Login](../assets/web-console-login.png)
+![Login](..\assets\web-console-login.png)
 
 ----
 
@@ -52,7 +52,7 @@ OpenShift ships with a web-based console that allows users to perform various ta
 * Password: `developer`
 
 NOTE: You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift web console.
 
 ----
@@ -61,7 +61,7 @@ If you do get the warning, click the **Advanced** button to complete the process
 
 After you dismiss the tour page, you'll see that there are no projects found, as shown in the figure below.
 
-![No Projects Found](../assets/no-projects-found.png)
+![No Projects Found](..\assets\no-projects-found.png)
 
 This is about to change. You will add a project to OpenShift.
 
@@ -168,11 +168,11 @@ The OpenShift web console will appear.
 
 `Step 8b:` Then click the link `quarkus` in the projects list that appears as shown in the figure below.
 
-![Select Quarkus](../assets/select-quarkus.png)
+![Select Quarkus](..\assets\select-quarkus.png)
 
 You'll see a circular graphic that represents the Postgres database as shown in the figure below.
 
-![Postgres](../assets/display-postgres.png)
+![Postgres](..\assets\display-postgres.png)
 
 You'll be working in the Topology view in upcoming topics.
 
@@ -224,7 +224,7 @@ INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extension (default-cli) @ people 
 
 `Step 12:` Click the file named `application.properties` in the directory tree to open the file for editing as shown in the figure below:
 
-![Select application properties](../assets/select-app-properties.png)
+![Select application properties](..\assets\select-app-properties.png)
 
 ----
 
@@ -328,7 +328,7 @@ NOTE: If the `oc rollout` command seems not to finish, press the `CTRL+C` keys t
 
 `Step 18:`  Click the **Web Console:** tab to view the updated **Topology** graphics as shown in the figure below.
 
-![People and Postgree](../assets/people-n-postgres.png)
+![People and Postgree](..\assets\people-n-postgres.png)
 
 Notice that both the People application and the Postgres database are represented in the graphic. Also notice that the relationship between the People application and the Postgres database is described visually by a connecting line between the two.
 
