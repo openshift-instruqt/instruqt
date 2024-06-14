@@ -51,7 +51,7 @@ To create the `Sample` bean, do the following steps.
 
 `Step 1b:` Click on the `New File` icon to create a file named `Sample.java` in the `qute/src/main/java/org/acme/` directory as shown in the figure below.
 
-![Create sample.java](../assets/create-sample-java.png)
+![Create sample.java](..\assets\create-sample-java.png)
 
 `Step 1c:` Add the following code to the file `Sample.java`:
 
@@ -83,7 +83,7 @@ Next, create a service class named `SampleService` that has a `get()` method. Th
 
 `Step 2b:` Click on the `New File` icon to create a file named `SampleService.java` in the `qute/src/main/java/org/acme/` directory, as shown in the figure below.
 
-![Create SampleService](../assets/create-sampleservice.png)
+![Create SampleService](..\assets\create-sampleservice.png)
 
 `Step 2c:` Add the following code to the file `SampleService.java`:
 
@@ -135,7 +135,7 @@ Next, let's create the template file.
 
 `Step 4b:` Click on the `New File` icon to create a file named `report_01.json.template` in the `qute/src/main/resources/templates/reports/v1` directory as shown in the figure below.
 
-![Create JSON Template](../assets/create-json-template.png)
+![Create JSON Template](..\assets\create-json-template.png)
 
 `Step 4c:` Add the following code to the file `report_01.json.template`:
 
@@ -166,7 +166,7 @@ Also note the use of the conditional [elvis operator](https://en.wikipedia.org/w
 
 `Step 5b:` Click on the `New File` icon to create a file named `ReportGenerator.java` in the `qute/src/main/java/org/acme/` directory as shown in the figure below.
 
-![Create Report Generatgor](../assets/create-report-generator.png)
+![Create Report Generatgor](..\assets\create-report-generator.png)
 
 `Step 5c:` Add the following code to the file `ReportGenerator.java`:
 
