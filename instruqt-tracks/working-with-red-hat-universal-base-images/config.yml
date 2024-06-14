@@ -1,0 +1,15 @@
+version: "3"
+virtualbrowsers:
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882359
+virtualmachines:
+- name: user
+  image: rhel-cloud/rhel-8
+  shell: /bin/bash
+  environment:
+    TERM: xterm
+  machine_type: g1-small
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports
