@@ -1,4 +1,7 @@
 version: "3"
+virtualbrowsers:
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882353
 virtualmachines:
 - name: rhel
   image: instruqt-redhat/rhel-latest

@@ -36,8 +36,11 @@ developers:
 - nvinto@redhat.com
 - akeenan@redhat.com
 - cclyburn@redhat.com
+maintenance: true
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "534048997498659061"
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "1631815228435239697"
