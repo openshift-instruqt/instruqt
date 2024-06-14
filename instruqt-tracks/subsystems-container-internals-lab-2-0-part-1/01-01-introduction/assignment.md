@@ -59,4 +59,4 @@ Covering all of this material is beyond the scope of any live training, but we w
 
 Now, let's start with the introductory lab, which covers these four basic primitives:
 
-![New Primitives](../assets/01-new-primitives.png)
+![New Primitives](..\assets\01-new-primitives.png)
