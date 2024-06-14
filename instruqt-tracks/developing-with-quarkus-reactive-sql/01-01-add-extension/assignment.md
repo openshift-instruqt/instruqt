@@ -20,7 +20,7 @@ notes:
 
     Quarkus uses [Vert.x](https://vertx.io/docs/vertx-pg-client/java/) and [Netty](https://netty.io/) at its core. And uses a bunch of reactive frameworks and extensions on top to enable the developers. Quarkus is not just for HTTP microservices, but also for event-driven architectures. The secret behind this is to use a single reactive engine that supports both imperative and reactive code.
 
-    ![Reactive](../assets/vert-x-arch.png)
+    ![Reactive](..\assets\vert-x-arch.png)
 
     Quarkus is intended to support both imperative and reactive coding. Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Vert.x and Netty). All the HTTP requests an application receives are handled by event loops on the IO Thread. Requests are then routed towards the code that manages the request. Depending on the destination, the request can invoke the code managing the request on a worker thread via the Servlet/Jax-RS or use the reactive route IO Thread.
 

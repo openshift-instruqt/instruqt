@@ -29,7 +29,7 @@ First you'll add code that will automatically create a table in the PostgresSQL 
 
 `Step 1a:` In the **Visual Editor**, navigate to the file `src/main/java/org/acme/reactive/CoffeeResource.java` as shown in the figure below.
 
-![Open Coffee Resource](../assets/open-coffeesource.png)
+![Open Coffee Resource](..\assets\open-coffeesource.png)
 
 `Step 1b:` Click on the file `src/main/java/org/acme/reactive/CoffeeResource.java` to open it for editing.
 

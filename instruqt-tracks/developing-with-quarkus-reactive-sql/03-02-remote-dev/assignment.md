@@ -46,7 +46,7 @@ OpenShift ships with a web console that allows users to perform tasks via a brow
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
+![Security warning](..\assets\security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift web console.|
 
 `Step 1b:` Log in using the following credentials as shown in the figure below:
@@ -54,7 +54,7 @@ If you do get the warning, click the **Advanced** button to complete the process
 * Username: `developer`
 * Password: `developer`
 
-![login](../assets/web-console-login.png)
+![login](..\assets\web-console-login.png)
 
 `Step 1c:` Click the **Skip Tour** button to skip the new user introduction.
 
@@ -107,7 +107,7 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 `Step 4:` Return to the **OpenShift Web Console** and click the **Topology** button on the vertical menu bar on the left. Then, click the link
 `reactive-sql`.  You'll be presented with a page displaying the text `No resources found` as shown in the figure below.
 
-![No resources found](../assets/no-resources-found.png)
+![No resources found](..\assets\no-resources-found.png)
 
 
 # Deploying the PostgresSQL database
@@ -150,7 +150,7 @@ You'll see the following output:
 
 `Step 6:` Return to the **OpenShift Web Console** tab. You'll see the Postgres pod spinning up from the Topology view in the web console as shown in the figure below.
 
-![Postgres pod](../assets/database-in-openhift.png)
+![Postgres pod](..\assets\database-in-openhift.png)
 
 # Adding the Quarkus OpenShift extension
 
@@ -188,7 +188,7 @@ You will see output similar to the following:
 
 `Step 8b:` Navigate to the file `src/main/resources/application.properties` as shown in the figure below.
 
-![To application properties](../assets/to-application-properties.png)
+![To application properties](..\assets\to-application-properties.png)
 
 `Step 8c:` Click on the file `src/main/resources/application.properties` to open it for editing.
 
@@ -212,7 +212,7 @@ quarkus.datasource.password=password
 
 `Step 8e:` Click on the `Disk` icon or press `CTRL+S` to save the file as shown in the figure below:
 
-![Save properties](../assets/save-properties-01.png)
+![Save properties](..\assets\save-properties-01.png)
 
 
 **KEY POINTS TO UNDERSTAND**
@@ -281,7 +281,7 @@ replication controller "reactive-sql-1" successfully rolled out
 
 `Step 11:` Return to the **OpenShift Web Console** tab. You will see two circular graphics indicating that both the PostgresSQL database and Quarkus reactive application are running, as shown in the figure below.
 
-![Apps are runnning](../assets/react-app-running.png)
+![Apps are runnning](..\assets\react-app-running.png)
 
 ----
 
@@ -308,7 +308,7 @@ http://reactive-sql-reactive-sql.crc-lgph7-master-0.crc.hbie33wmyvpb.instruqt.io
 
 `Step 13:` Copy and past the URL returned from the `oc get route...` command in to the address bar in a browser window. You will see a web page like so:
 
-![Coffee App Web Page](../assets/coffee-web-page-01.png)
+![Coffee App Web Page](..\assets\coffee-web-page-01.png)
 
 The demonstration application is now up and running.
 
@@ -359,7 +359,7 @@ You'll add the text ` - Remote Dev` to the banner text.
 
 `Step 15c:` At `Line 110` change the text from `Quarkus Reactive SQL Coffee Shop` to `Quarkus Reactive SQL Coffee Shop - Remove Dev` as shown in the figure below.
 
-![Change text](../assets/change-banner-01.png)
+![Change text](..\assets\change-banner-01.png)
 
 `Step 15d:` Click on the `Disk` icon or press `CTRL+S` to save the file.
 
@@ -367,7 +367,7 @@ You'll add the text ` - Remote Dev` to the banner text.
 
 `Step 16:` Return to the web browser window where you loaded the demonstration application's web page. You will see that the HTML page on OpenShift has updated automatically as shown in the figure below.
 
-![Updated web page](../assets/web-page-updated.png)
+![Updated web page](..\assets\web-page-updated.png)
 
 # Congratulations!
 

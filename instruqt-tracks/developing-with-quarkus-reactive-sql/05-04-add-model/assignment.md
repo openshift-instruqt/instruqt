@@ -27,7 +27,7 @@ First, let's analyze the existing code.
 
 `Step 1:` Using the **Visual Editor**, navigate to the file `src/main/java/org/acme/reactive/Coffee.java` as shown in the figure below:
 
-![Open coffee](../assets/open-coffee.png)
+![Open coffee](..\assets\open-coffee.png)
 
 Notice that the `Coffee` class has only fields as shown in the code snippet below:
 
