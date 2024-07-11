@@ -104,19 +104,19 @@ You can now log into the OpenShift web console using the `admin/admin` username/
 
 You'll be presented with a login page as shown in the figure below.
 
-![Login](..\assets\web-console-login.png)
+![Login](../assets/web-console-login.png)
 
 |NOTE:|
 |----|
 |You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](..\assets\security_warning.png)
+![Security warning](../assets/security_warning.png)
 If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 Use the `admin/admin` username/password pair to login.
 
 Once logged in, you will be in the **Administrator** perspective. Notice that the first item in the vertical menu bar of the OpenShift console has the label **Administrator** as shown in the figure below:
 
-![Admin Perspective](..\assets\admin-perspective.png)
+![Admin Perspective](../assets/admin-perspective.png)
 
 Next you'll change to the **Developer** perspective.
 
@@ -124,7 +124,7 @@ Next you'll change to the **Developer** perspective.
 
 `Step 4 :`  Select `Developer` from the drop-down as shown in the figure below to change to the **Developer** perspective.
 
-![Change to Developer](..\assets\change-to-developer.png)
+![Change to Developer](../assets/change-to-developer.png)
 
 Next, you'll select the project you created previously in the OpenShift web console.
 
@@ -139,11 +139,11 @@ Next, you'll select the project you created previously in the OpenShift web cons
 
 The details of these 3 previous actions are shown in the figure below.
 
-![Select MyProject](..\assets\select-my-project.png)
+![Select MyProject](../assets/select-my-project.png)
 
 You'll be presented with an **Add** page that has a collection of text blocks as shown in the figure below.
 
-![MyProject Result](..\assets\my-project-result.png)
+![MyProject Result](../assets/my-project-result.png)
 
 # Congratulations!
 

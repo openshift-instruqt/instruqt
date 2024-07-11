@@ -45,11 +45,11 @@ You can also trigger a build from within the OpenShift web console. Let's execut
 
 `Step 2b:` Click the **Start build** item in the drop-down menu on the right side of the build page, as shown in the figure below.
 
-![Build](..\assets\builds-menu.png)
+![Build](../assets/builds-menu.png)
 
 You'll see results similar to the figure shown below.
 
-![Build results](..\assets\start-build-results.png)
+![Build results](../assets/start-build-results.png)
 
 ---
 
@@ -196,7 +196,7 @@ The ``--wait`` option is supplied to indicate that the command should only retur
 
 `Step 9:` Go to the web page where the example code is running. You will see that the color of the header section on the web page has changed to blue, as shown in the figure below.
 
-![Blue Build](..\assets\blue-build.png)
+![Blue Build](../assets/blue-build.png)
 
 When you use the ``--from-dir=.`` option with ``oc start-build``, the contents from the current working directory will only be used for that one build.
 
