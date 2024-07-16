@@ -1,6 +1,6 @@
 ---
 slug: join-red-hat-developer-portal
-id: vivawx1dse7u
+id: jpe00hticcs1
 type: challenge
 title: Join Red Hat Developer at no cost
 teaser: Join Red Hat Developer at no cost
