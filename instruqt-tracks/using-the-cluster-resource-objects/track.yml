@@ -32,7 +32,6 @@ developers:
 - bob@cogarttech.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-- dschenck@redhat.com
 lab_config:
   overlay: false
   width: 25
@@ -40,4 +39,4 @@ lab_config:
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "2347917032942272828"
+checksum: "16751136676502001748"
