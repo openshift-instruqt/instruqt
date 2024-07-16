@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euxo pipefail
+echo 'logincheck'
+if [ "${LOGGEDIN-0}" = "1" ]; then
+    echo 'loggedin'
+    exit 0
+fi
+ 
+rm -f /home/user/checkResult.json
+rm -f /home/user/checkAssets.json
+rm -f /home/user/checkError.txt
+
+
+echo 'dropdown check'
+echo '{"location":{"conditions":[{"url":"redhat.com","condition":"contains"}]},"innerText":[{"selector":"html \u003e body","value":"Please click on Check button in the bottom right of your screen to continue with the Lab."}]}' > /home/user/checkAssets.json
+until [ -f /home/user/checkResult.json ]; do
+    sleep 1
+done
+if grep "SUCCESS" /home/user/checkResult.json; then
+    echo 'account dropdown'
+    exit 0
+fi
+
+
+rm -f /home/user/checkResult.json
+rm -f /home/user/checkAssets.json
+rm -f /home/user/checkError.txt
+
+
+echo 'email check'
+echo '{"location":{"conditions":[]},"innerText":[{"selector":"html \u003e body","value":"Email address verification"}]}' > /home/user/checkAssets.json
+until [ -f /home/user/checkResult.json ]; do
+    sleep 1
+done
+cat /home/user/checkResult.json
+if grep "SUCCESS" /home/user/checkResult.json; then
+    echo 'email validation'
+    exit 0
+fi
+fail-message "Please login and click 'Check' button."
+exit 1
