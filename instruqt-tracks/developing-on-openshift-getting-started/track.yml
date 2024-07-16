@@ -30,7 +30,7 @@ developers:
 - dleblanc@redhat.com
 - bclayton@redhat.com
 - cclyburn@redhat.com
-- dschenck@redhat.com
+- null
 - nvinto@redhat.com
 - ryanj@redhat.com
 idle_timeout: 400
@@ -43,4 +43,4 @@ lab_config:
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "14157105333834008842"
+checksum: "9700682222241621987"

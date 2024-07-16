@@ -29,7 +29,7 @@ You will scale up the application up to 2 replicas.
 
 `Step 1:` Click inside the circle for the `parksmap` application you just installed within the **Topology** view. The details window will appear in a side panel as shown in the figure below.
 
-![Scaling Up 1](..\assets\scaling-01.png)
+![Scaling Up 1](../assets/scaling-01.png)
 
 ----
 
@@ -37,7 +37,7 @@ You will scale up the application up to 2 replicas.
 
 The figure below illustrates selecting the **Details** and increasing the number of pods to 2.
 
-![Scaling Up 2](..\assets\scaling-02.png)
+![Scaling Up 2](../assets/scaling-02.png)
 
 You are now running two replicas of the application.
 
@@ -47,7 +47,7 @@ You are now running two replicas of the application.
 
 `Step 3:` To verify that we changed the number of replicas, click the **Resources** tab in the side panel. You will see a list of pods as shown in the figure below.
 
-![View Pods](..\assets\view-pods.jpg)
+![View Pods](../assets/view-pods.jpg)
 
 You can see that we now have 2 replicas. Now, let's take a look at OpenShift's self-healing feature. Self Healing ensures that the number of pods you declare for your application is always running.
 
@@ -61,17 +61,17 @@ Now you will kill one of the pods to see if OpenShift will bring it back to life
 
 `Step 4:` On the **Resources** tab where you viewed the list of pods after scaling to 2 replicas, click the name of one of the pods in the list as shown in the figure below.
 
-![View pods](..\assets\view-pods.jpg)
+![View pods](../assets/view-pods.jpg)
 
 ----
 
 `Step 5:` In the top right corner of the page, there is an **Actions** drop down menu. Click it and select **Delete Pod** as shown in the figure below.
 
-![Delete Pod](..\assets\\delete-pod.png)
+![Delete Pod](../assets/delete-pod.png)
 
 After deleting the pod, you will be taken to a page listing pods. Notice that even though you deleted one pod, two pods are still running, as shown in the figure below.
 
-![Replenish Pod](..\assets\replenish-pod.jpg)
+![Replenish Pod](../assets/replenish-pod.jpg)
 
 A replacement pod was created because OpenShift will always make sure that when a pod dies, it creates a new pod to fill its place.
 
@@ -89,7 +89,7 @@ Before we continue, go ahead and scale your application down to a single instanc
 
 `Step 6d:` Click the down arrow to the right of the pod circle to reset the number of pods to 1 as shown in the figure below.
 
-![Reset pod count](..\assets\reset-pod-count.jpg)
+![Reset pod count](../assets/reset-pod-count.jpg)
 
 # Congratulations!
 
