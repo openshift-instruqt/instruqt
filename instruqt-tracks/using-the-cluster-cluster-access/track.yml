@@ -27,11 +27,6 @@ tags:
 owner: openshift
 developers:
 - bob@cogarttech.com
-<<<<<<< HEAD
-- null
-- nvinto@redhat.com
-=======
->>>>>>> d145684 (checksum bump)
 - ryanj@redhat.com
 - cclyburn@redhat.com
 - dschenck@redhat.com
@@ -46,4 +41,4 @@ lab_config:
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "4423390616467355167"
+checksum: "7958663768012622605"

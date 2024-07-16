@@ -69,7 +69,7 @@ https://console-openshift-console.crc-lgph7-master-0.crc.q82njnglzds2.instruqt.i
 
 You'll be presented with the login page in the web console as shown in the figure below:
 
-![Login](..\assets\web-console-login.png)
+![Login](../assets/web-console-login.png)
 
 Use the following username/password pair to log in:
 
@@ -82,19 +82,19 @@ Upon successful login, you are presented with a "Getting Started" message and th
 
 `Step 4:` Click the `create a Project` link as shown in the figure below.
 
-![Create Project](..\assets\add_project.png)
+![Create Project](../assets/add_project.png)
 
 ----
 
 `Step 5:` Name the project `myproject` as shown in the figure below.
 
-![Name project](..\assets\create-project-dialog.png)
+![Name project](../assets/create-project-dialog.png)
 
 ----
 
 `Step 6:` To see the details of the project you just created, click the **Project** tab on the vertical menu bar on the left of the Web Console, as shown in the figure below.
 
-![Select Project](..\assets\select-project.png)
+![Select Project](../assets/select-project.png)
 
 # Congratulations!
 
