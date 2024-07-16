@@ -111,7 +111,7 @@ The output above is the URL to the SimpleMessage application running in this Ope
 
 `Step 7:` Copy the URL from the output above into your web browser's address bar. You will see the new message appear as shown in the figure below.
 
-![Web Output](..\assets\web-output.png)
+![Web Output](../assets/web-output.png)
 
 As you can see, the new message you created in `message.txt` is now displayed in the web page.
 

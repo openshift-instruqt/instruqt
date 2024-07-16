@@ -133,7 +133,7 @@ http://simplemessage-myproject.crc-lgph7-master-0.crc.ai7oaxyso7ih.instruqt.io
 
 `Step 8:` Copy the URL you retrieved in the previous step into a web browser. You'll see a web page as shown in the figure below.
 
-![Updated Web Page](..\assets\updated-web-output.png)
+![Updated Web Page](../assets/updated-web-output.png)
 
 As you can see, the web page was updated. The container's file system will now be updated automatically, and the web page has the new message you entered in `message.txt`.
 
