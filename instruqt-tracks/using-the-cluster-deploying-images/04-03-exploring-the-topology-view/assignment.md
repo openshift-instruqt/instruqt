@@ -24,13 +24,13 @@ In this topic, you will learn about different aspects of working with an applica
 
 `Step 1:` Go to the web console and click the **Topology** menu item on the left side of the page, as shown in the figure below.
 
-![Topology View](../assets/topology-view-with-app.png)
+![Topology View](..\assets\topology-view-with-app.png)
 
 The **Topology** page with a circular graphic will appear as shown in the figure below. As mentioned in the previous topic, this circular graphic represents the ParksMap application.
 
 Notice that the circular graphic has an icon at the upper right, as highlighted by a red box shown in the figure below.
 
-![Open in URL](../assets/access-parksmap.png)
+![Open in URL](..\assets\access-parksmap.png)
 
 The icon represents the `route` to the ParksMap application.
 
@@ -38,7 +38,7 @@ The icon represents the `route` to the ParksMap application.
 
 `Step 2:` Click on the `route` icon to open the ParksMap application in a new browser tab, as shown in the figure below.
 
-![Show ParksMap](../assets/show-parksmap.png)
+![Show ParksMap](..\assets\show-parksmap.png)
 
 Now, let's scale up the number of `pod` resource objects that support the application.
 
@@ -46,7 +46,7 @@ Now, let's scale up the number of `pod` resource objects that support the applic
 
 `Step 3:` Go to the web console and click the center of the circular graphic for the ParksMap application as shown in the figure below.
 
-![Select App](../assets/select-app.png)
+![Select App](..\assets\select-app.png)
 
 The information page for the application will slide out on the right-hand side.
 
@@ -54,7 +54,7 @@ The information page for the application will slide out on the right-hand side.
 
 `Step 4:`  Select the **Details** tab from the horizontal menu bar on the application's information page as shown in the figure below.
 
-![Scale App](../assets/scaling-02.png)
+![Scale App](..\assets\scaling-02.png)
 
 The **Details** tab reveals a circular graphic. This graphic describes the number of pods supporting the ParksMap application.
 

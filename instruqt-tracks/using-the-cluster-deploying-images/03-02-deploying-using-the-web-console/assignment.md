@@ -31,12 +31,12 @@ In this topic, you will learn how to use the web console to identify a container
 
 `Step 3:`  Click the label **Container images** as shown in the figure below.
 
-![Select container](../assets/select-container-with-code.png)
+![Select container](..\assets\select-container-with-code.png)
 
 
 You'll be presented with the **Deploy Image** page as shown in the figure below.
 
-![Deploy Image](../assets/deploy-container.png)
+![Deploy Image](..\assets\deploy-container.png)
 
 ----
 
@@ -48,15 +48,15 @@ quay.io/openshiftroadshow/parksmap:latest
 
 The text above describes the container image that will be used for the application you're adding. In this case, you are adding the ParksMap container image that is stored on the container registry `Quay.io` as shown in the figure below.
 
-![Container image definition](../assets/config-image-00.png)
+![Container image definition](..\assets\config-image-00.png)
 
 Once you enter the location of the container image in the text box above, OpenShift will fill in the configuration details automatically. The figure below shows how configuration information is automatically entered for the **General** section.
 
-![Container image definition General](../assets/config-image-01.png)
+![Container image definition General](..\assets\config-image-01.png)
 
  The figure below shows how configuration information is automatically entered for the **Resources** section.
 
- ![Container image definition Adv](../assets/config-image-02.png)
+ ![Container image definition Adv](..\assets\config-image-02.png)
 
 The final section titled **Advanced options**, which you'll see in a moment, has a checkbox that will have OpenShift automatically create a `route` resource object to the application when selected.
 
@@ -68,7 +68,7 @@ The checkbox is selected automatically by OpenShift when adding the container im
 
 `Step 5:` Click the button labeled **Create** at the bottom of the **Add** page as shown in the figure below:
 
-![Save Image](../assets/save-image-config.png)
+![Save Image](..\assets\save-image-config.png)
 
 After you save the container image, OpenShift will do the work of creating the application automatically.
 
@@ -76,7 +76,7 @@ The **Add+** page will close.
 
 Then you'll see the **Topology** page with a circular graphic appear as shown in the figure below.
 
-![Topology View](../assets/topology-view-with-app.png)
+![Topology View](..\assets\topology-view-with-app.png)
 
 This circular graphic represents the ParksMap application.
 
