@@ -30,11 +30,14 @@ owner: openshift
 developers:
 - nvinto@redhat.com
 - bob@cogarttech.com
-- dschenck@redhat.com
-- ryanj@redhat.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
+- dschenck@redhat.com
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "8108396255827403634"
+  feedback_recap_enabled: true
+  loadingMessages: true
+  hideStopButton: false
+checksum: "2347917032942272828"
