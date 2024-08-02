@@ -217,7 +217,7 @@ The command `odo push` OpenShift created a container to host the `backend` compo
 
 `Step 8b:` Select the **Developer** option from the drop-down menu as shown below:
 
-![Developer Perspective](..\assets\select-dev.png)
+![Developer Perspective](../assets/select-dev.png)
 
 After selecting the **Developer** option, you will be at the **Topology** view that shows what components are deployed in your OpenShift project.
 
@@ -227,7 +227,7 @@ After selecting the **Developer** option, you will be at the **Topology** view t
 
 When a dark blue circle appears around the back-end component as shown below, the pod is ready and the `backend` component container will start running as shown in the figure below.
 
-![Backend Pod](..\assets\backend-pod.png)
+![Backend Pod](../assets/backend-pod.png)
 
 
 # Viewing log output in the terminal window

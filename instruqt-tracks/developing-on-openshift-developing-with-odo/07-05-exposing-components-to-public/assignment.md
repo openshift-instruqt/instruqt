@@ -101,7 +101,7 @@ http://frontend-app-myproject.crc-lgph7-master-0.crc.ghds3bg5bjox.instruqt.io/
 
 `Step 4:`  Copy that link from the  `odo` response into your web browser's address bar. If all is well, you'll see a web page as shown in the illustration below:
 
-![Wild West UI](..\assets\wild-west.png)
+![Wild West UI](../assets/wild-west.png)
 
 # Congratulations!
 
