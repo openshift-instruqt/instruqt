@@ -57,7 +57,7 @@ Notice that the command prompt is followed by this message `Waiting for somethin
 
 Currently, the title of the Wild West game application is "Wild West The OpenShift Way!" Let's change it.
 
-![Application Title](../assets/app-name.png)
+![Application Title](..\assets\app-name.png)
 
 We will change this to "`My App` The OpenShift Way!"
 
@@ -105,7 +105,7 @@ Waiting for something to change in /root/frontend
 
 Refresh the application's page in the web browser. You will see the new name in the web interface for the application as shown in the figure below:
 
-![My Web App](../assets/myapp-web-page.png)
+![My Web App](..\assets\myapp-web-page.png)
 
 ----
 **NOTE:**

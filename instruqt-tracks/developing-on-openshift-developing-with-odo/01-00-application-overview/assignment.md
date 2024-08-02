@@ -42,7 +42,7 @@ Applications are often divided into components based on a logical division of la
 
 The application deployed in this tutorial consists of two such components, the back-end component and the front-end component.
 
-![App Architecture](../assets/app-arch.png)
+![App Architecture](..\assets\app-arch.png)
 
 # Understanding the Back-end
 
