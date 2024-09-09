@@ -8,14 +8,17 @@ notes:
 - type: text
   contents: Topic 3 - Packaging a custom bean in to a .jar file
 tabs:
-- title: Terminal 1
+- id: 7yjiov7xkfxk
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: f5t13dfno6wc
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/getting-started
-- title: Terminal 2
+- id: dttxdejhhp7y
+  title: Terminal 2
   type: terminal
   hostname: crc
 difficulty: basic

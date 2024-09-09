@@ -8,17 +8,21 @@ notes:
 - type: text
   contents: Topic 5 - Moving the container to the cloud
 tabs:
-- title: Terminal 1
+- id: d8dd4oyxqgtj
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: o9f4x3xlo3pj
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
-- title: Terminal 2
+- id: tapmawhsioaz
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Web Console
+- id: ztttimktqrhq
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

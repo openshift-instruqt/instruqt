@@ -8,17 +8,21 @@ notes:
 - type: text
   contents: Topic 6 - Scaling Quarkus
 tabs:
-- title: Terminal 1
+- id: xzk16z04uqmr
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: qodjofuz9lbu
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
-- title: Terminal 2
+- id: lvbfrqtiawr2
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: OpenShift Web Console
+- id: ioqdaalxbww2
+  title: OpenShift Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

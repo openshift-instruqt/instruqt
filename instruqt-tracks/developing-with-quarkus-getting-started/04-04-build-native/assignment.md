@@ -8,14 +8,17 @@ notes:
 - type: text
   contents: Topic 4 - Creating a native executable
 tabs:
-- title: Terminal 1
+- id: kry0icxxmvd6
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: 5blagx3fy4wh
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/getting-started
-- title: Terminal 2
+- id: trzmyq1cngdn
+  title: Terminal 2
   type: terminal
   hostname: crc
 difficulty: basic

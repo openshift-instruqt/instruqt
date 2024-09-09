@@ -8,17 +8,21 @@ notes:
 - type: text
   contents: Topic 2 - Adding a custom CDI bean to the demonstration application
 tabs:
-- title: Terminal 1
+- id: vdp45wyvrgjz
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: 7yykroor4l7c
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/getting-started
-- title: Terminal 2
+- id: nizebpzlngqi
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Dev UI
+- id: b8v8ljkwbip0
+  title: Dev UI
   type: service
   hostname: crc
   path: /q/dev

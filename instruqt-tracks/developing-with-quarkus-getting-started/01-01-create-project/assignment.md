@@ -31,17 +31,21 @@ notes:
 
     Quarkus combines both the familiar imperative code and the non-blocking reactive styles when developing applications.
 tabs:
-- title: Terminal 1
+- id: z1nmgqyoygq5
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: judjdmdggmj2
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus
-- title: Terminal 2
+- id: wctfdulbvwbn
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Dev UI
+- id: jauv1y2ugq15
+  title: Dev UI
   type: service
   hostname: crc
   path: /q/dev
