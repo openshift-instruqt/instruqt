@@ -218,7 +218,9 @@ You'll see the Dev UI for your running application as shown in the figure below.
 
 ![Config Editor](../assets/config-editor-01.png)
 
-The `Configuration` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
+As you can see in the figure below, the `Config Editor` allows developers to make configuration changes or experiment with various application settings in a very detailed manner.
+
+![Config Editor Detail](../assets/config-editor-02.png)
 
 |NOTE:|
 |----|

@@ -71,6 +71,10 @@ public class GreetingService {
 }
 ```
 
+`Step 4b:` Save the `GreetingService.java` file by clicking the **Save File** icon as shown in the figure below:
+
+![Save Service](../assets/save-service.png)
+
 ----
 
 `Step 5:`  Reopen the file `GreetingResource.java` and replace all the code in that file with the code shown below.
@@ -148,7 +152,9 @@ Let's add another test for Quarkus to run continuously. The new test will exerci
 
 ----
 
-`Step 10:` Open `GreetingResourceTest.java`.
+`Step 10:` Click the **New File** icon and create a file named `GreetingServiceTest.java` as shown in the figure below.
+
+![Create Test File](../assets/create-test-file.png)
 
 ----
 
