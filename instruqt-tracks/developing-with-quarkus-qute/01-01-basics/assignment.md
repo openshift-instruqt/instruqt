@@ -38,17 +38,21 @@ notes:
 
     You can learn more about the details of Qute by reading the [introduction guide](https://quarkus.io/guides/qute) and the comprehensive [reference guide](https://quarkus.io/guides/qute-reference).
 tabs:
-- title: Terminal 1
+- id: xrgpajdj9xvo
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Terminal 2
+- id: 92kdueaybjqf
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: gpxw1njq6vz5
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/qute
-- title: Qute Sample Page
+- id: vkp2f0kyzwd7
+  title: Qute Sample Page
   type: service
   hostname: crc
   path: /some-page
