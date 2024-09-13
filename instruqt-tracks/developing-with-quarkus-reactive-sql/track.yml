@@ -39,11 +39,10 @@ owner: openshift
 developers:
 - doh@redhat.com
 - bob@cogarttech.com
-- dschenck@redhat.com
 - nvinto@redhat.com
 - eshortis@redhat.com
-- ryanj@redhat.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
 sandbox_preset: openshift-411
 lab_config:
   overlay: false
@@ -52,4 +51,4 @@ lab_config:
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "2603218897058024328"
+checksum: "7878072425048305736"
