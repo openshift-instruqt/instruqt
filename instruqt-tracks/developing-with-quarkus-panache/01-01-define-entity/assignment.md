@@ -34,10 +34,12 @@ notes:
 
     You can learn more about Panache at [quarkus.io](https://quarkus.io).
 tabs:
-- title: Terminal 1
+- id: xvlcymvioilr
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: m87skiqk4tt5
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache
