@@ -35,10 +35,12 @@ notes:
 
     Learn more at [quarkus.io](https://quarkus.io)
 tabs:
-- title: Terminal 1
+- id: gfwaeupknyx6
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: 4nhb66xiveyz
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects
