@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Topic 5 - Deploying the demonstration app in an executable JAR
 tabs:
-- title: Terminal 1
+- id: 1dn7vmpwnzbk
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: r0mlaiclh8ib
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/fruit-taster
-- title: Terminal 2
+- id: b0zfhogz0ehl
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash

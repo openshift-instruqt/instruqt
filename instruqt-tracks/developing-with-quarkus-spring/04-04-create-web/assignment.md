@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Topic 4 - Using Spring Web Annotations in Quarkus
 tabs:
-- title: Terminal 1
+- id: ii0npj4kuktt
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: x4elyu7u23of
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/fruit-taster
-- title: Terminal 2
+- id: c8k8fy6zx9gd
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash

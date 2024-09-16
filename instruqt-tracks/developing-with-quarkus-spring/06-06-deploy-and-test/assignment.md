@@ -7,19 +7,23 @@ notes:
 - type: text
   contents: Topic 6 - Creating a Quarkus native app running in OpenShift
 tabs:
-- title: Terminal 1
+- id: 4458oaflkncp
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: evkpqfzqsiat
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/fruit-taster
-- title: Terminal 2
+- id: 1njyjcwa0cbn
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Web Console
+- id: hpxitzm4yekh
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

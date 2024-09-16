@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Topic 3 - Implementing Spring dependency injection in Quarkus
 tabs:
-- title: Terminal 1
+- id: 9wn7g25h2eyy
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: mj29maymvx2d
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/fruit-taster
-- title: Terminal 2
+- id: f69x5lpln0kx
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash

@@ -18,15 +18,18 @@ notes:
 
     You'll build a simple application that uses Spring Data to integrate with an underlying database via JPA. Also. you'll inject beans using Spring DI and expose them as RESTful endpoints via Spring Rest.
 tabs:
-- title: Terminal 1
+- id: qjzhitcb44nx
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: x76nsysvknsq
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/
-- title: Terminal 2
+- id: kxk5oihay8bx
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash

@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Topic 2 - Adding data access to the demonstration application
 tabs:
-- title: Terminal 1
+- id: sn5ow60a0kle
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: 2yxbqtodp2by
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/fruit-taster
-- title: Terminal 2
+- id: cskqe27j6woh
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash
