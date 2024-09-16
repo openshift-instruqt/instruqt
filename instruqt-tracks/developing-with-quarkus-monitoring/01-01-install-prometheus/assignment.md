@@ -26,14 +26,17 @@ notes:
 
     Learn more at [quarkus.io](https://quarkus.io)
 tabs:
-- title: Terminal 1
+- id: 5grdxxf5yvpt
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: rpcxwuh52w4c
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus
-- title: Web Console
+- id: e9ralz481cy1
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

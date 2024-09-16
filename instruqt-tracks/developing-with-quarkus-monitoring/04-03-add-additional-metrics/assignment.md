@@ -1,16 +1,18 @@
 ---
 slug: 03-add-additional-metrics
-id: oaefgzibry43
+id: qrpulueqayvq
 type: challenge
 title: Topic 3 - Gathering additional metrics from the demonstration application
 notes:
 - type: text
   contents: Topic 3 - Gathering additional metrics from the demonstration application
 tabs:
-- title: Terminal 1
+- id: sy4ipx6ezyia
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: gpcvikvbx22y
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/primes

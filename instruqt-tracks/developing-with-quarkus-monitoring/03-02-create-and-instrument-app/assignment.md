@@ -7,13 +7,16 @@ notes:
 - type: text
   contents: Topic 2 - Adding the Prometheus extension
 tabs:
-- title: Terminal 1
+- id: tdiwhu6shee1
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Terminal 2
+- id: dk8yjtgavwms
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: al7x4nsiqswe
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/primes

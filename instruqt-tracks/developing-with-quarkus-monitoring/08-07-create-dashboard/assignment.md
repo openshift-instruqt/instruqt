@@ -7,13 +7,16 @@ notes:
 - type: text
   contents: Topic 7 - Creating the Grafana Dashboard
 tabs:
-- title: Terminal 1
+- id: 17k49iul0jxx
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Terminal 2
+- id: n1qxrldw2qd4
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: fiymzcclksx7
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root

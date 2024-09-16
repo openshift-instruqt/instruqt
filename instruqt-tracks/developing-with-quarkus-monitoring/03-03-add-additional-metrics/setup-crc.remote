@@ -1,4 +1,0 @@
-#!/bin/bash
-
-kill -9 $(ps aux | grep primes | grep -v grep | awk '{print $2}')
-nohup mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/primes > /root/log.out 2> /root/log.err < /dev/null & disown

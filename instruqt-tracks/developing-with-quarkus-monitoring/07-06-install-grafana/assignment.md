@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 6 - Integrating Grafana with OpenShift and Prometheus
 tabs:
-- title: Terminal 1
+- id: vaxgcuzyv0ez
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: urnxnd8yfmh8
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root

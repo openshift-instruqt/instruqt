@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 5 - Monitoring application performance with Prometheus
 tabs:
-- title: Terminal 1
+- id: clgnqdnbblzd
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: wdasgxjrm6n6
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus/primes
