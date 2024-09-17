@@ -3,20 +3,31 @@ slug: aap-configure
 id: b4l1xusyizyt
 type: challenge
 title: Step 2 - Ansible Automation Platform Configuration
+notes:
+- type: text
+  contents: |-
+    # Ansible Automation Platform Configuration Setup
+
+    After a successful installation and login to the Ansible Automation platform, we need to configure it according to our requirements. These requirements could be anything, such as multi-cloud deployment, multi-cluster deployment, or using it for continuous delivery.
+
+    In this scenario, we will consider the Ansible Automation platform for continuous deployment/delivery.
 tabs:
-- title: Terminal 1
+- id: kkgap6h7rjix
+  title: Terminal
   type: terminal
-  hostname: container
-- title: Web Console
+  hostname: crc
+- id: gdg0rj2quvcl
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
+- id: tpydiidko7qw
+  title: Code editor
   type: code
-  hostname: container
-  path: /root/backend
+  hostname: crc
+  path: /home
 difficulty: basic
-timelimit: 600
+timelimit: 1000
 ---
 
 ## Ansible Automation Platform Configuration Setup
@@ -100,11 +111,9 @@ You need to extract the token and certificates using the following commands.
 
 The token is collected in `containergroup-sa.token` file. You have to copy the context and paste it into AAP credentials page in `API authentication bearer token` block.
 
+
 ```
-dnf install jq -y && oc project dev-game-app && cd backend
-```
-```
-oc get secret cicd -o json | jq '.data.token' | xargs | base64 --decode > containergroup-sa.token
+cd home && oc get secret cicd -o json | jq '.data.token' | xargs | base64 --decode > containergroup-sa.token
 ```
 The certificate is collected in the `containergroup-ca.crt` file. You have to copy the context and paste it in the AAP credentials page in the `Certificate Authority data` block.
 
@@ -112,7 +121,9 @@ The certificate is collected in the `containergroup-ca.crt` file. You have to co
 oc get secret cicd -o json | jq '.data["ca.crt"]' | xargs | base64 --decode > containergroup-ca.crt
 ```
 
-Alternatively, switch to the visual-editor tab to collect the `Token` and `Certificate`.
+Alternatively, switch to the 3rd tab means `Code-editor` tab to collect the `Token` and `Certificate`.
+> [!NOTE]
+> If .token & .crt file is not visible then click on the refresh icon â†»
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/aap_cred_filled.png?raw=true)
 
@@ -151,6 +162,9 @@ After adding, you can check connectivity with OpenShift cluster by clicking on â
 **Project**:
 
 The project is an SCM of the project where all playbooks and manifests are available. With the help of the project, we need to fetch it. From the left menu, select a project and click on Add, then give a name to the project.
+> [!IMPORTANT]
+>Kindly fork the following repository into your GitHub account and provide the URL, as shown below, of your GitHub repository.
+
 The Source Control Type is Git. In the Source Control URL, fill in the GitHub URL:
 ```
 https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo.git

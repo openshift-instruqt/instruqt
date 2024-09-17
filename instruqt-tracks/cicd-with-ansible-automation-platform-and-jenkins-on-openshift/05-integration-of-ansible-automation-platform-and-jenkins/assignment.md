@@ -3,8 +3,26 @@ slug: integration-of-ansible-automation-platform-and-jenkins
 id: x5clyla3ouwj
 type: challenge
 title: Step 4 - Integration Of Ansible Automation Platform & Jenkins
+notes:
+- type: text
+  contents: |-
+    # Integration of Ansible Automation Platform & Jenkins
+
+    We have completed the setup of the Ansible Automation platform and Jenkins continuous integration.
+
+    To connect the Ansible Automation platform and Jenkins, log in to the Jenkins dashboard and install the **Ansible** and **Ansible Tower** plugins from Manage Jenkins.
+tabs:
+- id: yzdotlyuopxt
+  title: Terminal
+  type: terminal
+  hostname: crc
+- id: ybfbniumifgl
+  title: Web Console
+  type: website
+  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  new_window: true
 difficulty: basic
-timelimit: 3600
+timelimit: 1800
 ---
 ## Integration of Ansible Automation Platform & Jenkins
 
@@ -39,10 +57,13 @@ Select the build triggers as "Build after other projects are built."
 In Build Triggers, check the "Build after other projects are built" option and add the continuous integration pipeline name.
 
 It's time now to see an end-to-end pipeline in action. To do that, you have to clone the GitHub repository in your favorite code editor like VScode or PyCharm.
+> [!IMPORTANT]
+> Kindly consider here the forked repository.
 
-Checkout into the git folder and make some minor changes like adding "#" in any file.
+Checkout into the git folder and make some changes in your GitHub repository.
 
-After you are done with your changes, it's time to push them to the GitHub repository using git commands:
+
+After completing your changes, it's time to push them to the GitHub repository using git commands:
 
 ```
 git add .
@@ -56,7 +77,7 @@ git commit -m "my changes"
 git push
 ```
 
-After pushing, check the Jenkins dashboard. The Continuous Integration pipeline will start. It will build and push the container image. Later on, the Continuous Deployment pipeline will start with the help of Ansible Automation Platform, and it will deploy the pod in OpenShift cluster.
+After push, check the Jenkins dashboard. The Continuous Integration pipeline will start. It will build and push the container image. Later on, the Continuous Deployment pipeline will start with the help of Ansible Automation Platform,  it will deploy the pod in OpenShift cluster.
 
 ![AltText](https://github.com/redhat-developer-demos/ansible-automation-platform-continous-delivery-demo/blob/main/assets/jenkins_cd_op.png?raw=true)
 
