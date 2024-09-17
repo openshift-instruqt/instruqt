@@ -9,10 +9,12 @@ notes:
   contents: Topic 4 - Adding reactive searching, filtering and paging to the demonstration
     application
 tabs:
-- title: Terminal 1
+- id: ekybyzyuqk9i
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: pyv5idpwl6vt
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive

@@ -7,13 +7,16 @@ notes:
 - type: text
   contents: Topic 3 - Adding reactive queries to the Person entity
 tabs:
-- title: Terminal 1
+- id: z5zxknrvpwks
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Terminal 2
+- id: n3tiy3uh3jkx
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: xcdgnorarecg
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive

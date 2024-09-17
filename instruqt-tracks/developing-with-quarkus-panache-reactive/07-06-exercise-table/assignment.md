@@ -7,14 +7,17 @@ notes:
 - type: text
   contents: Topic 6 - Exercising the demonstration application's web page
 tabs:
-- title: Terminal 1
+- id: v2zo0vhap6j1
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: shanm30ab3ve
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
-- title: OpenShift Web Console
+- id: lr5lg0i9sr9w
+  title: OpenShift Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

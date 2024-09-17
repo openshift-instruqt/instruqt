@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 5 - Adding a startup task to the PersonResource
 tabs:
-- title: Terminal 1
+- id: 7murgaxva6al
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: miurimycncvh
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive

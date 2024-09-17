@@ -43,10 +43,12 @@ notes:
       |---|
       |To learn more about reactive systems read the [Reactive Manifesto](https://www.reactivemanifesto.org/).|
 tabs:
-- title: Terminal 1
+- id: hyghgqcwrjes
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: hxu2mx63c3jv
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/rhoar-getting-started/quarkus/panache-reactive
