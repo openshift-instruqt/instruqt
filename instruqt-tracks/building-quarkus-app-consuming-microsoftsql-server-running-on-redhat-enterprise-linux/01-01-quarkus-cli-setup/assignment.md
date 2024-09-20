@@ -9,19 +9,14 @@ notes:
     ## Quarkus CLI Install
     In this lab we will install the Quarkus CLI in lab & with the help of Quarkus cli execute the CRUD application.
 tabs:
-- title: Terminal 1
+- id: 0aiebxebzrn7
+  title: Terminal 1
   type: terminal
   hostname: rhel
-- title: Terminal 2
+- id: jasta1nvcosk
+  title: Terminal 2
   type: terminal
   hostname: rhel
-- title: Terminal 3
-  type: terminal
-  hostname: rhel
-- title: Visual Editor
-  type: code
-  hostname: rhel
-  path: /root
 difficulty: intermediate
 timelimit: 1000
 ---
