@@ -25,12 +25,14 @@ notes:
 
     You'll use the concepts and techniques covered in this track to get a basic understanding of how to work with OpenShift in the Web Console and at the command line. OpenShift runs as a layer over Kubernetes and makes working with both Kubernetes and Linux containers easier. The result is that when developers use OpenShift they are free to focus on their code instead of spending time writing Dockerfiles and running container builds.
 tabs:
-- title: Terminal 1
+- id: bcpj9cow0xs3
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: nixkrbmthzhu
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 800

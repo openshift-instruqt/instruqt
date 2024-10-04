@@ -7,12 +7,14 @@ notes:
 - type: text
   contents: Exploring the OpenShift Web Console
 tabs:
-- title: Terminal 1
+- id: 9xmymzbrkjhg
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: fd96a2zzr0se
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 800
