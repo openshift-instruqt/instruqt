@@ -7,7 +7,8 @@ notes:
 - type: text
   contents: Topic 4 - Synchronizing files with a container
 tabs:
-- title: Terminal 1
+- id: 2mfp2hwkwct5
+  title: Terminal 1
   type: terminal
   hostname: crc
 difficulty: intermediate

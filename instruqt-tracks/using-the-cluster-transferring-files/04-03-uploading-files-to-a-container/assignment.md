@@ -7,7 +7,8 @@ notes:
 - type: text
   contents: Topic 3 - Uploading files to a container
 tabs:
-- title: Terminal 1
+- id: oxyu22x2enho
+  title: Terminal 1
   type: terminal
   hostname: crc
 difficulty: intermediate

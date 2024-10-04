@@ -7,7 +7,8 @@ notes:
 - type: text
   contents: Topic 5 - Copying files to a Persistent Volume
 tabs:
-- title: Terminal 1
+- id: mmybmhffyqia
+  title: Terminal 1
   type: terminal
   hostname: crc
 difficulty: intermediate
