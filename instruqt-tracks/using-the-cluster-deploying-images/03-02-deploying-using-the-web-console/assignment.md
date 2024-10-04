@@ -7,12 +7,14 @@ notes:
 - type: text
   contents: Deploying an Application from a Container Image Using the Web Console
 tabs:
-- title: Terminal 1
+- id: a3iknprlg5v5
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: p71zeikpvk7m
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500

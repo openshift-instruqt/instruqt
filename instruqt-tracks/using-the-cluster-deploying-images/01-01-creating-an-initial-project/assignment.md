@@ -21,12 +21,14 @@ notes:
 
     You deploy a container image on an OpenShift cluster in order to make the application easier to manage, scale, connect and monitor.
 tabs:
-- title: Terminal 1
+- id: a10tavy13c69
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: d6uzy1pe5bdr
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500

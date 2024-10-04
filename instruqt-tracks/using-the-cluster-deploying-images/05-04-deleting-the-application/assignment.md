@@ -7,12 +7,14 @@ notes:
 - type: text
   contents: Deleting the Application Using the Web Console
 tabs:
-- title: Terminal 1
+- id: 3iyrnvxzvld8
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: zu9yyjcwyoxd
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
@@ -46,8 +48,8 @@ Labels:                 app=parksmap
                         app.kubernetes.io/part-of=parksmap-app
                         app.openshift.io/runtime-version=latest
 Annotations:            openshift.io/host.generated=true
-Requested Host:         parksmap-myproject.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io
-                           exposed on router default (host router-default.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io) 59 minutes ago
+Requested Host:         parksmap-myproject.crc.2fxr0dqhkd8a.instruqt.io
+                           exposed on router default (host router-default.crc.2fxr0dqhkd8a.instruqt.io) 59 minutes ago
 Path:                   <none>
 TLS Termination:        <none>
 Insecure Policy:        <none>

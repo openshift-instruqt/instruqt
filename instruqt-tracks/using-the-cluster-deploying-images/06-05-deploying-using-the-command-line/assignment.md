@@ -8,12 +8,14 @@ notes:
 - type: text
   contents: Deploying the Application from a Container Image Using the Command Line
 tabs:
-- title: Terminal 1
+- id: btxb26xqebrw
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 1c10pbxfaubw
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
@@ -113,10 +115,10 @@ You'll get output similar to the following:
 
 ```
 NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap   parksmap-myproject.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io          parksmap   8080-tcp                 None
+parksmap   parksmap-myproject.crc.2fxr0dqhkd8a.instruqt.io          parksmap   8080-tcp                 None
 ```
 
-Notice the output above has the URL `parksmap-myproject.crc-lgph7-master-0.crc.2fxr0dqhkd8a.instruqt.io`.
+Notice the output above has the URL `parksmap-myproject.crc.2fxr0dqhkd8a.instruqt.io`.
 
 This is the `route` to the new instance of the ParkMap application that was just installed. You can copy it into a browser window to access the ParksMap application.
 
