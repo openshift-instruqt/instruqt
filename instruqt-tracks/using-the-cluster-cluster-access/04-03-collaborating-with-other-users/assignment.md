@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Collaborating with Other Users
 tabs:
-- title: Terminal 1
+- id: phxomfwigy2e
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: r4fb54jyx7ep
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root

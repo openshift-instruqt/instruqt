@@ -21,10 +21,12 @@ notes:
 
     You must log in to do anything on an OpenShift cluster. To collaborate on an OpenShift Project, you can authorize other users to see or modify resources in your Projects.
 tabs:
-- title: Terminal 1
+- id: djvowjn1iq4e
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: 8zatkhdv1cx9
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
@@ -60,7 +62,7 @@ oc get routes console -n openshift-console -o jsonpath='{"https://"}{.spec.host}
 You'll get the URL to the web console that is special to your instance of OpenShift running in the Instruqt interactive learning environment. The following is an example URL. **Yours will be different**.
 
 ```
-https://console-openshift-console.crc-lgph7-master-0.crc.q82njnglzds2.instruqt.io
+https://console-openshift-console.crc.q82njnglzds2.instruqt.io
 ```
 
 ----

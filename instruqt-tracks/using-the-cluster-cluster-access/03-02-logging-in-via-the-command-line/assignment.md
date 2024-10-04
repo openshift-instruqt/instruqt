@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Logging in via the Command Line
 tabs:
-- title: Terminal 1
+- id: ugy8bmsbmxxk
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: wyoakbxve38a
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root

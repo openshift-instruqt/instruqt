@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Switching Users Between Accounts
 tabs:
-- title: Terminal 1
+- id: 5sovsrwth93v
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: acydre7y12kt
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
