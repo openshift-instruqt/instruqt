@@ -7,7 +7,7 @@ notes:
 - type: text
   contents: Topic 4 - Synchronizing files with a container
 tabs:
-- id: 2mfp2hwkwct5
+- id: 4amujulntta9
   title: Terminal 1
   type: terminal
   hostname: crc

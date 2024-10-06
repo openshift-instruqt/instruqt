@@ -21,7 +21,7 @@ notes:
 
     You use the concepts and techniques covered in this track when you want to manually or automatically synchronize changes in the files on a local machine with containers in an OpenShift cluster and vice versa.
 tabs:
-- id: k5oa64stznu0
+- id: uqatijcyzj0l
   title: Terminal 1
   type: terminal
   hostname: crc

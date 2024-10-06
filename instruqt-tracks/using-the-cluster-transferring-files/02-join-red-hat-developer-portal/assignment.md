@@ -5,7 +5,7 @@ type: challenge
 title: Join Red Hat Developer at no cost
 teaser: Join Red Hat Developer at no cost
 tabs:
-- id: mxajw9ihowgf
+- id: j2egfcqophcq
   title: Red Hat Login
   type: browser
   hostname: rhd-login-3882386

@@ -7,7 +7,7 @@ notes:
 - type: text
   contents: Topic 2 - Downloading files from a container using the `oc rsync` command.
 tabs:
-- id: vggdrncvqisi
+- id: 4mplgxygtloe
   title: Terminal 1
   type: terminal
   hostname: crc
