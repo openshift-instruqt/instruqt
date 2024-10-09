@@ -8,19 +8,23 @@ notes:
 - type: text
   contents: Deploy the Node.js Application to Openshift
 tabs:
-- title: Terminal 1
+- id: 0kxd212jrpag
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: aidyhneaivle
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/nodejs/nodeserver
-- title: Terminal 2
+- id: 8dutnlvr06al
+  title: Terminal 2
   type: terminal
   hostname: crc
-- title: Web Console
+- id: e4r8mcbhgjjt
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 600
@@ -176,7 +180,7 @@ You can access the application using `curl` once again.
 `Step 9:` Run the following command in **Terminal 1** to get the URL to the applications endpoint and assign it to the environment variable named `APP_ROUTE`.
 
 ```bash
-APP_ROUTE=`oc get route nodeserver -n nodejs -o jsonpath='{"http://"}{.spec.host}{"/"}{"\n"}'`
+APP_ROUTE=`oc get route nodeserver -n nodejs -o jsonpath='{"https://"}{.spec.host}{"/"}{"\n"}'`
 ```
 
 ----

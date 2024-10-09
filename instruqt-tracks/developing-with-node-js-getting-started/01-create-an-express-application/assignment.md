@@ -21,14 +21,17 @@ notes:
     * Add logging and health checks
     * Deploy your application to Openshift
 tabs:
-- title: Terminal 1
+- id: nlyvk1lujwkx
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: wcrkpzhzseop
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/nodejs/nodeserver
-- title: Terminal 2
+- id: mvwapgaeq4xz
+  title: Terminal 2
   type: terminal
   hostname: crc
 difficulty: basic
@@ -112,7 +115,7 @@ Now, let’s start creating our server.
 `Step 7:` Run the following command in the **Terminal 1** window to start the application.
 
 ```
-npm start
+PORT=8081 npm start
 ```
 
 Once the application is started, you should see a similar output in your console:
@@ -128,7 +131,7 @@ Once the application is started, you should see a similar output in your console
 `Step 8:` Run the following command in the **Terminal 2** window that appears:
 
 ```
-curl -w "\n" localhost:8080/
+curl -w "\n" localhost:8081/
 ```
 
 You'll get the following output:

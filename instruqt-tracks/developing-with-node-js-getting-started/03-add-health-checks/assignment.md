@@ -8,14 +8,17 @@ notes:
 - type: text
   contents: Add Health Checks to your Application
 tabs:
-- title: Terminal 1
+- id: u6kmdd8qrmjw
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: lffbeezy4cct
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/nodejs/nodeserver
-- title: Terminal 2
+- id: ixywykeap1vr
+  title: Terminal 2
   type: terminal
   hostname: crc
 difficulty: basic
@@ -50,7 +53,7 @@ cd /root/projects/nodejs/nodeserver
 ```
 
 ```sh
-npm start
+PORT=8081 npm start
 ```
 
 ----
@@ -58,7 +61,7 @@ npm start
 `Step 3:` Run the following command in the **Terminal 2** window that appears to check that your `livenessProbe` Health Check endpoint is running:
 
 ```
-curl -w "\n" localhost:8080/live
+curl -w "\n" localhost:8081/live
 ```
 
 You'll get the following output:
