@@ -4,10 +4,12 @@ id: j0nw0gs6prer
 type: challenge
 title: Step 3 - Create Sample Task
 tabs:
-- title: Terminal 1
+- id: qhzs95hsscin
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: noicmjogjiml
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

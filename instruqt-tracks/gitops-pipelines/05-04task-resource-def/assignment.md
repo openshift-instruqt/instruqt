@@ -4,10 +4,12 @@ id: viic6rx0wuhd
 type: challenge
 title: Step 4 - Task Resource Definitions
 tabs:
-- title: Terminal 1
+- id: goyxyupyvg1o
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 4h3tm6h5hitf
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

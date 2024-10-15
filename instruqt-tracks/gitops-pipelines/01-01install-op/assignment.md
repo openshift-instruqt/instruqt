@@ -50,10 +50,12 @@ notes:
 
     In the following sections, you will go through each of the above steps to define and invoke a pipeline. Let's get started!
 tabs:
-- title: Terminal 1
+- id: ecofovztup6g
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: jrjrggszcb29
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

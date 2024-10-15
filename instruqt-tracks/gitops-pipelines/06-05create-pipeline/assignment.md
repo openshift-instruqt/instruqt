@@ -4,10 +4,12 @@ id: w0uyq85ohsx0
 type: challenge
 title: Step 5 - Create Pipeline
 tabs:
-- title: Terminal 1
+- id: tcavaxvq5lpx
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: fplvpxjqre90
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

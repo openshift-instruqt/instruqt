@@ -4,10 +4,12 @@ id: ksdabc6vxkfr
 type: challenge
 title: Step 6 - Trigger a Pipeline
 tabs:
-- title: Terminal 1
+- id: incfizvvqhdr
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: zlxvny3mbc68
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

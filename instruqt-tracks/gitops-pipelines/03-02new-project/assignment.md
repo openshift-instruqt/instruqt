@@ -4,10 +4,12 @@ id: udjs69gtevfb
 type: challenge
 title: Step 2 - Create a New Project
 tabs:
-- title: Terminal 1
+- id: qe369r2qboye
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 2alblpdmb2ui
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
