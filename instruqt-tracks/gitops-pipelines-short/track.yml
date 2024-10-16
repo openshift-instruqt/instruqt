@@ -35,7 +35,7 @@ developers:
 - cclyburn@redhat.com
 - ryanj@redhat.com
 - nvinto@redhat.com
-sandbox_preset: openshift-4-16
+sandbox_preset: openshift-4-17
 lab_config:
   overlay: false
   width: 25
@@ -45,4 +45,4 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "15547320607719603879"
+checksum: "7823555753728926460"
