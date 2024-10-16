@@ -8,12 +8,14 @@ notes:
   contents: "\U0001F4BE Install the Pipelines Operator\n=============================\n\nLearn
     how to install the OpenShift Pipelines operator"
 tabs:
-- title: Terminal 1
+- id: fw0pngoqdu2q
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: cvwhk7jfarjx
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500

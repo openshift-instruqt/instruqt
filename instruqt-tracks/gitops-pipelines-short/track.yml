@@ -29,16 +29,20 @@ description: |-
   abstracting away the underlying details.
 icon: https://logodix.com/logo/1910931.png
 level: beginner
-tags:
-- openshift
+tags: []
 owner: openshift
 developers:
 - cclyburn@redhat.com
 - ryanj@redhat.com
 - nvinto@redhat.com
-maintenance: true
+sandbox_preset: openshift-4-16
 lab_config:
   overlay: false
   width: 25
   position: right
-checksum: "6296251003776834860"
+  feedback_recap_enabled: true
+  loadingMessages: true
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "15547320607719603879"

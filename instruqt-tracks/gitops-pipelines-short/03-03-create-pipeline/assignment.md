@@ -8,12 +8,14 @@ notes:
   contents: "\U0001F477 Create a Pipeline\n=============================\n\nLearn
     how to create and trigger a Pipeline"
 tabs:
-- title: Terminal 1
+- id: nbe6jmxyfahr
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: ypnmbxgawkod
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 700
