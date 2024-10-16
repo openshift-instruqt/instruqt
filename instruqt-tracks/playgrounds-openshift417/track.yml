@@ -1,6 +1,6 @@
 slug: playgrounds-openshift417
 id: 6flzve3l3fk6
-title: OpenShift 4-17
+title: OpenShift Playground 4-17
 teaser: Quick access to the web console or the command-line interface to explore Red
   Hat OpenShift
 description: |
@@ -41,4 +41,4 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 33
-checksum: "6914955831375223083"
+checksum: "3371799848629212642"
