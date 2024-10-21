@@ -39,12 +39,6 @@ When you go get to the **OpenShift Web Console** you'll be presented with a logi
 
 ![Web Console](../assets/web-console-login.png)
 
-|NOTE:|
-|----|
-|You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
-If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
-
 ----
 `Step 2:`  Login to the **OpenShift Web Console** using the following credentials.
 
@@ -131,7 +125,7 @@ You will see similar output to this and you will need to type `y` to proceed.
 
 ```
 Need to install the following packages:
-  nodeshift@8.7.0
+  nodeshift@11.3.0
 Ok to proceed? (y) y
 ```
 
