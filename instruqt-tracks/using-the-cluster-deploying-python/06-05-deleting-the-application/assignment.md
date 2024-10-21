@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 5 - Deleting the application from the command line
 tabs:
-- title: Terminal 1
+- id: vutp4rvyt4mb
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 7p0birr9rivi
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
