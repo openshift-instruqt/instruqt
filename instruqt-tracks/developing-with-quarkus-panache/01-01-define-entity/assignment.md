@@ -322,7 +322,7 @@ INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'),
 ```
 
 The SQL statements displayed above will add records for three fake people to the database upon application startup.
-
+ 
 # Congratulations!
 
 In this topic you downloaded the source code from GitHub. You created a Panache entity named `Person`. You added the `EyeColor` enum. Also, you created a `PersonResource` for the application's RESTful API feature. Finally, you created the code to inject sample data into the application at start up.
