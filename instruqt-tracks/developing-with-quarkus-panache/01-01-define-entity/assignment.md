@@ -297,10 +297,7 @@ public class PersonResource {
 
 ---
 
-`Step 18:` Click on the `Disk` icon to or press `CTRL+S` keys to save the `PersonResource.java` file.
-
-
-As you can see, you've implemented your first Panache-based query. This query is encapsulated in the `PersonResource.getAll()` method.
+`Step 18:` As you can see, you've implemented your first Panache-based query. This query is encapsulated in the `PersonResource.getAll()` method.
 
 The `PersonResource.getAll()`  method will return a list of people as a JSON array
 
@@ -325,8 +322,6 @@ INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'),
 ```
 
 The SQL statements displayed above will add records for three fake people to the database upon application startup.
-
-`Step 20c:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `import.sql` file.
 
 # Congratulations!
 
