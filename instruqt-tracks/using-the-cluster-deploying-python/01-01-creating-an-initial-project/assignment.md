@@ -24,10 +24,12 @@ notes:
 
     You'll use the concepts and techniques presented in this track when you want to create and deploy applications from source code using OpenShift automation and thus avoid doing the work manually.
 tabs:
-- title: Terminal 1
+- id: yu4c36qfexle
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: f4dpetlcasgi
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

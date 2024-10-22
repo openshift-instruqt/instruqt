@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 3 - Viewing the build logs in the Web Console
 tabs:
-- title: Terminal 1
+- id: 87ab8x9b0ijo
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: mlj0ju4usb8h
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

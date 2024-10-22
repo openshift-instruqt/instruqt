@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 7 - Triggering new builds from the command line
 tabs:
-- title: Terminal 1
+- id: clwi27dxdbyu
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: rp8w8jlqdxlr
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

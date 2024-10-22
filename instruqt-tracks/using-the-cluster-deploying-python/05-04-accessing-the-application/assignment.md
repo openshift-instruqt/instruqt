@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 4 - Accessing the application using the Web Console
 tabs:
-- title: Terminal 1
+- id: dun7ukjodtz0
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: yhsedrevwvmq
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true

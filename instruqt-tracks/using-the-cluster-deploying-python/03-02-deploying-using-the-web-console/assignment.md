@@ -7,10 +7,12 @@ notes:
 - type: text
   contents: Topic 2 - Deploying an application using the Web Console
 tabs:
-- title: Terminal 1
+- id: fyfmxsismhsn
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: osc4u9sqf5ly
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
