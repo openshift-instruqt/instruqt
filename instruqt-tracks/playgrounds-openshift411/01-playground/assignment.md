@@ -21,14 +21,17 @@ notes:
 
     This OpenShift cluster will self-destruct in one hour.
 tabs:
-- title: Terminal 1
+- id: mudxxsf40ksk
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: l3oqokrblybz
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
+- id: d3exlfrvrhx9
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
