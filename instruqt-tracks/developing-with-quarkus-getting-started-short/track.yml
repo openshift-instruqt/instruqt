@@ -47,13 +47,16 @@ tags:
 - prod
 owner: openshift
 developers:
-- ryanj@redhat.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
 - doh@redhat.com
 lab_config:
   overlay: false
-  width: 25
-  position: right
+  width: 0
+  position: ""
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "15033171755013472059"
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "8032810536029513147"

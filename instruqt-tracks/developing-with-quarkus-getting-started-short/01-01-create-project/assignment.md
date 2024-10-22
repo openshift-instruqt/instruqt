@@ -29,19 +29,23 @@ notes:
 
     Application requirements have changed over the last few years. For any application to succeed in the era of big data, IoT or cloud computing, adhering to the principles and practices of the [reactive architecture style](https://developers.redhat.com/coderland/reactive/reactive-intro) is essential.
 tabs:
-- title: Terminal 1
+- id: okl2x8dqg0a4
+  title: Terminal 1
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Visual Editor
+- id: bvp06lvwu14j
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/projects/quarkus
-- title: Terminal 2
+- id: sqeayzc3moq6
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Dev UI
+- id: yavag0uhmvhf
+  title: Dev UI
   type: service
   hostname: crc
   path: /q/dev
@@ -101,8 +105,11 @@ Click the **Visual Editor** tab in the horizontal menu bar over the terminal win
 
 In case you don't see the subdirectories under the */root/projects/quarkus* directory, click on the reload icon.
 
+Make sure to replace `YOUR_SANDBOX_ID` with the sandbox ID from the ROUTE URL.
+
 ```
 %dev.quarkus.dev-ui.cors.enabled=false
+%dev.quarkus.dev-ui.hosts=crc-8080-${INSTRUQT_PARTICIPANT_ID}.env.play.instruqt.com
 ```
 
 ![add-to-cors](../assets/add-to-cors.png)
@@ -117,7 +124,7 @@ You are ready to run the Quarkus application
 mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/getting-started
 ```
 
-There will be a lot of output to the screen. When the process is finished running, you will see the following: 
+There will be a lot of output to the screen. When the process is finished running, you will see the following:
 
 ```
 Listening for transport dt_socket at address: 5005
@@ -164,7 +171,7 @@ Let's take a look.
 
 ----
 
-You are going to change the output of the **Hello App** API application from `Hello from Quarkus REST` to `Hola from Quarkus RESTe` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
+You are going to change the output of the **Hello App** API application from `Hello from Quarkus REST` to `Hola from Quarkus REST` by doing nothing more than changing one line of code. Quarkus will take care of everything else.
 
 ----
 
