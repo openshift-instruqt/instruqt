@@ -23,20 +23,24 @@ notes:
 
     Sit back and relax!  This demo environment typically takes 10-15 mins to prepare
 tabs:
-- title: Terminal 1
+- id: gfdyuqrkqdop
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Terminal 2
+- id: pdrqnyaifn6k
+  title: Terminal 2
   type: terminal
   hostname: crc
   cmd: /bin/bash
-- title: Web Console
+- id: neussbfiwrg6
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Developer Hub
+- id: gvful64bbuh4
+  title: Developer Hub
   type: website
-  url: https://rhdh.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://rhdh.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 3600
@@ -88,10 +92,10 @@ helm show values openshift-helm-charts/redhat-developer-hub > values.yaml
 sed -e 's/^      registry: quay.io/      registry: registry.redhat.io/' -i values.yaml
 ```
 ```
-sed -e "s/^  host: \"\"/  host: \"rhdh.crc-97g8f-master-0.crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
+sed -e "s/^  host: \"\"/  host: \"rhdh.crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
 ```
 ```
-sed -e "s/^  clusterRouterBase: apps.example.com/  clusterRouterBase: \"crc-97g8f-master-0.crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
+sed -e "s/^  clusterRouterBase: apps.example.com/  clusterRouterBase: \"crc.${INSTRUQT_PARTICIPANT_ID}.instruqt.io\"/" -i values.yaml
 ```
 ```
 helm upgrade -i rhdh -f values.yaml openshift-helm-charts/redhat-developer-hub
