@@ -244,8 +244,6 @@ public enum EyeColor {
 }
 ```
 
-`Step 6d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `EyeColor.java`.
-
 You've created the `EyeColor` enumeration.
 
 Next, you'll create a RESTful endpoint by which to access the `Person` resource.
@@ -309,8 +307,6 @@ public class PersonResource {
 }
 ```
 
-`Step 7d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `EyeColor.java`.
-
 |NOTE|
 |----|
 |You will see many `// TODO` comments in the file, `src/main/java/org/acme/person/PersonResource.java`. **Do Not Delete Them!** You will need these comments later on.|
@@ -338,11 +334,10 @@ The next step in this topic is to add sample data to the demonstration applicati
 `Step 8c:` Click the file `src/main/resources/import.sql` to open the file for editing and add the following code:
 
 ```sql
-INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');
-INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Salvador L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');
-INSERT INTO person(id, name, birth, eyes) VALUES (nextval('hibernate_sequence'), 'Huynh Kim Hue', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
+INSERT INTO person(id, name, birth, eyes) VALUES (1, 'Farid Ulyanov', to_date('1974-08-15', 'YYYY-MM-dd'), 'BLUE');
+INSERT INTO person(id, name, birth, eyes) VALUES (2, 'Salvador L. Witcher', to_date('1984-05-24', 'YYYY-MM-dd'), 'BROWN');
+INSERT INTO person(id, name, birth, eyes) VALUES (3, 'Huynh Kim Hue', to_date('1999-04-25', 'YYYY-MM-dd'), 'HAZEL');
 ```
-`Step 8d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `src/main/resources/import.sql`.
 
 In topics to come, the file `src/main/resources/import.sql` will inject three fake people into the database that will be associated with the demonstration application.
 

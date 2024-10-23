@@ -35,23 +35,7 @@ Live Coding connects the demonstration application running on your local environ
 
 # Creating an OpenShift project using the CLI tool
 
-`Step 1:` Run the following command in the **Terminal 1** console window to log into OpenShift:
-
-```
-oc login -u developer -p developer
-```
-
-You will see output similar to the following:
-
-```bash
-Login successful.
-
-You don't have any projects. You can try to create a new project, by running
-
-    oc new-project <projectname>
-```
-
-`Step 2:` Run the following command in the **Terminal 1** console window to create a project in OpenShift named `Sample Quarkus Datatable App`:
+`Step 1:` Run the following command in the **Terminal 1** console window to create a project in OpenShift named `Sample Quarkus Datatable App`:
 
 ```
 oc new-project quarkus --display-name="Sample Quarkus Datatable App"
@@ -77,7 +61,7 @@ The following step adds the Postgres database to the demonstration application.
 
 ----
 
-`Step 3:` Run the following command in the **Terminal 1** console window to deploy a Postgres instance to the new project in OpenShift:
+`Step 2:` Run the following command in the **Terminal 1** console window to deploy a Postgres instance to the new project in OpenShift:
 
 ```
 oc new-app \
@@ -112,16 +96,16 @@ You'll get output similar to the following:
 
 # Logging into OpenShift using the web console
 
-`Step 4:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the console window to the left to access the OpenShift web console web page. You will be presented with the console login page.
+`Step 3:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the console window to the left to access the OpenShift web console web page. You will be presented with the console login page.
 
 ![web log in](../assets/web-console-login.png)
 
 ----
 
-`Step 5:`  Enter the following access credentials into the OpenShift web console web page:
+`Step 4:`  Enter the following access credentials into the OpenShift web console web page:
 
-* Username: `developer`
-* Password: `developer`
+* Username: `admin`
+* Password: `admin`
 
 |NOTE|
 |----|
@@ -131,13 +115,13 @@ If you do get the warning, click the **Advanced** button to complete the process
 
 ----
 
-`Step 6:` Click the **Skip Tour** button.
+`Step 5:` Click the **Skip Tour** button.
 
 ----
 
-`Step 7a:` Click the **Topology** tab on the left side of the OpenShift web console.
+`Step 6a:` Click the **Topology** tab on the left side of the OpenShift web console.
 
-`Step 7b:` Then click the link `quarkus` in the projects list that appears as shown in the figure below.
+`Step 6b:` Then click the link `quarkus` in the projects list that appears as shown in the figure below.
 
 ![Select Quarkus](../assets/select-quarkus.png)
 
@@ -155,7 +139,7 @@ The OpenShift extension makes it easier for the user to get started with Quarkus
 
 ----
 
-`Step 8:` Run the following command in **Terminal 1** to add the OpenShift extension to the demonstration project:
+`Step 7:` Run the following command in **Terminal 1** to add the OpenShift extension to the demonstration project:
 
 ```
 cd /root/projects/rhoar-getting-started/quarkus/panache-reactive && \
@@ -180,16 +164,16 @@ You'll see the following output:
 
 # Configuring Quarkus for remote Live Coding
 
-`Step 9a:` From the **Visual Editor** tab, navigate to the file  `src/main/resources/application.properties` as shown in the figure below.
+`Step 8a:` From the **Visual Editor** tab, navigate to the file  `src/main/resources/application.properties` as shown in the figure below.
 
 ![Open Application Properties](../assets/open-application-properties.png)
 
 
-`Step 9b:` Click the file `application.properties` to open it for editing and add the following code:
+`Step 8b:` Click the file `application.properties` to open it for editing and add the following code:
 
 ```text
 # Remote Live Coding setup
-quarkus.package.type=mutable-jar
+quarkus.package.jar.type=mutable-jar
 quarkus.live-reload.password=changeit
 
 # OpenShift Production Configuration
@@ -206,7 +190,7 @@ The statement `quarkus.package.type=mutable-jar` shown above in the file `applic
 
 # Deploying the application to OpenShift
 
-`Step 10:` Run the following command in **Terminal 1** to build and deploy the Quarkus application in OpenShift:
+`Step 9:` Run the following command in **Terminal 1** to build and deploy the Quarkus application in OpenShift:
 
 ```
 mvn clean package -DskipTests \
@@ -239,10 +223,10 @@ The following list describes the meaning of the options used in the command `mvn
 * `quarkus.openshift.env.vars.quarkus-launch-devmode=true` - Sets an environment variable in the container to tell Quarkus to launch in dev mode instead of production mode, which is the default when deploying to Kubernetes or OpenShift.
 
 
-`Step 11:` Run the following command in **Terminal 1** to verify that the demonstration application has been rolled out:
+`Step 10:` Run the following command in **Terminal 1** to verify that the demonstration application has been rolled out:
 
 ```
-oc rollout status -w dc/people
+oc rollout status -w deployment/people
 ```
 
 Upon success you will see the following output:
@@ -261,7 +245,7 @@ Do a quick test to ensure the remote app is running by using `curl` to retrieve 
 
 ----
 
-`Step 12a:` Run the following command in **Terminal 1** to get the demonstration application's Route:
+`Step 11a:` Run the following command in **Terminal 1** to get the demonstration application's Route:
 
 ```
 export APP_URL=`oc get route people -n quarkus -o jsonpath='{"http://"}{.spec.host}'` && echo $APP_URL
@@ -273,7 +257,7 @@ You'll get output similar to the following:
 http://people-quarkus.crc-dzk9v-master-0.crc.cgamswlsavav.instruqt.io
 ```
 
-`Step 12b:` Run the following command in **Terminal 1** to make the environment variable available in the topics to come.
+`Step 11b:` Run the following command in **Terminal 1** to make the environment variable available in the topics to come.
 
 ```
 echo "export APP_URL=${APP_URL}" >> /root/.bashrc
@@ -285,7 +269,7 @@ echo "export APP_URL=${APP_URL}" >> /root/.bashrc
 
 ----
 
-`Step 13:` Run the following command in **Terminal 1** to execute `curl` against the `/person` endpoint of the demonstration application's RESTful API. The result will be piped to the [`jq`](https://stedolan.github.io/jq/) utility that displays the JSON in a pretty format:
+`Step 12:` Run the following command in **Terminal 1** to execute `curl` against the `/person` endpoint of the demonstration application's RESTful API. The result will be piped to the [`jq`](https://stedolan.github.io/jq/) utility that displays the JSON in a pretty format:
 
 ```
 curl -s $APP_URL/person | jq
