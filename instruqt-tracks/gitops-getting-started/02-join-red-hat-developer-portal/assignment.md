@@ -5,9 +5,10 @@ type: challenge
 title: Join Red Hat Developer at no cost
 teaser: Join Red Hat Developer at no cost
 tabs:
-- title: Red Hat Login
+- id: megelqw0zbge
+  title: Red Hat Login
   type: browser
-  hostname: rhd-login
+  hostname: rhd-login-3882336
 difficulty: ""
 ---
 Before you proceed with the next challenge, please take a moment to register for Red Hat Developer. If you already have a Red Hat account, you can use the same login credentials.

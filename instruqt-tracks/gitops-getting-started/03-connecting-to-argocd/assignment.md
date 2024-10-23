@@ -4,14 +4,17 @@ id: flg5wffrvkeo
 type: challenge
 title: Connecting to ArgoCD
 tabs:
-- title: Terminal 1
+- id: kkbbjbz3k6wa
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 5g9v5wgt0boq
+  title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
+- id: io8gy7d5kawr
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
