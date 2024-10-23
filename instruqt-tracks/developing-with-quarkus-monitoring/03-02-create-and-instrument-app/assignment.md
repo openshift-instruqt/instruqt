@@ -54,7 +54,7 @@ Next, you'll create a basic Quarkus **Hello World** application that includes th
 
 ```
 cd /root/projects/quarkus && \
-mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:3.15.1:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=primes \
     -DclassName="org.acme.quickstart.GreetingResource" \

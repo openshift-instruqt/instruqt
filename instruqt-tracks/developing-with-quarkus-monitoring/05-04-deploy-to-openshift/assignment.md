@@ -72,8 +72,6 @@ quarkus.openshift.expose=true
 quarkus.openshift.labels.app.openshift.io/runtime=quarkus
 ```
 
-`Step 2c:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `application.properties` file.
-
 **KEY POINTS TO UNDERSTAND**
 
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certificates and that Quarkus should trust them.

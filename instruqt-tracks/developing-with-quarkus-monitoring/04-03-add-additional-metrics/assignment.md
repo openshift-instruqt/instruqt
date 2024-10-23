@@ -36,11 +36,11 @@ package org.acme.quickstart;
 
 import io.micrometer.core.instrument.MeterRegistry;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.function.Supplier;
 
@@ -98,8 +98,6 @@ public class PrimeNumberResource {
     }
 }
 ```
-
-`Step 1d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `PrimeNumberResource.java` file as shown in the figure below.
 
 ![Save Prime Resource](../assets/save-prime-resource.png)
 
@@ -258,10 +256,10 @@ package org.acme.quickstart;
 
 import java.util.Arrays;
 
-import javax.annotation.Priority;
-import javax.inject.Singleton;
-import javax.interceptor.Interceptor;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.Priority;
+import jakarta.inject.Singleton;
+import jakarta.interceptor.Interceptor;
+import jakarta.enterprise.inject.Produces;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -317,8 +315,6 @@ public class CustomConfiguration {
 }
 ```
 
-`Step 10d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `PrimeNumberResource.java` file.
-
 **KEY POINTS TO UNDERSTAND**
 
 * `configurePrometheusRegistries()` at `Line 31` adds a custom tag `registry: prometheus` tag to Prometheus registry metrics.
@@ -339,8 +335,6 @@ Now that you have programmed `CustomConfiguration.java`, you need to add the con
 # Configure value for the tag we add to metrics
 deployment.env=prod
 ```
-
-`Step 11c:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `application.properties` file.
 
 The addition you just made to `application.properties` will cause an `env: prod` tag to be added to each metric based on the filter created previously.
 
