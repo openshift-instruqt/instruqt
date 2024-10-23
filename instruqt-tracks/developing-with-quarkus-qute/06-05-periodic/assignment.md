@@ -75,8 +75,6 @@ public class Sample {
 }
 ```
 
-`Step 1d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `Sample.java` file.
-
 Next, create a service class named `SampleService` that has a `get()` method. The `get()` method returns a random `List` of samples.
 
 ----
@@ -98,7 +96,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class SampleService {
@@ -113,8 +111,6 @@ public class SampleService {
     }
 }
 ```
-
-`Step 2d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `SampleService.java` file.
 
 You now have a way to generate a continuous stream of random data based on the object definition described in the `Sample` bean.
 
@@ -155,8 +151,6 @@ Next, let's create the template file.
 
 The `report_01.json.template` emits data in structured manner according to a timestamp.
 
-`Step 4d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `report_01.json.template` file.
-
 # Analyzing the JSON template
 
 Here we are looping over the passed-in `samples`. You can iterate over `Iterable`s, `Map`s, and `Stream`s. Since we are rendering JSON, we also need to escape the first of any pair of JSON-related `}` or `{` using `\}` or `\{`.
@@ -178,9 +172,9 @@ package org.acme;
 
 import java.io.FileWriter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.Location;
@@ -224,9 +218,6 @@ public class ReportGenerator {
 ```
 The code shown above generates reports periodically to a file in `/tmp`.
 
-
-`Step 5d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `ReportGenerator.java` file.
-
 **KEY POINTS TO UNDERSTAND:**
 
 * The code uses the `@ResourcePath` qualifier to specify the template path: `templates/reports/v1/report_01.json`.
@@ -256,33 +247,6 @@ Assuming no errors, a `Sample` entry will be written to the `/tmp/report.json` f
 
 ```console
 tail -f /tmp/report.json
-```
-
-You'll see output similar to the following:
-
-```json
-{
-    "time": "2022-04-21T22:30:35.000969",
-    "samples": [
-      {"name": "Jeff","data": "0.23984994653540892"},
-      {"name": "Jeff","data": "0.8867636935236044"},
-      {"name": "James","data": "0.3672510964874448"},
-      {"name": "Deepak","data": "--Invalid--"},
-      {"name": "Deepak","data": "0.13618854513825762"}
-    ]
-  }
-{
-    "time": "2022-04-21T22:30:36.001193",
-    "samples": [
-      {"name": "Sally","data": "0.7833450060326326"},
-      {"name": "Jeff","data": "0.7343044249643622"},
-      {"name": "Daniel","data": "0.7452815950519064"},
-      {"name": "Sally","data": "0.2590073757626006"},
-      {"name": "Daniel","data": "0.9834003620683878"},
-      {"name": "Jeff","data": "0.22577470893349594"},
-      {"name": "Deepak","data": "0.1547905261085607"}
-    ]
-  }
 ```
 
 **Congratulations!**

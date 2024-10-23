@@ -65,8 +65,6 @@ You will start out by refactoring an existing template file in anticipation of i
 </html>
 ```
 
-`Step 1d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `item.html` file.
-
 Let's take a moment to analyze the code.
 
 # Analyzing the hello.html template file
@@ -115,7 +113,6 @@ public class TemplateExtensions {
     }
 }
 ```
-`Step 3e:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `TemplateExtensions.java` file.
 
 Let's analyze the code.
 

@@ -67,8 +67,6 @@ public class Item {
 }
 ```
 
-`Step 1e:` Click on the `Disk` icon or press `CTRL+S` keys to save the `Item.java` file.
-
 The file you just created is a simple `Item` object that has two fields, `name` and `price`.
 
 # Creating a template
@@ -112,8 +110,6 @@ total 0
 </html>
 ```
 
-`Step 3d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `item.html` file.
-
 Notice that the data expressions `{item.name}` and `{item.price}` are used in the `item.html` template code shown above.
 
 Next, you will create a service that mocks up a database of items that will be consumed by the template.
@@ -132,7 +128,7 @@ package org.acme;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ItemService {
@@ -149,8 +145,6 @@ public class ItemService {
     }
 }
 ```
-
-`Step 4d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `ItemService.java` file.
 
 # Creating a RESTful endpoint
 
@@ -171,12 +165,12 @@ Next you will create a resource class that uses the type-safe template you creat
 ```java
 package org.acme;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.CheckedTemplate;
@@ -200,8 +194,6 @@ public class ItemResource {
     }
 }
 ```
-
-`Step 5d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `ItemResource.java` file.
 
 Let's pause from coding for a moment and analyze the code in the file `ItemResource.java`.
 
@@ -307,8 +299,6 @@ You will now learn how to take this approach.
 </html>
 ```
 
-`Step 8c:` Click on the `Disk` icon or press `CTRL+S` keys to save the `item.html` file.
-
 Notice the annotation `{@org.acme.Item item}` in the first line of code above. This is an optional parameter declaration. If declared, Qute attempts to validate all expressions that reference the parameter `item`.
 
 Next, you need to update the resource class `ItemResource.java` to use the alternative way to inject data into templates.
@@ -324,12 +314,12 @@ Next, you need to update the resource class `ItemResource.java` to use the alter
 ```java
 package org.acme;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.Location;
@@ -354,9 +344,7 @@ public class ItemResource {
 }
 ```
 
-`Step 9d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `ItemResource.java` file.
-
-`Step 9e:` Click the **Qute Item 1** to view the result of the updated code in the internal browser inside the interactive learning environment.
+`Step 9d:` Click the **Qute Item 1** to view the result of the updated code in the internal browser inside the interactive learning environment.
 
 You will see results as shown in the figure  below.
 
@@ -374,8 +362,6 @@ But let's see what happens if when there is an error condition.
 
 `Step 10c:` Change the string `{item.name}` to `{item.nonSense}`.
 
-`Step 10d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `item.html` file.
-
 `Step 10d:` Click on the **Qute Item 1** tab, or reload it to see an error on the web page as shown in figure below.
 
 ![Err](../assets/validation-error.png)
@@ -391,8 +377,6 @@ Now you need to reset the template to its original state.
 `Step 12b:` Click on the file `item.html` to open the template file for editing.
 
 `Step 11c:` Change the string `{item.nonSense}` to `{item.name}`.
-
-`Step 11d:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `item.html` file.
 
 `Step 11d:` Click on the **Qute Item 1** tab or reload it to see an error on the web page as shown in the figure below.
 

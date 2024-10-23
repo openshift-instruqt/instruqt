@@ -69,10 +69,6 @@ Hello {name} from HelloResource!
 
 Notice that the template file shown above has text that will render a message that's different than the `hello` message rendered in previous steps.
 
-`Step 3d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `hello.txt` file as shown in the figure below.
-
-![Save hello.txt](../assets/save-hello-txt.png)
-
 Next, let's create the Goodbye template.
 
 ----
@@ -89,8 +85,6 @@ Next, let's create the Goodbye template.
 Goodbye {name} from GoodbyeResource!
 ```
 
-`Step 4d:` Click on the `Disk` icon or press `CTRL+S` keys to save the `goodbye.txt` file.
-
 Now let’s declare and use those templates in the `HelloResource` resource class.
 
 ----
@@ -106,11 +100,11 @@ Now let’s declare and use those templates in the `HelloResource` resource clas
 ```java
 package org.acme;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.CheckedTemplate;
@@ -131,8 +125,6 @@ public class HelloResource {
     }
 }
 ```
-
-`Step 5c:` Click on the `Disk` icon or press the `CTRL+S` keys to save the `HelloResource.java` file.
 
 # Analyzing the HelloResource class
 
@@ -161,11 +153,11 @@ Let's create another resource that references the `HelloResource.Templates` stat
 ```java
 package org.acme;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 
 import io.quarkus.qute.TemplateInstance;
 
@@ -179,8 +171,6 @@ public class GoodbyeResource {
     }
 }
 ```
-
-`Step 6c:` Click on the `Disk` icon or press `CTRL+S` keys to save the `GoodbyeResource.java` file.
 
 # Exercising the Hello and Goodbye endpoints
 

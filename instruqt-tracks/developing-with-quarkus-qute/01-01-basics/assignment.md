@@ -101,7 +101,7 @@ Let's create the basic Quarkus **Hello World** application. The creation process
 
 ```
 cd /root/projects/quarkus &&
- mvn io.quarkus:quarkus-maven-plugin:2.16.2.Final:create \
+ mvn io.quarkus:quarkus-maven-plugin:3.15.1:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=qute \
     -Dextensions="quarkus-resteasy-qute,quarkus-vertx-web,quarkus-qute,quarkus-scheduler"
@@ -334,10 +334,6 @@ Hello {name}!
 
 ----
 
-`Step 12e:` Click on the `Disk` icon or press `CTRL+S` keys to save the file, as shown in the figure below:
-
-![Save File](../assets/save-file.png)
-
 # Creating REST endpoint to access template
 
 Now let’s create a resource class that defines a RESTful endpoint and binds the endpoint to the template defined in `hello.txt`.
@@ -356,12 +352,12 @@ Now let’s create a resource class that defines a RESTful endpoint and binds th
 ```java
 package org.acme;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.Template;
@@ -379,8 +375,6 @@ public class HelloResource {
     }
 }
 ```
-
-`Step 13d:` Click on the `Disk` icon or press `CTRL+S` keys to save the file named `HelloResource.java`.
 
 **KEY POINTS TO UNDERSTAND:**
 
