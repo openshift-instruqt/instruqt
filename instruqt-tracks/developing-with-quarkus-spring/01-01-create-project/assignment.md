@@ -81,7 +81,7 @@ You'll see the following ouput:
 `Step 3:` Run the following command in **Terminal 1** to create the demonstration project named **Fruit Taster**.
 
 ```
- mvn io.quarkus:quarkus-maven-plugin:3.9.2:create \
+ mvn io.quarkus:quarkus-maven-plugin:3.15.1:create \
     -DprojectGroupId=org.acme \
     -DprojectArtifactId=fruit-taster \
     -Dextensions="spring-data-jpa,spring-web,spring-di,jdbc-postgres, jdbc-h2"
