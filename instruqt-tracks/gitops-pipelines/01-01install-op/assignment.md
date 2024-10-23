@@ -92,13 +92,6 @@ Click the **Web Console** tab over the terminal area to open the OpenShift web c
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
-|NOTE:|
-|----|
-|You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/instruqt-tracks/developing-on-openshift-getting-started/assets/security_warning.png)
-If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
-
-
 
 Use the following credentials to log in:
 
@@ -117,7 +110,7 @@ Use the _Filter by keyword_ box to search for `Red Hat OpenShift Pipelines` in t
 
 Read the brief description of the Operator on the _Red Hat OpenShift Pipelines_ page. Click _Install_.
 
-Select _pipelines-1.11.1_ for the Update channel, _All namespaces on the cluster (default)_ for installation mode, & _Automatic_ for the approval strategy. Click Install!
+Select _pipelines-1.16.0_ for the Update channel, _All namespaces on the cluster (default)_ for installation mode, & _Automatic_ for the approval strategy. Click Install!
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-settings.png)
 
