@@ -21,16 +21,18 @@ tags:
 - openshift
 owner: openshift
 developers:
-- bob@cogarttech.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
+- bob@cogarttech.com
 - doh@redhat.com
 - eshortis@redhat.com
-- ryanj@redhat.com
 lab_config:
   overlay: false
-  width: 25
-  position: right
+  width: 0
+  position: ""
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "9601724244238264290"
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "5288824880099739474"
