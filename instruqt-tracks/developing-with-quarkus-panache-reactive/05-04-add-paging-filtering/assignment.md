@@ -74,10 +74,7 @@ You are going to work with the following parameters to enable search and paging 
     }
 ```
 
-`Step 1d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `PersonResource.java`.
-
-
-The code in the method `Uni<DataTable> datatable((...)` shown above in `Step 1c` uses [JAX-RS `@QueryParam`](https://docs.oracle.com/javaee/7/api/javax/ws/rs/QueryParam.html) values to specify the incoming parameters to be applied to queries executed within the function. These parameters are passed to the server from the front-end call to the endpoint, `GET /person/datatable`.
+The code in the method `Uni<DataTable> datatable((...)` shown above in `Step 1c` uses [JAX-RS `@QueryParam`](https://docs.oracle.com/javaee/7/api/jakarta/ws/rs/QueryParam.html) values to specify the incoming parameters to be applied to queries executed within the function. These parameters are passed to the server from the front-end call to the endpoint, `GET /person/datatable`.
 
 The method `Uni<DataTable> datatable((...)` code you just added has a number of `TODO` statements that need to be implemented. You'll fill in the `TODO`s in a moment. But, first you need to review the predefined class `DataTable.java`.
 
@@ -122,7 +119,6 @@ This work is done by adding a query to the `PersonResource.java` class.
           .orElseGet(() -> Person.findAll())
           .page(pageNumber, length);
 ```
-`Step 3d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `PersonResource.java`.
 
 ----
 
@@ -146,8 +142,6 @@ This work is done by adding a query to the `PersonResource.java` class.
                 return datatable;
         }));
 ```
-
-`Step 4b:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `PersonResource.java`.
 
 The logic in the code you inserted into the file `PersonResource.java` at `Step 3b` above assigns the results of the search of the database to the object variable `filteredPeople`.
 

@@ -173,10 +173,10 @@ package org.acme.person.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.smallrye.mutiny.Multi;
@@ -211,10 +211,6 @@ public class Person extends PanacheEntity {
 |BEWARE|
 |----|
 |In the source code file, `src/main/java/org/acme/person/model/Person.java` you will see a `// TODO` comment at `Line XX`. **Do Not Delete It!** You will need this comment later on.|
-
-`Step 5d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of the Java file as shown in the figure below.
-
-![Save Person](../assets/save-person-java.png)
 
 # Defining the eye color enum
 
@@ -276,13 +272,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javax.enterprise.event.Observes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import jakarta.enterprise.event.Observes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 
 import org.acme.person.model.DataTable;
 import org.acme.person.model.EyeColor;
@@ -324,7 +320,7 @@ public class PersonResource {
 * `@Path("/person")` - Indicates the path to the `Person` resource that is appended to the base URL of the RESTful API
 * `@GET` - Indicates the the API call will use the [HTTP GET method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).
 * `getAll` - Is the Java function that will be executed with the request to the `/person` endpoint is received by the server
-* [`@Produces(MediaType.APPLICATION_JSON)`](https://docs.oracle.com/javaee/7/api/javax/ws/rs/core/MediaType.html) - Indicates that the response will be returned as JSON.
+* [`@Produces(MediaType.APPLICATION_JSON)`](https://docs.oracle.com/javaee/7/api/jakarta/ws/rs/core/MediaType.html) - Indicates that the response will be returned as JSON.
 * `Uni<T>` - A data type defined in the [Mutiny library]((https://javadoc.io/doc/io.smallrye.reactive/mutiny/latest/io/smallrye/mutiny/package-summary.html)) that represents a lazy asynchronous action.
 
 # Adding the sample data

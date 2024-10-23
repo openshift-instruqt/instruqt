@@ -61,8 +61,6 @@ Managed beans (like the `PersonResource`) can listen for lifecycle events by usi
     }
 ```
 
-`Step 1d:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `PersonResource.java`.
-
 |NOTE|
 |----|
 |Adding 10k entries will make the demonstration application's startup time artificially high, around 5-10 seconds.|

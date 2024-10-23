@@ -213,11 +213,6 @@ quarkus.datasource.password=password
 |----|
 |You can change the remote live-reload username/password pair defined by `quarkus.datasource.username` and `quarkus.datasource.password` in the `application.properties` file to whatever you want. Those credentials are used to secure communication between the remote side and the local side.
 
-`Step 8e:` Click on the `Disk` icon or press `CTRL+S` to save the file as shown in the figure below:
-
-![Save properties](../assets/save-properties-01.png)
-
-
 **KEY POINTS TO UNDERSTAND**
 
 * The `quarkus.package.type=mutable-jar` setting in the `application.properties` file instructs Quarkus to package the application as a `mutable application`.

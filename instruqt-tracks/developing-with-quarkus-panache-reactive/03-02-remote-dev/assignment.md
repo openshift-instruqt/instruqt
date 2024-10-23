@@ -200,8 +200,6 @@ quarkus.hibernate-orm.database.generation=drop-and-create
 quarkus.hibernate-orm.sql-load-script=import.sql
 ```
 
-`Step 9c:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `EyeColor.java`.
-
 **KEY CONCEPTS TO UNDERSTAND**
 
 The statement `quarkus.package.type=mutable-jar` shown above in the file `application.properties` indicates that Quarkus will package the application as a `mutable` application. A mutable application is one that's capable of being changed and updated in-place, on demand and on a regular basis.

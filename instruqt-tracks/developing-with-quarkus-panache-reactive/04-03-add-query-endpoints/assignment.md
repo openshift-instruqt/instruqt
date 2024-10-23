@@ -72,8 +72,6 @@ You are now going to add some reactive queries to the `Person` entity. The reaso
     }
 ```
 
-`Step 2c:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `Person.java`.
-
 **UNDERSTANDING REACTIVE QUERIES**
 
 The query `findByColor(EyeColor color)` retrieves a list of people based on eye color from the demonstration application's database. The query `getBeforeYear(int year)` gets a list of people that have birthdays on or before a particular birth year.
@@ -107,8 +105,6 @@ Now that the custom entity queries have been implemented in the `Person` entity 
         return Person.getBeforeYear(year);
     }
 ```
-
-`Step 3c:` Click on the `Disk` icon or press `CTRL+S` to save the contents of `PersonResource.java`.
 
 **IMPORTANT CONCEPTS TO UNDERSTAND**
 

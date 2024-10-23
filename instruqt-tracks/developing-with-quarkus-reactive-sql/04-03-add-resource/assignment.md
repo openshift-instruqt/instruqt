@@ -46,8 +46,6 @@ First you'll add code that will automatically create a table in the PostgresSQL 
                 .indefinitely();
 ```
 
-`Step 1d:` Click on the `Disk` icon or press `CTRL+S` to save the file.
-
 Next, you'll add the RESTful API methods. You'll add a `GET` method that sill return all coffee types. Also, you'll add `GET` method that returns a specific coffee type according to `id`.
 
 The `getSingle` method that returns a single coffee type uses the `PathParam` to indicate the the `id` passed from the query string value defined by the `@Path` annotation.
@@ -71,8 +69,6 @@ The `getSingle` method that returns a single coffee type uses the `PathParam` to
     }
 
 ```
-
-`Step 2b:` Click on the `Disk` icon or press `CTRL+S` to save the file.
 
 Now add the `POST` and `PUT` request methods.
 
@@ -98,8 +94,6 @@ Now add the `POST` and `PUT` request methods.
     }
 ```
 
-`Step 3b:` Click on the `Disk` icon or press `CTRL+S` to save the file.
-
 Finally add the DELETE method, so that there's an endpoint for deleting a coffee type from the Quarkus demonstration application.
 
 ----
@@ -115,8 +109,6 @@ Finally add the DELETE method, so that there's an endpoint for deleting a coffee
                 .onItem().transform(status -> Response.status(status).build());
     }
 ```
-
-`Step 4b:` Click on the `Disk` icon or press `CTRL+S` to save the file.
 
 # Congratulations!
 

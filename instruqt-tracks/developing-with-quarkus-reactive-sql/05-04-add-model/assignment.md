@@ -64,7 +64,6 @@ The outstanding work is to add intelligence to the `Coffee` class that will enab
                 .onItem().transform(iterator -> iterator.hasNext() ? from(iterator.next()) : null);
     }
 ```
-`Step 3c:` Click on the `Disk` icon or press `CTRL+S` to save the file.
 
 Notice that an `PgPool` object is passed to the `findById()` method as the type of the `client` parameter.
 
