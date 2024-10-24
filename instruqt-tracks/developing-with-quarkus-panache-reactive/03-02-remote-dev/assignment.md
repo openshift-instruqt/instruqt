@@ -217,7 +217,7 @@ The following list describes the meaning of the options used in the command `mvn
 
 * `quarkus.kubernetes.deploy=true` - Instructs the extension to deploy to OpenShift after the container image is built.
 * `quarkus.kubernetes-client.trust-certs=true` - Indicates that the application is using self-signed certificates and that the application is to trust the certificates.
-* `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension to generate and create the OpenShift resources, such as `DeploymentConfig` and `Service`, after building the container.
+* `quarkus.kubernetes.deployment-target=openshift` - Instructs the extension to generate and create the OpenShift resources, such as `Deployment` and `Service`, after building the container.
 * `quarkus.openshift.route.expose=true` - Instructs the extension to generate an OpenShift [`Route`](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html) making the demonstration application accessible from a browser.
 * `quarkus.kubernetes.annotations."app.openshift.io/connects-to"=postgres-database` - Adds a visual connector to show the DB connection in the OpenShift web console topology view.
 * `quarkus.openshift.env.vars.quarkus-launch-devmode=true` - Sets an environment variable in the container to tell Quarkus to launch in dev mode instead of production mode, which is the default when deploying to Kubernetes or OpenShift.
