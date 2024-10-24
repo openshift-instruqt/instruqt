@@ -92,7 +92,6 @@ Click the **Web Console** tab over the terminal area to open the OpenShift web c
 
 ![Web Console Login](https://raw.githubusercontent.com/openshift-instruqt/instruqt/master/assets/middleware/pipelines/web-console-login.png)
 
-
 Use the following credentials to log in:
 
 * **Username:** `admin`

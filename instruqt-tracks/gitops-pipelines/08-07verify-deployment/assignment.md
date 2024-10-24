@@ -33,7 +33,7 @@ After clicking on the icon, you should see the application running in a new tab.
 In addition, you can get the route of the application by executing the following command to access the application.
 
 ```
-oc get route pipelines-vote-ui --template='http://{{.spec.host}}'
+oc get route pipelines-vote-ui --template='https://{{.spec.host}}'
 ```
 
 Congratulations! You have successfully deployed your first application using OpenShift Pipelines.
