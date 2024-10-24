@@ -67,11 +67,6 @@ Operator, what it installs, and how all the components fit together.
 
 At first, Click the **Web Console** from the row of horizontal tabs at the top of the interactive terminal window. (The **Web Console** tab is the second tab to the right.)
 
-|NOTE:|
-|----|
-|You might see the following warning notification due to using an untrusted security certificate.
-If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
-
 You will then be able to login with admin permissions with:
 
 * **Username:** ``admin``
