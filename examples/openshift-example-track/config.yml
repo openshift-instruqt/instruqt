@@ -7,3 +7,4 @@ virtualmachines:
   - http
   - https
   - high-ports
+  provision_ssl_certificate: true
