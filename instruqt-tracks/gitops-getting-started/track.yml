@@ -52,7 +52,6 @@ developers:
 - nvinto@redhat.com
 idle_timeout: 400
 timelimit: 3600
-sandbox_preset: openshift-4-17
 lab_config:
   overlay: false
   width: 0
@@ -62,4 +61,4 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "14395805195941233913"
+checksum: "17282156194566535460"
