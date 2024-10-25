@@ -1,17 +1,5 @@
 ---
 tracks:
+  - { slug: playgrounds-openshift417, id: 6flzve3l3fk6 }
   - { slug: developing-on-openshift-getting-started, id: akihuxyag7aw }
-  - { slug: developing-with-quarkus-getting-started-short, id: 8ggoprmy6nzc }
-  - { slug: developing-with-quarkus-getting-started, id: riixlttwv5ye }
-  - { slug: developing-with-quarkus-kafka, id: 2wpuz3xbtyb5 }
-  - { slug: gitops-getting-started, id: ec9auzkeypbz }
   - { slug: gitops-pipelines, id: lqsxxbn4a6qy }
-  - { slug: kafka-kafka-basic, id: ssyttqtvjbgy }
-  - { slug: kafka-kafka-debezium, id: vrbjwexemqym }
-  - { slug: kafka-kafka-quarkus, id: trcegnjbjtej }
-  - { slug: playgrounds-openshift411, id: hlujba8rmi8j }
-  - { slug: using-the-cluster-cluster-access, id: tyrhthzthmld }
-  - { slug: using-the-cluster-deploying-images, id: 5n6yatx8rmn6 }
-  - { slug: using-the-cluster-deploying-python, id: njh5qyjkwkju }
-  - { slug: using-the-cluster-resource-objects, id: uysmncjvfgvk }
-  - { slug: using-the-cluster-transferring-files, id: fpczaosk7rlm }
