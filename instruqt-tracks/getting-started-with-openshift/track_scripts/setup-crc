@@ -11,35 +11,36 @@ echo "export HOME=/root" > /tmp/.bashrc
 cat /root/.bashrc >> /tmp/.bashrc
 mv /tmp/.bashrc /root/.bashrc
 
-ENS4IP=$(ip -4 -o addr show ens4 | awk '{print $4}' | cut -d "/" -f 1)
-
 # set hostname
 #INSTRUQT_HOSTNAME=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/hostname)
 
-# Don't do this below causes issues later on, i believe.
-# hostnamectl set-hostname $HOSTNAME
-
 eval $(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/startup-script | grep INSTRUQT_PARTICIPANT_ID)
 
-# dnsmasq config for crc-dnsmasq.service
-cat << EOF > /var/srv/dnsmasq.conf
-user=root
-port= 53
-bind-interfaces
+# start openshift
+systemctl start ovs-configuration.service
+BREXIP=$(ip -4 -o addr show br-ex  | awk '{print $4}' | cut -d "/" -f 1)
+
+cat << EOF > /etc/resolv.conf
+search c.rhd-devx-instruqt.internal google.internal
+nameserver $BREXIP
+nameserver 169.254.169.254
+EOF
+
+systemctl reload NetworkManager
+
+cat << EOF > /etc/dnsmasq.d/crc-dnsmasq.conf
+listen-address=$BREXIP
 expand-hosts
 log-queries
 local=/crc.testing/
 domain=crc.testing
-address=/apps-crc.testing/$ENS4IP
-address=/api.crc.testing/$ENS4IP
-address=/api-int.crc.testing/$ENS4IP
-address=/$HOSTNAME.crc.testing/192.168.126.11
+address=/apps-crc.testing/$BREXIP
+address=/api.crc.testing/$BREXIP
+address=/api-int.crc.testing/$BREXIP
+address=/crc.crc.testing/192.168.126.11
 EOF
 
-sed -i '/^search.*/a nameserver 10.88.0.8' /etc/resolv.conf
-
-# start openshift
-systemctl start crc-dnsmasq.service
+systemctl start dnsmasq.service
 systemctl start kubelet
 
 # INGRESS
@@ -113,12 +114,17 @@ do
     echo "AVAILABLE"
 done
 
-
+# SSL Setup
+curl -s -o /etc/ssl/certs/sandbox.crt -H "Metadata-Flavor: Google"     "http://metadata.google.internal/computeMetadata/v1/instance/attributes/ssl-certificate"
+curl -s -o /etc/ssl/certs/sandbox.key -H "Metadata-Flavor: Google"     "http://metadata.google.internal/computeMetadata/v1/instance/attributes/ssl-certificate-key"
+oc --namespace openshift-ingress create secret tls custom-certs-default --cert=/etc/ssl/certs/sandbox.crt --key=/etc/ssl/certs/sandbox.key
+rm /etc/ssl/certs/sandbox.key
+#oc patch --type=merge --namespace openshift-ingress-operator ingresscontrollers/default --patch '{"spec":{"defaultCertificate":{"name":"custom-certs-default"}}}'
 
 # INGRESS
 
 # check if ingresses.config.openshift.io cluster is present
-oc patch -p '{"spec": {"domain": "'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' ingresses.config.openshift.io cluster --type=merge
+oc patch -p '{"spec": {"domain": "'$HOSTNAME'.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' ingresses.config.openshift.io cluster --type=merge
 
 # Wait 30 seconds for the old pod to be terminated
 sleep 30
@@ -133,7 +139,9 @@ metadata:
   namespace: openshift-ingress-operator
 spec:
   replicas: 1
-  domain: $HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io
+  domain: $HOSTNAME.$INSTRUQT_PARTICIPANT_ID.instruqt.io
+  defaultCertificate:
+    name: custom-certs-default
 EOF
 
 oc rollout status deploy/oauth-openshift -n openshift-authentication
@@ -144,11 +152,11 @@ oc rollout status deploy/apiserver -n openshift-apiserver
 until oc get routes -A 2>/dev/null 1>&2; do echo "Changing routes, waiting for cluster operators..."; sleep 5; done
 
 
-oc patch -p '{"spec": {"host": "console-openshift-console.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route console -n openshift-console --type=merge
+oc patch -p '{"spec": {"host": "console-openshift-console.'$HOSTNAME'.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route console -n openshift-console --type=merge
 
-oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route downloads -n openshift-console --type=merge
+oc patch -p '{"spec": {"host": "downloads-openshift-console.'$HOSTNAME'.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route downloads -n openshift-console --type=merge
 
-oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.crc.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
+oc patch -p '{"spec": {"host": "default-route-openshift-image-registry.'$HOSTNAME'.'$INSTRUQT_PARTICIPANT_ID'.instruqt.io"}}' route default-route -n openshift-image-registry --type=merge
 
 
 #wait until cluster operators are "available"
@@ -232,7 +240,7 @@ do
     sleep 5
 done
 
-while [ "$(curl -k -I https://console-openshift-console.$HOSTNAME.crc.$INSTRUQT_PARTICIPANT_ID.instruqt.io -o /dev/null -w '%{http_code}\n' -s 2>/dev/null)" != "200" ]
+while [ "$(curl -k -I https://console-openshift-console.$HOSTNAME.$INSTRUQT_PARTICIPANT_ID.instruqt.io -o /dev/null -w '%{http_code}\n' -s 2>/dev/null)" != "200" ]
 do
     echo "Waiting for web console - unavailable via curl"
     sleep 5

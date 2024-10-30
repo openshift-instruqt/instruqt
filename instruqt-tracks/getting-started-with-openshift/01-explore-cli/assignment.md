@@ -15,7 +15,7 @@ tabs:
 - id: wfilzijgsri5
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
@@ -38,7 +38,7 @@ The `oc` command provides all of the functionality of the Kubernetes `kubectl` C
 Log into OpenShift from the command line on the left using the `oc login` command:
 
 ```
-oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u admin -p admin
 ```
 
 ✅ Login Confirmation
