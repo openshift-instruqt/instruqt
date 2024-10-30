@@ -4,15 +4,18 @@ id: yeuxgtja3fdv
 type: challenge
 title: Step 3 - Routing HTTP Requests
 tabs:
-- title: Terminal 1
+- id: yxp8xqytkedv
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: gi8kgyikq4iw
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this step you will explore **routes**.
 

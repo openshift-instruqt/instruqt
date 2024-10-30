@@ -8,15 +8,18 @@ notes:
   contents: "\U0001F4BB Working with the Web Console\n=============================\nLogin
     to and explore the OpenShift web console\n\n![Login screen](../assets/web-console-login.png)\n"
 tabs:
-- title: Terminal
+- id: nfjpj8sscveq
+  title: Terminal
   type: terminal
   hostname: crc
-- title: Web Console
+- id: 8l2zmxlcgygg
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 🔒 Logging in with the web console

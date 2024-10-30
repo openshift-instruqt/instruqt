@@ -8,15 +8,18 @@ notes:
   contents: "\U0001F4BB Working with the Command Line\n=============================\n\nLearn
     how to login to OpenShift using the `oc` command"
 tabs:
-- title: Terminal
+- id: xpejeb6eeo4f
+  title: Terminal
   type: terminal
   hostname: crc
-- title: Web Console
+- id: wfilzijgsri5
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 💻 Working with the Command Line Interface (CLI)

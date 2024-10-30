@@ -27,4 +27,12 @@ tags:
 owner: openshift
 developers:
 - ryanj@redhat.com
-checksum: "6878796676682477044"
+sandbox_preset: openshift-411
+lab_config:
+  feedback_recap_enabled: true
+  loadingMessages: true
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 33
+checksum: "11460986099944361592"
+enhanced_loading: false
