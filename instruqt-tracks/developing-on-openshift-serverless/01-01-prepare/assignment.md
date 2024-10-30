@@ -16,58 +16,65 @@ notes:
     In this tutorial, you will:
     * Deploy an OpenShift Serverless `service`.
     * Deploy multiple `revisions` of a service.
-    * Understand the `underlying components` of a serverless service.
+    * Understand the `underlying compents` of a serverless service.
     * Understand how Serverless is able to `scale-to-zero`.
     * Run different revisions of a service via `canary` and `blue-green` deployments.
     * Utilize the `knative client`.
 
     ## Why Serverless?
 
-    Deploying applications as Serverless services is becoming a popular architectural style. It seems like many organizations assume that _Functions as a Service (FaaS)_ implies a serverless architecture. We think it is more accurate to say that FaaS is one of the ways to utilize serverless, although it is not the only way. This raises a supercritical question for enterprises that may have applications that could be a monolith or a microservice: What is the easiest path to serverless application deployment?
+    Deploying applications as Serverless services is becoming a popular architectural style. It seems like many organizations assume that _Functions as a Service (FaaS)_ implies a serverless architecture. We think it is more accurate to say that FaaS is one of the ways to utilize serverless, although it is not the only way. This raises a super critical question for enterprises that may have applications which could be monolith or a microservice: What is the easiest path to serverless application deployment?
 
     The answer is a platform that can run serverless workloads, while also enabling you to have complete control of the configuration, building, and deployment. Ideally, the platform also supports deploying the applications as linux containers.
 
     ## OpenShift Serverless
 
-    In this chapter, we introduce you to one such platform -- [OpenShift Serverless][serverless-main]. OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI-compliant Linux containers that can be run anywhere. This is known as `Serving`.
+    In this chapter we introduce you to one such platform -- [OpenShift Serverless][serverless-main].  OpenShift Serverless helps developers to deploy and run applications that will scale up or scale to zero on-demand. Applications are packaged as OCI compliant Linux containers that can be run anywhere.  This is known as `Serving`.
 
     ![OpenShift Serving](../assets/knative-serving-diagram.png)
 
-    Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]). This is known as `Eventing`.
+    Serverless has a robust way to allow for applications to be triggered by a variety of event sources, such as events from your own applications, cloud services from multiple providers, Software as a Service (SaaS) systems and Red Hat Services ([AMQ Streams][amq-docs]).  This is known as `Eventing`.
 
     ![OpenShift Eventing](../assets/knative-eventing-diagram.png)
 
     OpenShift Serverless applications can be integrated with other OpenShift services, such as OpenShift [Pipelines][pipelines-main], and [Service Mesh][service-mesh-main], delivering a complete serverless application development and deployment experience.
 
-    This tutorial will focus on the `Serving` aspect of OpenShift Serverless as the first diagram showcases. Be on the lookout for additional tutorials to dig further into Serverless, specifically `Eventing`.
+    This tutorial will focus on the `Serving` aspect of OpenShift Serverless as the first diagram showcases.  Be on the lookout for additional tutorials to dig further into Serverless, specifically `Eventing`.
 
     ## The Environment
 
     The OpenShift environment created for you is running version 4.11 of the OpenShift Container Platform. This deployment is a self-contained environment that provides everything you need to be successful learning the platform. This includes a preconfigured command line environment, the OpenShift web console, public URLs, and sample applications.
 
-    > **Note:** *It is possible to skip around in this tutorial. The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
+    > **Note:** *It is possible to skip around in this tutorial.  The only pre-requisite for each section would be the initial `Prepare for Exercises` section.*
     >
     > *For example, you could run the `Prepare for Exercises` section immediately followed by the `Scaling` section.*
 
     Now, let's get started!
 tabs:
-- title: Terminal 1
+- id: sxtfg37tdtzc
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: h4dwu6aq1s9o
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
-timelimit: 500
+timelimit: 360
+enhanced_loading: null
 ---
+[serverless-install-script]: https://github.com/openshift-labs/learn-katacoda/blob/master/assets/01-prepare/install-serverless.bash
+[olm-docs]: https://docs.openshift.com/container-platform/latest/operators/understanding/olm/olm-understanding-olm.html
+[serving-docs]: https://github.com/knative/serving-operator#the-knativeserving-custom-resource
+
 OpenShift Serverless is an OpenShift add-on that can be installed via an operator that is available within the OpenShift OperatorHub.
 
-Some operators are able to be installed into single namespaces within a cluster and are only able to monitor resources within that namespace. The OpenShift Serverless operator is one that installs globally on a cluster so that it is able to monitor and manage Serverless resources for every single project and user within the cluster.
+Some operators are able to be installed into single namespaces within a cluster and are only able to monitor resources within that namespace.  The OpenShift Serverless operator is one that installs globally on a cluster so that it is able to monitor and manage Serverless resources for every single project and user within the cluster.
 
-You could install the Serverless operator using the *Operators* tab within the web console, or you can use the CLI tool `oc`. In this instance, the terminal on the side is already running through an automated CLI install. This [script can be found here][serverless-install-script].
+You could install the Serverless operator using the *Operators* tab within the web console, or you can use the CLI tool `oc`.  In this instance, the terminal on the side is already running through an automated CLI install.  This [script can be found here][serverless-install-script].
 
-Since the installation will take some time, let's take a moment to review the installation via the web console.
+Since the install will take some time, let's take a moment to review the installation via the web console.
 
 > **Note:** *These steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
@@ -109,7 +116,7 @@ Next, our scripts will install the Serverless Operator into the `openshift-opera
 
 > **Note:** In case you see the warning message (`Danger alert:A Subscription for this Operator already exists in Namespace "openshift-serverless"`), please ignore it and click on `Cancel` button.
 
-Open the **Installed Operators** tab and watch the **OpenShift Serverless Operator**. The operator is installed and ready when the `Status=Succeeded`.
+Open the **Installed Operators** tab and watch the **OpenShift Serverless Operator**.  The operator is installed and ready when the `Status=Succeeded`.
 
 ![05-succeeded](../assets/05-succeeded.png)
 
@@ -122,7 +129,7 @@ As per the [Knative Serving Operator documentation][serving-docs] you must creat
 
 > **Note:** *Remember, these steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
-Move to the `knative-serving` project. Open the **Installed Operators** tab and the **OpenShift Serverless Operator**. Then click on the **Knative Serving**.
+Move to the `knative-serving` project. Open the **Installed Operators** tab and the **OpenShift Serverless Operator**.  Then click on the **Knative Serving**.
 
 ![07-kservinginstance](../assets/07-kservinginstance.png)
 
@@ -137,11 +144,11 @@ Let's go to the `Toplogy view` in the *Developer perspective*, you will see the 
 OpenShift Serverless should now be installed!
 
 ## Login as a Developer and Create a Project
-Before beginning, we should change to the non-privileged user `developer` and create a new `project` for the tutorial.
+Before beginning we should change to the non-privileged user `developer` and create a new `project` for the tutorial.
 
 > **Note:** *Remember, these steps are for informational purposes only. **Do not** follow them in this instance as there already is an automated install running in the terminal.*
 
-To change to the non-privileged user in our environment, we login as username: `developer`, password: `developer`
+To change to the non-privileged user in our environment we login as username: `developer`, password: `developer`
 
 ```
 oc login -u developer -p developer

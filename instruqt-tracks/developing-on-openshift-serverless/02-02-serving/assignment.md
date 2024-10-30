@@ -4,17 +4,22 @@ id: 3w1jzyukm89f
 type: challenge
 title: Deploying your service
 tabs:
-- title: Terminal 1
+- id: qb0m3vp1j8d9
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: zbwm6xrxibe5
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
-timelimit: 500
+timelimit: 360
+enhanced_loading: null
 ---
-At the end of this chapter, you will be able to:
+[ocp-serving-components]: https://docs.openshift.com/container-platform/4.7/serverless/architecture/serverless-serving-architecture.html
+
+At the end of this chapter you will be able to:
 - Deploy your very first application as an OpenShift Serverless `Service`.
 - Learn the underlying components of a Serverless Service, such as: `configurations`, `revisions`, and `routes`.
 - Watch the service `scale to zero`.
@@ -30,9 +35,9 @@ Like before, we can see what `api-resources` are available now by running:
 oc api-resources --api-group serving.knative.dev
 ```
 
-> **Note:** *Before we searched for any `api-resource` which had `KnativeServing` in any of the output using `grep`. In this section we are filtering the `APIGROUP` which equals `serving.knative.dev`.*
+> **Note:** *Before we searched for any `api-resource` which had `KnativeServing` in any of the output using `grep`.  In this section we are filtering the `APIGROUP` which equals `serving.knative.dev`.*
 
-The Serving module consists of a few different pieces. These pieces are listed in the output of the previous command: `configurations`, `revisions`, `routes`, and `services`. The `knativeservings` api-resource was existing, and we already created an instance of it to install KnativeServing.
+The Serving module consists of a few different pieces.  These pieces are listed in the output of the previous command: `configurations`, `revisions`, `routes`, and `services`.  The `knativeservings` api-resource was existing, and we already created an instance of it to install KnativeServing.
 
 ```
 NAME              SHORTNAMES      APIGROUP              NAMESPACED   KIND
@@ -47,7 +52,7 @@ The diagram below shows how each of the components of the Serving module fit tog
 
 ![Serving](../assets/serving.png)
 
-We will discuss what each one of these new resources are used for in the coming sections. Let's start with `services`.
+We will discuss what each one of these new resources are used for in the coming sections.  Let's start with `services`.
 
 ## OpenShift Serverless Services
 As discussed in the [OpenShift Serverless Documentation][ocp-serving-components], a **Knative Service Resource** automatically manages the whole lifecycle of a serverless workload on a cluster. It controls the creation of other objects to ensure that an app has a route, a configuration, and a new revision for each update of the service. Services can be defined to always route traffic to the latest revision or to a pinned revision.
@@ -78,10 +83,10 @@ spec:
             path: /healthz
 ```
 
-We now are deploying an instance of a `Service` that is provided by `serving.knative.dev`. In our simple example, we define a container `image` and the paths for `health checking` of the service. We also provided the `name` and `namespace`.
+We now are deploying an instance of a `Service` that is provided by `serving.knative.dev`.  In our simple example we define a container `image` and the paths for `health checking` of the service.  We also provided the `name` and `namespace`.
 
 ## Deploy the Serverless Service
-To deploy the service we could deploy the YAML above by executing `oc apply -n serverless-tutorial -f 02-serving/service.yaml`, but one of the best features of serverless is the ability to deploy and work with serverless resources without ever working with yaml. In this tutorial we will use the `kn` CLI tool to work with serverless.
+To deploy the service we could deploy the yaml above by executing `oc apply -n serverless-tutorial -f 02-serving/service.yaml`, but one of the best features of serverless is the ability to deploy and work with serverless resources without ever working with yaml.  In this tutorial we will use the `kn` CLI tool to work with serverless.
 
 To deploy the service execute:
 ```
@@ -109,10 +114,10 @@ NAME                                        READY   STATUS    RESTARTS   AGE
 greeter-6vzt6-deployment-5dc8bd556c-42lqh   2/2     Running   0          11s
 ```
 
-> **Question:** *If you run the watch script too late you might not see any pods running or being created after a few loops and will have to escape out of the watch with `CTRL+C`. I'll let you think about why this happens. Continue on for now and validate the deployment.*
+> **Question:** *If you run the watch script too late you might not see any pods running or being created after a few loops and will have to escape out of the watch with `CTRL+C`.  I'll let you think about why this happens.  Continue on for now and validate the deployment.*
 
 ## Check out the deployment
-As discussed in the [OpenShift Serverless Documentation][ocp-serving-components], Serverless Service deployments will create a few required serverless resources. We will dive into each of them below.
+As discussed in the [OpenShift Serverless Documentation][ocp-serving-components], Serverless Service deployments will create a few required serverless resources.  We will dive into each of them below.
 
 ### Service
 We can see the Serverless Service that we just created by executing:
@@ -130,7 +135,7 @@ greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrl
 
 > **Note:** It also is possible to use the `oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
 
-The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed. It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
+The Serverless `Service` gives us information about it's `URL`, it's `LATEST` revision, it's `AGE`, and it's status for each service we have deployed.  It is also important to see that `READY=True` to validate that the service has deployed successfully even if there were no pods running in the previous section.
 
 It also is possible to `describe` a specific service to gather detailed information about that service by executing:
 
@@ -156,16 +161,16 @@ Conditions:
   ++ RoutesReady             2m
 ```
 
-> **Note:** *Most resources can be `described` via the `kn` tool. Be sure to check them out while continuing along the tutorial.*
+> **Note:** *Most resources can be `described` via the `kn` tool.  Be sure to check them out while continuing along the tutorial.*
 
-Next, we will inspect the `Route`. Routes manage the ingress and URL into the service.
+Next, we will inspect the `Route`.  Routes manage the ingress and URL into the service.
 
 > *How is it possible to have a service deployed and `Ready` but no pods are running for that service?*
 >
 > See a hint by inspecting the `READY` column from `oc get deployment
 
 ### Route
-As the [OpenShift Serverless Documentation][ocp-serving-components] explains, a `Route` resource maps a network endpoint to one or more Knative revisions. It is possible to manage the traffic in several ways, including fractional traffic and named routes. Currently, since our service is new, we have only one revision to direct our users to -- in later sections we will show how to manage multiple revisions at once using a `Canary Deployment Pattern`.
+As the [OpenShift Serverless Documentation][ocp-serving-components] explains, a `Route` resource maps a network endpoint to one or more Knative revisions. It is possible to manage the traffic in several ways, including fractional traffic and named routes.  Currently, since our service is new, we have only one revision to direct our users to -- in later sections we will show how to manage multiple revisions at once using a `Canary Deployment Pattern`.
 
 We can see the route by executing:
 ```
@@ -179,7 +184,7 @@ greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrl
 ```
 
 ### Revision
-Lastly, we can inspect the `Revisions`. As per the [OpenShift Serverless Documentation][ocp-serving-components], a `Revision` is a point-in-time snapshot of the code and configuration for each modification made to the workload. Revisions are immutable objects and can be retained for as long as needed. Cluster administrators can modify the `revision.serving.knative.dev` resource to enable automatic scaling of Pods in an OpenShift Container Platform cluster.
+Lastly, we can inspect the `Revisions`.  As per the [OpenShift Serverless Documentation][ocp-serving-components], a `Revision` is a point-in-time snapshot of the code and configuration for each modification made to the workload. Revisions are immutable objects and can be retained for as long as needed. Cluster administrators can modify the `revision.serving.knative.dev` resource to enable automatic scaling of Pods in an OpenShift Container Platform cluster.
 
 Before inspecting revisions, update the image of the service by executing:
 ```
@@ -202,10 +207,10 @@ greeter-00002   greeter   100%             2            6s      4 OK / 4     Tru
 greeter-00001   greeter                    1            3m17s   3 OK / 4     True
 ```
 
-Here we can see each revision and details, including the percentage of `TRAFFIC` it is receiving. We can also see the generational number of this revision, **which is incremented on each update of the service**.
+Here we can see each revision and details including the percantage of `TRAFFIC` it is receiving.  We can also see the generational number of this revision, **which is incremented on each update of the service**.
 
 ### Invoke the Service
-Now that we have seen a few of the underlying resources that get created when deploying a Serverless Service, we can test the deployment. To do so we will need to use the URL returned by the serverless route. To invoke the service we can execute the command:
+Now that we have seen a a few of the underlying resouces that get created when deploying a Serverless Service, we can test the deployment.  To do so we will need to use the URL returned by the serverless route.  To invoke the service we can execute the command:
 
 ```
 export APP_ROUTE=$(kn route list | awk '{print $2}' | sed -n 2p)
@@ -217,7 +222,7 @@ The service will return a response like **Hi  greeter => '6fee83923a9f' : 1**
 > **NOTE:** *You can also open this in your own local browser to test the service!*
 
 ### Scale to Zero
-The `greeter` service will automatically scale down to zero if it does not get a request for approximately `90` seconds. Try watching the service scaling down by executing.
+The `greeter` service will automatically scale down to zero if it does not get request for approximately `90` seconds.  Try watching the service scaling down by executing
 
 ```
 oc get pods -n serverless-tutorial -w

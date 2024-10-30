@@ -4,20 +4,23 @@ id: 0zd3twslix5a
 type: challenge
 title: Canary Releases
 tabs:
-- title: Terminal 1
+- id: ukhbxbejczob
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: motxbpcik6hy
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
-timelimit: 500
+timelimit: 360
+enhanced_loading: null
 ---
-At the end of this step, you will be able to:
+At the end of this step you will be able to:
 - Configure a service to use a `Canary Release` deployment pattern
 
-> **Note:** *If you did not complete the previous Traffic Distribution section, please execute both of the following commands:*
+> **Note:** *If you did not complete the previous Traffic Distribution section please execute both of the following commands:*
 
 ```
 kn service create greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace serverless-tutorial --revision-name greeter-v1
@@ -25,7 +28,7 @@ kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:
 ```
 
 ## Applying a Canary Release Pattern
-A Canary release is more effective when looking to reduce the risk of introducing new features. Using this type of deployment model allows a more effective feature-feedback loop before rolling out the change to the entire user base. Using this deployment approach with Serverless allows splitting the traffic between revisions in increments as small as 1%.
+A Canary release is more effective when looking to reduce the risk of introducing new features. Using this type of deployment model allows a more effective feature-feedback loop before rolling out the change to the entire user base.  Using this deployment approach with Serverless allows splitting the traffic between revisions in increments as small as 1%.
 
 To see this in action, apply the following service update that will split the traffic 80% to 20% between `greeter-v1` and `greeter-v2` by executing:
 
@@ -36,9 +39,9 @@ kn service update greeter \
    --traffic @latest=0
 ```
 
-In the service configuration above, see the 80/20 split between v1 and v2 of the greeter service. Also, see that the current service is set to receive 0% of the traffic using the `latest` tag.
+In the service configuration above see the 80/20 split between v1 and v2 of the greeter service.  Also see that the current service is set to receive 0% of the traffic using the `latest` tag.
 
-> **Note:** *The equivalent YAML for the service above can be seen by executing:
+> **Note:** *The equivalent yaml for the service above can be seen by executing:
 
 ```
 cat /root/04-canary-releases/greeter-canary-service.yaml
@@ -72,7 +75,7 @@ Hi  greeter => '6fee83923a9f' : 7
 Hi  greeter => '6fee83923a9f' : 8
 ```
 
-Also, notice that two pods are running, representing both greeter-v1 and greeter-v2:
+Also notice that two pods are running, representing both greeter-v1 and greeter-v2:
 
 ```
 oc get pods -n serverless-tutorial
@@ -84,16 +87,16 @@ greeter-v1-deployment-5dc8bd556c-42lqh   2/2     Running   0          29s
 greeter-v2-deployment-1dc2dd145c-41aab   2/2     Running   0          20s
 ```
 
-> **Note:** *If we waited too long to execute the preceding command, we might have noticed the services scaling to zero!*
+> **Note:** *If we waited too long to execute the preceding command we might have noticed the services scaling to zero!*
 >
 > **Challenge:** *As a challenge, adjust the traffic distribution percentages and observe the responses by executing the `poll-svc-10.bash` script again.*
 
 ## Delete the Service
 
-We will need to clean up the project for our next section by executing the following:
+We will need to cleanup the project for our next section by executing:
 
 ```
 kn service delete greeter
 ```
 
-Congrats! You are now able to apply a few different deployment patterns using Serverless. In the next section, we will see how we dig a little deeper into the scaling components of Serverless.
+Congrats! You now are able to apply a few different deployment patterns using Serverless.  In the next section we will see how we dig a little deeper into the scaling components of Serverless.
