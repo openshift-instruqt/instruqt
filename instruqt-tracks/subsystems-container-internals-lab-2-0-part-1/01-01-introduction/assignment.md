@@ -29,15 +29,18 @@ notes:
     ## Start Scenario
     Once you have watched the background video or went through the presentation, continue to the exercises
 tabs:
-- title: Terminal 1
+- id: g2qpfhe4l5ye
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: frv2hdshh4zi
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 If you understand Linux, you probably already have 85% of the knowledge you need to understand containers. If you understand how processes, mounts, networks , shells and daemons work - commands like ps, mount, ip addr, bash, httpd and mysqld - then you just need to understand a few extra primitives to become an expert with containers. Remember that all of the things that you already know today still apply: from security and performance to storage and networking, containers are just a different way of packaging and delivering Linux applications. There are four basic primitives to learn to get you from Linux administrator to feeling comfortable with containers:
 

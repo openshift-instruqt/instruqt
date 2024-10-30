@@ -40,10 +40,10 @@ idle_timeout: 400
 timelimit: 3600
 sandbox_preset: openshift-411
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "10743153572227732754"
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "16022963847024600765"
+enhanced_loading: false

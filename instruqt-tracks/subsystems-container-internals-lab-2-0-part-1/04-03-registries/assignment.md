@@ -4,15 +4,18 @@ id: ox2tmj5g60mi
 type: challenge
 title: Container Registries
 tabs:
-- title: Terminal 1
+- id: nzh9nkdytnf8
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: 32fe2qr5ctoh
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 Registries are really just fancy file servers that help users share container images with each other. The magic of containers is really the ability to find, run, build, share and collaborate with a new packaging format that groups applications and all of their dependencies together.
 

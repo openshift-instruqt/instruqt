@@ -4,15 +4,18 @@ id: 5wivn4yihpmz
 type: challenge
 title: Closing
 tabs:
-- title: Terminal 1
+- id: fqx9jxi7nmxh
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: o2tpnkpryzhw
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this lab, we have covered container images, registries, hosts, and orchestration as four new primitives you need to learn on your container journey. If you are struggling to understand why you need containers, or why need to move to orchestration - or maybe you are struggling to explain it to your management or others in your team - maybe thinking about it in this context will help:
 

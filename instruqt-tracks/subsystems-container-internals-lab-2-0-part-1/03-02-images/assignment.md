@@ -4,15 +4,18 @@ id: xprdnkkg3f4n
 type: challenge
 title: Container Images
 tabs:
-- title: Terminal 1
+- id: txiuybs65ngj
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: ykdcxlzgygk0
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 Container images are really just tar files. Seriously, they are tar files, with an associated JSON file. Together we call these an Image Bundle. The on-disk format of this bundle is defined by the [OCI Image Specification](https://github.com/opencontainers/image-spec). All major container engines including Podman, Docker, RKT, CRI-O and containerd build and consume these bundles.
 

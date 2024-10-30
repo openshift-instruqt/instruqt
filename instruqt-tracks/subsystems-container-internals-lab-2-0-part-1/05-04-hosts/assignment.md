@@ -4,15 +4,18 @@ id: gte82b8eqk9k
 type: challenge
 title: Container Hosts
 tabs:
-- title: Terminal 1
+- id: ida1o6pbh7cf
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: u5gfnt5jkoz5
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 To understand the Container Host, we must analyze the layers that work together to create a container. They include:
 

@@ -4,15 +4,18 @@ id: u0bt0faqe52g
 type: challenge
 title: Container Orchestration
 tabs:
-- title: Terminal 1
+- id: tood0xmeavh7
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: j58mplgql7ub
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 Container Orchestration is the next logical progression after you become comfortable working with containers on a single host. With a single container host, containerized applications can be managed quite similarly to traditional applications, while gaining incremental efficiencies. With orchestration, there is a significant paradigm shift - developers and administrators alike need to think differently, making all changes to applications through an API.  Some people question the "complexity" of orchestration, but the benefits far outweigh the work of learning it. Today, Kubernetes is the clear winner when it comes to container orchestration, and with it, you gain:
 
