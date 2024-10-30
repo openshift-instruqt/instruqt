@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Understanding Resource Objects
 tabs:
-- title: Terminal 1
+- id: ddefowj3ojvx
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: cwhxa1vp2wg3
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic you will learn to list and examine the various resource objects available in OpenShift. You'll also learn about the various ways to use the `oc get` and `oc api-resources` commands.

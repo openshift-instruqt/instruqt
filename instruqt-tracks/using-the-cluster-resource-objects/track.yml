@@ -33,10 +33,10 @@ developers:
 - cclyburn@redhat.com
 - ryanj@redhat.com
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   feedback_recap_enabled: true
   loadingMessages: true
   hideStopButton: false
-checksum: "8369807451292708672"
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "5465532293813945684"
+enhanced_loading: false

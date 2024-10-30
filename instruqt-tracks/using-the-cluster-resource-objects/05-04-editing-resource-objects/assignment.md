@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Editing Resource Objects
 tabs:
-- title: Terminal 1
+- id: nsatul2la5z0
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: mxn3yyiq7oxe
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic you're going to learn how to make changes to an existing resource object using the `oc edit` command.
 

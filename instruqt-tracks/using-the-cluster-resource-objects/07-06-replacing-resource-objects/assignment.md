@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Replacing Resource Objects
 tabs:
-- title: Terminal 1
+- id: uzbkjwoa3yww
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: xuoxgxc7ygk4
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic, you will learn how to replace a particular OpenShift resource.
 

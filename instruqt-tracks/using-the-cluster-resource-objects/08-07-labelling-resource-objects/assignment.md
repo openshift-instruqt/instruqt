@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Labelling Resource Objects
 tabs:
-- title: Terminal 1
+- id: taz0zxswz0q9
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: ny71wkfx2qsk
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic you will learn how to use labels to work with OpenShift resource objects.

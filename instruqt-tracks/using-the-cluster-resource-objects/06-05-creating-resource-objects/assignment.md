@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Creating Resource Objects
 tabs:
-- title: Terminal 1
+- id: eib5t9pxbj9x
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: 0r9omrlgjz7d
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic you will learn how to create OpenShift resource objects using the `oc create` command.
 

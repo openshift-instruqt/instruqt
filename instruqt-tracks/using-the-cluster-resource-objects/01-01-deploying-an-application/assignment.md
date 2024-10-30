@@ -23,15 +23,18 @@ notes:
 
     You'll use the concepts and techniques described in this track when you want to find, query, and change the OpenShift resources that make up an application.
 tabs:
-- title: Terminal 1
+- id: 7nu2cjfg5klp
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: o21ugdufx8tx
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will log into OpenShift using the `oc login` command line tool. Then you will create an application using `oc new-project`. Finally, you'll expose the application for access outside of the OpenShift cluster using the `oc expose` command.

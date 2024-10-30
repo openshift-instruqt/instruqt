@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Deleting Resource Objects
 tabs:
-- title: Terminal 1
+- id: pbmhhyr4ih4x
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: qh0cimnh8ukr
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic you will learn how to delete resource objects using the `oc delete` command.
 

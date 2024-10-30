@@ -7,15 +7,18 @@ notes:
 - type: text
   contents: Querying Resource Objects
 tabs:
-- title: Terminal 1
+- id: t4gn8kzxzewi
+  title: Terminal 1
   type: terminal
   hostname: container
-- title: Visual Editor
+- id: zdmarsjsykbi
+  title: Visual Editor
   type: code
   hostname: container
   path: /root
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic you will learn how to get information about a resource object using a variety of `oc` commands.
 
