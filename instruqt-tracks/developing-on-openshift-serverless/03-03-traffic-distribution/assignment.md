@@ -11,7 +11,7 @@ tabs:
 - id: cfpjxlweovou
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 360
@@ -111,16 +111,16 @@ The output should be similar to:
 Name:       greeter
 Namespace:  serverless-tutorial
 Age:        1m
-URL:        https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
+URL:        https://greeter-serverless-tutorial.crc.9yhetjexy8dv.instruqt.io
 Service:    greeter
 
 Traffic Targets:
     0%  @latest (greeter-v2) #latest
-        URL:  https://latest-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
+        URL:  https://latest-greeter-serverless-tutorial.crc.9yhetjexy8dv.instruqt.io
   100%  greeter-v1 #current
-        URL:  https://current-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
+        URL:  https://current-greeter-serverless-tutorial.crc.9yhetjexy8dv.instruqt.io
     0%  greeter-v2 #prev
-        URL:  https://prev-greeter-serverless-tutorial.crc-lgph7-master-0.crc.9yhetjexy8dv.instruqt.io
+        URL:  https://prev-greeter-serverless-tutorial.crc.9yhetjexy8dv.instruqt.io
 
 Conditions:
   OK TYPE                      AGE REASON

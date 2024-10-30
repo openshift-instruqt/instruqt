@@ -3,29 +3,27 @@ echo "Setting up Serverless..."
 # Login as admin
 oc login -u admin -p admin
 
-# Wait for katacoda to copy our stuff?
-while [ ! -f 01-prepare/operator-subscription.yaml ]
-do
-	sleep 5
-done
+mkdir -p 01-prepare
 
 # Apply the serverless operator
-oc create -f 01-prepare/operator-subscription.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/refs/heads/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/operator-subscription.yaml
 sleep 3
 
 echo "Serverless Operator Subscribed, waiting for deployment..."
 # Setup waiting function
+curl https://github.com/openshift-instruqt/instruqt/blob/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/watch-serverless-operator.bash > 01-prepare\watch-serverless-operator.bash
 bash 01-prepare/watch-serverless-operator.bash
 sleep 3
 
 echo "Serverless Operator deployed. Deploying knative-serving..."
 # If we make it this far we have deployed the Serverless Operator!
 # Next, Knative Serving
-oc create -f 01-prepare/serving.yaml
+oc create -f https://raw.githubusercontent.com/openshift-instruqt/instruqt/refs/heads/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/serving.yaml
 sleep 3
 
 echo "Serving created, waiting for deployment..."
 # Wait for Serving to install
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/refs/heads/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/watch-knative-serving.bash > 01-prepare/watch-knative-serving.bash
 bash 01-prepare/watch-knative-serving.bash
 sleep 3
 

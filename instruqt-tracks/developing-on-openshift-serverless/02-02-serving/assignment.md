@@ -11,7 +11,7 @@ tabs:
 - id: zbwm6xrxibe5
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-lgph7-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 360
@@ -130,7 +130,7 @@ The output should be similar to:
 
 ```
 NAME      URL  LATEST            AGE     CONDITIONS   READY   REASON
-greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io   greeter-00001   52s   3 OK / 3   True
+greeter   https://greeter-serverless-tutorial.crc.gr82i7rvhrlg.instruqt.io   greeter-00001   52s   3 OK / 3   True
 ```
 
 > **Note:** It also is possible to use the `oc` command to see the serverless resources, to see the services execute: `oc get -n serverless-tutorial services.serving.knative.dev
@@ -149,7 +149,7 @@ The output should be similar to:
 Name:       greeter
 Namespace:  serverless-tutorial
 Age:        2m
-URL:        https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io
+URL:        https://greeter-serverless-tutorial.crc.gr82i7rvhrlg.instruqt.io
 
 Revisions:
   100%  @latest (greeter-00001) [1] (2m)
@@ -180,7 +180,7 @@ kn route list
 See the `NAME` of the route, the `URL`, as well as if it is `READY` (your URL will be different):
 ```bash
 NAME      URL                                                                                   READY
-greeter   https://greeter-serverless-tutorial.crc-lgph7-master-0.crc.gr82i7rvhrlg.instruqt.io   True
+greeter   https://greeter-serverless-tutorial.crc.gr82i7rvhrlg.instruqt.io   True
 ```
 
 ### Revision
