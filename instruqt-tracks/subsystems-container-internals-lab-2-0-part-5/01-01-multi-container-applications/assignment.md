@@ -28,15 +28,18 @@ notes:
     ## Start Scenario
     Once you have watched the background video or went throught the presentation, continue to the exercises
 tabs:
-- title: Terminal 1
+- id: ofzrezxqodfy
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Visual Editor
+- id: tgx36fnyl2ud
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root/labs
 difficulty: intermediate
 timelimit: 675
+enhanced_loading: null
 ---
 The goal of this exercise is to build a containerized two tier application in an OpenShift cluster. This application will help you learn about clustered containers and distributed systems. It will teach you about Kubernetes and how it operates with the principles of "defined state" and "actual state" - it constantly monitors the environment and attempts to make the actual state match the defined state.
 
