@@ -11,7 +11,7 @@ sleep 3
 
 echo "Serverless Operator Subscribed, waiting for deployment..."
 # Setup waiting function
-curl https://github.com/openshift-instruqt/instruqt/blob/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/watch-serverless-operator.bash > 01-prepare/watch-serverless-operator.bash
+curl https://raw.githubusercontent.com/openshift-instruqt/instruqt/refs/heads/master/instruqt-tracks/developing-on-openshift-serverless/scripts/01-prepare/watch-serverless-operator.bash > 01-prepare/watch-serverless-operator.bash
 bash 01-prepare/watch-serverless-operator.bash
 sleep 3
 
