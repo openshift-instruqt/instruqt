@@ -56,10 +56,10 @@ replicaset.apps/parksmap-7c4b487459   0         0         0       35s
 replicaset.apps/parksmap-867b495f94   1         1         1       35s
 
 NAME                                      IMAGE REPOSITORY                                                                                            TAGS    UPDATED
-imagestream.image.openshift.io/parksmap   default-route-openshift-image-registry.crc-lgph7-master-0.crc.aa5od8iq5doy.instruqt.io/myproject/parksmap   1.3.0   35 seconds ago
+imagestream.image.openshift.io/parksmap   default-route-openshift-image-registry.crc.aa5od8iq5doy.instruqt.io/myproject/parksmap   1.3.0   35 seconds ago
 
 NAME                                HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-route.route.openshift.io/parksmap   parksmap-myproject.crc-lgph7-master-0.crc.aa5od8iq5doy.instruqt.io          parksmap   8080-tcp                 None            None
+route.route.openshift.io/parksmap   parksmap-myproject.crc.aa5od8iq5doy.instruqt.io          parksmap   8080-tcp                 None            None
 ```
 
 You can use the `-o name` option to restrict output to show only the names of the resources.
@@ -96,7 +96,7 @@ You'll see output similar to the following:
 
 ```
 NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap   parksmap-myproject.crc-lgph7-master-0.crc.aa5od8iq5doy.instruqt.io          parksmap   8080-tcp                 None
+parksmap   parksmap-myproject.crc.aa5od8iq5doy.instruqt.io          parksmap   8080-tcp                 None
 ```
 
 # Listing the OpenShift resource objects
@@ -144,7 +144,7 @@ You'll get output similar to the following:
 
 ```
 NAME       HOST/PORT                                                            PATH   SERVICES   PORT       TERMINATION   WILDCARD
-parksmap   parksmap-myproject.crc-lgph7-master-0.crc.ejsovmyiskmk.instruqt.io          parksmap   8080-tcp                 None
+parksmap   parksmap-myproject.crc.ejsovmyiskmk.instruqt.io          parksmap   8080-tcp                 None
 ```
 
 Notice that the result above shows the URL to use to access the particular application on the Internet. This URL was created automatically by OpenShift.

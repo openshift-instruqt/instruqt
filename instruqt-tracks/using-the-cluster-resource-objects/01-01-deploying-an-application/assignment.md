@@ -114,13 +114,13 @@ By default, when using `oc new-app` from the command line to deploy an applicati
 `Step 4:` Run the following command to expose the application to the public:
 
 ```
-oc expose svc/parksmap
+oc create route edge parksmap --service=parksmap
 ```
 
 You'll get output similar to the following:
 
 ```
-route.route.openshift.io/parksmap exposed
+route.route.openshift.io/parksmap created
 ```
 
 # Congratulations!
