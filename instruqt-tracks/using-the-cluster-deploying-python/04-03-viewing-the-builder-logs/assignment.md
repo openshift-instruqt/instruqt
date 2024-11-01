@@ -7,17 +7,18 @@ notes:
 - type: text
   contents: Topic 3 - Viewing the build logs in the Web Console
 tabs:
-- id: 87ab8x9b0ijo
+- id: dwwrqlvdku9g
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: mlj0ju4usb8h
+- id: 4hguknisxg29
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will learn how to view a deployment's logs from within the OpenShift web console. In this case, you will view the logs for the Python application deployment you started in the previous topic.

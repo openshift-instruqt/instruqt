@@ -7,17 +7,18 @@ notes:
 - type: text
   contents: Topic 6 - Deploying the application from the command line
 tabs:
-- id: txxq4ypguxkd
+- id: 0dguhydf9ck6
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: dfcfvxbmpser
+- id: cwdexazkpedg
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will use the `oc` command line tool to deploy the previously deployed application using the web console.
@@ -131,7 +132,7 @@ You'll get output similar to the following:
 
 ```
 NAME             HOST/PORT                                                                  PATH   SERVICES         PORT       TERMINATION   WILDCARD
-blog-django-py   blog-django-py-myproject.crc-lgph7-master-0.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
+blog-django-py   blog-django-py-myproject.crc.pfrbfxh9ypu7.instruqt.io          blog-django-py   8080-tcp                 None
 ```
 
 # Congratulations!

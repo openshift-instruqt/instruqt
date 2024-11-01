@@ -7,17 +7,18 @@ notes:
 - type: text
   contents: Topic 5 - Deleting the application from the command line
 tabs:
-- id: vutp4rvyt4mb
+- id: yzd7jig4t1kq
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: 7p0birr9rivi
+- id: 09wftjdy9ihm
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will use the OpenShift `oc` command line tool to delete the application you created using the web console in previous topics. Then you will recreate the application from the command line using `oc`.

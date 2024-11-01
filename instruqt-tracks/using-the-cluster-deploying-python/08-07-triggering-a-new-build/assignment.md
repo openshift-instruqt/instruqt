@@ -7,17 +7,18 @@ notes:
 - type: text
   contents: Topic 7 - Triggering new builds from the command line
 tabs:
-- id: clwi27dxdbyu
+- id: bljqtfcip3s1
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: rp8w8jlqdxlr
+- id: 6qf3rfqf21rr
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic, you will learn how to use the command line to rebuild an app that's already running in OpenShift. Also, you will learn how to execute a rebuild in OpenShift when code changes in source control.
 

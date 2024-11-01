@@ -7,17 +7,18 @@ notes:
 - type: text
   contents: Topic 4 - Accessing the application using the Web Console
 tabs:
-- id: dun7ukjodtz0
+- id: movc4cdm40nl
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: yhsedrevwvmq
+- id: ktntjng9ksj5
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In the previous topics, you built and deployed the Python application. In this topic, you will open the application in a web browser from the Topology page using the **Route** assigned by OpenShift.
 

@@ -24,17 +24,18 @@ notes:
 
     You'll use the concepts and techniques presented in this track when you want to create and deploy applications from source code using OpenShift automation and thus avoid doing the work manually.
 tabs:
-- id: yu4c36qfexle
+- id: av5pqnvf1hd7
   title: Terminal 1
   type: terminal
   hostname: crc
-- id: f4dpetlcasgi
+- id: o7mqweg750gn
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 ## Logging into OpenShift from the command line
@@ -48,7 +49,7 @@ Let's get started by logging in. You log into OpenShift from the command line by
 `Step 1:` Run the following command to log into OpenShift:
 
 ```
-oc login -u admin -p admin https://api.crc.testing:6443 --insecure-skip-tls-verify=true
+oc login -u admin -p admin
 ```
 
 You'll see results similar to the following:
@@ -107,12 +108,6 @@ You can now log into the OpenShift web console using the `admin/admin` username/
 You'll be presented with a login page as shown in the figure below.
 
 ![Login](../assets/web-console-login.png)
-
-|NOTE:|
-|----|
-|You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
-If you do get the warning, click the **Advanced** button to complete the process necessary to grant permission to the browser to access the OpenShift Web Console.|
 
 Use the `admin/admin` username/password pair to login.
 
