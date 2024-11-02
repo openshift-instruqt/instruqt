@@ -10,9 +10,10 @@ tabs:
 - id: gsyy7qsr9ior
   title: Terminal 1
   type: terminal
-  hostname: crc
+  hostname: container
 difficulty: intermediate
 timelimit: 360
+enhanced_loading: null
 ---
 In this topic you will learn how to use persistent volumes under OpenShift in conjunction with the `oc rsync` command.
 

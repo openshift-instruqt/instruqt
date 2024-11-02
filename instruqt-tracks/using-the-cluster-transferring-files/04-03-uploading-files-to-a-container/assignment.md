@@ -10,9 +10,10 @@ tabs:
 - id: fu3tk3ytebte
   title: Terminal 1
   type: terminal
-  hostname: crc
+  hostname: container
 difficulty: intermediate
 timelimit: 360
+enhanced_loading: null
 ---
 In this topic you will learn how to copy a file from the local machine into the application container. You will copy a new version of the `message.txt` file from the local machine into the application container.
 
@@ -98,7 +99,7 @@ In the above command, the `--no-perms` option is also used because the target di
 `Step 6:` Run the following command get the URL to the application's web site and store the URL in an environment variable named `APP_ROUTE`:
 
 ```
-export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://"}{.spec.host}'` && echo $APP_ROUTE
+export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"https://"}{.spec.host}'` && echo $APP_ROUTE
 ```
 You'll get output similar to the following:
 

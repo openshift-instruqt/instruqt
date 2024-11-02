@@ -10,9 +10,10 @@ tabs:
 - id: 4mplgxygtloe
   title: Terminal 1
   type: terminal
-  hostname: crc
+  hostname: container
 difficulty: intermediate
 timelimit: 360
+enhanced_loading: null
 ---
 In this topic you will learn how to transfer files to and from a container. You'll create an application from an existing container image hosted in the Quay.io container registry. Then you will access a command line shell within the application's underlying Linux container. Finally, you'll use the `oc rsync` command from the shell's command line to copy a file out of the container and into the local machine.
 
@@ -104,13 +105,13 @@ simplemessage-7fcb66cfb6-hmdpd
 `Step 5:`  Run the following command to create an OpenShift `service` resource that exposes the pod with the `parksmap` container to the internal OpenShift network. The command will also create a `route` resource that has a URL allowing public access to the application from the Internet.
 
 ```
-oc expose service/simplemessage
+oc create route edge simplemessage --service=simplemessage
 ```
 
 You'll get output similar to the following.
 
 ```
-route.route.openshift.io/simplemessage exposed
+route.route.openshift.io/simplemessage created
 ```
 
 ----
@@ -119,7 +120,7 @@ route.route.openshift.io/simplemessage exposed
 
 
 ```
-export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://"}{.spec.host}'` && echo $APP_ROUTE
+export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"https://"}{.spec.host}'` && echo $APP_ROUTE
 ```
 
 You'll get output similar to the following:

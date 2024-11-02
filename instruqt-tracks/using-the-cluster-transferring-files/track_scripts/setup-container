@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export OPENSHIFT_RELEASE_VERSION="4.17.0"
+
+dnf install -y procps-ng iputils bind-utils rsync git
+
+crc=`nslookup crc |  awk -F': ' 'NR==6 { print $2 } '`
+
+echo "$crc api.crc.testing" >> /etc/hosts
+
+curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/$OPENSHIFT_RELEASE_VERSION/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -o /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz
+tar -xvf /tmp/openshift-client-linux-$OPENSHIFT_RELEASE_VERSION.tar.gz -C /usr/bin/
+chmod +x /usr/bin/oc
+chmod +x /usr/bin/kubectl

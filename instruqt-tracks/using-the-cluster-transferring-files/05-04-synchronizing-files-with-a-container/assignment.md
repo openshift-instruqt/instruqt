@@ -10,9 +10,10 @@ tabs:
 - id: 4amujulntta9
   title: Terminal 1
   type: terminal
-  hostname: crc
+  hostname: container
 difficulty: intermediate
 timelimit: 360
+enhanced_loading: null
 ---
 
 In this topic you will learn how to implement automatic synchronization of the file updates between the local machine and the file system for the SimpleMessage application running within this track's OpenShift clusters.
@@ -121,7 +122,7 @@ I like OpenShift!
 `Step 7:` Run the following command in **Terminal 1** to get the URL to the SimpleMessage application running in the OpenShift cluster:
 
 ```
-export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"http://"}{.spec.host}'` && echo $APP_ROUTE
+export APP_ROUTE=`oc get route simplemessage -n myproject -o jsonpath='{"https://"}{.spec.host}'` && echo $APP_ROUTE
 ```
 
 You'll get output similar to the following. (Your actual URL will be different):

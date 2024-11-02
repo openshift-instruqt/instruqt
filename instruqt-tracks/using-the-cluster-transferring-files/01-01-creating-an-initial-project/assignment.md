@@ -24,9 +24,10 @@ tabs:
 - id: uqatijcyzj0l
   title: Terminal 1
   type: terminal
-  hostname: crc
+  hostname: container
 difficulty: intermediate
 timelimit: 360
+enhanced_loading: null
 ---
 In this topic you will log in and create a project in OpenShift, for use through the following topics.
 
