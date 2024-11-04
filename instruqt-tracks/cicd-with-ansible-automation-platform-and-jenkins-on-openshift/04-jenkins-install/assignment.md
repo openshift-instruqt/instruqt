@@ -20,6 +20,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 1000
+enhanced_loading: null
 ---
 ## Jenkins Setup
 

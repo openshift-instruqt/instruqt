@@ -28,6 +28,7 @@ tabs:
   path: /home
 difficulty: basic
 timelimit: 1000
+enhanced_loading: null
 ---
 
 ## Ansible Automation Platform Configuration Setup

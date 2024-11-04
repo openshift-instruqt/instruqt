@@ -23,6 +23,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 1800
+enhanced_loading: null
 ---
 ## Integration of Ansible Automation Platform & Jenkins
 

@@ -32,6 +32,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 1000
+enhanced_loading: null
 ---
 
 # CI/CD with Ansible Automation Platform and Jenkins
