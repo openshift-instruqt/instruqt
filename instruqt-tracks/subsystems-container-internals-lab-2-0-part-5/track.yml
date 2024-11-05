@@ -29,19 +29,20 @@ tags:
 - openshift
 owner: openshift
 developers:
-- akeenan@redhat.com
 - smccarty@redhat.com
+- nvinto@redhat.com
+- akeenan@redhat.com
 - cclyburn@redhat.com
 - ryanj@redhat.com
-- nvinto@redhat.com
 idle_timeout: 400
 timelimit: 3600
 sandbox_preset: openshift-4-12
 lab_config:
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "3179895529217336677"
+checksum: "392022303901787548"
 enhanced_loading: false
