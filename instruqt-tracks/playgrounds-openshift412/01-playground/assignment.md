@@ -21,19 +21,23 @@ notes:
 
     This OpenShift cluster will self-destruct in one hour.
 tabs:
-- title: Terminal 1
+- id: yyxvhfv5uub5
+  title: Terminal 1
   type: terminal
   hostname: crc
-- title: Web Console
+- id: n5kl9zhkel1n
+  title: Web Console
   type: website
   url: https://console-openshift-console.crc-rwwzd-master-0.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-- title: Visual Editor
+- id: rbsqs5gycbof
+  title: Visual Editor
   type: code
   hostname: crc
   path: /root
 difficulty: basic
 timelimit: 3600
+enhanced_loading: null
 ---
 Before you get started we recommend reading the following tips. They explain
 a bit about how the playground environment is setup and what access you have.
