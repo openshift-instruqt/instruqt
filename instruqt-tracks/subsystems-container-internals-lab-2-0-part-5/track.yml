@@ -32,6 +32,7 @@ developers:
 - akeenan@redhat.com
 - smccarty@redhat.com
 - cclyburn@redhat.com
+- ryanj@redhat.com
 - nvinto@redhat.com
 idle_timeout: 400
 timelimit: 3600
@@ -42,5 +43,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "7781392666811445184"
+checksum: "3179895529217336677"
 enhanced_loading: false
