@@ -1,0 +1,35 @@
+slug: quarkus-spring
+id: p5bqxz0pqu1r
+title: Quarkus Spring
+description: |-
+  This track demonstrates how Spring and Spring Boot developers can use Spring annotations for Spring Data, Web, and Dependency Injection when building Quarkus applications.
+
+
+  |What you need to know before you start|
+  |----|
+  |In order to get full benefit from taking this track you should...<br>• Have experience programming applications in Java using the [Maven](https://maven.apache.org/) framework.<br>• Have a working knowledge of application programming using [Spring Boot](https://spring.io/projects/spring-boot). <br>• Some introductory experience creating Java/Maven applications using Quarkus|
+
+  <br>
+
+  Quarkus enables Spring developers to become productive quickly using their existing knowledge and familiarity of the Spring APIs.
+
+  You'll build a simple application that uses Spring Data to integrate with an underlying database via JPA. Also. you'll inject beans using Spring DI and expose them as RESTful endpoints via Spring Rest.
+icon: https://logodix.com/logo/1910931.png
+level: beginner
+tags:
+- prod
+- openshift
+owner: openshift
+developers:
+- ryanj@redhat.com
+idle_timeout: 300
+timelimit: 1200
+lab_config:
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "5390036598052551046"
+enhanced_loading: false
