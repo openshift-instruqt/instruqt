@@ -102,18 +102,14 @@ The snippet of code below shows you the output you'll get at the end of the inst
 
 Before you start the Quarkus application, you need to disable the CORS filter to access the Quarkus DEV UI since the Quarkus application will run on the container rather than a local environment.
 
-Click the **Visual Editor** tab in the horizontal menu bar over the terminal window to the left. You'll see the code editor that is part of the interactive learning environment. Open the `application.properties` file in the *src/main/resources* directory. Then, add the following key and values. Note that the changes will be save automacticatlly.
-
-In case you don't see the subdirectories under the */root/projects/quarkus* directory, click on the reload icon.
-
-Make sure to replace `YOUR_SANDBOX_ID` with the sandbox ID from the ROUTE URL.
+Run the following command in **Terminal 1** to update your `application.properties` file in the *src/main/resources* directory:
 
 ```
+cat <<EOF > /root/projects/quarkus/getting-started/src/main/resources/application.properties
 %dev.quarkus.dev-ui.cors.enabled=false
 %dev.quarkus.dev-ui.hosts=crc-8080-${INSTRUQT_PARTICIPANT_ID}.env.play.instruqt.com
+EOF
 ```
-
-![add-to-cors](../assets/add-to-cors.png)
 
 # Running the Application
 
@@ -177,6 +173,8 @@ You are going to change the output of the **Hello App** API application from `He
 ----
 
 `Step 6:`  Click the **Visual Editor** tab in the horizontal menu bar over the terminal window to the left. You'll see the code editor that is part of the interactive learning environment.
+
+In case you don't see the subdirectories under the */root/projects/quarkus* directory, click on the reload icon.
 
 ----
 
