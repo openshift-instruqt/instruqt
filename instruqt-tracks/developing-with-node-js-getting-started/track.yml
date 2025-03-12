@@ -33,14 +33,13 @@ developers:
 - ryanj@redhat.com
 idle_timeout: 400
 timelimit: 3600
-sandbox_preset: openshift-4-17
+sandbox_preset: openshift-4-18
 lab_config:
-  overlay: false
-  width: 0
-  position: ""
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 33
-checksum: "7083179758751410687"
+checksum: "16986804832382096045"
+enhanced_loading: false

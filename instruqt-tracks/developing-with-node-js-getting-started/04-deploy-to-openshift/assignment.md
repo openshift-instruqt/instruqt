@@ -28,6 +28,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 Now that we have the Application built, let's move it onto the cloud.
 

@@ -23,6 +23,7 @@ tabs:
   hostname: crc
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 Kubernetes, and a number of other cloud deployment technologies, provide "Health Checking" as a system that allows the cloud deployment technology to monitor the deployed application and to take action should the application fail or report itself as "unhealthy".
 

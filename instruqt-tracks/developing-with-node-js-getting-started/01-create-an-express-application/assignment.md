@@ -36,6 +36,7 @@ tabs:
   hostname: crc
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In this step, you will create a basic Express.js application that responds with “Hello, World!”
 
