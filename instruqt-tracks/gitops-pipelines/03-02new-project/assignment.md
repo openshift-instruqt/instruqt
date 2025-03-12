@@ -15,6 +15,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 For this tutorial, you're going to create a simple application that involves a [frontend](https://github.com/openshift/pipelines-vote-ui) and [backend](https://github.com/openshift/pipelines-vote-api). This application needs to deploy in a new project (i.e. Kubernetes namespace). You can start by creating the project with:
 

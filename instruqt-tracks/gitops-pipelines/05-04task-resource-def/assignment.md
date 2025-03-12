@@ -15,6 +15,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 Tasks can also take parameters. This way, you can pass various flags to be used in this Task. These `params` can be instrumental in making your Tasks more generic and reusable across Pipelines. For example, a `Task` could apply a custom Kubernetes manifest, like the example below. This will be needed for deploying an image on OpenShift in our next section. In addition, we'll cover the `workspaces` during our `Pipeline` step.
 

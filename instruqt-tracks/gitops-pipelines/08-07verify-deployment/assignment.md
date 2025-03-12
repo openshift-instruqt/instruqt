@@ -15,6 +15,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 To verify a successful deployment for our application, head back out to the web console by clicking on the Console at the center top of the workshop in your browser.
 

@@ -15,6 +15,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 A `Pipeline` defines an ordered series of `Tasks` that you want to execute along with the corresponding inputs and outputs for each `Task`. In fact, tasks should do one single thing so you can reuse them across pipelines or even within a single pipeline.
 

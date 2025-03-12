@@ -61,6 +61,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 [OpenShift Pipelines](https://docs.openshift.com/container-platform/latest/cicd/pipelines/understanding-openshift-pipelines.html) are an OpenShift add-on that can be installed via an operator that is available in the OpenShift OperatorHub. It allows for cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using [Tekton](https://tekton.dev/).
 
