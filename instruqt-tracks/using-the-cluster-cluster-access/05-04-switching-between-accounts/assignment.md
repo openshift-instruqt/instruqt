@@ -18,6 +18,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 501
+enhanced_loading: null
 ---
 In this topic you'll learn how to use the `oc login` command to move among a variety of OpenShift user accounts
 

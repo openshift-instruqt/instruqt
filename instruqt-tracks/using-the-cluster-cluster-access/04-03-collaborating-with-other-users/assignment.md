@@ -18,6 +18,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 501
+enhanced_loading: null
 ---
 In this topic you will learn how to log in as a different user, and perform actions in OpenShift according to the logged in user. You'll also learn how to create a new user from the command line. Then you'll learn how to use the web console to give that new user `edit` permissions to work with your application via an OpenShift `rolebinding` resource object.
 

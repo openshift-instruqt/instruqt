@@ -32,6 +32,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 501
+enhanced_loading: null
 ---
 In this topic you will learn how to use the command line to discover the URL for accessing the OpenShift web console. Also, you'll use the web console to create a project in OpenShift. You will work with the project you create here throughout the remainder of this track.
 

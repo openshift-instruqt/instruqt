@@ -18,6 +18,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 501
+enhanced_loading: null
 ---
 In this topic you will learn how to log into OpenShift from a terminal using the `oc login` command.
 
