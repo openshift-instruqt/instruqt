@@ -19,6 +19,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 ❓ What's OpenShift Pipelines?
 ===============================

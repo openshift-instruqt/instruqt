@@ -19,6 +19,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 700
+enhanced_loading: null
 ---
 👷 Creating our Pipeline
 ===============================

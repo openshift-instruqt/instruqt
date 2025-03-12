@@ -22,6 +22,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 📁 Create a new project
 ===================================
