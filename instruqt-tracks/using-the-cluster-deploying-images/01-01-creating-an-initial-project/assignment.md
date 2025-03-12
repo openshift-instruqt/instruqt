@@ -32,6 +32,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will learn how to log into an OpenShift cluster from the command line, and also by using the web console.

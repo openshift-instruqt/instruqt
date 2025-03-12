@@ -18,6 +18,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic, you will learn how to use the web console to identify a container image in an external container image registry. Then you will use that container image to create an application that runs in the project named `myproject`. The application you'll run is a simple blog website.
 

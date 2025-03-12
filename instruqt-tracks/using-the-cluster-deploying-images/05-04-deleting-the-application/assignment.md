@@ -2,7 +2,7 @@
 slug: 04-deleting-the-application
 id: rtn43jx9xotp
 type: challenge
-title: Topic 4 - Deleting the Application Using the Web Console
+title: Topic 4 -  Deleting the Application Using OC CLI
 notes:
 - type: text
   contents: Deleting the Application Using the Web Console
@@ -16,8 +16,9 @@ tabs:
   type: website
   url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
-difficulty: basic
+difficulty: ""
 timelimit: 500
+enhanced_loading: null
 ---
 In this topic, you will learn how to delete an OpenShift application from the command line using the `oc delete` command.
 

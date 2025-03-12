@@ -19,6 +19,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will deploy an application into OpenShift from the command line.

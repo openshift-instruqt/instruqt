@@ -30,14 +30,13 @@ developers:
 - cclyburn@redhat.com
 - bob@cogarttech.com
 - nvinto@redhat.com
-sandbox_preset: openshift-4-17
+sandbox_preset: openshift-4-18
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "1246140294987863177"
+checksum: "571682157620162731"
+enhanced_loading: false

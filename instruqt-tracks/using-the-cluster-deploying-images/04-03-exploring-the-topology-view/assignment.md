@@ -18,6 +18,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 500
+enhanced_loading: null
 ---
 
 In this topic, you will learn about different aspects of working with an application in OpenShift's Topology view. You'll learn how to access the application on the Internet from within the **Topology** view. You'll also learn how to view the details of an application. Then, you'll learn how to scale ParksMap up by increasing the number of underlying `pod` resource objects.
