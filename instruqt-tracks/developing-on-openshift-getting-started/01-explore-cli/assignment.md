@@ -36,6 +36,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 # Working with the Command Line Interface (CLI)
 

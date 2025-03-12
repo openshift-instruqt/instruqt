@@ -18,6 +18,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In this step, you will learn how to scale your application up by creating multiple replicas of the pod that represents the application in the cluster. Red Hat OpenShift will make it look like all of the replicas are a single application. But, behind the scenes, OpenShift routes traffic among the replicas automatically.
 

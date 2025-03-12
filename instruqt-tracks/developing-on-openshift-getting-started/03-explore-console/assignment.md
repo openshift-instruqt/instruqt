@@ -18,6 +18,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 This topic focuses on learning how to log into the Red Hat OpenShift web console and then create an application once logged in.
 

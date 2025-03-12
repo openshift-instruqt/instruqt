@@ -15,6 +15,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In this step you will explore **routes**.
 
