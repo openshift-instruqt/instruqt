@@ -40,7 +40,7 @@ podman run -d -p 3306:3306 quay.io/fatherlinux/linux-container-internals-2-0-int
 Now, poll the simulated database with our very simple client, curl:
 
 ```
-curl localhost:3306
+curl --http0.9 localhost:3306
 ```
 
 

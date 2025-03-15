@@ -60,7 +60,7 @@ Wait until all pods are are in status "RUNNING".
 When the pods are done being created, pull some data from our newly created "web app".  Notice that we get back the contents of a file which resides on the the database server, not the web server:
 
 ```
-curl $(oc get svc pepperoni-pizza -ojsonpath='{.spec.clusterIP}')
+curl --http0.9 $(oc get svc pepperoni-pizza -ojsonpath='{.spec.clusterIP}')
 ```
 
 **Note:** The command in brackets above is simply getting the IP address of the web server.
@@ -68,7 +68,7 @@ curl $(oc get svc pepperoni-pizza -ojsonpath='{.spec.clusterIP}')
 Now, let's pull data directly from the "database."  It's the same file as we would expect, but this time coming back over port 3306:
 
 ```
-curl $(oc get svc cheese-pizza -ojsonpath='{.spec.clusterIP}'):3306
+curl --http0.9 $(oc get svc cheese-pizza -ojsonpath='{.spec.clusterIP}'):3306
 ```
 
 Take a moment to note that we could fire up 50 copies of this same application in Kubernetes with 49 more commands (in different projects). It's that easy.
