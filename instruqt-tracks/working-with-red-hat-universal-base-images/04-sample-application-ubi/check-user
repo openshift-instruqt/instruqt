@@ -1,0 +1,8 @@
+#!/bin/bash
+check_php_ubi=$(podman image list | grep "php-ubi" | wc | awk '{print $1}')
+
+if [[ $check_php_ubi -eq 1 ]];then   
+    echo "Pass: Congratualtions You can successfully move towards the next step"; 
+else
+    fail-message "Fail: Please create an image as 'php-ubi' for the lab to proceed"
+fi
