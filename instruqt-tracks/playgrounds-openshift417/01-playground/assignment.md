@@ -38,6 +38,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 3600
+enhanced_loading: null
 ---
 Before you get started we recommend reading the following tips. They explain
 a bit about how the playground environment is setup and what access you have.
