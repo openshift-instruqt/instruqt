@@ -20,6 +20,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In this environment, we have some
 example manifesets taken from our [sample GitOps repo](https://github.com/redhat-developer-demos/openshift-gitops-examples).

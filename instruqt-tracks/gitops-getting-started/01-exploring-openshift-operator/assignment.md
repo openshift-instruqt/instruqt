@@ -59,6 +59,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 Welcome! In this section we will be exploring the OpenShift GitOps
 Operator, what it installs, and how all the components fit together.

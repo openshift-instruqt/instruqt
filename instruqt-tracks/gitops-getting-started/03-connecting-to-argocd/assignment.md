@@ -20,6 +20,7 @@ tabs:
   path: /root
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 Now that you've verified that Argo CD is up and running, let's explore
 how to access and manage Argo CD.
