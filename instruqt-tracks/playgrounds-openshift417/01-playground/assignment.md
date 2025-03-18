@@ -8,7 +8,7 @@ notes:
   contents: |
     ## Goal
 
-    Explore OpenShift version 4.17.
+    Explore OpenShift version 4.18.
 
     ## Concepts
 
