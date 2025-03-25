@@ -101,6 +101,7 @@ This should have the following output.
 
 ```shell
 NAME                                                  AGE
+openshift-gitops-operator.openshift-gitops-operator   25m
 openshift-gitops-operator.openshift-operators         25m
 ```
 
