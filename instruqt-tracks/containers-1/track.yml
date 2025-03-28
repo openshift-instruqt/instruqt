@@ -31,8 +31,8 @@ tags:
 owner: openshift
 developers:
 - ryanj@redhat.com
-idle_timeout: 400
-timelimit: 6600
+idle_timeout: 3000
+timelimit: 12000
 lab_config:
   feedback_recap_enabled: true
   feedback_tab_enabled: false
@@ -40,5 +40,5 @@ lab_config:
   hideStopButton: false
   default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "8699765058354047128"
+checksum: "15280495931417267785"
 enhanced_loading: false
