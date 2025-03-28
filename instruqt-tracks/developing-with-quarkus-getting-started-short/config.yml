@@ -1,7 +1,7 @@
 version: "3"
 virtualmachines:
 - name: crc
-  image: rhd-devx-instruqt/openshift-4-14-7-97g8f
+  image: rhd-devx-instruqt/openshift-4-18-1
   shell: /bin/bash
   machine_type: n1-highmem-4
   allow_external_ingress:
