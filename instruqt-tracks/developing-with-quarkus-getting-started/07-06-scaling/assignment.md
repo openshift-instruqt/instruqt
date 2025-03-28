@@ -28,6 +28,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 Now that we have our app running on OpenShift, let's see what we can do.
 

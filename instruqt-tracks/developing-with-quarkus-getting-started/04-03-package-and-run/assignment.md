@@ -23,6 +23,7 @@ tabs:
   hostname: crc
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In the previous step you added a custom CDI bean to the app. Now you're going to package and run the bean as a self-contained JAR file.
 

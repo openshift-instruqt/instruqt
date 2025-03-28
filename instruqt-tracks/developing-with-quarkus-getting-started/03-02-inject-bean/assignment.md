@@ -29,6 +29,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In the previous step you created a basic RESTful Java application with Quarkus. In this topic you'll add a custom [CDI bean](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2/html/development_guide/contexts_and_dependency_injection) that uses the Quarkus **ArC** extension.  ArC is a [CDI](https://www.cdi-spec.org/)-based dependency injection [solution](https://quarkus.io/guides/cdi-reference.html) tailored for the Quarkus architecture.
 

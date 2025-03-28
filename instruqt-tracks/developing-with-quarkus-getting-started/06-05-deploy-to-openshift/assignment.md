@@ -28,6 +28,7 @@ tabs:
   new_window: true
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 Now that we have the demonstration application built, let's move it into Linux a container and then on into the cloud.
 

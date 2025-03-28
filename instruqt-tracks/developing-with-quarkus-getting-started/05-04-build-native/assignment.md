@@ -23,6 +23,7 @@ tabs:
   hostname: crc
 difficulty: basic
 timelimit: 800
+enhanced_loading: null
 ---
 In this topic you're going to learn how produce a native executable for the demonstration application.
 
