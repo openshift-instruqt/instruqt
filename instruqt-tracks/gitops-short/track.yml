@@ -54,6 +54,6 @@ lab_config:
   loadingMessages: true
   hideStopButton: false
   default_layout: AssignmentRight
-  default_layout_sidebar_size: 25
-checksum: "3831312416725734636"
+  default_layout_sidebar_size: 50
+checksum: "266942226424509183"
 enhanced_loading: false
