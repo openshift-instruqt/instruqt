@@ -25,7 +25,7 @@ tabs:
 - id: dwq79xpsh9by
   title: Web Console
   type: website
-  url: https://console-openshift-console.crc-97g8f-master-0.crc.${_SANDBOX_ID}.instruqt.io
+  url: https://console-openshift-console.crc.${_SANDBOX_ID}.instruqt.io
   new_window: true
 difficulty: intermediate
 timelimit: 800
@@ -241,13 +241,6 @@ As mentioned previously, OpenShift ships with a web-based console that will allo
 `Step 10:` Click on `OpenShift Web Console` tab on the horizontal menu bar over the terminal window to the left. You'll be presented with a login dialog as shown in the figure below.
 
 ![Login](../assets/web-console-login.png)
-
-
-|NOTE:|
-|----|
-|You might see the following warning notification due to using an untrusted security certificate.
-![Security warning](../assets/security_warning.png)
-If you do get the warning, click the **Advanced** button to grant permission to access the OpenShift Web Console.|
 
 ----
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 kill -9 $(ps aux | grep fruit-taster | grep -v grep | awk '{print $2}')
-nohup mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster > /root/log.out 2> /root/log.err < /dev/null & disown
+nohup mvn quarkus:dev -Dquarkus.http.port=8081 -Dquarkus.http.host=0.0.0.0 -f /root/projects/quarkus/fruit-taster > /root/log.out 2> /root/log.err < /dev/null & disown

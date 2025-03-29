@@ -114,7 +114,7 @@ Once the demonstration project is created using Maven, it needs to be started.
 
 
 ```bash
-mvn quarkus:dev -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/fruit-taster
+mvn quarkus:dev -Dquarkus.http.port=8081 -Dquarkus.http.host=0.0.0.0 -Dquarkus.analytics.disabled=true -f /root/projects/quarkus/fruit-taster
 ```
 
 Eventually you'll see output similar to the following:
@@ -124,7 +124,7 @@ __  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-INFO  [io.quarkus] (Quarkus Main Thread) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in xxxs. Listening on: http://0.0.0.0:8080
+INFO  [io.quarkus] (Quarkus Main Thread) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in xxxs. Listening on: http://0.0.0.0:8081
 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, rest, rest-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web, vertx]
 
@@ -144,7 +144,7 @@ Tests paused, press [r] to resume, [h] for more options>
 `Step 6:` Run the following command in **Terminal 2** to verify that the **Fruit Taster App** is running
 
 ```console
-curl -w "\n" localhost:8080/greeting/
+curl -w "\n" localhost:8081/greeting/
 ```
 
 You will see the following output:

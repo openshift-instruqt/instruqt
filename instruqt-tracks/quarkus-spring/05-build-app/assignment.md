@@ -76,7 +76,7 @@ You'll see output similar to the following:
 `Step 3:` Run the following command in **Terminal 1** to invoke the demonstration application using the `quarkus-run.jar`:
 
 ```
-java -jar /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
+java -Dquarkus.http.port=8081 -jar /root/projects/quarkus/fruit-taster/target/quarkus-app/quarkus-run.jar
 ```
 
 You'll see a lot of screen output. When the application is up and running you'll see:
@@ -86,7 +86,7 @@ _  ____  __  _____   ___  __ ____  ______
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-2022-04-06 17:58:34,814 INFO  [io.quarkus] (main) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in2.428s. Listening on: http://0.0.0.0:8080
+2022-04-06 17:58:34,814 INFO  [io.quarkus] (main) fruit-taster 1.0.0-SNAPSHOT on JVM (powered by Quarkus xx.xx.xx) started in2.428s. Listening on: http://0.0.0.0:8081
 2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Profile prod activated.
 2022-04-06 17:58:34,820 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-h2, jdbc-postgresql, narayana-jta, rest, rest-jackson, smallrye-context-propagation, spring-data-jpa, spring-di, spring-web, vertx]
 ```
@@ -104,7 +104,7 @@ Let's confirm the that RESTful endpoints are functional.
 `Step 5:` Run the following command in **Terminal 2** to exercise the `/fruits` endpoint published by the demonstration application.
 
 ```
-curl -s http://localhost:8080/fruits | jq
+curl -s http://localhost:8081/fruits | jq
 ```
 
 You'll get the following output

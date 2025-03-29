@@ -129,7 +129,7 @@ Now that you've created `FruitController` , we can test some of the endpoints.
 `Step 5:`  Run the following command in the **Terminal 1** window.
 
 ```
-curl -w "\n" localhost:8080/fruits/ | jq .
+curl -w "\n" localhost:8081/fruits/ | jq .
 ```
 
 The command above uses `curl` to make a GET request against the `fruits` endpoint. Then the response is piped on to the `jq` utility which displays a pretty rendering of the response JSON. (The `jq` utility was installed previously as part of the track's setup)
@@ -176,7 +176,7 @@ You'll get the following output:
 `Step 6:` Run the the following command in the **Terminal 1** window to add a fruit with the name `apple` and the color `red` to the data store using the REST API.
 
 ```
-curl -X POST -s http://localhost:8080/fruits/name/apple/color/red
+curl -X POST -s http://localhost:8081/fruits/name/apple/color/red
 ```
 
 You'll get the following output:
@@ -190,7 +190,7 @@ You'll get the following output:
 `Step 7:`  Run the the following command in the **Terminal 1** window to get all `red` fruits:
 
 ```
-curl -s http://localhost:8080/fruits/color/red | jq
+curl -s http://localhost:8081/fruits/color/red | jq
 ```
 
 You get output as follows:
@@ -222,7 +222,7 @@ Notice the presence of `apple` which we just added earlier.
 `Step 8:`  Run the the following command in the **Terminal 1** window to change the color of the `apple` to `green`:
 
 ```
-curl -X PUT -s http://localhost:8080/fruits/id/6/color/green
+curl -X PUT -s http://localhost:8081/fruits/id/6/color/green
 ```
 
 You'll get the following output:
@@ -236,7 +236,7 @@ You'll get the following output:
 `Step 9:`  Run the the following command in the **Terminal 1** window to change retrieve all `green` fruits:
 
 ```
-curl -s http://localhost:8080/fruits/color/green | jq
+curl -s http://localhost:8081/fruits/color/green | jq
 ```
 
 You'll get the following output:
@@ -349,7 +349,7 @@ Is the app still running? Let's check it out by exercising the new endpoints
 `Step 13:` Run the following command in  **Terminal 1** to taste all the fruits:
 
 ```
-curl -s http://localhost:8080/taster | jq
+curl -s http://localhost:8081/taster | jq
 ```
 
 You will see the following output:
@@ -404,7 +404,7 @@ You will see the following output:
 `Step 14:` Run the following command in  **Terminal 1** to taste only the `green` fruits:
 
 ```
-curl -s http://localhost:8080/taster/green | jq
+curl -s http://localhost:8081/taster/green | jq
 ```
 
 You will get the following output
@@ -451,7 +451,7 @@ taste.suffix = (if you like fruit!)
 `Step 18:` Run the following command in the **Terminal 1** window to taste yellow fruits:
 
 ```
-curl -s http://localhost:8080/taster/yellow | jq
+curl -s http://localhost:8081/taster/yellow | jq
 ```
 
 You will see the following output:
