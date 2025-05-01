@@ -37,15 +37,22 @@ tags:
 - openshift
 owner: openshift
 developers:
-- nityadav@redhat.com
-- narathod@redhat.com
-- codingsaduvu@gmail.com
 - cclyburn@redhat.com
+- nityadav@redhat.com
+- vravula@redhat.com
+- codingsaduvu@gmail.com
+- narathod@redhat.com
+maintenance: true
+show_timer: true
 timelimit: 4000
 lab_config:
-  overlay: false
-  width: 33
-  position: right
+  sidebar_enabled: true
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
-checksum: "3807240607528714960"
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 33
+checksum: "9589388267964444965"
+enhanced_loading: false
