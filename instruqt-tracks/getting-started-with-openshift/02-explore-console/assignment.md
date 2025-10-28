@@ -57,13 +57,15 @@ You can think of a **project** as a visualization of the Kubernetes namespace ba
 
 1. From the OpenShift Web Console, click **+Add** on the left side menu.
 
-2. Click **Create a project** and name the project `myproject`.
+2. Under Add, click on the **Create a project** link and name the project `myproject`.
 
 ![Switch to Developer](../assets/config-project.png)
 
-3. Next, click the **Create** button.
+3. Next, click the **Create** button to create your project.
 
-4. Scroll down the page and click on the  **Container images** box.
+4. Scroll down the page and click on the **Container images** tile.
+
+![Click on the 'Container images' tile](../assets/container-image.png)
 
 ![Switch to Developer](../assets/deploy-container.png)
 
