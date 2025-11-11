@@ -1,0 +1,12 @@
+version: "3"
+virtualmachines:
+- name: user
+  image: rhel-cloud/rhel-8
+  shell: /bin/bash
+  environment:
+    TERM: xterm
+  machine_type: g1-small
+  allow_external_ingress:
+  - http
+  - https
+  - high-ports

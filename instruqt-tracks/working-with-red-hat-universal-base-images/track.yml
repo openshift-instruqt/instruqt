@@ -1,0 +1,24 @@
+slug: working-with-red-hat-universal-base-images
+id: 1zo2xe8zooav
+title: Working with Red Hat Universal Base Images
+teaser: Start exploring Red Hat UBI images
+description: |-
+  # **Working with Red Hat Universal Base Images**
+
+
+  In this **Track**, we'll explore **Red Hat Universal Base Images** more commonly know as **UBI**.  We will explore both the UBI as well as the UBI minimal container image. We will also create a sample application using PHP and a UBI container image.
+icon: ""
+level: beginner
+tags:
+- Red Hat
+- UBI
+owner: openshift
+developers:
+- tpaul@redhat.com
+- narathod@redhat.com
+timelimit: 900
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+checksum: "10847206781718620390"

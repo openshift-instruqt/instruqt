@@ -1,0 +1,8 @@
+#!/bin/bash
+check_ubi_minimal_exists=$(podman image list | grep "ubi-minimal" | wc | awk '{print $1}')
+
+if [[ $check_ubi_minimal_exists -eq 1 ]];then   
+    echo "Pass: Congratualtions You can successfully move towards the next step"; 
+else
+    fail-message "Fail: Please create an image as 'ubi9-minimal' for the lab to proceed"
+fi

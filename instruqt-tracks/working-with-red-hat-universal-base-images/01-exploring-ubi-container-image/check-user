@@ -1,0 +1,8 @@
+#!/bin/bash
+check_ubi_exists=$(podman image list | grep "ubi9" | wc | awk '{print $1}')
+
+if [[ $check_ubi_exists -eq 1 ]];then
+    echo "Congratualtions You can successfully move towards the next step"
+else
+    fail-message "Please create an image as 'ubi9' for the lab to proceed"
+fi

@@ -1,0 +1,6 @@
+#!/bin/bash
+podman stop --all
+podman rm --all
+podman run --name ubi-minimal -it registry.access.redhat.com/ubi9/ubi-minimal bash
+ls /etc/yum.repos.d/
+microdnf --version
