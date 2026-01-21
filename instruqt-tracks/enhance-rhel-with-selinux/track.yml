@@ -1,0 +1,21 @@
+slug: enhance-rhel-with-selinux
+id: rjdycaafkria
+title: Enhance RHEL with SELinux
+description: ""
+icon: .\assets\rhel.webp
+tags:
+- rhel
+- selinux
+owner: openshift
+developers:
+- narathod@redhat.com
+- nityadav@redhat.com
+show_timer: true
+timelimit: 1800
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "6612310405079298019"

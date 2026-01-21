@@ -1,0 +1,4 @@
+#!/bin/bash
+mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup 
+# rm -f /etc/httpd/conf.d/welcome.conf
+systemctl restart httpd

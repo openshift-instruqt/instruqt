@@ -1,0 +1,15 @@
+version: "3"
+virtualbrowsers:
+- name: console
+  url: https://developers.redhat.com/content-gateway/link/3881693
+- name: rhd-login
+  url: https://developers.redhat.com/node/284339?auHash=5k9QV-yD0z-jAU7XkJyq1TUxhVyyZVLiuZz7tsfTz_s&offerid=3882356
+virtualmachines:
+- name: rhel
+  image: projects/tmm-instruqt-11-26-2021/global/images/rhel-9-1-11-18-2022-4
+  shell: /bin/bash
+  machine_type: n1-standard-1
+  allow_external_ingress:
+  - https
+  - http
+  - high-ports
